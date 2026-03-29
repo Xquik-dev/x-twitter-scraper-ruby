@@ -1,0 +1,111 @@
+# frozen_string_literal: true
+
+require_relative "../test_helper"
+
+class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::ResourceTest
+  def test_create_required_params
+    skip("Mock server tests are disabled")
+
+    response = @x_twitter_scraper.webhooks.create(event_types: [:"tweet.new"], url: "https://example.com")
+
+    assert_pattern do
+      response => XTwitterScraper::Models::WebhookCreateResponse
+    end
+
+    assert_pattern do
+      response => {
+        id: String,
+        created_at: Time,
+        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Models::WebhookCreateResponse::EventType]),
+        secret: String,
+        url: String
+      }
+    end
+  end
+
+  def test_update
+    skip("Mock server tests are disabled")
+
+    response = @x_twitter_scraper.webhooks.update("id")
+
+    assert_pattern do
+      response => XTwitterScraper::Models::WebhookUpdateResponse
+    end
+
+    assert_pattern do
+      response => {
+        id: String,
+        created_at: Time,
+        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Models::WebhookUpdateResponse::EventType]),
+        is_active: XTwitterScraper::Internal::Type::Boolean,
+        url: String
+      }
+    end
+  end
+
+  def test_list
+    skip("Mock server tests are disabled")
+
+    response = @x_twitter_scraper.webhooks.list
+
+    assert_pattern do
+      response => XTwitterScraper::Models::WebhookListResponse
+    end
+
+    assert_pattern do
+      response => {
+        webhooks: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::WebhookListResponse::Webhook])
+      }
+    end
+  end
+
+  def test_deactivate
+    skip("Mock server tests are disabled")
+
+    response = @x_twitter_scraper.webhooks.deactivate("id")
+
+    assert_pattern do
+      response => XTwitterScraper::Models::WebhookDeactivateResponse
+    end
+
+    assert_pattern do
+      response => {
+        success: true | false
+      }
+    end
+  end
+
+  def test_list_deliveries
+    skip("Mock server tests are disabled")
+
+    response = @x_twitter_scraper.webhooks.list_deliveries("id")
+
+    assert_pattern do
+      response => XTwitterScraper::Models::WebhookListDeliveriesResponse
+    end
+
+    assert_pattern do
+      response => {
+        deliveries: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::WebhookListDeliveriesResponse::Delivery])
+      }
+    end
+  end
+
+  def test_test_
+    skip("Mock server tests are disabled")
+
+    response = @x_twitter_scraper.webhooks.test_("id")
+
+    assert_pattern do
+      response => XTwitterScraper::Models::WebhookTestResponse
+    end
+
+    assert_pattern do
+      response => {
+        status_code: Integer,
+        success: XTwitterScraper::Internal::Type::Boolean,
+        error: String | nil
+      }
+    end
+  end
+end

@@ -1,0 +1,69 @@
+module XTwitterScraper
+  class Client < XTwitterScraper::Internal::Transport::BaseClient
+    DEFAULT_MAX_RETRIES: 2
+
+    DEFAULT_TIMEOUT_IN_SECONDS: Float
+
+    DEFAULT_INITIAL_RETRY_DELAY: Float
+
+    DEFAULT_MAX_RETRY_DELAY: Float
+
+    attr_reader api_key: String?
+
+    attr_reader bearer_token: String?
+
+    attr_reader account: XTwitterScraper::Resources::Account
+
+    attr_reader api_keys: XTwitterScraper::Resources::APIKeys
+
+    attr_reader subscribe: XTwitterScraper::Resources::Subscribe
+
+    attr_reader compose: XTwitterScraper::Resources::Compose
+
+    attr_reader drafts: XTwitterScraper::Resources::Drafts
+
+    attr_reader styles: XTwitterScraper::Resources::Styles
+
+    attr_reader radar: XTwitterScraper::Resources::Radar
+
+    attr_reader monitors: XTwitterScraper::Resources::Monitors
+
+    attr_reader events: XTwitterScraper::Resources::Events
+
+    attr_reader extractions: XTwitterScraper::Resources::Extractions
+
+    attr_reader draws: XTwitterScraper::Resources::Draws
+
+    attr_reader webhooks: XTwitterScraper::Resources::Webhooks
+
+    attr_reader integrations: XTwitterScraper::Resources::Integrations
+
+    attr_reader x: XTwitterScraper::Resources::X
+
+    attr_reader trends: XTwitterScraper::Resources::Trends
+
+    attr_reader bot: XTwitterScraper::Resources::Bot
+
+    attr_reader support: XTwitterScraper::Resources::Support
+
+    attr_reader credits: XTwitterScraper::Resources::Credits
+
+    private def auth_headers: (
+      security: { auth_api_key: bool, oauth_bearer: bool }
+    ) -> ::Hash[String, String]
+
+    private def auth_api_key: -> ::Hash[String, String]
+
+    private def oauth_bearer: -> ::Hash[String, String]
+
+    def initialize: (
+      ?api_key: String?,
+      ?bearer_token: String?,
+      ?base_url: String?,
+      ?max_retries: Integer,
+      ?timeout: Float,
+      ?initial_retry_delay: Float,
+      ?max_retry_delay: Float
+    ) -> void
+  end
+end

@@ -1,0 +1,30 @@
+module XTwitterScraper
+  module Models
+    module X
+      type community_create_response =
+        { community_id: String, success: true, community_name: String }
+
+      class CommunityCreateResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor community_id: String
+
+        attr_accessor success: true
+
+        attr_reader community_name: String?
+
+        def community_name=: (String) -> String
+
+        def initialize: (
+          community_id: String,
+          ?community_name: String,
+          ?success: true
+        ) -> void
+
+        def to_hash: -> {
+          community_id: String,
+          success: true,
+          community_name: String
+        }
+      end
+    end
+  end
+end

@@ -1,0 +1,87 @@
+module XTwitterScraper
+  module Models
+    type style_get_performance_response =
+      {
+        tweet_count: Integer,
+        tweets: ::Array[XTwitterScraper::Models::StyleGetPerformanceResponse::Tweet],
+        x_username: String
+      }
+
+    class StyleGetPerformanceResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor tweet_count: Integer
+
+      attr_accessor tweets: ::Array[XTwitterScraper::Models::StyleGetPerformanceResponse::Tweet]
+
+      attr_accessor x_username: String
+
+      def initialize: (
+        tweet_count: Integer,
+        tweets: ::Array[XTwitterScraper::Models::StyleGetPerformanceResponse::Tweet],
+        x_username: String
+      ) -> void
+
+      def to_hash: -> {
+        tweet_count: Integer,
+        tweets: ::Array[XTwitterScraper::Models::StyleGetPerformanceResponse::Tweet],
+        x_username: String
+      }
+
+      type tweet =
+        {
+          id: String,
+          text: String,
+          created_at: String,
+          like_count: Integer,
+          reply_count: Integer,
+          retweet_count: Integer,
+          view_count: Integer
+        }
+
+      class Tweet < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor text: String
+
+        attr_reader created_at: String?
+
+        def created_at=: (String) -> String
+
+        attr_reader like_count: Integer?
+
+        def like_count=: (Integer) -> Integer
+
+        attr_reader reply_count: Integer?
+
+        def reply_count=: (Integer) -> Integer
+
+        attr_reader retweet_count: Integer?
+
+        def retweet_count=: (Integer) -> Integer
+
+        attr_reader view_count: Integer?
+
+        def view_count=: (Integer) -> Integer
+
+        def initialize: (
+          id: String,
+          text: String,
+          ?created_at: String,
+          ?like_count: Integer,
+          ?reply_count: Integer,
+          ?retweet_count: Integer,
+          ?view_count: Integer
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          text: String,
+          created_at: String,
+          like_count: Integer,
+          reply_count: Integer,
+          retweet_count: Integer,
+          view_count: Integer
+        }
+      end
+    end
+  end
+end

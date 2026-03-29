@@ -1,0 +1,28 @@
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_get_favoriters_response =
+        { has_next_page: bool, next_cursor: String, users: ::Array[top] }
+
+      class TweetGetFavoritersResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor has_next_page: bool
+
+        attr_accessor next_cursor: String
+
+        attr_accessor users: ::Array[top]
+
+        def initialize: (
+          has_next_page: bool,
+          next_cursor: String,
+          users: ::Array[top]
+        ) -> void
+
+        def to_hash: -> {
+          has_next_page: bool,
+          next_cursor: String,
+          users: ::Array[top]
+        }
+      end
+    end
+  end
+end

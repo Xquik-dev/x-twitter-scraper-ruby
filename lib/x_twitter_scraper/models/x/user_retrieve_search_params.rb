@@ -1,0 +1,32 @@
+# frozen_string_literal: true
+
+module XTwitterScraper
+  module Models
+    module X
+      # @see XTwitterScraper::Resources::X::Users#retrieve_search
+      class UserRetrieveSearchParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        # @!attribute q
+        #   Search query
+        #
+        #   @return [String]
+        required :q, String
+
+        # @!attribute cursor
+        #   Pagination cursor
+        #
+        #   @return [String, nil]
+        optional :cursor, String
+
+        # @!method initialize(q:, cursor: nil, request_options: {})
+        #   @param q [String] Search query
+        #
+        #   @param cursor [String] Pagination cursor
+        #
+        #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
+      end
+    end
+  end
+end

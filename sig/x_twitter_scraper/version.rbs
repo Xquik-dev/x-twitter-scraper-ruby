@@ -1,0 +1,3 @@
+module XTwitterScraper
+  VERSION: String
+end

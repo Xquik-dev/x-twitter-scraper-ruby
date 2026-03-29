@@ -1,0 +1,192 @@
+module XTwitterScraper
+  module Models
+    type x_get_article_response =
+      {
+        article: XTwitterScraper::Models::XGetArticleResponse::Article,
+        author: XTwitterScraper::Models::XGetArticleResponse::Author
+      }
+
+    class XGetArticleResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor article: XTwitterScraper::Models::XGetArticleResponse::Article
+
+      attr_reader author: XTwitterScraper::Models::XGetArticleResponse::Author?
+
+      def author=: (
+        XTwitterScraper::Models::XGetArticleResponse::Author
+      ) -> XTwitterScraper::Models::XGetArticleResponse::Author
+
+      def initialize: (
+        article: XTwitterScraper::Models::XGetArticleResponse::Article,
+        ?author: XTwitterScraper::Models::XGetArticleResponse::Author
+      ) -> void
+
+      def to_hash: -> {
+        article: XTwitterScraper::Models::XGetArticleResponse::Article,
+        author: XTwitterScraper::Models::XGetArticleResponse::Author
+      }
+
+      type article =
+        {
+          contents: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content],
+          cover_image_url: String,
+          created_at: String,
+          like_count: Integer,
+          preview_text: String,
+          quote_count: Integer,
+          reply_count: Integer,
+          title: String,
+          view_count: Integer
+        }
+
+      class Article < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader contents: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content]?
+
+        def contents=: (
+          ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content]
+        ) -> ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content]
+
+        attr_reader cover_image_url: String?
+
+        def cover_image_url=: (String) -> String
+
+        attr_reader created_at: String?
+
+        def created_at=: (String) -> String
+
+        attr_reader like_count: Integer?
+
+        def like_count=: (Integer) -> Integer
+
+        attr_reader preview_text: String?
+
+        def preview_text=: (String) -> String
+
+        attr_reader quote_count: Integer?
+
+        def quote_count=: (Integer) -> Integer
+
+        attr_reader reply_count: Integer?
+
+        def reply_count=: (Integer) -> Integer
+
+        attr_reader title: String?
+
+        def title=: (String) -> String
+
+        attr_reader view_count: Integer?
+
+        def view_count=: (Integer) -> Integer
+
+        def initialize: (
+          ?contents: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content],
+          ?cover_image_url: String,
+          ?created_at: String,
+          ?like_count: Integer,
+          ?preview_text: String,
+          ?quote_count: Integer,
+          ?reply_count: Integer,
+          ?title: String,
+          ?view_count: Integer
+        ) -> void
+
+        def to_hash: -> {
+          contents: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content],
+          cover_image_url: String,
+          created_at: String,
+          like_count: Integer,
+          preview_text: String,
+          quote_count: Integer,
+          reply_count: Integer,
+          title: String,
+          view_count: Integer
+        }
+
+        type content =
+          {
+            height: Integer,
+            text: String,
+            type: String,
+            url: String,
+            width: Integer
+          }
+
+        class Content < XTwitterScraper::Internal::Type::BaseModel
+          attr_reader height: Integer?
+
+          def height=: (Integer) -> Integer
+
+          attr_reader text: String?
+
+          def text=: (String) -> String
+
+          attr_reader type: String?
+
+          def type=: (String) -> String
+
+          attr_reader url: String?
+
+          def url=: (String) -> String
+
+          attr_reader width: Integer?
+
+          def width=: (Integer) -> Integer
+
+          def initialize: (
+            ?height: Integer,
+            ?text: String,
+            ?type: String,
+            ?url: String,
+            ?width: Integer
+          ) -> void
+
+          def to_hash: -> {
+            height: Integer,
+            text: String,
+            type: String,
+            url: String,
+            width: Integer
+          }
+        end
+      end
+
+      type author =
+        {
+          id: String,
+          followers: Integer,
+          username: String,
+          verified: bool,
+          profile_picture: String
+        }
+
+      class Author < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor followers: Integer
+
+        attr_accessor username: String
+
+        attr_accessor verified: bool
+
+        attr_reader profile_picture: String?
+
+        def profile_picture=: (String) -> String
+
+        def initialize: (
+          id: String,
+          followers: Integer,
+          username: String,
+          verified: bool,
+          ?profile_picture: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          followers: Integer,
+          username: String,
+          verified: bool,
+          profile_picture: String
+        }
+      end
+    end
+  end
+end

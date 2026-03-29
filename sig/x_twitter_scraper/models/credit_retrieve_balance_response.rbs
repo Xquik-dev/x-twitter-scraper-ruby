@@ -1,0 +1,35 @@
+module XTwitterScraper
+  module Models
+    type credit_retrieve_balance_response =
+      {
+        auto_topup_enabled: bool,
+        balance: Integer,
+        lifetime_purchased: Integer,
+        lifetime_used: Integer
+      }
+
+    class CreditRetrieveBalanceResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor auto_topup_enabled: bool
+
+      attr_accessor balance: Integer
+
+      attr_accessor lifetime_purchased: Integer
+
+      attr_accessor lifetime_used: Integer
+
+      def initialize: (
+        auto_topup_enabled: bool,
+        balance: Integer,
+        lifetime_purchased: Integer,
+        lifetime_used: Integer
+      ) -> void
+
+      def to_hash: -> {
+        auto_topup_enabled: bool,
+        balance: Integer,
+        lifetime_purchased: Integer,
+        lifetime_used: Integer
+      }
+    end
+  end
+end

@@ -1,0 +1,28 @@
+module XTwitterScraper
+  module Models
+    type style_compare_params =
+      { :username1 => String, :username2 => String }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class StyleCompareParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor username1: String
+
+      attr_accessor username2: String
+
+      def initialize: (
+        username1: String,
+        username2: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        :username1 => String,
+        :username2 => String,
+        request_options: XTwitterScraper::RequestOptions
+      }
+    end
+  end
+end

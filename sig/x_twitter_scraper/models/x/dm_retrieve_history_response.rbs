@@ -1,0 +1,77 @@
+module XTwitterScraper
+  module Models
+    module X
+      type dm_retrieve_history_response =
+        {
+          has_next_page: bool,
+          messages: ::Array[XTwitterScraper::Models::X::DmRetrieveHistoryResponse::Message],
+          next_cursor: String
+        }
+
+      class DmRetrieveHistoryResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor has_next_page: bool
+
+        attr_accessor messages: ::Array[XTwitterScraper::Models::X::DmRetrieveHistoryResponse::Message]
+
+        attr_accessor next_cursor: String
+
+        def initialize: (
+          has_next_page: bool,
+          messages: ::Array[XTwitterScraper::Models::X::DmRetrieveHistoryResponse::Message],
+          next_cursor: String
+        ) -> void
+
+        def to_hash: -> {
+          has_next_page: bool,
+          messages: ::Array[XTwitterScraper::Models::X::DmRetrieveHistoryResponse::Message],
+          next_cursor: String
+        }
+
+        type message =
+          {
+            id: String,
+            created_at: String,
+            receiver_id: String,
+            sender_id: String,
+            text: String
+          }
+
+        class Message < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_reader created_at: String?
+
+          def created_at=: (String) -> String
+
+          attr_reader receiver_id: String?
+
+          def receiver_id=: (String) -> String
+
+          attr_reader sender_id: String?
+
+          def sender_id=: (String) -> String
+
+          attr_reader text: String?
+
+          def text=: (String) -> String
+
+          def initialize: (
+            id: String,
+            ?created_at: String,
+            ?receiver_id: String,
+            ?sender_id: String,
+            ?text: String
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            created_at: String,
+            receiver_id: String,
+            sender_id: String,
+            text: String
+          }
+        end
+      end
+    end
+  end
+end

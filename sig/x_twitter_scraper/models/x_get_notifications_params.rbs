@@ -1,0 +1,49 @@
+module XTwitterScraper
+  module Models
+    type x_get_notifications_params =
+      {
+        cursor: String,
+        type: XTwitterScraper::Models::XGetNotificationsParams::type_
+      }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class XGetNotificationsParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_reader cursor: String?
+
+      def cursor=: (String) -> String
+
+      attr_reader type: XTwitterScraper::Models::XGetNotificationsParams::type_?
+
+      def type=: (
+        XTwitterScraper::Models::XGetNotificationsParams::type_
+      ) -> XTwitterScraper::Models::XGetNotificationsParams::type_
+
+      def initialize: (
+        ?cursor: String,
+        ?type: XTwitterScraper::Models::XGetNotificationsParams::type_,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        cursor: String,
+        type: XTwitterScraper::Models::XGetNotificationsParams::type_,
+        request_options: XTwitterScraper::RequestOptions
+      }
+
+      type type_ = :All | :Verified | :Mentions
+
+      module Type
+        extend XTwitterScraper::Internal::Type::Enum
+
+        ALL: :All
+        VERIFIED: :Verified
+        MENTIONS: :Mentions
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::XGetNotificationsParams::type_]
+      end
+    end
+  end
+end

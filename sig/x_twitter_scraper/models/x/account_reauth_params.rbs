@@ -1,0 +1,36 @@
+module XTwitterScraper
+  module Models
+    module X
+      type account_reauth_params =
+        { id: String, password: String, totp_secret: String }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class AccountReauthParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor password: String
+
+        attr_reader totp_secret: String?
+
+        def totp_secret=: (String) -> String
+
+        def initialize: (
+          id: String,
+          password: String,
+          ?totp_secret: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          password: String,
+          totp_secret: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

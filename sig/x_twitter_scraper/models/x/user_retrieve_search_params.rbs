@@ -1,0 +1,32 @@
+module XTwitterScraper
+  module Models
+    module X
+      type user_retrieve_search_params =
+        { q: String, cursor: String }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class UserRetrieveSearchParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor q: String
+
+        attr_reader cursor: String?
+
+        def cursor=: (String) -> String
+
+        def initialize: (
+          q: String,
+          ?cursor: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          q: String,
+          cursor: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

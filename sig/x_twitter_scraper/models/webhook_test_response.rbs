@@ -1,0 +1,24 @@
+module XTwitterScraper
+  module Models
+    type webhook_test_response =
+      { status_code: Integer, success: bool, error: String }
+
+    class WebhookTestResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor status_code: Integer
+
+      attr_accessor success: bool
+
+      attr_reader error: String?
+
+      def error=: (String) -> String
+
+      def initialize: (
+        status_code: Integer,
+        success: bool,
+        ?error: String
+      ) -> void
+
+      def to_hash: -> { status_code: Integer, success: bool, error: String }
+    end
+  end
+end

@@ -1,0 +1,17 @@
+module XTwitterScraper
+  module Models
+    module X
+      type dm_update_response = { message_id: String, success: true }
+
+      class DmUpdateResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor message_id: String
+
+        attr_accessor success: true
+
+        def initialize: (message_id: String, ?success: true) -> void
+
+        def to_hash: -> { message_id: String, success: true }
+      end
+    end
+  end
+end

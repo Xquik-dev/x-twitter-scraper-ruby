@@ -1,0 +1,56 @@
+module XTwitterScraper
+  module Models
+    module X
+      type profile_patch_all_params =
+        {
+          account: String,
+          description: String,
+          location: String,
+          name: String,
+          url: String
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class ProfilePatchAllParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor account: String
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        attr_reader location: String?
+
+        def location=: (String) -> String
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_reader url: String?
+
+        def url=: (String) -> String
+
+        def initialize: (
+          account: String,
+          ?description: String,
+          ?location: String,
+          ?name: String,
+          ?url: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          account: String,
+          description: String,
+          location: String,
+          name: String,
+          url: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

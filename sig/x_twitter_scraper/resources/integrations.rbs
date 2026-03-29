@@ -1,0 +1,52 @@
+module XTwitterScraper
+  module Resources
+    class Integrations
+      def create: (
+        config: XTwitterScraper::IntegrationCreateParams::Config,
+        event_types: ::Array[XTwitterScraper::Models::IntegrationCreateParams::event_type],
+        name: String,
+        type: XTwitterScraper::Models::IntegrationCreateParams::type_,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::IntegrationCreateResponse
+
+      def retrieve: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::IntegrationRetrieveResponse
+
+      def update: (
+        String id,
+        ?event_types: ::Array[XTwitterScraper::Models::IntegrationUpdateParams::event_type],
+        ?filters: ::Hash[Symbol, top],
+        ?is_active: bool,
+        ?message_template: ::Hash[Symbol, top],
+        ?name: String,
+        ?scope_all_monitors: bool,
+        ?silent_push: bool,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::IntegrationUpdateResponse
+
+      def list: (
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::IntegrationListResponse
+
+      def delete: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::IntegrationDeleteResponse
+
+      def list_deliveries: (
+        String id,
+        ?limit: Integer,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::IntegrationListDeliveriesResponse
+
+      def send_test: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::IntegrationSendTestResponse
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

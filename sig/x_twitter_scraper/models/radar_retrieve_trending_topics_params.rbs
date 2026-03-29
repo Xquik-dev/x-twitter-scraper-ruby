@@ -1,0 +1,56 @@
+module XTwitterScraper
+  module Models
+    type radar_retrieve_trending_topics_params =
+      {
+        category: String,
+        count: Integer,
+        hours: Integer,
+        region: String,
+        source: String
+      }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class RadarRetrieveTrendingTopicsParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_reader category: String?
+
+      def category=: (String) -> String
+
+      attr_reader count: Integer?
+
+      def count=: (Integer) -> Integer
+
+      attr_reader hours: Integer?
+
+      def hours=: (Integer) -> Integer
+
+      attr_reader region: String?
+
+      def region=: (String) -> String
+
+      attr_reader source: String?
+
+      def source=: (String) -> String
+
+      def initialize: (
+        ?category: String,
+        ?count: Integer,
+        ?hours: Integer,
+        ?region: String,
+        ?source: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        category: String,
+        count: Integer,
+        hours: Integer,
+        region: String,
+        source: String,
+        request_options: XTwitterScraper::RequestOptions
+      }
+    end
+  end
+end

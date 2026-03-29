@@ -1,0 +1,37 @@
+module XTwitterScraper
+  module Models
+    type extraction_retrieve_response =
+      {
+        has_more: bool,
+        job: ::Hash[Symbol, top],
+        results: ::Array[::Hash[Symbol, top]],
+        next_cursor: String
+      }
+
+    class ExtractionRetrieveResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor has_more: bool
+
+      attr_accessor job: ::Hash[Symbol, top]
+
+      attr_accessor results: ::Array[::Hash[Symbol, top]]
+
+      attr_reader next_cursor: String?
+
+      def next_cursor=: (String) -> String
+
+      def initialize: (
+        has_more: bool,
+        job: ::Hash[Symbol, top],
+        results: ::Array[::Hash[Symbol, top]],
+        ?next_cursor: String
+      ) -> void
+
+      def to_hash: -> {
+        has_more: bool,
+        job: ::Hash[Symbol, top],
+        results: ::Array[::Hash[Symbol, top]],
+        next_cursor: String
+      }
+    end
+  end
+end

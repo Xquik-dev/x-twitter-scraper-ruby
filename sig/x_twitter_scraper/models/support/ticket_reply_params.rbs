@@ -1,0 +1,30 @@
+module XTwitterScraper
+  module Models
+    module Support
+      type ticket_reply_params =
+        { id: String, body: String }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class TicketReplyParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor body: String
+
+        def initialize: (
+          id: String,
+          body: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          body: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

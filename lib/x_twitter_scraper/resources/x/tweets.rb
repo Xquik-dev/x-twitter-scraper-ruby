@@ -1,0 +1,296 @@
+# frozen_string_literal: true
+
+module XTwitterScraper
+  module Resources
+    class X
+      class Tweets
+        # X write actions (tweets, likes, follows, DMs)
+        # @return [XTwitterScraper::Resources::X::Tweets::Like]
+        attr_reader :like
+
+        # X write actions (tweets, likes, follows, DMs)
+        # @return [XTwitterScraper::Resources::X::Tweets::Retweet]
+        attr_reader :retweet
+
+        # Create tweet
+        #
+        # @overload create(account:, text:, attachment_url: nil, community_id: nil, is_note_tweet: nil, media_ids: nil, reply_to_tweet_id: nil, request_options: {})
+        #
+        # @param account [String] X account (@username or account ID)
+        #
+        # @param text [String]
+        #
+        # @param attachment_url [String]
+        #
+        # @param community_id [String]
+        #
+        # @param is_note_tweet [Boolean]
+        #
+        # @param media_ids [Array<String>]
+        #
+        # @param reply_to_tweet_id [String]
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::TweetCreateResponse]
+        #
+        # @see XTwitterScraper::Models::X::TweetCreateParams
+        def create(params)
+          parsed, options = XTwitterScraper::X::TweetCreateParams.dump_request(params)
+          @client.request(
+            method: :post,
+            path: "x/tweets",
+            body: parsed,
+            model: XTwitterScraper::Models::X::TweetCreateResponse,
+            options: options
+          )
+        end
+
+        # Look up tweet
+        #
+        # @overload retrieve(tweet_id, request_options: {})
+        #
+        # @param tweet_id [String]
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::TweetRetrieveResponse]
+        #
+        # @see XTwitterScraper::Models::X::TweetRetrieveParams
+        def retrieve(tweet_id, params = {})
+          @client.request(
+            method: :get,
+            path: ["x/tweets/%1$s", tweet_id],
+            model: XTwitterScraper::Models::X::TweetRetrieveResponse,
+            options: params[:request_options]
+          )
+        end
+
+        # Get multiple tweets by IDs
+        #
+        # @overload list(ids:, request_options: {})
+        #
+        # @param ids [String] Comma-separated tweet IDs (max 100)
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [nil]
+        #
+        # @see XTwitterScraper::Models::X::TweetListParams
+        def list(params)
+          parsed, options = XTwitterScraper::X::TweetListParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(method: :get, path: "x/tweets", query: query, model: NilClass, options: options)
+        end
+
+        # Delete tweet
+        #
+        # @overload delete(tweet_id, account:, request_options: {})
+        #
+        # @param tweet_id [String]
+        #
+        # @param account [String] X account (@username or account ID)
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::TweetDeleteResponse]
+        #
+        # @see XTwitterScraper::Models::X::TweetDeleteParams
+        def delete(tweet_id, params)
+          parsed, options = XTwitterScraper::X::TweetDeleteParams.dump_request(params)
+          @client.request(
+            method: :delete,
+            path: ["x/tweets/%1$s", tweet_id],
+            body: parsed,
+            model: XTwitterScraper::Models::X::TweetDeleteResponse,
+            options: options
+          )
+        end
+
+        # Get users who liked a tweet
+        #
+        # @overload get_favoriters(id, cursor: nil, request_options: {})
+        #
+        # @param id [String] Tweet ID
+        #
+        # @param cursor [String] Pagination cursor from previous response
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::TweetGetFavoritersResponse]
+        #
+        # @see XTwitterScraper::Models::X::TweetGetFavoritersParams
+        def get_favoriters(id, params = {})
+          parsed, options = XTwitterScraper::X::TweetGetFavoritersParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: ["x/tweets/%1$s/favoriters", id],
+            query: query,
+            model: XTwitterScraper::Models::X::TweetGetFavoritersResponse,
+            options: options
+          )
+        end
+
+        # Get quote tweets of a tweet
+        #
+        # @overload get_quotes(id, cursor: nil, include_replies: nil, since_time: nil, until_time: nil, request_options: {})
+        #
+        # @param id [String] Tweet ID
+        #
+        # @param cursor [String] Pagination cursor
+        #
+        # @param include_replies [Boolean] Include replies (default false)
+        #
+        # @param since_time [String] Unix timestamp - filter after
+        #
+        # @param until_time [String] Unix timestamp - filter before
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::TweetGetQuotesResponse]
+        #
+        # @see XTwitterScraper::Models::X::TweetGetQuotesParams
+        def get_quotes(id, params = {})
+          parsed, options = XTwitterScraper::X::TweetGetQuotesParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: ["x/tweets/%1$s/quotes", id],
+            query: query.transform_keys(
+              include_replies: "includeReplies",
+              since_time: "sinceTime",
+              until_time: "untilTime"
+            ),
+            model: XTwitterScraper::Models::X::TweetGetQuotesResponse,
+            options: options
+          )
+        end
+
+        # Get replies to a tweet
+        #
+        # @overload get_replies(id, cursor: nil, since_time: nil, until_time: nil, request_options: {})
+        #
+        # @param id [String] Tweet ID
+        #
+        # @param cursor [String] Pagination cursor
+        #
+        # @param since_time [String] Unix timestamp - filter after
+        #
+        # @param until_time [String] Unix timestamp - filter before
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::TweetGetRepliesResponse]
+        #
+        # @see XTwitterScraper::Models::X::TweetGetRepliesParams
+        def get_replies(id, params = {})
+          parsed, options = XTwitterScraper::X::TweetGetRepliesParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: ["x/tweets/%1$s/replies", id],
+            query: query.transform_keys(since_time: "sinceTime", until_time: "untilTime"),
+            model: XTwitterScraper::Models::X::TweetGetRepliesResponse,
+            options: options
+          )
+        end
+
+        # Get users who retweeted a tweet
+        #
+        # @overload get_retweeters(id, cursor: nil, request_options: {})
+        #
+        # @param id [String] Tweet ID
+        #
+        # @param cursor [String] Pagination cursor
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::TweetGetRetweetersResponse]
+        #
+        # @see XTwitterScraper::Models::X::TweetGetRetweetersParams
+        def get_retweeters(id, params = {})
+          parsed, options = XTwitterScraper::X::TweetGetRetweetersParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: ["x/tweets/%1$s/retweeters", id],
+            query: query,
+            model: XTwitterScraper::Models::X::TweetGetRetweetersResponse,
+            options: options
+          )
+        end
+
+        # Get thread context for a tweet
+        #
+        # @overload get_thread(id, cursor: nil, request_options: {})
+        #
+        # @param id [String] Tweet ID
+        #
+        # @param cursor [String] Pagination cursor
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::TweetGetThreadResponse]
+        #
+        # @see XTwitterScraper::Models::X::TweetGetThreadParams
+        def get_thread(id, params = {})
+          parsed, options = XTwitterScraper::X::TweetGetThreadParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: ["x/tweets/%1$s/thread", id],
+            query: query,
+            model: XTwitterScraper::Models::X::TweetGetThreadResponse,
+            options: options
+          )
+        end
+
+        # Search tweets
+        #
+        # @overload search(q:, cursor: nil, limit: nil, query_type: nil, since_time: nil, until_time: nil, request_options: {})
+        #
+        # @param q [String] Search query (keywords,
+        #
+        # @param cursor [String] Pagination cursor from previous response
+        #
+        # @param limit [Integer] Deprecated — use cursor-based pagination instead
+        #
+        # @param query_type [Symbol, XTwitterScraper::Models::X::TweetSearchParams::QueryType] Sort order — Latest (chronological) or Top (engagement-ranked)
+        #
+        # @param since_time [String] ISO 8601 timestamp — only return tweets after this time
+        #
+        # @param until_time [String] ISO 8601 timestamp — only return tweets before this time
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::TweetSearchResponse]
+        #
+        # @see XTwitterScraper::Models::X::TweetSearchParams
+        def search(params)
+          parsed, options = XTwitterScraper::X::TweetSearchParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: "x/tweets/search",
+            query: query.transform_keys(
+              query_type: "queryType",
+              since_time: "sinceTime",
+              until_time: "untilTime"
+            ),
+            model: XTwitterScraper::Models::X::TweetSearchResponse,
+            options: options
+          )
+        end
+
+        # @api private
+        #
+        # @param client [XTwitterScraper::Client]
+        def initialize(client:)
+          @client = client
+          @like = XTwitterScraper::Resources::X::Tweets::Like.new(client: client)
+          @retweet = XTwitterScraper::Resources::X::Tweets::Retweet.new(client: client)
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,37 @@
+# frozen_string_literal: true
+
+require_relative "../../../test_helper"
+
+class XTwitterScraper::Test::Resources::X::Tweets::RetweetTest < XTwitterScraper::Test::ResourceTest
+  def test_create_required_params
+    skip("Mock server tests are disabled")
+
+    response = @x_twitter_scraper.x.tweets.retweet.create("tweetId", account: "account")
+
+    assert_pattern do
+      response => XTwitterScraper::Models::X::Tweets::RetweetCreateResponse
+    end
+
+    assert_pattern do
+      response => {
+        success: true | false
+      }
+    end
+  end
+
+  def test_delete_required_params
+    skip("Mock server tests are disabled")
+
+    response = @x_twitter_scraper.x.tweets.retweet.delete("tweetId", account: "account")
+
+    assert_pattern do
+      response => XTwitterScraper::Models::X::Tweets::RetweetDeleteResponse
+    end
+
+    assert_pattern do
+      response => {
+        success: true | false
+      }
+    end
+  end
+end

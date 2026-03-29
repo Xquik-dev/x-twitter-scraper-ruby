@@ -1,0 +1,39 @@
+module XTwitterScraper
+  module Resources
+    class X
+      class Accounts
+        def create: (
+          email: String,
+          password: String,
+          username: String,
+          ?proxy_country: String,
+          ?totp_secret: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::AccountCreateResponse
+
+        def retrieve: (
+          String id,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::AccountRetrieveResponse
+
+        def list: (
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::AccountListResponse
+
+        def delete: (
+          String id,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::AccountDeleteResponse
+
+        def reauth: (
+          String id,
+          password: String,
+          ?totp_secret: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::AccountReauthResponse
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

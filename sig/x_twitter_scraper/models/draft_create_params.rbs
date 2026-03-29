@@ -1,0 +1,55 @@
+module XTwitterScraper
+  module Models
+    type draft_create_params =
+      {
+        text: String,
+        goal: XTwitterScraper::Models::DraftCreateParams::goal,
+        topic: String
+      }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class DraftCreateParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor text: String
+
+      attr_reader goal: XTwitterScraper::Models::DraftCreateParams::goal?
+
+      def goal=: (
+        XTwitterScraper::Models::DraftCreateParams::goal
+      ) -> XTwitterScraper::Models::DraftCreateParams::goal
+
+      attr_reader topic: String?
+
+      def topic=: (String) -> String
+
+      def initialize: (
+        text: String,
+        ?goal: XTwitterScraper::Models::DraftCreateParams::goal,
+        ?topic: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        text: String,
+        goal: XTwitterScraper::Models::DraftCreateParams::goal,
+        topic: String,
+        request_options: XTwitterScraper::RequestOptions
+      }
+
+      type goal = :engagement | :followers | :authority | :conversation
+
+      module Goal
+        extend XTwitterScraper::Internal::Type::Enum
+
+        ENGAGEMENT: :engagement
+        FOLLOWERS: :followers
+        AUTHORITY: :authority
+        CONVERSATION: :conversation
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::DraftCreateParams::goal]
+      end
+    end
+  end
+end

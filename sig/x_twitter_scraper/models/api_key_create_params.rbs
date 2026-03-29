@@ -1,0 +1,25 @@
+module XTwitterScraper
+  module Models
+    type api_key_create_params =
+      { name: String } & XTwitterScraper::Internal::Type::request_parameters
+
+    class APIKeyCreateParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      def initialize: (
+        ?name: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        name: String,
+        request_options: XTwitterScraper::RequestOptions
+      }
+    end
+  end
+end

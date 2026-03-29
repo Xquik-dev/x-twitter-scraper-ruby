@@ -1,0 +1,11 @@
+module XTwitterScraper
+  module Resources
+    class Subscribe
+      def create: (
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::SubscribeCreateResponse
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

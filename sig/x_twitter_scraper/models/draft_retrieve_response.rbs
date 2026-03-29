@@ -1,0 +1,49 @@
+module XTwitterScraper
+  module Models
+    type draft_retrieve_response =
+      {
+        id: String,
+        created_at: Time,
+        text: String,
+        updated_at: Time,
+        goal: String,
+        topic: String
+      }
+
+    class DraftRetrieveResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor text: String
+
+      attr_accessor updated_at: Time
+
+      attr_reader goal: String?
+
+      def goal=: (String) -> String
+
+      attr_reader topic: String?
+
+      def topic=: (String) -> String
+
+      def initialize: (
+        id: String,
+        created_at: Time,
+        text: String,
+        updated_at: Time,
+        ?goal: String,
+        ?topic: String
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        created_at: Time,
+        text: String,
+        updated_at: Time,
+        goal: String,
+        topic: String
+      }
+    end
+  end
+end

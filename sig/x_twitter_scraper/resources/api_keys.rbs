@@ -1,0 +1,21 @@
+module XTwitterScraper
+  module Resources
+    class APIKeys
+      def create: (
+        ?name: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::APIKeyCreateResponse
+
+      def list: (
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::APIKeyListResponse
+
+      def revoke: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::APIKeyRevokeResponse
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

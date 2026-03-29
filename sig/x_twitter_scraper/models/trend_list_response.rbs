@@ -1,0 +1,63 @@
+module XTwitterScraper
+  module Models
+    type trend_list_response =
+      {
+        total: Integer,
+        trends: ::Array[XTwitterScraper::Models::TrendListResponse::Trend],
+        woeid: Integer
+      }
+
+    class TrendListResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor total: Integer
+
+      attr_accessor trends: ::Array[XTwitterScraper::Models::TrendListResponse::Trend]
+
+      attr_accessor woeid: Integer
+
+      def initialize: (
+        total: Integer,
+        trends: ::Array[XTwitterScraper::Models::TrendListResponse::Trend],
+        woeid: Integer
+      ) -> void
+
+      def to_hash: -> {
+        total: Integer,
+        trends: ::Array[XTwitterScraper::Models::TrendListResponse::Trend],
+        woeid: Integer
+      }
+
+      type trend =
+        { name: String, description: String, query: String, rank: Integer }
+
+      class Trend < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor name: String
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        attr_reader query: String?
+
+        def query=: (String) -> String
+
+        attr_reader rank: Integer?
+
+        def rank=: (Integer) -> Integer
+
+        def initialize: (
+          name: String,
+          ?description: String,
+          ?query: String,
+          ?rank: Integer
+        ) -> void
+
+        def to_hash: -> {
+          name: String,
+          description: String,
+          query: String,
+          rank: Integer
+        }
+      end
+    end
+  end
+end

@@ -1,0 +1,141 @@
+module XTwitterScraper
+  module Models
+    type draw_retrieve_response =
+      {
+        draw: XTwitterScraper::Models::DrawRetrieveResponse::Draw,
+        winners: ::Array[XTwitterScraper::Models::DrawRetrieveResponse::Winner]
+      }
+
+    class DrawRetrieveResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor draw: XTwitterScraper::Models::DrawRetrieveResponse::Draw
+
+      attr_accessor winners: ::Array[XTwitterScraper::Models::DrawRetrieveResponse::Winner]
+
+      def initialize: (
+        draw: XTwitterScraper::Models::DrawRetrieveResponse::Draw,
+        winners: ::Array[XTwitterScraper::Models::DrawRetrieveResponse::Winner]
+      ) -> void
+
+      def to_hash: -> {
+        draw: XTwitterScraper::Models::DrawRetrieveResponse::Draw,
+        winners: ::Array[XTwitterScraper::Models::DrawRetrieveResponse::Winner]
+      }
+
+      type draw =
+        {
+          id: String,
+          created_at: Time,
+          status: String,
+          total_entries: Integer,
+          tweet_author_username: String,
+          tweet_id: String,
+          tweet_like_count: Integer,
+          tweet_quote_count: Integer,
+          tweet_reply_count: Integer,
+          tweet_retweet_count: Integer,
+          tweet_text: String,
+          tweet_url: String,
+          valid_entries: Integer,
+          drawn_at: Time
+        }
+
+      class Draw < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor status: String
+
+        attr_accessor total_entries: Integer
+
+        attr_accessor tweet_author_username: String
+
+        attr_accessor tweet_id: String
+
+        attr_accessor tweet_like_count: Integer
+
+        attr_accessor tweet_quote_count: Integer
+
+        attr_accessor tweet_reply_count: Integer
+
+        attr_accessor tweet_retweet_count: Integer
+
+        attr_accessor tweet_text: String
+
+        attr_accessor tweet_url: String
+
+        attr_accessor valid_entries: Integer
+
+        attr_reader drawn_at: Time?
+
+        def drawn_at=: (Time) -> Time
+
+        def initialize: (
+          id: String,
+          created_at: Time,
+          status: String,
+          total_entries: Integer,
+          tweet_author_username: String,
+          tweet_id: String,
+          tweet_like_count: Integer,
+          tweet_quote_count: Integer,
+          tweet_reply_count: Integer,
+          tweet_retweet_count: Integer,
+          tweet_text: String,
+          tweet_url: String,
+          valid_entries: Integer,
+          ?drawn_at: Time
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          status: String,
+          total_entries: Integer,
+          tweet_author_username: String,
+          tweet_id: String,
+          tweet_like_count: Integer,
+          tweet_quote_count: Integer,
+          tweet_reply_count: Integer,
+          tweet_retweet_count: Integer,
+          tweet_text: String,
+          tweet_url: String,
+          valid_entries: Integer,
+          drawn_at: Time
+        }
+      end
+
+      type winner =
+        {
+          author_username: String,
+          is_backup: bool,
+          position: Integer,
+          tweet_id: String
+        }
+
+      class Winner < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor author_username: String
+
+        attr_accessor is_backup: bool
+
+        attr_accessor position: Integer
+
+        attr_accessor tweet_id: String
+
+        def initialize: (
+          author_username: String,
+          is_backup: bool,
+          position: Integer,
+          tweet_id: String
+        ) -> void
+
+        def to_hash: -> {
+          author_username: String,
+          is_backup: bool,
+          position: Integer,
+          tweet_id: String
+        }
+      end
+    end
+  end
+end

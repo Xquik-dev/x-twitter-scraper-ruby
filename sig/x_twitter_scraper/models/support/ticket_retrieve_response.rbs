@@ -1,0 +1,85 @@
+module XTwitterScraper
+  module Models
+    module Support
+      type ticket_retrieve_response =
+        {
+          created_at: Time,
+          messages: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message],
+          public_id: String,
+          status: String,
+          subject: String,
+          updated_at: Time
+        }
+
+      class TicketRetrieveResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader created_at: Time?
+
+        def created_at=: (Time) -> Time
+
+        attr_reader messages: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message]?
+
+        def messages=: (
+          ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message]
+        ) -> ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message]
+
+        attr_reader public_id: String?
+
+        def public_id=: (String) -> String
+
+        attr_reader status: String?
+
+        def status=: (String) -> String
+
+        attr_reader subject: String?
+
+        def subject=: (String) -> String
+
+        attr_reader updated_at: Time?
+
+        def updated_at=: (Time) -> Time
+
+        def initialize: (
+          ?created_at: Time,
+          ?messages: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message],
+          ?public_id: String,
+          ?status: String,
+          ?subject: String,
+          ?updated_at: Time
+        ) -> void
+
+        def to_hash: -> {
+          created_at: Time,
+          messages: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message],
+          public_id: String,
+          status: String,
+          subject: String,
+          updated_at: Time
+        }
+
+        type message = { body: String, created_at: Time, sender: String }
+
+        class Message < XTwitterScraper::Internal::Type::BaseModel
+          attr_reader body: String?
+
+          def body=: (String) -> String
+
+          attr_reader created_at: Time?
+
+          def created_at=: (Time) -> Time
+
+          attr_reader sender: String?
+
+          def sender=: (String) -> String
+
+          def initialize: (
+            ?body: String,
+            ?created_at: Time,
+            ?sender: String
+          ) -> void
+
+          def to_hash: -> { body: String, created_at: Time, sender: String }
+        end
+      end
+    end
+  end
+end

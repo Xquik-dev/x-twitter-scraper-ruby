@@ -1,0 +1,21 @@
+module XTwitterScraper
+  module Resources
+    class Account
+      def retrieve: (
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::AccountRetrieveResponse
+
+      def set_x_username: (
+        username: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::AccountSetXUsernameResponse
+
+      def update_locale: (
+        locale: XTwitterScraper::Models::AccountUpdateLocaleParams::locale,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::AccountUpdateLocaleResponse
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

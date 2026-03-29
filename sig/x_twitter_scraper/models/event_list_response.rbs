@@ -1,0 +1,95 @@
+module XTwitterScraper
+  module Models
+    type event_list_response =
+      {
+        events: ::Array[XTwitterScraper::Models::EventListResponse::Event],
+        has_more: bool,
+        next_cursor: String
+      }
+
+    class EventListResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor events: ::Array[XTwitterScraper::Models::EventListResponse::Event]
+
+      attr_accessor has_more: bool
+
+      attr_reader next_cursor: String?
+
+      def next_cursor=: (String) -> String
+
+      def initialize: (
+        events: ::Array[XTwitterScraper::Models::EventListResponse::Event],
+        has_more: bool,
+        ?next_cursor: String
+      ) -> void
+
+      def to_hash: -> {
+        events: ::Array[XTwitterScraper::Models::EventListResponse::Event],
+        has_more: bool,
+        next_cursor: String
+      }
+
+      type event =
+        {
+          id: String,
+          data: ::Hash[Symbol, top],
+          monitor_id: String,
+          occurred_at: Time,
+          type: XTwitterScraper::Models::EventListResponse::Event::type_,
+          username: String
+        }
+
+      class Event < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor data: ::Hash[Symbol, top]
+
+        attr_accessor monitor_id: String
+
+        attr_accessor occurred_at: Time
+
+        attr_accessor type: XTwitterScraper::Models::EventListResponse::Event::type_
+
+        attr_accessor username: String
+
+        def initialize: (
+          id: String,
+          data: ::Hash[Symbol, top],
+          monitor_id: String,
+          occurred_at: Time,
+          type: XTwitterScraper::Models::EventListResponse::Event::type_,
+          username: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          data: ::Hash[Symbol, top],
+          monitor_id: String,
+          occurred_at: Time,
+          type: XTwitterScraper::Models::EventListResponse::Event::type_,
+          username: String
+        }
+
+        type type_ =
+          :"tweet.new"
+          | :"tweet.reply"
+          | :"tweet.retweet"
+          | :"tweet.quote"
+          | :"follower.gained"
+          | :"follower.lost"
+
+        module Type
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TWEET_NEW: :"tweet.new"
+          TWEET_REPLY: :"tweet.reply"
+          TWEET_RETWEET: :"tweet.retweet"
+          TWEET_QUOTE: :"tweet.quote"
+          FOLLOWER_GAINED: :"follower.gained"
+          FOLLOWER_LOST: :"follower.lost"
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::EventListResponse::Event::type_]
+        end
+      end
+    end
+  end
+end

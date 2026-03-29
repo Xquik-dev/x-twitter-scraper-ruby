@@ -1,0 +1,17 @@
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_create_response = { success: true, tweet_id: String }
+
+      class TweetCreateResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor success: true
+
+        attr_accessor tweet_id: String
+
+        def initialize: (tweet_id: String, ?success: true) -> void
+
+        def to_hash: -> { success: true, tweet_id: String }
+      end
+    end
+  end
+end

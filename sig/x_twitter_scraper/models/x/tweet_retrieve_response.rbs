@@ -1,0 +1,129 @@
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_retrieve_response =
+        {
+          tweet: XTwitterScraper::Models::X::TweetRetrieveResponse::Tweet,
+          author: XTwitterScraper::Models::X::TweetRetrieveResponse::Author
+        }
+
+      class TweetRetrieveResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor tweet: XTwitterScraper::Models::X::TweetRetrieveResponse::Tweet
+
+        attr_reader author: XTwitterScraper::Models::X::TweetRetrieveResponse::Author?
+
+        def author=: (
+          XTwitterScraper::Models::X::TweetRetrieveResponse::Author
+        ) -> XTwitterScraper::Models::X::TweetRetrieveResponse::Author
+
+        def initialize: (
+          tweet: XTwitterScraper::Models::X::TweetRetrieveResponse::Tweet,
+          ?author: XTwitterScraper::Models::X::TweetRetrieveResponse::Author
+        ) -> void
+
+        def to_hash: -> {
+          tweet: XTwitterScraper::Models::X::TweetRetrieveResponse::Tweet,
+          author: XTwitterScraper::Models::X::TweetRetrieveResponse::Author
+        }
+
+        type tweet =
+          {
+            id: String,
+            bookmark_count: Integer,
+            like_count: Integer,
+            quote_count: Integer,
+            reply_count: Integer,
+            retweet_count: Integer,
+            text: String,
+            view_count: Integer,
+            created_at: String
+          }
+
+        class Tweet < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor bookmark_count: Integer
+
+          attr_accessor like_count: Integer
+
+          attr_accessor quote_count: Integer
+
+          attr_accessor reply_count: Integer
+
+          attr_accessor retweet_count: Integer
+
+          attr_accessor text: String
+
+          attr_accessor view_count: Integer
+
+          attr_reader created_at: String?
+
+          def created_at=: (String) -> String
+
+          def initialize: (
+            id: String,
+            bookmark_count: Integer,
+            like_count: Integer,
+            quote_count: Integer,
+            reply_count: Integer,
+            retweet_count: Integer,
+            text: String,
+            view_count: Integer,
+            ?created_at: String
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            bookmark_count: Integer,
+            like_count: Integer,
+            quote_count: Integer,
+            reply_count: Integer,
+            retweet_count: Integer,
+            text: String,
+            view_count: Integer,
+            created_at: String
+          }
+        end
+
+        type author =
+          {
+            id: String,
+            followers: Integer,
+            username: String,
+            verified: bool,
+            profile_picture: String
+          }
+
+        class Author < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor followers: Integer
+
+          attr_accessor username: String
+
+          attr_accessor verified: bool
+
+          attr_reader profile_picture: String?
+
+          def profile_picture=: (String) -> String
+
+          def initialize: (
+            id: String,
+            followers: Integer,
+            username: String,
+            verified: bool,
+            ?profile_picture: String
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            followers: Integer,
+            username: String,
+            verified: bool,
+            profile_picture: String
+          }
+        end
+      end
+    end
+  end
+end

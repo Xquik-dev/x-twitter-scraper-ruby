@@ -1,0 +1,23 @@
+module XTwitterScraper
+  module Models
+    type credit_topup_balance_params =
+      { amount: Integer } & XTwitterScraper::Internal::Type::request_parameters
+
+    class CreditTopupBalanceParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor amount: Integer
+
+      def initialize: (
+        amount: Integer,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        amount: Integer,
+        request_options: XTwitterScraper::RequestOptions
+      }
+    end
+  end
+end

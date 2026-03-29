@@ -1,0 +1,63 @@
+module XTwitterScraper
+  module Models
+    type x_get_notifications_response =
+      {
+        has_next_page: bool,
+        next_cursor: String,
+        notifications: ::Array[XTwitterScraper::Models::XGetNotificationsResponse::Notification]
+      }
+
+    class XGetNotificationsResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor has_next_page: bool
+
+      attr_accessor next_cursor: String
+
+      attr_accessor notifications: ::Array[XTwitterScraper::Models::XGetNotificationsResponse::Notification]
+
+      def initialize: (
+        has_next_page: bool,
+        next_cursor: String,
+        notifications: ::Array[XTwitterScraper::Models::XGetNotificationsResponse::Notification]
+      ) -> void
+
+      def to_hash: -> {
+        has_next_page: bool,
+        next_cursor: String,
+        notifications: ::Array[XTwitterScraper::Models::XGetNotificationsResponse::Notification]
+      }
+
+      type notification =
+        { id: String, message: String, timestamp: String, type: String }
+
+      class Notification < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        attr_reader timestamp: String?
+
+        def timestamp=: (String) -> String
+
+        attr_reader type: String?
+
+        def type=: (String) -> String
+
+        def initialize: (
+          id: String,
+          ?message: String,
+          ?timestamp: String,
+          ?type: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          message: String,
+          timestamp: String,
+          type: String
+        }
+      end
+    end
+  end
+end

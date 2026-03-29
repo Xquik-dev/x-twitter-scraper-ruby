@@ -1,0 +1,16 @@
+module XTwitterScraper
+  module Resources
+    class Bot
+      attr_reader platform_links: XTwitterScraper::Resources::Bot::PlatformLinks
+
+      def track_usage: (
+        input_tokens: Integer,
+        output_tokens: Integer,
+        platform_user_id: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::BotTrackUsageResponse
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

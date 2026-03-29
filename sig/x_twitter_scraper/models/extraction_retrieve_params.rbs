@@ -1,0 +1,36 @@
+module XTwitterScraper
+  module Models
+    type extraction_retrieve_params =
+      { id: String, after: String, limit: Integer }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class ExtractionRetrieveParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor id: String
+
+      attr_reader after: String?
+
+      def after=: (String) -> String
+
+      attr_reader limit: Integer?
+
+      def limit=: (Integer) -> Integer
+
+      def initialize: (
+        id: String,
+        ?after: String,
+        ?limit: Integer,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        after: String,
+        limit: Integer,
+        request_options: XTwitterScraper::RequestOptions
+      }
+    end
+  end
+end

@@ -1,0 +1,10 @@
+module XTwitterScraper
+  module Internal
+    extend XTwitterScraper::Internal::Util::SorbetRuntimeSupport
+
+    type file_input =
+      Pathname | StringIO | IO | String | XTwitterScraper::FilePart
+
+    OMIT: Object
+  end
+end

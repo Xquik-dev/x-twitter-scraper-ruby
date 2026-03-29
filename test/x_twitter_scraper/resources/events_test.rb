@@ -1,0 +1,45 @@
+# frozen_string_literal: true
+
+require_relative "../test_helper"
+
+class XTwitterScraper::Test::Resources::EventsTest < XTwitterScraper::Test::ResourceTest
+  def test_retrieve
+    skip("Mock server tests are disabled")
+
+    response = @x_twitter_scraper.events.retrieve("id")
+
+    assert_pattern do
+      response => XTwitterScraper::Models::EventRetrieveResponse
+    end
+
+    assert_pattern do
+      response => {
+        id: String,
+        data: ^(XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]),
+        monitor_id: String,
+        occurred_at: Time,
+        type: XTwitterScraper::Models::EventRetrieveResponse::Type,
+        username: String,
+        x_event_id: String | nil
+      }
+    end
+  end
+
+  def test_list
+    skip("Mock server tests are disabled")
+
+    response = @x_twitter_scraper.events.list
+
+    assert_pattern do
+      response => XTwitterScraper::Models::EventListResponse
+    end
+
+    assert_pattern do
+      response => {
+        events: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::EventListResponse::Event]),
+        has_more: XTwitterScraper::Internal::Type::Boolean,
+        next_cursor: String | nil
+      }
+    end
+  end
+end

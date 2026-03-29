@@ -1,0 +1,56 @@
+# frozen_string_literal: true
+
+module XTwitterScraper
+  module Models
+    # @see XTwitterScraper::Resources::Webhooks#create
+    class WebhookCreateResponse < XTwitterScraper::Internal::Type::BaseModel
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
+      # @!attribute created_at
+      #
+      #   @return [Time]
+      required :created_at, Time, api_name: :createdAt
+
+      # @!attribute event_types
+      #
+      #   @return [Array<Symbol, XTwitterScraper::Models::WebhookCreateResponse::EventType>]
+      required :event_types,
+               -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Models::WebhookCreateResponse::EventType] },
+               api_name: :eventTypes
+
+      # @!attribute secret
+      #
+      #   @return [String]
+      required :secret, String
+
+      # @!attribute url
+      #
+      #   @return [String]
+      required :url, String
+
+      # @!method initialize(id:, created_at:, event_types:, secret:, url:)
+      #   @param id [String]
+      #   @param created_at [Time]
+      #   @param event_types [Array<Symbol, XTwitterScraper::Models::WebhookCreateResponse::EventType>]
+      #   @param secret [String]
+      #   @param url [String]
+
+      module EventType
+        extend XTwitterScraper::Internal::Type::Enum
+
+        TWEET_NEW = :"tweet.new"
+        TWEET_REPLY = :"tweet.reply"
+        TWEET_RETWEET = :"tweet.retweet"
+        TWEET_QUOTE = :"tweet.quote"
+        FOLLOWER_GAINED = :"follower.gained"
+        FOLLOWER_LOST = :"follower.lost"
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+    end
+  end
+end

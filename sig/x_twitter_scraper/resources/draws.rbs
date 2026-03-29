@@ -1,0 +1,41 @@
+module XTwitterScraper
+  module Resources
+    class Draws
+      def retrieve: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::DrawRetrieveResponse
+
+      def list: (
+        ?after: String,
+        ?limit: Integer,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::DrawListResponse
+
+      def export: (
+        String id,
+        ?format_: XTwitterScraper::Models::DrawExportParams::format_,
+        ?type: XTwitterScraper::Models::DrawExportParams::type_,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> StringIO
+
+      def run: (
+        tweet_url: String,
+        ?backup_count: Integer,
+        ?filter_account_age_days: Integer,
+        ?filter_language: String,
+        ?filter_min_followers: Integer,
+        ?must_follow_username: String,
+        ?must_retweet: bool,
+        ?required_hashtags: ::Array[String],
+        ?required_keywords: ::Array[String],
+        ?required_mentions: ::Array[String],
+        ?unique_authors_only: bool,
+        ?winner_count: Integer,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::DrawRunResponse
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

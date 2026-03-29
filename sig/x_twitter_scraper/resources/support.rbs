@@ -1,0 +1,9 @@
+module XTwitterScraper
+  module Resources
+    class Support
+      attr_reader tickets: XTwitterScraper::Resources::Support::Tickets
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

@@ -1,0 +1,30 @@
+module XTwitterScraper
+  module Models
+    module Bot
+      type platform_link_lookup_params =
+        { platform: String, platform_user_id: String }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class PlatformLinkLookupParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor platform: String
+
+        attr_accessor platform_user_id: String
+
+        def initialize: (
+          platform: String,
+          platform_user_id: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          platform: String,
+          platform_user_id: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

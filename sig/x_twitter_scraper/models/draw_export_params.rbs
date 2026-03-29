@@ -1,0 +1,71 @@
+module XTwitterScraper
+  module Models
+    type draw_export_params =
+      {
+        id: String,
+        format_: XTwitterScraper::Models::DrawExportParams::format_,
+        type: XTwitterScraper::Models::DrawExportParams::type_
+      }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class DrawExportParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor id: String
+
+      attr_reader format_: XTwitterScraper::Models::DrawExportParams::format_?
+
+      def format_=: (
+        XTwitterScraper::Models::DrawExportParams::format_
+      ) -> XTwitterScraper::Models::DrawExportParams::format_
+
+      attr_reader type: XTwitterScraper::Models::DrawExportParams::type_?
+
+      def type=: (
+        XTwitterScraper::Models::DrawExportParams::type_
+      ) -> XTwitterScraper::Models::DrawExportParams::type_
+
+      def initialize: (
+        id: String,
+        ?format_: XTwitterScraper::Models::DrawExportParams::format_,
+        ?type: XTwitterScraper::Models::DrawExportParams::type_,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        format_: XTwitterScraper::Models::DrawExportParams::format_,
+        type: XTwitterScraper::Models::DrawExportParams::type_,
+        request_options: XTwitterScraper::RequestOptions
+      }
+
+      type format_ = :csv | :json | :md | :"md-document" | :pdf | :txt | :xlsx
+
+      module Format
+        extend XTwitterScraper::Internal::Type::Enum
+
+        CSV: :csv
+        JSON: :json
+        MD: :md
+        MD_DOCUMENT: :"md-document"
+        PDF: :pdf
+        TXT: :txt
+        XLSX: :xlsx
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::DrawExportParams::format_]
+      end
+
+      type type_ = :winners | :entries
+
+      module Type
+        extend XTwitterScraper::Internal::Type::Enum
+
+        WINNERS: :winners
+        ENTRIES: :entries
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::DrawExportParams::type_]
+      end
+    end
+  end
+end

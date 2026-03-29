@@ -1,0 +1,30 @@
+module XTwitterScraper
+  module Resources
+    class X
+      class Lists
+        def retrieve_followers: (
+          String id,
+          ?cursor: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> nil
+
+        def retrieve_members: (
+          String id,
+          ?cursor: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> nil
+
+        def retrieve_tweets: (
+          String id,
+          ?cursor: String,
+          ?include_replies: bool,
+          ?since_time: String,
+          ?until_time: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> nil
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

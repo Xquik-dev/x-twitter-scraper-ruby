@@ -1,0 +1,51 @@
+module XTwitterScraper
+  module Resources
+    class X
+      class Communities
+        attr_reader join: XTwitterScraper::Resources::X::Communities::Join
+
+        attr_reader tweets: XTwitterScraper::Resources::X::Communities::Tweets
+
+        def create: (
+          account: String,
+          name: String,
+          ?description: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::CommunityCreateResponse
+
+        def delete: (
+          String id,
+          account: String,
+          community_name: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::CommunityDeleteResponse
+
+        def retrieve_info: (
+          String id,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::CommunityRetrieveInfoResponse
+
+        def retrieve_members: (
+          String id,
+          ?cursor: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> nil
+
+        def retrieve_moderators: (
+          String id,
+          ?cursor: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> nil
+
+        def retrieve_search: (
+          q: String,
+          ?cursor: String,
+          ?query_type: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> nil
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

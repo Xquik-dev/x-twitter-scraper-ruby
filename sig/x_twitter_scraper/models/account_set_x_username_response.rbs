@@ -1,0 +1,15 @@
+module XTwitterScraper
+  module Models
+    type account_set_x_username_response = { success: true, x_username: String }
+
+    class AccountSetXUsernameResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor success: true
+
+      attr_accessor x_username: String
+
+      def initialize: (x_username: String, ?success: true) -> void
+
+      def to_hash: -> { success: true, x_username: String }
+    end
+  end
+end

@@ -1,0 +1,103 @@
+module XTwitterScraper
+  module Models
+    type draw_run_params =
+      {
+        tweet_url: String,
+        backup_count: Integer,
+        filter_account_age_days: Integer,
+        filter_language: String,
+        filter_min_followers: Integer,
+        must_follow_username: String,
+        must_retweet: bool,
+        required_hashtags: ::Array[String],
+        required_keywords: ::Array[String],
+        required_mentions: ::Array[String],
+        unique_authors_only: bool,
+        winner_count: Integer
+      }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class DrawRunParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor tweet_url: String
+
+      attr_reader backup_count: Integer?
+
+      def backup_count=: (Integer) -> Integer
+
+      attr_reader filter_account_age_days: Integer?
+
+      def filter_account_age_days=: (Integer) -> Integer
+
+      attr_reader filter_language: String?
+
+      def filter_language=: (String) -> String
+
+      attr_reader filter_min_followers: Integer?
+
+      def filter_min_followers=: (Integer) -> Integer
+
+      attr_reader must_follow_username: String?
+
+      def must_follow_username=: (String) -> String
+
+      attr_reader must_retweet: bool?
+
+      def must_retweet=: (bool) -> bool
+
+      attr_reader required_hashtags: ::Array[String]?
+
+      def required_hashtags=: (::Array[String]) -> ::Array[String]
+
+      attr_reader required_keywords: ::Array[String]?
+
+      def required_keywords=: (::Array[String]) -> ::Array[String]
+
+      attr_reader required_mentions: ::Array[String]?
+
+      def required_mentions=: (::Array[String]) -> ::Array[String]
+
+      attr_reader unique_authors_only: bool?
+
+      def unique_authors_only=: (bool) -> bool
+
+      attr_reader winner_count: Integer?
+
+      def winner_count=: (Integer) -> Integer
+
+      def initialize: (
+        tweet_url: String,
+        ?backup_count: Integer,
+        ?filter_account_age_days: Integer,
+        ?filter_language: String,
+        ?filter_min_followers: Integer,
+        ?must_follow_username: String,
+        ?must_retweet: bool,
+        ?required_hashtags: ::Array[String],
+        ?required_keywords: ::Array[String],
+        ?required_mentions: ::Array[String],
+        ?unique_authors_only: bool,
+        ?winner_count: Integer,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        tweet_url: String,
+        backup_count: Integer,
+        filter_account_age_days: Integer,
+        filter_language: String,
+        filter_min_followers: Integer,
+        must_follow_username: String,
+        must_retweet: bool,
+        required_hashtags: ::Array[String],
+        required_keywords: ::Array[String],
+        required_mentions: ::Array[String],
+        unique_authors_only: bool,
+        winner_count: Integer,
+        request_options: XTwitterScraper::RequestOptions
+      }
+    end
+  end
+end

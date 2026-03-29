@@ -1,0 +1,21 @@
+module XTwitterScraper
+  module Models
+    module Support
+      type ticket_update_response = { public_id: String, status: String }
+
+      class TicketUpdateResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader public_id: String?
+
+        def public_id=: (String) -> String
+
+        attr_reader status: String?
+
+        def status=: (String) -> String
+
+        def initialize: (?public_id: String, ?status: String) -> void
+
+        def to_hash: -> { public_id: String, status: String }
+      end
+    end
+  end
+end

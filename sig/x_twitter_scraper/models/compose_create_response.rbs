@@ -1,0 +1,7 @@
+module XTwitterScraper
+  module Models
+    type compose_create_response = ::Hash[Symbol, top]
+
+    ComposeCreateResponse: XTwitterScraper::Internal::Type::Converter
+  end
+end

@@ -1,0 +1,19 @@
+module XTwitterScraper
+  module Models
+    module X
+      type account_list_params =
+        {  } & XTwitterScraper::Internal::Type::request_parameters
+
+      class AccountListParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        def initialize: (
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> { request_options: XTwitterScraper::RequestOptions }
+      end
+    end
+  end
+end

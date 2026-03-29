@@ -1,0 +1,64 @@
+module XTwitterScraper
+  module Models
+    type account_retrieve_response =
+      {
+        monitors_allowed: Integer,
+        monitors_used: Integer,
+        plan: XTwitterScraper::Models::AccountRetrieveResponse::plan,
+        current_period: XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod
+      }
+
+    class AccountRetrieveResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor monitors_allowed: Integer
+
+      attr_accessor monitors_used: Integer
+
+      attr_accessor plan: XTwitterScraper::Models::AccountRetrieveResponse::plan
+
+      attr_reader current_period: XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod?
+
+      def current_period=: (
+        XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod
+      ) -> XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod
+
+      def initialize: (
+        monitors_allowed: Integer,
+        monitors_used: Integer,
+        plan: XTwitterScraper::Models::AccountRetrieveResponse::plan,
+        ?current_period: XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod
+      ) -> void
+
+      def to_hash: -> {
+        monitors_allowed: Integer,
+        monitors_used: Integer,
+        plan: XTwitterScraper::Models::AccountRetrieveResponse::plan,
+        current_period: XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod
+      }
+
+      type plan = :active | :inactive
+
+      module Plan
+        extend XTwitterScraper::Internal::Type::Enum
+
+        ACTIVE: :active
+        INACTIVE: :inactive
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::AccountRetrieveResponse::plan]
+      end
+
+      type current_period = { end_: Time, start: Time, usage_percent: Float }
+
+      class CurrentPeriod < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor end_: Time
+
+        attr_accessor start: Time
+
+        attr_accessor usage_percent: Float
+
+        def initialize: (end_: Time, start: Time, usage_percent: Float) -> void
+
+        def to_hash: -> { end_: Time, start: Time, usage_percent: Float }
+      end
+    end
+  end
+end

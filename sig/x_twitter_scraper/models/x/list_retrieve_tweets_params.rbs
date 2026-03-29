@@ -1,0 +1,56 @@
+module XTwitterScraper
+  module Models
+    module X
+      type list_retrieve_tweets_params =
+        {
+          id: String,
+          cursor: String,
+          include_replies: bool,
+          since_time: String,
+          until_time: String
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class ListRetrieveTweetsParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_reader cursor: String?
+
+        def cursor=: (String) -> String
+
+        attr_reader include_replies: bool?
+
+        def include_replies=: (bool) -> bool
+
+        attr_reader since_time: String?
+
+        def since_time=: (String) -> String
+
+        attr_reader until_time: String?
+
+        def until_time=: (String) -> String
+
+        def initialize: (
+          id: String,
+          ?cursor: String,
+          ?include_replies: bool,
+          ?since_time: String,
+          ?until_time: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          cursor: String,
+          include_replies: bool,
+          since_time: String,
+          until_time: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

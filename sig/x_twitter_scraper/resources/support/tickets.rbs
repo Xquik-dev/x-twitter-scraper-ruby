@@ -1,0 +1,36 @@
+module XTwitterScraper
+  module Resources
+    class Support
+      class Tickets
+        def create: (
+          body: String,
+          subject: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::Support::TicketCreateResponse
+
+        def retrieve: (
+          String id,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::Support::TicketRetrieveResponse
+
+        def update: (
+          String id,
+          status: XTwitterScraper::Models::Support::TicketUpdateParams::status,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::Support::TicketUpdateResponse
+
+        def list: (
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::Support::TicketListResponse
+
+        def reply: (
+          String id,
+          body: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::Support::TicketReplyResponse
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

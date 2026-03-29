@@ -1,0 +1,80 @@
+module XTwitterScraper
+  module Models
+    module Support
+      type ticket_list_response =
+        {
+          tickets: ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket]
+        }
+
+      class TicketListResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader tickets: ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket]?
+
+        def tickets=: (
+          ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket]
+        ) -> ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket]
+
+        def initialize: (
+          ?tickets: ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket]
+        ) -> void
+
+        def to_hash: -> {
+          tickets: ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket]
+        }
+
+        type ticket =
+          {
+            created_at: Time,
+            message_count: Integer,
+            public_id: String,
+            status: String,
+            subject: String,
+            updated_at: Time
+          }
+
+        class Ticket < XTwitterScraper::Internal::Type::BaseModel
+          attr_reader created_at: Time?
+
+          def created_at=: (Time) -> Time
+
+          attr_reader message_count: Integer?
+
+          def message_count=: (Integer) -> Integer
+
+          attr_reader public_id: String?
+
+          def public_id=: (String) -> String
+
+          attr_reader status: String?
+
+          def status=: (String) -> String
+
+          attr_reader subject: String?
+
+          def subject=: (String) -> String
+
+          attr_reader updated_at: Time?
+
+          def updated_at=: (Time) -> Time
+
+          def initialize: (
+            ?created_at: Time,
+            ?message_count: Integer,
+            ?public_id: String,
+            ?status: String,
+            ?subject: String,
+            ?updated_at: Time
+          ) -> void
+
+          def to_hash: -> {
+            created_at: Time,
+            message_count: Integer,
+            public_id: String,
+            status: String,
+            subject: String,
+            updated_at: Time
+          }
+        end
+      end
+    end
+  end
+end
