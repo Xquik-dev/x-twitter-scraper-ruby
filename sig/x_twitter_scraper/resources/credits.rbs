@@ -1,0 +1,16 @@
+module XTwitterScraper
+  module Resources
+    class Credits
+      def retrieve_balance: (
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::CreditRetrieveBalanceResponse
+
+      def topup_balance: (
+        amount: Integer,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::CreditTopupBalanceResponse
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

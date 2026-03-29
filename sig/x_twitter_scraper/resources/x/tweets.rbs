@@ -1,0 +1,85 @@
+module XTwitterScraper
+  module Resources
+    class X
+      class Tweets
+        attr_reader like: XTwitterScraper::Resources::X::Tweets::Like
+
+        attr_reader retweet: XTwitterScraper::Resources::X::Tweets::Retweet
+
+        def create: (
+          account: String,
+          text: String,
+          ?attachment_url: String,
+          ?community_id: String,
+          ?is_note_tweet: bool,
+          ?media_ids: ::Array[String],
+          ?reply_to_tweet_id: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::TweetCreateResponse
+
+        def retrieve: (
+          String tweet_id,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::TweetRetrieveResponse
+
+        def list: (
+          ids: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> nil
+
+        def delete: (
+          String tweet_id,
+          account: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::TweetDeleteResponse
+
+        def get_favoriters: (
+          String id,
+          ?cursor: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::TweetGetFavoritersResponse
+
+        def get_quotes: (
+          String id,
+          ?cursor: String,
+          ?include_replies: bool,
+          ?since_time: String,
+          ?until_time: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::TweetGetQuotesResponse
+
+        def get_replies: (
+          String id,
+          ?cursor: String,
+          ?since_time: String,
+          ?until_time: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::TweetGetRepliesResponse
+
+        def get_retweeters: (
+          String id,
+          ?cursor: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::TweetGetRetweetersResponse
+
+        def get_thread: (
+          String id,
+          ?cursor: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::TweetGetThreadResponse
+
+        def search: (
+          q: String,
+          ?cursor: String,
+          ?limit: Integer,
+          ?query_type: XTwitterScraper::Models::X::TweetSearchParams::query_type,
+          ?since_time: String,
+          ?until_time: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::TweetSearchResponse
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

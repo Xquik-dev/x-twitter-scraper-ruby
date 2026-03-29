@@ -1,0 +1,30 @@
+module XTwitterScraper
+  module Resources
+    class Drafts
+      def create: (
+        text: String,
+        ?goal: XTwitterScraper::Models::DraftCreateParams::goal,
+        ?topic: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::DraftCreateResponse
+
+      def retrieve: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::DraftRetrieveResponse
+
+      def list: (
+        ?after_cursor: String,
+        ?limit: Integer,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::DraftListResponse
+
+      def delete: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> nil
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

@@ -1,0 +1,52 @@
+module XTwitterScraper
+  module Models
+    module X
+      type media_download_response =
+        {
+          cache_hit: bool,
+          gallery_url: String,
+          total_media: Integer,
+          total_tweets: Integer,
+          tweet_id: String
+        }
+
+      class MediaDownloadResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader cache_hit: bool?
+
+        def cache_hit=: (bool) -> bool
+
+        attr_reader gallery_url: String?
+
+        def gallery_url=: (String) -> String
+
+        attr_reader total_media: Integer?
+
+        def total_media=: (Integer) -> Integer
+
+        attr_reader total_tweets: Integer?
+
+        def total_tweets=: (Integer) -> Integer
+
+        attr_reader tweet_id: String?
+
+        def tweet_id=: (String) -> String
+
+        def initialize: (
+          ?cache_hit: bool,
+          ?gallery_url: String,
+          ?total_media: Integer,
+          ?total_tweets: Integer,
+          ?tweet_id: String
+        ) -> void
+
+        def to_hash: -> {
+          cache_hit: bool,
+          gallery_url: String,
+          total_media: Integer,
+          total_tweets: Integer,
+          tweet_id: String
+        }
+      end
+    end
+  end
+end

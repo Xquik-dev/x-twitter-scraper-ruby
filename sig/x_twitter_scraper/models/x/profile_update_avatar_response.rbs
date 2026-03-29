@@ -1,0 +1,15 @@
+module XTwitterScraper
+  module Models
+    module X
+      type profile_update_avatar_response = { success: true }
+
+      class ProfileUpdateAvatarResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor success: true
+
+        def initialize: (?success: true) -> void
+
+        def to_hash: -> { success: true }
+      end
+    end
+  end
+end

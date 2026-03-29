@@ -1,0 +1,48 @@
+module XTwitterScraper
+  module Models
+    type subscribe_create_response =
+      {
+        url: String,
+        message: String,
+        status: XTwitterScraper::Models::SubscribeCreateResponse::status
+      }
+
+    class SubscribeCreateResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor url: String
+
+      attr_reader message: String?
+
+      def message=: (String) -> String
+
+      attr_reader status: XTwitterScraper::Models::SubscribeCreateResponse::status?
+
+      def status=: (
+        XTwitterScraper::Models::SubscribeCreateResponse::status
+      ) -> XTwitterScraper::Models::SubscribeCreateResponse::status
+
+      def initialize: (
+        url: String,
+        ?message: String,
+        ?status: XTwitterScraper::Models::SubscribeCreateResponse::status
+      ) -> void
+
+      def to_hash: -> {
+        url: String,
+        message: String,
+        status: XTwitterScraper::Models::SubscribeCreateResponse::status
+      }
+
+      type status = :checkout_created | :already_subscribed | :payment_issue
+
+      module Status
+        extend XTwitterScraper::Internal::Type::Enum
+
+        CHECKOUT_CREATED: :checkout_created
+        ALREADY_SUBSCRIBED: :already_subscribed
+        PAYMENT_ISSUE: :payment_issue
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::SubscribeCreateResponse::status]
+      end
+    end
+  end
+end

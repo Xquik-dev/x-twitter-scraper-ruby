@@ -1,0 +1,15 @@
+module XTwitterScraper
+  module Models
+    type credit_retrieve_balance_params =
+      {  } & XTwitterScraper::Internal::Type::request_parameters
+
+    class CreditRetrieveBalanceParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      def initialize: (?request_options: XTwitterScraper::request_opts) -> void
+
+      def to_hash: -> { request_options: XTwitterScraper::RequestOptions }
+    end
+  end
+end

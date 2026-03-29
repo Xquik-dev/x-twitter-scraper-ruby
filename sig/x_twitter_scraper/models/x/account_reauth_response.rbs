@@ -1,0 +1,20 @@
+module XTwitterScraper
+  module Models
+    module X
+      type account_reauth_response =
+        { id: String, status: String, x_username: String }
+
+      class AccountReauthResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor status: String
+
+        attr_accessor x_username: String
+
+        def initialize: (id: String, status: String, x_username: String) -> void
+
+        def to_hash: -> { id: String, status: String, x_username: String }
+      end
+    end
+  end
+end

@@ -1,0 +1,22 @@
+module XTwitterScraper
+  module Resources
+    class Compose
+      def create: (
+        step: XTwitterScraper::Models::ComposeCreateParams::step,
+        ?additional_context: String,
+        ?call_to_action: String,
+        ?draft: String,
+        ?goal: XTwitterScraper::Models::ComposeCreateParams::goal,
+        ?has_link: bool,
+        ?has_media: bool,
+        ?media_type: XTwitterScraper::Models::ComposeCreateParams::media_type,
+        ?style_username: String,
+        ?tone: String,
+        ?topic: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::compose_create_response
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

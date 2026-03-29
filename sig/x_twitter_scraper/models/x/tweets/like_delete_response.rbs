@@ -1,0 +1,17 @@
+module XTwitterScraper
+  module Models
+    module X
+      module Tweets
+        type like_delete_response = { success: true }
+
+        class LikeDeleteResponse < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor success: true
+
+          def initialize: (?success: true) -> void
+
+          def to_hash: -> { success: true }
+        end
+      end
+    end
+  end
+end

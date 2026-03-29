@@ -1,0 +1,13 @@
+module XTwitterScraper
+  module Models
+    type webhook_deactivate_response = { success: true }
+
+    class WebhookDeactivateResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor success: true
+
+      def initialize: (?success: true) -> void
+
+      def to_hash: -> { success: true }
+    end
+  end
+end

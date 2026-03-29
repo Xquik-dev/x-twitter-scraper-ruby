@@ -1,0 +1,32 @@
+module XTwitterScraper
+  module Models
+    module X
+      type user_retrieve_verified_followers_params =
+        { id: String, cursor: String }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class UserRetrieveVerifiedFollowersParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_reader cursor: String?
+
+        def cursor=: (String) -> String
+
+        def initialize: (
+          id: String,
+          ?cursor: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          cursor: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

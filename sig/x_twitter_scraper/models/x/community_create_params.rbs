@@ -1,0 +1,36 @@
+module XTwitterScraper
+  module Models
+    module X
+      type community_create_params =
+        { account: String, name: String, description: String }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class CommunityCreateParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor account: String
+
+        attr_accessor name: String
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        def initialize: (
+          account: String,
+          name: String,
+          ?description: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          account: String,
+          name: String,
+          description: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

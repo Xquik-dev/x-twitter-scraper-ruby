@@ -1,0 +1,36 @@
+module XTwitterScraper
+  module Models
+    type account_update_locale_params =
+      { locale: XTwitterScraper::Models::AccountUpdateLocaleParams::locale }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class AccountUpdateLocaleParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor locale: XTwitterScraper::Models::AccountUpdateLocaleParams::locale
+
+      def initialize: (
+        locale: XTwitterScraper::Models::AccountUpdateLocaleParams::locale,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        locale: XTwitterScraper::Models::AccountUpdateLocaleParams::locale,
+        request_options: XTwitterScraper::RequestOptions
+      }
+
+      type locale = :en | :tr | :es
+
+      module Locale
+        extend XTwitterScraper::Internal::Type::Enum
+
+        EN: :en
+        TR: :tr
+        ES: :es
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::AccountUpdateLocaleParams::locale]
+      end
+    end
+  end
+end

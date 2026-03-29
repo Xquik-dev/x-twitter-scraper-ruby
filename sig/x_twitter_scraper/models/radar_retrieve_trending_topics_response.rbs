@@ -1,0 +1,88 @@
+module XTwitterScraper
+  module Models
+    type radar_retrieve_trending_topics_response =
+      {
+        items: ::Array[XTwitterScraper::Models::RadarRetrieveTrendingTopicsResponse::Item],
+        total: Integer
+      }
+
+    class RadarRetrieveTrendingTopicsResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor items: ::Array[XTwitterScraper::Models::RadarRetrieveTrendingTopicsResponse::Item]
+
+      attr_accessor total: Integer
+
+      def initialize: (
+        items: ::Array[XTwitterScraper::Models::RadarRetrieveTrendingTopicsResponse::Item],
+        total: Integer
+      ) -> void
+
+      def to_hash: -> {
+        items: ::Array[XTwitterScraper::Models::RadarRetrieveTrendingTopicsResponse::Item],
+        total: Integer
+      }
+
+      type item =
+        {
+          category: String,
+          published_at: Time,
+          region: String,
+          score: Float,
+          source: String,
+          title: String,
+          description: String,
+          image_url: String,
+          url: String
+        }
+
+      class Item < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor category: String
+
+        attr_accessor published_at: Time
+
+        attr_accessor region: String
+
+        attr_accessor score: Float
+
+        attr_accessor source: String
+
+        attr_accessor title: String
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        attr_reader image_url: String?
+
+        def image_url=: (String) -> String
+
+        attr_reader url: String?
+
+        def url=: (String) -> String
+
+        def initialize: (
+          category: String,
+          published_at: Time,
+          region: String,
+          score: Float,
+          source: String,
+          title: String,
+          ?description: String,
+          ?image_url: String,
+          ?url: String
+        ) -> void
+
+        def to_hash: -> {
+          category: String,
+          published_at: Time,
+          region: String,
+          score: Float,
+          source: String,
+          title: String,
+          description: String,
+          image_url: String,
+          url: String
+        }
+      end
+    end
+  end
+end

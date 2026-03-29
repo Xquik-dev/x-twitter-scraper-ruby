@@ -1,0 +1,52 @@
+module XTwitterScraper
+  module Models
+    module X
+      type account_create_params =
+        {
+          email: String,
+          password: String,
+          username: String,
+          proxy_country: String,
+          totp_secret: String
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class AccountCreateParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor email: String
+
+        attr_accessor password: String
+
+        attr_accessor username: String
+
+        attr_reader proxy_country: String?
+
+        def proxy_country=: (String) -> String
+
+        attr_reader totp_secret: String?
+
+        def totp_secret=: (String) -> String
+
+        def initialize: (
+          email: String,
+          password: String,
+          username: String,
+          ?proxy_country: String,
+          ?totp_secret: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          email: String,
+          password: String,
+          username: String,
+          proxy_country: String,
+          totp_secret: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

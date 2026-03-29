@@ -1,0 +1,13 @@
+module XTwitterScraper
+  module Resources
+    class Trends
+      def list: (
+        ?count: Integer,
+        ?woeid: Integer,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::TrendListResponse
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

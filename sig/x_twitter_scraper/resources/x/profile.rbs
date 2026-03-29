@@ -1,0 +1,30 @@
+module XTwitterScraper
+  module Resources
+    class X
+      class Profile
+        def patch_all: (
+          account: String,
+          ?description: String,
+          ?location: String,
+          ?name: String,
+          ?url: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::ProfilePatchAllResponse
+
+        def update_avatar: (
+          account: String,
+          file: XTwitterScraper::Internal::file_input,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::ProfileUpdateAvatarResponse
+
+        def update_banner: (
+          account: String,
+          file: XTwitterScraper::Internal::file_input,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::ProfileUpdateBannerResponse
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

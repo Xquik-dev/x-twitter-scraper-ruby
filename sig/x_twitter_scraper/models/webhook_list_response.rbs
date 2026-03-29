@@ -1,0 +1,78 @@
+module XTwitterScraper
+  module Models
+    type webhook_list_response =
+      {
+        webhooks: ::Array[XTwitterScraper::Models::WebhookListResponse::Webhook]
+      }
+
+    class WebhookListResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor webhooks: ::Array[XTwitterScraper::Models::WebhookListResponse::Webhook]
+
+      def initialize: (
+        webhooks: ::Array[XTwitterScraper::Models::WebhookListResponse::Webhook]
+      ) -> void
+
+      def to_hash: -> {
+        webhooks: ::Array[XTwitterScraper::Models::WebhookListResponse::Webhook]
+      }
+
+      type webhook =
+        {
+          id: String,
+          created_at: Time,
+          event_types: ::Array[XTwitterScraper::Models::WebhookListResponse::Webhook::event_type],
+          is_active: bool,
+          url: String
+        }
+
+      class Webhook < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor event_types: ::Array[XTwitterScraper::Models::WebhookListResponse::Webhook::event_type]
+
+        attr_accessor is_active: bool
+
+        attr_accessor url: String
+
+        def initialize: (
+          id: String,
+          created_at: Time,
+          event_types: ::Array[XTwitterScraper::Models::WebhookListResponse::Webhook::event_type],
+          is_active: bool,
+          url: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          event_types: ::Array[XTwitterScraper::Models::WebhookListResponse::Webhook::event_type],
+          is_active: bool,
+          url: String
+        }
+
+        type event_type =
+          :"tweet.new"
+          | :"tweet.reply"
+          | :"tweet.retweet"
+          | :"tweet.quote"
+          | :"follower.gained"
+          | :"follower.lost"
+
+        module EventType
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TWEET_NEW: :"tweet.new"
+          TWEET_REPLY: :"tweet.reply"
+          TWEET_RETWEET: :"tweet.retweet"
+          TWEET_QUOTE: :"tweet.quote"
+          FOLLOWER_GAINED: :"follower.gained"
+          FOLLOWER_LOST: :"follower.lost"
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::WebhookListResponse::Webhook::event_type]
+        end
+      end
+    end
+  end
+end

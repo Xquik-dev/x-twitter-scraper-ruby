@@ -1,0 +1,20 @@
+module XTwitterScraper
+  module Resources
+    class Events
+      def retrieve: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::EventRetrieveResponse
+
+      def list: (
+        ?after: String,
+        ?event_type: XTwitterScraper::Models::EventListParams::event_type,
+        ?limit: Integer,
+        ?monitor_id: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::EventListResponse
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

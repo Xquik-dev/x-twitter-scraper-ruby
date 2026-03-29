@@ -1,0 +1,138 @@
+module XTwitterScraper
+  module Models
+    type extraction_run_params =
+      {
+        tool_type: XTwitterScraper::Models::ExtractionRunParams::tool_type,
+        advanced_query: String,
+        exact_phrase: String,
+        exclude_words: String,
+        search_query: String,
+        target_community_id: String,
+        target_list_id: String,
+        target_space_id: String,
+        target_tweet_id: String,
+        target_username: String
+      }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class ExtractionRunParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor tool_type: XTwitterScraper::Models::ExtractionRunParams::tool_type
+
+      attr_reader advanced_query: String?
+
+      def advanced_query=: (String) -> String
+
+      attr_reader exact_phrase: String?
+
+      def exact_phrase=: (String) -> String
+
+      attr_reader exclude_words: String?
+
+      def exclude_words=: (String) -> String
+
+      attr_reader search_query: String?
+
+      def search_query=: (String) -> String
+
+      attr_reader target_community_id: String?
+
+      def target_community_id=: (String) -> String
+
+      attr_reader target_list_id: String?
+
+      def target_list_id=: (String) -> String
+
+      attr_reader target_space_id: String?
+
+      def target_space_id=: (String) -> String
+
+      attr_reader target_tweet_id: String?
+
+      def target_tweet_id=: (String) -> String
+
+      attr_reader target_username: String?
+
+      def target_username=: (String) -> String
+
+      def initialize: (
+        tool_type: XTwitterScraper::Models::ExtractionRunParams::tool_type,
+        ?advanced_query: String,
+        ?exact_phrase: String,
+        ?exclude_words: String,
+        ?search_query: String,
+        ?target_community_id: String,
+        ?target_list_id: String,
+        ?target_space_id: String,
+        ?target_tweet_id: String,
+        ?target_username: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        tool_type: XTwitterScraper::Models::ExtractionRunParams::tool_type,
+        advanced_query: String,
+        exact_phrase: String,
+        exclude_words: String,
+        search_query: String,
+        target_community_id: String,
+        target_list_id: String,
+        target_space_id: String,
+        target_tweet_id: String,
+        target_username: String,
+        request_options: XTwitterScraper::RequestOptions
+      }
+
+      type tool_type =
+        :article_extractor
+        | :community_extractor
+        | :community_moderator_explorer
+        | :community_post_extractor
+        | :community_search
+        | :follower_explorer
+        | :following_explorer
+        | :list_follower_explorer
+        | :list_member_extractor
+        | :list_post_extractor
+        | :mention_extractor
+        | :people_search
+        | :post_extractor
+        | :quote_extractor
+        | :reply_extractor
+        | :repost_extractor
+        | :space_explorer
+        | :thread_extractor
+        | :tweet_search_extractor
+        | :verified_follower_explorer
+
+      module ToolType
+        extend XTwitterScraper::Internal::Type::Enum
+
+        ARTICLE_EXTRACTOR: :article_extractor
+        COMMUNITY_EXTRACTOR: :community_extractor
+        COMMUNITY_MODERATOR_EXPLORER: :community_moderator_explorer
+        COMMUNITY_POST_EXTRACTOR: :community_post_extractor
+        COMMUNITY_SEARCH: :community_search
+        FOLLOWER_EXPLORER: :follower_explorer
+        FOLLOWING_EXPLORER: :following_explorer
+        LIST_FOLLOWER_EXPLORER: :list_follower_explorer
+        LIST_MEMBER_EXTRACTOR: :list_member_extractor
+        LIST_POST_EXTRACTOR: :list_post_extractor
+        MENTION_EXTRACTOR: :mention_extractor
+        PEOPLE_SEARCH: :people_search
+        POST_EXTRACTOR: :post_extractor
+        QUOTE_EXTRACTOR: :quote_extractor
+        REPLY_EXTRACTOR: :reply_extractor
+        REPOST_EXTRACTOR: :repost_extractor
+        SPACE_EXPLORER: :space_explorer
+        THREAD_EXTRACTOR: :thread_extractor
+        TWEET_SEARCH_EXTRACTOR: :tweet_search_extractor
+        VERIFIED_FOLLOWER_EXPLORER: :verified_follower_explorer
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionRunParams::tool_type]
+      end
+    end
+  end
+end

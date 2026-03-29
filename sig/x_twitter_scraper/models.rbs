@@ -1,0 +1,121 @@
+module XTwitterScraper
+  class AccountRetrieveParams = XTwitterScraper::Models::AccountRetrieveParams
+
+  class AccountSetXUsernameParams = XTwitterScraper::Models::AccountSetXUsernameParams
+
+  class AccountUpdateLocaleParams = XTwitterScraper::Models::AccountUpdateLocaleParams
+
+  class APIKeyCreateParams = XTwitterScraper::Models::APIKeyCreateParams
+
+  class APIKeyListParams = XTwitterScraper::Models::APIKeyListParams
+
+  class APIKeyRevokeParams = XTwitterScraper::Models::APIKeyRevokeParams
+
+  module Bot = XTwitterScraper::Models::Bot
+
+  class BotTrackUsageParams = XTwitterScraper::Models::BotTrackUsageParams
+
+  class ComposeCreateParams = XTwitterScraper::Models::ComposeCreateParams
+
+  class CreditRetrieveBalanceParams = XTwitterScraper::Models::CreditRetrieveBalanceParams
+
+  class CreditTopupBalanceParams = XTwitterScraper::Models::CreditTopupBalanceParams
+
+  class DraftCreateParams = XTwitterScraper::Models::DraftCreateParams
+
+  class DraftDeleteParams = XTwitterScraper::Models::DraftDeleteParams
+
+  class DraftListParams = XTwitterScraper::Models::DraftListParams
+
+  class DraftRetrieveParams = XTwitterScraper::Models::DraftRetrieveParams
+
+  class DrawExportParams = XTwitterScraper::Models::DrawExportParams
+
+  class DrawListParams = XTwitterScraper::Models::DrawListParams
+
+  class DrawRetrieveParams = XTwitterScraper::Models::DrawRetrieveParams
+
+  class DrawRunParams = XTwitterScraper::Models::DrawRunParams
+
+  class EventListParams = XTwitterScraper::Models::EventListParams
+
+  class EventRetrieveParams = XTwitterScraper::Models::EventRetrieveParams
+
+  class ExtractionEstimateCostParams = XTwitterScraper::Models::ExtractionEstimateCostParams
+
+  class ExtractionExportResultsParams = XTwitterScraper::Models::ExtractionExportResultsParams
+
+  class ExtractionListParams = XTwitterScraper::Models::ExtractionListParams
+
+  class ExtractionRetrieveParams = XTwitterScraper::Models::ExtractionRetrieveParams
+
+  class ExtractionRunParams = XTwitterScraper::Models::ExtractionRunParams
+
+  class IntegrationCreateParams = XTwitterScraper::Models::IntegrationCreateParams
+
+  class IntegrationDeleteParams = XTwitterScraper::Models::IntegrationDeleteParams
+
+  class IntegrationListDeliveriesParams = XTwitterScraper::Models::IntegrationListDeliveriesParams
+
+  class IntegrationListParams = XTwitterScraper::Models::IntegrationListParams
+
+  class IntegrationRetrieveParams = XTwitterScraper::Models::IntegrationRetrieveParams
+
+  class IntegrationSendTestParams = XTwitterScraper::Models::IntegrationSendTestParams
+
+  class IntegrationUpdateParams = XTwitterScraper::Models::IntegrationUpdateParams
+
+  class MonitorCreateParams = XTwitterScraper::Models::MonitorCreateParams
+
+  class MonitorDeactivateParams = XTwitterScraper::Models::MonitorDeactivateParams
+
+  class MonitorListParams = XTwitterScraper::Models::MonitorListParams
+
+  class MonitorRetrieveParams = XTwitterScraper::Models::MonitorRetrieveParams
+
+  class MonitorUpdateParams = XTwitterScraper::Models::MonitorUpdateParams
+
+  class RadarRetrieveTrendingTopicsParams = XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams
+
+  class StyleAnalyzeParams = XTwitterScraper::Models::StyleAnalyzeParams
+
+  class StyleCompareParams = XTwitterScraper::Models::StyleCompareParams
+
+  class StyleDeleteParams = XTwitterScraper::Models::StyleDeleteParams
+
+  class StyleGetPerformanceParams = XTwitterScraper::Models::StyleGetPerformanceParams
+
+  class StyleListParams = XTwitterScraper::Models::StyleListParams
+
+  class StyleRetrieveParams = XTwitterScraper::Models::StyleRetrieveParams
+
+  class StyleUpdateParams = XTwitterScraper::Models::StyleUpdateParams
+
+  class SubscribeCreateParams = XTwitterScraper::Models::SubscribeCreateParams
+
+  module Support = XTwitterScraper::Models::Support
+
+  class TrendListParams = XTwitterScraper::Models::TrendListParams
+
+  class WebhookCreateParams = XTwitterScraper::Models::WebhookCreateParams
+
+  class WebhookDeactivateParams = XTwitterScraper::Models::WebhookDeactivateParams
+
+  class WebhookListDeliveriesParams = XTwitterScraper::Models::WebhookListDeliveriesParams
+
+  class WebhookListParams = XTwitterScraper::Models::WebhookListParams
+
+  class WebhookTestParams = XTwitterScraper::Models::WebhookTestParams
+
+  class WebhookUpdateParams = XTwitterScraper::Models::WebhookUpdateParams
+
+  module X = XTwitterScraper::Models::X
+
+  class XGetArticleParams = XTwitterScraper::Models::XGetArticleParams
+
+  class XGetHomeTimelineParams = XTwitterScraper::Models::XGetHomeTimelineParams
+
+  class XGetNotificationsParams = XTwitterScraper::Models::XGetNotificationsParams
+
+  class XGetTrendsParams = XTwitterScraper::Models::XGetTrendsParams
+end

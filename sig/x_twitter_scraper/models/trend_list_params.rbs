@@ -1,0 +1,32 @@
+module XTwitterScraper
+  module Models
+    type trend_list_params =
+      { count: Integer, woeid: Integer }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class TrendListParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_reader count: Integer?
+
+      def count=: (Integer) -> Integer
+
+      attr_reader woeid: Integer?
+
+      def woeid=: (Integer) -> Integer
+
+      def initialize: (
+        ?count: Integer,
+        ?woeid: Integer,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        count: Integer,
+        woeid: Integer,
+        request_options: XTwitterScraper::RequestOptions
+      }
+    end
+  end
+end

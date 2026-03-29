@@ -1,0 +1,46 @@
+module XTwitterScraper
+  module Resources
+    class X
+      attr_reader tweets: XTwitterScraper::Resources::X::Tweets
+
+      attr_reader users: XTwitterScraper::Resources::X::Users
+
+      attr_reader followers: XTwitterScraper::Resources::X::Followers
+
+      attr_reader dm: XTwitterScraper::Resources::X::Dm
+
+      attr_reader media: XTwitterScraper::Resources::X::Media
+
+      attr_reader profile: XTwitterScraper::Resources::X::Profile
+
+      attr_reader communities: XTwitterScraper::Resources::X::Communities
+
+      attr_reader accounts: XTwitterScraper::Resources::X::Accounts
+
+      attr_reader bookmarks: XTwitterScraper::Resources::X::Bookmarks
+
+      attr_reader lists: XTwitterScraper::Resources::X::Lists
+
+      def get_article: (
+        String tweet_id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::XGetArticleResponse
+
+      def get_home_timeline: (
+        ?cursor: String,
+        ?seen_tweet_ids: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::XGetHomeTimelineResponse
+
+      def get_notifications: (
+        ?cursor: String,
+        ?type: XTwitterScraper::Models::XGetNotificationsParams::type_,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::XGetNotificationsResponse
+
+      def get_trends: (?request_options: XTwitterScraper::request_opts) -> nil
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

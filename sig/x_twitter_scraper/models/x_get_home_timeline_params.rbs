@@ -1,0 +1,32 @@
+module XTwitterScraper
+  module Models
+    type x_get_home_timeline_params =
+      { cursor: String, seen_tweet_ids: String }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class XGetHomeTimelineParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_reader cursor: String?
+
+      def cursor=: (String) -> String
+
+      attr_reader seen_tweet_ids: String?
+
+      def seen_tweet_ids=: (String) -> String
+
+      def initialize: (
+        ?cursor: String,
+        ?seen_tweet_ids: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        cursor: String,
+        seen_tweet_ids: String,
+        request_options: XTwitterScraper::RequestOptions
+      }
+    end
+  end
+end

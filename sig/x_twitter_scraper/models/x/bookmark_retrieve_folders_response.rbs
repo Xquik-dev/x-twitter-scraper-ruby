@@ -1,0 +1,44 @@
+module XTwitterScraper
+  module Models
+    module X
+      type bookmark_retrieve_folders_response =
+        {
+          folders: ::Array[XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder],
+          has_next_page: bool,
+          next_cursor: String
+        }
+
+      class BookmarkRetrieveFoldersResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor folders: ::Array[XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder]
+
+        attr_accessor has_next_page: bool
+
+        attr_accessor next_cursor: String
+
+        def initialize: (
+          folders: ::Array[XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder],
+          has_next_page: bool,
+          next_cursor: String
+        ) -> void
+
+        def to_hash: -> {
+          folders: ::Array[XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder],
+          has_next_page: bool,
+          next_cursor: String
+        }
+
+        type folder = { id: String, name: String }
+
+        class Folder < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor name: String
+
+          def initialize: (id: String, name: String) -> void
+
+          def to_hash: -> { id: String, name: String }
+        end
+      end
+    end
+  end
+end

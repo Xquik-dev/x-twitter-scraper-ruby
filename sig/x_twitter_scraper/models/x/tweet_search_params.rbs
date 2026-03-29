@@ -1,0 +1,76 @@
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_search_params =
+        {
+          q: String,
+          cursor: String,
+          limit: Integer,
+          query_type: XTwitterScraper::Models::X::TweetSearchParams::query_type,
+          since_time: String,
+          until_time: String
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class TweetSearchParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor q: String
+
+        attr_reader cursor: String?
+
+        def cursor=: (String) -> String
+
+        attr_reader limit: Integer?
+
+        def limit=: (Integer) -> Integer
+
+        attr_reader query_type: XTwitterScraper::Models::X::TweetSearchParams::query_type?
+
+        def query_type=: (
+          XTwitterScraper::Models::X::TweetSearchParams::query_type
+        ) -> XTwitterScraper::Models::X::TweetSearchParams::query_type
+
+        attr_reader since_time: String?
+
+        def since_time=: (String) -> String
+
+        attr_reader until_time: String?
+
+        def until_time=: (String) -> String
+
+        def initialize: (
+          q: String,
+          ?cursor: String,
+          ?limit: Integer,
+          ?query_type: XTwitterScraper::Models::X::TweetSearchParams::query_type,
+          ?since_time: String,
+          ?until_time: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          q: String,
+          cursor: String,
+          limit: Integer,
+          query_type: XTwitterScraper::Models::X::TweetSearchParams::query_type,
+          since_time: String,
+          until_time: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+
+        type query_type = :Latest | :Top
+
+        module QueryType
+          extend XTwitterScraper::Internal::Type::Enum
+
+          LATEST: :Latest
+          TOP: :Top
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetSearchParams::query_type]
+        end
+      end
+    end
+  end
+end

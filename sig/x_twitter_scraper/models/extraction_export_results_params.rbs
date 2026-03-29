@@ -1,0 +1,51 @@
+module XTwitterScraper
+  module Models
+    type extraction_export_results_params =
+      {
+        id: String,
+        format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_
+      }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class ExtractionExportResultsParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor id: String
+
+      attr_reader format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_?
+
+      def format_=: (
+        XTwitterScraper::Models::ExtractionExportResultsParams::format_
+      ) -> XTwitterScraper::Models::ExtractionExportResultsParams::format_
+
+      def initialize: (
+        id: String,
+        ?format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_,
+        request_options: XTwitterScraper::RequestOptions
+      }
+
+      type format_ = :csv | :json | :md | :"md-document" | :pdf | :txt | :xlsx
+
+      module Format
+        extend XTwitterScraper::Internal::Type::Enum
+
+        CSV: :csv
+        JSON: :json
+        MD: :md
+        MD_DOCUMENT: :"md-document"
+        PDF: :pdf
+        TXT: :txt
+        XLSX: :xlsx
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionExportResultsParams::format_]
+      end
+    end
+  end
+end

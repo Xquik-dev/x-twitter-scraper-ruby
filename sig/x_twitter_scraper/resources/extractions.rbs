@@ -1,0 +1,56 @@
+module XTwitterScraper
+  module Resources
+    class Extractions
+      def retrieve: (
+        String id,
+        ?after: String,
+        ?limit: Integer,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::ExtractionRetrieveResponse
+
+      def list: (
+        ?after: String,
+        ?limit: Integer,
+        ?status: XTwitterScraper::Models::ExtractionListParams::status,
+        ?tool_type: XTwitterScraper::Models::ExtractionListParams::tool_type,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::ExtractionListResponse
+
+      def estimate_cost: (
+        tool_type: XTwitterScraper::Models::ExtractionEstimateCostParams::tool_type,
+        ?advanced_query: String,
+        ?exact_phrase: String,
+        ?exclude_words: String,
+        ?search_query: String,
+        ?target_community_id: String,
+        ?target_list_id: String,
+        ?target_space_id: String,
+        ?target_tweet_id: String,
+        ?target_username: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::ExtractionEstimateCostResponse
+
+      def export_results: (
+        String id,
+        ?format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> StringIO
+
+      def run: (
+        tool_type: XTwitterScraper::Models::ExtractionRunParams::tool_type,
+        ?advanced_query: String,
+        ?exact_phrase: String,
+        ?exclude_words: String,
+        ?search_query: String,
+        ?target_community_id: String,
+        ?target_list_id: String,
+        ?target_space_id: String,
+        ?target_tweet_id: String,
+        ?target_username: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::ExtractionRunResponse
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

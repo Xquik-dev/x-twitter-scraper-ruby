@@ -1,0 +1,23 @@
+module XTwitterScraper
+  module Models
+    type style_delete_params =
+      { username: String } & XTwitterScraper::Internal::Type::request_parameters
+
+    class StyleDeleteParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor username: String
+
+      def initialize: (
+        username: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        username: String,
+        request_options: XTwitterScraper::RequestOptions
+      }
+    end
+  end
+end

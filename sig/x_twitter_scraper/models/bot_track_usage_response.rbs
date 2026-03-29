@@ -1,0 +1,15 @@
+module XTwitterScraper
+  module Models
+    type bot_track_usage_response = { success: bool }
+
+    class BotTrackUsageResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (?success: bool) -> void
+
+      def to_hash: -> { success: bool }
+    end
+  end
+end

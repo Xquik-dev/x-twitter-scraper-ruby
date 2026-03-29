@@ -1,0 +1,15 @@
+module XTwitterScraper
+  module Models
+    module Bot
+      type platform_link_lookup_response = { user_id: String }
+
+      class PlatformLinkLookupResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor user_id: String
+
+        def initialize: (user_id: String) -> void
+
+        def to_hash: -> { user_id: String }
+      end
+    end
+  end
+end

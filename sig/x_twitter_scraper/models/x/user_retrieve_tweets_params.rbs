@@ -1,0 +1,49 @@
+module XTwitterScraper
+  module Models
+    module X
+      type user_retrieve_tweets_params =
+        {
+          id: String,
+          cursor: String,
+          include_parent_tweet: bool,
+          include_replies: bool
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class UserRetrieveTweetsParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_reader cursor: String?
+
+        def cursor=: (String) -> String
+
+        attr_reader include_parent_tweet: bool?
+
+        def include_parent_tweet=: (bool) -> bool
+
+        attr_reader include_replies: bool?
+
+        def include_replies=: (bool) -> bool
+
+        def initialize: (
+          id: String,
+          ?cursor: String,
+          ?include_parent_tweet: bool,
+          ?include_replies: bool,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          cursor: String,
+          include_parent_tweet: bool,
+          include_replies: bool,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

@@ -1,0 +1,137 @@
+module XTwitterScraper
+  module Models
+    type compose_create_params =
+      {
+        step: XTwitterScraper::Models::ComposeCreateParams::step,
+        additional_context: String,
+        call_to_action: String,
+        draft: String,
+        goal: XTwitterScraper::Models::ComposeCreateParams::goal,
+        has_link: bool,
+        has_media: bool,
+        media_type: XTwitterScraper::Models::ComposeCreateParams::media_type,
+        style_username: String,
+        tone: String,
+        topic: String
+      }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class ComposeCreateParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor step: XTwitterScraper::Models::ComposeCreateParams::step
+
+      attr_reader additional_context: String?
+
+      def additional_context=: (String) -> String
+
+      attr_reader call_to_action: String?
+
+      def call_to_action=: (String) -> String
+
+      attr_reader draft: String?
+
+      def draft=: (String) -> String
+
+      attr_reader goal: XTwitterScraper::Models::ComposeCreateParams::goal?
+
+      def goal=: (
+        XTwitterScraper::Models::ComposeCreateParams::goal
+      ) -> XTwitterScraper::Models::ComposeCreateParams::goal
+
+      attr_reader has_link: bool?
+
+      def has_link=: (bool) -> bool
+
+      attr_reader has_media: bool?
+
+      def has_media=: (bool) -> bool
+
+      attr_reader media_type: XTwitterScraper::Models::ComposeCreateParams::media_type?
+
+      def media_type=: (
+        XTwitterScraper::Models::ComposeCreateParams::media_type
+      ) -> XTwitterScraper::Models::ComposeCreateParams::media_type
+
+      attr_reader style_username: String?
+
+      def style_username=: (String) -> String
+
+      attr_reader tone: String?
+
+      def tone=: (String) -> String
+
+      attr_reader topic: String?
+
+      def topic=: (String) -> String
+
+      def initialize: (
+        step: XTwitterScraper::Models::ComposeCreateParams::step,
+        ?additional_context: String,
+        ?call_to_action: String,
+        ?draft: String,
+        ?goal: XTwitterScraper::Models::ComposeCreateParams::goal,
+        ?has_link: bool,
+        ?has_media: bool,
+        ?media_type: XTwitterScraper::Models::ComposeCreateParams::media_type,
+        ?style_username: String,
+        ?tone: String,
+        ?topic: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        step: XTwitterScraper::Models::ComposeCreateParams::step,
+        additional_context: String,
+        call_to_action: String,
+        draft: String,
+        goal: XTwitterScraper::Models::ComposeCreateParams::goal,
+        has_link: bool,
+        has_media: bool,
+        media_type: XTwitterScraper::Models::ComposeCreateParams::media_type,
+        style_username: String,
+        tone: String,
+        topic: String,
+        request_options: XTwitterScraper::RequestOptions
+      }
+
+      type step = :compose | :refine | :score
+
+      module Step
+        extend XTwitterScraper::Internal::Type::Enum
+
+        COMPOSE: :compose
+        REFINE: :refine
+        SCORE: :score
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ComposeCreateParams::step]
+      end
+
+      type goal = :engagement | :followers | :authority | :conversation
+
+      module Goal
+        extend XTwitterScraper::Internal::Type::Enum
+
+        ENGAGEMENT: :engagement
+        FOLLOWERS: :followers
+        AUTHORITY: :authority
+        CONVERSATION: :conversation
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ComposeCreateParams::goal]
+      end
+
+      type media_type = :photo | :video | :none
+
+      module MediaType
+        extend XTwitterScraper::Internal::Type::Enum
+
+        PHOTO: :photo
+        VIDEO: :video
+        NONE: :none
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ComposeCreateParams::media_type]
+      end
+    end
+  end
+end

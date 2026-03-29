@@ -1,0 +1,70 @@
+# typed: strong
+
+module XTwitterScraper
+  module Resources
+    class Support
+      # Support ticket management
+      class Tickets
+        # Create a support ticket
+        sig do
+          params(
+            body: String,
+            subject: String,
+            request_options: XTwitterScraper::RequestOptions::OrHash
+          ).returns(XTwitterScraper::Models::Support::TicketCreateResponse)
+        end
+        def create(body:, subject:, request_options: {})
+        end
+
+        # Get ticket with all messages
+        sig do
+          params(
+            id: String,
+            request_options: XTwitterScraper::RequestOptions::OrHash
+          ).returns(XTwitterScraper::Models::Support::TicketRetrieveResponse)
+        end
+        def retrieve(id, request_options: {})
+        end
+
+        # Update ticket status
+        sig do
+          params(
+            id: String,
+            status:
+              XTwitterScraper::Support::TicketUpdateParams::Status::OrSymbol,
+            request_options: XTwitterScraper::RequestOptions::OrHash
+          ).returns(XTwitterScraper::Models::Support::TicketUpdateResponse)
+        end
+        def update(id, status:, request_options: {})
+        end
+
+        # List user's support tickets
+        sig do
+          params(
+            request_options: XTwitterScraper::RequestOptions::OrHash
+          ).returns(XTwitterScraper::Models::Support::TicketListResponse)
+        end
+        def list(request_options: {})
+        end
+
+        # Reply to a support ticket
+        sig do
+          params(
+            id: String,
+            body: String,
+            request_options: XTwitterScraper::RequestOptions::OrHash
+          ).returns(XTwitterScraper::Models::Support::TicketReplyResponse)
+        end
+        def reply(id, body:, request_options: {})
+        end
+
+        # @api private
+        sig do
+          params(client: XTwitterScraper::Client).returns(T.attached_class)
+        end
+        def self.new(client:)
+        end
+      end
+    end
+  end
+end

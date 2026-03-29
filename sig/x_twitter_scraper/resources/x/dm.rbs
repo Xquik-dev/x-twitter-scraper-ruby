@@ -1,0 +1,25 @@
+module XTwitterScraper
+  module Resources
+    class X
+      class Dm
+        def update: (
+          String user_id,
+          account: String,
+          text: String,
+          ?media_ids: ::Array[String],
+          ?reply_to_message_id: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::DmUpdateResponse
+
+        def retrieve_history: (
+          String user_id,
+          ?cursor: String,
+          ?max_id: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::DmRetrieveHistoryResponse
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

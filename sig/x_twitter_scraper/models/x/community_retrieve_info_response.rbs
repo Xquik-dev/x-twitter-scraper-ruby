@@ -1,0 +1,15 @@
+module XTwitterScraper
+  module Models
+    module X
+      type community_retrieve_info_response = { community: top }
+
+      class CommunityRetrieveInfoResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor community: top
+
+        def initialize: (community: top) -> void
+
+        def to_hash: -> { community: top }
+      end
+    end
+  end
+end

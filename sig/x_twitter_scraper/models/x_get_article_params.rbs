@@ -1,0 +1,23 @@
+module XTwitterScraper
+  module Models
+    type x_get_article_params =
+      { tweet_id: String } & XTwitterScraper::Internal::Type::request_parameters
+
+    class XGetArticleParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor tweet_id: String
+
+      def initialize: (
+        tweet_id: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        tweet_id: String,
+        request_options: XTwitterScraper::RequestOptions
+      }
+    end
+  end
+end

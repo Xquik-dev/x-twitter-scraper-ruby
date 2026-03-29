@@ -1,0 +1,40 @@
+module XTwitterScraper
+  module Resources
+    class Webhooks
+      def create: (
+        event_types: ::Array[XTwitterScraper::Models::WebhookCreateParams::event_type],
+        url: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::WebhookCreateResponse
+
+      def update: (
+        String id,
+        ?event_types: ::Array[XTwitterScraper::Models::WebhookUpdateParams::event_type],
+        ?is_active: bool,
+        ?url: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::WebhookUpdateResponse
+
+      def list: (
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::WebhookListResponse
+
+      def deactivate: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::WebhookDeactivateResponse
+
+      def list_deliveries: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::WebhookListDeliveriesResponse
+
+      def test_: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::WebhookTestResponse
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

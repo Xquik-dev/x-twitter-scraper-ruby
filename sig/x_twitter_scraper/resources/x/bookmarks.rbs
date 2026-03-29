@@ -1,0 +1,19 @@
+module XTwitterScraper
+  module Resources
+    class X
+      class Bookmarks
+        def list: (
+          ?cursor: String,
+          ?folder_id: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::BookmarkListResponse
+
+        def retrieve_folders: (
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

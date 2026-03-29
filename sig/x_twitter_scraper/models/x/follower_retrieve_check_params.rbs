@@ -1,0 +1,30 @@
+module XTwitterScraper
+  module Models
+    module X
+      type follower_retrieve_check_params =
+        { source: String, target: String }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class FollowerRetrieveCheckParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor source: String
+
+        attr_accessor target: String
+
+        def initialize: (
+          source: String,
+          target: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          source: String,
+          target: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

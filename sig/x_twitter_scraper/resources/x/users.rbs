@@ -1,0 +1,81 @@
+module XTwitterScraper
+  module Resources
+    class X
+      class Users
+        attr_reader follow: XTwitterScraper::Resources::X::Users::Follow
+
+        def retrieve: (
+          String username,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::UserRetrieveResponse
+
+        def retrieve_batch: (
+          ids: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> nil
+
+        def retrieve_followers: (
+          String id,
+          ?cursor: String,
+          ?page_size: Integer,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> nil
+
+        def retrieve_followers_you_know: (
+          String id,
+          ?cursor: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::UserRetrieveFollowersYouKnowResponse
+
+        def retrieve_following: (
+          String id,
+          ?cursor: String,
+          ?page_size: Integer,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> nil
+
+        def retrieve_likes: (
+          String id,
+          ?cursor: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::UserRetrieveLikesResponse
+
+        def retrieve_media: (
+          String id,
+          ?cursor: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::UserRetrieveMediaResponse
+
+        def retrieve_mentions: (
+          String id,
+          ?cursor: String,
+          ?since_time: String,
+          ?until_time: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> nil
+
+        def retrieve_search: (
+          q: String,
+          ?cursor: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> nil
+
+        def retrieve_tweets: (
+          String id,
+          ?cursor: String,
+          ?include_parent_tweet: bool,
+          ?include_replies: bool,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::UserRetrieveTweetsResponse
+
+        def retrieve_verified_followers: (
+          String id,
+          ?cursor: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> nil
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end
