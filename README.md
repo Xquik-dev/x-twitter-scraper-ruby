@@ -28,9 +28,9 @@ x_twitter_scraper = XTwitterScraper::Client.new(
   api_key: ENV["X_TWITTER_SCRAPER_API_KEY"] # This is the default and can be omitted
 )
 
-account = x_twitter_scraper.account.retrieve
+paginated_tweets = x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
 
-puts(account.monitorsAllowed)
+puts(paginated_tweets.has_next_page)
 ```
 
 ### File uploads
@@ -41,17 +41,17 @@ Request parameters that correspond to file uploads can be passed as raw contents
 require "pathname"
 
 # Use `Pathname` to send the filename and/or avoid paging a large file into memory:
-media = x_twitter_scraper.x.media.create(file: Pathname("/path/to/file"))
+response = x_twitter_scraper.x.media.upload(file: Pathname("/path/to/file"))
 
 # Alternatively, pass file contents or a `StringIO` directly:
-media = x_twitter_scraper.x.media.create(file: File.read("/path/to/file"))
+response = x_twitter_scraper.x.media.upload(file: File.read("/path/to/file"))
 
 # Or, to control the filename and/or content type:
 file =
   XTwitterScraper::FilePart.new(File.read("/path/to/file"), filename: "/path/to/file", content_type: "…")
-media = x_twitter_scraper.x.media.create(file: file)
+response = x_twitter_scraper.x.media.upload(file: file)
 
-puts(media.mediaId)
+puts(response.mediaId)
 ```
 
 Note that you can also pass a raw `IO` descriptor, but this disables retries, as the library can't be sure if the descriptor is a file or pipe (which cannot be rewound).
@@ -62,7 +62,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```ruby
 begin
-  account = x_twitter_scraper.account.retrieve
+  tweet = x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
 rescue XTwitterScraper::Errors::APIConnectionError => e
   puts("The server could not be reached")
   puts(e.cause)  # an underlying Exception, likely raised within `net/http`
@@ -105,7 +105,7 @@ x_twitter_scraper = XTwitterScraper::Client.new(
 )
 
 # Or, configure per-request:
-x_twitter_scraper.account.retrieve(request_options: {max_retries: 5})
+x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10, request_options: {max_retries: 5})
 ```
 
 ### Timeouts
@@ -119,7 +119,7 @@ x_twitter_scraper = XTwitterScraper::Client.new(
 )
 
 # Or, configure per-request:
-x_twitter_scraper.account.retrieve(request_options: {timeout: 5})
+x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10, request_options: {timeout: 5})
 ```
 
 On timeout, `XTwitterScraper::Errors::APITimeoutError` is raised.
@@ -149,8 +149,10 @@ You can send undocumented parameters to any endpoint, and read undocumented resp
 Note: the `extra_` parameters of the same name overrides the documented parameters.
 
 ```ruby
-account =
-  x_twitter_scraper.account.retrieve(
+paginated_tweets =
+  x_twitter_scraper.x.tweets.search(
+    q: "from:elonmusk",
+    limit: 10,
     request_options: {
       extra_query: {my_query_parameter: value},
       extra_body: {my_body_parameter: value},
@@ -158,7 +160,7 @@ account =
     }
   )
 
-puts(account[:my_undocumented_property])
+puts(paginated_tweets[:my_undocumented_property])
 ```
 
 #### Undocumented request params
@@ -196,18 +198,18 @@ This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitio
 You can provide typesafe request parameters like so:
 
 ```ruby
-x_twitter_scraper.account.retrieve
+x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
 ```
 
 Or, equivalently:
 
 ```ruby
 # Hashes work, but are not typesafe:
-x_twitter_scraper.account.retrieve
+x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
 
 # You can also splat a full Params class:
-params = XTwitterScraper::AccountRetrieveParams.new
-x_twitter_scraper.account.retrieve(**params)
+params = XTwitterScraper::X::TweetSearchParams.new(q: "from:elonmusk", limit: 10)
+x_twitter_scraper.x.tweets.search(**params)
 ```
 
 ### Enums

@@ -2,14 +2,14 @@ module XTwitterScraper
   module Resources
     class X
       class Profile
-        def patch_all: (
+        def update: (
           account: String,
           ?description: String,
           ?location: String,
           ?name: String,
           ?url: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::ProfilePatchAllResponse
+        ) -> XTwitterScraper::Models::X::ProfileUpdateResponse
 
         def update_avatar: (
           account: String,

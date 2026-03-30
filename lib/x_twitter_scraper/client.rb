@@ -82,7 +82,6 @@ module XTwitterScraper
     # @return [XTwitterScraper::Resources::Trends]
     attr_reader :trends
 
-    # Telegram bot service endpoints
     # @return [XTwitterScraper::Resources::Bot]
     attr_reader :bot
 

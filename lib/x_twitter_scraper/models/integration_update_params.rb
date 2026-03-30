@@ -14,11 +14,9 @@ module XTwitterScraper
 
       # @!attribute event_types
       #
-      #   @return [Array<Symbol, XTwitterScraper::Models::IntegrationUpdateParams::EventType>, nil]
+      #   @return [Array<Symbol, XTwitterScraper::Models::EventType>, nil]
       optional :event_types,
-               -> {
-                 XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::IntegrationUpdateParams::EventType]
-               },
+               -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType] },
                api_name: :eventTypes
 
       # @!attribute filters
@@ -55,7 +53,7 @@ module XTwitterScraper
 
       # @!method initialize(id:, event_types: nil, filters: nil, is_active: nil, message_template: nil, name: nil, scope_all_monitors: nil, silent_push: nil, request_options: {})
       #   @param id [String]
-      #   @param event_types [Array<Symbol, XTwitterScraper::Models::IntegrationUpdateParams::EventType>]
+      #   @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>]
       #   @param filters [Hash{Symbol=>Object}]
       #   @param is_active [Boolean]
       #   @param message_template [Hash{Symbol=>Object}]
@@ -63,20 +61,6 @@ module XTwitterScraper
       #   @param scope_all_monitors [Boolean]
       #   @param silent_push [Boolean]
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
-
-      module EventType
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TWEET_NEW = :"tweet.new"
-        TWEET_REPLY = :"tweet.reply"
-        TWEET_RETWEET = :"tweet.retweet"
-        TWEET_QUOTE = :"tweet.quote"
-        FOLLOWER_GAINED = :"follower.gained"
-        FOLLOWER_LOST = :"follower.lost"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
     end
   end
 end

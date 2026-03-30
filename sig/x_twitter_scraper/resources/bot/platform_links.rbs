@@ -2,24 +2,6 @@ module XTwitterScraper
   module Resources
     class Bot
       class PlatformLinks
-        def create: (
-          platform: XTwitterScraper::Models::Bot::PlatformLinkCreateParams::platform,
-          platform_user_id: String,
-          ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::Bot::PlatformLinkCreateResponse
-
-        def delete: (
-          platform: XTwitterScraper::Models::Bot::PlatformLinkDeleteParams::platform,
-          platform_user_id: String,
-          ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::Bot::PlatformLinkDeleteResponse
-
-        def lookup: (
-          platform: String,
-          platform_user_id: String,
-          ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::Bot::PlatformLinkLookupResponse
-
         def initialize: (client: XTwitterScraper::Client) -> void
       end
     end

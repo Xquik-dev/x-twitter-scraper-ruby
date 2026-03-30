@@ -5,15 +5,13 @@ module XTwitterScraper
 
   class AccountUpdateLocaleParams = XTwitterScraper::Models::AccountUpdateLocaleParams
 
+  class APIKey = XTwitterScraper::Models::APIKey
+
   class APIKeyCreateParams = XTwitterScraper::Models::APIKeyCreateParams
 
   class APIKeyListParams = XTwitterScraper::Models::APIKeyListParams
 
   class APIKeyRevokeParams = XTwitterScraper::Models::APIKeyRevokeParams
-
-  module Bot = XTwitterScraper::Models::Bot
-
-  class BotTrackUsageParams = XTwitterScraper::Models::BotTrackUsageParams
 
   class ComposeCreateParams = XTwitterScraper::Models::ComposeCreateParams
 
@@ -21,15 +19,25 @@ module XTwitterScraper
 
   class CreditTopupBalanceParams = XTwitterScraper::Models::CreditTopupBalanceParams
 
+  class Delivery = XTwitterScraper::Models::Delivery
+
+  class Draft = XTwitterScraper::Models::Draft
+
   class DraftCreateParams = XTwitterScraper::Models::DraftCreateParams
 
   class DraftDeleteParams = XTwitterScraper::Models::DraftDeleteParams
+
+  class DraftDetail = XTwitterScraper::Models::DraftDetail
 
   class DraftListParams = XTwitterScraper::Models::DraftListParams
 
   class DraftRetrieveParams = XTwitterScraper::Models::DraftRetrieveParams
 
+  class DrawDetail = XTwitterScraper::Models::DrawDetail
+
   class DrawExportParams = XTwitterScraper::Models::DrawExportParams
+
+  class DrawListItem = XTwitterScraper::Models::DrawListItem
 
   class DrawListParams = XTwitterScraper::Models::DrawListParams
 
@@ -37,13 +45,23 @@ module XTwitterScraper
 
   class DrawRunParams = XTwitterScraper::Models::DrawRunParams
 
+  class Error = XTwitterScraper::Models::Error
+
+  class Event = XTwitterScraper::Models::Event
+
+  class EventDetail = XTwitterScraper::Models::EventDetail
+
   class EventListParams = XTwitterScraper::Models::EventListParams
 
   class EventRetrieveParams = XTwitterScraper::Models::EventRetrieveParams
 
+  module EventType = XTwitterScraper::Models::EventType
+
   class ExtractionEstimateCostParams = XTwitterScraper::Models::ExtractionEstimateCostParams
 
   class ExtractionExportResultsParams = XTwitterScraper::Models::ExtractionExportResultsParams
+
+  class ExtractionJob = XTwitterScraper::Models::ExtractionJob
 
   class ExtractionListParams = XTwitterScraper::Models::ExtractionListParams
 
@@ -51,9 +69,13 @@ module XTwitterScraper
 
   class ExtractionRunParams = XTwitterScraper::Models::ExtractionRunParams
 
+  class Integration = XTwitterScraper::Models::Integration
+
   class IntegrationCreateParams = XTwitterScraper::Models::IntegrationCreateParams
 
   class IntegrationDeleteParams = XTwitterScraper::Models::IntegrationDeleteParams
+
+  class IntegrationDelivery = XTwitterScraper::Models::IntegrationDelivery
 
   class IntegrationListDeliveriesParams = XTwitterScraper::Models::IntegrationListDeliveriesParams
 
@@ -65,6 +87,8 @@ module XTwitterScraper
 
   class IntegrationUpdateParams = XTwitterScraper::Models::IntegrationUpdateParams
 
+  class Monitor = XTwitterScraper::Models::Monitor
+
   class MonitorCreateParams = XTwitterScraper::Models::MonitorCreateParams
 
   class MonitorDeactivateParams = XTwitterScraper::Models::MonitorDeactivateParams
@@ -74,6 +98,12 @@ module XTwitterScraper
   class MonitorRetrieveParams = XTwitterScraper::Models::MonitorRetrieveParams
 
   class MonitorUpdateParams = XTwitterScraper::Models::MonitorUpdateParams
+
+  class PaginatedTweets = XTwitterScraper::Models::PaginatedTweets
+
+  class PaginatedUsers = XTwitterScraper::Models::PaginatedUsers
+
+  class RadarItem = XTwitterScraper::Models::RadarItem
 
   class RadarRetrieveTrendingTopicsParams = XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams
 
@@ -87,6 +117,10 @@ module XTwitterScraper
 
   class StyleListParams = XTwitterScraper::Models::StyleListParams
 
+  class StyleProfile = XTwitterScraper::Models::StyleProfile
+
+  class StyleProfileSummary = XTwitterScraper::Models::StyleProfileSummary
+
   class StyleRetrieveParams = XTwitterScraper::Models::StyleRetrieveParams
 
   class StyleUpdateParams = XTwitterScraper::Models::StyleUpdateParams
@@ -96,6 +130,8 @@ module XTwitterScraper
   module Support = XTwitterScraper::Models::Support
 
   class TrendListParams = XTwitterScraper::Models::TrendListParams
+
+  class Webhook = XTwitterScraper::Models::Webhook
 
   class WebhookCreateParams = XTwitterScraper::Models::WebhookCreateParams
 
@@ -108,6 +144,8 @@ module XTwitterScraper
   class WebhookTestParams = XTwitterScraper::Models::WebhookTestParams
 
   class WebhookUpdateParams = XTwitterScraper::Models::WebhookUpdateParams
+
+  class Winner = XTwitterScraper::Models::Winner
 
   module X = XTwitterScraper::Models::X
 

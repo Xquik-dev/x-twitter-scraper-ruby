@@ -7,7 +7,7 @@ module XTwitterScraper
       class Profile
         # Update X profile
         #
-        # @overload patch_all(account:, description: nil, location: nil, name: nil, url: nil, request_options: {})
+        # @overload update(account:, description: nil, location: nil, name: nil, url: nil, request_options: {})
         #
         # @param account [String] X account (@username or account ID)
         #
@@ -21,16 +21,16 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::ProfilePatchAllResponse]
+        # @return [XTwitterScraper::Models::X::ProfileUpdateResponse]
         #
-        # @see XTwitterScraper::Models::X::ProfilePatchAllParams
-        def patch_all(params)
-          parsed, options = XTwitterScraper::X::ProfilePatchAllParams.dump_request(params)
+        # @see XTwitterScraper::Models::X::ProfileUpdateParams
+        def update(params)
+          parsed, options = XTwitterScraper::X::ProfileUpdateParams.dump_request(params)
           @client.request(
             method: :patch,
             path: "x/profile",
             body: parsed,
-            model: XTwitterScraper::Models::X::ProfilePatchAllResponse,
+            model: XTwitterScraper::Models::X::ProfileUpdateResponse,
             options: options
           )
         end

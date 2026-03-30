@@ -12,14 +12,14 @@ module XTwitterScraper
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::StyleRetrieveResponse]
+      # @return [XTwitterScraper::Models::StyleProfile]
       #
       # @see XTwitterScraper::Models::StyleRetrieveParams
       def retrieve(username, params = {})
         @client.request(
           method: :get,
           path: ["styles/%1$s", username],
-          model: XTwitterScraper::Models::StyleRetrieveResponse,
+          model: XTwitterScraper::StyleProfile,
           options: params[:request_options]
         )
       end
@@ -36,7 +36,7 @@ module XTwitterScraper
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::StyleUpdateResponse]
+      # @return [XTwitterScraper::Models::StyleProfile]
       #
       # @see XTwitterScraper::Models::StyleUpdateParams
       def update(username, params)
@@ -45,7 +45,7 @@ module XTwitterScraper
           method: :put,
           path: ["styles/%1$s", username],
           body: parsed,
-          model: XTwitterScraper::Models::StyleUpdateResponse,
+          model: XTwitterScraper::StyleProfile,
           options: options
         )
       end
@@ -96,7 +96,7 @@ module XTwitterScraper
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::StyleAnalyzeResponse]
+      # @return [XTwitterScraper::Models::StyleProfile]
       #
       # @see XTwitterScraper::Models::StyleAnalyzeParams
       def analyze(params)
@@ -105,7 +105,7 @@ module XTwitterScraper
           method: :post,
           path: "styles",
           body: parsed,
-          model: XTwitterScraper::Models::StyleAnalyzeResponse,
+          model: XTwitterScraper::StyleProfile,
           options: options
         )
       end

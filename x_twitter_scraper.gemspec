@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version = XTwitterScraper::VERSION
   s.summary = "Ruby library to access the X Twitter Scraper API"
   s.authors = ["X Twitter Scraper"]
-  s.email = ""
+  s.email = "support@xquik.com"
   s.homepage = "https://gemdocs.org/gems/x-twitter-scraper"
   s.metadata["homepage_uri"] = s.homepage
   s.metadata["source_code_uri"] = "https://github.com/stainless-sdks/x-twitter-scraper-ruby"

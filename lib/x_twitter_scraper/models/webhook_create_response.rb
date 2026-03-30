@@ -16,9 +16,9 @@ module XTwitterScraper
 
       # @!attribute event_types
       #
-      #   @return [Array<Symbol, XTwitterScraper::Models::WebhookCreateResponse::EventType>]
+      #   @return [Array<Symbol, XTwitterScraper::Models::EventType>]
       required :event_types,
-               -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Models::WebhookCreateResponse::EventType] },
+               -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType] },
                api_name: :eventTypes
 
       # @!attribute secret
@@ -34,23 +34,9 @@ module XTwitterScraper
       # @!method initialize(id:, created_at:, event_types:, secret:, url:)
       #   @param id [String]
       #   @param created_at [Time]
-      #   @param event_types [Array<Symbol, XTwitterScraper::Models::WebhookCreateResponse::EventType>]
+      #   @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>]
       #   @param secret [String]
       #   @param url [String]
-
-      module EventType
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TWEET_NEW = :"tweet.new"
-        TWEET_REPLY = :"tweet.reply"
-        TWEET_RETWEET = :"tweet.retweet"
-        TWEET_QUOTE = :"tweet.quote"
-        FOLLOWER_GAINED = :"follower.gained"
-        FOLLOWER_LOST = :"follower.lost"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
     end
   end
 end

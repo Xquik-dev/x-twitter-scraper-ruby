@@ -9,11 +9,9 @@ module XTwitterScraper
 
       # @!attribute event_types
       #
-      #   @return [Array<Symbol, XTwitterScraper::Models::MonitorCreateParams::EventType>]
+      #   @return [Array<Symbol, XTwitterScraper::Models::EventType>]
       required :event_types,
-               -> {
-                 XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::MonitorCreateParams::EventType]
-               },
+               -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType] },
                api_name: :eventTypes
 
       # @!attribute username
@@ -23,25 +21,11 @@ module XTwitterScraper
       required :username, String
 
       # @!method initialize(event_types:, username:, request_options: {})
-      #   @param event_types [Array<Symbol, XTwitterScraper::Models::MonitorCreateParams::EventType>]
+      #   @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>]
       #
       #   @param username [String] X username (without @)
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
-
-      module EventType
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TWEET_NEW = :"tweet.new"
-        TWEET_REPLY = :"tweet.reply"
-        TWEET_RETWEET = :"tweet.retweet"
-        TWEET_QUOTE = :"tweet.quote"
-        FOLLOWER_GAINED = :"follower.gained"
-        FOLLOWER_LOST = :"follower.lost"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
     end
   end
 end

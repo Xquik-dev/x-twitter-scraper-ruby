@@ -30,7 +30,7 @@ module XTwitterScraper
         ?cursor: String,
         ?seen_tweet_ids: String,
         ?request_options: XTwitterScraper::request_opts
-      ) -> XTwitterScraper::Models::XGetHomeTimelineResponse
+      ) -> XTwitterScraper::PaginatedTweets
 
       def get_notifications: (
         ?cursor: String,

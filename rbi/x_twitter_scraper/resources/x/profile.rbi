@@ -14,9 +14,9 @@ module XTwitterScraper
             name: String,
             url: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::ProfilePatchAllResponse)
+          ).returns(XTwitterScraper::Models::X::ProfileUpdateResponse)
         end
-        def patch_all(
+        def update(
           # X account (@username or account ID)
           account:,
           # Bio description

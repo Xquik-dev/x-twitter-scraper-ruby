@@ -443,11 +443,9 @@ module XTwitterScraper
         # @return [Hash{Symbol=>Object}]
         #
         # @example
-        #   # `account_retrieve_response` is a `XTwitterScraper::Models::AccountRetrieveResponse`
-        #   account_retrieve_response => {
-        #     monitors_allowed: monitors_allowed,
-        #     monitors_used: monitors_used,
-        #     plan: plan
+        #   # `error` is a `XTwitterScraper::Error`
+        #   error => {
+        #     error: error
         #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)

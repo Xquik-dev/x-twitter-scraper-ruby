@@ -1,0 +1,35 @@
+module XTwitterScraper
+  module Models
+    type winner =
+      {
+        author_username: String,
+        is_backup: bool,
+        position: Integer,
+        tweet_id: String
+      }
+
+    class Winner < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor author_username: String
+
+      attr_accessor is_backup: bool
+
+      attr_accessor position: Integer
+
+      attr_accessor tweet_id: String
+
+      def initialize: (
+        author_username: String,
+        is_backup: bool,
+        position: Integer,
+        tweet_id: String
+      ) -> void
+
+      def to_hash: -> {
+        author_username: String,
+        is_backup: bool,
+        position: Integer,
+        tweet_id: String
+      }
+    end
+  end
+end

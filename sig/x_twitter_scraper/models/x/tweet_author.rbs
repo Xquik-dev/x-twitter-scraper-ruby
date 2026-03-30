@@ -1,0 +1,44 @@
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_author =
+        {
+          id: String,
+          followers: Integer,
+          username: String,
+          verified: bool,
+          profile_picture: String
+        }
+
+      class TweetAuthor < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor followers: Integer
+
+        attr_accessor username: String
+
+        attr_accessor verified: bool
+
+        attr_reader profile_picture: String?
+
+        def profile_picture=: (String) -> String
+
+        def initialize: (
+          id: String,
+          followers: Integer,
+          username: String,
+          verified: bool,
+          ?profile_picture: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          followers: Integer,
+          username: String,
+          verified: bool,
+          profile_picture: String
+        }
+      end
+    end
+  end
+end

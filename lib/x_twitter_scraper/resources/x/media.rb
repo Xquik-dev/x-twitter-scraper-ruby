@@ -5,33 +5,6 @@ module XTwitterScraper
     class X
       # Media upload & download
       class Media
-        # Upload media
-        #
-        # @overload create(account:, file:, is_long_video: nil, request_options: {})
-        #
-        # @param account [String] X account (@username or account ID)
-        #
-        # @param file [Pathname, StringIO, IO, String, XTwitterScraper::FilePart] Media file to upload
-        #
-        # @param is_long_video [Boolean]
-        #
-        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
-        #
-        # @return [XTwitterScraper::Models::X::MediaCreateResponse]
-        #
-        # @see XTwitterScraper::Models::X::MediaCreateParams
-        def create(params)
-          parsed, options = XTwitterScraper::X::MediaCreateParams.dump_request(params)
-          @client.request(
-            method: :post,
-            path: "x/media",
-            headers: {"content-type" => "multipart/form-data"},
-            body: parsed,
-            model: XTwitterScraper::Models::X::MediaCreateResponse,
-            options: options
-          )
-        end
-
         # Download tweet media
         #
         # @overload download(tweet_ids: nil, tweet_input: nil, request_options: {})
@@ -52,6 +25,33 @@ module XTwitterScraper
             path: "x/media/download",
             body: parsed,
             model: XTwitterScraper::Models::X::MediaDownloadResponse,
+            options: options
+          )
+        end
+
+        # Upload media
+        #
+        # @overload upload(account:, file:, is_long_video: nil, request_options: {})
+        #
+        # @param account [String] X account (@username or account ID)
+        #
+        # @param file [Pathname, StringIO, IO, String, XTwitterScraper::FilePart] Media file to upload
+        #
+        # @param is_long_video [Boolean]
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::MediaUploadResponse]
+        #
+        # @see XTwitterScraper::Models::X::MediaUploadParams
+        def upload(params)
+          parsed, options = XTwitterScraper::X::MediaUploadParams.dump_request(params)
+          @client.request(
+            method: :post,
+            path: "x/media",
+            headers: {"content-type" => "multipart/form-data"},
+            body: parsed,
+            model: XTwitterScraper::Models::X::MediaUploadResponse,
             options: options
           )
         end

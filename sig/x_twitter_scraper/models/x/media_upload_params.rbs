@@ -1,0 +1,40 @@
+module XTwitterScraper
+  module Models
+    module X
+      type media_upload_params =
+        {
+          account: String,
+          file: XTwitterScraper::Internal::file_input,
+          is_long_video: bool
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class MediaUploadParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor account: String
+
+        attr_accessor file: XTwitterScraper::Internal::file_input
+
+        attr_reader is_long_video: bool?
+
+        def is_long_video=: (bool) -> bool
+
+        def initialize: (
+          account: String,
+          file: XTwitterScraper::Internal::file_input,
+          ?is_long_video: bool,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          account: String,
+          file: XTwitterScraper::Internal::file_input,
+          is_long_video: bool,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end
