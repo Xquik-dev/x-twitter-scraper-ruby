@@ -15,13 +15,13 @@ module XTwitterScraper
 
       # @!attribute users
       #
-      #   @return [Array<Object>]
-      required :users, XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Internal::Type::Unknown]
+      #   @return [Array<XTwitterScraper::Models::X::UserProfile>]
+      required :users, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile] }
 
       # @!method initialize(has_next_page:, next_cursor:, users:)
       #   @param has_next_page [Boolean]
       #   @param next_cursor [String]
-      #   @param users [Array<Object>]
+      #   @param users [Array<XTwitterScraper::Models::X::UserProfile>]
     end
   end
 end
