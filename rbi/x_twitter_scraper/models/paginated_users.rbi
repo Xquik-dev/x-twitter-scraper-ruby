@@ -17,14 +17,14 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :next_cursor
 
-      sig { returns(T::Array[T.anything]) }
+      sig { returns(T::Array[XTwitterScraper::X::UserProfile]) }
       attr_accessor :users
 
       sig do
         params(
           has_next_page: T::Boolean,
           next_cursor: String,
-          users: T::Array[T.anything]
+          users: T::Array[XTwitterScraper::X::UserProfile::OrHash]
         ).returns(T.attached_class)
       end
       def self.new(has_next_page:, next_cursor:, users:)
@@ -35,7 +35,7 @@ module XTwitterScraper
           {
             has_next_page: T::Boolean,
             next_cursor: String,
-            users: T::Array[T.anything]
+            users: T::Array[XTwitterScraper::X::UserProfile]
           }
         )
       end

@@ -1,25 +1,29 @@
 module XTwitterScraper
   module Models
     type paginated_users =
-      { has_next_page: bool, next_cursor: String, users: ::Array[top] }
+      {
+        has_next_page: bool,
+        next_cursor: String,
+        users: ::Array[XTwitterScraper::X::UserProfile]
+      }
 
     class PaginatedUsers < XTwitterScraper::Internal::Type::BaseModel
       attr_accessor has_next_page: bool
 
       attr_accessor next_cursor: String
 
-      attr_accessor users: ::Array[top]
+      attr_accessor users: ::Array[XTwitterScraper::X::UserProfile]
 
       def initialize: (
         has_next_page: bool,
         next_cursor: String,
-        users: ::Array[top]
+        users: ::Array[XTwitterScraper::X::UserProfile]
       ) -> void
 
       def to_hash: -> {
         has_next_page: bool,
         next_cursor: String,
-        users: ::Array[top]
+        users: ::Array[XTwitterScraper::X::UserProfile]
       }
     end
   end
