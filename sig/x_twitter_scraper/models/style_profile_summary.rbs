@@ -1,0 +1,35 @@
+module XTwitterScraper
+  module Models
+    type style_profile_summary =
+      {
+        fetched_at: Time,
+        is_own_account: bool,
+        tweet_count: Integer,
+        x_username: String
+      }
+
+    class StyleProfileSummary < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor fetched_at: Time
+
+      attr_accessor is_own_account: bool
+
+      attr_accessor tweet_count: Integer
+
+      attr_accessor x_username: String
+
+      def initialize: (
+        fetched_at: Time,
+        is_own_account: bool,
+        tweet_count: Integer,
+        x_username: String
+      ) -> void
+
+      def to_hash: -> {
+        fetched_at: Time,
+        is_own_account: bool,
+        tweet_count: Integer,
+        x_username: String
+      }
+    end
+  end
+end

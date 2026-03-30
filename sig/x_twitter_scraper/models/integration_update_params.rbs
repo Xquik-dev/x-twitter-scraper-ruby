@@ -3,7 +3,7 @@ module XTwitterScraper
     type integration_update_params =
       {
         id: String,
-        event_types: ::Array[XTwitterScraper::Models::IntegrationUpdateParams::event_type],
+        event_types: ::Array[XTwitterScraper::Models::event_type],
         filters: ::Hash[Symbol, top],
         is_active: bool,
         message_template: ::Hash[Symbol, top],
@@ -19,11 +19,11 @@ module XTwitterScraper
 
       attr_accessor id: String
 
-      attr_reader event_types: ::Array[XTwitterScraper::Models::IntegrationUpdateParams::event_type]?
+      attr_reader event_types: ::Array[XTwitterScraper::Models::event_type]?
 
       def event_types=: (
-        ::Array[XTwitterScraper::Models::IntegrationUpdateParams::event_type]
-      ) -> ::Array[XTwitterScraper::Models::IntegrationUpdateParams::event_type]
+        ::Array[XTwitterScraper::Models::event_type]
+      ) -> ::Array[XTwitterScraper::Models::event_type]
 
       attr_reader filters: ::Hash[Symbol, top]?
 
@@ -51,7 +51,7 @@ module XTwitterScraper
 
       def initialize: (
         id: String,
-        ?event_types: ::Array[XTwitterScraper::Models::IntegrationUpdateParams::event_type],
+        ?event_types: ::Array[XTwitterScraper::Models::event_type],
         ?filters: ::Hash[Symbol, top],
         ?is_active: bool,
         ?message_template: ::Hash[Symbol, top],
@@ -63,7 +63,7 @@ module XTwitterScraper
 
       def to_hash: -> {
         id: String,
-        event_types: ::Array[XTwitterScraper::Models::IntegrationUpdateParams::event_type],
+        event_types: ::Array[XTwitterScraper::Models::event_type],
         filters: ::Hash[Symbol, top],
         is_active: bool,
         message_template: ::Hash[Symbol, top],
@@ -72,27 +72,6 @@ module XTwitterScraper
         silent_push: bool,
         request_options: XTwitterScraper::RequestOptions
       }
-
-      type event_type =
-        :"tweet.new"
-        | :"tweet.reply"
-        | :"tweet.retweet"
-        | :"tweet.quote"
-        | :"follower.gained"
-        | :"follower.lost"
-
-      module EventType
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TWEET_NEW: :"tweet.new"
-        TWEET_REPLY: :"tweet.reply"
-        TWEET_RETWEET: :"tweet.retweet"
-        TWEET_QUOTE: :"tweet.quote"
-        FOLLOWER_GAINED: :"follower.gained"
-        FOLLOWER_LOST: :"follower.lost"
-
-        def self?.values: -> ::Array[XTwitterScraper::Models::IntegrationUpdateParams::event_type]
-      end
     end
   end
 end

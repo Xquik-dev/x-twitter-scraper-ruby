@@ -2,18 +2,18 @@ module XTwitterScraper
   module Resources
     class X
       class Media
-        def create: (
-          account: String,
-          file: XTwitterScraper::Internal::file_input,
-          ?is_long_video: bool,
-          ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::MediaCreateResponse
-
         def download: (
           ?tweet_ids: ::Array[String],
           ?tweet_input: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::MediaDownloadResponse
+
+        def upload: (
+          account: String,
+          file: XTwitterScraper::Internal::file_input,
+          ?is_long_video: bool,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::MediaUploadResponse
 
         def initialize: (client: XTwitterScraper::Client) -> void
       end

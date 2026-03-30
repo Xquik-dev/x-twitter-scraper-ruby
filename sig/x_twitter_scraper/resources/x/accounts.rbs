@@ -14,7 +14,7 @@ module XTwitterScraper
         def retrieve: (
           String id,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::AccountRetrieveResponse
+        ) -> XTwitterScraper::X::XAccountDetail
 
         def list: (
           ?request_options: XTwitterScraper::request_opts

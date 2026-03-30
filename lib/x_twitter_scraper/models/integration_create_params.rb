@@ -15,11 +15,9 @@ module XTwitterScraper
 
       # @!attribute event_types
       #
-      #   @return [Array<Symbol, XTwitterScraper::Models::IntegrationCreateParams::EventType>]
+      #   @return [Array<Symbol, XTwitterScraper::Models::EventType>]
       required :event_types,
-               -> {
-                 XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::IntegrationCreateParams::EventType]
-               },
+               -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType] },
                api_name: :eventTypes
 
       # @!attribute name
@@ -35,7 +33,7 @@ module XTwitterScraper
       # @!method initialize(config:, event_types:, name:, type:, request_options: {})
       #   @param config [XTwitterScraper::Models::IntegrationCreateParams::Config] Integration config (e.g. Telegram chatId)
       #
-      #   @param event_types [Array<Symbol, XTwitterScraper::Models::IntegrationCreateParams::EventType>]
+      #   @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>]
       #
       #   @param name [String]
       #
@@ -53,20 +51,6 @@ module XTwitterScraper
         #   Integration config (e.g. Telegram chatId)
         #
         #   @param chat_id [String]
-      end
-
-      module EventType
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TWEET_NEW = :"tweet.new"
-        TWEET_REPLY = :"tweet.reply"
-        TWEET_RETWEET = :"tweet.retweet"
-        TWEET_QUOTE = :"tweet.quote"
-        FOLLOWER_GAINED = :"follower.gained"
-        FOLLOWER_LOST = :"follower.lost"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
       end
 
       module Type

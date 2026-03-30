@@ -1,52 +1,28 @@
 module XTwitterScraper
   module Models
     type webhook_create_params =
-      {
-        event_types: ::Array[XTwitterScraper::Models::WebhookCreateParams::event_type],
-        url: String
-      }
+      { event_types: ::Array[XTwitterScraper::Models::event_type], url: String }
       & XTwitterScraper::Internal::Type::request_parameters
 
     class WebhookCreateParams < XTwitterScraper::Internal::Type::BaseModel
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      attr_accessor event_types: ::Array[XTwitterScraper::Models::WebhookCreateParams::event_type]
+      attr_accessor event_types: ::Array[XTwitterScraper::Models::event_type]
 
       attr_accessor url: String
 
       def initialize: (
-        event_types: ::Array[XTwitterScraper::Models::WebhookCreateParams::event_type],
+        event_types: ::Array[XTwitterScraper::Models::event_type],
         url: String,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
       def to_hash: -> {
-        event_types: ::Array[XTwitterScraper::Models::WebhookCreateParams::event_type],
+        event_types: ::Array[XTwitterScraper::Models::event_type],
         url: String,
         request_options: XTwitterScraper::RequestOptions
       }
-
-      type event_type =
-        :"tweet.new"
-        | :"tweet.reply"
-        | :"tweet.retweet"
-        | :"tweet.quote"
-        | :"follower.gained"
-        | :"follower.lost"
-
-      module EventType
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TWEET_NEW: :"tweet.new"
-        TWEET_REPLY: :"tweet.reply"
-        TWEET_RETWEET: :"tweet.retweet"
-        TWEET_QUOTE: :"tweet.quote"
-        FOLLOWER_GAINED: :"follower.gained"
-        FOLLOWER_LOST: :"follower.lost"
-
-        def self?.values: -> ::Array[XTwitterScraper::Models::WebhookCreateParams::event_type]
-      end
     end
   end
 end

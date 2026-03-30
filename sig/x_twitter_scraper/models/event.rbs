@@ -1,0 +1,45 @@
+module XTwitterScraper
+  module Models
+    type event =
+      {
+        id: String,
+        data: ::Hash[Symbol, top],
+        monitor_id: String,
+        occurred_at: Time,
+        type: XTwitterScraper::Models::event_type,
+        username: String
+      }
+
+    class Event < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor data: ::Hash[Symbol, top]
+
+      attr_accessor monitor_id: String
+
+      attr_accessor occurred_at: Time
+
+      attr_accessor type: XTwitterScraper::Models::event_type
+
+      attr_accessor username: String
+
+      def initialize: (
+        id: String,
+        data: ::Hash[Symbol, top],
+        monitor_id: String,
+        occurred_at: Time,
+        type: XTwitterScraper::Models::event_type,
+        username: String
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        data: ::Hash[Symbol, top],
+        monitor_id: String,
+        occurred_at: Time,
+        type: XTwitterScraper::Models::event_type,
+        username: String
+      }
+    end
+  end
+end

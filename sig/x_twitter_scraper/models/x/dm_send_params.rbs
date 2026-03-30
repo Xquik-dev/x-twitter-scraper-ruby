@@ -1,0 +1,52 @@
+module XTwitterScraper
+  module Models
+    module X
+      type dm_send_params =
+        {
+          user_id: String,
+          account: String,
+          text: String,
+          media_ids: ::Array[String],
+          reply_to_message_id: String
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class DmSendParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor user_id: String
+
+        attr_accessor account: String
+
+        attr_accessor text: String
+
+        attr_reader media_ids: ::Array[String]?
+
+        def media_ids=: (::Array[String]) -> ::Array[String]
+
+        attr_reader reply_to_message_id: String?
+
+        def reply_to_message_id=: (String) -> String
+
+        def initialize: (
+          user_id: String,
+          account: String,
+          text: String,
+          ?media_ids: ::Array[String],
+          ?reply_to_message_id: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          user_id: String,
+          account: String,
+          text: String,
+          media_ids: ::Array[String],
+          reply_to_message_id: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

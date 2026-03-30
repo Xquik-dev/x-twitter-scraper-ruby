@@ -1,0 +1,87 @@
+module XTwitterScraper
+  module Models
+    type draw_detail =
+      {
+        id: String,
+        created_at: Time,
+        status: String,
+        total_entries: Integer,
+        tweet_author_username: String,
+        tweet_id: String,
+        tweet_like_count: Integer,
+        tweet_quote_count: Integer,
+        tweet_reply_count: Integer,
+        tweet_retweet_count: Integer,
+        tweet_text: String,
+        tweet_url: String,
+        valid_entries: Integer,
+        drawn_at: Time
+      }
+
+    class DrawDetail < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor status: String
+
+      attr_accessor total_entries: Integer
+
+      attr_accessor tweet_author_username: String
+
+      attr_accessor tweet_id: String
+
+      attr_accessor tweet_like_count: Integer
+
+      attr_accessor tweet_quote_count: Integer
+
+      attr_accessor tweet_reply_count: Integer
+
+      attr_accessor tweet_retweet_count: Integer
+
+      attr_accessor tweet_text: String
+
+      attr_accessor tweet_url: String
+
+      attr_accessor valid_entries: Integer
+
+      attr_reader drawn_at: Time?
+
+      def drawn_at=: (Time) -> Time
+
+      def initialize: (
+        id: String,
+        created_at: Time,
+        status: String,
+        total_entries: Integer,
+        tweet_author_username: String,
+        tweet_id: String,
+        tweet_like_count: Integer,
+        tweet_quote_count: Integer,
+        tweet_reply_count: Integer,
+        tweet_retweet_count: Integer,
+        tweet_text: String,
+        tweet_url: String,
+        valid_entries: Integer,
+        ?drawn_at: Time
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        created_at: Time,
+        status: String,
+        total_entries: Integer,
+        tweet_author_username: String,
+        tweet_id: String,
+        tweet_like_count: Integer,
+        tweet_quote_count: Integer,
+        tweet_reply_count: Integer,
+        tweet_retweet_count: Integer,
+        tweet_text: String,
+        tweet_url: String,
+        valid_entries: Integer,
+        drawn_at: Time
+      }
+    end
+  end
+end

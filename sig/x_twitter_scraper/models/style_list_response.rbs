@@ -1,50 +1,16 @@
 module XTwitterScraper
   module Models
     type style_list_response =
-      { styles: ::Array[XTwitterScraper::Models::StyleListResponse::Style] }
+      { styles: ::Array[XTwitterScraper::StyleProfileSummary] }
 
     class StyleListResponse < XTwitterScraper::Internal::Type::BaseModel
-      attr_accessor styles: ::Array[XTwitterScraper::Models::StyleListResponse::Style]
+      attr_accessor styles: ::Array[XTwitterScraper::StyleProfileSummary]
 
       def initialize: (
-        styles: ::Array[XTwitterScraper::Models::StyleListResponse::Style]
+        styles: ::Array[XTwitterScraper::StyleProfileSummary]
       ) -> void
 
-      def to_hash: -> {
-        styles: ::Array[XTwitterScraper::Models::StyleListResponse::Style]
-      }
-
-      type style =
-        {
-          fetched_at: Time,
-          is_own_account: bool,
-          tweet_count: Integer,
-          x_username: String
-        }
-
-      class Style < XTwitterScraper::Internal::Type::BaseModel
-        attr_accessor fetched_at: Time
-
-        attr_accessor is_own_account: bool
-
-        attr_accessor tweet_count: Integer
-
-        attr_accessor x_username: String
-
-        def initialize: (
-          fetched_at: Time,
-          is_own_account: bool,
-          tweet_count: Integer,
-          x_username: String
-        ) -> void
-
-        def to_hash: -> {
-          fetched_at: Time,
-          is_own_account: bool,
-          tweet_count: Integer,
-          x_username: String
-        }
-      end
+      def to_hash: -> { styles: ::Array[XTwitterScraper::StyleProfileSummary] }
     end
   end
 end

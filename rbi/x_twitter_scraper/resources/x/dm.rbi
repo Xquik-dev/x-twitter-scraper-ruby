@@ -4,29 +4,6 @@ module XTwitterScraper
   module Resources
     class X
       class Dm
-        # Send direct message
-        sig do
-          params(
-            user_id: String,
-            account: String,
-            text: String,
-            media_ids: T::Array[String],
-            reply_to_message_id: String,
-            request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::DmUpdateResponse)
-        end
-        def update(
-          # Recipient user ID
-          user_id,
-          # X account (@username or account ID)
-          account:,
-          text:,
-          media_ids: nil,
-          reply_to_message_id: nil,
-          request_options: {}
-        )
-        end
-
         # Get DM conversation history
         sig do
           params(
@@ -43,6 +20,29 @@ module XTwitterScraper
           cursor: nil,
           # Legacy pagination cursor (backward compat)
           max_id: nil,
+          request_options: {}
+        )
+        end
+
+        # Send direct message
+        sig do
+          params(
+            user_id: String,
+            account: String,
+            text: String,
+            media_ids: T::Array[String],
+            reply_to_message_id: String,
+            request_options: XTwitterScraper::RequestOptions::OrHash
+          ).returns(XTwitterScraper::Models::X::DmSendResponse)
+        end
+        def send_(
+          # Recipient user ID
+          user_id,
+          # X account (@username or account ID)
+          account:,
+          text:,
+          media_ids: nil,
+          reply_to_message_id: nil,
           request_options: {}
         )
         end

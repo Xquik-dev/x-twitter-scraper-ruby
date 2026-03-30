@@ -1,0 +1,37 @@
+module XTwitterScraper
+  module Models
+    module X
+      type follower_check_response =
+        {
+          is_followed_by: bool,
+          is_following: bool,
+          source_username: String,
+          target_username: String
+        }
+
+      class FollowerCheckResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor is_followed_by: bool
+
+        attr_accessor is_following: bool
+
+        attr_accessor source_username: String
+
+        attr_accessor target_username: String
+
+        def initialize: (
+          is_followed_by: bool,
+          is_following: bool,
+          source_username: String,
+          target_username: String
+        ) -> void
+
+        def to_hash: -> {
+          is_followed_by: bool,
+          is_following: bool,
+          source_username: String,
+          target_username: String
+        }
+      end
+    end
+  end
+end

@@ -2,13 +2,13 @@ module XTwitterScraper
   module Models
     type draft_list_response =
       {
-        drafts: ::Array[XTwitterScraper::Models::DraftListResponse::Draft],
+        drafts: ::Array[XTwitterScraper::Draft],
         has_more: bool,
         next_cursor: String
       }
 
     class DraftListResponse < XTwitterScraper::Internal::Type::BaseModel
-      attr_accessor drafts: ::Array[XTwitterScraper::Models::DraftListResponse::Draft]
+      attr_accessor drafts: ::Array[XTwitterScraper::Draft]
 
       attr_accessor has_more: bool
 
@@ -17,57 +17,16 @@ module XTwitterScraper
       def next_cursor=: (String) -> String
 
       def initialize: (
-        drafts: ::Array[XTwitterScraper::Models::DraftListResponse::Draft],
+        drafts: ::Array[XTwitterScraper::Draft],
         has_more: bool,
         ?next_cursor: String
       ) -> void
 
       def to_hash: -> {
-        drafts: ::Array[XTwitterScraper::Models::DraftListResponse::Draft],
+        drafts: ::Array[XTwitterScraper::Draft],
         has_more: bool,
         next_cursor: String
       }
-
-      type draft =
-        {
-          id: String,
-          created_at: Time,
-          text: String,
-          goal: String,
-          topic: String
-        }
-
-      class Draft < XTwitterScraper::Internal::Type::BaseModel
-        attr_accessor id: String
-
-        attr_accessor created_at: Time
-
-        attr_accessor text: String
-
-        attr_reader goal: String?
-
-        def goal=: (String) -> String
-
-        attr_reader topic: String?
-
-        def topic=: (String) -> String
-
-        def initialize: (
-          id: String,
-          created_at: Time,
-          text: String,
-          ?goal: String,
-          ?topic: String
-        ) -> void
-
-        def to_hash: -> {
-          id: String,
-          created_at: Time,
-          text: String,
-          goal: String,
-          topic: String
-        }
-      end
     end
   end
 end

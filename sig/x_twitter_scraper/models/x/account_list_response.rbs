@@ -2,57 +2,16 @@ module XTwitterScraper
   module Models
     module X
       type account_list_response =
-        {
-          accounts: ::Array[XTwitterScraper::Models::X::AccountListResponse::Account]
-        }
+        { accounts: ::Array[XTwitterScraper::X::XAccount] }
 
       class AccountListResponse < XTwitterScraper::Internal::Type::BaseModel
-        attr_accessor accounts: ::Array[XTwitterScraper::Models::X::AccountListResponse::Account]
+        attr_accessor accounts: ::Array[XTwitterScraper::X::XAccount]
 
         def initialize: (
-          accounts: ::Array[XTwitterScraper::Models::X::AccountListResponse::Account]
+          accounts: ::Array[XTwitterScraper::X::XAccount]
         ) -> void
 
-        def to_hash: -> {
-          accounts: ::Array[XTwitterScraper::Models::X::AccountListResponse::Account]
-        }
-
-        type account =
-          {
-            id: String,
-            created_at: Time,
-            status: String,
-            x_user_id: String,
-            x_username: String
-          }
-
-        class Account < XTwitterScraper::Internal::Type::BaseModel
-          attr_accessor id: String
-
-          attr_accessor created_at: Time
-
-          attr_accessor status: String
-
-          attr_accessor x_user_id: String
-
-          attr_accessor x_username: String
-
-          def initialize: (
-            id: String,
-            created_at: Time,
-            status: String,
-            x_user_id: String,
-            x_username: String
-          ) -> void
-
-          def to_hash: -> {
-            id: String,
-            created_at: Time,
-            status: String,
-            x_user_id: String,
-            x_username: String
-          }
-        end
+        def to_hash: -> { accounts: ::Array[XTwitterScraper::X::XAccount] }
       end
     end
   end

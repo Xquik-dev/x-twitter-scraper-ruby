@@ -9,7 +9,7 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
     response = @x_twitter_scraper.styles.retrieve("username")
 
     assert_pattern do
-      response => XTwitterScraper::Models::StyleRetrieveResponse
+      response => XTwitterScraper::StyleProfile
     end
 
     assert_pattern do
@@ -17,7 +17,7 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
         fetched_at: Time,
         is_own_account: XTwitterScraper::Internal::Type::Boolean,
         tweet_count: Integer,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::StyleRetrieveResponse::Tweet]),
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::StyleProfile::Tweet]),
         x_username: String
       }
     end
@@ -29,7 +29,7 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
     response = @x_twitter_scraper.styles.update("username", label: "label", tweets: [{text: "text"}])
 
     assert_pattern do
-      response => XTwitterScraper::Models::StyleUpdateResponse
+      response => XTwitterScraper::StyleProfile
     end
 
     assert_pattern do
@@ -37,7 +37,7 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
         fetched_at: Time,
         is_own_account: XTwitterScraper::Internal::Type::Boolean,
         tweet_count: Integer,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::StyleUpdateResponse::Tweet]),
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::StyleProfile::Tweet]),
         x_username: String
       }
     end
@@ -54,7 +54,7 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
 
     assert_pattern do
       response => {
-        styles: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::StyleListResponse::Style])
+        styles: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::StyleProfileSummary])
       }
     end
   end
@@ -75,7 +75,7 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
     response = @x_twitter_scraper.styles.analyze(username: "username")
 
     assert_pattern do
-      response => XTwitterScraper::Models::StyleAnalyzeResponse
+      response => XTwitterScraper::StyleProfile
     end
 
     assert_pattern do
@@ -83,7 +83,7 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
         fetched_at: Time,
         is_own_account: XTwitterScraper::Internal::Type::Boolean,
         tweet_count: Integer,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::StyleAnalyzeResponse::Tweet]),
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::StyleProfile::Tweet]),
         x_username: String
       }
     end
@@ -100,8 +100,8 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
 
     assert_pattern do
       response => {
-        style1: XTwitterScraper::Models::StyleCompareResponse::Style1,
-        style2: XTwitterScraper::Models::StyleCompareResponse::Style2
+        style1: XTwitterScraper::StyleProfile,
+        style2: XTwitterScraper::StyleProfile
       }
     end
   end

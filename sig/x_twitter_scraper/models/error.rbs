@@ -1,0 +1,72 @@
+module XTwitterScraper
+  module Models
+    type error = { error: XTwitterScraper::Models::Error::error }
+
+    class Error < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor error: XTwitterScraper::Models::Error::error
+
+      def initialize: (error: XTwitterScraper::Models::Error::error) -> void
+
+      def to_hash: -> { error: XTwitterScraper::Models::Error::error }
+
+      type error =
+        :internal_error
+        | :invalid_format
+        | :invalid_id
+        | :invalid_input
+        | :invalid_params
+        | :invalid_tool_type
+        | :invalid_tweet_id
+        | :invalid_tweet_url
+        | :invalid_username
+        | :missing_params
+        | :missing_query
+        | :monitor_already_exists
+        | :monitor_limit_reached
+        | :no_subscription
+        | :not_found
+        | :stream_registration_failed
+        | :subscription_inactive
+        | :tweet_not_found
+        | :unauthenticated
+        | :usage_limit_reached
+        | :user_not_found
+        | :webhook_inactive
+        | :x_api_rate_limited
+        | :x_api_unavailable
+        | :x_api_unauthorized
+
+      module Error
+        extend XTwitterScraper::Internal::Type::Enum
+
+        INTERNAL_ERROR: :internal_error
+        INVALID_FORMAT: :invalid_format
+        INVALID_ID: :invalid_id
+        INVALID_INPUT: :invalid_input
+        INVALID_PARAMS: :invalid_params
+        INVALID_TOOL_TYPE: :invalid_tool_type
+        INVALID_TWEET_ID: :invalid_tweet_id
+        INVALID_TWEET_URL: :invalid_tweet_url
+        INVALID_USERNAME: :invalid_username
+        MISSING_PARAMS: :missing_params
+        MISSING_QUERY: :missing_query
+        MONITOR_ALREADY_EXISTS: :monitor_already_exists
+        MONITOR_LIMIT_REACHED: :monitor_limit_reached
+        NO_SUBSCRIPTION: :no_subscription
+        NOT_FOUND: :not_found
+        STREAM_REGISTRATION_FAILED: :stream_registration_failed
+        SUBSCRIPTION_INACTIVE: :subscription_inactive
+        TWEET_NOT_FOUND: :tweet_not_found
+        UNAUTHENTICATED: :unauthenticated
+        USAGE_LIMIT_REACHED: :usage_limit_reached
+        USER_NOT_FOUND: :user_not_found
+        WEBHOOK_INACTIVE: :webhook_inactive
+        X_API_RATE_LIMITED: :x_api_rate_limited
+        X_API_UNAVAILABLE: :x_api_unavailable
+        X_API_UNAUTHORIZED: :x_api_unauthorized
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::Error::error]
+      end
+    end
+  end
+end

@@ -77,7 +77,6 @@ module XTwitterScraper
     sig { returns(XTwitterScraper::Resources::Trends) }
     attr_reader :trends
 
-    # Telegram bot service endpoints
     sig { returns(XTwitterScraper::Resources::Bot) }
     attr_reader :bot
 

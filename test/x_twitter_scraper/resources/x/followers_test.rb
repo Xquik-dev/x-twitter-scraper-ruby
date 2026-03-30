@@ -3,13 +3,13 @@
 require_relative "../../test_helper"
 
 class XTwitterScraper::Test::Resources::X::FollowersTest < XTwitterScraper::Test::ResourceTest
-  def test_retrieve_check_required_params
+  def test_check_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.followers.retrieve_check(source: "source", target: "target")
+    response = @x_twitter_scraper.x.followers.check(source: "source", target: "target")
 
     assert_pattern do
-      response => XTwitterScraper::Models::X::FollowerRetrieveCheckResponse
+      response => XTwitterScraper::Models::X::FollowerCheckResponse
     end
 
     assert_pattern do

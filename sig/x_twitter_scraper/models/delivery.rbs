@@ -1,0 +1,61 @@
+module XTwitterScraper
+  module Models
+    type delivery =
+      {
+        id: String,
+        attempts: Integer,
+        created_at: Time,
+        status: String,
+        stream_event_id: String,
+        delivered_at: Time,
+        last_error: String,
+        last_status_code: Integer
+      }
+
+    class Delivery < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor attempts: Integer
+
+      attr_accessor created_at: Time
+
+      attr_accessor status: String
+
+      attr_accessor stream_event_id: String
+
+      attr_reader delivered_at: Time?
+
+      def delivered_at=: (Time) -> Time
+
+      attr_reader last_error: String?
+
+      def last_error=: (String) -> String
+
+      attr_reader last_status_code: Integer?
+
+      def last_status_code=: (Integer) -> Integer
+
+      def initialize: (
+        id: String,
+        attempts: Integer,
+        created_at: Time,
+        status: String,
+        stream_event_id: String,
+        ?delivered_at: Time,
+        ?last_error: String,
+        ?last_status_code: Integer
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        attempts: Integer,
+        created_at: Time,
+        status: String,
+        stream_event_id: String,
+        delivered_at: Time,
+        last_error: String,
+        last_status_code: Integer
+      }
+    end
+  end
+end

@@ -3,13 +3,13 @@
 require_relative "../../test_helper"
 
 class XTwitterScraper::Test::Resources::X::ProfileTest < XTwitterScraper::Test::ResourceTest
-  def test_patch_all_required_params
+  def test_update_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.profile.patch_all(account: "account")
+    response = @x_twitter_scraper.x.profile.update(account: "account")
 
     assert_pattern do
-      response => XTwitterScraper::Models::X::ProfilePatchAllResponse
+      response => XTwitterScraper::Models::X::ProfileUpdateResponse
     end
 
     assert_pattern do

@@ -1,0 +1,65 @@
+module XTwitterScraper
+  module Models
+    class XAccountDetail = X::XAccountDetail
+
+    module X
+      type x_account_detail =
+        {
+          id: String,
+          created_at: Time,
+          status: String,
+          x_user_id: String,
+          x_username: String,
+          cookies_obtained_at: Time,
+          proxy_country: String,
+          updated_at: Time
+        }
+
+      class XAccountDetail < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor status: String
+
+        attr_accessor x_user_id: String
+
+        attr_accessor x_username: String
+
+        attr_reader cookies_obtained_at: Time?
+
+        def cookies_obtained_at=: (Time) -> Time
+
+        attr_reader proxy_country: String?
+
+        def proxy_country=: (String) -> String
+
+        attr_reader updated_at: Time?
+
+        def updated_at=: (Time) -> Time
+
+        def initialize: (
+          id: String,
+          created_at: Time,
+          status: String,
+          x_user_id: String,
+          x_username: String,
+          ?cookies_obtained_at: Time,
+          ?proxy_country: String,
+          ?updated_at: Time
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          status: String,
+          x_user_id: String,
+          x_username: String,
+          cookies_obtained_at: Time,
+          proxy_country: String,
+          updated_at: Time
+        }
+      end
+    end
+  end
+end

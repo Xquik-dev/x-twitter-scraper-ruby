@@ -12,14 +12,14 @@ module XTwitterScraper
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::EventRetrieveResponse]
+      # @return [XTwitterScraper::Models::EventDetail]
       #
       # @see XTwitterScraper::Models::EventRetrieveParams
       def retrieve(id, params = {})
         @client.request(
           method: :get,
           path: ["events/%1$s", id],
-          model: XTwitterScraper::Models::EventRetrieveResponse,
+          model: XTwitterScraper::EventDetail,
           options: params[:request_options]
         )
       end
@@ -30,7 +30,7 @@ module XTwitterScraper
       #
       # @param after [String] Cursor for pagination
       #
-      # @param event_type [Symbol, XTwitterScraper::Models::EventListParams::EventType]
+      # @param event_type [Symbol, XTwitterScraper::Models::EventType]
       #
       # @param limit [Integer]
       #

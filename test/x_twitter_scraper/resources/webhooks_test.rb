@@ -16,7 +16,7 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
       response => {
         id: String,
         created_at: Time,
-        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Models::WebhookCreateResponse::EventType]),
+        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
         secret: String,
         url: String
       }
@@ -29,14 +29,14 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.webhooks.update("id")
 
     assert_pattern do
-      response => XTwitterScraper::Models::WebhookUpdateResponse
+      response => XTwitterScraper::Webhook
     end
 
     assert_pattern do
       response => {
         id: String,
         created_at: Time,
-        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Models::WebhookUpdateResponse::EventType]),
+        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
         is_active: XTwitterScraper::Internal::Type::Boolean,
         url: String
       }
@@ -54,7 +54,7 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
 
     assert_pattern do
       response => {
-        webhooks: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::WebhookListResponse::Webhook])
+        webhooks: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Webhook])
       }
     end
   end
@@ -86,7 +86,7 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
 
     assert_pattern do
       response => {
-        deliveries: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::WebhookListDeliveriesResponse::Delivery])
+        deliveries: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Delivery])
       }
     end
   end

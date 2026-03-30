@@ -2,11 +2,11 @@ module XTwitterScraper
   module Resources
     class X
       class Followers
-        def retrieve_check: (
+        def check: (
           source: String,
           target: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::FollowerRetrieveCheckResponse
+        ) -> XTwitterScraper::Models::X::FollowerCheckResponse
 
         def initialize: (client: XTwitterScraper::Client) -> void
       end

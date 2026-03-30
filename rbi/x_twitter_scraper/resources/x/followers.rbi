@@ -11,9 +11,9 @@ module XTwitterScraper
             source: String,
             target: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::FollowerRetrieveCheckResponse)
+          ).returns(XTwitterScraper::Models::X::FollowerCheckResponse)
         end
-        def retrieve_check(
+        def check(
           # Username to check (without @)
           source:,
           # Target username (without @)

@@ -15,6 +15,31 @@ module XTwitterScraper
       #
       # We can therefore convert string values to Symbols, but can't convert other
       # values safely.
+      #
+      # @example
+      #   # `event_type` is a `XTwitterScraper::EventType`
+      #   case event_type
+      #   when XTwitterScraper::EventType::TWEET_NEW
+      #     # ...
+      #   when XTwitterScraper::EventType::TWEET_REPLY
+      #     # ...
+      #   when XTwitterScraper::EventType::TWEET_RETWEET
+      #     # ...
+      #   else
+      #     puts(event_type)
+      #   end
+      #
+      # @example
+      #   case event_type
+      #   in :"tweet.new"
+      #     # ...
+      #   in :"tweet.reply"
+      #     # ...
+      #   in :"tweet.retweet"
+      #     # ...
+      #   else
+      #     puts(event_type)
+      #   end
       module Enum
         include XTwitterScraper::Internal::Type::Converter
         include XTwitterScraper::Internal::Util::SorbetRuntimeSupport
