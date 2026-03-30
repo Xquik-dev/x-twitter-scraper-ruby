@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = "support@xquik.com"
   s.homepage = "https://gemdocs.org/gems/x-twitter-scraper"
   s.metadata["homepage_uri"] = s.homepage
-  s.metadata["source_code_uri"] = "https://github.com/stainless-sdks/x-twitter-scraper-ruby"
+  s.metadata["source_code_uri"] = "https://github.com/Xquik-dev/x-twitter-scraper-ruby"
   s.metadata["rubygems_mfa_required"] = false.to_s
   s.required_ruby_version = ">= 3.2.0"
 
