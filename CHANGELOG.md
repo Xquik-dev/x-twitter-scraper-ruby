@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.2.0 (2026-04-01)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** api update ([4e8766f](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/4e8766f1c8edd3f7b904cb872cb9f64730a22bbb))
+* **api:** api update ([f369f70](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/f369f7059ec0bd763d044a04cce27151250824ff))
+
+
+### Bug Fixes
+
+* align path encoding with RFC 3986 section 3.3 ([d0e93ac](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/d0e93acfd96cb7047474040f98670748b5ff0b99))
+* variable name typo ([235ba6c](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/235ba6ca1454d0617616c3f173de819df657dd93))
+
+
+### Chores
+
+* update SDK settings ([323c79a](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/323c79ae37c1a89db3bcafdb703da447e8c3f9e1))
+
 ## 0.1.0 (2026-03-30)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.0.1...v0.1.0)
