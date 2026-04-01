@@ -1,14 +1,145 @@
 module XTwitterScraper
   module Models
     module X
-      type community_retrieve_info_response = { community: top }
+      type community_retrieve_info_response =
+        {
+          community: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community
+        }
 
       class CommunityRetrieveInfoResponse < XTwitterScraper::Internal::Type::BaseModel
-        attr_accessor community: top
+        attr_accessor community: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community
 
-        def initialize: (community: top) -> void
+        def initialize: (
+          community: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community
+        ) -> void
 
-        def to_hash: -> { community: top }
+        def to_hash: -> {
+          community: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community
+        }
+
+        type community =
+          {
+            id: String,
+            banner_url: String,
+            created_at: String,
+            description: String,
+            join_policy: String,
+            member_count: Integer,
+            moderator_count: Integer,
+            name: String,
+            primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
+            rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
+          }
+
+        class Community < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_reader banner_url: String?
+
+          def banner_url=: (String) -> String
+
+          attr_reader created_at: String?
+
+          def created_at=: (String) -> String
+
+          attr_reader description: String?
+
+          def description=: (String) -> String
+
+          attr_reader join_policy: String?
+
+          def join_policy=: (String) -> String
+
+          attr_reader member_count: Integer?
+
+          def member_count=: (Integer) -> Integer
+
+          attr_reader moderator_count: Integer?
+
+          def moderator_count=: (Integer) -> Integer
+
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          attr_reader primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic?
+
+          def primary_topic=: (
+            XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic
+          ) -> XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic
+
+          attr_reader rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]?
+
+          def rules=: (
+            ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
+          ) -> ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
+
+          def initialize: (
+            id: String,
+            ?banner_url: String,
+            ?created_at: String,
+            ?description: String,
+            ?join_policy: String,
+            ?member_count: Integer,
+            ?moderator_count: Integer,
+            ?name: String,
+            ?primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
+            ?rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            banner_url: String,
+            created_at: String,
+            description: String,
+            join_policy: String,
+            member_count: Integer,
+            moderator_count: Integer,
+            name: String,
+            primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
+            rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
+          }
+
+          type primary_topic = { id: String, name: String }
+
+          class PrimaryTopic < XTwitterScraper::Internal::Type::BaseModel
+            attr_reader id: String?
+
+            def id=: (String) -> String
+
+            attr_reader name: String?
+
+            def name=: (String) -> String
+
+            def initialize: (?id: String, ?name: String) -> void
+
+            def to_hash: -> { id: String, name: String }
+          end
+
+          type rule = { id: String, description: String, name: String }
+
+          class Rule < XTwitterScraper::Internal::Type::BaseModel
+            attr_reader id: String?
+
+            def id=: (String) -> String
+
+            attr_reader description: String?
+
+            def description=: (String) -> String
+
+            attr_reader name: String?
+
+            def name=: (String) -> String
+
+            def initialize: (
+              ?id: String,
+              ?description: String,
+              ?name: String
+            ) -> void
+
+            def to_hash: -> { id: String, description: String, name: String }
+          end
+        end
       end
     end
   end

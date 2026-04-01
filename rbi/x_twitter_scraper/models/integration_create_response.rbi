@@ -14,6 +14,7 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :id
 
+      # Integration config — shape varies by type (JSON)
       sig { returns(T::Hash[Symbol, T.anything]) }
       attr_accessor :config
 
@@ -42,6 +43,7 @@ module XTwitterScraper
       end
       attr_accessor :type
 
+      # Event filter rules (JSON)
       sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
       attr_reader :filters
 
@@ -87,12 +89,14 @@ module XTwitterScraper
       end
       def self.new(
         id:,
+        # Integration config — shape varies by type (JSON)
         config:,
         created_at:,
         event_types:,
         is_active:,
         name:,
         type:,
+        # Event filter rules (JSON)
         filters: nil,
         message_template: nil,
         scope_all_monitors: nil,

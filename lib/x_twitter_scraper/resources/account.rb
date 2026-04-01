@@ -62,7 +62,7 @@ module XTwitterScraper
           path: "account",
           body: parsed,
           model: XTwitterScraper::Models::AccountUpdateLocaleResponse,
-          security: {},
+          security: {auth_api_key: true},
           options: options
         )
       end

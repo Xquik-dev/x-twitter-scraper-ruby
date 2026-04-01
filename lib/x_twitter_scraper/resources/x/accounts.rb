@@ -31,7 +31,7 @@ module XTwitterScraper
             path: "x/accounts",
             body: parsed,
             model: XTwitterScraper::Models::X::AccountCreateResponse,
-            security: {},
+            security: {auth_api_key: true},
             options: options
           )
         end
@@ -52,7 +52,7 @@ module XTwitterScraper
             method: :get,
             path: ["x/accounts/%1$s", id],
             model: XTwitterScraper::Models::X::AccountRetrieveResponse,
-            security: {},
+            security: {auth_api_key: true},
             options: params[:request_options]
           )
         end
@@ -71,7 +71,7 @@ module XTwitterScraper
             method: :get,
             path: "x/accounts",
             model: XTwitterScraper::Models::X::AccountListResponse,
-            security: {},
+            security: {auth_api_key: true},
             options: params[:request_options]
           )
         end
@@ -92,7 +92,7 @@ module XTwitterScraper
             method: :delete,
             path: ["x/accounts/%1$s", id],
             model: XTwitterScraper::Models::X::AccountDeleteResponse,
-            security: {},
+            security: {auth_api_key: true},
             options: params[:request_options]
           )
         end
@@ -119,7 +119,7 @@ module XTwitterScraper
             path: ["x/accounts/%1$s/reauth", id],
             body: parsed,
             model: XTwitterScraper::Models::X::AccountReauthResponse,
-            security: {},
+            security: {auth_api_key: true},
             options: options
           )
         end

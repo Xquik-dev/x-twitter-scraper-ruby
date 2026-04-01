@@ -14,6 +14,7 @@ module XTwitterScraper
       sig { returns(T::Boolean) }
       attr_accessor :has_more
 
+      # Extraction job metadata — shape varies by tool type (JSON)
       sig { returns(T::Hash[Symbol, T.anything]) }
       attr_accessor :job
 
@@ -34,7 +35,13 @@ module XTwitterScraper
           next_cursor: String
         ).returns(T.attached_class)
       end
-      def self.new(has_more:, job:, results:, next_cursor: nil)
+      def self.new(
+        has_more:,
+        # Extraction job metadata — shape varies by tool type (JSON)
+        job:,
+        results:,
+        next_cursor: nil
+      )
       end
 
       sig do

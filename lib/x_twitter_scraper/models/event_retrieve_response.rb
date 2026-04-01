@@ -10,6 +10,7 @@ module XTwitterScraper
       required :id, String
 
       # @!attribute data
+      #   Event payload — shape varies by event type (JSON)
       #
       #   @return [Hash{Symbol=>Object}]
       required :data, XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]
@@ -41,11 +42,17 @@ module XTwitterScraper
 
       # @!method initialize(id:, data:, monitor_id:, occurred_at:, type:, username:, x_event_id: nil)
       #   @param id [String]
-      #   @param data [Hash{Symbol=>Object}]
+      #
+      #   @param data [Hash{Symbol=>Object}] Event payload — shape varies by event type (JSON)
+      #
       #   @param monitor_id [String]
+      #
       #   @param occurred_at [Time]
+      #
       #   @param type [Symbol, XTwitterScraper::Models::EventRetrieveResponse::Type]
+      #
       #   @param username [String]
+      #
       #   @param x_event_id [String]
 
       # @see XTwitterScraper::Models::EventRetrieveResponse#type
