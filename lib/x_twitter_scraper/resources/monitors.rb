@@ -8,7 +8,7 @@ module XTwitterScraper
       #
       # @overload create(event_types:, username:, request_options: {})
       #
-      # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>]
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::MonitorCreateParams::EventType>]
       #
       # @param username [String] X username (without @)
       #
@@ -36,14 +36,14 @@ module XTwitterScraper
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::Monitor]
+      # @return [XTwitterScraper::Models::MonitorRetrieveResponse]
       #
       # @see XTwitterScraper::Models::MonitorRetrieveParams
       def retrieve(id, params = {})
         @client.request(
           method: :get,
           path: ["monitors/%1$s", id],
-          model: XTwitterScraper::Monitor,
+          model: XTwitterScraper::Models::MonitorRetrieveResponse,
           options: params[:request_options]
         )
       end
@@ -54,13 +54,13 @@ module XTwitterScraper
       #
       # @param id [String] Resource ID (stringified bigint)
       #
-      # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>]
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::MonitorUpdateParams::EventType>]
       #
       # @param is_active [Boolean]
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::Monitor]
+      # @return [XTwitterScraper::Models::MonitorUpdateResponse]
       #
       # @see XTwitterScraper::Models::MonitorUpdateParams
       def update(id, params = {})
@@ -69,7 +69,7 @@ module XTwitterScraper
           method: :patch,
           path: ["monitors/%1$s", id],
           body: parsed,
-          model: XTwitterScraper::Monitor,
+          model: XTwitterScraper::Models::MonitorUpdateResponse,
           options: options
         )
       end

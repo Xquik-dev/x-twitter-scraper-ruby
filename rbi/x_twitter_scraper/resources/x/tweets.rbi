@@ -84,7 +84,7 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::PaginatedUsers)
+          ).returns(XTwitterScraper::Models::X::TweetGetFavoritersResponse)
         end
         def get_favoriters(
           # Tweet ID
@@ -104,7 +104,7 @@ module XTwitterScraper
             since_time: String,
             until_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::PaginatedTweets)
+          ).returns(XTwitterScraper::Models::X::TweetGetQuotesResponse)
         end
         def get_quotes(
           # Tweet ID
@@ -129,7 +129,7 @@ module XTwitterScraper
             since_time: String,
             until_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::PaginatedTweets)
+          ).returns(XTwitterScraper::Models::X::TweetGetRepliesResponse)
         end
         def get_replies(
           # Tweet ID
@@ -150,7 +150,7 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::PaginatedUsers)
+          ).returns(XTwitterScraper::Models::X::TweetGetRetweetersResponse)
         end
         def get_retweeters(
           # Tweet ID
@@ -167,7 +167,7 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::PaginatedTweets)
+          ).returns(XTwitterScraper::Models::X::TweetGetThreadResponse)
         end
         def get_thread(
           # Tweet ID
@@ -189,7 +189,7 @@ module XTwitterScraper
             since_time: String,
             until_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::PaginatedTweets)
+          ).returns(XTwitterScraper::Models::X::TweetSearchResponse)
         end
         def search(
           # Search query (keywords,

@@ -14,8 +14,8 @@ class XTwitterScraper::Test::Resources::DrawsTest < XTwitterScraper::Test::Resou
 
     assert_pattern do
       response => {
-        draw: XTwitterScraper::DrawDetail,
-        winners: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Winner])
+        draw: XTwitterScraper::Models::DrawRetrieveResponse::Draw,
+        winners: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::DrawRetrieveResponse::Winner])
       }
     end
   end
@@ -31,7 +31,7 @@ class XTwitterScraper::Test::Resources::DrawsTest < XTwitterScraper::Test::Resou
 
     assert_pattern do
       response => {
-        draws: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::DrawListItem]),
+        draws: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::DrawListResponse::Draw]),
         has_more: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String | nil
       }
@@ -63,7 +63,7 @@ class XTwitterScraper::Test::Resources::DrawsTest < XTwitterScraper::Test::Resou
         total_entries: Integer,
         tweet_id: String,
         valid_entries: Integer,
-        winners: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Winner])
+        winners: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::DrawRunResponse::Winner])
       }
     end
   end

@@ -16,7 +16,7 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
       response => {
         id: String,
         created_at: Time,
-        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
+        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Models::MonitorCreateResponse::EventType]),
         username: String,
         x_user_id: String
       }
@@ -29,14 +29,14 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.monitors.retrieve("id")
 
     assert_pattern do
-      response => XTwitterScraper::Monitor
+      response => XTwitterScraper::Models::MonitorRetrieveResponse
     end
 
     assert_pattern do
       response => {
         id: String,
         created_at: Time,
-        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
+        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Models::MonitorRetrieveResponse::EventType]),
         is_active: XTwitterScraper::Internal::Type::Boolean,
         username: String,
         x_user_id: String
@@ -50,14 +50,14 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.monitors.update("id")
 
     assert_pattern do
-      response => XTwitterScraper::Monitor
+      response => XTwitterScraper::Models::MonitorUpdateResponse
     end
 
     assert_pattern do
       response => {
         id: String,
         created_at: Time,
-        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
+        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Models::MonitorUpdateResponse::EventType]),
         is_active: XTwitterScraper::Internal::Type::Boolean,
         username: String,
         x_user_id: String
@@ -76,7 +76,7 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
 
     assert_pattern do
       response => {
-        monitors: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Monitor]),
+        monitors: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::MonitorListResponse::Monitor]),
         total: Integer
       }
     end

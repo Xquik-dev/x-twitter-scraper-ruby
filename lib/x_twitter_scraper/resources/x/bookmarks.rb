@@ -15,7 +15,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::PaginatedTweets]
+        # @return [XTwitterScraper::Models::X::BookmarkListResponse]
         #
         # @see XTwitterScraper::Models::X::BookmarkListParams
         def list(params = {})
@@ -25,7 +25,7 @@ module XTwitterScraper
             method: :get,
             path: "x/bookmarks",
             query: query.transform_keys(folder_id: "folderId"),
-            model: XTwitterScraper::PaginatedTweets,
+            model: XTwitterScraper::Models::X::BookmarkListResponse,
             options: options
           )
         end

@@ -6,7 +6,7 @@ module XTwitterScraper
         data: ::Hash[Symbol, top],
         monitor_id: String,
         occurred_at: Time,
-        type: XTwitterScraper::Models::event_type,
+        type: XTwitterScraper::Models::Event::type_,
         username: String
       }
 
@@ -19,7 +19,7 @@ module XTwitterScraper
 
       attr_accessor occurred_at: Time
 
-      attr_accessor type: XTwitterScraper::Models::event_type
+      attr_accessor type: XTwitterScraper::Models::Event::type_
 
       attr_accessor username: String
 
@@ -28,7 +28,7 @@ module XTwitterScraper
         data: ::Hash[Symbol, top],
         monitor_id: String,
         occurred_at: Time,
-        type: XTwitterScraper::Models::event_type,
+        type: XTwitterScraper::Models::Event::type_,
         username: String
       ) -> void
 
@@ -37,9 +37,30 @@ module XTwitterScraper
         data: ::Hash[Symbol, top],
         monitor_id: String,
         occurred_at: Time,
-        type: XTwitterScraper::Models::event_type,
+        type: XTwitterScraper::Models::Event::type_,
         username: String
       }
+
+      type type_ =
+        :"tweet.new"
+        | :"tweet.reply"
+        | :"tweet.retweet"
+        | :"tweet.quote"
+        | :"follower.gained"
+        | :"follower.lost"
+
+      module Type
+        extend XTwitterScraper::Internal::Type::Enum
+
+        TWEET_NEW: :"tweet.new"
+        TWEET_REPLY: :"tweet.reply"
+        TWEET_RETWEET: :"tweet.retweet"
+        TWEET_QUOTE: :"tweet.quote"
+        FOLLOWER_GAINED: :"follower.gained"
+        FOLLOWER_LOST: :"follower.lost"
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::Event::type_]
+      end
     end
   end
 end

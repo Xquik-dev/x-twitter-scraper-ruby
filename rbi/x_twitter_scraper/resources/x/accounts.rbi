@@ -36,7 +36,7 @@ module XTwitterScraper
           params(
             id: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::X::XAccountDetail)
+          ).returns(XTwitterScraper::Models::X::AccountRetrieveResponse)
         end
         def retrieve(
           # Resource ID (stringified bigint)

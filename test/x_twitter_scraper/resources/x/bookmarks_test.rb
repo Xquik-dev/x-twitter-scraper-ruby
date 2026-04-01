@@ -9,14 +9,14 @@ class XTwitterScraper::Test::Resources::X::BookmarksTest < XTwitterScraper::Test
     response = @x_twitter_scraper.x.bookmarks.list
 
     assert_pattern do
-      response => XTwitterScraper::PaginatedTweets
+      response => XTwitterScraper::Models::X::BookmarkListResponse
     end
 
     assert_pattern do
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::BookmarkListResponse::Tweet])
       }
     end
   end

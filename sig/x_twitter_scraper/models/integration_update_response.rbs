@@ -1,0 +1,109 @@
+module XTwitterScraper
+  module Models
+    type integration_update_response =
+      {
+        id: String,
+        config: ::Hash[Symbol, top],
+        created_at: Time,
+        event_types: ::Array[XTwitterScraper::Models::IntegrationUpdateResponse::event_type],
+        is_active: bool,
+        name: String,
+        type: XTwitterScraper::Models::IntegrationUpdateResponse::type_,
+        filters: ::Hash[Symbol, top],
+        message_template: String,
+        scope_all_monitors: bool,
+        silent_push: bool
+      }
+
+    class IntegrationUpdateResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor config: ::Hash[Symbol, top]
+
+      attr_accessor created_at: Time
+
+      attr_accessor event_types: ::Array[XTwitterScraper::Models::IntegrationUpdateResponse::event_type]
+
+      attr_accessor is_active: bool
+
+      attr_accessor name: String
+
+      attr_accessor type: XTwitterScraper::Models::IntegrationUpdateResponse::type_
+
+      attr_reader filters: ::Hash[Symbol, top]?
+
+      def filters=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader message_template: String?
+
+      def message_template=: (String) -> String
+
+      attr_reader scope_all_monitors: bool?
+
+      def scope_all_monitors=: (bool) -> bool
+
+      attr_reader silent_push: bool?
+
+      def silent_push=: (bool) -> bool
+
+      def initialize: (
+        id: String,
+        config: ::Hash[Symbol, top],
+        created_at: Time,
+        event_types: ::Array[XTwitterScraper::Models::IntegrationUpdateResponse::event_type],
+        is_active: bool,
+        name: String,
+        type: XTwitterScraper::Models::IntegrationUpdateResponse::type_,
+        ?filters: ::Hash[Symbol, top],
+        ?message_template: String,
+        ?scope_all_monitors: bool,
+        ?silent_push: bool
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        config: ::Hash[Symbol, top],
+        created_at: Time,
+        event_types: ::Array[XTwitterScraper::Models::IntegrationUpdateResponse::event_type],
+        is_active: bool,
+        name: String,
+        type: XTwitterScraper::Models::IntegrationUpdateResponse::type_,
+        filters: ::Hash[Symbol, top],
+        message_template: String,
+        scope_all_monitors: bool,
+        silent_push: bool
+      }
+
+      type event_type =
+        :"tweet.new"
+        | :"tweet.reply"
+        | :"tweet.retweet"
+        | :"tweet.quote"
+        | :"follower.gained"
+        | :"follower.lost"
+
+      module EventType
+        extend XTwitterScraper::Internal::Type::Enum
+
+        TWEET_NEW: :"tweet.new"
+        TWEET_REPLY: :"tweet.reply"
+        TWEET_RETWEET: :"tweet.retweet"
+        TWEET_QUOTE: :"tweet.quote"
+        FOLLOWER_GAINED: :"follower.gained"
+        FOLLOWER_LOST: :"follower.lost"
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::IntegrationUpdateResponse::event_type]
+      end
+
+      type type_ = :telegram
+
+      module Type
+        extend XTwitterScraper::Internal::Type::Enum
+
+        TELEGRAM: :telegram
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::IntegrationUpdateResponse::type_]
+      end
+    end
+  end
+end

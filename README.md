@@ -28,9 +28,9 @@ x_twitter_scraper = XTwitterScraper::Client.new(
   api_key: ENV["X_TWITTER_SCRAPER_API_KEY"] # This is the default and can be omitted
 )
 
-paginated_tweets = x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
+response = x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
 
-puts(paginated_tweets.has_next_page)
+puts(response.has_next_page)
 ```
 
 ### File uploads
@@ -149,7 +149,7 @@ You can send undocumented parameters to any endpoint, and read undocumented resp
 Note: the `extra_` parameters of the same name overrides the documented parameters.
 
 ```ruby
-paginated_tweets =
+response =
   x_twitter_scraper.x.tweets.search(
     q: "from:elonmusk",
     limit: 10,
@@ -160,7 +160,7 @@ paginated_tweets =
     }
   )
 
-puts(paginated_tweets[:my_undocumented_property])
+puts(response[:my_undocumented_property])
 ```
 
 #### Undocumented request params

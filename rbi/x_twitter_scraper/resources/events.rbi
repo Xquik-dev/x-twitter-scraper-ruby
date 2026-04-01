@@ -9,7 +9,7 @@ module XTwitterScraper
         params(
           id: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::EventDetail)
+        ).returns(XTwitterScraper::Models::EventRetrieveResponse)
       end
       def retrieve(
         # Resource ID (stringified bigint)
@@ -22,7 +22,7 @@ module XTwitterScraper
       sig do
         params(
           after: String,
-          event_type: XTwitterScraper::EventType::OrSymbol,
+          event_type: XTwitterScraper::EventListParams::EventType::OrSymbol,
           limit: Integer,
           monitor_id: String,
           request_options: XTwitterScraper::RequestOptions::OrHash

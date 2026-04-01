@@ -2,7 +2,6 @@
 
 module XTwitterScraper
   module Models
-    # @see XTwitterScraper::Resources::Styles#retrieve
     class StyleProfile < XTwitterScraper::Internal::Type::BaseModel
       # @!attribute fetched_at
       #

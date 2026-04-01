@@ -9,7 +9,7 @@ module XTwitterScraper
         params(
           username: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::StyleProfile)
+        ).returns(XTwitterScraper::Models::StyleRetrieveResponse)
       end
       def retrieve(
         # X username of cached style
@@ -25,7 +25,7 @@ module XTwitterScraper
           label: String,
           tweets: T::Array[XTwitterScraper::StyleUpdateParams::Tweet::OrHash],
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::StyleProfile)
+        ).returns(XTwitterScraper::Models::StyleUpdateResponse)
       end
       def update(
         # X username of cached style
@@ -66,7 +66,7 @@ module XTwitterScraper
         params(
           username: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::StyleProfile)
+        ).returns(XTwitterScraper::Models::StyleAnalyzeResponse)
       end
       def analyze(
         # X username to analyze

@@ -15,7 +15,7 @@ class XTwitterScraper::Test::Resources::IntegrationsTest < XTwitterScraper::Test
       )
 
     assert_pattern do
-      response => XTwitterScraper::Integration
+      response => XTwitterScraper::Models::IntegrationCreateResponse
     end
 
     assert_pattern do
@@ -23,10 +23,10 @@ class XTwitterScraper::Test::Resources::IntegrationsTest < XTwitterScraper::Test
         id: String,
         config: ^(XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]),
         created_at: Time,
-        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
+        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Models::IntegrationCreateResponse::EventType]),
         is_active: XTwitterScraper::Internal::Type::Boolean,
         name: String,
-        type: XTwitterScraper::Integration::Type,
+        type: XTwitterScraper::Models::IntegrationCreateResponse::Type,
         filters: ^(XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]) | nil,
         message_template: String | nil,
         scope_all_monitors: XTwitterScraper::Internal::Type::Boolean | nil,
@@ -41,7 +41,7 @@ class XTwitterScraper::Test::Resources::IntegrationsTest < XTwitterScraper::Test
     response = @x_twitter_scraper.integrations.retrieve("id")
 
     assert_pattern do
-      response => XTwitterScraper::Integration
+      response => XTwitterScraper::Models::IntegrationRetrieveResponse
     end
 
     assert_pattern do
@@ -49,10 +49,10 @@ class XTwitterScraper::Test::Resources::IntegrationsTest < XTwitterScraper::Test
         id: String,
         config: ^(XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]),
         created_at: Time,
-        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
+        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Models::IntegrationRetrieveResponse::EventType]),
         is_active: XTwitterScraper::Internal::Type::Boolean,
         name: String,
-        type: XTwitterScraper::Integration::Type,
+        type: XTwitterScraper::Models::IntegrationRetrieveResponse::Type,
         filters: ^(XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]) | nil,
         message_template: String | nil,
         scope_all_monitors: XTwitterScraper::Internal::Type::Boolean | nil,
@@ -67,7 +67,7 @@ class XTwitterScraper::Test::Resources::IntegrationsTest < XTwitterScraper::Test
     response = @x_twitter_scraper.integrations.update("id")
 
     assert_pattern do
-      response => XTwitterScraper::Integration
+      response => XTwitterScraper::Models::IntegrationUpdateResponse
     end
 
     assert_pattern do
@@ -75,10 +75,10 @@ class XTwitterScraper::Test::Resources::IntegrationsTest < XTwitterScraper::Test
         id: String,
         config: ^(XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]),
         created_at: Time,
-        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
+        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Models::IntegrationUpdateResponse::EventType]),
         is_active: XTwitterScraper::Internal::Type::Boolean,
         name: String,
-        type: XTwitterScraper::Integration::Type,
+        type: XTwitterScraper::Models::IntegrationUpdateResponse::Type,
         filters: ^(XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]) | nil,
         message_template: String | nil,
         scope_all_monitors: XTwitterScraper::Internal::Type::Boolean | nil,
@@ -98,7 +98,7 @@ class XTwitterScraper::Test::Resources::IntegrationsTest < XTwitterScraper::Test
 
     assert_pattern do
       response => {
-        integrations: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Integration])
+        integrations: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::IntegrationListResponse::Integration])
       }
     end
   end
@@ -130,7 +130,7 @@ class XTwitterScraper::Test::Resources::IntegrationsTest < XTwitterScraper::Test
 
     assert_pattern do
       response => {
-        deliveries: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::IntegrationDelivery])
+        deliveries: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::IntegrationListDeliveriesResponse::Delivery])
       }
     end
   end

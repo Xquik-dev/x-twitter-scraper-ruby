@@ -7,7 +7,8 @@ module XTwitterScraper
       # Create webhook
       sig do
         params(
-          event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
+          event_types:
+            T::Array[XTwitterScraper::WebhookCreateParams::EventType::OrSymbol],
           url: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Models::WebhookCreateResponse)
@@ -24,11 +25,12 @@ module XTwitterScraper
       sig do
         params(
           id: String,
-          event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
+          event_types:
+            T::Array[XTwitterScraper::WebhookUpdateParams::EventType::OrSymbol],
           is_active: T::Boolean,
           url: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::Webhook)
+        ).returns(XTwitterScraper::Models::WebhookUpdateResponse)
       end
       def update(
         # Resource ID (stringified bigint)

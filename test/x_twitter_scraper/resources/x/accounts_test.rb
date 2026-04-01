@@ -29,7 +29,7 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
     response = @x_twitter_scraper.x.accounts.retrieve("id")
 
     assert_pattern do
-      response => XTwitterScraper::X::XAccountDetail
+      response => XTwitterScraper::Models::X::AccountRetrieveResponse
     end
 
     assert_pattern do
@@ -57,7 +57,7 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
 
     assert_pattern do
       response => {
-        accounts: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::XAccount])
+        accounts: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::AccountListResponse::Account])
       }
     end
   end

@@ -4,7 +4,7 @@ module XTwitterScraper
       {
         id: String,
         created_at: Time,
-        event_types: ::Array[XTwitterScraper::Models::event_type],
+        event_types: ::Array[XTwitterScraper::Models::Monitor::event_type],
         is_active: bool,
         username: String,
         x_user_id: String
@@ -15,7 +15,7 @@ module XTwitterScraper
 
       attr_accessor created_at: Time
 
-      attr_accessor event_types: ::Array[XTwitterScraper::Models::event_type]
+      attr_accessor event_types: ::Array[XTwitterScraper::Models::Monitor::event_type]
 
       attr_accessor is_active: bool
 
@@ -26,7 +26,7 @@ module XTwitterScraper
       def initialize: (
         id: String,
         created_at: Time,
-        event_types: ::Array[XTwitterScraper::Models::event_type],
+        event_types: ::Array[XTwitterScraper::Models::Monitor::event_type],
         is_active: bool,
         username: String,
         x_user_id: String
@@ -35,11 +35,32 @@ module XTwitterScraper
       def to_hash: -> {
         id: String,
         created_at: Time,
-        event_types: ::Array[XTwitterScraper::Models::event_type],
+        event_types: ::Array[XTwitterScraper::Models::Monitor::event_type],
         is_active: bool,
         username: String,
         x_user_id: String
       }
+
+      type event_type =
+        :"tweet.new"
+        | :"tweet.reply"
+        | :"tweet.retweet"
+        | :"tweet.quote"
+        | :"follower.gained"
+        | :"follower.lost"
+
+      module EventType
+        extend XTwitterScraper::Internal::Type::Enum
+
+        TWEET_NEW: :"tweet.new"
+        TWEET_REPLY: :"tweet.reply"
+        TWEET_RETWEET: :"tweet.retweet"
+        TWEET_QUOTE: :"tweet.quote"
+        FOLLOWER_GAINED: :"follower.gained"
+        FOLLOWER_LOST: :"follower.lost"
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::Monitor::event_type]
+      end
     end
   end
 end
