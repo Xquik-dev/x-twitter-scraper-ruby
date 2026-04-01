@@ -44,14 +44,14 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::XAccountDetail]
+        # @return [XTwitterScraper::Models::X::AccountRetrieveResponse]
         #
         # @see XTwitterScraper::Models::X::AccountRetrieveParams
         def retrieve(id, params = {})
           @client.request(
             method: :get,
             path: ["x/accounts/%1$s", id],
-            model: XTwitterScraper::X::XAccountDetail,
+            model: XTwitterScraper::Models::X::AccountRetrieveResponse,
             security: {},
             options: params[:request_options]
           )

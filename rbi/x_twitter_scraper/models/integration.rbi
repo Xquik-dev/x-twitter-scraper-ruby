@@ -20,7 +20,9 @@ module XTwitterScraper
       sig { returns(Time) }
       attr_accessor :created_at
 
-      sig { returns(T::Array[XTwitterScraper::EventType::TaggedSymbol]) }
+      sig do
+        returns(T::Array[XTwitterScraper::Integration::EventType::OrSymbol])
+      end
       attr_accessor :event_types
 
       sig { returns(T::Boolean) }
@@ -29,7 +31,7 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :name
 
-      sig { returns(XTwitterScraper::Integration::Type::TaggedSymbol) }
+      sig { returns(XTwitterScraper::Integration::Type::OrSymbol) }
       attr_accessor :type
 
       sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
@@ -61,7 +63,8 @@ module XTwitterScraper
           id: String,
           config: T::Hash[Symbol, T.anything],
           created_at: Time,
-          event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
+          event_types:
+            T::Array[XTwitterScraper::Integration::EventType::OrSymbol],
           is_active: T::Boolean,
           name: String,
           type: XTwitterScraper::Integration::Type::OrSymbol,
@@ -92,10 +95,11 @@ module XTwitterScraper
             id: String,
             config: T::Hash[Symbol, T.anything],
             created_at: Time,
-            event_types: T::Array[XTwitterScraper::EventType::TaggedSymbol],
+            event_types:
+              T::Array[XTwitterScraper::Integration::EventType::OrSymbol],
             is_active: T::Boolean,
             name: String,
-            type: XTwitterScraper::Integration::Type::TaggedSymbol,
+            type: XTwitterScraper::Integration::Type::OrSymbol,
             filters: T::Hash[Symbol, T.anything],
             message_template: String,
             scope_all_monitors: T::Boolean,
@@ -104,6 +108,55 @@ module XTwitterScraper
         )
       end
       def to_hash
+      end
+
+      module EventType
+        extend XTwitterScraper::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, XTwitterScraper::Integration::EventType)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        TWEET_NEW =
+          T.let(
+            :"tweet.new",
+            XTwitterScraper::Integration::EventType::TaggedSymbol
+          )
+        TWEET_REPLY =
+          T.let(
+            :"tweet.reply",
+            XTwitterScraper::Integration::EventType::TaggedSymbol
+          )
+        TWEET_RETWEET =
+          T.let(
+            :"tweet.retweet",
+            XTwitterScraper::Integration::EventType::TaggedSymbol
+          )
+        TWEET_QUOTE =
+          T.let(
+            :"tweet.quote",
+            XTwitterScraper::Integration::EventType::TaggedSymbol
+          )
+        FOLLOWER_GAINED =
+          T.let(
+            :"follower.gained",
+            XTwitterScraper::Integration::EventType::TaggedSymbol
+          )
+        FOLLOWER_LOST =
+          T.let(
+            :"follower.lost",
+            XTwitterScraper::Integration::EventType::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[XTwitterScraper::Integration::EventType::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
       end
 
       module Type

@@ -57,7 +57,7 @@ module XTwitterScraper
           cursor: String,
           seen_tweet_ids: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::PaginatedTweets)
+        ).returns(XTwitterScraper::Models::XGetHomeTimelineResponse)
       end
       def get_home_timeline(
         # Pagination cursor from previous response

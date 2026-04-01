@@ -2,24 +2,170 @@ module XTwitterScraper
   module Models
     type style_compare_response =
       {
-        :style1 => XTwitterScraper::StyleProfile,
-        :style2 => XTwitterScraper::StyleProfile
+        :style1 => XTwitterScraper::Models::StyleCompareResponse::Style1,
+        :style2 => XTwitterScraper::Models::StyleCompareResponse::Style2
       }
 
     class StyleCompareResponse < XTwitterScraper::Internal::Type::BaseModel
-      attr_accessor style1: XTwitterScraper::StyleProfile
+      attr_accessor style1: XTwitterScraper::Models::StyleCompareResponse::Style1
 
-      attr_accessor style2: XTwitterScraper::StyleProfile
+      attr_accessor style2: XTwitterScraper::Models::StyleCompareResponse::Style2
 
       def initialize: (
-        style1: XTwitterScraper::StyleProfile,
-        style2: XTwitterScraper::StyleProfile
+        style1: XTwitterScraper::Models::StyleCompareResponse::Style1,
+        style2: XTwitterScraper::Models::StyleCompareResponse::Style2
       ) -> void
 
       def to_hash: -> {
-        :style1 => XTwitterScraper::StyleProfile,
-        :style2 => XTwitterScraper::StyleProfile
+        :style1 => XTwitterScraper::Models::StyleCompareResponse::Style1,
+        :style2 => XTwitterScraper::Models::StyleCompareResponse::Style2
       }
+
+      type style1 =
+        {
+          fetched_at: Time,
+          is_own_account: bool,
+          tweet_count: Integer,
+          tweets: ::Array[XTwitterScraper::Models::StyleCompareResponse::Style1::Tweet],
+          x_username: String
+        }
+
+      class Style1 < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor fetched_at: Time
+
+        attr_accessor is_own_account: bool
+
+        attr_accessor tweet_count: Integer
+
+        attr_accessor tweets: ::Array[XTwitterScraper::Models::StyleCompareResponse::Style1::Tweet]
+
+        attr_accessor x_username: String
+
+        def initialize: (
+          fetched_at: Time,
+          is_own_account: bool,
+          tweet_count: Integer,
+          tweets: ::Array[XTwitterScraper::Models::StyleCompareResponse::Style1::Tweet],
+          x_username: String
+        ) -> void
+
+        def to_hash: -> {
+          fetched_at: Time,
+          is_own_account: bool,
+          tweet_count: Integer,
+          tweets: ::Array[XTwitterScraper::Models::StyleCompareResponse::Style1::Tweet],
+          x_username: String
+        }
+
+        type tweet =
+          {
+            id: String,
+            text: String,
+            author_username: String,
+            created_at: String
+          }
+
+        class Tweet < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor text: String
+
+          attr_reader author_username: String?
+
+          def author_username=: (String) -> String
+
+          attr_reader created_at: String?
+
+          def created_at=: (String) -> String
+
+          def initialize: (
+            id: String,
+            text: String,
+            ?author_username: String,
+            ?created_at: String
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            text: String,
+            author_username: String,
+            created_at: String
+          }
+        end
+      end
+
+      type style2 =
+        {
+          fetched_at: Time,
+          is_own_account: bool,
+          tweet_count: Integer,
+          tweets: ::Array[XTwitterScraper::Models::StyleCompareResponse::Style2::Tweet],
+          x_username: String
+        }
+
+      class Style2 < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor fetched_at: Time
+
+        attr_accessor is_own_account: bool
+
+        attr_accessor tweet_count: Integer
+
+        attr_accessor tweets: ::Array[XTwitterScraper::Models::StyleCompareResponse::Style2::Tweet]
+
+        attr_accessor x_username: String
+
+        def initialize: (
+          fetched_at: Time,
+          is_own_account: bool,
+          tweet_count: Integer,
+          tweets: ::Array[XTwitterScraper::Models::StyleCompareResponse::Style2::Tweet],
+          x_username: String
+        ) -> void
+
+        def to_hash: -> {
+          fetched_at: Time,
+          is_own_account: bool,
+          tweet_count: Integer,
+          tweets: ::Array[XTwitterScraper::Models::StyleCompareResponse::Style2::Tweet],
+          x_username: String
+        }
+
+        type tweet =
+          {
+            id: String,
+            text: String,
+            author_username: String,
+            created_at: String
+          }
+
+        class Tweet < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor text: String
+
+          attr_reader author_username: String?
+
+          def author_username=: (String) -> String
+
+          attr_reader created_at: String?
+
+          def created_at=: (String) -> String
+
+          def initialize: (
+            id: String,
+            text: String,
+            ?author_username: String,
+            ?created_at: String
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            text: String,
+            author_username: String,
+            created_at: String
+          }
+        end
+      end
     end
   end
 end

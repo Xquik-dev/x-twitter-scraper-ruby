@@ -33,7 +33,7 @@ class XTwitterScraper::Test::Resources::ExtractionsTest < XTwitterScraper::Test:
 
     assert_pattern do
       response => {
-        extractions: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::ExtractionJob]),
+        extractions: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::ExtractionListResponse::Extraction]),
         has_more: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String | nil
       }

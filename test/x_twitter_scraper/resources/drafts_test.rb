@@ -9,7 +9,7 @@ class XTwitterScraper::Test::Resources::DraftsTest < XTwitterScraper::Test::Reso
     response = @x_twitter_scraper.drafts.create(text: "text")
 
     assert_pattern do
-      response => XTwitterScraper::DraftDetail
+      response => XTwitterScraper::Models::DraftCreateResponse
     end
 
     assert_pattern do
@@ -30,7 +30,7 @@ class XTwitterScraper::Test::Resources::DraftsTest < XTwitterScraper::Test::Reso
     response = @x_twitter_scraper.drafts.retrieve("id")
 
     assert_pattern do
-      response => XTwitterScraper::DraftDetail
+      response => XTwitterScraper::Models::DraftRetrieveResponse
     end
 
     assert_pattern do
@@ -56,7 +56,7 @@ class XTwitterScraper::Test::Resources::DraftsTest < XTwitterScraper::Test::Reso
 
     assert_pattern do
       response => {
-        drafts: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Draft]),
+        drafts: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::DraftListResponse::Draft]),
         has_more: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String | nil
       }

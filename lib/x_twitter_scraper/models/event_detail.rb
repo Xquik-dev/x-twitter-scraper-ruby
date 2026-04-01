@@ -2,7 +2,6 @@
 
 module XTwitterScraper
   module Models
-    # @see XTwitterScraper::Resources::Events#retrieve
     class EventDetail < XTwitterScraper::Internal::Type::BaseModel
       # @!attribute id
       #
@@ -26,8 +25,8 @@ module XTwitterScraper
 
       # @!attribute type
       #
-      #   @return [Symbol, XTwitterScraper::Models::EventType]
-      required :type, enum: -> { XTwitterScraper::EventType }
+      #   @return [Symbol, XTwitterScraper::Models::EventDetail::Type]
+      required :type, enum: -> { XTwitterScraper::EventDetail::Type }
 
       # @!attribute username
       #
@@ -44,9 +43,24 @@ module XTwitterScraper
       #   @param data [Hash{Symbol=>Object}]
       #   @param monitor_id [String]
       #   @param occurred_at [Time]
-      #   @param type [Symbol, XTwitterScraper::Models::EventType]
+      #   @param type [Symbol, XTwitterScraper::Models::EventDetail::Type]
       #   @param username [String]
       #   @param x_event_id [String]
+
+      # @see XTwitterScraper::Models::EventDetail#type
+      module Type
+        extend XTwitterScraper::Internal::Type::Enum
+
+        TWEET_NEW = :"tweet.new"
+        TWEET_REPLY = :"tweet.reply"
+        TWEET_RETWEET = :"tweet.retweet"
+        TWEET_QUOTE = :"tweet.quote"
+        FOLLOWER_GAINED = :"follower.gained"
+        FOLLOWER_LOST = :"follower.lost"
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
     end
   end
 end

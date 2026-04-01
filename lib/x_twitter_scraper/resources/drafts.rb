@@ -13,7 +13,7 @@ module XTwitterScraper
       # @param topic [String]
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::DraftDetail]
+      # @return [XTwitterScraper::Models::DraftCreateResponse]
       #
       # @see XTwitterScraper::Models::DraftCreateParams
       def create(params)
@@ -22,7 +22,7 @@ module XTwitterScraper
           method: :post,
           path: "drafts",
           body: parsed,
-          model: XTwitterScraper::DraftDetail,
+          model: XTwitterScraper::Models::DraftCreateResponse,
           options: options
         )
       end
@@ -35,14 +35,14 @@ module XTwitterScraper
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::DraftDetail]
+      # @return [XTwitterScraper::Models::DraftRetrieveResponse]
       #
       # @see XTwitterScraper::Models::DraftRetrieveParams
       def retrieve(id, params = {})
         @client.request(
           method: :get,
           path: ["drafts/%1$s", id],
-          model: XTwitterScraper::DraftDetail,
+          model: XTwitterScraper::Models::DraftRetrieveResponse,
           options: params[:request_options]
         )
       end

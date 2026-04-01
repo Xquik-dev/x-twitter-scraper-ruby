@@ -12,7 +12,9 @@ module XTwitterScraper
               id: String,
               account: String,
               request_options: XTwitterScraper::RequestOptions::OrHash
-            ).returns(XTwitterScraper::X::CommunityActionResult)
+            ).returns(
+              XTwitterScraper::Models::X::Communities::JoinCreateResponse
+            )
           end
           def create(
             # Resource ID (stringified bigint)
@@ -29,7 +31,9 @@ module XTwitterScraper
               id: String,
               account: String,
               request_options: XTwitterScraper::RequestOptions::OrHash
-            ).returns(XTwitterScraper::X::CommunityActionResult)
+            ).returns(
+              XTwitterScraper::Models::X::Communities::JoinDeleteAllResponse
+            )
           end
           def delete_all(
             # Resource ID (stringified bigint)

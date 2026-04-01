@@ -9,7 +9,7 @@ class XTwitterScraper::Test::Resources::EventsTest < XTwitterScraper::Test::Reso
     response = @x_twitter_scraper.events.retrieve("id")
 
     assert_pattern do
-      response => XTwitterScraper::EventDetail
+      response => XTwitterScraper::Models::EventRetrieveResponse
     end
 
     assert_pattern do
@@ -18,7 +18,7 @@ class XTwitterScraper::Test::Resources::EventsTest < XTwitterScraper::Test::Reso
         data: ^(XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]),
         monitor_id: String,
         occurred_at: Time,
-        type: XTwitterScraper::EventType,
+        type: XTwitterScraper::Models::EventRetrieveResponse::Type,
         username: String,
         x_event_id: String | nil
       }
@@ -36,7 +36,7 @@ class XTwitterScraper::Test::Resources::EventsTest < XTwitterScraper::Test::Reso
 
     assert_pattern do
       response => {
-        events: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Event]),
+        events: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::EventListResponse::Event]),
         has_more: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String | nil
       }
