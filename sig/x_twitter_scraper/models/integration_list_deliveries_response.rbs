@@ -1,18 +1,92 @@
 module XTwitterScraper
   module Models
     type integration_list_deliveries_response =
-      { deliveries: ::Array[XTwitterScraper::IntegrationDelivery] }
+      {
+        deliveries: ::Array[XTwitterScraper::Models::IntegrationListDeliveriesResponse::Delivery]
+      }
 
     class IntegrationListDeliveriesResponse < XTwitterScraper::Internal::Type::BaseModel
-      attr_accessor deliveries: ::Array[XTwitterScraper::IntegrationDelivery]
+      attr_accessor deliveries: ::Array[XTwitterScraper::Models::IntegrationListDeliveriesResponse::Delivery]
 
       def initialize: (
-        deliveries: ::Array[XTwitterScraper::IntegrationDelivery]
+        deliveries: ::Array[XTwitterScraper::Models::IntegrationListDeliveriesResponse::Delivery]
       ) -> void
 
       def to_hash: -> {
-        deliveries: ::Array[XTwitterScraper::IntegrationDelivery]
+        deliveries: ::Array[XTwitterScraper::Models::IntegrationListDeliveriesResponse::Delivery]
       }
+
+      type delivery =
+        {
+          id: String,
+          attempts: Integer,
+          created_at: Time,
+          event_type: String,
+          status: String,
+          delivered_at: Time,
+          last_error: String,
+          last_status_code: Integer,
+          source_id: String,
+          source_type: String
+        }
+
+      class Delivery < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor attempts: Integer
+
+        attr_accessor created_at: Time
+
+        attr_accessor event_type: String
+
+        attr_accessor status: String
+
+        attr_reader delivered_at: Time?
+
+        def delivered_at=: (Time) -> Time
+
+        attr_reader last_error: String?
+
+        def last_error=: (String) -> String
+
+        attr_reader last_status_code: Integer?
+
+        def last_status_code=: (Integer) -> Integer
+
+        attr_reader source_id: String?
+
+        def source_id=: (String) -> String
+
+        attr_reader source_type: String?
+
+        def source_type=: (String) -> String
+
+        def initialize: (
+          id: String,
+          attempts: Integer,
+          created_at: Time,
+          event_type: String,
+          status: String,
+          ?delivered_at: Time,
+          ?last_error: String,
+          ?last_status_code: Integer,
+          ?source_id: String,
+          ?source_type: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          attempts: Integer,
+          created_at: Time,
+          event_type: String,
+          status: String,
+          delivered_at: Time,
+          last_error: String,
+          last_status_code: Integer,
+          source_id: String,
+          source_type: String
+        }
+      end
     end
   end
 end

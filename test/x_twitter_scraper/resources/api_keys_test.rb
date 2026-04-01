@@ -34,7 +34,7 @@ class XTwitterScraper::Test::Resources::APIKeysTest < XTwitterScraper::Test::Res
 
     assert_pattern do
       response => {
-        keys: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::APIKey])
+        keys: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::APIKeyListResponse::Key])
       }
     end
   end

@@ -3,7 +3,6 @@
 module XTwitterScraper
   module Models
     module X
-      # @see XTwitterScraper::Resources::X::Users#retrieve
       class UserProfile < XTwitterScraper::Internal::Type::BaseModel
         # @!attribute id
         #

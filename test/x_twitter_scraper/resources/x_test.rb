@@ -15,7 +15,7 @@ class XTwitterScraper::Test::Resources::XTest < XTwitterScraper::Test::ResourceT
     assert_pattern do
       response => {
         article: XTwitterScraper::Models::XGetArticleResponse::Article,
-        author: XTwitterScraper::X::TweetAuthor | nil
+        author: XTwitterScraper::Models::XGetArticleResponse::Author | nil
       }
     end
   end
@@ -26,14 +26,14 @@ class XTwitterScraper::Test::Resources::XTest < XTwitterScraper::Test::ResourceT
     response = @x_twitter_scraper.x.get_home_timeline
 
     assert_pattern do
-      response => XTwitterScraper::PaginatedTweets
+      response => XTwitterScraper::Models::XGetHomeTimelineResponse
     end
 
     assert_pattern do
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::XGetHomeTimelineResponse::Tweet])
       }
     end
   end

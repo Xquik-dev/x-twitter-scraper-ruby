@@ -4,14 +4,14 @@ module XTwitterScraper
       def retrieve: (
         String username,
         ?request_options: XTwitterScraper::request_opts
-      ) -> XTwitterScraper::StyleProfile
+      ) -> XTwitterScraper::Models::StyleRetrieveResponse
 
       def update: (
         String username,
         label: String,
         tweets: ::Array[XTwitterScraper::StyleUpdateParams::Tweet],
         ?request_options: XTwitterScraper::request_opts
-      ) -> XTwitterScraper::StyleProfile
+      ) -> XTwitterScraper::Models::StyleUpdateResponse
 
       def list: (
         ?request_options: XTwitterScraper::request_opts
@@ -25,7 +25,7 @@ module XTwitterScraper
       def analyze: (
         username: String,
         ?request_options: XTwitterScraper::request_opts
-      ) -> XTwitterScraper::StyleProfile
+      ) -> XTwitterScraper::Models::StyleAnalyzeResponse
 
       def compare: (
         username1: String,

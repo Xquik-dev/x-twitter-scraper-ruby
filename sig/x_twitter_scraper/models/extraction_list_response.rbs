@@ -2,13 +2,13 @@ module XTwitterScraper
   module Models
     type extraction_list_response =
       {
-        extractions: ::Array[XTwitterScraper::ExtractionJob],
+        extractions: ::Array[XTwitterScraper::Models::ExtractionListResponse::Extraction],
         has_more: bool,
         next_cursor: String
       }
 
     class ExtractionListResponse < XTwitterScraper::Internal::Type::BaseModel
-      attr_accessor extractions: ::Array[XTwitterScraper::ExtractionJob]
+      attr_accessor extractions: ::Array[XTwitterScraper::Models::ExtractionListResponse::Extraction]
 
       attr_accessor has_more: bool
 
@@ -17,16 +17,121 @@ module XTwitterScraper
       def next_cursor=: (String) -> String
 
       def initialize: (
-        extractions: ::Array[XTwitterScraper::ExtractionJob],
+        extractions: ::Array[XTwitterScraper::Models::ExtractionListResponse::Extraction],
         has_more: bool,
         ?next_cursor: String
       ) -> void
 
       def to_hash: -> {
-        extractions: ::Array[XTwitterScraper::ExtractionJob],
+        extractions: ::Array[XTwitterScraper::Models::ExtractionListResponse::Extraction],
         has_more: bool,
         next_cursor: String
       }
+
+      type extraction =
+        {
+          id: String,
+          created_at: Time,
+          status: XTwitterScraper::Models::ExtractionListResponse::Extraction::status,
+          tool_type: XTwitterScraper::Models::ExtractionListResponse::Extraction::tool_type,
+          total_results: Integer,
+          completed_at: Time
+        }
+
+      class Extraction < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor status: XTwitterScraper::Models::ExtractionListResponse::Extraction::status
+
+        attr_accessor tool_type: XTwitterScraper::Models::ExtractionListResponse::Extraction::tool_type
+
+        attr_accessor total_results: Integer
+
+        attr_reader completed_at: Time?
+
+        def completed_at=: (Time) -> Time
+
+        def initialize: (
+          id: String,
+          created_at: Time,
+          status: XTwitterScraper::Models::ExtractionListResponse::Extraction::status,
+          tool_type: XTwitterScraper::Models::ExtractionListResponse::Extraction::tool_type,
+          total_results: Integer,
+          ?completed_at: Time
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          status: XTwitterScraper::Models::ExtractionListResponse::Extraction::status,
+          tool_type: XTwitterScraper::Models::ExtractionListResponse::Extraction::tool_type,
+          total_results: Integer,
+          completed_at: Time
+        }
+
+        type status = :running | :completed | :failed
+
+        module Status
+          extend XTwitterScraper::Internal::Type::Enum
+
+          RUNNING: :running
+          COMPLETED: :completed
+          FAILED: :failed
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionListResponse::Extraction::status]
+        end
+
+        type tool_type =
+          :article_extractor
+          | :community_extractor
+          | :community_moderator_explorer
+          | :community_post_extractor
+          | :community_search
+          | :follower_explorer
+          | :following_explorer
+          | :list_follower_explorer
+          | :list_member_extractor
+          | :list_post_extractor
+          | :mention_extractor
+          | :people_search
+          | :post_extractor
+          | :quote_extractor
+          | :reply_extractor
+          | :repost_extractor
+          | :space_explorer
+          | :thread_extractor
+          | :tweet_search_extractor
+          | :verified_follower_explorer
+
+        module ToolType
+          extend XTwitterScraper::Internal::Type::Enum
+
+          ARTICLE_EXTRACTOR: :article_extractor
+          COMMUNITY_EXTRACTOR: :community_extractor
+          COMMUNITY_MODERATOR_EXPLORER: :community_moderator_explorer
+          COMMUNITY_POST_EXTRACTOR: :community_post_extractor
+          COMMUNITY_SEARCH: :community_search
+          FOLLOWER_EXPLORER: :follower_explorer
+          FOLLOWING_EXPLORER: :following_explorer
+          LIST_FOLLOWER_EXPLORER: :list_follower_explorer
+          LIST_MEMBER_EXTRACTOR: :list_member_extractor
+          LIST_POST_EXTRACTOR: :list_post_extractor
+          MENTION_EXTRACTOR: :mention_extractor
+          PEOPLE_SEARCH: :people_search
+          POST_EXTRACTOR: :post_extractor
+          QUOTE_EXTRACTOR: :quote_extractor
+          REPLY_EXTRACTOR: :reply_extractor
+          REPOST_EXTRACTOR: :repost_extractor
+          SPACE_EXPLORER: :space_explorer
+          THREAD_EXTRACTOR: :thread_extractor
+          TWEET_SEARCH_EXTRACTOR: :tweet_search_extractor
+          VERIFIED_FOLLOWER_EXPLORER: :verified_follower_explorer
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionListResponse::Extraction::tool_type]
+        end
+      end
     end
   end
 end

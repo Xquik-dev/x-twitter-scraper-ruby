@@ -3,7 +3,7 @@ module XTwitterScraper
     type event_list_params =
       {
         after: String,
-        event_type: XTwitterScraper::Models::event_type,
+        event_type: XTwitterScraper::Models::EventListParams::event_type,
         limit: Integer,
         monitor_id: String
       }
@@ -17,11 +17,11 @@ module XTwitterScraper
 
       def after=: (String) -> String
 
-      attr_reader event_type: XTwitterScraper::Models::event_type?
+      attr_reader event_type: XTwitterScraper::Models::EventListParams::event_type?
 
       def event_type=: (
-        XTwitterScraper::Models::event_type
-      ) -> XTwitterScraper::Models::event_type
+        XTwitterScraper::Models::EventListParams::event_type
+      ) -> XTwitterScraper::Models::EventListParams::event_type
 
       attr_reader limit: Integer?
 
@@ -33,7 +33,7 @@ module XTwitterScraper
 
       def initialize: (
         ?after: String,
-        ?event_type: XTwitterScraper::Models::event_type,
+        ?event_type: XTwitterScraper::Models::EventListParams::event_type,
         ?limit: Integer,
         ?monitor_id: String,
         ?request_options: XTwitterScraper::request_opts
@@ -41,11 +41,32 @@ module XTwitterScraper
 
       def to_hash: -> {
         after: String,
-        event_type: XTwitterScraper::Models::event_type,
+        event_type: XTwitterScraper::Models::EventListParams::event_type,
         limit: Integer,
         monitor_id: String,
         request_options: XTwitterScraper::RequestOptions
       }
+
+      type event_type =
+        :"tweet.new"
+        | :"tweet.reply"
+        | :"tweet.retweet"
+        | :"tweet.quote"
+        | :"follower.gained"
+        | :"follower.lost"
+
+      module EventType
+        extend XTwitterScraper::Internal::Type::Enum
+
+        TWEET_NEW: :"tweet.new"
+        TWEET_REPLY: :"tweet.reply"
+        TWEET_RETWEET: :"tweet.retweet"
+        TWEET_QUOTE: :"tweet.quote"
+        FOLLOWER_GAINED: :"follower.gained"
+        FOLLOWER_LOST: :"follower.lost"
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::EventListParams::event_type]
+      end
     end
   end
 end

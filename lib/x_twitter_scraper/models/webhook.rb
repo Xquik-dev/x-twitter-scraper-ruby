@@ -2,7 +2,6 @@
 
 module XTwitterScraper
   module Models
-    # @see XTwitterScraper::Resources::Webhooks#update
     class Webhook < XTwitterScraper::Internal::Type::BaseModel
       # @!attribute id
       #
@@ -16,9 +15,9 @@ module XTwitterScraper
 
       # @!attribute event_types
       #
-      #   @return [Array<Symbol, XTwitterScraper::Models::EventType>]
+      #   @return [Array<Symbol, XTwitterScraper::Models::Webhook::EventType>]
       required :event_types,
-               -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType] },
+               -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Webhook::EventType] },
                api_name: :eventTypes
 
       # @!attribute is_active
@@ -34,9 +33,23 @@ module XTwitterScraper
       # @!method initialize(id:, created_at:, event_types:, is_active:, url:)
       #   @param id [String]
       #   @param created_at [Time]
-      #   @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>]
+      #   @param event_types [Array<Symbol, XTwitterScraper::Models::Webhook::EventType>]
       #   @param is_active [Boolean]
       #   @param url [String]
+
+      module EventType
+        extend XTwitterScraper::Internal::Type::Enum
+
+        TWEET_NEW = :"tweet.new"
+        TWEET_REPLY = :"tweet.reply"
+        TWEET_RETWEET = :"tweet.retweet"
+        TWEET_QUOTE = :"tweet.quote"
+        FOLLOWER_GAINED = :"follower.gained"
+        FOLLOWER_LOST = :"follower.lost"
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
     end
   end
 end

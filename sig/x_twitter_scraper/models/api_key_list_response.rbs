@@ -1,13 +1,62 @@
 module XTwitterScraper
   module Models
-    type api_key_list_response = { keys: ::Array[XTwitterScraper::APIKey] }
+    type api_key_list_response =
+      { keys: ::Array[XTwitterScraper::Models::APIKeyListResponse::Key] }
 
     class APIKeyListResponse < XTwitterScraper::Internal::Type::BaseModel
-      attr_accessor keys: ::Array[XTwitterScraper::APIKey]
+      attr_accessor keys: ::Array[XTwitterScraper::Models::APIKeyListResponse::Key]
 
-      def initialize: (keys: ::Array[XTwitterScraper::APIKey]) -> void
+      def initialize: (
+        keys: ::Array[XTwitterScraper::Models::APIKeyListResponse::Key]
+      ) -> void
 
-      def to_hash: -> { keys: ::Array[XTwitterScraper::APIKey] }
+      def to_hash: -> {
+        keys: ::Array[XTwitterScraper::Models::APIKeyListResponse::Key]
+      }
+
+      type key =
+        {
+          id: String,
+          created_at: Time,
+          is_active: bool,
+          name: String,
+          prefix: String,
+          last_used_at: Time
+        }
+
+      class Key < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor is_active: bool
+
+        attr_accessor name: String
+
+        attr_accessor prefix: String
+
+        attr_reader last_used_at: Time?
+
+        def last_used_at=: (Time) -> Time
+
+        def initialize: (
+          id: String,
+          created_at: Time,
+          is_active: bool,
+          name: String,
+          prefix: String,
+          ?last_used_at: Time
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          is_active: bool,
+          name: String,
+          prefix: String,
+          last_used_at: Time
+        }
+      end
     end
   end
 end

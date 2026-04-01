@@ -17,10 +17,10 @@ module XTwitterScraper
       sig { returns(Time) }
       attr_accessor :created_at
 
-      sig { returns(XTwitterScraper::ExtractionJob::Status::TaggedSymbol) }
+      sig { returns(XTwitterScraper::ExtractionJob::Status::OrSymbol) }
       attr_accessor :status
 
-      sig { returns(XTwitterScraper::ExtractionJob::ToolType::TaggedSymbol) }
+      sig { returns(XTwitterScraper::ExtractionJob::ToolType::OrSymbol) }
       attr_accessor :tool_type
 
       sig { returns(Integer) }
@@ -57,8 +57,8 @@ module XTwitterScraper
           {
             id: String,
             created_at: Time,
-            status: XTwitterScraper::ExtractionJob::Status::TaggedSymbol,
-            tool_type: XTwitterScraper::ExtractionJob::ToolType::TaggedSymbol,
+            status: XTwitterScraper::ExtractionJob::Status::OrSymbol,
+            tool_type: XTwitterScraper::ExtractionJob::ToolType::OrSymbol,
             total_results: Integer,
             completed_at: Time
           }
