@@ -49,7 +49,7 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
 
     assert_pattern do
       response => {
-        community: XTwitterScraper::Internal::Type::Unknown
+        community: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community
       }
     end
   end

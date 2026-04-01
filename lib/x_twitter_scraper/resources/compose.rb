@@ -32,7 +32,7 @@ module XTwitterScraper
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Hash{Symbol=>Object}]
+      # @return [XTwitterScraper::Models::ComposeCreateResponse]
       #
       # @see XTwitterScraper::Models::ComposeCreateParams
       def create(params)
@@ -41,7 +41,7 @@ module XTwitterScraper
           method: :post,
           path: "compose",
           body: parsed,
-          model: XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown],
+          model: XTwitterScraper::Models::ComposeCreateResponse,
           options: options
         )
       end

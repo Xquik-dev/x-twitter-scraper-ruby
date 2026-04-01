@@ -60,11 +60,11 @@ module XTwitterScraper
       #
       # @param event_types [Array<Symbol, XTwitterScraper::Models::IntegrationUpdateParams::EventType>]
       #
-      # @param filters [Hash{Symbol=>Object}]
+      # @param filters [Hash{Symbol=>Object}] Event filter rules (JSON)
       #
       # @param is_active [Boolean]
       #
-      # @param message_template [Hash{Symbol=>Object}]
+      # @param message_template [Hash{Symbol=>Object}] Custom message template (JSON)
       #
       # @param name [String]
       #

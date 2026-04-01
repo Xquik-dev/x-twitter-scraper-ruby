@@ -19,7 +19,7 @@ module XTwitterScraper
           tone: String,
           topic: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(T::Hash[Symbol, T.anything])
+        ).returns(XTwitterScraper::Models::ComposeCreateResponse)
       end
       def create(
         # Workflow step
