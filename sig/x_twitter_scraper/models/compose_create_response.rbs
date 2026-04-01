@@ -1,7 +1,43 @@
 module XTwitterScraper
   module Models
-    type compose_create_response = ::Hash[Symbol, top]
+    type compose_create_response =
+      {
+        feedback: String,
+        score: Float,
+        suggestions: ::Array[String],
+        text: String
+      }
 
-    ComposeCreateResponse: XTwitterScraper::Internal::Type::Converter
+    class ComposeCreateResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader feedback: String?
+
+      def feedback=: (String) -> String
+
+      attr_reader score: Float?
+
+      def score=: (Float) -> Float
+
+      attr_reader suggestions: ::Array[String]?
+
+      def suggestions=: (::Array[String]) -> ::Array[String]
+
+      attr_reader text: String?
+
+      def text=: (String) -> String
+
+      def initialize: (
+        ?feedback: String,
+        ?score: Float,
+        ?suggestions: ::Array[String],
+        ?text: String
+      ) -> void
+
+      def to_hash: -> {
+        feedback: String,
+        score: Float,
+        suggestions: ::Array[String],
+        text: String
+      }
+    end
   end
 end

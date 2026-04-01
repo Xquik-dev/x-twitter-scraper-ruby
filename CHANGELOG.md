@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 (2026-04-01)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** api update ([f86e402](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/f86e4024943bd72605879352d377f1a9527ce8c6))
+
 ## 0.2.0 (2026-04-01)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.1.0...v0.2.0)

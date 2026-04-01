@@ -9,6 +9,7 @@ module XTwitterScraper
       required :id, String
 
       # @!attribute config
+      #   Integration config — shape varies by type (JSON)
       #
       #   @return [Hash{Symbol=>Object}]
       required :config, XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]
@@ -41,6 +42,7 @@ module XTwitterScraper
       required :type, enum: -> { XTwitterScraper::Integration::Type }
 
       # @!attribute filters
+      #   Event filter rules (JSON)
       #
       #   @return [Hash{Symbol=>Object}, nil]
       optional :filters, XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]
@@ -62,15 +64,25 @@ module XTwitterScraper
 
       # @!method initialize(id:, config:, created_at:, event_types:, is_active:, name:, type:, filters: nil, message_template: nil, scope_all_monitors: nil, silent_push: nil)
       #   @param id [String]
-      #   @param config [Hash{Symbol=>Object}]
+      #
+      #   @param config [Hash{Symbol=>Object}] Integration config — shape varies by type (JSON)
+      #
       #   @param created_at [Time]
+      #
       #   @param event_types [Array<Symbol, XTwitterScraper::Models::Integration::EventType>]
+      #
       #   @param is_active [Boolean]
+      #
       #   @param name [String]
+      #
       #   @param type [Symbol, XTwitterScraper::Models::Integration::Type]
-      #   @param filters [Hash{Symbol=>Object}]
+      #
+      #   @param filters [Hash{Symbol=>Object}] Event filter rules (JSON)
+      #
       #   @param message_template [String]
+      #
       #   @param scope_all_monitors [Boolean]
+      #
       #   @param silent_push [Boolean]
 
       module EventType

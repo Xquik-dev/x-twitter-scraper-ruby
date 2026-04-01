@@ -22,6 +22,7 @@ module XTwitterScraper
                api_name: :eventTypes
 
       # @!attribute filters
+      #   Event filter rules (JSON)
       #
       #   @return [Hash{Symbol=>Object}, nil]
       optional :filters, XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]
@@ -32,6 +33,7 @@ module XTwitterScraper
       optional :is_active, XTwitterScraper::Internal::Type::Boolean, api_name: :isActive
 
       # @!attribute message_template
+      #   Custom message template (JSON)
       #
       #   @return [Hash{Symbol=>Object}, nil]
       optional :message_template,
@@ -55,13 +57,21 @@ module XTwitterScraper
 
       # @!method initialize(id:, event_types: nil, filters: nil, is_active: nil, message_template: nil, name: nil, scope_all_monitors: nil, silent_push: nil, request_options: {})
       #   @param id [String]
+      #
       #   @param event_types [Array<Symbol, XTwitterScraper::Models::IntegrationUpdateParams::EventType>]
-      #   @param filters [Hash{Symbol=>Object}]
+      #
+      #   @param filters [Hash{Symbol=>Object}] Event filter rules (JSON)
+      #
       #   @param is_active [Boolean]
-      #   @param message_template [Hash{Symbol=>Object}]
+      #
+      #   @param message_template [Hash{Symbol=>Object}] Custom message template (JSON)
+      #
       #   @param name [String]
+      #
       #   @param scope_all_monitors [Boolean]
+      #
       #   @param silent_push [Boolean]
+      #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
 
       module EventType

@@ -62,8 +62,10 @@ module XTwitterScraper
         # Resource ID (stringified bigint)
         id,
         event_types: nil,
+        # Event filter rules (JSON)
         filters: nil,
         is_active: nil,
+        # Custom message template (JSON)
         message_template: nil,
         name: nil,
         scope_all_monitors: nil,

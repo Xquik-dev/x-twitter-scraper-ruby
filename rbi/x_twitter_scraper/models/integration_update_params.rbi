@@ -38,6 +38,7 @@ module XTwitterScraper
       end
       attr_writer :event_types
 
+      # Event filter rules (JSON)
       sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
       attr_reader :filters
 
@@ -50,6 +51,7 @@ module XTwitterScraper
       sig { params(is_active: T::Boolean).void }
       attr_writer :is_active
 
+      # Custom message template (JSON)
       sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
       attr_reader :message_template
 
@@ -93,8 +95,10 @@ module XTwitterScraper
       def self.new(
         id:,
         event_types: nil,
+        # Event filter rules (JSON)
         filters: nil,
         is_active: nil,
+        # Custom message template (JSON)
         message_template: nil,
         name: nil,
         scope_all_monitors: nil,

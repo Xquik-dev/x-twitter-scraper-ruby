@@ -14,7 +14,7 @@ module XTwitterScraper
         ?tone: String,
         ?topic: String,
         ?request_options: XTwitterScraper::request_opts
-      ) -> XTwitterScraper::Models::compose_create_response
+      ) -> XTwitterScraper::Models::ComposeCreateResponse
 
       def initialize: (client: XTwitterScraper::Client) -> void
     end
