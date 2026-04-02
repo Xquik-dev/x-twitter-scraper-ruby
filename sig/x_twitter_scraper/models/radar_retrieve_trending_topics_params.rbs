@@ -6,7 +6,7 @@ module XTwitterScraper
         count: Integer,
         hours: Integer,
         region: String,
-        source: String
+        source: XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::source
       }
       & XTwitterScraper::Internal::Type::request_parameters
 
@@ -30,16 +30,18 @@ module XTwitterScraper
 
       def region=: (String) -> String
 
-      attr_reader source: String?
+      attr_reader source: XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::source?
 
-      def source=: (String) -> String
+      def source=: (
+        XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::source
+      ) -> XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::source
 
       def initialize: (
         ?category: String,
         ?count: Integer,
         ?hours: Integer,
         ?region: String,
-        ?source: String,
+        ?source: XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::source,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
@@ -48,9 +50,32 @@ module XTwitterScraper
         count: Integer,
         hours: Integer,
         region: String,
-        source: String,
+        source: XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::source,
         request_options: XTwitterScraper::RequestOptions
       }
+
+      type source =
+        :github
+        | :google_trends
+        | :hacker_news
+        | :polymarket
+        | :reddit
+        | :trustmrr
+        | :wikipedia
+
+      module Source
+        extend XTwitterScraper::Internal::Type::Enum
+
+        GITHUB: :github
+        GOOGLE_TRENDS: :google_trends
+        HACKER_NEWS: :hacker_news
+        POLYMARKET: :polymarket
+        REDDIT: :reddit
+        TRUSTMRR: :trustmrr
+        WIKIPEDIA: :wikipedia
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::source]
+      end
     end
   end
 end

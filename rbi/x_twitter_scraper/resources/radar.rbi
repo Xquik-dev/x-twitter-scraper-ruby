@@ -11,7 +11,8 @@ module XTwitterScraper
           count: Integer,
           hours: Integer,
           region: String,
-          source: String,
+          source:
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source::OrSymbol,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Models::RadarRetrieveTrendingTopicsResponse)
       end

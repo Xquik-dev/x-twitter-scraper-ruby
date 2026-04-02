@@ -3,18 +3,6 @@ module XTwitterScraper
     class X
       class Tweets
         class Retweet
-          def create: (
-            String tweet_id,
-            account: String,
-            ?request_options: XTwitterScraper::request_opts
-          ) -> XTwitterScraper::Models::X::Tweets::RetweetCreateResponse
-
-          def delete: (
-            String tweet_id,
-            account: String,
-            ?request_options: XTwitterScraper::request_opts
-          ) -> XTwitterScraper::Models::X::Tweets::RetweetDeleteResponse
-
           def initialize: (client: XTwitterScraper::Client) -> void
         end
       end

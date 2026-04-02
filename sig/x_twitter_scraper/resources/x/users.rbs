@@ -4,11 +4,6 @@ module XTwitterScraper
       class Users
         attr_reader follow: XTwitterScraper::Resources::X::Users::Follow
 
-        def retrieve: (
-          String username,
-          ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::UserRetrieveResponse
-
         def retrieve_batch: (
           ids: String,
           ?request_options: XTwitterScraper::request_opts
