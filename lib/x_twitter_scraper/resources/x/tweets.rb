@@ -4,11 +4,9 @@ module XTwitterScraper
   module Resources
     class X
       class Tweets
-        # X write actions (tweets, likes, follows, DMs)
         # @return [XTwitterScraper::Resources::X::Tweets::Like]
         attr_reader :like
 
-        # X write actions (tweets, likes, follows, DMs)
         # @return [XTwitterScraper::Resources::X::Tweets::Retweet]
         attr_reader :retweet
 
@@ -46,25 +44,6 @@ module XTwitterScraper
           )
         end
 
-        # Look up tweet
-        #
-        # @overload retrieve(tweet_id, request_options: {})
-        #
-        # @param tweet_id [String]
-        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
-        #
-        # @return [XTwitterScraper::Models::X::TweetRetrieveResponse]
-        #
-        # @see XTwitterScraper::Models::X::TweetRetrieveParams
-        def retrieve(tweet_id, params = {})
-          @client.request(
-            method: :get,
-            path: ["x/tweets/%1$s", tweet_id],
-            model: XTwitterScraper::Models::X::TweetRetrieveResponse,
-            options: params[:request_options]
-          )
-        end
-
         # Get multiple tweets by IDs
         #
         # @overload list(ids:, request_options: {})
@@ -80,30 +59,6 @@ module XTwitterScraper
           parsed, options = XTwitterScraper::X::TweetListParams.dump_request(params)
           query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
           @client.request(method: :get, path: "x/tweets", query: query, model: NilClass, options: options)
-        end
-
-        # Delete tweet
-        #
-        # @overload delete(tweet_id, account:, request_options: {})
-        #
-        # @param tweet_id [String]
-        #
-        # @param account [String] X account (@username or account ID)
-        #
-        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
-        #
-        # @return [XTwitterScraper::Models::X::TweetDeleteResponse]
-        #
-        # @see XTwitterScraper::Models::X::TweetDeleteParams
-        def delete(tweet_id, params)
-          parsed, options = XTwitterScraper::X::TweetDeleteParams.dump_request(params)
-          @client.request(
-            method: :delete,
-            path: ["x/tweets/%1$s", tweet_id],
-            body: parsed,
-            model: XTwitterScraper::Models::X::TweetDeleteResponse,
-            options: options
-          )
         end
 
         # Get users who liked a tweet

@@ -19,7 +19,7 @@ module XTwitterScraper
       #
       # @param region [String] Region filter (us, global, etc.)
       #
-      # @param source [String] Source filter. One of: github, google_trends, hacker_news, polymarket, reddit, t
+      # @param source [Symbol, XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::Source] Source filter. One of: github, google_trends, hacker_news, polymarket, reddit, t
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #

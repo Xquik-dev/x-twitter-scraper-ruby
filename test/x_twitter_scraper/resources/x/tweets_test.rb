@@ -20,23 +20,6 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
     end
   end
 
-  def test_retrieve
-    skip("Mock server tests are disabled")
-
-    response = @x_twitter_scraper.x.tweets.retrieve("tweetId")
-
-    assert_pattern do
-      response => XTwitterScraper::Models::X::TweetRetrieveResponse
-    end
-
-    assert_pattern do
-      response => {
-        tweet: XTwitterScraper::Models::X::TweetRetrieveResponse::Tweet,
-        author: XTwitterScraper::Models::X::TweetRetrieveResponse::Author | nil
-      }
-    end
-  end
-
   def test_list_required_params
     skip("Mock server tests are disabled")
 
@@ -44,22 +27,6 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
 
     assert_pattern do
       response => nil
-    end
-  end
-
-  def test_delete_required_params
-    skip("Mock server tests are disabled")
-
-    response = @x_twitter_scraper.x.tweets.delete("tweetId", account: "account")
-
-    assert_pattern do
-      response => XTwitterScraper::Models::X::TweetDeleteResponse
-    end
-
-    assert_pattern do
-      response => {
-        success: true | false
-      }
     end
   end
 

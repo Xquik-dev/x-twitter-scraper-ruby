@@ -6,7 +6,7 @@ module XTwitterScraper
         ?count: Integer,
         ?hours: Integer,
         ?region: String,
-        ?source: String,
+        ?source: XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::source,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::RadarRetrieveTrendingTopicsResponse
 

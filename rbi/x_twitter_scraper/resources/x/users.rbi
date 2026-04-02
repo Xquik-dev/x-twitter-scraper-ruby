@@ -5,23 +5,8 @@ module XTwitterScraper
     class X
       # X data lookups (subscription required)
       class Users
-        # X write actions (tweets, likes, follows, DMs)
         sig { returns(XTwitterScraper::Resources::X::Users::Follow) }
         attr_reader :follow
-
-        # Look up X user
-        sig do
-          params(
-            username: String,
-            request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::UserRetrieveResponse)
-        end
-        def retrieve(
-          # X username (without @)
-          username,
-          request_options: {}
-        )
-        end
 
         # Get multiple users by IDs
         sig do

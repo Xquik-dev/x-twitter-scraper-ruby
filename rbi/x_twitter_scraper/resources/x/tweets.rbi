@@ -4,11 +4,9 @@ module XTwitterScraper
   module Resources
     class X
       class Tweets
-        # X write actions (tweets, likes, follows, DMs)
         sig { returns(XTwitterScraper::Resources::X::Tweets::Like) }
         attr_reader :like
 
-        # X write actions (tweets, likes, follows, DMs)
         sig { returns(XTwitterScraper::Resources::X::Tweets::Retweet) }
         attr_reader :retweet
 
@@ -38,16 +36,6 @@ module XTwitterScraper
         )
         end
 
-        # Look up tweet
-        sig do
-          params(
-            tweet_id: String,
-            request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::TweetRetrieveResponse)
-        end
-        def retrieve(tweet_id, request_options: {})
-        end
-
         # Get multiple tweets by IDs
         sig do
           params(
@@ -58,22 +46,6 @@ module XTwitterScraper
         def list(
           # Comma-separated tweet IDs (max 100)
           ids:,
-          request_options: {}
-        )
-        end
-
-        # Delete tweet
-        sig do
-          params(
-            tweet_id: String,
-            account: String,
-            request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::TweetDeleteResponse)
-        end
-        def delete(
-          tweet_id,
-          # X account (@username or account ID)
-          account:,
           request_options: {}
         )
         end

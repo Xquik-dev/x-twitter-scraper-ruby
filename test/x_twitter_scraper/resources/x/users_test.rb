@@ -3,32 +3,6 @@
 require_relative "../../test_helper"
 
 class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::ResourceTest
-  def test_retrieve
-    skip("Mock server tests are disabled")
-
-    response = @x_twitter_scraper.x.users.retrieve("username")
-
-    assert_pattern do
-      response => XTwitterScraper::Models::X::UserRetrieveResponse
-    end
-
-    assert_pattern do
-      response => {
-        id: String,
-        name: String,
-        username: String,
-        created_at: String | nil,
-        description: String | nil,
-        followers: Integer | nil,
-        following: Integer | nil,
-        location: String | nil,
-        profile_picture: String | nil,
-        statuses_count: Integer | nil,
-        verified: XTwitterScraper::Internal::Type::Boolean | nil
-      }
-    end
-  end
-
   def test_retrieve_batch_required_params
     skip("Mock server tests are disabled")
 

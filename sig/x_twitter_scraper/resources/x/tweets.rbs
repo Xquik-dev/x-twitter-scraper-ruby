@@ -17,21 +17,10 @@ module XTwitterScraper
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::TweetCreateResponse
 
-        def retrieve: (
-          String tweet_id,
-          ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::TweetRetrieveResponse
-
         def list: (
           ids: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> nil
-
-        def delete: (
-          String tweet_id,
-          account: String,
-          ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::TweetDeleteResponse
 
         def get_favoriters: (
           String id,
