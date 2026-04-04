@@ -168,7 +168,7 @@ module XTwitterScraper
           q:,
           # Pagination cursor from previous response
           cursor: nil,
-          # Deprecated — use cursor-based pagination instead
+          # Max tweets to return (server paginates internally). Omit for single page (~20).
           limit: nil,
           # Sort order — Latest (chronological) or Top (engagement-ranked)
           query_type: nil,

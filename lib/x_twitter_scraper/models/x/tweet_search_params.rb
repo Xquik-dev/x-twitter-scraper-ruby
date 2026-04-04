@@ -21,7 +21,7 @@ module XTwitterScraper
         optional :cursor, String
 
         # @!attribute limit
-        #   Deprecated — use cursor-based pagination instead
+        #   Max tweets to return (server paginates internally). Omit for single page (~20).
         #
         #   @return [Integer, nil]
         optional :limit, Integer
@@ -49,7 +49,7 @@ module XTwitterScraper
         #
         #   @param cursor [String] Pagination cursor from previous response
         #
-        #   @param limit [Integer] Deprecated — use cursor-based pagination instead
+        #   @param limit [Integer] Max tweets to return (server paginates internally). Omit for single page (~20).
         #
         #   @param query_type [Symbol, XTwitterScraper::Models::X::TweetSearchParams::QueryType] Sort order — Latest (chronological) or Top (engagement-ranked)
         #
