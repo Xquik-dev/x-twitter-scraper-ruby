@@ -11,7 +11,15 @@ module XTwitterScraper
           retweet_count: Integer,
           text: String,
           view_count: Integer,
-          created_at: String
+          conversation_id: String,
+          created_at: String,
+          entities: top,
+          is_note_tweet: bool,
+          is_quote_status: bool,
+          is_reply: bool,
+          media: ::Array[XTwitterScraper::X::TweetDetail::Media],
+          quoted_tweet: top,
+          source: String
         }
 
       class TweetDetail < XTwitterScraper::Internal::Type::BaseModel
@@ -31,9 +39,43 @@ module XTwitterScraper
 
         attr_accessor view_count: Integer
 
+        attr_reader conversation_id: String?
+
+        def conversation_id=: (String) -> String
+
         attr_reader created_at: String?
 
         def created_at=: (String) -> String
+
+        attr_reader entities: top?
+
+        def entities=: (top) -> top
+
+        attr_reader is_note_tweet: bool?
+
+        def is_note_tweet=: (bool) -> bool
+
+        attr_reader is_quote_status: bool?
+
+        def is_quote_status=: (bool) -> bool
+
+        attr_reader is_reply: bool?
+
+        def is_reply=: (bool) -> bool
+
+        attr_reader media: ::Array[XTwitterScraper::X::TweetDetail::Media]?
+
+        def media=: (
+          ::Array[XTwitterScraper::X::TweetDetail::Media]
+        ) -> ::Array[XTwitterScraper::X::TweetDetail::Media]
+
+        attr_reader quoted_tweet: top?
+
+        def quoted_tweet=: (top) -> top
+
+        attr_reader source: String?
+
+        def source=: (String) -> String
 
         def initialize: (
           id: String,
@@ -44,7 +86,15 @@ module XTwitterScraper
           retweet_count: Integer,
           text: String,
           view_count: Integer,
-          ?created_at: String
+          ?conversation_id: String,
+          ?created_at: String,
+          ?entities: top,
+          ?is_note_tweet: bool,
+          ?is_quote_status: bool,
+          ?is_reply: bool,
+          ?media: ::Array[XTwitterScraper::X::TweetDetail::Media],
+          ?quoted_tweet: top,
+          ?source: String
         ) -> void
 
         def to_hash: -> {
@@ -56,8 +106,63 @@ module XTwitterScraper
           retweet_count: Integer,
           text: String,
           view_count: Integer,
-          created_at: String
+          conversation_id: String,
+          created_at: String,
+          entities: top,
+          is_note_tweet: bool,
+          is_quote_status: bool,
+          is_reply: bool,
+          media: ::Array[XTwitterScraper::X::TweetDetail::Media],
+          quoted_tweet: top,
+          source: String
         }
+
+        type media =
+          {
+            media_url: String,
+            type: XTwitterScraper::Models::X::TweetDetail::Media::type_,
+            url: String
+          }
+
+        class Media < XTwitterScraper::Internal::Type::BaseModel
+          attr_reader media_url: String?
+
+          def media_url=: (String) -> String
+
+          attr_reader type: XTwitterScraper::Models::X::TweetDetail::Media::type_?
+
+          def type=: (
+            XTwitterScraper::Models::X::TweetDetail::Media::type_
+          ) -> XTwitterScraper::Models::X::TweetDetail::Media::type_
+
+          attr_reader url: String?
+
+          def url=: (String) -> String
+
+          def initialize: (
+            ?media_url: String,
+            ?type: XTwitterScraper::Models::X::TweetDetail::Media::type_,
+            ?url: String
+          ) -> void
+
+          def to_hash: -> {
+            media_url: String,
+            type: XTwitterScraper::Models::X::TweetDetail::Media::type_,
+            url: String
+          }
+
+          type type_ = :photo | :video | :animated_gif
+
+          module Type
+            extend XTwitterScraper::Internal::Type::Enum
+
+            PHOTO: :photo
+            VIDEO: :video
+            ANIMATED_GIF: :animated_gif
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetDetail::Media::type_]
+          end
+        end
       end
     end
   end

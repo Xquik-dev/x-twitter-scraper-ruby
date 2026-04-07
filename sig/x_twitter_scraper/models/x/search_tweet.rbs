@@ -8,6 +8,7 @@ module XTwitterScraper
           author: XTwitterScraper::X::SearchTweet::Author,
           bookmark_count: Integer,
           created_at: String,
+          is_note_tweet: bool,
           like_count: Integer,
           quote_count: Integer,
           reply_count: Integer,
@@ -33,6 +34,10 @@ module XTwitterScraper
         attr_reader created_at: String?
 
         def created_at=: (String) -> String
+
+        attr_reader is_note_tweet: bool?
+
+        def is_note_tweet=: (bool) -> bool
 
         attr_reader like_count: Integer?
 
@@ -60,6 +65,7 @@ module XTwitterScraper
           ?author: XTwitterScraper::X::SearchTweet::Author,
           ?bookmark_count: Integer,
           ?created_at: String,
+          ?is_note_tweet: bool,
           ?like_count: Integer,
           ?quote_count: Integer,
           ?reply_count: Integer,
@@ -73,6 +79,7 @@ module XTwitterScraper
           author: XTwitterScraper::X::SearchTweet::Author,
           bookmark_count: Integer,
           created_at: String,
+          is_note_tweet: bool,
           like_count: Integer,
           quote_count: Integer,
           reply_count: Integer,
