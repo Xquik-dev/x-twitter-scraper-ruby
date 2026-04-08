@@ -8,7 +8,7 @@ module XTwitterScraper
         event_types: ::Array[XTwitterScraper::Models::event_type],
         is_active: bool,
         name: String,
-        type: XTwitterScraper::Models::Integration::type_,
+        type: :telegram,
         filters: ::Hash[Symbol, top],
         message_template: String,
         scope_all_monitors: bool,
@@ -28,7 +28,7 @@ module XTwitterScraper
 
       attr_accessor name: String
 
-      attr_accessor type: XTwitterScraper::Models::Integration::type_
+      attr_accessor type: :telegram
 
       attr_reader filters: ::Hash[Symbol, top]?
 
@@ -53,11 +53,11 @@ module XTwitterScraper
         event_types: ::Array[XTwitterScraper::Models::event_type],
         is_active: bool,
         name: String,
-        type: XTwitterScraper::Models::Integration::type_,
         ?filters: ::Hash[Symbol, top],
         ?message_template: String,
         ?scope_all_monitors: bool,
-        ?silent_push: bool
+        ?silent_push: bool,
+        ?type: :telegram
       ) -> void
 
       def to_hash: -> {
@@ -67,22 +67,12 @@ module XTwitterScraper
         event_types: ::Array[XTwitterScraper::Models::event_type],
         is_active: bool,
         name: String,
-        type: XTwitterScraper::Models::Integration::type_,
+        type: :telegram,
         filters: ::Hash[Symbol, top],
         message_template: String,
         scope_all_monitors: bool,
         silent_push: bool
       }
-
-      type type_ = :telegram
-
-      module Type
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TELEGRAM: :telegram
-
-        def self?.values: -> ::Array[XTwitterScraper::Models::Integration::type_]
-      end
     end
   end
 end

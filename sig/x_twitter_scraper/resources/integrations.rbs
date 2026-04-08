@@ -5,7 +5,7 @@ module XTwitterScraper
         config: XTwitterScraper::IntegrationCreateParams::Config,
         event_types: ::Array[XTwitterScraper::Models::event_type],
         name: String,
-        type: XTwitterScraper::Models::IntegrationCreateParams::type_,
+        ?type: :telegram,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Integration
 

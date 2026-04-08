@@ -40,8 +40,8 @@ module XTwitterScraper
 
       # @!attribute type
       #
-      #   @return [Symbol, XTwitterScraper::Models::Integration::Type]
-      required :type, enum: -> { XTwitterScraper::Integration::Type }
+      #   @return [Symbol, :telegram]
+      required :type, const: :telegram
 
       # @!attribute filters
       #   Event filter rules (JSON)
@@ -64,7 +64,7 @@ module XTwitterScraper
       #   @return [Boolean, nil]
       optional :silent_push, XTwitterScraper::Internal::Type::Boolean, api_name: :silentPush
 
-      # @!method initialize(id:, config:, created_at:, event_types:, is_active:, name:, type:, filters: nil, message_template: nil, scope_all_monitors: nil, silent_push: nil)
+      # @!method initialize(id:, config:, created_at:, event_types:, is_active:, name:, filters: nil, message_template: nil, scope_all_monitors: nil, silent_push: nil, type: :telegram)
       #   Third-party integration (e.g. Telegram) subscribed to monitor events.
       #
       #   @param id [String]
@@ -79,8 +79,6 @@ module XTwitterScraper
       #
       #   @param name [String]
       #
-      #   @param type [Symbol, XTwitterScraper::Models::Integration::Type]
-      #
       #   @param filters [Hash{Symbol=>Object}] Event filter rules (JSON)
       #
       #   @param message_template [String]
@@ -88,16 +86,8 @@ module XTwitterScraper
       #   @param scope_all_monitors [Boolean]
       #
       #   @param silent_push [Boolean]
-
-      # @see XTwitterScraper::Models::Integration#type
-      module Type
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TELEGRAM = :telegram
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #
+      #   @param type [Symbol, :telegram]
     end
   end
 end

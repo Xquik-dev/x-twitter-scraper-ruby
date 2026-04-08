@@ -3,38 +3,28 @@ module XTwitterScraper
     type extraction_run_response =
       {
         id: String,
-        status: XTwitterScraper::Models::ExtractionRunResponse::status,
+        status: :running,
         tool_type: XTwitterScraper::Models::ExtractionRunResponse::tool_type
       }
 
     class ExtractionRunResponse < XTwitterScraper::Internal::Type::BaseModel
       attr_accessor id: String
 
-      attr_accessor status: XTwitterScraper::Models::ExtractionRunResponse::status
+      attr_accessor status: :running
 
       attr_accessor tool_type: XTwitterScraper::Models::ExtractionRunResponse::tool_type
 
       def initialize: (
         id: String,
-        status: XTwitterScraper::Models::ExtractionRunResponse::status,
-        tool_type: XTwitterScraper::Models::ExtractionRunResponse::tool_type
+        tool_type: XTwitterScraper::Models::ExtractionRunResponse::tool_type,
+        ?status: :running
       ) -> void
 
       def to_hash: -> {
         id: String,
-        status: XTwitterScraper::Models::ExtractionRunResponse::status,
+        status: :running,
         tool_type: XTwitterScraper::Models::ExtractionRunResponse::tool_type
       }
-
-      type status = :running
-
-      module Status
-        extend XTwitterScraper::Internal::Type::Enum
-
-        RUNNING: :running
-
-        def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionRunResponse::status]
-      end
 
       type tool_type =
         :article_extractor

@@ -31,7 +31,7 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :name
 
-      sig { returns(XTwitterScraper::Integration::Type::TaggedSymbol) }
+      sig { returns(Symbol) }
       attr_accessor :type
 
       # Event filter rules (JSON)
@@ -68,11 +68,11 @@ module XTwitterScraper
           event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           is_active: T::Boolean,
           name: String,
-          type: XTwitterScraper::Integration::Type::OrSymbol,
           filters: T::Hash[Symbol, T.anything],
           message_template: String,
           scope_all_monitors: T::Boolean,
-          silent_push: T::Boolean
+          silent_push: T::Boolean,
+          type: Symbol
         ).returns(T.attached_class)
       end
       def self.new(
@@ -84,12 +84,12 @@ module XTwitterScraper
         event_types:,
         is_active:,
         name:,
-        type:,
         # Event filter rules (JSON)
         filters: nil,
         message_template: nil,
         scope_all_monitors: nil,
-        silent_push: nil
+        silent_push: nil,
+        type: :telegram
       )
       end
 
@@ -102,7 +102,7 @@ module XTwitterScraper
             event_types: T::Array[XTwitterScraper::EventType::TaggedSymbol],
             is_active: T::Boolean,
             name: String,
-            type: XTwitterScraper::Integration::Type::TaggedSymbol,
+            type: Symbol,
             filters: T::Hash[Symbol, T.anything],
             message_template: String,
             scope_all_monitors: T::Boolean,
@@ -111,25 +111,6 @@ module XTwitterScraper
         )
       end
       def to_hash
-      end
-
-      module Type
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias { T.all(Symbol, XTwitterScraper::Integration::Type) }
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        TELEGRAM =
-          T.let(:telegram, XTwitterScraper::Integration::Type::TaggedSymbol)
-
-        sig do
-          override.returns(
-            T::Array[XTwitterScraper::Integration::Type::TaggedSymbol]
-          )
-        end
-        def self.values
-        end
       end
     end
   end

@@ -5,7 +5,7 @@ module XTwitterScraper
         config: XTwitterScraper::IntegrationCreateParams::Config,
         event_types: ::Array[XTwitterScraper::Models::event_type],
         name: String,
-        type: XTwitterScraper::Models::IntegrationCreateParams::type_
+        type: :telegram
       }
       & XTwitterScraper::Internal::Type::request_parameters
 
@@ -19,13 +19,13 @@ module XTwitterScraper
 
       attr_accessor name: String
 
-      attr_accessor type: XTwitterScraper::Models::IntegrationCreateParams::type_
+      attr_accessor type: :telegram
 
       def initialize: (
         config: XTwitterScraper::IntegrationCreateParams::Config,
         event_types: ::Array[XTwitterScraper::Models::event_type],
         name: String,
-        type: XTwitterScraper::Models::IntegrationCreateParams::type_,
+        ?type: :telegram,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
@@ -33,7 +33,7 @@ module XTwitterScraper
         config: XTwitterScraper::IntegrationCreateParams::Config,
         event_types: ::Array[XTwitterScraper::Models::event_type],
         name: String,
-        type: XTwitterScraper::Models::IntegrationCreateParams::type_,
+        type: :telegram,
         request_options: XTwitterScraper::RequestOptions
       }
 
@@ -45,16 +45,6 @@ module XTwitterScraper
         def initialize: (chat_id: String) -> void
 
         def to_hash: -> { chat_id: String }
-      end
-
-      type type_ = :telegram
-
-      module Type
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TELEGRAM: :telegram
-
-        def self?.values: -> ::Array[XTwitterScraper::Models::IntegrationCreateParams::type_]
       end
     end
   end

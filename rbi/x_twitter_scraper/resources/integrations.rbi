@@ -10,7 +10,7 @@ module XTwitterScraper
           config: XTwitterScraper::IntegrationCreateParams::Config::OrHash,
           event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           name: String,
-          type: XTwitterScraper::IntegrationCreateParams::Type::OrSymbol,
+          type: Symbol,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Integration)
       end
@@ -20,7 +20,7 @@ module XTwitterScraper
         # Array of event types to subscribe to.
         event_types:,
         name:,
-        type:,
+        type: :telegram,
         request_options: {}
       )
       end
