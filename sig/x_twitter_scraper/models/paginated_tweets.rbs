@@ -4,7 +4,7 @@ module XTwitterScraper
       {
         has_next_page: bool,
         next_cursor: String,
-        tweets: ::Array[XTwitterScraper::PaginatedTweets::Tweet]
+        tweets: ::Array[XTwitterScraper::X::SearchTweet]
       }
 
     class PaginatedTweets < XTwitterScraper::Internal::Type::BaseModel
@@ -12,135 +12,19 @@ module XTwitterScraper
 
       attr_accessor next_cursor: String
 
-      attr_accessor tweets: ::Array[XTwitterScraper::PaginatedTweets::Tweet]
+      attr_accessor tweets: ::Array[XTwitterScraper::X::SearchTweet]
 
       def initialize: (
         has_next_page: bool,
         next_cursor: String,
-        tweets: ::Array[XTwitterScraper::PaginatedTweets::Tweet]
+        tweets: ::Array[XTwitterScraper::X::SearchTweet]
       ) -> void
 
       def to_hash: -> {
         has_next_page: bool,
         next_cursor: String,
-        tweets: ::Array[XTwitterScraper::PaginatedTweets::Tweet]
+        tweets: ::Array[XTwitterScraper::X::SearchTweet]
       }
-
-      type tweet =
-        {
-          id: String,
-          text: String,
-          author: XTwitterScraper::PaginatedTweets::Tweet::Author,
-          bookmark_count: Integer,
-          created_at: String,
-          is_note_tweet: bool,
-          like_count: Integer,
-          quote_count: Integer,
-          reply_count: Integer,
-          retweet_count: Integer,
-          view_count: Integer
-        }
-
-      class Tweet < XTwitterScraper::Internal::Type::BaseModel
-        attr_accessor id: String
-
-        attr_accessor text: String
-
-        attr_reader author: XTwitterScraper::PaginatedTweets::Tweet::Author?
-
-        def author=: (
-          XTwitterScraper::PaginatedTweets::Tweet::Author
-        ) -> XTwitterScraper::PaginatedTweets::Tweet::Author
-
-        attr_reader bookmark_count: Integer?
-
-        def bookmark_count=: (Integer) -> Integer
-
-        attr_reader created_at: String?
-
-        def created_at=: (String) -> String
-
-        attr_reader is_note_tweet: bool?
-
-        def is_note_tweet=: (bool) -> bool
-
-        attr_reader like_count: Integer?
-
-        def like_count=: (Integer) -> Integer
-
-        attr_reader quote_count: Integer?
-
-        def quote_count=: (Integer) -> Integer
-
-        attr_reader reply_count: Integer?
-
-        def reply_count=: (Integer) -> Integer
-
-        attr_reader retweet_count: Integer?
-
-        def retweet_count=: (Integer) -> Integer
-
-        attr_reader view_count: Integer?
-
-        def view_count=: (Integer) -> Integer
-
-        def initialize: (
-          id: String,
-          text: String,
-          ?author: XTwitterScraper::PaginatedTweets::Tweet::Author,
-          ?bookmark_count: Integer,
-          ?created_at: String,
-          ?is_note_tweet: bool,
-          ?like_count: Integer,
-          ?quote_count: Integer,
-          ?reply_count: Integer,
-          ?retweet_count: Integer,
-          ?view_count: Integer
-        ) -> void
-
-        def to_hash: -> {
-          id: String,
-          text: String,
-          author: XTwitterScraper::PaginatedTweets::Tweet::Author,
-          bookmark_count: Integer,
-          created_at: String,
-          is_note_tweet: bool,
-          like_count: Integer,
-          quote_count: Integer,
-          reply_count: Integer,
-          retweet_count: Integer,
-          view_count: Integer
-        }
-
-        type author =
-          { id: String, name: String, username: String, verified: bool }
-
-        class Author < XTwitterScraper::Internal::Type::BaseModel
-          attr_accessor id: String
-
-          attr_accessor name: String
-
-          attr_accessor username: String
-
-          attr_reader verified: bool?
-
-          def verified=: (bool) -> bool
-
-          def initialize: (
-            id: String,
-            name: String,
-            username: String,
-            ?verified: bool
-          ) -> void
-
-          def to_hash: -> {
-            id: String,
-            name: String,
-            username: String,
-            verified: bool
-          }
-        end
-      end
     end
   end
 end

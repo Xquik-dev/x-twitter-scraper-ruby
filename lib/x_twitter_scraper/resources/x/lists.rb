@@ -15,7 +15,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::ListRetrieveFollowersResponse]
+        # @return [XTwitterScraper::Models::PaginatedUsers]
         #
         # @see XTwitterScraper::Models::X::ListRetrieveFollowersParams
         def retrieve_followers(id, params = {})
@@ -25,7 +25,7 @@ module XTwitterScraper
             method: :get,
             path: ["x/lists/%1$s/followers", id],
             query: query,
-            model: XTwitterScraper::Models::X::ListRetrieveFollowersResponse,
+            model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end
@@ -40,7 +40,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::ListRetrieveMembersResponse]
+        # @return [XTwitterScraper::Models::PaginatedUsers]
         #
         # @see XTwitterScraper::Models::X::ListRetrieveMembersParams
         def retrieve_members(id, params = {})
@@ -50,7 +50,7 @@ module XTwitterScraper
             method: :get,
             path: ["x/lists/%1$s/members", id],
             query: query,
-            model: XTwitterScraper::Models::X::ListRetrieveMembersResponse,
+            model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end
@@ -71,7 +71,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::ListRetrieveTweetsResponse]
+        # @return [XTwitterScraper::Models::PaginatedTweets]
         #
         # @see XTwitterScraper::Models::X::ListRetrieveTweetsParams
         def retrieve_tweets(id, params = {})
@@ -85,7 +85,7 @@ module XTwitterScraper
               since_time: "sinceTime",
               until_time: "untilTime"
             ),
-            model: XTwitterScraper::Models::X::ListRetrieveTweetsResponse,
+            model: XTwitterScraper::PaginatedTweets,
             options: options
           )
         end

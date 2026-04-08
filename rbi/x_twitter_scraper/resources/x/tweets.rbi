@@ -4,9 +4,11 @@ module XTwitterScraper
   module Resources
     class X
       class Tweets
+        # X write actions (tweets, likes, follows, DMs)
         sig { returns(XTwitterScraper::Resources::X::Tweets::Like) }
         attr_reader :like
 
+        # X write actions (tweets, likes, follows, DMs)
         sig { returns(XTwitterScraper::Resources::X::Tweets::Retweet) }
         attr_reader :retweet
 
@@ -36,16 +38,47 @@ module XTwitterScraper
         )
         end
 
+        # Look up tweet
+        sig do
+          params(
+            id: String,
+            request_options: XTwitterScraper::RequestOptions::OrHash
+          ).returns(XTwitterScraper::Models::X::TweetRetrieveResponse)
+        end
+        def retrieve(
+          # Tweet ID
+          id,
+          request_options: {}
+        )
+        end
+
         # Get multiple tweets by IDs
         sig do
           params(
             ids: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::TweetListResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def list(
           # Comma-separated tweet IDs (max 100)
           ids:,
+          request_options: {}
+        )
+        end
+
+        # Delete tweet
+        sig do
+          params(
+            id: String,
+            account: String,
+            request_options: XTwitterScraper::RequestOptions::OrHash
+          ).returns(XTwitterScraper::Models::X::TweetDeleteResponse)
+        end
+        def delete(
+          # Tweet ID to delete
+          id,
+          # X account identifier (@username or account ID)
+          account:,
           request_options: {}
         )
         end
@@ -56,7 +89,7 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::TweetGetFavoritersResponse)
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def get_favoriters(
           # Tweet ID to get favoriters
@@ -76,7 +109,7 @@ module XTwitterScraper
             since_time: String,
             until_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::TweetGetQuotesResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def get_quotes(
           # Tweet ID to get quotes
@@ -101,7 +134,7 @@ module XTwitterScraper
             since_time: String,
             until_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::TweetGetRepliesResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def get_replies(
           # Tweet ID to get replies
@@ -122,7 +155,7 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::TweetGetRetweetersResponse)
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def get_retweeters(
           # Tweet ID to get retweeters
@@ -139,7 +172,7 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::TweetGetThreadResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def get_thread(
           # Tweet ID to get thread context
@@ -161,7 +194,7 @@ module XTwitterScraper
             since_time: String,
             until_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::TweetSearchResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def search(
           # Search query (keywords,

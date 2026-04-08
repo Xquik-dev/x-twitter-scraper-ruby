@@ -7,13 +7,13 @@ module XTwitterScraper
             String id,
             account: String,
             ?request_options: XTwitterScraper::request_opts
-          ) -> XTwitterScraper::Models::X::Communities::JoinCreateResponse
+          ) -> XTwitterScraper::X::CommunityActionResult
 
           def delete_all: (
             String id,
             account: String,
             ?request_options: XTwitterScraper::request_opts
-          ) -> XTwitterScraper::Models::X::Communities::JoinDeleteAllResponse
+          ) -> XTwitterScraper::X::CommunityActionResult
 
           def initialize: (client: XTwitterScraper::Client) -> void
         end

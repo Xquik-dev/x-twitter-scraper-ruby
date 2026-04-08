@@ -8,7 +8,7 @@ module XTwitterScraper
       #
       # @overload create(event_types:, username:, request_options: {})
       #
-      # @param event_types [Array<Symbol, XTwitterScraper::Models::MonitorCreateParams::EventType>] Array of event types to subscribe to.
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
       #
       # @param username [String] X username (without @)
       #
@@ -36,14 +36,14 @@ module XTwitterScraper
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::MonitorRetrieveResponse]
+      # @return [XTwitterScraper::Models::Monitor]
       #
       # @see XTwitterScraper::Models::MonitorRetrieveParams
       def retrieve(id, params = {})
         @client.request(
           method: :get,
           path: ["monitors/%1$s", id],
-          model: XTwitterScraper::Models::MonitorRetrieveResponse,
+          model: XTwitterScraper::Monitor,
           options: params[:request_options]
         )
       end
@@ -54,13 +54,13 @@ module XTwitterScraper
       #
       # @param id [String] Resource ID (stringified bigint)
       #
-      # @param event_types [Array<Symbol, XTwitterScraper::Models::MonitorUpdateParams::EventType>] Array of event types to subscribe to.
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
       #
       # @param is_active [Boolean]
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::MonitorUpdateResponse]
+      # @return [XTwitterScraper::Models::Monitor]
       #
       # @see XTwitterScraper::Models::MonitorUpdateParams
       def update(id, params = {})
@@ -69,7 +69,7 @@ module XTwitterScraper
           method: :patch,
           path: ["monitors/%1$s", id],
           body: parsed,
-          model: XTwitterScraper::Models::MonitorUpdateResponse,
+          model: XTwitterScraper::Monitor,
           options: options
         )
       end

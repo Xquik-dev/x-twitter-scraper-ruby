@@ -17,16 +17,27 @@ module XTwitterScraper
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::TweetCreateResponse
 
+        def retrieve: (
+          String id,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::TweetRetrieveResponse
+
         def list: (
           ids: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::TweetListResponse
+        ) -> XTwitterScraper::PaginatedTweets
+
+        def delete: (
+          String id,
+          account: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::TweetDeleteResponse
 
         def get_favoriters: (
           String id,
           ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::TweetGetFavoritersResponse
+        ) -> XTwitterScraper::PaginatedUsers
 
         def get_quotes: (
           String id,
@@ -35,7 +46,7 @@ module XTwitterScraper
           ?since_time: String,
           ?until_time: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::TweetGetQuotesResponse
+        ) -> XTwitterScraper::PaginatedTweets
 
         def get_replies: (
           String id,
@@ -43,19 +54,19 @@ module XTwitterScraper
           ?since_time: String,
           ?until_time: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::TweetGetRepliesResponse
+        ) -> XTwitterScraper::PaginatedTweets
 
         def get_retweeters: (
           String id,
           ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::TweetGetRetweetersResponse
+        ) -> XTwitterScraper::PaginatedUsers
 
         def get_thread: (
           String id,
           ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::TweetGetThreadResponse
+        ) -> XTwitterScraper::PaginatedTweets
 
         def search: (
           q: String,
@@ -65,7 +76,7 @@ module XTwitterScraper
           ?since_time: String,
           ?until_time: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::TweetSearchResponse
+        ) -> XTwitterScraper::PaginatedTweets
 
         def initialize: (client: XTwitterScraper::Client) -> void
       end

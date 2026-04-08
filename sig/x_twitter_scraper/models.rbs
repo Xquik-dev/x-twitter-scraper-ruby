@@ -111,11 +111,19 @@ module XTwitterScraper
 
   class StyleCompareParams = XTwitterScraper::Models::StyleCompareParams
 
+  class StyleDeleteParams = XTwitterScraper::Models::StyleDeleteParams
+
+  class StyleGetPerformanceParams = XTwitterScraper::Models::StyleGetPerformanceParams
+
   class StyleListParams = XTwitterScraper::Models::StyleListParams
 
   class StyleProfile = XTwitterScraper::Models::StyleProfile
 
   class StyleProfileSummary = XTwitterScraper::Models::StyleProfileSummary
+
+  class StyleRetrieveParams = XTwitterScraper::Models::StyleRetrieveParams
+
+  class StyleUpdateParams = XTwitterScraper::Models::StyleUpdateParams
 
   class SubscribeCreateParams = XTwitterScraper::Models::SubscribeCreateParams
 

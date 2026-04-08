@@ -4,42 +4,47 @@ module XTwitterScraper
       class Users
         attr_reader follow: XTwitterScraper::Resources::X::Users::Follow
 
+        def retrieve: (
+          String id,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::X::UserProfile
+
         def retrieve_batch: (
           ids: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::UserRetrieveBatchResponse
+        ) -> XTwitterScraper::PaginatedUsers
 
         def retrieve_followers: (
           String id,
           ?cursor: String,
           ?page_size: Integer,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::UserRetrieveFollowersResponse
+        ) -> XTwitterScraper::PaginatedUsers
 
         def retrieve_followers_you_know: (
           String id,
           ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::UserRetrieveFollowersYouKnowResponse
+        ) -> XTwitterScraper::PaginatedUsers
 
         def retrieve_following: (
           String id,
           ?cursor: String,
           ?page_size: Integer,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::UserRetrieveFollowingResponse
+        ) -> XTwitterScraper::PaginatedUsers
 
         def retrieve_likes: (
           String id,
           ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::UserRetrieveLikesResponse
+        ) -> XTwitterScraper::PaginatedTweets
 
         def retrieve_media: (
           String id,
           ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::UserRetrieveMediaResponse
+        ) -> XTwitterScraper::PaginatedTweets
 
         def retrieve_mentions: (
           String id,
@@ -47,13 +52,13 @@ module XTwitterScraper
           ?since_time: String,
           ?until_time: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::UserRetrieveMentionsResponse
+        ) -> XTwitterScraper::PaginatedTweets
 
         def retrieve_search: (
           q: String,
           ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::UserRetrieveSearchResponse
+        ) -> XTwitterScraper::PaginatedUsers
 
         def retrieve_tweets: (
           String id,
@@ -61,13 +66,13 @@ module XTwitterScraper
           ?include_parent_tweet: bool,
           ?include_replies: bool,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::UserRetrieveTweetsResponse
+        ) -> XTwitterScraper::PaginatedTweets
 
         def retrieve_verified_followers: (
           String id,
           ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse
+        ) -> XTwitterScraper::PaginatedUsers
 
         def initialize: (client: XTwitterScraper::Client) -> void
       end

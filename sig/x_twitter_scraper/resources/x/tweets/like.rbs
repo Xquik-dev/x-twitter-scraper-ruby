@@ -3,6 +3,18 @@ module XTwitterScraper
     class X
       class Tweets
         class Like
+          def create: (
+            String id,
+            account: String,
+            ?request_options: XTwitterScraper::request_opts
+          ) -> XTwitterScraper::Models::X::Tweets::LikeCreateResponse
+
+          def delete: (
+            String id,
+            account: String,
+            ?request_options: XTwitterScraper::request_opts
+          ) -> XTwitterScraper::Models::X::Tweets::LikeDeleteResponse
+
           def initialize: (client: XTwitterScraper::Client) -> void
         end
       end

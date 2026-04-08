@@ -1,0 +1,15 @@
+module XTwitterScraper
+  module Models
+    module X
+      type account_bulk_retry_response = { cleared: Integer }
+
+      class AccountBulkRetryResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor cleared: Integer
+
+        def initialize: (cleared: Integer) -> void
+
+        def to_hash: -> { cleared: Integer }
+      end
+    end
+  end
+end

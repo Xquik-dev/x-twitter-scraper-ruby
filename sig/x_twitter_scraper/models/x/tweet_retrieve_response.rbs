@@ -1,0 +1,31 @@
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_retrieve_response =
+        {
+          tweet: XTwitterScraper::X::TweetDetail,
+          author: XTwitterScraper::X::TweetAuthor
+        }
+
+      class TweetRetrieveResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor tweet: XTwitterScraper::X::TweetDetail
+
+        attr_reader author: XTwitterScraper::X::TweetAuthor?
+
+        def author=: (
+          XTwitterScraper::X::TweetAuthor
+        ) -> XTwitterScraper::X::TweetAuthor
+
+        def initialize: (
+          tweet: XTwitterScraper::X::TweetDetail,
+          ?author: XTwitterScraper::X::TweetAuthor
+        ) -> void
+
+        def to_hash: -> {
+          tweet: XTwitterScraper::X::TweetDetail,
+          author: XTwitterScraper::X::TweetAuthor
+        }
+      end
+    end
+  end
+end

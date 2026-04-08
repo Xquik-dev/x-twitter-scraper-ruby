@@ -8,7 +8,7 @@ module XTwitterScraper
       #
       # @overload create(event_types:, url:, request_options: {})
       #
-      # @param event_types [Array<Symbol, XTwitterScraper::Models::WebhookCreateParams::EventType>] Array of event types to subscribe to.
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
       #
       # @param url [String] HTTPS URL
       #
@@ -34,7 +34,7 @@ module XTwitterScraper
       #
       # @param id [String] Resource ID (stringified bigint)
       #
-      # @param event_types [Array<Symbol, XTwitterScraper::Models::WebhookUpdateParams::EventType>] Array of event types to subscribe to.
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
       #
       # @param is_active [Boolean]
       #
@@ -42,7 +42,7 @@ module XTwitterScraper
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::WebhookUpdateResponse]
+      # @return [XTwitterScraper::Models::Webhook]
       #
       # @see XTwitterScraper::Models::WebhookUpdateParams
       def update(id, params = {})
@@ -51,7 +51,7 @@ module XTwitterScraper
           method: :patch,
           path: ["webhooks/%1$s", id],
           body: parsed,
-          model: XTwitterScraper::Models::WebhookUpdateResponse,
+          model: XTwitterScraper::Webhook,
           options: options
         )
       end

@@ -198,7 +198,9 @@ module XTwitterScraper
 
           sig do
             returns(
-              T.nilable(XTwitterScraper::X::TweetDetail::Media::Type::OrSymbol)
+              T.nilable(
+                XTwitterScraper::X::TweetDetail::Media::Type::TaggedSymbol
+              )
             )
           end
           attr_reader :type
@@ -230,7 +232,8 @@ module XTwitterScraper
             override.returns(
               {
                 media_url: String,
-                type: XTwitterScraper::X::TweetDetail::Media::Type::OrSymbol,
+                type:
+                  XTwitterScraper::X::TweetDetail::Media::Type::TaggedSymbol,
                 url: String
               }
             )

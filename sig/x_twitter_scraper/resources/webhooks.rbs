@@ -2,18 +2,18 @@ module XTwitterScraper
   module Resources
     class Webhooks
       def create: (
-        event_types: ::Array[XTwitterScraper::Models::WebhookCreateParams::event_type],
+        event_types: ::Array[XTwitterScraper::Models::event_type],
         url: String,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::WebhookCreateResponse
 
       def update: (
         String id,
-        ?event_types: ::Array[XTwitterScraper::Models::WebhookUpdateParams::event_type],
+        ?event_types: ::Array[XTwitterScraper::Models::event_type],
         ?is_active: bool,
         ?url: String,
         ?request_options: XTwitterScraper::request_opts
-      ) -> XTwitterScraper::Models::WebhookUpdateResponse
+      ) -> XTwitterScraper::Webhook
 
       def list: (
         ?request_options: XTwitterScraper::request_opts

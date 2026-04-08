@@ -3,6 +3,18 @@ module XTwitterScraper
     class X
       class Users
         class Follow
+          def create: (
+            String id,
+            account: String,
+            ?request_options: XTwitterScraper::request_opts
+          ) -> XTwitterScraper::Models::X::Users::FollowCreateResponse
+
+          def delete_all: (
+            String id,
+            account: String,
+            ?request_options: XTwitterScraper::request_opts
+          ) -> XTwitterScraper::Models::X::Users::FollowDeleteAllResponse
+
           def initialize: (client: XTwitterScraper::Client) -> void
         end
       end

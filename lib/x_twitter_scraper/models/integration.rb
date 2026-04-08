@@ -2,6 +2,7 @@
 
 module XTwitterScraper
   module Models
+    # @see XTwitterScraper::Resources::Integrations#create
     class Integration < XTwitterScraper::Internal::Type::BaseModel
       # @!attribute id
       #
@@ -22,9 +23,9 @@ module XTwitterScraper
       # @!attribute event_types
       #   Array of event types to subscribe to.
       #
-      #   @return [Array<Symbol, XTwitterScraper::Models::Integration::EventType>]
+      #   @return [Array<Symbol, XTwitterScraper::Models::EventType>]
       required :event_types,
-               -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Integration::EventType] },
+               -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType] },
                api_name: :eventTypes
 
       # @!attribute is_active
@@ -72,7 +73,7 @@ module XTwitterScraper
       #
       #   @param created_at [Time]
       #
-      #   @param event_types [Array<Symbol, XTwitterScraper::Models::Integration::EventType>] Array of event types to subscribe to.
+      #   @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
       #
       #   @param is_active [Boolean]
       #
@@ -87,21 +88,6 @@ module XTwitterScraper
       #   @param scope_all_monitors [Boolean]
       #
       #   @param silent_push [Boolean]
-
-      # Type of monitor event fired when account activity occurs.
-      module EventType
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TWEET_NEW = :"tweet.new"
-        TWEET_REPLY = :"tweet.reply"
-        TWEET_RETWEET = :"tweet.retweet"
-        TWEET_QUOTE = :"tweet.quote"
-        FOLLOWER_GAINED = :"follower.gained"
-        FOLLOWER_LOST = :"follower.lost"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
 
       # @see XTwitterScraper::Models::Integration#type
       module Type

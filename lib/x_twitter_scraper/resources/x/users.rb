@@ -5,8 +5,29 @@ module XTwitterScraper
     class X
       # X data lookups (subscription required)
       class Users
+        # X write actions (tweets, likes, follows, DMs)
         # @return [XTwitterScraper::Resources::X::Users::Follow]
         attr_reader :follow
+
+        # Look up X user
+        #
+        # @overload retrieve(id, request_options: {})
+        #
+        # @param id [String] X username (without @) or user ID
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::UserProfile]
+        #
+        # @see XTwitterScraper::Models::X::UserRetrieveParams
+        def retrieve(id, params = {})
+          @client.request(
+            method: :get,
+            path: ["x/users/%1$s", id],
+            model: XTwitterScraper::X::UserProfile,
+            options: params[:request_options]
+          )
+        end
 
         # Get multiple users by IDs
         #
@@ -16,7 +37,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::UserRetrieveBatchResponse]
+        # @return [XTwitterScraper::Models::PaginatedUsers]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveBatchParams
         def retrieve_batch(params)
@@ -26,7 +47,7 @@ module XTwitterScraper
             method: :get,
             path: "x/users/batch",
             query: query,
-            model: XTwitterScraper::Models::X::UserRetrieveBatchResponse,
+            model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end
@@ -43,7 +64,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::UserRetrieveFollowersResponse]
+        # @return [XTwitterScraper::Models::PaginatedUsers]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveFollowersParams
         def retrieve_followers(id, params = {})
@@ -53,7 +74,7 @@ module XTwitterScraper
             method: :get,
             path: ["x/users/%1$s/followers", id],
             query: query.transform_keys(page_size: "pageSize"),
-            model: XTwitterScraper::Models::X::UserRetrieveFollowersResponse,
+            model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end
@@ -68,7 +89,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::UserRetrieveFollowersYouKnowResponse]
+        # @return [XTwitterScraper::Models::PaginatedUsers]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveFollowersYouKnowParams
         def retrieve_followers_you_know(id, params = {})
@@ -78,7 +99,7 @@ module XTwitterScraper
             method: :get,
             path: ["x/users/%1$s/followers-you-know", id],
             query: query,
-            model: XTwitterScraper::Models::X::UserRetrieveFollowersYouKnowResponse,
+            model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end
@@ -95,7 +116,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::UserRetrieveFollowingResponse]
+        # @return [XTwitterScraper::Models::PaginatedUsers]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveFollowingParams
         def retrieve_following(id, params = {})
@@ -105,7 +126,7 @@ module XTwitterScraper
             method: :get,
             path: ["x/users/%1$s/following", id],
             query: query.transform_keys(page_size: "pageSize"),
-            model: XTwitterScraper::Models::X::UserRetrieveFollowingResponse,
+            model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end
@@ -120,7 +141,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::UserRetrieveLikesResponse]
+        # @return [XTwitterScraper::Models::PaginatedTweets]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveLikesParams
         def retrieve_likes(id, params = {})
@@ -130,7 +151,7 @@ module XTwitterScraper
             method: :get,
             path: ["x/users/%1$s/likes", id],
             query: query,
-            model: XTwitterScraper::Models::X::UserRetrieveLikesResponse,
+            model: XTwitterScraper::PaginatedTweets,
             options: options
           )
         end
@@ -145,7 +166,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::UserRetrieveMediaResponse]
+        # @return [XTwitterScraper::Models::PaginatedTweets]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveMediaParams
         def retrieve_media(id, params = {})
@@ -155,7 +176,7 @@ module XTwitterScraper
             method: :get,
             path: ["x/users/%1$s/media", id],
             query: query,
-            model: XTwitterScraper::Models::X::UserRetrieveMediaResponse,
+            model: XTwitterScraper::PaginatedTweets,
             options: options
           )
         end
@@ -174,7 +195,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::UserRetrieveMentionsResponse]
+        # @return [XTwitterScraper::Models::PaginatedTweets]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveMentionsParams
         def retrieve_mentions(id, params = {})
@@ -184,7 +205,7 @@ module XTwitterScraper
             method: :get,
             path: ["x/users/%1$s/mentions", id],
             query: query.transform_keys(since_time: "sinceTime", until_time: "untilTime"),
-            model: XTwitterScraper::Models::X::UserRetrieveMentionsResponse,
+            model: XTwitterScraper::PaginatedTweets,
             options: options
           )
         end
@@ -199,7 +220,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::UserRetrieveSearchResponse]
+        # @return [XTwitterScraper::Models::PaginatedUsers]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveSearchParams
         def retrieve_search(params)
@@ -209,7 +230,7 @@ module XTwitterScraper
             method: :get,
             path: "x/users/search",
             query: query,
-            model: XTwitterScraper::Models::X::UserRetrieveSearchResponse,
+            model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end
@@ -228,7 +249,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::UserRetrieveTweetsResponse]
+        # @return [XTwitterScraper::Models::PaginatedTweets]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveTweetsParams
         def retrieve_tweets(id, params = {})
@@ -241,7 +262,7 @@ module XTwitterScraper
               include_parent_tweet: "includeParentTweet",
               include_replies: "includeReplies"
             ),
-            model: XTwitterScraper::Models::X::UserRetrieveTweetsResponse,
+            model: XTwitterScraper::PaginatedTweets,
             options: options
           )
         end
@@ -256,7 +277,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse]
+        # @return [XTwitterScraper::Models::PaginatedUsers]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersParams
         def retrieve_verified_followers(id, params = {})
@@ -266,7 +287,7 @@ module XTwitterScraper
             method: :get,
             path: ["x/users/%1$s/verified-followers", id],
             query: query,
-            model: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse,
+            model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end

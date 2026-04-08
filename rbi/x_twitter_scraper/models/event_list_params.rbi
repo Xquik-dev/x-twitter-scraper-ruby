@@ -22,18 +22,10 @@ module XTwitterScraper
       attr_writer :after
 
       # Filter events by type
-      sig do
-        returns(
-          T.nilable(XTwitterScraper::EventListParams::EventType::OrSymbol)
-        )
-      end
+      sig { returns(T.nilable(XTwitterScraper::EventType::OrSymbol)) }
       attr_reader :event_type
 
-      sig do
-        params(
-          event_type: XTwitterScraper::EventListParams::EventType::OrSymbol
-        ).void
-      end
+      sig { params(event_type: XTwitterScraper::EventType::OrSymbol).void }
       attr_writer :event_type
 
       # Maximum number of items to return (1-100, default 50)
@@ -53,7 +45,7 @@ module XTwitterScraper
       sig do
         params(
           after: String,
-          event_type: XTwitterScraper::EventListParams::EventType::OrSymbol,
+          event_type: XTwitterScraper::EventType::OrSymbol,
           limit: Integer,
           monitor_id: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
@@ -76,7 +68,7 @@ module XTwitterScraper
         override.returns(
           {
             after: String,
-            event_type: XTwitterScraper::EventListParams::EventType::OrSymbol,
+            event_type: XTwitterScraper::EventType::OrSymbol,
             limit: Integer,
             monitor_id: String,
             request_options: XTwitterScraper::RequestOptions
@@ -84,56 +76,6 @@ module XTwitterScraper
         )
       end
       def to_hash
-      end
-
-      # Filter events by type
-      module EventType
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, XTwitterScraper::EventListParams::EventType)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        TWEET_NEW =
-          T.let(
-            :"tweet.new",
-            XTwitterScraper::EventListParams::EventType::TaggedSymbol
-          )
-        TWEET_REPLY =
-          T.let(
-            :"tweet.reply",
-            XTwitterScraper::EventListParams::EventType::TaggedSymbol
-          )
-        TWEET_RETWEET =
-          T.let(
-            :"tweet.retweet",
-            XTwitterScraper::EventListParams::EventType::TaggedSymbol
-          )
-        TWEET_QUOTE =
-          T.let(
-            :"tweet.quote",
-            XTwitterScraper::EventListParams::EventType::TaggedSymbol
-          )
-        FOLLOWER_GAINED =
-          T.let(
-            :"follower.gained",
-            XTwitterScraper::EventListParams::EventType::TaggedSymbol
-          )
-        FOLLOWER_LOST =
-          T.let(
-            :"follower.lost",
-            XTwitterScraper::EventListParams::EventType::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[XTwitterScraper::EventListParams::EventType::TaggedSymbol]
-          )
-        end
-        def self.values
-        end
       end
     end
   end

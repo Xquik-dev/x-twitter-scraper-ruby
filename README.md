@@ -1,6 +1,6 @@
 # X Twitter Scraper Ruby API library
 
-The X Twitter Scraper Ruby library provides convenient access to the X Twitter Scraper REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/Xquik-dev/x-twitter-scraper-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
+The X Twitter Scraper Ruby library provides convenient access to the X Twitter Scraper REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/stainless-sdks/x-twitter-scraper-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -14,13 +14,9 @@ The REST API documentation can be found on [xquik.com](https://xquik.com).
 
 To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
 
-<!-- x-release-please-start-version -->
-
 ```ruby
-gem "x-twitter-scraper", "~> 0.2.0"
+gem "x-twitter-scraper", "~> 0.3.0"
 ```
-
-<!-- x-release-please-end -->
 
 ## Usage
 
@@ -32,9 +28,37 @@ x_twitter_scraper = XTwitterScraper::Client.new(
   api_key: ENV["X_TWITTER_SCRAPER_API_KEY"] # This is the default and can be omitted
 )
 
-response = x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
+paginated_tweets = x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
 
-puts(response.has_next_page)
+puts(paginated_tweets.has_next_page)
+```
+
+### Pagination
+
+List methods in the X Twitter Scraper API are paginated.
+
+This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
+
+```ruby
+page = x_twitter_scraper.x.communities.tweets.list
+
+# Fetch single item from page.
+tweet = page[0]
+puts(tweet.has_next_page)
+
+# Automatically fetches more pages as needed.
+page.auto_paging_each do |tweet|
+  puts(tweet.has_next_page)
+end
+```
+
+Alternatively, you can use the `#next_page?` and `#next_page` methods for more granular control working with pages.
+
+```ruby
+if page.next_page?
+  new_page = page.next_page
+  puts(new_page[0].has_next_page)
+end
 ```
 
 ### File uploads
@@ -153,7 +177,7 @@ You can send undocumented parameters to any endpoint, and read undocumented resp
 Note: the `extra_` parameters of the same name overrides the documented parameters.
 
 ```ruby
-response =
+paginated_tweets =
   x_twitter_scraper.x.tweets.search(
     q: "from:elonmusk",
     limit: 10,
@@ -164,7 +188,7 @@ response =
     }
   )
 
-puts(response[:my_undocumented_property])
+puts(paginated_tweets[:my_undocumented_property])
 ```
 
 #### Undocumented request params
@@ -256,4 +280,4 @@ Ruby 3.2.0 or higher.
 
 ## Contributing
 
-See [the contributing documentation](https://github.com/Xquik-dev/x-twitter-scraper-ruby/tree/main/CONTRIBUTING.md).
+See [the contributing documentation](https://github.com/stainless-sdks/x-twitter-scraper-ruby/tree/main/CONTRIBUTING.md).

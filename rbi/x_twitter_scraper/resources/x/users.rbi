@@ -5,15 +5,30 @@ module XTwitterScraper
     class X
       # X data lookups (subscription required)
       class Users
+        # X write actions (tweets, likes, follows, DMs)
         sig { returns(XTwitterScraper::Resources::X::Users::Follow) }
         attr_reader :follow
+
+        # Look up X user
+        sig do
+          params(
+            id: String,
+            request_options: XTwitterScraper::RequestOptions::OrHash
+          ).returns(XTwitterScraper::X::UserProfile)
+        end
+        def retrieve(
+          # X username (without @) or user ID
+          id,
+          request_options: {}
+        )
+        end
 
         # Get multiple users by IDs
         sig do
           params(
             ids: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::UserRetrieveBatchResponse)
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_batch(
           # Comma-separated user IDs (max 100)
@@ -29,7 +44,7 @@ module XTwitterScraper
             cursor: String,
             page_size: Integer,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::UserRetrieveFollowersResponse)
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_followers(
           # User ID or username
@@ -48,9 +63,7 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(
-            XTwitterScraper::Models::X::UserRetrieveFollowersYouKnowResponse
-          )
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_followers_you_know(
           # User ID for followers-you-know lookup
@@ -68,7 +81,7 @@ module XTwitterScraper
             cursor: String,
             page_size: Integer,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::UserRetrieveFollowingResponse)
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_following(
           # User ID or username for following lookup
@@ -87,7 +100,7 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::UserRetrieveLikesResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def retrieve_likes(
           # User ID
@@ -104,7 +117,7 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::UserRetrieveMediaResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def retrieve_media(
           # User ID for media lookup
@@ -123,7 +136,7 @@ module XTwitterScraper
             since_time: String,
             until_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::UserRetrieveMentionsResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def retrieve_mentions(
           # User ID or username for mentions lookup
@@ -144,7 +157,7 @@ module XTwitterScraper
             q: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::UserRetrieveSearchResponse)
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_search(
           # User search query
@@ -163,7 +176,7 @@ module XTwitterScraper
             include_parent_tweet: T::Boolean,
             include_replies: T::Boolean,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::UserRetrieveTweetsResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def retrieve_tweets(
           # X user ID or username
@@ -184,9 +197,7 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(
-            XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse
-          )
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_verified_followers(
           # User ID or username for verified followers
