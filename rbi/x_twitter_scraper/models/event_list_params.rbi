@@ -14,13 +14,14 @@ module XTwitterScraper
           )
         end
 
-      # Cursor for pagination
+      # Cursor for keyset pagination
       sig { returns(T.nilable(String)) }
       attr_reader :after
 
       sig { params(after: String).void }
       attr_writer :after
 
+      # Filter events by type
       sig do
         returns(
           T.nilable(XTwitterScraper::EventListParams::EventType::OrSymbol)
@@ -35,12 +36,14 @@ module XTwitterScraper
       end
       attr_writer :event_type
 
+      # Maximum number of items to return (1-100, default 50)
       sig { returns(T.nilable(Integer)) }
       attr_reader :limit
 
       sig { params(limit: Integer).void }
       attr_writer :limit
 
+      # Filter events by monitor ID
       sig { returns(T.nilable(String)) }
       attr_reader :monitor_id
 
@@ -57,10 +60,13 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
-        # Cursor for pagination
+        # Cursor for keyset pagination
         after: nil,
+        # Filter events by type
         event_type: nil,
+        # Maximum number of items to return (1-100, default 50)
         limit: nil,
+        # Filter events by monitor ID
         monitor_id: nil,
         request_options: {}
       )
@@ -80,6 +86,7 @@ module XTwitterScraper
       def to_hash
       end
 
+      # Filter events by type
       module EventType
         extend XTwitterScraper::Internal::Type::Enum
 

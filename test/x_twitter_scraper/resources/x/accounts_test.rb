@@ -7,7 +7,11 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
     skip("Mock server tests are disabled")
 
     response =
-      @x_twitter_scraper.x.accounts.create(email: "email", password: "password", username: "username")
+      @x_twitter_scraper.x.accounts.create(
+        email: "user@example.com",
+        password: "s3cur3Pa$$w0rd",
+        username: "elonmusk"
+      )
 
     assert_pattern do
       response => XTwitterScraper::Models::X::AccountCreateResponse
@@ -81,7 +85,7 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
   def test_reauth_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.accounts.reauth("id", password: "password")
+    response = @x_twitter_scraper.x.accounts.reauth("id", password: "password_value")
 
     assert_pattern do
       response => XTwitterScraper::Models::X::AccountReauthResponse

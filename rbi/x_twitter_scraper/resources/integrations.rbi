@@ -20,6 +20,7 @@ module XTwitterScraper
       def create(
         # Integration config (e.g. Telegram chatId)
         config:,
+        # Array of event types to subscribe to.
         event_types:,
         name:,
         type:,
@@ -61,6 +62,7 @@ module XTwitterScraper
       def update(
         # Resource ID (stringified bigint)
         id,
+        # Array of event types to subscribe to.
         event_types: nil,
         # Event filter rules (JSON)
         filters: nil,
@@ -108,6 +110,7 @@ module XTwitterScraper
       def list_deliveries(
         # Resource ID (stringified bigint)
         id,
+        # Maximum number of items to return (1-100, default 50)
         limit: nil,
         request_options: {}
       )

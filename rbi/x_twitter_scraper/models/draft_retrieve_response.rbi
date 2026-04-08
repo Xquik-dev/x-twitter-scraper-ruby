@@ -35,6 +35,7 @@ module XTwitterScraper
       sig { params(topic: String).void }
       attr_writer :topic
 
+      # Full tweet draft including update timestamp.
       sig do
         params(
           id: String,

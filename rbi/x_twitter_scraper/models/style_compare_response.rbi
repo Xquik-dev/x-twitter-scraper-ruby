@@ -11,6 +11,7 @@ module XTwitterScraper
           )
         end
 
+      # Full style profile with sampled tweets used for tone analysis.
       sig { returns(XTwitterScraper::Models::StyleCompareResponse::Style1) }
       attr_reader :style1
 
@@ -21,6 +22,7 @@ module XTwitterScraper
       end
       attr_writer :style1
 
+      # Full style profile with sampled tweets used for tone analysis.
       sig { returns(XTwitterScraper::Models::StyleCompareResponse::Style2) }
       attr_reader :style2
 
@@ -37,7 +39,12 @@ module XTwitterScraper
           style2: XTwitterScraper::Models::StyleCompareResponse::Style2::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(style1:, style2:)
+      def self.new(
+        # Full style profile with sampled tweets used for tone analysis.
+        style1:,
+        # Full style profile with sampled tweets used for tone analysis.
+        style2:
+      )
       end
 
       sig do
@@ -81,6 +88,7 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :x_username
 
+        # Full style profile with sampled tweets used for tone analysis.
         sig do
           params(
             fetched_at: Time,
@@ -202,6 +210,7 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :x_username
 
+        # Full style profile with sampled tweets used for tone analysis.
         sig do
           params(
             fetched_at: Time,

@@ -16,8 +16,9 @@ module XTwitterScraper
       def retrieve(
         # Extraction public ID (UUID)
         id,
-        # Cursor for pagination
+        # Cursor for keyset pagination
         after: nil,
+        # Maximum number of results to return (1-1000, default 100)
         limit: nil,
         request_options: {}
       )
@@ -34,10 +35,13 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::ExtractionListResponse)
       end
       def list(
-        # Cursor for pagination
+        # Cursor for keyset pagination
         after: nil,
+        # Maximum number of items to return (1-100, default 50)
         limit: nil,
+        # Filter by job status
         status: nil,
+        # Filter by extraction tool type
         tool_type: nil,
         request_options: {}
       )
@@ -61,12 +65,13 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::ExtractionEstimateCostResponse)
       end
       def estimate_cost(
+        # Identifier for the extraction tool used to run a job.
         tool_type:,
-        # Raw advanced search query appended as-is (tweet_search_extractor)
+        # Raw advanced query string appended to the estimate (tweet_search_extractor)
         advanced_query: nil,
-        # Exact phrase to match (tweet_search_extractor)
+        # Exact phrase filter for search estimation
         exact_phrase: nil,
-        # Words to exclude from results (tweet_search_extractor)
+        # Words excluded from estimated search results
         exclude_words: nil,
         search_query: nil,
         target_community_id: nil,
@@ -90,6 +95,7 @@ module XTwitterScraper
       def export_results(
         # Extraction public ID
         id,
+        # Export file format
         format_: nil,
         request_options: {}
       )
@@ -112,6 +118,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::ExtractionRunResponse)
       end
       def run(
+        # Identifier for the extraction tool used to run a job.
         tool_type:,
         # Raw advanced search query appended as-is (tweet_search_extractor)
         advanced_query: nil,

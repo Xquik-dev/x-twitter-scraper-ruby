@@ -14,13 +14,14 @@ module XTwitterScraper
           )
         end
 
-      # Cursor for pagination
+      # Cursor for keyset pagination
       sig { returns(T.nilable(String)) }
       attr_reader :after
 
       sig { params(after: String).void }
       attr_writer :after
 
+      # Maximum number of items to return (1-100, default 50)
       sig { returns(T.nilable(Integer)) }
       attr_reader :limit
 
@@ -35,8 +36,9 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
-        # Cursor for pagination
+        # Cursor for keyset pagination
         after: nil,
+        # Maximum number of items to return (1-100, default 50)
         limit: nil,
         request_options: {}
       )

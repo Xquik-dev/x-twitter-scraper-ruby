@@ -18,7 +18,7 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :user_id
 
-        # Pagination cursor from previous response
+        # Pagination cursor for DM history
         sig { returns(T.nilable(String)) }
         attr_reader :cursor
 
@@ -42,7 +42,7 @@ module XTwitterScraper
         end
         def self.new(
           user_id:,
-          # Pagination cursor from previous response
+          # Pagination cursor for DM history
           cursor: nil,
           # Legacy pagination cursor (backward compat)
           max_id: nil,

@@ -11,12 +11,12 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).void
+          ).returns(XTwitterScraper::Models::X::ListRetrieveFollowersResponse)
         end
         def retrieve_followers(
           # List ID
           id,
-          # Pagination cursor
+          # Pagination cursor for list followers
           cursor: nil,
           request_options: {}
         )
@@ -28,12 +28,12 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).void
+          ).returns(XTwitterScraper::Models::X::ListRetrieveMembersResponse)
         end
         def retrieve_members(
-          # List ID
+          # List ID for member lookup
           id,
-          # Pagination cursor
+          # Pagination cursor for list members
           cursor: nil,
           request_options: {}
         )
@@ -48,12 +48,12 @@ module XTwitterScraper
             since_time: String,
             until_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).void
+          ).returns(XTwitterScraper::Models::X::ListRetrieveTweetsResponse)
         end
         def retrieve_tweets(
-          # List ID
+          # List ID for tweet lookup
           id,
-          # Pagination cursor
+          # Pagination cursor for list tweets
           cursor: nil,
           # Include replies (default false)
           include_replies: nil,

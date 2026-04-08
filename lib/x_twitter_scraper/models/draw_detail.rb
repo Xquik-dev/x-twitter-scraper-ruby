@@ -74,6 +74,8 @@ module XTwitterScraper
       optional :drawn_at, Time, api_name: :drawnAt
 
       # @!method initialize(id:, created_at:, status:, total_entries:, tweet_author_username:, tweet_id:, tweet_like_count:, tweet_quote_count:, tweet_reply_count:, tweet_retweet_count:, tweet_text:, tweet_url:, valid_entries:, drawn_at: nil)
+      #   Full giveaway draw with tweet metrics, entries, and timing.
+      #
       #   @param id [String]
       #   @param created_at [Time]
       #   @param status [String]

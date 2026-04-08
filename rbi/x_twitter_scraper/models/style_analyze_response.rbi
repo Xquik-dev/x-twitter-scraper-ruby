@@ -28,6 +28,7 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :x_username
 
+      # Full style profile with sampled tweets used for tone analysis.
       sig do
         params(
           fetched_at: Time,

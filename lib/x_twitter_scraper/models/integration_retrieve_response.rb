@@ -21,6 +21,7 @@ module XTwitterScraper
       required :created_at, Time, api_name: :createdAt
 
       # @!attribute event_types
+      #   Array of event types to subscribe to.
       #
       #   @return [Array<Symbol, XTwitterScraper::Models::IntegrationRetrieveResponse::EventType>]
       required :event_types,
@@ -64,13 +65,15 @@ module XTwitterScraper
       optional :silent_push, XTwitterScraper::Internal::Type::Boolean, api_name: :silentPush
 
       # @!method initialize(id:, config:, created_at:, event_types:, is_active:, name:, type:, filters: nil, message_template: nil, scope_all_monitors: nil, silent_push: nil)
+      #   Third-party integration (e.g. Telegram) subscribed to monitor events.
+      #
       #   @param id [String]
       #
       #   @param config [Hash{Symbol=>Object}] Integration config — shape varies by type (JSON)
       #
       #   @param created_at [Time]
       #
-      #   @param event_types [Array<Symbol, XTwitterScraper::Models::IntegrationRetrieveResponse::EventType>]
+      #   @param event_types [Array<Symbol, XTwitterScraper::Models::IntegrationRetrieveResponse::EventType>] Array of event types to subscribe to.
       #
       #   @param is_active [Boolean]
       #
@@ -86,6 +89,7 @@ module XTwitterScraper
       #
       #   @param silent_push [Boolean]
 
+      # Type of monitor event fired when account activity occurs.
       module EventType
         extend XTwitterScraper::Internal::Type::Enum
 

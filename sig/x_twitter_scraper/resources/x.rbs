@@ -38,7 +38,9 @@ module XTwitterScraper
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::XGetNotificationsResponse
 
-      def get_trends: (?request_options: XTwitterScraper::request_opts) -> nil
+      def get_trends: (
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::XGetTrendsResponse
 
       def initialize: (client: XTwitterScraper::Client) -> void
     end

@@ -8,7 +8,7 @@ module XTwitterScraper
       include XTwitterScraper::Internal::Type::RequestParameters
 
       # @!attribute cursor
-      #   Pagination cursor from previous response
+      #   Pagination cursor for timeline
       #
       #   @return [String, nil]
       optional :cursor, String
@@ -20,7 +20,7 @@ module XTwitterScraper
       optional :seen_tweet_ids, String
 
       # @!method initialize(cursor: nil, seen_tweet_ids: nil, request_options: {})
-      #   @param cursor [String] Pagination cursor from previous response
+      #   @param cursor [String] Pagination cursor for timeline
       #
       #   @param seen_tweet_ids [String] Comma-separated tweet IDs to exclude from results
       #

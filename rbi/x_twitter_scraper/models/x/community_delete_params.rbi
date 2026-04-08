@@ -18,7 +18,7 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :id
 
-        # X account (@username or account ID)
+        # X account (@username or ID) deleting the community
         sig { returns(String) }
         attr_accessor :account
 
@@ -36,7 +36,7 @@ module XTwitterScraper
         end
         def self.new(
           id:,
-          # X account (@username or account ID)
+          # X account (@username or ID) deleting the community
           account:,
           # Community name for confirmation
           community_name:,

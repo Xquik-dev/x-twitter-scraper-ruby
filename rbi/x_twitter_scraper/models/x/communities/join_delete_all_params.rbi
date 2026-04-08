@@ -19,7 +19,7 @@ module XTwitterScraper
           sig { returns(String) }
           attr_accessor :id
 
-          # X account (@username or account ID)
+          # X account identifier (@username or account ID)
           sig { returns(String) }
           attr_accessor :account
 
@@ -32,7 +32,7 @@ module XTwitterScraper
           end
           def self.new(
             id:,
-            # X account (@username or account ID)
+            # X account identifier (@username or account ID)
             account:,
             request_options: {}
           )

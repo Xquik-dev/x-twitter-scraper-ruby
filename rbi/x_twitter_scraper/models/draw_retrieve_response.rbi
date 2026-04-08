@@ -11,6 +11,7 @@ module XTwitterScraper
           )
         end
 
+      # Full giveaway draw with tweet metrics, entries, and timing.
       sig { returns(XTwitterScraper::Models::DrawRetrieveResponse::Draw) }
       attr_reader :draw
 
@@ -35,7 +36,11 @@ module XTwitterScraper
             ]
         ).returns(T.attached_class)
       end
-      def self.new(draw:, winners:)
+      def self.new(
+        # Full giveaway draw with tweet metrics, entries, and timing.
+        draw:,
+        winners:
+      )
       end
 
       sig do
@@ -104,6 +109,7 @@ module XTwitterScraper
         sig { params(drawn_at: Time).void }
         attr_writer :drawn_at
 
+        # Full giveaway draw with tweet metrics, entries, and timing.
         sig do
           params(
             id: String,
@@ -185,6 +191,7 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :tweet_id
 
+        # Giveaway draw winner with position and backup flag.
         sig do
           params(
             author_username: String,

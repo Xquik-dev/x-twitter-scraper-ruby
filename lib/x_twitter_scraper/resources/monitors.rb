@@ -8,7 +8,7 @@ module XTwitterScraper
       #
       # @overload create(event_types:, username:, request_options: {})
       #
-      # @param event_types [Array<Symbol, XTwitterScraper::Models::MonitorCreateParams::EventType>]
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::MonitorCreateParams::EventType>] Array of event types to subscribe to.
       #
       # @param username [String] X username (without @)
       #
@@ -54,7 +54,7 @@ module XTwitterScraper
       #
       # @param id [String] Resource ID (stringified bigint)
       #
-      # @param event_types [Array<Symbol, XTwitterScraper::Models::MonitorUpdateParams::EventType>]
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::MonitorUpdateParams::EventType>] Array of event types to subscribe to.
       #
       # @param is_active [Boolean]
       #

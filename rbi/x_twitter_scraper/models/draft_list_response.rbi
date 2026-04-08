@@ -78,6 +78,7 @@ module XTwitterScraper
         sig { params(topic: String).void }
         attr_writer :topic
 
+        # Saved tweet draft with optional topic and goal.
         sig do
           params(
             id: String,

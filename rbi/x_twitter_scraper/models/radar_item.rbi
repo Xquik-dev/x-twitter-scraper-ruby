@@ -44,6 +44,7 @@ module XTwitterScraper
       sig { params(url: String).void }
       attr_writer :url
 
+      # Trending topic with score, category, source, and region.
       sig do
         params(
           category: String,

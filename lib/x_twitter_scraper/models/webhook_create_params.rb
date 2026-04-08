@@ -8,6 +8,7 @@ module XTwitterScraper
       include XTwitterScraper::Internal::Type::RequestParameters
 
       # @!attribute event_types
+      #   Array of event types to subscribe to.
       #
       #   @return [Array<Symbol, XTwitterScraper::Models::WebhookCreateParams::EventType>]
       required :event_types,
@@ -23,12 +24,13 @@ module XTwitterScraper
       required :url, String
 
       # @!method initialize(event_types:, url:, request_options: {})
-      #   @param event_types [Array<Symbol, XTwitterScraper::Models::WebhookCreateParams::EventType>]
+      #   @param event_types [Array<Symbol, XTwitterScraper::Models::WebhookCreateParams::EventType>] Array of event types to subscribe to.
       #
       #   @param url [String] HTTPS URL
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
 
+      # Type of monitor event fired when account activity occurs.
       module EventType
         extend XTwitterScraper::Internal::Type::Enum
 

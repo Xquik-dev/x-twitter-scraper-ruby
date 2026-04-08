@@ -9,6 +9,8 @@ module XTwitterScraper
       required :error, enum: -> { XTwitterScraper::Error::Error }
 
       # @!method initialize(error:)
+      #   Error response containing a machine-readable error code.
+      #
       #   @param error [Symbol, XTwitterScraper::Models::Error::Error]
 
       # @see XTwitterScraper::Models::Error#error

@@ -24,6 +24,7 @@ module XTwitterScraper
       sig { returns(Time) }
       attr_accessor :occurred_at
 
+      # Type of monitor event fired when account activity occurs.
       sig { returns(XTwitterScraper::EventDetail::Type::OrSymbol) }
       attr_accessor :type
 
@@ -36,6 +37,7 @@ module XTwitterScraper
       sig { params(x_event_id: String).void }
       attr_writer :x_event_id
 
+      # Full monitor event including payload data and optional X event ID.
       sig do
         params(
           id: String,
@@ -53,6 +55,7 @@ module XTwitterScraper
         data:,
         monitor_id:,
         occurred_at:,
+        # Type of monitor event fired when account activity occurs.
         type:,
         username:,
         x_event_id: nil
@@ -75,6 +78,7 @@ module XTwitterScraper
       def to_hash
       end
 
+      # Type of monitor event fired when account activity occurs.
       module Type
         extend XTwitterScraper::Internal::Type::Enum
 

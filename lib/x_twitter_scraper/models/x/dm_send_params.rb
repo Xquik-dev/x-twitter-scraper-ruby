@@ -14,7 +14,7 @@ module XTwitterScraper
         required :user_id, String
 
         # @!attribute account
-        #   X account (@username or account ID)
+        #   X account (@username or ID) sending the DM
         #
         #   @return [String]
         required :account, String
@@ -37,7 +37,7 @@ module XTwitterScraper
         # @!method initialize(user_id:, account:, text:, media_ids: nil, reply_to_message_id: nil, request_options: {})
         #   @param user_id [String]
         #
-        #   @param account [String] X account (@username or account ID)
+        #   @param account [String] X account (@username or ID) sending the DM
         #
         #   @param text [String]
         #

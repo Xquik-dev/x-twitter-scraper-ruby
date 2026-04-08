@@ -13,6 +13,7 @@ module XTwitterScraper
       required :id, String
 
       # @!attribute event_types
+      #   Array of event types to subscribe to.
       #
       #   @return [Array<Symbol, XTwitterScraper::Models::MonitorUpdateParams::EventType>, nil]
       optional :event_types,
@@ -28,10 +29,14 @@ module XTwitterScraper
 
       # @!method initialize(id:, event_types: nil, is_active: nil, request_options: {})
       #   @param id [String]
-      #   @param event_types [Array<Symbol, XTwitterScraper::Models::MonitorUpdateParams::EventType>]
+      #
+      #   @param event_types [Array<Symbol, XTwitterScraper::Models::MonitorUpdateParams::EventType>] Array of event types to subscribe to.
+      #
       #   @param is_active [Boolean]
+      #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
 
+      # Type of monitor event fired when account activity occurs.
       module EventType
         extend XTwitterScraper::Internal::Type::Enum
 

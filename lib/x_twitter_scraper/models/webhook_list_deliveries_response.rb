@@ -55,6 +55,8 @@ module XTwitterScraper
         optional :last_status_code, Integer, api_name: :lastStatusCode
 
         # @!method initialize(id:, attempts:, created_at:, status:, stream_event_id:, delivered_at: nil, last_error: nil, last_status_code: nil)
+        #   Webhook delivery attempt record with status and retry count.
+        #
         #   @param id [String]
         #   @param attempts [Integer]
         #   @param created_at [Time]

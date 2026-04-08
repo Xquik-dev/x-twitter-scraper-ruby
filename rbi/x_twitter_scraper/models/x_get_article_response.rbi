@@ -21,6 +21,7 @@ module XTwitterScraper
       end
       attr_writer :article
 
+      # Author of a tweet with follower count and verification status.
       sig do
         returns(T.nilable(XTwitterScraper::Models::XGetArticleResponse::Author))
       end
@@ -40,7 +41,11 @@ module XTwitterScraper
           author: XTwitterScraper::Models::XGetArticleResponse::Author::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(article:, author: nil)
+      def self.new(
+        article:,
+        # Author of a tweet with follower count and verification status.
+        author: nil
+      )
       end
 
       sig do
@@ -288,6 +293,7 @@ module XTwitterScraper
         sig { params(profile_picture: String).void }
         attr_writer :profile_picture
 
+        # Author of a tweet with follower count and verification status.
         sig do
           params(
             id: String,

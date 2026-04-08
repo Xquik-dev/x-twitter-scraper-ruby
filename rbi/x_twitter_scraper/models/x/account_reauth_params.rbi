@@ -18,11 +18,11 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :id
 
-        # Account password
+        # Updated account password
         sig { returns(String) }
         attr_accessor :password
 
-        # TOTP secret for 2FA
+        # TOTP secret for 2FA re-authentication
         sig { returns(T.nilable(String)) }
         attr_reader :totp_secret
 
@@ -39,9 +39,9 @@ module XTwitterScraper
         end
         def self.new(
           id:,
-          # Account password
+          # Updated account password
           password:,
-          # TOTP secret for 2FA
+          # TOTP secret for 2FA re-authentication
           totp_secret: nil,
           request_options: {}
         )

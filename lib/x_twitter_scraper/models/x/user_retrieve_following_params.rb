@@ -14,13 +14,13 @@ module XTwitterScraper
         required :id, String
 
         # @!attribute cursor
-        #   Pagination cursor
+        #   Pagination cursor for following list
         #
         #   @return [String, nil]
         optional :cursor, String
 
         # @!attribute page_size
-        #   Items per page (20-200, default 200)
+        #   Results per page (20-200, default 200)
         #
         #   @return [Integer, nil]
         optional :page_size, Integer
@@ -28,9 +28,9 @@ module XTwitterScraper
         # @!method initialize(id:, cursor: nil, page_size: nil, request_options: {})
         #   @param id [String]
         #
-        #   @param cursor [String] Pagination cursor
+        #   @param cursor [String] Pagination cursor for following list
         #
-        #   @param page_size [Integer] Items per page (20-200, default 200)
+        #   @param page_size [Integer] Results per page (20-200, default 200)
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end

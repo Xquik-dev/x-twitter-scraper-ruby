@@ -19,6 +19,8 @@ module XTwitterScraper
       required :users, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::PaginatedUsers::User] }
 
       # @!method initialize(has_next_page:, next_cursor:, users:)
+      #   Paginated list of user profiles with cursor-based navigation.
+      #
       #   @param has_next_page [Boolean]
       #   @param next_cursor [String]
       #   @param users [Array<XTwitterScraper::Models::PaginatedUsers::User>]
@@ -80,6 +82,8 @@ module XTwitterScraper
         optional :verified, XTwitterScraper::Internal::Type::Boolean
 
         # @!method initialize(id:, name:, username:, created_at: nil, description: nil, followers: nil, following: nil, location: nil, profile_picture: nil, statuses_count: nil, verified: nil)
+        #   X user profile with bio, follower counts, and verification status.
+        #
         #   @param id [String]
         #   @param name [String]
         #   @param username [String]

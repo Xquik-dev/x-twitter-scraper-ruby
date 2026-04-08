@@ -8,9 +8,9 @@ class XTwitterScraper::Test::Resources::IntegrationsTest < XTwitterScraper::Test
 
     response =
       @x_twitter_scraper.integrations.create(
-        config: {chatId: "chatId"},
-        event_types: [:"tweet.new"],
-        name: "name",
+        config: {chatId: "-1001234567890"},
+        event_types: [:"tweet.new", :"follower.gained"],
+        name: "My Telegram Bot",
         type: :telegram
       )
 

@@ -17,7 +17,7 @@ module XTwitterScraper
         # @see XTwitterScraper::Models::X::CommunityRetrieveInfoResponse#community
         class Community < XTwitterScraper::Internal::Type::BaseModel
           # @!attribute id
-          #   Community ID
+          #   Unique community identifier
           #
           #   @return [String]
           required :id, String
@@ -35,7 +35,7 @@ module XTwitterScraper
           optional :created_at, String
 
           # @!attribute description
-          #   Community description
+          #   About text for the community
           #
           #   @return [String, nil]
           optional :description, String
@@ -59,7 +59,7 @@ module XTwitterScraper
           optional :moderator_count, Integer
 
           # @!attribute name
-          #   Community name
+          #   Display name of the community
           #
           #   @return [String, nil]
           optional :name, String
@@ -81,13 +81,13 @@ module XTwitterScraper
           # @!method initialize(id:, banner_url: nil, created_at: nil, description: nil, join_policy: nil, member_count: nil, moderator_count: nil, name: nil, primary_topic: nil, rules: nil)
           #   Community info object
           #
-          #   @param id [String] Community ID
+          #   @param id [String] Unique community identifier
           #
           #   @param banner_url [String] Community banner image URL
           #
           #   @param created_at [String] Community creation timestamp
           #
-          #   @param description [String] Community description
+          #   @param description [String] About text for the community
           #
           #   @param join_policy [String] Join policy (open or restricted)
           #
@@ -95,7 +95,7 @@ module XTwitterScraper
           #
           #   @param moderator_count [Integer] Total moderator count
           #
-          #   @param name [String] Community name
+          #   @param name [String] Display name of the community
           #
           #   @param primary_topic [XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic] Primary topic
           #

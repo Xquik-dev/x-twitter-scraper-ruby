@@ -4,7 +4,7 @@ module XTwitterScraper
   module Resources
     # Trending topics by region
     class Trends
-      # Get trending topics
+      # Get regional trending topics
       sig do
         params(
           count: Integer,
@@ -13,6 +13,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::TrendListResponse)
       end
       def list(
+        # Number of trending topics to return (1-50, default 30)
         count: nil,
         # Region WOEID (1=Worldwide, 23424977=US, 23424975=UK, 23424969=Turkey)
         woeid: nil,

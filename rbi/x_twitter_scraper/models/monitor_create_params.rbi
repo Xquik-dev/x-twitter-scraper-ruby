@@ -14,6 +14,7 @@ module XTwitterScraper
           )
         end
 
+      # Array of event types to subscribe to.
       sig do
         returns(
           T::Array[XTwitterScraper::MonitorCreateParams::EventType::OrSymbol]
@@ -34,6 +35,7 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
+        # Array of event types to subscribe to.
         event_types:,
         # X username (without @)
         username:,
@@ -56,6 +58,7 @@ module XTwitterScraper
       def to_hash
       end
 
+      # Type of monitor event fired when account activity occurs.
       module EventType
         extend XTwitterScraper::Internal::Type::Enum
 

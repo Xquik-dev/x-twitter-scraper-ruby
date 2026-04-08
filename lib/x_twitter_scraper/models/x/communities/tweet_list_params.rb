@@ -10,29 +10,29 @@ module XTwitterScraper
           include XTwitterScraper::Internal::Type::RequestParameters
 
           # @!attribute q
-          #   Search query
+          #   Search query for cross-community tweets
           #
           #   @return [String]
           required :q, String
 
           # @!attribute cursor
-          #   Pagination cursor
+          #   Pagination cursor for cross-community results
           #
           #   @return [String, nil]
           optional :cursor, String
 
           # @!attribute query_type
-          #   Sort order (Latest or Top)
+          #   Sort order for cross-community results (Latest or Top)
           #
           #   @return [String, nil]
           optional :query_type, String
 
           # @!method initialize(q:, cursor: nil, query_type: nil, request_options: {})
-          #   @param q [String] Search query
+          #   @param q [String] Search query for cross-community tweets
           #
-          #   @param cursor [String] Pagination cursor
+          #   @param cursor [String] Pagination cursor for cross-community results
           #
-          #   @param query_type [String] Sort order (Latest or Top)
+          #   @param query_type [String] Sort order for cross-community results (Latest or Top)
           #
           #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
         end

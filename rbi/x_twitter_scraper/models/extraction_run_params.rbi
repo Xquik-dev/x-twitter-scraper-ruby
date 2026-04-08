@@ -14,6 +14,7 @@ module XTwitterScraper
           )
         end
 
+      # Identifier for the extraction tool used to run a job.
       sig { returns(XTwitterScraper::ExtractionRunParams::ToolType::OrSymbol) }
       attr_accessor :tool_type
 
@@ -90,6 +91,7 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
+        # Identifier for the extraction tool used to run a job.
         tool_type:,
         # Raw advanced search query appended as-is (tweet_search_extractor)
         advanced_query: nil,
@@ -127,6 +129,7 @@ module XTwitterScraper
       def to_hash
       end
 
+      # Identifier for the extraction tool used to run a job.
       module ToolType
         extend XTwitterScraper::Internal::Type::Enum
 

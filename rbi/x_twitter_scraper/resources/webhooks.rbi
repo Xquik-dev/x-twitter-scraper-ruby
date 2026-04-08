@@ -14,6 +14,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::WebhookCreateResponse)
       end
       def create(
+        # Array of event types to subscribe to.
         event_types:,
         # HTTPS URL
         url:,
@@ -35,6 +36,7 @@ module XTwitterScraper
       def update(
         # Resource ID (stringified bigint)
         id,
+        # Array of event types to subscribe to.
         event_types: nil,
         is_active: nil,
         url: nil,

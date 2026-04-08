@@ -51,7 +51,7 @@ class XTwitterScraper::Test::Resources::DrawsTest < XTwitterScraper::Test::Resou
   def test_run_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.draws.run(tweet_url: "https://example.com")
+    response = @x_twitter_scraper.draws.run(tweet_url: "https://x.com/elonmusk/status/1234567890")
 
     assert_pattern do
       response => XTwitterScraper::Models::DrawRunResponse

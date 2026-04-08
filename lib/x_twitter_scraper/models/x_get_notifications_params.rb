@@ -8,7 +8,7 @@ module XTwitterScraper
       include XTwitterScraper::Internal::Type::RequestParameters
 
       # @!attribute cursor
-      #   Pagination cursor from previous response
+      #   Pagination cursor for notifications
       #
       #   @return [String, nil]
       optional :cursor, String
@@ -20,7 +20,7 @@ module XTwitterScraper
       optional :type, enum: -> { XTwitterScraper::XGetNotificationsParams::Type }
 
       # @!method initialize(cursor: nil, type: nil, request_options: {})
-      #   @param cursor [String] Pagination cursor from previous response
+      #   @param cursor [String] Pagination cursor for notifications
       #
       #   @param type [Symbol, XTwitterScraper::Models::XGetNotificationsParams::Type] Notification type filter
       #

@@ -103,9 +103,9 @@ module XTwitterScraper
         #
         # @param id [String] Resource ID (stringified bigint)
         #
-        # @param password [String] Account password
+        # @param password [String] Updated account password
         #
-        # @param totp_secret [String] TOTP secret for 2FA
+        # @param totp_secret [String] TOTP secret for 2FA re-authentication
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

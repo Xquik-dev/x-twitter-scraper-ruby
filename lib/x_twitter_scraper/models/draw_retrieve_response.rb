@@ -5,6 +5,7 @@ module XTwitterScraper
     # @see XTwitterScraper::Resources::Draws#retrieve
     class DrawRetrieveResponse < XTwitterScraper::Internal::Type::BaseModel
       # @!attribute draw
+      #   Full giveaway draw with tweet metrics, entries, and timing.
       #
       #   @return [XTwitterScraper::Models::DrawRetrieveResponse::Draw]
       required :draw, -> { XTwitterScraper::Models::DrawRetrieveResponse::Draw }
@@ -16,7 +17,8 @@ module XTwitterScraper
                -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::DrawRetrieveResponse::Winner] }
 
       # @!method initialize(draw:, winners:)
-      #   @param draw [XTwitterScraper::Models::DrawRetrieveResponse::Draw]
+      #   @param draw [XTwitterScraper::Models::DrawRetrieveResponse::Draw] Full giveaway draw with tweet metrics, entries, and timing.
+      #
       #   @param winners [Array<XTwitterScraper::Models::DrawRetrieveResponse::Winner>]
 
       # @see XTwitterScraper::Models::DrawRetrieveResponse#draw
@@ -92,6 +94,8 @@ module XTwitterScraper
         optional :drawn_at, Time, api_name: :drawnAt
 
         # @!method initialize(id:, created_at:, status:, total_entries:, tweet_author_username:, tweet_id:, tweet_like_count:, tweet_quote_count:, tweet_reply_count:, tweet_retweet_count:, tweet_text:, tweet_url:, valid_entries:, drawn_at: nil)
+        #   Full giveaway draw with tweet metrics, entries, and timing.
+        #
         #   @param id [String]
         #   @param created_at [Time]
         #   @param status [String]
@@ -130,6 +134,8 @@ module XTwitterScraper
         required :tweet_id, String, api_name: :tweetId
 
         # @!method initialize(author_username:, is_backup:, position:, tweet_id:)
+        #   Giveaway draw winner with position and backup flag.
+        #
         #   @param author_username [String]
         #   @param is_backup [Boolean]
         #   @param position [Integer]

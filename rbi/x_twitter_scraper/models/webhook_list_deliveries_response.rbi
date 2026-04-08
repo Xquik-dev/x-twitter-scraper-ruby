@@ -86,6 +86,7 @@ module XTwitterScraper
         sig { params(last_status_code: Integer).void }
         attr_writer :last_status_code
 
+        # Webhook delivery attempt record with status and retry count.
         sig do
           params(
             id: String,

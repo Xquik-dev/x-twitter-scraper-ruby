@@ -22,7 +22,7 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::CommunityCreateResponse)
         end
         def create(
-          # X account (@username or account ID)
+          # X account (@username or ID) creating the community
           account:,
           # Community name
           name:,
@@ -44,7 +44,7 @@ module XTwitterScraper
         def delete(
           # Resource ID (stringified bigint)
           id,
-          # X account (@username or account ID)
+          # X account (@username or ID) deleting the community
           account:,
           # Community name for confirmation
           community_name:,
@@ -72,10 +72,12 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).void
+          ).returns(
+            XTwitterScraper::Models::X::CommunityRetrieveMembersResponse
+          )
         end
         def retrieve_members(
-          # Community ID
+          # Community ID for member lookup
           id,
           # Pagination cursor
           cursor: nil,
@@ -89,12 +91,14 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).void
+          ).returns(
+            XTwitterScraper::Models::X::CommunityRetrieveModeratorsResponse
+          )
         end
         def retrieve_moderators(
-          # Community ID
+          # Community ID for moderator lookup
           id,
-          # Pagination cursor
+          # Pagination cursor for community moderators
           cursor: nil,
           request_options: {}
         )
@@ -107,12 +111,12 @@ module XTwitterScraper
             cursor: String,
             query_type: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).void
+          ).returns(XTwitterScraper::Models::X::CommunityRetrieveSearchResponse)
         end
         def retrieve_search(
           # Search query
           q:,
-          # Pagination cursor
+          # Pagination cursor for community search
           cursor: nil,
           # Sort order (Latest or Top)
           query_type: nil,

@@ -45,6 +45,8 @@ module XTwitterScraper
         optional :last_used_at, Time, api_name: :lastUsedAt
 
         # @!method initialize(id:, created_at:, is_active:, name:, prefix:, last_used_at: nil)
+        #   API key metadata returned when listing keys.
+        #
         #   @param id [String]
         #   @param created_at [Time]
         #   @param is_active [Boolean]

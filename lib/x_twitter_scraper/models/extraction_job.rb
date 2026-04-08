@@ -19,6 +19,7 @@ module XTwitterScraper
       required :status, enum: -> { XTwitterScraper::ExtractionJob::Status }
 
       # @!attribute tool_type
+      #   Identifier for the extraction tool used to run a job.
       #
       #   @return [Symbol, XTwitterScraper::Models::ExtractionJob::ToolType]
       required :tool_type, enum: -> { XTwitterScraper::ExtractionJob::ToolType }, api_name: :toolType
@@ -34,11 +35,18 @@ module XTwitterScraper
       optional :completed_at, Time, api_name: :completedAt
 
       # @!method initialize(id:, created_at:, status:, tool_type:, total_results:, completed_at: nil)
+      #   Extraction job tracking status, tool type, and result count.
+      #
       #   @param id [String]
+      #
       #   @param created_at [Time]
+      #
       #   @param status [Symbol, XTwitterScraper::Models::ExtractionJob::Status]
-      #   @param tool_type [Symbol, XTwitterScraper::Models::ExtractionJob::ToolType]
+      #
+      #   @param tool_type [Symbol, XTwitterScraper::Models::ExtractionJob::ToolType] Identifier for the extraction tool used to run a job.
+      #
       #   @param total_results [Integer]
+      #
       #   @param completed_at [Time]
 
       # @see XTwitterScraper::Models::ExtractionJob#status
@@ -53,6 +61,8 @@ module XTwitterScraper
         #   @return [Array<Symbol>]
       end
 
+      # Identifier for the extraction tool used to run a job.
+      #
       # @see XTwitterScraper::Models::ExtractionJob#tool_type
       module ToolType
         extend XTwitterScraper::Internal::Type::Enum

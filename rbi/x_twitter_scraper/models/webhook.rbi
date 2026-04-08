@@ -14,6 +14,7 @@ module XTwitterScraper
       sig { returns(Time) }
       attr_accessor :created_at
 
+      # Array of event types to subscribe to.
       sig { returns(T::Array[XTwitterScraper::Webhook::EventType::OrSymbol]) }
       attr_accessor :event_types
 
@@ -23,6 +24,7 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :url
 
+      # Webhook endpoint registered to receive event deliveries.
       sig do
         params(
           id: String,
@@ -32,7 +34,14 @@ module XTwitterScraper
           url: String
         ).returns(T.attached_class)
       end
-      def self.new(id:, created_at:, event_types:, is_active:, url:)
+      def self.new(
+        id:,
+        created_at:,
+        # Array of event types to subscribe to.
+        event_types:,
+        is_active:,
+        url:
+      )
       end
 
       sig do
@@ -50,6 +59,7 @@ module XTwitterScraper
       def to_hash
       end
 
+      # Type of monitor event fired when account activity occurs.
       module EventType
         extend XTwitterScraper::Internal::Type::Enum
 

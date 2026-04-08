@@ -14,7 +14,7 @@ module XTwitterScraper
         required :id, String
 
         # @!attribute account
-        #   X account (@username or account ID)
+        #   X account (@username or ID) deleting the community
         #
         #   @return [String]
         required :account, String
@@ -28,7 +28,7 @@ module XTwitterScraper
         # @!method initialize(id:, account:, community_name:, request_options: {})
         #   @param id [String]
         #
-        #   @param account [String] X account (@username or account ID)
+        #   @param account [String] X account (@username or ID) deleting the community
         #
         #   @param community_name [String] Community name for confirmation
         #

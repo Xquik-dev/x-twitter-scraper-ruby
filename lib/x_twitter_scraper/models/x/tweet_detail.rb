@@ -58,8 +58,8 @@ module XTwitterScraper
         # @!attribute entities
         #   Parsed entities from the tweet text (URLs, mentions, hashtags, media)
         #
-        #   @return [Object, nil]
-        optional :entities, XTwitterScraper::Internal::Type::Unknown
+        #   @return [Hash{Symbol=>Object}, nil]
+        optional :entities, XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]
 
         # @!attribute is_note_tweet
         #   Whether this is a Note Tweet (long-form post, up to 25,000 characters)
@@ -88,8 +88,8 @@ module XTwitterScraper
         # @!attribute quoted_tweet
         #   The quoted tweet object, present when isQuoteStatus is true
         #
-        #   @return [Object, nil]
-        optional :quoted_tweet, XTwitterScraper::Internal::Type::Unknown
+        #   @return [Hash{Symbol=>Object}, nil]
+        optional :quoted_tweet, XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]
 
         # @!attribute source
         #   Client application used to post this tweet
@@ -98,6 +98,8 @@ module XTwitterScraper
         optional :source, String
 
         # @!method initialize(id:, bookmark_count:, like_count:, quote_count:, reply_count:, retweet_count:, text:, view_count:, conversation_id: nil, created_at: nil, entities: nil, is_note_tweet: nil, is_quote_status: nil, is_reply: nil, media: nil, quoted_tweet: nil, source: nil)
+        #   Full tweet with text, engagement metrics, media, and metadata.
+        #
         #   @param id [String]
         #
         #   @param bookmark_count [Integer]
@@ -118,7 +120,7 @@ module XTwitterScraper
         #
         #   @param created_at [String]
         #
-        #   @param entities [Object] Parsed entities from the tweet text (URLs, mentions, hashtags, media)
+        #   @param entities [Hash{Symbol=>Object}] Parsed entities from the tweet text (URLs, mentions, hashtags, media)
         #
         #   @param is_note_tweet [Boolean] Whether this is a Note Tweet (long-form post, up to 25,000 characters)
         #
@@ -128,7 +130,7 @@ module XTwitterScraper
         #
         #   @param media [Array<XTwitterScraper::Models::X::TweetDetail::Media>] Attached media items, omitted when the tweet has no media
         #
-        #   @param quoted_tweet [Object] The quoted tweet object, present when isQuoteStatus is true
+        #   @param quoted_tweet [Hash{Symbol=>Object}] The quoted tweet object, present when isQuoteStatus is true
         #
         #   @param source [String] Client application used to post this tweet
 

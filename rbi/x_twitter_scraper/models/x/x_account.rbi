@@ -29,6 +29,7 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :x_username
 
+        # Linked X account summary with username and connection status.
         sig do
           params(
             id: String,

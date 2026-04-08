@@ -20,6 +20,8 @@ module XTwitterScraper
         required :success, const: true
 
         # @!method initialize(community_id:, community_name:, success: true)
+        #   Result of a community join or leave action.
+        #
         #   @param community_id [String]
         #   @param community_name [String]
         #   @param success [Boolean, true]

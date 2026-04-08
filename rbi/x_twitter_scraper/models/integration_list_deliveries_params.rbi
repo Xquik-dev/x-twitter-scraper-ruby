@@ -17,6 +17,7 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :id
 
+      # Maximum number of items to return (1-100, default 50)
       sig { returns(T.nilable(Integer)) }
       attr_reader :limit
 
@@ -30,7 +31,12 @@ module XTwitterScraper
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(id:, limit: nil, request_options: {})
+      def self.new(
+        id:,
+        # Maximum number of items to return (1-100, default 50)
+        limit: nil,
+        request_options: {}
+      )
       end
 
       sig do

@@ -43,7 +43,7 @@ class XTwitterScraper::Test::Resources::ExtractionsTest < XTwitterScraper::Test:
   def test_estimate_cost_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.extractions.estimate_cost(tool_type: :article_extractor)
+    response = @x_twitter_scraper.extractions.estimate_cost(tool_type: :follower_explorer)
 
     assert_pattern do
       response => XTwitterScraper::Models::ExtractionEstimateCostResponse
@@ -73,7 +73,7 @@ class XTwitterScraper::Test::Resources::ExtractionsTest < XTwitterScraper::Test:
   def test_run_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.extractions.run(tool_type: :article_extractor)
+    response = @x_twitter_scraper.extractions.run(tool_type: :follower_explorer)
 
     assert_pattern do
       response => XTwitterScraper::Models::ExtractionRunResponse

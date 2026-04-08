@@ -9,7 +9,15 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_batch(ids: "ids")
 
     assert_pattern do
-      response => nil
+      response => XTwitterScraper::Models::X::UserRetrieveBatchResponse
+    end
+
+    assert_pattern do
+      response => {
+        has_next_page: XTwitterScraper::Internal::Type::Boolean,
+        next_cursor: String,
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::UserRetrieveBatchResponse::User])
+      }
     end
   end
 
@@ -19,7 +27,15 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_followers("id")
 
     assert_pattern do
-      response => nil
+      response => XTwitterScraper::Models::X::UserRetrieveFollowersResponse
+    end
+
+    assert_pattern do
+      response => {
+        has_next_page: XTwitterScraper::Internal::Type::Boolean,
+        next_cursor: String,
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::UserRetrieveFollowersResponse::User])
+      }
     end
   end
 
@@ -47,7 +63,15 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_following("id")
 
     assert_pattern do
-      response => nil
+      response => XTwitterScraper::Models::X::UserRetrieveFollowingResponse
+    end
+
+    assert_pattern do
+      response => {
+        has_next_page: XTwitterScraper::Internal::Type::Boolean,
+        next_cursor: String,
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::UserRetrieveFollowingResponse::User])
+      }
     end
   end
 
@@ -93,7 +117,15 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_mentions("id")
 
     assert_pattern do
-      response => nil
+      response => XTwitterScraper::Models::X::UserRetrieveMentionsResponse
+    end
+
+    assert_pattern do
+      response => {
+        has_next_page: XTwitterScraper::Internal::Type::Boolean,
+        next_cursor: String,
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::UserRetrieveMentionsResponse::Tweet])
+      }
     end
   end
 
@@ -103,7 +135,15 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_search(q: "q")
 
     assert_pattern do
-      response => nil
+      response => XTwitterScraper::Models::X::UserRetrieveSearchResponse
+    end
+
+    assert_pattern do
+      response => {
+        has_next_page: XTwitterScraper::Internal::Type::Boolean,
+        next_cursor: String,
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::UserRetrieveSearchResponse::User])
+      }
     end
   end
 
@@ -131,7 +171,15 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_verified_followers("id")
 
     assert_pattern do
-      response => nil
+      response => XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse
+    end
+
+    assert_pattern do
+      response => {
+        has_next_page: XTwitterScraper::Internal::Type::Boolean,
+        next_cursor: String,
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::User])
+      }
     end
   end
 end

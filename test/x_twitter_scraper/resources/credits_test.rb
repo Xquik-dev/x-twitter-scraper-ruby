@@ -25,7 +25,7 @@ class XTwitterScraper::Test::Resources::CreditsTest < XTwitterScraper::Test::Res
   def test_topup_balance_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.credits.topup_balance(amount: 0)
+    response = @x_twitter_scraper.credits.topup_balance(amount: 10_000)
 
     assert_pattern do
       response => XTwitterScraper::Models::CreditTopupBalanceResponse

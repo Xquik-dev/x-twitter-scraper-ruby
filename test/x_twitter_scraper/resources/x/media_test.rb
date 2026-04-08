@@ -26,7 +26,7 @@ class XTwitterScraper::Test::Resources::X::MediaTest < XTwitterScraper::Test::Re
   def test_upload_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.media.upload(account: "account", file: StringIO.new("Example data"))
+    response = @x_twitter_scraper.x.media.upload(account: "@elonmusk", file: StringIO.new("Example data"))
 
     assert_pattern do
       response => XTwitterScraper::Models::X::MediaUploadResponse

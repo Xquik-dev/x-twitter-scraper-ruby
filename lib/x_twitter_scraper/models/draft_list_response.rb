@@ -52,6 +52,8 @@ module XTwitterScraper
         optional :topic, String
 
         # @!method initialize(id:, created_at:, text:, goal: nil, topic: nil)
+        #   Saved tweet draft with optional topic and goal.
+        #
         #   @param id [String]
         #   @param created_at [Time]
         #   @param text [String]

@@ -52,22 +52,28 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [nil]
+        # @return [XTwitterScraper::Models::X::TweetListResponse]
         #
         # @see XTwitterScraper::Models::X::TweetListParams
         def list(params)
           parsed, options = XTwitterScraper::X::TweetListParams.dump_request(params)
           query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
-          @client.request(method: :get, path: "x/tweets", query: query, model: NilClass, options: options)
+          @client.request(
+            method: :get,
+            path: "x/tweets",
+            query: query,
+            model: XTwitterScraper::Models::X::TweetListResponse,
+            options: options
+          )
         end
 
         # Get users who liked a tweet
         #
         # @overload get_favoriters(id, cursor: nil, request_options: {})
         #
-        # @param id [String] Tweet ID
+        # @param id [String] Tweet ID to get favoriters
         #
-        # @param cursor [String] Pagination cursor from previous response
+        # @param cursor [String] Pagination cursor for favoriters
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -90,15 +96,15 @@ module XTwitterScraper
         #
         # @overload get_quotes(id, cursor: nil, include_replies: nil, since_time: nil, until_time: nil, request_options: {})
         #
-        # @param id [String] Tweet ID
+        # @param id [String] Tweet ID to get quotes
         #
-        # @param cursor [String] Pagination cursor
+        # @param cursor [String] Pagination cursor for quote tweets
         #
-        # @param include_replies [Boolean] Include replies (default false)
+        # @param include_replies [Boolean] Include reply quotes (default false)
         #
-        # @param since_time [String] Unix timestamp - filter after
+        # @param since_time [String] Unix timestamp - return quotes posted after this time
         #
-        # @param until_time [String] Unix timestamp - filter before
+        # @param until_time [String] Unix timestamp - return quotes posted before this time
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -125,13 +131,13 @@ module XTwitterScraper
         #
         # @overload get_replies(id, cursor: nil, since_time: nil, until_time: nil, request_options: {})
         #
-        # @param id [String] Tweet ID
+        # @param id [String] Tweet ID to get replies
         #
-        # @param cursor [String] Pagination cursor
+        # @param cursor [String] Pagination cursor for tweet replies
         #
-        # @param since_time [String] Unix timestamp - filter after
+        # @param since_time [String] Unix timestamp - return replies posted after this time
         #
-        # @param until_time [String] Unix timestamp - filter before
+        # @param until_time [String] Unix timestamp - return replies posted before this time
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -154,9 +160,9 @@ module XTwitterScraper
         #
         # @overload get_retweeters(id, cursor: nil, request_options: {})
         #
-        # @param id [String] Tweet ID
+        # @param id [String] Tweet ID to get retweeters
         #
-        # @param cursor [String] Pagination cursor
+        # @param cursor [String] Pagination cursor for retweeters
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -179,9 +185,9 @@ module XTwitterScraper
         #
         # @overload get_thread(id, cursor: nil, request_options: {})
         #
-        # @param id [String] Tweet ID
+        # @param id [String] Tweet ID to get thread context
         #
-        # @param cursor [String] Pagination cursor
+        # @param cursor [String] Pagination cursor for thread tweets
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

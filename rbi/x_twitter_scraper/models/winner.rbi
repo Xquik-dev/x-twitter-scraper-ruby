@@ -20,6 +20,7 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :tweet_id
 
+      # Giveaway draw winner with position and backup flag.
       sig do
         params(
           author_username: String,

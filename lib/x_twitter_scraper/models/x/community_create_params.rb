@@ -9,7 +9,7 @@ module XTwitterScraper
         include XTwitterScraper::Internal::Type::RequestParameters
 
         # @!attribute account
-        #   X account (@username or account ID)
+        #   X account (@username or ID) creating the community
         #
         #   @return [String]
         required :account, String
@@ -27,7 +27,7 @@ module XTwitterScraper
         optional :description, String
 
         # @!method initialize(account:, name:, description: nil, request_options: {})
-        #   @param account [String] X account (@username or account ID)
+        #   @param account [String] X account (@username or ID) creating the community
         #
         #   @param name [String] Community name
         #

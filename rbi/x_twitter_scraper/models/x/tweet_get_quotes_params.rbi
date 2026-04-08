@@ -18,28 +18,28 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :id
 
-        # Pagination cursor
+        # Pagination cursor for quote tweets
         sig { returns(T.nilable(String)) }
         attr_reader :cursor
 
         sig { params(cursor: String).void }
         attr_writer :cursor
 
-        # Include replies (default false)
+        # Include reply quotes (default false)
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :include_replies
 
         sig { params(include_replies: T::Boolean).void }
         attr_writer :include_replies
 
-        # Unix timestamp - filter after
+        # Unix timestamp - return quotes posted after this time
         sig { returns(T.nilable(String)) }
         attr_reader :since_time
 
         sig { params(since_time: String).void }
         attr_writer :since_time
 
-        # Unix timestamp - filter before
+        # Unix timestamp - return quotes posted before this time
         sig { returns(T.nilable(String)) }
         attr_reader :until_time
 
@@ -58,13 +58,13 @@ module XTwitterScraper
         end
         def self.new(
           id:,
-          # Pagination cursor
+          # Pagination cursor for quote tweets
           cursor: nil,
-          # Include replies (default false)
+          # Include reply quotes (default false)
           include_replies: nil,
-          # Unix timestamp - filter after
+          # Unix timestamp - return quotes posted after this time
           since_time: nil,
-          # Unix timestamp - filter before
+          # Unix timestamp - return quotes posted before this time
           until_time: nil,
           request_options: {}
         )

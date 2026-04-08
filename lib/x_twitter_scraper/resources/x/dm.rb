@@ -10,7 +10,7 @@ module XTwitterScraper
         #
         # @param user_id [String] Target user ID
         #
-        # @param cursor [String] Pagination cursor from previous response
+        # @param cursor [String] Pagination cursor for DM history
         #
         # @param max_id [String] Legacy pagination cursor (backward compat)
         #
@@ -37,7 +37,7 @@ module XTwitterScraper
         #
         # @param user_id [String] Recipient user ID
         #
-        # @param account [String] X account (@username or account ID)
+        # @param account [String] X account (@username or ID) sending the DM
         #
         # @param text [String]
         #

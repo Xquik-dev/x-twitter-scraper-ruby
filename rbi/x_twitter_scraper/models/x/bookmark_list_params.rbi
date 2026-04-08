@@ -15,7 +15,7 @@ module XTwitterScraper
             )
           end
 
-        # Pagination cursor from previous response
+        # Pagination cursor for bookmarks
         sig { returns(T.nilable(String)) }
         attr_reader :cursor
 
@@ -37,7 +37,7 @@ module XTwitterScraper
           ).returns(T.attached_class)
         end
         def self.new(
-          # Pagination cursor from previous response
+          # Pagination cursor for bookmarks
           cursor: nil,
           # Optional bookmark folder ID
           folder_id: nil,

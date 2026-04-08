@@ -66,6 +66,8 @@ module XTwitterScraper
         optional :url, String
 
         # @!method initialize(category:, published_at:, region:, score:, source:, title:, description: nil, image_url: nil, url: nil)
+        #   Trending topic with score, category, source, and region.
+        #
         #   @param category [String]
         #   @param published_at [Time]
         #   @param region [String]

@@ -60,7 +60,7 @@ module XTwitterScraper
               )
             end
 
-          # Community ID
+          # Unique community identifier
           sig { returns(String) }
           attr_accessor :id
 
@@ -78,7 +78,7 @@ module XTwitterScraper
           sig { params(created_at: String).void }
           attr_writer :created_at
 
-          # Community description
+          # About text for the community
           sig { returns(T.nilable(String)) }
           attr_reader :description
 
@@ -106,7 +106,7 @@ module XTwitterScraper
           sig { params(moderator_count: Integer).void }
           attr_writer :moderator_count
 
-          # Community name
+          # Display name of the community
           sig { returns(T.nilable(String)) }
           attr_reader :name
 
@@ -173,13 +173,13 @@ module XTwitterScraper
             ).returns(T.attached_class)
           end
           def self.new(
-            # Community ID
+            # Unique community identifier
             id:,
             # Community banner image URL
             banner_url: nil,
             # Community creation timestamp
             created_at: nil,
-            # Community description
+            # About text for the community
             description: nil,
             # Join policy (open or restricted)
             join_policy: nil,
@@ -187,7 +187,7 @@ module XTwitterScraper
             member_count: nil,
             # Total moderator count
             moderator_count: nil,
-            # Community name
+            # Display name of the community
             name: nil,
             # Primary topic
             primary_topic: nil,

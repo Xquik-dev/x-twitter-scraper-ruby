@@ -10,13 +10,15 @@ module XTwitterScraper
       required :article, -> { XTwitterScraper::Models::XGetArticleResponse::Article }
 
       # @!attribute author
+      #   Author of a tweet with follower count and verification status.
       #
       #   @return [XTwitterScraper::Models::XGetArticleResponse::Author, nil]
       optional :author, -> { XTwitterScraper::Models::XGetArticleResponse::Author }
 
       # @!method initialize(article:, author: nil)
       #   @param article [XTwitterScraper::Models::XGetArticleResponse::Article]
-      #   @param author [XTwitterScraper::Models::XGetArticleResponse::Author]
+      #
+      #   @param author [XTwitterScraper::Models::XGetArticleResponse::Author] Author of a tweet with follower count and verification status.
 
       # @see XTwitterScraper::Models::XGetArticleResponse#article
       class Article < XTwitterScraper::Internal::Type::BaseModel
@@ -151,6 +153,8 @@ module XTwitterScraper
         optional :profile_picture, String, api_name: :profilePicture
 
         # @!method initialize(id:, followers:, username:, verified:, profile_picture: nil)
+        #   Author of a tweet with follower count and verification status.
+        #
         #   @param id [String]
         #   @param followers [Integer]
         #   @param username [String]

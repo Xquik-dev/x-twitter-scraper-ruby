@@ -50,10 +50,10 @@ module XTwitterScraper
         attr_writer :created_at
 
         # Parsed entities from the tweet text (URLs, mentions, hashtags, media)
-        sig { returns(T.nilable(T.anything)) }
+        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
         attr_reader :entities
 
-        sig { params(entities: T.anything).void }
+        sig { params(entities: T::Hash[Symbol, T.anything]).void }
         attr_writer :entities
 
         # Whether this is a Note Tweet (long-form post, up to 25,000 characters)
@@ -91,10 +91,10 @@ module XTwitterScraper
         attr_writer :media
 
         # The quoted tweet object, present when isQuoteStatus is true
-        sig { returns(T.nilable(T.anything)) }
+        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
         attr_reader :quoted_tweet
 
-        sig { params(quoted_tweet: T.anything).void }
+        sig { params(quoted_tweet: T::Hash[Symbol, T.anything]).void }
         attr_writer :quoted_tweet
 
         # Client application used to post this tweet
@@ -104,6 +104,7 @@ module XTwitterScraper
         sig { params(source: String).void }
         attr_writer :source
 
+        # Full tweet with text, engagement metrics, media, and metadata.
         sig do
           params(
             id: String,
@@ -116,12 +117,12 @@ module XTwitterScraper
             view_count: Integer,
             conversation_id: String,
             created_at: String,
-            entities: T.anything,
+            entities: T::Hash[Symbol, T.anything],
             is_note_tweet: T::Boolean,
             is_quote_status: T::Boolean,
             is_reply: T::Boolean,
             media: T::Array[XTwitterScraper::X::TweetDetail::Media::OrHash],
-            quoted_tweet: T.anything,
+            quoted_tweet: T::Hash[Symbol, T.anything],
             source: String
           ).returns(T.attached_class)
         end
@@ -167,12 +168,12 @@ module XTwitterScraper
               view_count: Integer,
               conversation_id: String,
               created_at: String,
-              entities: T.anything,
+              entities: T::Hash[Symbol, T.anything],
               is_note_tweet: T::Boolean,
               is_quote_status: T::Boolean,
               is_reply: T::Boolean,
               media: T::Array[XTwitterScraper::X::TweetDetail::Media],
-              quoted_tweet: T.anything,
+              quoted_tweet: T::Hash[Symbol, T.anything],
               source: String
             }
           )

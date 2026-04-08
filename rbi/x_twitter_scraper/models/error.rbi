@@ -11,6 +11,7 @@ module XTwitterScraper
       sig { returns(XTwitterScraper::Error::Error::OrSymbol) }
       attr_accessor :error
 
+      # Error response containing a machine-readable error code.
       sig do
         params(error: XTwitterScraper::Error::Error::OrSymbol).returns(
           T.attached_class

@@ -7,14 +7,14 @@ module XTwitterScraper
         def retrieve_batch: (
           ids: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> nil
+        ) -> XTwitterScraper::Models::X::UserRetrieveBatchResponse
 
         def retrieve_followers: (
           String id,
           ?cursor: String,
           ?page_size: Integer,
           ?request_options: XTwitterScraper::request_opts
-        ) -> nil
+        ) -> XTwitterScraper::Models::X::UserRetrieveFollowersResponse
 
         def retrieve_followers_you_know: (
           String id,
@@ -27,7 +27,7 @@ module XTwitterScraper
           ?cursor: String,
           ?page_size: Integer,
           ?request_options: XTwitterScraper::request_opts
-        ) -> nil
+        ) -> XTwitterScraper::Models::X::UserRetrieveFollowingResponse
 
         def retrieve_likes: (
           String id,
@@ -47,13 +47,13 @@ module XTwitterScraper
           ?since_time: String,
           ?until_time: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> nil
+        ) -> XTwitterScraper::Models::X::UserRetrieveMentionsResponse
 
         def retrieve_search: (
           q: String,
           ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> nil
+        ) -> XTwitterScraper::Models::X::UserRetrieveSearchResponse
 
         def retrieve_tweets: (
           String id,
@@ -67,7 +67,7 @@ module XTwitterScraper
           String id,
           ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> nil
+        ) -> XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse
 
         def initialize: (client: XTwitterScraper::Client) -> void
       end

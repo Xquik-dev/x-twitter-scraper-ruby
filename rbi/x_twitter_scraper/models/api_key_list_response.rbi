@@ -63,6 +63,7 @@ module XTwitterScraper
         sig { params(last_used_at: Time).void }
         attr_writer :last_used_at
 
+        # API key metadata returned when listing keys.
         sig do
           params(
             id: String,

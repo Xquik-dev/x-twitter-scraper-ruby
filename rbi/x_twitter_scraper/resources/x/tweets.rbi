@@ -41,7 +41,7 @@ module XTwitterScraper
           params(
             ids: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).void
+          ).returns(XTwitterScraper::Models::X::TweetListResponse)
         end
         def list(
           # Comma-separated tweet IDs (max 100)
@@ -59,9 +59,9 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::TweetGetFavoritersResponse)
         end
         def get_favoriters(
-          # Tweet ID
+          # Tweet ID to get favoriters
           id,
-          # Pagination cursor from previous response
+          # Pagination cursor for favoriters
           cursor: nil,
           request_options: {}
         )
@@ -79,15 +79,15 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::TweetGetQuotesResponse)
         end
         def get_quotes(
-          # Tweet ID
+          # Tweet ID to get quotes
           id,
-          # Pagination cursor
+          # Pagination cursor for quote tweets
           cursor: nil,
-          # Include replies (default false)
+          # Include reply quotes (default false)
           include_replies: nil,
-          # Unix timestamp - filter after
+          # Unix timestamp - return quotes posted after this time
           since_time: nil,
-          # Unix timestamp - filter before
+          # Unix timestamp - return quotes posted before this time
           until_time: nil,
           request_options: {}
         )
@@ -104,13 +104,13 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::TweetGetRepliesResponse)
         end
         def get_replies(
-          # Tweet ID
+          # Tweet ID to get replies
           id,
-          # Pagination cursor
+          # Pagination cursor for tweet replies
           cursor: nil,
-          # Unix timestamp - filter after
+          # Unix timestamp - return replies posted after this time
           since_time: nil,
-          # Unix timestamp - filter before
+          # Unix timestamp - return replies posted before this time
           until_time: nil,
           request_options: {}
         )
@@ -125,9 +125,9 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::TweetGetRetweetersResponse)
         end
         def get_retweeters(
-          # Tweet ID
+          # Tweet ID to get retweeters
           id,
-          # Pagination cursor
+          # Pagination cursor for retweeters
           cursor: nil,
           request_options: {}
         )
@@ -142,9 +142,9 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::TweetGetThreadResponse)
         end
         def get_thread(
-          # Tweet ID
+          # Tweet ID to get thread context
           id,
-          # Pagination cursor
+          # Pagination cursor for thread tweets
           cursor: nil,
           request_options: {}
         )

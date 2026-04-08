@@ -29,20 +29,20 @@ module XTwitterScraper
           String id,
           ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> nil
+        ) -> XTwitterScraper::Models::X::CommunityRetrieveMembersResponse
 
         def retrieve_moderators: (
           String id,
           ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> nil
+        ) -> XTwitterScraper::Models::X::CommunityRetrieveModeratorsResponse
 
         def retrieve_search: (
           q: String,
           ?cursor: String,
           ?query_type: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> nil
+        ) -> XTwitterScraper::Models::X::CommunityRetrieveSearchResponse
 
         def initialize: (client: XTwitterScraper::Client) -> void
       end
