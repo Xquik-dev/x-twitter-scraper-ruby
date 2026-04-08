@@ -14,11 +14,7 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :id
 
-      sig do
-        returns(
-          XTwitterScraper::Models::ExtractionRunResponse::Status::TaggedSymbol
-        )
-      end
+      sig { returns(Symbol) }
       attr_accessor :status
 
       # Identifier for the extraction tool used to run a job.
@@ -32,17 +28,16 @@ module XTwitterScraper
       sig do
         params(
           id: String,
-          status:
-            XTwitterScraper::Models::ExtractionRunResponse::Status::OrSymbol,
           tool_type:
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::OrSymbol
+            XTwitterScraper::Models::ExtractionRunResponse::ToolType::OrSymbol,
+          status: Symbol
         ).returns(T.attached_class)
       end
       def self.new(
         id:,
-        status:,
         # Identifier for the extraction tool used to run a job.
-        tool_type:
+        tool_type:,
+        status: :running
       )
       end
 
@@ -50,43 +45,13 @@ module XTwitterScraper
         override.returns(
           {
             id: String,
-            status:
-              XTwitterScraper::Models::ExtractionRunResponse::Status::TaggedSymbol,
+            status: Symbol,
             tool_type:
               XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
           }
         )
       end
       def to_hash
-      end
-
-      module Status
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(
-              Symbol,
-              XTwitterScraper::Models::ExtractionRunResponse::Status
-            )
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        RUNNING =
-          T.let(
-            :running,
-            XTwitterScraper::Models::ExtractionRunResponse::Status::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              XTwitterScraper::Models::ExtractionRunResponse::Status::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
       end
 
       # Identifier for the extraction tool used to run a job.

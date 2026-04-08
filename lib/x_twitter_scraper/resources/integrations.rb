@@ -6,7 +6,7 @@ module XTwitterScraper
     class Integrations
       # Create integration
       #
-      # @overload create(config:, event_types:, name:, type:, request_options: {})
+      # @overload create(config:, event_types:, name:, type: :telegram, request_options: {})
       #
       # @param config [XTwitterScraper::Models::IntegrationCreateParams::Config] Integration config (e.g. Telegram chatId)
       #
@@ -14,7 +14,7 @@ module XTwitterScraper
       #
       # @param name [String]
       #
-      # @param type [Symbol, XTwitterScraper::Models::IntegrationCreateParams::Type]
+      # @param type [Symbol, :telegram]
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #

@@ -32,7 +32,7 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :name
 
-      sig { returns(XTwitterScraper::IntegrationCreateParams::Type::OrSymbol) }
+      sig { returns(Symbol) }
       attr_accessor :type
 
       sig do
@@ -40,7 +40,7 @@ module XTwitterScraper
           config: XTwitterScraper::IntegrationCreateParams::Config::OrHash,
           event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           name: String,
-          type: XTwitterScraper::IntegrationCreateParams::Type::OrSymbol,
+          type: Symbol,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -50,7 +50,7 @@ module XTwitterScraper
         # Array of event types to subscribe to.
         event_types:,
         name:,
-        type:,
+        type: :telegram,
         request_options: {}
       )
       end
@@ -61,7 +61,7 @@ module XTwitterScraper
             config: XTwitterScraper::IntegrationCreateParams::Config,
             event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
             name: String,
-            type: XTwitterScraper::IntegrationCreateParams::Type::OrSymbol,
+            type: Symbol,
             request_options: XTwitterScraper::RequestOptions
           }
         )
@@ -88,32 +88,6 @@ module XTwitterScraper
 
         sig { override.returns({ chat_id: String }) }
         def to_hash
-        end
-      end
-
-      module Type
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, XTwitterScraper::IntegrationCreateParams::Type)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        TELEGRAM =
-          T.let(
-            :telegram,
-            XTwitterScraper::IntegrationCreateParams::Type::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              XTwitterScraper::IntegrationCreateParams::Type::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
         end
       end
     end

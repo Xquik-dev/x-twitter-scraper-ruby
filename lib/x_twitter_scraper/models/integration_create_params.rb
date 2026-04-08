@@ -28,17 +28,17 @@ module XTwitterScraper
 
       # @!attribute type
       #
-      #   @return [Symbol, XTwitterScraper::Models::IntegrationCreateParams::Type]
-      required :type, enum: -> { XTwitterScraper::IntegrationCreateParams::Type }
+      #   @return [Symbol, :telegram]
+      required :type, const: :telegram
 
-      # @!method initialize(config:, event_types:, name:, type:, request_options: {})
+      # @!method initialize(config:, event_types:, name:, type: :telegram, request_options: {})
       #   @param config [XTwitterScraper::Models::IntegrationCreateParams::Config] Integration config (e.g. Telegram chatId)
       #
       #   @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
       #
       #   @param name [String]
       #
-      #   @param type [Symbol, XTwitterScraper::Models::IntegrationCreateParams::Type]
+      #   @param type [Symbol, :telegram]
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
 
@@ -52,15 +52,6 @@ module XTwitterScraper
         #   Integration config (e.g. Telegram chatId)
         #
         #   @param chat_id [String]
-      end
-
-      module Type
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TELEGRAM = :telegram
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
       end
     end
   end

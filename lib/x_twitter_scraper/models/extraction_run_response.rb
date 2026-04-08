@@ -11,8 +11,8 @@ module XTwitterScraper
 
       # @!attribute status
       #
-      #   @return [Symbol, XTwitterScraper::Models::ExtractionRunResponse::Status]
-      required :status, enum: -> { XTwitterScraper::Models::ExtractionRunResponse::Status }
+      #   @return [Symbol, :running]
+      required :status, const: :running
 
       # @!attribute tool_type
       #   Identifier for the extraction tool used to run a job.
@@ -22,22 +22,12 @@ module XTwitterScraper
                enum: -> { XTwitterScraper::Models::ExtractionRunResponse::ToolType },
                api_name: :toolType
 
-      # @!method initialize(id:, status:, tool_type:)
+      # @!method initialize(id:, tool_type:, status: :running)
       #   @param id [String]
       #
-      #   @param status [Symbol, XTwitterScraper::Models::ExtractionRunResponse::Status]
-      #
       #   @param tool_type [Symbol, XTwitterScraper::Models::ExtractionRunResponse::ToolType] Identifier for the extraction tool used to run a job.
-
-      # @see XTwitterScraper::Models::ExtractionRunResponse#status
-      module Status
-        extend XTwitterScraper::Internal::Type::Enum
-
-        RUNNING = :running
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #
+      #   @param status [Symbol, :running]
 
       # Identifier for the extraction tool used to run a job.
       #

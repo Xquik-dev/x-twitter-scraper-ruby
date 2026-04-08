@@ -82,7 +82,7 @@ class XTwitterScraper::Test::Resources::ExtractionsTest < XTwitterScraper::Test:
     assert_pattern do
       response => {
         id: String,
-        status: XTwitterScraper::Models::ExtractionRunResponse::Status,
+        status: Symbol,
         tool_type: XTwitterScraper::Models::ExtractionRunResponse::ToolType
       }
     end
