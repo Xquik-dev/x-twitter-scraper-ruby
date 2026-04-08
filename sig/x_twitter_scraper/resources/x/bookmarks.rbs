@@ -6,7 +6,7 @@ module XTwitterScraper
           ?cursor: String,
           ?folder_id: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Internal::CursorPage[XTwitterScraper::PaginatedTweets]
+        ) -> XTwitterScraper::PaginatedTweets
 
         def retrieve_folders: (
           ?request_options: XTwitterScraper::request_opts
