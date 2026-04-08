@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.4.0 (2026-04-08)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** api update ([f9c02a4](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/f9c02a49240130a307fcbd1cfbcfaf999966fb06))
+* **api:** api update ([89e3ff5](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/89e3ff5905185e6223233618819d6dc87a2e87d7))
+* **api:** api update ([dbe6467](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/dbe6467a33987dcd3a65b78bfefca13b5123ae63))
+* **api:** api update ([279a416](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/279a416215ad266661cac5edd02e821e2f701d60))
+
+
+### Bug Fixes
+
+* **ci:** pin rubygems/configure-rubygems-credentials to v1.0.0 ([7d2cde5](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/7d2cde520114bba9680b2c98fbe699f75f9b5c04))
+* set homepage to docs.xquik.com, add documentation_uri to gemdocs ([0f8e806](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/0f8e806ff20df4700054a7df0e17aa89e2da4859))
+
 ## 0.3.0 (2026-04-01)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.2.0...v0.3.0)
