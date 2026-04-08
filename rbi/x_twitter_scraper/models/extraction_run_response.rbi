@@ -21,6 +21,7 @@ module XTwitterScraper
       end
       attr_accessor :status
 
+      # Identifier for the extraction tool used to run a job.
       sig do
         returns(
           XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
@@ -37,7 +38,12 @@ module XTwitterScraper
             XTwitterScraper::Models::ExtractionRunResponse::ToolType::OrSymbol
         ).returns(T.attached_class)
       end
-      def self.new(id:, status:, tool_type:)
+      def self.new(
+        id:,
+        status:,
+        # Identifier for the extraction tool used to run a job.
+        tool_type:
+      )
       end
 
       sig do
@@ -83,6 +89,7 @@ module XTwitterScraper
         end
       end
 
+      # Identifier for the extraction tool used to run a job.
       module ToolType
         extend XTwitterScraper::Internal::Type::Enum
 

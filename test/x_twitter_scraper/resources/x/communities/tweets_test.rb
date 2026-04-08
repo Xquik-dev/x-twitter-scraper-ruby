@@ -9,7 +9,15 @@ class XTwitterScraper::Test::Resources::X::Communities::TweetsTest < XTwitterScr
     response = @x_twitter_scraper.x.communities.tweets.list(q: "q")
 
     assert_pattern do
-      response => nil
+      response => XTwitterScraper::Models::X::Communities::TweetListResponse
+    end
+
+    assert_pattern do
+      response => {
+        has_next_page: XTwitterScraper::Internal::Type::Boolean,
+        next_cursor: String,
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::Communities::TweetListResponse::Tweet])
+      }
     end
   end
 end

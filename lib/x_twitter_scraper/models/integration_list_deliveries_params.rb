@@ -13,13 +13,16 @@ module XTwitterScraper
       required :id, String
 
       # @!attribute limit
+      #   Maximum number of items to return (1-100, default 50)
       #
       #   @return [Integer, nil]
       optional :limit, Integer
 
       # @!method initialize(id:, limit: nil, request_options: {})
       #   @param id [String]
-      #   @param limit [Integer]
+      #
+      #   @param limit [Integer] Maximum number of items to return (1-100, default 50)
+      #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
     end
   end

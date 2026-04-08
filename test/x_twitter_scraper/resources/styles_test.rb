@@ -22,7 +22,7 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
   def test_analyze_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.styles.analyze(username: "username")
+    response = @x_twitter_scraper.styles.analyze(username: "elonmusk")
 
     assert_pattern do
       response => XTwitterScraper::Models::StyleAnalyzeResponse

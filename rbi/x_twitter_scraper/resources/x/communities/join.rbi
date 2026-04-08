@@ -19,7 +19,7 @@ module XTwitterScraper
           def create(
             # Resource ID (stringified bigint)
             id,
-            # X account (@username or account ID)
+            # X account identifier (@username or account ID)
             account:,
             request_options: {}
           )
@@ -38,7 +38,7 @@ module XTwitterScraper
           def delete_all(
             # Resource ID (stringified bigint)
             id,
-            # X account (@username or account ID)
+            # X account identifier (@username or account ID)
             account:,
             request_options: {}
           )

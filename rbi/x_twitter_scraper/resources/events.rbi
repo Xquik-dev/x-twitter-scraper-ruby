@@ -29,10 +29,13 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::EventListResponse)
       end
       def list(
-        # Cursor for pagination
+        # Cursor for keyset pagination
         after: nil,
+        # Filter events by type
         event_type: nil,
+        # Maximum number of items to return (1-100, default 50)
         limit: nil,
+        # Filter events by monitor ID
         monitor_id: nil,
         request_options: {}
       )

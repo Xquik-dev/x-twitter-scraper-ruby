@@ -14,7 +14,7 @@ module XTwitterScraper
           )
         end
 
-      # Pagination cursor from previous response
+      # Pagination cursor for timeline
       sig { returns(T.nilable(String)) }
       attr_reader :cursor
 
@@ -36,7 +36,7 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
-        # Pagination cursor from previous response
+        # Pagination cursor for timeline
         cursor: nil,
         # Comma-separated tweet IDs to exclude from results
         seen_tweet_ids: nil,

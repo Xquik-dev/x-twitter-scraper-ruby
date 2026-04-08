@@ -17,6 +17,7 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :id
 
+      # Export output format
       sig do
         returns(T.nilable(XTwitterScraper::DrawExportParams::Format::OrSymbol))
       end
@@ -50,6 +51,7 @@ module XTwitterScraper
       end
       def self.new(
         id:,
+        # Export output format
         format_: nil,
         # Export winners or all entries
         type: nil,
@@ -70,6 +72,7 @@ module XTwitterScraper
       def to_hash
       end
 
+      # Export output format
       module Format
         extend XTwitterScraper::Internal::Type::Enum
 

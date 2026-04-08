@@ -24,6 +24,7 @@ module XTwitterScraper
       end
       attr_accessor :tweets
 
+      # Paginated list of tweets with cursor-based navigation.
       sig do
         params(
           has_next_page: T::Boolean,
@@ -94,7 +95,7 @@ module XTwitterScraper
         sig { params(created_at: String).void }
         attr_writer :created_at
 
-        # Whether this is a Note Tweet (long-form post, up to 25,000 characters)
+        # True for Note Tweets (long-form content, up to 25,000 characters)
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :is_note_tweet
 
@@ -131,6 +132,7 @@ module XTwitterScraper
         sig { params(view_count: Integer).void }
         attr_writer :view_count
 
+        # Tweet returned from search results with inline author info.
         sig do
           params(
             id: String,
@@ -153,7 +155,7 @@ module XTwitterScraper
           author: nil,
           bookmark_count: nil,
           created_at: nil,
-          # Whether this is a Note Tweet (long-form post, up to 25,000 characters)
+          # True for Note Tweets (long-form content, up to 25,000 characters)
           is_note_tweet: nil,
           like_count: nil,
           quote_count: nil,

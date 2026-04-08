@@ -10,9 +10,9 @@ module XTwitterScraper
       #
       # @param id [String] Extraction public ID (UUID)
       #
-      # @param after [String] Cursor for pagination
+      # @param after [String] Cursor for keyset pagination
       #
-      # @param limit [Integer]
+      # @param limit [Integer] Maximum number of results to return (1-1000, default 100)
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -35,13 +35,13 @@ module XTwitterScraper
       #
       # @overload list(after: nil, limit: nil, status: nil, tool_type: nil, request_options: {})
       #
-      # @param after [String] Cursor for pagination
+      # @param after [String] Cursor for keyset pagination
       #
-      # @param limit [Integer]
+      # @param limit [Integer] Maximum number of items to return (1-100, default 50)
       #
-      # @param status [Symbol, XTwitterScraper::Models::ExtractionListParams::Status]
+      # @param status [Symbol, XTwitterScraper::Models::ExtractionListParams::Status] Filter by job status
       #
-      # @param tool_type [Symbol, XTwitterScraper::Models::ExtractionListParams::ToolType]
+      # @param tool_type [Symbol, XTwitterScraper::Models::ExtractionListParams::ToolType] Filter by extraction tool type
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -64,13 +64,13 @@ module XTwitterScraper
       #
       # @overload estimate_cost(tool_type:, advanced_query: nil, exact_phrase: nil, exclude_words: nil, search_query: nil, target_community_id: nil, target_list_id: nil, target_space_id: nil, target_tweet_id: nil, target_username: nil, request_options: {})
       #
-      # @param tool_type [Symbol, XTwitterScraper::Models::ExtractionEstimateCostParams::ToolType]
+      # @param tool_type [Symbol, XTwitterScraper::Models::ExtractionEstimateCostParams::ToolType] Identifier for the extraction tool used to run a job.
       #
-      # @param advanced_query [String] Raw advanced search query appended as-is (tweet_search_extractor)
+      # @param advanced_query [String] Raw advanced query string appended to the estimate (tweet_search_extractor)
       #
-      # @param exact_phrase [String] Exact phrase to match (tweet_search_extractor)
+      # @param exact_phrase [String] Exact phrase filter for search estimation
       #
-      # @param exclude_words [String] Words to exclude from results (tweet_search_extractor)
+      # @param exclude_words [String] Words excluded from estimated search results
       #
       # @param search_query [String]
       #
@@ -106,7 +106,7 @@ module XTwitterScraper
       #
       # @param id [String] Extraction public ID
       #
-      # @param format_ [Symbol, XTwitterScraper::Models::ExtractionExportResultsParams::Format]
+      # @param format_ [Symbol, XTwitterScraper::Models::ExtractionExportResultsParams::Format] Export file format
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -130,7 +130,7 @@ module XTwitterScraper
       #
       # @overload run(tool_type:, advanced_query: nil, exact_phrase: nil, exclude_words: nil, search_query: nil, target_community_id: nil, target_list_id: nil, target_space_id: nil, target_tweet_id: nil, target_username: nil, request_options: {})
       #
-      # @param tool_type [Symbol, XTwitterScraper::Models::ExtractionRunParams::ToolType]
+      # @param tool_type [Symbol, XTwitterScraper::Models::ExtractionRunParams::ToolType] Identifier for the extraction tool used to run a job.
       #
       # @param advanced_query [String] Raw advanced search query appended as-is (tweet_search_extractor)
       #

@@ -9,21 +9,21 @@ module XTwitterScraper
         include XTwitterScraper::Internal::Type::RequestParameters
 
         # @!attribute q
-        #   Search query
+        #   User search query
         #
         #   @return [String]
         required :q, String
 
         # @!attribute cursor
-        #   Pagination cursor
+        #   Pagination cursor for user search
         #
         #   @return [String, nil]
         optional :cursor, String
 
         # @!method initialize(q:, cursor: nil, request_options: {})
-        #   @param q [String] Search query
+        #   @param q [String] User search query
         #
-        #   @param cursor [String] Pagination cursor
+        #   @param cursor [String] Pagination cursor for user search
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end

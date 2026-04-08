@@ -14,6 +14,7 @@ module XTwitterScraper
       required :config, -> { XTwitterScraper::IntegrationCreateParams::Config }
 
       # @!attribute event_types
+      #   Array of event types to subscribe to.
       #
       #   @return [Array<Symbol, XTwitterScraper::Models::IntegrationCreateParams::EventType>]
       required :event_types,
@@ -35,7 +36,7 @@ module XTwitterScraper
       # @!method initialize(config:, event_types:, name:, type:, request_options: {})
       #   @param config [XTwitterScraper::Models::IntegrationCreateParams::Config] Integration config (e.g. Telegram chatId)
       #
-      #   @param event_types [Array<Symbol, XTwitterScraper::Models::IntegrationCreateParams::EventType>]
+      #   @param event_types [Array<Symbol, XTwitterScraper::Models::IntegrationCreateParams::EventType>] Array of event types to subscribe to.
       #
       #   @param name [String]
       #
@@ -55,6 +56,7 @@ module XTwitterScraper
         #   @param chat_id [String]
       end
 
+      # Type of monitor event fired when account activity occurs.
       module EventType
         extend XTwitterScraper::Internal::Type::Enum
 

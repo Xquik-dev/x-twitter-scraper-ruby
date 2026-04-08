@@ -34,6 +34,8 @@ module XTwitterScraper
       optional :topic, String
 
       # @!method initialize(id:, created_at:, text:, updated_at:, goal: nil, topic: nil)
+      #   Full tweet draft including update timestamp.
+      #
       #   @param id [String]
       #   @param created_at [Time]
       #   @param text [String]

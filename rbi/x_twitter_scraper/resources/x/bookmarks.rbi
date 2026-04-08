@@ -14,7 +14,7 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::BookmarkListResponse)
         end
         def list(
-          # Pagination cursor from previous response
+          # Pagination cursor for bookmarks
           cursor: nil,
           # Optional bookmark folder ID
           folder_id: nil,

@@ -14,7 +14,7 @@ module XTwitterScraper
         required :user_id, String
 
         # @!attribute cursor
-        #   Pagination cursor from previous response
+        #   Pagination cursor for DM history
         #
         #   @return [String, nil]
         optional :cursor, String
@@ -28,7 +28,7 @@ module XTwitterScraper
         # @!method initialize(user_id:, cursor: nil, max_id: nil, request_options: {})
         #   @param user_id [String]
         #
-        #   @param cursor [String] Pagination cursor from previous response
+        #   @param cursor [String] Pagination cursor for DM history
         #
         #   @param max_id [String] Legacy pagination cursor (backward compat)
         #

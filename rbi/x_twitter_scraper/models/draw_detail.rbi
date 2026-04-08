@@ -53,6 +53,7 @@ module XTwitterScraper
       sig { params(drawn_at: Time).void }
       attr_writer :drawn_at
 
+      # Full giveaway draw with tweet metrics, entries, and timing.
       sig do
         params(
           id: String,

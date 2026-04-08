@@ -13,12 +13,12 @@ module XTwitterScraper
           view_count: Integer,
           conversation_id: String,
           created_at: String,
-          entities: top,
+          entities: ::Hash[Symbol, top],
           is_note_tweet: bool,
           is_quote_status: bool,
           is_reply: bool,
           media: ::Array[XTwitterScraper::X::TweetDetail::Media],
-          quoted_tweet: top,
+          quoted_tweet: ::Hash[Symbol, top],
           source: String
         }
 
@@ -47,9 +47,9 @@ module XTwitterScraper
 
         def created_at=: (String) -> String
 
-        attr_reader entities: top?
+        attr_reader entities: ::Hash[Symbol, top]?
 
-        def entities=: (top) -> top
+        def entities=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
         attr_reader is_note_tweet: bool?
 
@@ -69,9 +69,9 @@ module XTwitterScraper
           ::Array[XTwitterScraper::X::TweetDetail::Media]
         ) -> ::Array[XTwitterScraper::X::TweetDetail::Media]
 
-        attr_reader quoted_tweet: top?
+        attr_reader quoted_tweet: ::Hash[Symbol, top]?
 
-        def quoted_tweet=: (top) -> top
+        def quoted_tweet=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
         attr_reader source: String?
 
@@ -88,12 +88,12 @@ module XTwitterScraper
           view_count: Integer,
           ?conversation_id: String,
           ?created_at: String,
-          ?entities: top,
+          ?entities: ::Hash[Symbol, top],
           ?is_note_tweet: bool,
           ?is_quote_status: bool,
           ?is_reply: bool,
           ?media: ::Array[XTwitterScraper::X::TweetDetail::Media],
-          ?quoted_tweet: top,
+          ?quoted_tweet: ::Hash[Symbol, top],
           ?source: String
         ) -> void
 
@@ -108,12 +108,12 @@ module XTwitterScraper
           view_count: Integer,
           conversation_id: String,
           created_at: String,
-          entities: top,
+          entities: ::Hash[Symbol, top],
           is_note_tweet: bool,
           is_quote_status: bool,
           is_reply: bool,
           media: ::Array[XTwitterScraper::X::TweetDetail::Media],
-          quoted_tweet: top,
+          quoted_tweet: ::Hash[Symbol, top],
           source: String
         }
 

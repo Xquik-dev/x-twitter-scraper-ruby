@@ -65,6 +65,8 @@ module XTwitterScraper
         optional :source_type, String, api_name: :sourceType
 
         # @!method initialize(id:, attempts:, created_at:, event_type:, status:, delivered_at: nil, last_error: nil, last_status_code: nil, source_id: nil, source_type: nil)
+        #   Integration delivery attempt record with status and retry count.
+        #
         #   @param id [String]
         #   @param attempts [Integer]
         #   @param created_at [Time]

@@ -77,6 +77,7 @@ module XTwitterScraper
         end
         attr_accessor :status
 
+        # Identifier for the extraction tool used to run a job.
         sig do
           returns(
             XTwitterScraper::Models::ExtractionListResponse::Extraction::ToolType::TaggedSymbol
@@ -93,6 +94,7 @@ module XTwitterScraper
         sig { params(completed_at: Time).void }
         attr_writer :completed_at
 
+        # Extraction job tracking status, tool type, and result count.
         sig do
           params(
             id: String,
@@ -109,6 +111,7 @@ module XTwitterScraper
           id:,
           created_at:,
           status:,
+          # Identifier for the extraction tool used to run a job.
           tool_type:,
           total_results:,
           completed_at: nil
@@ -171,6 +174,7 @@ module XTwitterScraper
           end
         end
 
+        # Identifier for the extraction tool used to run a job.
         module ToolType
           extend XTwitterScraper::Internal::Type::Enum
 

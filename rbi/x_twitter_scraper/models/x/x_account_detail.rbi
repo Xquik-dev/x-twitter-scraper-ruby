@@ -47,6 +47,7 @@ module XTwitterScraper
         sig { params(updated_at: Time).void }
         attr_writer :updated_at
 
+        # Full X account details including proxy, cookies, and update timestamp.
         sig do
           params(
             id: String,

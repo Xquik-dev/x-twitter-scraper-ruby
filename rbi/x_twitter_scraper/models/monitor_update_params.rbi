@@ -17,6 +17,7 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :id
 
+      # Array of event types to subscribe to.
       sig do
         returns(
           T.nilable(
@@ -49,7 +50,13 @@ module XTwitterScraper
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(id:, event_types: nil, is_active: nil, request_options: {})
+      def self.new(
+        id:,
+        # Array of event types to subscribe to.
+        event_types: nil,
+        is_active: nil,
+        request_options: {}
+      )
       end
 
       sig do
@@ -68,6 +75,7 @@ module XTwitterScraper
       def to_hash
       end
 
+      # Type of monitor event fired when account activity occurs.
       module EventType
         extend XTwitterScraper::Internal::Type::Enum
 

@@ -11,11 +11,11 @@ module XTwitterScraper
         #
         # @param id [String] List ID
         #
-        # @param cursor [String] Pagination cursor
+        # @param cursor [String] Pagination cursor for list followers
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [nil]
+        # @return [XTwitterScraper::Models::X::ListRetrieveFollowersResponse]
         #
         # @see XTwitterScraper::Models::X::ListRetrieveFollowersParams
         def retrieve_followers(id, params = {})
@@ -25,7 +25,7 @@ module XTwitterScraper
             method: :get,
             path: ["x/lists/%1$s/followers", id],
             query: query,
-            model: NilClass,
+            model: XTwitterScraper::Models::X::ListRetrieveFollowersResponse,
             options: options
           )
         end
@@ -34,13 +34,13 @@ module XTwitterScraper
         #
         # @overload retrieve_members(id, cursor: nil, request_options: {})
         #
-        # @param id [String] List ID
+        # @param id [String] List ID for member lookup
         #
-        # @param cursor [String] Pagination cursor
+        # @param cursor [String] Pagination cursor for list members
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [nil]
+        # @return [XTwitterScraper::Models::X::ListRetrieveMembersResponse]
         #
         # @see XTwitterScraper::Models::X::ListRetrieveMembersParams
         def retrieve_members(id, params = {})
@@ -50,7 +50,7 @@ module XTwitterScraper
             method: :get,
             path: ["x/lists/%1$s/members", id],
             query: query,
-            model: NilClass,
+            model: XTwitterScraper::Models::X::ListRetrieveMembersResponse,
             options: options
           )
         end
@@ -59,9 +59,9 @@ module XTwitterScraper
         #
         # @overload retrieve_tweets(id, cursor: nil, include_replies: nil, since_time: nil, until_time: nil, request_options: {})
         #
-        # @param id [String] List ID
+        # @param id [String] List ID for tweet lookup
         #
-        # @param cursor [String] Pagination cursor
+        # @param cursor [String] Pagination cursor for list tweets
         #
         # @param include_replies [Boolean] Include replies (default false)
         #
@@ -71,7 +71,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [nil]
+        # @return [XTwitterScraper::Models::X::ListRetrieveTweetsResponse]
         #
         # @see XTwitterScraper::Models::X::ListRetrieveTweetsParams
         def retrieve_tweets(id, params = {})
@@ -85,7 +85,7 @@ module XTwitterScraper
               since_time: "sinceTime",
               until_time: "untilTime"
             ),
-            model: NilClass,
+            model: XTwitterScraper::Models::X::ListRetrieveTweetsResponse,
             options: options
           )
         end

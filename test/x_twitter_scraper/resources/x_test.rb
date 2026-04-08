@@ -62,7 +62,15 @@ class XTwitterScraper::Test::Resources::XTest < XTwitterScraper::Test::ResourceT
     response = @x_twitter_scraper.x.get_trends
 
     assert_pattern do
-      response => nil
+      response => XTwitterScraper::Models::XGetTrendsResponse
+    end
+
+    assert_pattern do
+      response => {
+        count: Integer,
+        trends: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::XGetTrendsResponse::Trend]),
+        woeid: Integer
+      }
     end
   end
 end

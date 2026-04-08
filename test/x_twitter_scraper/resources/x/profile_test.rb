@@ -6,7 +6,7 @@ class XTwitterScraper::Test::Resources::X::ProfileTest < XTwitterScraper::Test::
   def test_update_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.profile.update(account: "account")
+    response = @x_twitter_scraper.x.profile.update(account: "@elonmusk")
 
     assert_pattern do
       response => XTwitterScraper::Models::X::ProfileUpdateResponse
@@ -23,7 +23,7 @@ class XTwitterScraper::Test::Resources::X::ProfileTest < XTwitterScraper::Test::
     skip("Mock server tests are disabled")
 
     response =
-      @x_twitter_scraper.x.profile.update_avatar(account: "account", file: StringIO.new("Example data"))
+      @x_twitter_scraper.x.profile.update_avatar(account: "@elonmusk", file: StringIO.new("Example data"))
 
     assert_pattern do
       response => XTwitterScraper::Models::X::ProfileUpdateAvatarResponse
@@ -40,7 +40,7 @@ class XTwitterScraper::Test::Resources::X::ProfileTest < XTwitterScraper::Test::
     skip("Mock server tests are disabled")
 
     response =
-      @x_twitter_scraper.x.profile.update_banner(account: "account", file: StringIO.new("Example data"))
+      @x_twitter_scraper.x.profile.update_banner(account: "@elonmusk", file: StringIO.new("Example data"))
 
     assert_pattern do
       response => XTwitterScraper::Models::X::ProfileUpdateBannerResponse

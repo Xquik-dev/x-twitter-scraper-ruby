@@ -8,7 +8,7 @@ module XTwitterScraper
       #
       # @overload create(event_types:, url:, request_options: {})
       #
-      # @param event_types [Array<Symbol, XTwitterScraper::Models::WebhookCreateParams::EventType>]
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::WebhookCreateParams::EventType>] Array of event types to subscribe to.
       #
       # @param url [String] HTTPS URL
       #
@@ -34,7 +34,7 @@ module XTwitterScraper
       #
       # @param id [String] Resource ID (stringified bigint)
       #
-      # @param event_types [Array<Symbol, XTwitterScraper::Models::WebhookUpdateParams::EventType>]
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::WebhookUpdateParams::EventType>] Array of event types to subscribe to.
       #
       # @param is_active [Boolean]
       #

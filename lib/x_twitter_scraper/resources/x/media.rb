@@ -33,7 +33,7 @@ module XTwitterScraper
         #
         # @overload upload(account:, file:, is_long_video: nil, request_options: {})
         #
-        # @param account [String] X account (@username or account ID)
+        # @param account [String] X account (@username or ID) uploading media
         #
         # @param file [Pathname, StringIO, IO, String, XTwitterScraper::FilePart] Media file to upload
         #

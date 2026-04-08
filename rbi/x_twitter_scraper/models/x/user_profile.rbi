@@ -69,6 +69,7 @@ module XTwitterScraper
         sig { params(verified: T::Boolean).void }
         attr_writer :verified
 
+        # X user profile with bio, follower counts, and verification status.
         sig do
           params(
             id: String,

@@ -13,15 +13,19 @@ module XTwitterScraper
       required :id, String
 
       # @!attribute format_
+      #   Export file format
       #
       #   @return [Symbol, XTwitterScraper::Models::ExtractionExportResultsParams::Format, nil]
       optional :format_, enum: -> { XTwitterScraper::ExtractionExportResultsParams::Format }
 
       # @!method initialize(id:, format_: nil, request_options: {})
       #   @param id [String]
-      #   @param format_ [Symbol, XTwitterScraper::Models::ExtractionExportResultsParams::Format]
+      #
+      #   @param format_ [Symbol, XTwitterScraper::Models::ExtractionExportResultsParams::Format] Export file format
+      #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
 
+      # Export file format
       module Format
         extend XTwitterScraper::Internal::Type::Enum
 

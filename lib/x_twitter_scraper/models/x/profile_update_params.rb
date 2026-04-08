@@ -9,7 +9,7 @@ module XTwitterScraper
         include XTwitterScraper::Internal::Type::RequestParameters
 
         # @!attribute account
-        #   X account (@username or account ID)
+        #   X account (@username or ID) to update profile
         #
         #   @return [String]
         required :account, String
@@ -38,7 +38,7 @@ module XTwitterScraper
         optional :url, String
 
         # @!method initialize(account:, description: nil, location: nil, name: nil, url: nil, request_options: {})
-        #   @param account [String] X account (@username or account ID)
+        #   @param account [String] X account (@username or ID) to update profile
         #
         #   @param description [String] Bio description
         #

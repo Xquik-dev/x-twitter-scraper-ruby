@@ -22,6 +22,7 @@ module XTwitterScraper
           sig { returns(T::Boolean) }
           attr_accessor :success
 
+          # Result of a community join or leave action.
           sig do
             params(
               community_id: String,

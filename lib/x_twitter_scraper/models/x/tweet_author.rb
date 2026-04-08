@@ -30,6 +30,8 @@ module XTwitterScraper
         optional :profile_picture, String, api_name: :profilePicture
 
         # @!method initialize(id:, followers:, username:, verified:, profile_picture: nil)
+        #   Author of a tweet with follower count and verification status.
+        #
         #   @param id [String]
         #   @param followers [Integer]
         #   @param username [String]

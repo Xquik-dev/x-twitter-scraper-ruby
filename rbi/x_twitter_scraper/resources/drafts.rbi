@@ -41,6 +41,7 @@ module XTwitterScraper
       def list(
         # Cursor for pagination
         after_cursor: nil,
+        # Maximum number of items to return (1-100, default 50)
         limit: nil,
         request_options: {}
       )

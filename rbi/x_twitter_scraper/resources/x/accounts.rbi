@@ -80,9 +80,9 @@ module XTwitterScraper
         def reauth(
           # Resource ID (stringified bigint)
           id,
-          # Account password
+          # Updated account password
           password:,
-          # TOTP secret for 2FA
+          # TOTP secret for 2FA re-authentication
           totp_secret: nil,
           request_options: {}
         )

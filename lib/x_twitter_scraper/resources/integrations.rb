@@ -10,7 +10,7 @@ module XTwitterScraper
       #
       # @param config [XTwitterScraper::Models::IntegrationCreateParams::Config] Integration config (e.g. Telegram chatId)
       #
-      # @param event_types [Array<Symbol, XTwitterScraper::Models::IntegrationCreateParams::EventType>]
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::IntegrationCreateParams::EventType>] Array of event types to subscribe to.
       #
       # @param name [String]
       #
@@ -58,7 +58,7 @@ module XTwitterScraper
       #
       # @param id [String] Resource ID (stringified bigint)
       #
-      # @param event_types [Array<Symbol, XTwitterScraper::Models::IntegrationUpdateParams::EventType>]
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::IntegrationUpdateParams::EventType>] Array of event types to subscribe to.
       #
       # @param filters [Hash{Symbol=>Object}] Event filter rules (JSON)
       #
@@ -132,7 +132,7 @@ module XTwitterScraper
       #
       # @param id [String] Resource ID (stringified bigint)
       #
-      # @param limit [Integer]
+      # @param limit [Integer] Maximum number of items to return (1-100, default 50)
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #

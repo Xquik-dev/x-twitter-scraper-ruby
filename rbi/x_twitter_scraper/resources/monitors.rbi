@@ -14,6 +14,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::MonitorCreateResponse)
       end
       def create(
+        # Array of event types to subscribe to.
         event_types:,
         # X username (without @)
         username:,
@@ -48,6 +49,7 @@ module XTwitterScraper
       def update(
         # Resource ID (stringified bigint)
         id,
+        # Array of event types to subscribe to.
         event_types: nil,
         is_active: nil,
         request_options: {}

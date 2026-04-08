@@ -13,6 +13,7 @@ module XTwitterScraper
       required :id, String
 
       # @!attribute event_types
+      #   Array of event types to subscribe to.
       #
       #   @return [Array<Symbol, XTwitterScraper::Models::IntegrationUpdateParams::EventType>, nil]
       optional :event_types,
@@ -58,7 +59,7 @@ module XTwitterScraper
       # @!method initialize(id:, event_types: nil, filters: nil, is_active: nil, message_template: nil, name: nil, scope_all_monitors: nil, silent_push: nil, request_options: {})
       #   @param id [String]
       #
-      #   @param event_types [Array<Symbol, XTwitterScraper::Models::IntegrationUpdateParams::EventType>]
+      #   @param event_types [Array<Symbol, XTwitterScraper::Models::IntegrationUpdateParams::EventType>] Array of event types to subscribe to.
       #
       #   @param filters [Hash{Symbol=>Object}] Event filter rules (JSON)
       #
@@ -74,6 +75,7 @@ module XTwitterScraper
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
 
+      # Type of monitor event fired when account activity occurs.
       module EventType
         extend XTwitterScraper::Internal::Type::Enum
 

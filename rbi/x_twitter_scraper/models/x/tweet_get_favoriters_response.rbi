@@ -27,6 +27,7 @@ module XTwitterScraper
         end
         attr_accessor :users
 
+        # Paginated list of user profiles with cursor-based navigation.
         sig do
           params(
             has_next_page: T::Boolean,
@@ -121,6 +122,7 @@ module XTwitterScraper
           sig { params(verified: T::Boolean).void }
           attr_writer :verified
 
+          # X user profile with bio, follower counts, and verification status.
           sig do
             params(
               id: String,

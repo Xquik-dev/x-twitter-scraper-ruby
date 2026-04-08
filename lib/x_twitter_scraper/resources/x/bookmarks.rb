@@ -9,7 +9,7 @@ module XTwitterScraper
         #
         # @overload list(cursor: nil, folder_id: nil, request_options: {})
         #
-        # @param cursor [String] Pagination cursor from previous response
+        # @param cursor [String] Pagination cursor for bookmarks
         #
         # @param folder_id [String] Optional bookmark folder ID
         #

@@ -6,7 +6,11 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
   def test_create_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.webhooks.create(event_types: [:"tweet.new"], url: "https://example.com")
+    response =
+      @x_twitter_scraper.webhooks.create(
+        event_types: [:"tweet.new", :"follower.gained"],
+        url: "https://example.com/webhook"
+      )
 
     assert_pattern do
       response => XTwitterScraper::Models::WebhookCreateResponse

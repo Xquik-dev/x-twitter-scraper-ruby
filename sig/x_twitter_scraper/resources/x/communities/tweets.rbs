@@ -8,7 +8,7 @@ module XTwitterScraper
             ?cursor: String,
             ?query_type: String,
             ?request_options: XTwitterScraper::request_opts
-          ) -> nil
+          ) -> XTwitterScraper::Models::X::Communities::TweetListResponse
 
           def initialize: (client: XTwitterScraper::Client) -> void
         end

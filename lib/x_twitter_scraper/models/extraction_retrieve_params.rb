@@ -13,12 +13,13 @@ module XTwitterScraper
       required :id, String
 
       # @!attribute after
-      #   Cursor for pagination
+      #   Cursor for keyset pagination
       #
       #   @return [String, nil]
       optional :after, String
 
       # @!attribute limit
+      #   Maximum number of results to return (1-1000, default 100)
       #
       #   @return [Integer, nil]
       optional :limit, Integer
@@ -26,9 +27,9 @@ module XTwitterScraper
       # @!method initialize(id:, after: nil, limit: nil, request_options: {})
       #   @param id [String]
       #
-      #   @param after [String] Cursor for pagination
+      #   @param after [String] Cursor for keyset pagination
       #
-      #   @param limit [Integer]
+      #   @param limit [Integer] Maximum number of results to return (1-1000, default 100)
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
     end

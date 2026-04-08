@@ -9,7 +9,7 @@ module XTwitterScraper
         include XTwitterScraper::Internal::Type::RequestParameters
 
         # @!attribute account
-        #   X account (@username or account ID)
+        #   X account (@username or ID) uploading media
         #
         #   @return [String]
         required :account, String
@@ -26,7 +26,7 @@ module XTwitterScraper
         optional :is_long_video, XTwitterScraper::Internal::Type::Boolean
 
         # @!method initialize(account:, file:, is_long_video: nil, request_options: {})
-        #   @param account [String] X account (@username or account ID)
+        #   @param account [String] X account (@username or ID) uploading media
         #
         #   @param file [Pathname, StringIO, IO, String, XTwitterScraper::FilePart] Media file to upload
         #

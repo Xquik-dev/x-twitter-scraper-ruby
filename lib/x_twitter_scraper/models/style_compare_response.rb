@@ -5,18 +5,21 @@ module XTwitterScraper
     # @see XTwitterScraper::Resources::Styles#compare
     class StyleCompareResponse < XTwitterScraper::Internal::Type::BaseModel
       # @!attribute style1
+      #   Full style profile with sampled tweets used for tone analysis.
       #
       #   @return [XTwitterScraper::Models::StyleCompareResponse::Style1]
       required :style1, -> { XTwitterScraper::Models::StyleCompareResponse::Style1 }
 
       # @!attribute style2
+      #   Full style profile with sampled tweets used for tone analysis.
       #
       #   @return [XTwitterScraper::Models::StyleCompareResponse::Style2]
       required :style2, -> { XTwitterScraper::Models::StyleCompareResponse::Style2 }
 
       # @!method initialize(style1:, style2:)
-      #   @param style1 [XTwitterScraper::Models::StyleCompareResponse::Style1]
-      #   @param style2 [XTwitterScraper::Models::StyleCompareResponse::Style2]
+      #   @param style1 [XTwitterScraper::Models::StyleCompareResponse::Style1] Full style profile with sampled tweets used for tone analysis.
+      #
+      #   @param style2 [XTwitterScraper::Models::StyleCompareResponse::Style2] Full style profile with sampled tweets used for tone analysis.
 
       # @see XTwitterScraper::Models::StyleCompareResponse#style1
       class Style1 < XTwitterScraper::Internal::Type::BaseModel
@@ -47,6 +50,8 @@ module XTwitterScraper
         required :x_username, String, api_name: :xUsername
 
         # @!method initialize(fetched_at:, is_own_account:, tweet_count:, tweets:, x_username:)
+        #   Full style profile with sampled tweets used for tone analysis.
+        #
         #   @param fetched_at [Time]
         #   @param is_own_account [Boolean]
         #   @param tweet_count [Integer]
@@ -111,6 +116,8 @@ module XTwitterScraper
         required :x_username, String, api_name: :xUsername
 
         # @!method initialize(fetched_at:, is_own_account:, tweet_count:, tweets:, x_username:)
+        #   Full style profile with sampled tweets used for tone analysis.
+        #
         #   @param fetched_at [Time]
         #   @param is_own_account [Boolean]
         #   @param tweet_count [Integer]

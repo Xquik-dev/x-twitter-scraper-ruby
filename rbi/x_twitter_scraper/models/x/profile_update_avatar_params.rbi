@@ -15,7 +15,7 @@ module XTwitterScraper
             )
           end
 
-        # X account (@username or account ID)
+        # X account (@username or ID) for avatar update
         sig { returns(String) }
         attr_accessor :account
 
@@ -31,7 +31,7 @@ module XTwitterScraper
           ).returns(T.attached_class)
         end
         def self.new(
-          # X account (@username or account ID)
+          # X account (@username or ID) for avatar update
           account:,
           # Avatar image (max 716KB)
           file:,

@@ -98,6 +98,7 @@ module XTwitterScraper
         sig { params(source_type: String).void }
         attr_writer :source_type
 
+        # Integration delivery attempt record with status and retry count.
         sig do
           params(
             id: String,

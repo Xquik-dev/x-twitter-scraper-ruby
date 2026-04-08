@@ -6,7 +6,7 @@ class XTwitterScraper::Test::Resources::DraftsTest < XTwitterScraper::Test::Reso
   def test_create_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.drafts.create(text: "text")
+    response = @x_twitter_scraper.drafts.create(text: "AI is the future of productivity")
 
     assert_pattern do
       response => XTwitterScraper::Models::DraftCreateResponse

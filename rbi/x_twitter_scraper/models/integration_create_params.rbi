@@ -25,6 +25,7 @@ module XTwitterScraper
       end
       attr_writer :config
 
+      # Array of event types to subscribe to.
       sig do
         returns(
           T::Array[
@@ -55,6 +56,7 @@ module XTwitterScraper
       def self.new(
         # Integration config (e.g. Telegram chatId)
         config:,
+        # Array of event types to subscribe to.
         event_types:,
         name:,
         type:,
@@ -101,6 +103,7 @@ module XTwitterScraper
         end
       end
 
+      # Type of monitor event fired when account activity occurs.
       module EventType
         extend XTwitterScraper::Internal::Type::Enum
 

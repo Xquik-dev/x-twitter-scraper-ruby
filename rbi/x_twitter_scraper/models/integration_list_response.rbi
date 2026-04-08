@@ -63,6 +63,7 @@ module XTwitterScraper
         sig { returns(Time) }
         attr_accessor :created_at
 
+        # Array of event types to subscribe to.
         sig do
           returns(
             T::Array[
@@ -110,6 +111,7 @@ module XTwitterScraper
         sig { params(silent_push: T::Boolean).void }
         attr_writer :silent_push
 
+        # Third-party integration (e.g. Telegram) subscribed to monitor events.
         sig do
           params(
             id: String,
@@ -134,6 +136,7 @@ module XTwitterScraper
           # Integration config — shape varies by type (JSON)
           config:,
           created_at:,
+          # Array of event types to subscribe to.
           event_types:,
           is_active:,
           name:,
@@ -170,6 +173,7 @@ module XTwitterScraper
         def to_hash
         end
 
+        # Type of monitor event fired when account activity occurs.
         module EventType
           extend XTwitterScraper::Internal::Type::Enum
 

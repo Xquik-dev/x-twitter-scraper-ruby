@@ -32,7 +32,7 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::MediaUploadResponse)
         end
         def upload(
-          # X account (@username or account ID)
+          # X account (@username or ID) uploading media
           account:,
           # Media file to upload
           file:,

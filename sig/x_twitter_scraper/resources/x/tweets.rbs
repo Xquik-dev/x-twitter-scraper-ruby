@@ -20,7 +20,7 @@ module XTwitterScraper
         def list: (
           ids: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> nil
+        ) -> XTwitterScraper::Models::X::TweetListResponse
 
         def get_favoriters: (
           String id,

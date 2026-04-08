@@ -10,15 +10,15 @@ module XTwitterScraper
           #
           # @overload list(q:, cursor: nil, query_type: nil, request_options: {})
           #
-          # @param q [String] Search query
+          # @param q [String] Search query for cross-community tweets
           #
-          # @param cursor [String] Pagination cursor
+          # @param cursor [String] Pagination cursor for cross-community results
           #
-          # @param query_type [String] Sort order (Latest or Top)
+          # @param query_type [String] Sort order for cross-community results (Latest or Top)
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [nil]
+          # @return [XTwitterScraper::Models::X::Communities::TweetListResponse]
           #
           # @see XTwitterScraper::Models::X::Communities::TweetListParams
           def list(params)
@@ -28,7 +28,7 @@ module XTwitterScraper
               method: :get,
               path: "x/communities/tweets",
               query: query.transform_keys(query_type: "queryType"),
-              model: NilClass,
+              model: XTwitterScraper::Models::X::Communities::TweetListResponse,
               options: options
             )
           end

@@ -30,7 +30,7 @@ module XTwitterScraper
         optional :created_at, String, api_name: :createdAt
 
         # @!attribute is_note_tweet
-        #   Whether this is a Note Tweet (long-form post, up to 25,000 characters)
+        #   True for Note Tweets (long-form content, up to 25,000 characters)
         #
         #   @return [Boolean, nil]
         optional :is_note_tweet, XTwitterScraper::Internal::Type::Boolean, api_name: :isNoteTweet
@@ -61,6 +61,8 @@ module XTwitterScraper
         optional :view_count, Integer, api_name: :viewCount
 
         # @!method initialize(id:, text:, author: nil, bookmark_count: nil, created_at: nil, is_note_tweet: nil, like_count: nil, quote_count: nil, reply_count: nil, retweet_count: nil, view_count: nil)
+        #   Tweet returned from search results with inline author info.
+        #
         #   @param id [String]
         #
         #   @param text [String]
@@ -71,7 +73,7 @@ module XTwitterScraper
         #
         #   @param created_at [String]
         #
-        #   @param is_note_tweet [Boolean] Whether this is a Note Tweet (long-form post, up to 25,000 characters)
+        #   @param is_note_tweet [Boolean] True for Note Tweets (long-form content, up to 25,000 characters)
         #
         #   @param like_count [Integer]
         #

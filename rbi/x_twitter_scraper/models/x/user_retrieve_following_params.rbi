@@ -18,14 +18,14 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :id
 
-        # Pagination cursor
+        # Pagination cursor for following list
         sig { returns(T.nilable(String)) }
         attr_reader :cursor
 
         sig { params(cursor: String).void }
         attr_writer :cursor
 
-        # Items per page (20-200, default 200)
+        # Results per page (20-200, default 200)
         sig { returns(T.nilable(Integer)) }
         attr_reader :page_size
 
@@ -42,9 +42,9 @@ module XTwitterScraper
         end
         def self.new(
           id:,
-          # Pagination cursor
+          # Pagination cursor for following list
           cursor: nil,
-          # Items per page (20-200, default 200)
+          # Results per page (20-200, default 200)
           page_size: nil,
           request_options: {}
         )

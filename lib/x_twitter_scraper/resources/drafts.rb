@@ -53,7 +53,7 @@ module XTwitterScraper
       #
       # @param after_cursor [String] Cursor for pagination
       #
-      # @param limit [Integer]
+      # @param limit [Integer] Maximum number of items to return (1-100, default 50)
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #

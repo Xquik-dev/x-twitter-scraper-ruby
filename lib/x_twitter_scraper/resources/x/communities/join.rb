@@ -12,7 +12,7 @@ module XTwitterScraper
           #
           # @param id [String] Resource ID (stringified bigint)
           #
-          # @param account [String] X account (@username or account ID)
+          # @param account [String] X account identifier (@username or account ID)
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -36,7 +36,7 @@ module XTwitterScraper
           #
           # @param id [String] Resource ID (stringified bigint)
           #
-          # @param account [String] X account (@username or account ID)
+          # @param account [String] X account identifier (@username or account ID)
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #

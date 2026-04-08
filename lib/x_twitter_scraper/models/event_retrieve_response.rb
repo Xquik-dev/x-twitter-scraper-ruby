@@ -26,6 +26,7 @@ module XTwitterScraper
       required :occurred_at, Time, api_name: :occurredAt
 
       # @!attribute type
+      #   Type of monitor event fired when account activity occurs.
       #
       #   @return [Symbol, XTwitterScraper::Models::EventRetrieveResponse::Type]
       required :type, enum: -> { XTwitterScraper::Models::EventRetrieveResponse::Type }
@@ -41,6 +42,8 @@ module XTwitterScraper
       optional :x_event_id, String, api_name: :xEventId
 
       # @!method initialize(id:, data:, monitor_id:, occurred_at:, type:, username:, x_event_id: nil)
+      #   Full monitor event including payload data and optional X event ID.
+      #
       #   @param id [String]
       #
       #   @param data [Hash{Symbol=>Object}] Event payload — shape varies by event type (JSON)
@@ -49,12 +52,14 @@ module XTwitterScraper
       #
       #   @param occurred_at [Time]
       #
-      #   @param type [Symbol, XTwitterScraper::Models::EventRetrieveResponse::Type]
+      #   @param type [Symbol, XTwitterScraper::Models::EventRetrieveResponse::Type] Type of monitor event fired when account activity occurs.
       #
       #   @param username [String]
       #
       #   @param x_event_id [String]
 
+      # Type of monitor event fired when account activity occurs.
+      #
       # @see XTwitterScraper::Models::EventRetrieveResponse#type
       module Type
         extend XTwitterScraper::Internal::Type::Enum

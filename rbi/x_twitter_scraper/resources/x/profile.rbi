@@ -17,7 +17,7 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::ProfileUpdateResponse)
         end
         def update(
-          # X account (@username or account ID)
+          # X account (@username or ID) to update profile
           account:,
           # Bio description
           description: nil,
@@ -39,7 +39,7 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::ProfileUpdateAvatarResponse)
         end
         def update_avatar(
-          # X account (@username or account ID)
+          # X account (@username or ID) for avatar update
           account:,
           # Avatar image (max 716KB)
           file:,
@@ -56,7 +56,7 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::ProfileUpdateBannerResponse)
         end
         def update_banner(
-          # X account (@username or account ID)
+          # X account (@username or ID) for banner update
           account:,
           # Banner image (max 2MB)
           file:,

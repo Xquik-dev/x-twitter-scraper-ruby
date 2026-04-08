@@ -35,6 +35,8 @@ module XTwitterScraper
         required :x_username, String, api_name: :xUsername
 
         # @!method initialize(fetched_at:, is_own_account:, tweet_count:, x_username:)
+        #   Style profile summary with tweet count and ownership flag.
+        #
         #   @param fetched_at [Time]
         #   @param is_own_account [Boolean]
         #   @param tweet_count [Integer]

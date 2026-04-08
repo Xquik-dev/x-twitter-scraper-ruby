@@ -15,7 +15,7 @@ module XTwitterScraper
           required :id, String
 
           # @!attribute account
-          #   X account (@username or account ID)
+          #   X account identifier (@username or account ID)
           #
           #   @return [String]
           required :account, String
@@ -23,7 +23,7 @@ module XTwitterScraper
           # @!method initialize(id:, account:, request_options: {})
           #   @param id [String]
           #
-          #   @param account [String] X account (@username or account ID)
+          #   @param account [String] X account identifier (@username or account ID)
           #
           #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
         end

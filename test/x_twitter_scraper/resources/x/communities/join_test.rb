@@ -6,7 +6,7 @@ class XTwitterScraper::Test::Resources::X::Communities::JoinTest < XTwitterScrap
   def test_create_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.communities.join.create("id", account: "account")
+    response = @x_twitter_scraper.x.communities.join.create("id", account: "@elonmusk")
 
     assert_pattern do
       response => XTwitterScraper::Models::X::Communities::JoinCreateResponse
@@ -24,7 +24,7 @@ class XTwitterScraper::Test::Resources::X::Communities::JoinTest < XTwitterScrap
   def test_delete_all_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.communities.join.delete_all("id", account: "account")
+    response = @x_twitter_scraper.x.communities.join.delete_all("id", account: "@elonmusk")
 
     assert_pattern do
       response => XTwitterScraper::Models::X::Communities::JoinDeleteAllResponse

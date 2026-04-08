@@ -14,19 +14,19 @@ module XTwitterScraper
         required :id, String
 
         # @!attribute cursor
-        #   Pagination cursor
+        #   Pagination cursor for tweet replies
         #
         #   @return [String, nil]
         optional :cursor, String
 
         # @!attribute since_time
-        #   Unix timestamp - filter after
+        #   Unix timestamp - return replies posted after this time
         #
         #   @return [String, nil]
         optional :since_time, String
 
         # @!attribute until_time
-        #   Unix timestamp - filter before
+        #   Unix timestamp - return replies posted before this time
         #
         #   @return [String, nil]
         optional :until_time, String
@@ -34,11 +34,11 @@ module XTwitterScraper
         # @!method initialize(id:, cursor: nil, since_time: nil, until_time: nil, request_options: {})
         #   @param id [String]
         #
-        #   @param cursor [String] Pagination cursor
+        #   @param cursor [String] Pagination cursor for tweet replies
         #
-        #   @param since_time [String] Unix timestamp - filter after
+        #   @param since_time [String] Unix timestamp - return replies posted after this time
         #
-        #   @param until_time [String] Unix timestamp - filter before
+        #   @param until_time [String] Unix timestamp - return replies posted before this time
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end

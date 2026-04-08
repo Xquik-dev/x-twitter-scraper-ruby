@@ -24,6 +24,8 @@ module XTwitterScraper
       required :tweet_id, String, api_name: :tweetId
 
       # @!method initialize(author_username:, is_backup:, position:, tweet_id:)
+      #   Giveaway draw winner with position and backup flag.
+      #
       #   @param author_username [String]
       #   @param is_backup [Boolean]
       #   @param position [Integer]
