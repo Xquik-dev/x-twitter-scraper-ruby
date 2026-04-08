@@ -33,34 +33,6 @@ paginated_tweets = x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 
 puts(paginated_tweets.has_next_page)
 ```
 
-### Pagination
-
-List methods in the X Twitter Scraper API are paginated.
-
-This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
-
-```ruby
-page = x_twitter_scraper.x.communities.tweets.list
-
-# Fetch single item from page.
-tweet = page[0]
-puts(tweet.has_next_page)
-
-# Automatically fetches more pages as needed.
-page.auto_paging_each do |tweet|
-  puts(tweet.has_next_page)
-end
-```
-
-Alternatively, you can use the `#next_page?` and `#next_page` methods for more granular control working with pages.
-
-```ruby
-if page.next_page?
-  new_page = page.next_page
-  puts(new_page[0].has_next_page)
-end
-```
-
 ### File uploads
 
 Request parameters that correspond to file uploads can be passed as raw contents, a [`Pathname`](https://rubyapi.org/3.2/o/pathname) instance, [`StringIO`](https://rubyapi.org/3.2/o/stringio), or more.

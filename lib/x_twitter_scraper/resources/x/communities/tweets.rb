@@ -18,7 +18,7 @@ module XTwitterScraper
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [XTwitterScraper::Internal::CursorPage<XTwitterScraper::Models::PaginatedTweets>]
+          # @return [XTwitterScraper::Models::PaginatedTweets]
           #
           # @see XTwitterScraper::Models::X::Communities::TweetListParams
           def list(params)
@@ -28,7 +28,6 @@ module XTwitterScraper
               method: :get,
               path: "x/communities/tweets",
               query: query.transform_keys(query_type: "queryType"),
-              page: XTwitterScraper::Internal::CursorPage,
               model: XTwitterScraper::PaginatedTweets,
               options: options
             )
@@ -44,7 +43,7 @@ module XTwitterScraper
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [XTwitterScraper::Internal::CursorPage<XTwitterScraper::Models::PaginatedTweets>]
+          # @return [XTwitterScraper::Models::PaginatedTweets]
           #
           # @see XTwitterScraper::Models::X::Communities::TweetListByCommunityParams
           def list_by_community(id, params = {})
@@ -54,7 +53,6 @@ module XTwitterScraper
               method: :get,
               path: ["x/communities/%1$s/tweets", id],
               query: query,
-              page: XTwitterScraper::Internal::CursorPage,
               model: XTwitterScraper::PaginatedTweets,
               options: options
             )

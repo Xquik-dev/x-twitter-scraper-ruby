@@ -13,11 +13,7 @@ module XTwitterScraper
               cursor: String,
               query_type: String,
               request_options: XTwitterScraper::RequestOptions::OrHash
-            ).returns(
-              XTwitterScraper::Internal::CursorPage[
-                XTwitterScraper::PaginatedTweets
-              ]
-            )
+            ).returns(XTwitterScraper::PaginatedTweets)
           end
           def list(
             # Search query for cross-community tweets
@@ -36,11 +32,7 @@ module XTwitterScraper
               id: String,
               cursor: String,
               request_options: XTwitterScraper::RequestOptions::OrHash
-            ).returns(
-              XTwitterScraper::Internal::CursorPage[
-                XTwitterScraper::PaginatedTweets
-              ]
-            )
+            ).returns(XTwitterScraper::PaginatedTweets)
           end
           def list_by_community(
             # Community ID for tweet lookup
