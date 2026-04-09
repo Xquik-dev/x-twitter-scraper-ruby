@@ -18,7 +18,6 @@ module XTwitterScraper
           method: :get,
           path: "account",
           model: XTwitterScraper::Models::AccountRetrieveResponse,
-          security: {auth_api_key: true},
           options: params[:request_options]
         )
       end
@@ -62,7 +61,6 @@ module XTwitterScraper
           path: "account",
           body: parsed,
           model: XTwitterScraper::Models::AccountUpdateLocaleResponse,
-          security: {auth_api_key: true},
           options: options
         )
       end
