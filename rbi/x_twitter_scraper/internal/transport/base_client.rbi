@@ -52,10 +52,6 @@ module XTwitterScraper
               stream: T.nilable(T::Class[T.anything]),
               model:
                 T.nilable(XTwitterScraper::Internal::Type::Converter::Input),
-              security:
-                T.nilable(
-                  { auth_api_key: T::Boolean, oauth_bearer: T::Boolean }
-                ),
               options: T.nilable(XTwitterScraper::RequestOptions::OrHash)
             }
           end
@@ -244,7 +240,7 @@ module XTwitterScraper
         # Execute the request specified by `req`. This is the method that all resource
         # methods call into.
         #
-        # @overload request(method, path, query: {}, headers: {}, body: nil, unwrap: nil, page: nil, stream: nil, model: XTwitterScraper::Internal::Type::Unknown, security: {auth_api_key: true, oauth_bearer: true}, options: {})
+        # @overload request(method, path, query: {}, headers: {}, body: nil, unwrap: nil, page: nil, stream: nil, model: XTwitterScraper::Internal::Type::Unknown, options: {})
         sig do
           params(
             method: Symbol,
@@ -286,8 +282,6 @@ module XTwitterScraper
               ),
             stream: T.nilable(T::Class[T.anything]),
             model: T.nilable(XTwitterScraper::Internal::Type::Converter::Input),
-            security:
-              T.nilable({ auth_api_key: T::Boolean, oauth_bearer: T::Boolean }),
             options: T.nilable(XTwitterScraper::RequestOptions::OrHash)
           ).returns(T.anything)
         end
@@ -301,7 +295,6 @@ module XTwitterScraper
           page: nil,
           stream: nil,
           model: XTwitterScraper::Internal::Type::Unknown,
-          security: { auth_api_key: true, oauth_bearer: true },
           options: {}
         )
         end

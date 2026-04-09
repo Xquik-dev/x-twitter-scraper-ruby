@@ -92,10 +92,18 @@ module XTwitterScraper
       # Get trending topics
       sig do
         params(
+          count: Integer,
+          woeid: Integer,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Models::XGetTrendsResponse)
       end
-      def get_trends(request_options: {})
+      def get_trends(
+        # Number of trending topics to return (1-50, default 30)
+        count: nil,
+        # Region WOEID (1=Worldwide, 23424977=US, 23424975=UK, 23424969=Turkey)
+        woeid: nil,
+        request_options: {}
+      )
       end
 
       # @api private

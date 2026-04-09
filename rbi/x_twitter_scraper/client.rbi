@@ -88,17 +88,8 @@ module XTwitterScraper
     attr_reader :credits
 
     # @api private
-    sig do
-      override
-        .params(
-          security: {
-            auth_api_key: T::Boolean,
-            oauth_bearer: T::Boolean
-          }
-        )
-        .returns(T::Hash[String, String])
-    end
-    private def auth_headers(security:)
+    sig { override.returns(T::Hash[String, String]) }
+    private def auth_headers
     end
 
     # @api private

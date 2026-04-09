@@ -94,11 +94,9 @@ module XTwitterScraper
 
     # @api private
     #
-    # @param security [Hash{Symbol=>Boolean}]
-    #
     # @return [Hash{String=>String}]
-    private def auth_headers(security:)
-      {auth_api_key:, oauth_bearer:}.slice(*security.keys).values.reduce({}, :merge)
+    private def auth_headers
+      {**auth_api_key, **oauth_bearer}
     end
 
     # @api private

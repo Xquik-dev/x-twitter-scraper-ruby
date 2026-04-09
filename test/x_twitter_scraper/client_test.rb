@@ -30,12 +30,7 @@ class XTwitterScraperTest < Minitest::Test
   def test_client_default_request_default_retry_attempts
     stub_request(:get, "http://localhost/x/tweets/search").to_return_json(status: 500, body: {})
 
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
+    x_twitter_scraper = XTwitterScraper::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
       x_twitter_scraper.x.tweets.search(q: "q")
@@ -48,12 +43,7 @@ class XTwitterScraperTest < Minitest::Test
     stub_request(:get, "http://localhost/x/tweets/search").to_return_json(status: 500, body: {})
 
     x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token",
-        max_retries: 3
-      )
+      XTwitterScraper::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 3)
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
       x_twitter_scraper.x.tweets.search(q: "q")
@@ -65,12 +55,7 @@ class XTwitterScraperTest < Minitest::Test
   def test_client_default_request_given_retry_attempts
     stub_request(:get, "http://localhost/x/tweets/search").to_return_json(status: 500, body: {})
 
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
+    x_twitter_scraper = XTwitterScraper::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
       x_twitter_scraper.x.tweets.search(q: "q", request_options: {max_retries: 3})
@@ -83,12 +68,7 @@ class XTwitterScraperTest < Minitest::Test
     stub_request(:get, "http://localhost/x/tweets/search").to_return_json(status: 500, body: {})
 
     x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token",
-        max_retries: 3
-      )
+      XTwitterScraper::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 3)
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
       x_twitter_scraper.x.tweets.search(q: "q", request_options: {max_retries: 4})
@@ -105,12 +85,7 @@ class XTwitterScraperTest < Minitest::Test
     )
 
     x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token",
-        max_retries: 1
-      )
+      XTwitterScraper::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
       x_twitter_scraper.x.tweets.search(q: "q")
@@ -130,12 +105,7 @@ class XTwitterScraperTest < Minitest::Test
     )
 
     x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token",
-        max_retries: 1
-      )
+      XTwitterScraper::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     Thread.current.thread_variable_set(:time_now, time_now)
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
@@ -155,12 +125,7 @@ class XTwitterScraperTest < Minitest::Test
     )
 
     x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token",
-        max_retries: 1
-      )
+      XTwitterScraper::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
       x_twitter_scraper.x.tweets.search(q: "q")
@@ -173,12 +138,7 @@ class XTwitterScraperTest < Minitest::Test
   def test_retry_count_header
     stub_request(:get, "http://localhost/x/tweets/search").to_return_json(status: 500, body: {})
 
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
+    x_twitter_scraper = XTwitterScraper::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
       x_twitter_scraper.x.tweets.search(q: "q")
@@ -192,12 +152,7 @@ class XTwitterScraperTest < Minitest::Test
   def test_omit_retry_count_header
     stub_request(:get, "http://localhost/x/tweets/search").to_return_json(status: 500, body: {})
 
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
+    x_twitter_scraper = XTwitterScraper::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
       x_twitter_scraper.x.tweets.search(
@@ -214,12 +169,7 @@ class XTwitterScraperTest < Minitest::Test
   def test_overwrite_retry_count_header
     stub_request(:get, "http://localhost/x/tweets/search").to_return_json(status: 500, body: {})
 
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
+    x_twitter_scraper = XTwitterScraper::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
       x_twitter_scraper.x.tweets.search(
@@ -242,12 +192,7 @@ class XTwitterScraperTest < Minitest::Test
       headers: {"location" => "/redirected"}
     )
 
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
+    x_twitter_scraper = XTwitterScraper::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(XTwitterScraper::Errors::APIConnectionError) do
       x_twitter_scraper.x.tweets.search(q: "q", request_options: {extra_headers: {}})
@@ -276,12 +221,7 @@ class XTwitterScraperTest < Minitest::Test
       headers: {"location" => "/redirected"}
     )
 
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
+    x_twitter_scraper = XTwitterScraper::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(XTwitterScraper::Errors::APIConnectionError) do
       x_twitter_scraper.x.tweets.search(q: "q", request_options: {extra_headers: {}})
@@ -305,12 +245,7 @@ class XTwitterScraperTest < Minitest::Test
       headers: {"location" => "/redirected"}
     )
 
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
+    x_twitter_scraper = XTwitterScraper::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(XTwitterScraper::Errors::APIConnectionError) do
       x_twitter_scraper.x.tweets.search(
@@ -340,12 +275,7 @@ class XTwitterScraperTest < Minitest::Test
       headers: {"location" => "https://example.com/redirected"}
     )
 
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
+    x_twitter_scraper = XTwitterScraper::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(XTwitterScraper::Errors::APIConnectionError) do
       x_twitter_scraper.x.tweets.search(
@@ -363,12 +293,7 @@ class XTwitterScraperTest < Minitest::Test
   def test_default_headers
     stub_request(:get, "http://localhost/x/tweets/search").to_return_json(status: 200, body: {})
 
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
+    x_twitter_scraper = XTwitterScraper::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     x_twitter_scraper.x.tweets.search(q: "q")
 

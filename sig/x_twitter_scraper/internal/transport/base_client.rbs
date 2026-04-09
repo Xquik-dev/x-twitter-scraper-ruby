@@ -20,7 +20,6 @@ module XTwitterScraper
             page: Class?,
             stream: Class?,
             model: XTwitterScraper::Internal::Type::Converter::input?,
-            security: { auth_api_key: bool, oauth_bearer: bool }?,
             options: XTwitterScraper::request_opts?
           }
         type request_input =
@@ -124,7 +123,6 @@ module XTwitterScraper
           ?page: Class?,
           ?stream: Class?,
           ?model: XTwitterScraper::Internal::Type::Converter::input?,
-          ?security: { auth_api_key: bool, oauth_bearer: bool }?,
           ?options: XTwitterScraper::request_opts?
         ) -> top
 

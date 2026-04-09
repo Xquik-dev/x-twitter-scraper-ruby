@@ -49,7 +49,6 @@ module XTwitterScraper
           path: "events",
           query: query.transform_keys(event_type: "eventType", monitor_id: "monitorId"),
           model: XTwitterScraper::Models::EventListResponse,
-          security: {auth_api_key: true},
           options: options
         )
       end
