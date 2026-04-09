@@ -14,7 +14,7 @@ module XTwitterScraper
           params(
             id: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::X::UserProfile)
+          ).returns(XTwitterScraper::UserProfile)
         end
         def retrieve(
           # X username (without @) or user ID

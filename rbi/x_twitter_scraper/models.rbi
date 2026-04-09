@@ -114,6 +114,8 @@ module XTwitterScraper
   RadarRetrieveTrendingTopicsParams =
     XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams
 
+  SearchTweet = XTwitterScraper::Models::SearchTweet
+
   StyleAnalyzeParams = XTwitterScraper::Models::StyleAnalyzeParams
 
   StyleCompareParams = XTwitterScraper::Models::StyleCompareParams
@@ -137,6 +139,8 @@ module XTwitterScraper
   Support = XTwitterScraper::Models::Support
 
   TrendListParams = XTwitterScraper::Models::TrendListParams
+
+  UserProfile = XTwitterScraper::Models::UserProfile
 
   Webhook = XTwitterScraper::Models::Webhook
 

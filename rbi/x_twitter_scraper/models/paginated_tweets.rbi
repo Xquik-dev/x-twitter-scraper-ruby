@@ -17,7 +17,7 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :next_cursor
 
-      sig { returns(T::Array[XTwitterScraper::X::SearchTweet]) }
+      sig { returns(T::Array[XTwitterScraper::SearchTweet]) }
       attr_accessor :tweets
 
       # Paginated list of tweets with cursor-based navigation.
@@ -25,7 +25,7 @@ module XTwitterScraper
         params(
           has_next_page: T::Boolean,
           next_cursor: String,
-          tweets: T::Array[XTwitterScraper::X::SearchTweet::OrHash]
+          tweets: T::Array[XTwitterScraper::SearchTweet::OrHash]
         ).returns(T.attached_class)
       end
       def self.new(has_next_page:, next_cursor:, tweets:)
@@ -36,7 +36,7 @@ module XTwitterScraper
           {
             has_next_page: T::Boolean,
             next_cursor: String,
-            tweets: T::Array[XTwitterScraper::X::SearchTweet]
+            tweets: T::Array[XTwitterScraper::SearchTweet]
           }
         )
       end
