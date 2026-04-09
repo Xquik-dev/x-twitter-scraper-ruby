@@ -17,14 +17,14 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::UserProfile]
+        # @return [XTwitterScraper::Models::UserProfile]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveParams
         def retrieve(id, params = {})
           @client.request(
             method: :get,
             path: ["x/users/%1$s", id],
-            model: XTwitterScraper::X::UserProfile,
+            model: XTwitterScraper::UserProfile,
             options: params[:request_options]
           )
         end
