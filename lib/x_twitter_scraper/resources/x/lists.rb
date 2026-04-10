@@ -3,9 +3,9 @@
 module XTwitterScraper
   module Resources
     class X
-      # X data lookups (subscription required)
+      # X List followers, members, and tweets
       class Lists
-        # Get list followers
+        # List followers of an X List
         #
         # @overload retrieve_followers(id, cursor: nil, request_options: {})
         #
@@ -30,7 +30,7 @@ module XTwitterScraper
           )
         end
 
-        # Get list members
+        # List members of an X List
         #
         # @overload retrieve_members(id, cursor: nil, request_options: {})
         #
@@ -55,7 +55,7 @@ module XTwitterScraper
           )
         end
 
-        # Get list tweets
+        # List tweets from an X List
         #
         # @overload retrieve_tweets(id, cursor: nil, include_replies: nil, since_time: nil, until_time: nil, request_options: {})
         #

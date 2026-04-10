@@ -2,7 +2,7 @@
 
 module XTwitterScraper
   module Resources
-    # Webhook endpoint management & delivery
+    # Webhook endpoint management and delivery
     class Webhooks
       # Create webhook
       sig do

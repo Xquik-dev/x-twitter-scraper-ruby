@@ -38,7 +38,7 @@ module XTwitterScraper
         )
         end
 
-        # Look up tweet
+        # Get tweet with full text, author, metrics & media
         sig do
           params(
             id: String,
@@ -83,7 +83,7 @@ module XTwitterScraper
         )
         end
 
-        # Get users who liked a tweet
+        # List users who liked a tweet
         sig do
           params(
             id: String,
@@ -100,7 +100,7 @@ module XTwitterScraper
         )
         end
 
-        # Get quote tweets of a tweet
+        # List quote tweets of a tweet
         sig do
           params(
             id: String,
@@ -126,7 +126,7 @@ module XTwitterScraper
         )
         end
 
-        # Get replies to a tweet
+        # List replies to a tweet
         sig do
           params(
             id: String,
@@ -149,7 +149,7 @@ module XTwitterScraper
         )
         end
 
-        # Get users who retweeted a tweet
+        # List users who retweeted a tweet
         sig do
           params(
             id: String,
@@ -166,7 +166,7 @@ module XTwitterScraper
         )
         end
 
-        # Get thread context for a tweet
+        # Get full conversation thread for a tweet
         sig do
           params(
             id: String,
@@ -183,7 +183,7 @@ module XTwitterScraper
         )
         end
 
-        # Search tweets
+        # Search tweets with X query operators & pagination
         sig do
           params(
             q: String,

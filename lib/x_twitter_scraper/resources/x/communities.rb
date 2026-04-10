@@ -8,7 +8,7 @@ module XTwitterScraper
         # @return [XTwitterScraper::Resources::X::Communities::Join]
         attr_reader :join
 
-        # X data lookups (subscription required)
+        # X Community info, members, and tweets
         # @return [XTwitterScraper::Resources::X::Communities::Tweets]
         attr_reader :tweets
 
@@ -64,7 +64,7 @@ module XTwitterScraper
           )
         end
 
-        # Get community details
+        # Get community name, description & member count
         #
         # @overload retrieve_info(id, request_options: {})
         #
@@ -84,7 +84,7 @@ module XTwitterScraper
           )
         end
 
-        # Get community members
+        # List members of a community
         #
         # @overload retrieve_members(id, cursor: nil, request_options: {})
         #
@@ -109,7 +109,7 @@ module XTwitterScraper
           )
         end
 
-        # Get community moderators
+        # List moderators of a community
         #
         # @overload retrieve_moderators(id, cursor: nil, request_options: {})
         #
@@ -134,7 +134,7 @@ module XTwitterScraper
           )
         end
 
-        # Search tweets across communities
+        # Search for communities by keyword
         #
         # @overload retrieve_search(q:, cursor: nil, query_type: nil, request_options: {})
         #

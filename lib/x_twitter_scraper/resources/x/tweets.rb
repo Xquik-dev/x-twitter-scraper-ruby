@@ -46,7 +46,7 @@ module XTwitterScraper
           )
         end
 
-        # Look up tweet
+        # Get tweet with full text, author, metrics & media
         #
         # @overload retrieve(id, request_options: {})
         #
@@ -113,7 +113,7 @@ module XTwitterScraper
           )
         end
 
-        # Get users who liked a tweet
+        # List users who liked a tweet
         #
         # @overload get_favoriters(id, cursor: nil, request_options: {})
         #
@@ -138,7 +138,7 @@ module XTwitterScraper
           )
         end
 
-        # Get quote tweets of a tweet
+        # List quote tweets of a tweet
         #
         # @overload get_quotes(id, cursor: nil, include_replies: nil, since_time: nil, until_time: nil, request_options: {})
         #
@@ -173,7 +173,7 @@ module XTwitterScraper
           )
         end
 
-        # Get replies to a tweet
+        # List replies to a tweet
         #
         # @overload get_replies(id, cursor: nil, since_time: nil, until_time: nil, request_options: {})
         #
@@ -202,7 +202,7 @@ module XTwitterScraper
           )
         end
 
-        # Get users who retweeted a tweet
+        # List users who retweeted a tweet
         #
         # @overload get_retweeters(id, cursor: nil, request_options: {})
         #
@@ -227,7 +227,7 @@ module XTwitterScraper
           )
         end
 
-        # Get thread context for a tweet
+        # Get full conversation thread for a tweet
         #
         # @overload get_thread(id, cursor: nil, request_options: {})
         #
@@ -252,7 +252,7 @@ module XTwitterScraper
           )
         end
 
-        # Search tweets
+        # Search tweets with X query operators & pagination
         #
         # @overload search(q:, cursor: nil, limit: nil, query_type: nil, since_time: nil, until_time: nil, request_options: {})
         #

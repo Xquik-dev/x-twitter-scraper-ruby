@@ -3,9 +3,9 @@
 module XTwitterScraper
   module Resources
     class X
-      # X data lookups (subscription required)
+      # Look up, search, and explore user profiles and relationships
       class Followers
-        # Check follow relationship
+        # Check if one user follows another
         sig do
           params(
             source: String,

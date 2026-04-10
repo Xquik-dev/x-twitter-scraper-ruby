@@ -2,23 +2,22 @@
 
 module XTwitterScraper
   module Resources
-    # X data lookups (subscription required)
     class X
       sig { returns(XTwitterScraper::Resources::X::Tweets) }
       attr_reader :tweets
 
-      # X data lookups (subscription required)
+      # Look up, search, and explore user profiles and relationships
       sig { returns(XTwitterScraper::Resources::X::Users) }
       attr_reader :users
 
-      # X data lookups (subscription required)
+      # Look up, search, and explore user profiles and relationships
       sig { returns(XTwitterScraper::Resources::X::Followers) }
       attr_reader :followers
 
       sig { returns(XTwitterScraper::Resources::X::Dm) }
       attr_reader :dm
 
-      # Media upload & download
+      # Media upload and download
       sig { returns(XTwitterScraper::Resources::X::Media) }
       attr_reader :media
 
@@ -33,11 +32,11 @@ module XTwitterScraper
       sig { returns(XTwitterScraper::Resources::X::Accounts) }
       attr_reader :accounts
 
-      # X data lookups (subscription required)
+      # Look up, search, and analyze individual tweets
       sig { returns(XTwitterScraper::Resources::X::Bookmarks) }
       attr_reader :bookmarks
 
-      # X data lookups (subscription required)
+      # X List followers, members, and tweets
       sig { returns(XTwitterScraper::Resources::X::Lists) }
       attr_reader :lists
 
@@ -89,7 +88,7 @@ module XTwitterScraper
       )
       end
 
-      # Get trending topics
+      # Get trending hashtags & topics from X by region
       sig do
         params(
           count: Integer,

@@ -2,23 +2,22 @@
 
 module XTwitterScraper
   module Resources
-    # X data lookups (subscription required)
     class X
       # @return [XTwitterScraper::Resources::X::Tweets]
       attr_reader :tweets
 
-      # X data lookups (subscription required)
+      # Look up, search, and explore user profiles and relationships
       # @return [XTwitterScraper::Resources::X::Users]
       attr_reader :users
 
-      # X data lookups (subscription required)
+      # Look up, search, and explore user profiles and relationships
       # @return [XTwitterScraper::Resources::X::Followers]
       attr_reader :followers
 
       # @return [XTwitterScraper::Resources::X::Dm]
       attr_reader :dm
 
-      # Media upload & download
+      # Media upload and download
       # @return [XTwitterScraper::Resources::X::Media]
       attr_reader :media
 
@@ -33,11 +32,11 @@ module XTwitterScraper
       # @return [XTwitterScraper::Resources::X::Accounts]
       attr_reader :accounts
 
-      # X data lookups (subscription required)
+      # Look up, search, and analyze individual tweets
       # @return [XTwitterScraper::Resources::X::Bookmarks]
       attr_reader :bookmarks
 
-      # X data lookups (subscription required)
+      # X List followers, members, and tweets
       # @return [XTwitterScraper::Resources::X::Lists]
       attr_reader :lists
 
@@ -111,7 +110,7 @@ module XTwitterScraper
         )
       end
 
-      # Get trending topics
+      # Get trending hashtags & topics from X by region
       #
       # @overload get_trends(count: nil, woeid: nil, request_options: {})
       #

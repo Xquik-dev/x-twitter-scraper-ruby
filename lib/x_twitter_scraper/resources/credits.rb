@@ -2,7 +2,7 @@
 
 module XTwitterScraper
   module Resources
-    # Subscription & billing
+    # Subscription, billing, and credits
     class Credits
       # Get credits balance
       #
