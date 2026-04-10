@@ -17,7 +17,7 @@ module XTwitterScraper
     sig { returns(T.nilable(String)) }
     attr_reader :bearer_token
 
-    # Account info & settings
+    # Account info and settings
     sig { returns(XTwitterScraper::Resources::Account) }
     attr_reader :account
 
@@ -25,23 +25,23 @@ module XTwitterScraper
     sig { returns(XTwitterScraper::Resources::APIKeys) }
     attr_reader :api_keys
 
-    # Subscription & billing
+    # Subscription, billing, and credits
     sig { returns(XTwitterScraper::Resources::Subscribe) }
     attr_reader :subscribe
 
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     sig { returns(XTwitterScraper::Resources::Compose) }
     attr_reader :compose
 
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     sig { returns(XTwitterScraper::Resources::Drafts) }
     attr_reader :drafts
 
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     sig { returns(XTwitterScraper::Resources::Styles) }
     attr_reader :styles
 
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     sig { returns(XTwitterScraper::Resources::Radar) }
     attr_reader :radar
 
@@ -61,7 +61,7 @@ module XTwitterScraper
     sig { returns(XTwitterScraper::Resources::Draws) }
     attr_reader :draws
 
-    # Webhook endpoint management & delivery
+    # Webhook endpoint management and delivery
     sig { returns(XTwitterScraper::Resources::Webhooks) }
     attr_reader :webhooks
 
@@ -69,11 +69,10 @@ module XTwitterScraper
     sig { returns(XTwitterScraper::Resources::Integrations) }
     attr_reader :integrations
 
-    # X data lookups (subscription required)
     sig { returns(XTwitterScraper::Resources::X) }
     attr_reader :x
 
-    # Trending topics by region
+    # Trending topics and hashtags by region
     sig { returns(XTwitterScraper::Resources::Trends) }
     attr_reader :trends
 
@@ -83,7 +82,7 @@ module XTwitterScraper
     sig { returns(XTwitterScraper::Resources::Support) }
     attr_reader :support
 
-    # Subscription & billing
+    # Subscription, billing, and credits
     sig { returns(XTwitterScraper::Resources::Credits) }
     attr_reader :credits
 

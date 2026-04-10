@@ -2,7 +2,7 @@
 
 module XTwitterScraper
   module Resources
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     class Radar
       # Some parameter documentations has been truncated, see
       # {XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams} for more details.

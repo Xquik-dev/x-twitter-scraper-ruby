@@ -22,7 +22,7 @@ module XTwitterScraper
     # @return [String, nil]
     attr_reader :bearer_token
 
-    # Account info & settings
+    # Account info and settings
     # @return [XTwitterScraper::Resources::Account]
     attr_reader :account
 
@@ -30,23 +30,23 @@ module XTwitterScraper
     # @return [XTwitterScraper::Resources::APIKeys]
     attr_reader :api_keys
 
-    # Subscription & billing
+    # Subscription, billing, and credits
     # @return [XTwitterScraper::Resources::Subscribe]
     attr_reader :subscribe
 
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     # @return [XTwitterScraper::Resources::Compose]
     attr_reader :compose
 
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     # @return [XTwitterScraper::Resources::Drafts]
     attr_reader :drafts
 
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     # @return [XTwitterScraper::Resources::Styles]
     attr_reader :styles
 
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     # @return [XTwitterScraper::Resources::Radar]
     attr_reader :radar
 
@@ -66,7 +66,7 @@ module XTwitterScraper
     # @return [XTwitterScraper::Resources::Draws]
     attr_reader :draws
 
-    # Webhook endpoint management & delivery
+    # Webhook endpoint management and delivery
     # @return [XTwitterScraper::Resources::Webhooks]
     attr_reader :webhooks
 
@@ -74,11 +74,10 @@ module XTwitterScraper
     # @return [XTwitterScraper::Resources::Integrations]
     attr_reader :integrations
 
-    # X data lookups (subscription required)
     # @return [XTwitterScraper::Resources::X]
     attr_reader :x
 
-    # Trending topics by region
+    # Trending topics and hashtags by region
     # @return [XTwitterScraper::Resources::Trends]
     attr_reader :trends
 
@@ -88,7 +87,7 @@ module XTwitterScraper
     # @return [XTwitterScraper::Resources::Support]
     attr_reader :support
 
-    # Subscription & billing
+    # Subscription, billing, and credits
     # @return [XTwitterScraper::Resources::Credits]
     attr_reader :credits
 

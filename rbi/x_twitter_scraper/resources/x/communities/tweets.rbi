@@ -4,9 +4,9 @@ module XTwitterScraper
   module Resources
     class X
       class Communities
-        # X data lookups (subscription required)
+        # X Community info, members, and tweets
         class Tweets
-          # Search tweets across all communities
+          # List tweets across all communities
           sig do
             params(
               q: String,
@@ -26,7 +26,7 @@ module XTwitterScraper
           )
           end
 
-          # Get community tweets
+          # List tweets posted in a community
           sig do
             params(
               id: String,

@@ -3,13 +3,13 @@
 module XTwitterScraper
   module Resources
     class X
-      # X data lookups (subscription required)
+      # Look up, search, and explore user profiles and relationships
       class Users
         # X write actions (tweets, likes, follows, DMs)
         # @return [XTwitterScraper::Resources::X::Users::Follow]
         attr_reader :follow
 
-        # Look up X user
+        # Get user profile with follower counts & verification
         #
         # @overload retrieve(id, request_options: {})
         #
@@ -29,7 +29,7 @@ module XTwitterScraper
           )
         end
 
-        # Get multiple users by IDs
+        # Look up multiple users by IDs in one call
         #
         # @overload retrieve_batch(ids:, request_options: {})
         #
@@ -52,7 +52,7 @@ module XTwitterScraper
           )
         end
 
-        # Get user followers
+        # List followers of a user
         #
         # @overload retrieve_followers(id, cursor: nil, page_size: nil, request_options: {})
         #
@@ -79,7 +79,7 @@ module XTwitterScraper
           )
         end
 
-        # Get followers you know for a user
+        # List mutual followers between you and a user
         #
         # @overload retrieve_followers_you_know(id, cursor: nil, request_options: {})
         #
@@ -104,7 +104,7 @@ module XTwitterScraper
           )
         end
 
-        # Get users this user follows
+        # List accounts a user follows
         #
         # @overload retrieve_following(id, cursor: nil, page_size: nil, request_options: {})
         #
@@ -131,7 +131,7 @@ module XTwitterScraper
           )
         end
 
-        # Get tweets liked by a user
+        # List tweets liked by a user
         #
         # @overload retrieve_likes(id, cursor: nil, request_options: {})
         #
@@ -156,7 +156,7 @@ module XTwitterScraper
           )
         end
 
-        # Get media tweets by a user
+        # List media tweets posted by a user
         #
         # @overload retrieve_media(id, cursor: nil, request_options: {})
         #
@@ -181,7 +181,7 @@ module XTwitterScraper
           )
         end
 
-        # Get tweets mentioning a user
+        # List tweets mentioning a user
         #
         # @overload retrieve_mentions(id, cursor: nil, since_time: nil, until_time: nil, request_options: {})
         #
@@ -235,7 +235,7 @@ module XTwitterScraper
           )
         end
 
-        # Get recent tweets by a user
+        # List recent tweets posted by a user
         #
         # @overload retrieve_tweets(id, cursor: nil, include_parent_tweet: nil, include_replies: nil, request_options: {})
         #
@@ -267,7 +267,7 @@ module XTwitterScraper
           )
         end
 
-        # Get verified followers
+        # List verified followers of a user
         #
         # @overload retrieve_verified_followers(id, cursor: nil, request_options: {})
         #

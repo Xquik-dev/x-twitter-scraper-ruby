@@ -3,13 +3,13 @@
 module XTwitterScraper
   module Resources
     class X
-      # X data lookups (subscription required)
+      # Look up, search, and explore user profiles and relationships
       class Users
         # X write actions (tweets, likes, follows, DMs)
         sig { returns(XTwitterScraper::Resources::X::Users::Follow) }
         attr_reader :follow
 
-        # Look up X user
+        # Get user profile with follower counts & verification
         sig do
           params(
             id: String,
@@ -23,7 +23,7 @@ module XTwitterScraper
         )
         end
 
-        # Get multiple users by IDs
+        # Look up multiple users by IDs in one call
         sig do
           params(
             ids: String,
@@ -37,7 +37,7 @@ module XTwitterScraper
         )
         end
 
-        # Get user followers
+        # List followers of a user
         sig do
           params(
             id: String,
@@ -57,7 +57,7 @@ module XTwitterScraper
         )
         end
 
-        # Get followers you know for a user
+        # List mutual followers between you and a user
         sig do
           params(
             id: String,
@@ -74,7 +74,7 @@ module XTwitterScraper
         )
         end
 
-        # Get users this user follows
+        # List accounts a user follows
         sig do
           params(
             id: String,
@@ -94,7 +94,7 @@ module XTwitterScraper
         )
         end
 
-        # Get tweets liked by a user
+        # List tweets liked by a user
         sig do
           params(
             id: String,
@@ -111,7 +111,7 @@ module XTwitterScraper
         )
         end
 
-        # Get media tweets by a user
+        # List media tweets posted by a user
         sig do
           params(
             id: String,
@@ -128,7 +128,7 @@ module XTwitterScraper
         )
         end
 
-        # Get tweets mentioning a user
+        # List tweets mentioning a user
         sig do
           params(
             id: String,
@@ -168,7 +168,7 @@ module XTwitterScraper
         )
         end
 
-        # Get recent tweets by a user
+        # List recent tweets posted by a user
         sig do
           params(
             id: String,
@@ -191,7 +191,7 @@ module XTwitterScraper
         )
         end
 
-        # Get verified followers
+        # List verified followers of a user
         sig do
           params(
             id: String,

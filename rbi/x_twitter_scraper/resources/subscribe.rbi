@@ -2,7 +2,7 @@
 
 module XTwitterScraper
   module Resources
-    # Subscription & billing
+    # Subscription, billing, and credits
     class Subscribe
       # Get checkout or billing URL
       sig do

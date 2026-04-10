@@ -8,7 +8,7 @@ module XTwitterScraper
         sig { returns(XTwitterScraper::Resources::X::Communities::Join) }
         attr_reader :join
 
-        # X data lookups (subscription required)
+        # X Community info, members, and tweets
         sig { returns(XTwitterScraper::Resources::X::Communities::Tweets) }
         attr_reader :tweets
 
@@ -52,7 +52,7 @@ module XTwitterScraper
         )
         end
 
-        # Get community details
+        # Get community name, description & member count
         sig do
           params(
             id: String,
@@ -66,7 +66,7 @@ module XTwitterScraper
         )
         end
 
-        # Get community members
+        # List members of a community
         sig do
           params(
             id: String,
@@ -83,7 +83,7 @@ module XTwitterScraper
         )
         end
 
-        # Get community moderators
+        # List moderators of a community
         sig do
           params(
             id: String,
@@ -100,7 +100,7 @@ module XTwitterScraper
         )
         end
 
-        # Search tweets across communities
+        # Search for communities by keyword
         sig do
           params(
             q: String,

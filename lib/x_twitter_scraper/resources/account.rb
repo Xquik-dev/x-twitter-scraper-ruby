@@ -2,7 +2,7 @@
 
 module XTwitterScraper
   module Resources
-    # Account info & settings
+    # Account info and settings
     class Account
       # Get account info
       #
