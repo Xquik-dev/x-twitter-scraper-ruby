@@ -52,7 +52,7 @@ module XTwitterScraper
         )
         end
 
-        # Get community name, description & member count
+        # Get community name, description and member count
         sig do
           params(
             id: String,

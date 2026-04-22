@@ -64,7 +64,7 @@ module XTwitterScraper
           )
         end
 
-        # Get community name, description & member count
+        # Get community name, description and member count
         #
         # @overload retrieve_info(id, request_options: {})
         #

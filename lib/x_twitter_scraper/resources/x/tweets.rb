@@ -48,7 +48,7 @@ module XTwitterScraper
           )
         end
 
-        # Get tweet with full text, author, metrics & media
+        # Get tweet with full text, author, metrics and media
         #
         # @overload retrieve(id, request_options: {})
         #
@@ -254,7 +254,7 @@ module XTwitterScraper
           )
         end
 
-        # Search tweets with X query operators & pagination
+        # Search tweets with X query operators and pagination
         #
         # @overload search(q:, cursor: nil, limit: nil, query_type: nil, since_time: nil, until_time: nil, request_options: {})
         #

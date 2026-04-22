@@ -110,7 +110,7 @@ module XTwitterScraper
         )
       end
 
-      # Get trending hashtags & topics from X by region
+      # Get trending hashtags and topics from X by region
       #
       # @overload get_trends(count: nil, woeid: nil, request_options: {})
       #

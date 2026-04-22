@@ -43,7 +43,7 @@ module XTwitterScraper
         )
         end
 
-        # Get tweet with full text, author, metrics & media
+        # Get tweet with full text, author, metrics and media
         sig do
           params(
             id: String,
@@ -188,7 +188,7 @@ module XTwitterScraper
         )
         end
 
-        # Search tweets with X query operators & pagination
+        # Search tweets with X query operators and pagination
         sig do
           params(
             q: String,
