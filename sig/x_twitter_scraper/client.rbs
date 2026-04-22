@@ -36,13 +36,9 @@ module XTwitterScraper
 
     attr_reader webhooks: XTwitterScraper::Resources::Webhooks
 
-    attr_reader integrations: XTwitterScraper::Resources::Integrations
-
     attr_reader x: XTwitterScraper::Resources::X
 
     attr_reader trends: XTwitterScraper::Resources::Trends
-
-    attr_reader bot: XTwitterScraper::Resources::Bot
 
     attr_reader support: XTwitterScraper::Resources::Support
 

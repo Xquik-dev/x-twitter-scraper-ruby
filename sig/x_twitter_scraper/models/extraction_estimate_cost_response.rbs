@@ -3,37 +3,44 @@ module XTwitterScraper
     type extraction_estimate_cost_response =
       {
         allowed: bool,
+        credits_available: String,
+        credits_required: String,
         estimated_results: Integer,
-        projected_percent: Float,
         source: String,
-        usage_percent: Float
+        resolved_x_user_id: String
       }
 
     class ExtractionEstimateCostResponse < XTwitterScraper::Internal::Type::BaseModel
       attr_accessor allowed: bool
 
-      attr_accessor estimated_results: Integer
+      attr_accessor credits_available: String
 
-      attr_accessor projected_percent: Float
+      attr_accessor credits_required: String
+
+      attr_accessor estimated_results: Integer
 
       attr_accessor source: String
 
-      attr_accessor usage_percent: Float
+      attr_reader resolved_x_user_id: String?
+
+      def resolved_x_user_id=: (String) -> String
 
       def initialize: (
         allowed: bool,
+        credits_available: String,
+        credits_required: String,
         estimated_results: Integer,
-        projected_percent: Float,
         source: String,
-        usage_percent: Float
+        ?resolved_x_user_id: String
       ) -> void
 
       def to_hash: -> {
         allowed: bool,
+        credits_available: String,
+        credits_required: String,
         estimated_results: Integer,
-        projected_percent: Float,
         source: String,
-        usage_percent: Float
+        resolved_x_user_id: String
       }
     end
   end

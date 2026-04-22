@@ -5,7 +5,7 @@ module XTwitterScraper
         monitors_allowed: Integer,
         monitors_used: Integer,
         plan: XTwitterScraper::Models::AccountRetrieveResponse::plan,
-        current_period: XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod
+        credit_info: XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo
       }
 
     class AccountRetrieveResponse < XTwitterScraper::Internal::Type::BaseModel
@@ -15,24 +15,24 @@ module XTwitterScraper
 
       attr_accessor plan: XTwitterScraper::Models::AccountRetrieveResponse::plan
 
-      attr_reader current_period: XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod?
+      attr_reader credit_info: XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo?
 
-      def current_period=: (
-        XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod
-      ) -> XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod
+      def credit_info=: (
+        XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo
+      ) -> XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo
 
       def initialize: (
         monitors_allowed: Integer,
         monitors_used: Integer,
         plan: XTwitterScraper::Models::AccountRetrieveResponse::plan,
-        ?current_period: XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod
+        ?credit_info: XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo
       ) -> void
 
       def to_hash: -> {
         monitors_allowed: Integer,
         monitors_used: Integer,
         plan: XTwitterScraper::Models::AccountRetrieveResponse::plan,
-        current_period: XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod
+        credit_info: XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo
       }
 
       type plan = :active | :inactive
@@ -46,18 +46,36 @@ module XTwitterScraper
         def self?.values: -> ::Array[XTwitterScraper::Models::AccountRetrieveResponse::plan]
       end
 
-      type current_period = { end_: Time, start: Time, usage_percent: Float }
+      type credit_info =
+        {
+          auto_topup_enabled: bool,
+          balance: Integer,
+          lifetime_purchased: Integer,
+          lifetime_used: Integer
+        }
 
-      class CurrentPeriod < XTwitterScraper::Internal::Type::BaseModel
-        attr_accessor end_: Time
+      class CreditInfo < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor auto_topup_enabled: bool
 
-        attr_accessor start: Time
+        attr_accessor balance: Integer
 
-        attr_accessor usage_percent: Float
+        attr_accessor lifetime_purchased: Integer
 
-        def initialize: (end_: Time, start: Time, usage_percent: Float) -> void
+        attr_accessor lifetime_used: Integer
 
-        def to_hash: -> { end_: Time, start: Time, usage_percent: Float }
+        def initialize: (
+          auto_topup_enabled: bool,
+          balance: Integer,
+          lifetime_purchased: Integer,
+          lifetime_used: Integer
+        ) -> void
+
+        def to_hash: -> {
+          auto_topup_enabled: bool,
+          balance: Integer,
+          lifetime_purchased: Integer,
+          lifetime_used: Integer
+        }
       end
     end
   end

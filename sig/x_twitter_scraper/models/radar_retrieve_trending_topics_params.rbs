@@ -2,9 +2,10 @@ module XTwitterScraper
   module Models
     type radar_retrieve_trending_topics_params =
       {
-        category: String,
-        count: Integer,
+        after: String,
+        category: XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::category,
         hours: Integer,
+        limit: Integer,
         region: String,
         source: XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::source
       }
@@ -14,17 +15,23 @@ module XTwitterScraper
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      attr_reader category: String?
+      attr_reader after: String?
 
-      def category=: (String) -> String
+      def after=: (String) -> String
 
-      attr_reader count: Integer?
+      attr_reader category: XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::category?
 
-      def count=: (Integer) -> Integer
+      def category=: (
+        XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::category
+      ) -> XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::category
 
       attr_reader hours: Integer?
 
       def hours=: (Integer) -> Integer
+
+      attr_reader limit: Integer?
+
+      def limit=: (Integer) -> Integer
 
       attr_reader region: String?
 
@@ -37,22 +44,49 @@ module XTwitterScraper
       ) -> XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::source
 
       def initialize: (
-        ?category: String,
-        ?count: Integer,
+        ?after: String,
+        ?category: XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::category,
         ?hours: Integer,
+        ?limit: Integer,
         ?region: String,
         ?source: XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::source,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
       def to_hash: -> {
-        category: String,
-        count: Integer,
+        after: String,
+        category: XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::category,
         hours: Integer,
+        limit: Integer,
         region: String,
         source: XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::source,
         request_options: XTwitterScraper::RequestOptions
       }
+
+      type category =
+        :general
+        | :tech
+        | :dev
+        | :science
+        | :culture
+        | :politics
+        | :business
+        | :entertainment
+
+      module Category
+        extend XTwitterScraper::Internal::Type::Enum
+
+        GENERAL: :general
+        TECH: :tech
+        DEV: :dev
+        SCIENCE: :science
+        CULTURE: :culture
+        POLITICS: :politics
+        BUSINESS: :business
+        ENTERTAINMENT: :entertainment
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::category]
+      end
 
       type source =
         :github

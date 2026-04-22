@@ -3,9 +3,6 @@
 module XTwitterScraper
   module Test
     module Resources
-      module Bot
-      end
-
       module Communities
       end
 

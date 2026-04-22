@@ -2,11 +2,16 @@ module XTwitterScraper
   module Models
     type radar_item =
       {
-        category: String,
+        id: String,
+        category: XTwitterScraper::Models::RadarItem::category,
+        created_at: Time,
+        language: String,
+        metadata: ::Hash[Symbol, top],
         published_at: Time,
         region: String,
         score: Float,
-        source: String,
+        source: XTwitterScraper::Models::RadarItem::source,
+        source_id: String,
         title: String,
         description: String,
         image_url: String,
@@ -14,7 +19,15 @@ module XTwitterScraper
       }
 
     class RadarItem < XTwitterScraper::Internal::Type::BaseModel
-      attr_accessor category: String
+      attr_accessor id: String
+
+      attr_accessor category: XTwitterScraper::Models::RadarItem::category
+
+      attr_accessor created_at: Time
+
+      attr_accessor language: String
+
+      attr_accessor metadata: ::Hash[Symbol, top]
 
       attr_accessor published_at: Time
 
@@ -22,7 +35,9 @@ module XTwitterScraper
 
       attr_accessor score: Float
 
-      attr_accessor source: String
+      attr_accessor source: XTwitterScraper::Models::RadarItem::source
+
+      attr_accessor source_id: String
 
       attr_accessor title: String
 
@@ -39,11 +54,16 @@ module XTwitterScraper
       def url=: (String) -> String
 
       def initialize: (
-        category: String,
+        id: String,
+        category: XTwitterScraper::Models::RadarItem::category,
+        created_at: Time,
+        language: String,
+        metadata: ::Hash[Symbol, top],
         published_at: Time,
         region: String,
         score: Float,
-        source: String,
+        source: XTwitterScraper::Models::RadarItem::source,
+        source_id: String,
         title: String,
         ?description: String,
         ?image_url: String,
@@ -51,16 +71,69 @@ module XTwitterScraper
       ) -> void
 
       def to_hash: -> {
-        category: String,
+        id: String,
+        category: XTwitterScraper::Models::RadarItem::category,
+        created_at: Time,
+        language: String,
+        metadata: ::Hash[Symbol, top],
         published_at: Time,
         region: String,
         score: Float,
-        source: String,
+        source: XTwitterScraper::Models::RadarItem::source,
+        source_id: String,
         title: String,
         description: String,
         image_url: String,
         url: String
       }
+
+      type category =
+        :general
+        | :tech
+        | :dev
+        | :science
+        | :culture
+        | :politics
+        | :business
+        | :entertainment
+
+      module Category
+        extend XTwitterScraper::Internal::Type::Enum
+
+        GENERAL: :general
+        TECH: :tech
+        DEV: :dev
+        SCIENCE: :science
+        CULTURE: :culture
+        POLITICS: :politics
+        BUSINESS: :business
+        ENTERTAINMENT: :entertainment
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::RadarItem::category]
+      end
+
+      type source =
+        :github
+        | :google_trends
+        | :hacker_news
+        | :polymarket
+        | :reddit
+        | :trustmrr
+        | :wikipedia
+
+      module Source
+        extend XTwitterScraper::Internal::Type::Enum
+
+        GITHUB: :github
+        GOOGLE_TRENDS: :google_trends
+        HACKER_NEWS: :hacker_news
+        POLYMARKET: :polymarket
+        REDDIT: :reddit
+        TRUSTMRR: :trustmrr
+        WIKIPEDIA: :wikipedia
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::RadarItem::source]
+      end
     end
   end
 end

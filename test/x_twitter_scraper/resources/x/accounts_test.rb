@@ -20,9 +20,12 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
     assert_pattern do
       response => {
         id: String,
+        created_at: Time,
+        health: XTwitterScraper::Models::X::AccountCreateResponse::Health,
         status: String,
         x_user_id: String,
-        x_username: String
+        x_username: String,
+        login_country: String | nil
       }
     end
   end
@@ -40,6 +43,7 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
       response => {
         id: String,
         created_at: Time,
+        health: XTwitterScraper::X::XAccountDetail::Health,
         status: String,
         x_user_id: String,
         x_username: String,
@@ -110,8 +114,12 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
     assert_pattern do
       response => {
         id: String,
+        created_at: Time,
+        health: XTwitterScraper::Models::X::AccountReauthResponse::Health,
         status: String,
-        x_username: String
+        x_user_id: String,
+        x_username: String,
+        login_country: String | nil
       }
     end
   end

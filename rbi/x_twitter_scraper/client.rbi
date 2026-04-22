@@ -65,19 +65,12 @@ module XTwitterScraper
     sig { returns(XTwitterScraper::Resources::Webhooks) }
     attr_reader :webhooks
 
-    # Push notification integrations (Telegram)
-    sig { returns(XTwitterScraper::Resources::Integrations) }
-    attr_reader :integrations
-
     sig { returns(XTwitterScraper::Resources::X) }
     attr_reader :x
 
     # Trending topics and hashtags by region
     sig { returns(XTwitterScraper::Resources::Trends) }
     attr_reader :trends
-
-    sig { returns(XTwitterScraper::Resources::Bot) }
-    attr_reader :bot
 
     sig { returns(XTwitterScraper::Resources::Support) }
     attr_reader :support

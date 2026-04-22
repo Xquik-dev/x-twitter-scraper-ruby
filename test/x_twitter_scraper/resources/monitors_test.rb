@@ -7,10 +7,7 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
     skip("Mock server tests are disabled")
 
     response =
-      @x_twitter_scraper.monitors.create(
-        event_types: [:"tweet.new", :"follower.gained"],
-        username: "elonmusk"
-      )
+      @x_twitter_scraper.monitors.create(event_types: [:"tweet.new", :"tweet.reply"], username: "elonmusk")
 
     assert_pattern do
       response => XTwitterScraper::Models::MonitorCreateResponse

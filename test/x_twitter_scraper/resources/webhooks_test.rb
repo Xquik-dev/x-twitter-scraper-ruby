@@ -8,7 +8,7 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
 
     response =
       @x_twitter_scraper.webhooks.create(
-        event_types: [:"tweet.new", :"follower.gained"],
+        event_types: [:"tweet.new", :"tweet.reply"],
         url: "https://example.com/webhook"
       )
 

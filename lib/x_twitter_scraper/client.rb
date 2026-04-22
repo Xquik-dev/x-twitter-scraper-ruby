@@ -70,19 +70,12 @@ module XTwitterScraper
     # @return [XTwitterScraper::Resources::Webhooks]
     attr_reader :webhooks
 
-    # Push notification integrations (Telegram)
-    # @return [XTwitterScraper::Resources::Integrations]
-    attr_reader :integrations
-
     # @return [XTwitterScraper::Resources::X]
     attr_reader :x
 
     # Trending topics and hashtags by region
     # @return [XTwitterScraper::Resources::Trends]
     attr_reader :trends
-
-    # @return [XTwitterScraper::Resources::Bot]
-    attr_reader :bot
 
     # @return [XTwitterScraper::Resources::Support]
     attr_reader :support
@@ -164,10 +157,8 @@ module XTwitterScraper
       @extractions = XTwitterScraper::Resources::Extractions.new(client: self)
       @draws = XTwitterScraper::Resources::Draws.new(client: self)
       @webhooks = XTwitterScraper::Resources::Webhooks.new(client: self)
-      @integrations = XTwitterScraper::Resources::Integrations.new(client: self)
       @x = XTwitterScraper::Resources::X.new(client: self)
       @trends = XTwitterScraper::Resources::Trends.new(client: self)
-      @bot = XTwitterScraper::Resources::Bot.new(client: self)
       @support = XTwitterScraper::Resources::Support.new(client: self)
       @credits = XTwitterScraper::Resources::Credits.new(client: self)
     end

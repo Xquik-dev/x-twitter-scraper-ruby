@@ -14,8 +14,9 @@ class XTwitterScraper::Test::Resources::RadarTest < XTwitterScraper::Test::Resou
 
     assert_pattern do
       response => {
+        has_more: XTwitterScraper::Internal::Type::Boolean,
         items: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::RadarItem]),
-        total: Integer
+        next_cursor: String | nil
       }
     end
   end

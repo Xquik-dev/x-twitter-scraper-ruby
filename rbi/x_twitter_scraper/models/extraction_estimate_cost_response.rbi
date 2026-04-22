@@ -14,33 +14,41 @@ module XTwitterScraper
       sig { returns(T::Boolean) }
       attr_accessor :allowed
 
+      sig { returns(String) }
+      attr_accessor :credits_available
+
+      sig { returns(String) }
+      attr_accessor :credits_required
+
       sig { returns(Integer) }
       attr_accessor :estimated_results
-
-      sig { returns(Float) }
-      attr_accessor :projected_percent
 
       sig { returns(String) }
       attr_accessor :source
 
-      sig { returns(Float) }
-      attr_accessor :usage_percent
+      sig { returns(T.nilable(String)) }
+      attr_reader :resolved_x_user_id
+
+      sig { params(resolved_x_user_id: String).void }
+      attr_writer :resolved_x_user_id
 
       sig do
         params(
           allowed: T::Boolean,
+          credits_available: String,
+          credits_required: String,
           estimated_results: Integer,
-          projected_percent: Float,
           source: String,
-          usage_percent: Float
+          resolved_x_user_id: String
         ).returns(T.attached_class)
       end
       def self.new(
         allowed:,
+        credits_available:,
+        credits_required:,
         estimated_results:,
-        projected_percent:,
         source:,
-        usage_percent:
+        resolved_x_user_id: nil
       )
       end
 
@@ -48,10 +56,11 @@ module XTwitterScraper
         override.returns(
           {
             allowed: T::Boolean,
+            credits_available: String,
+            credits_required: String,
             estimated_results: Integer,
-            projected_percent: Float,
             source: String,
-            usage_percent: Float
+            resolved_x_user_id: String
           }
         )
       end

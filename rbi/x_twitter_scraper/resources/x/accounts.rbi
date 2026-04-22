@@ -83,6 +83,8 @@ module XTwitterScraper
           params(
             id: String,
             password: String,
+            email: String,
+            proxy_country: String,
             totp_secret: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::AccountReauthResponse)
@@ -92,6 +94,10 @@ module XTwitterScraper
           id,
           # Updated account password
           password:,
+          # Email for the X account (updates stored email)
+          email: nil,
+          # Two-letter country code for login proxy region
+          proxy_country: nil,
           # TOTP secret for 2FA re-authentication
           totp_secret: nil,
           request_options: {}

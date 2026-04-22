@@ -20,6 +20,11 @@ module XTwitterScraper
         sig { returns(Time) }
         attr_accessor :created_at
 
+        sig do
+          returns(XTwitterScraper::X::XAccountDetail::Health::TaggedSymbol)
+        end
+        attr_accessor :health
+
         sig { returns(String) }
         attr_accessor :status
 
@@ -52,6 +57,7 @@ module XTwitterScraper
           params(
             id: String,
             created_at: Time,
+            health: XTwitterScraper::X::XAccountDetail::Health::OrSymbol,
             status: String,
             x_user_id: String,
             x_username: String,
@@ -63,6 +69,7 @@ module XTwitterScraper
         def self.new(
           id:,
           created_at:,
+          health:,
           status:,
           x_user_id:,
           x_username:,
@@ -77,6 +84,7 @@ module XTwitterScraper
             {
               id: String,
               created_at: Time,
+              health: XTwitterScraper::X::XAccountDetail::Health::TaggedSymbol,
               status: String,
               x_user_id: String,
               x_username: String,
@@ -87,6 +95,55 @@ module XTwitterScraper
           )
         end
         def to_hash
+        end
+
+        module Health
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, XTwitterScraper::X::XAccountDetail::Health)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          HEALTHY =
+            T.let(
+              :healthy,
+              XTwitterScraper::X::XAccountDetail::Health::TaggedSymbol
+            )
+          LOCKED =
+            T.let(
+              :locked,
+              XTwitterScraper::X::XAccountDetail::Health::TaggedSymbol
+            )
+          NEEDS_REAUTH =
+            T.let(
+              :needsReauth,
+              XTwitterScraper::X::XAccountDetail::Health::TaggedSymbol
+            )
+          RECOVERING =
+            T.let(
+              :recovering,
+              XTwitterScraper::X::XAccountDetail::Health::TaggedSymbol
+            )
+          SUSPENDED =
+            T.let(
+              :suspended,
+              XTwitterScraper::X::XAccountDetail::Health::TaggedSymbol
+            )
+          TEMPORARY_ISSUE =
+            T.let(
+              :temporaryIssue,
+              XTwitterScraper::X::XAccountDetail::Health::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[XTwitterScraper::X::XAccountDetail::Health::TaggedSymbol]
+            )
+          end
+          def self.values
+          end
         end
       end
     end

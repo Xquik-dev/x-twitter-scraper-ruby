@@ -16,10 +16,6 @@ module XTwitterScraper
         T.let(:"tweet.retweet", XTwitterScraper::EventType::TaggedSymbol)
       TWEET_QUOTE =
         T.let(:"tweet.quote", XTwitterScraper::EventType::TaggedSymbol)
-      FOLLOWER_GAINED =
-        T.let(:"follower.gained", XTwitterScraper::EventType::TaggedSymbol)
-      FOLLOWER_LOST =
-        T.let(:"follower.lost", XTwitterScraper::EventType::TaggedSymbol)
 
       sig do
         override.returns(T::Array[XTwitterScraper::EventType::TaggedSymbol])

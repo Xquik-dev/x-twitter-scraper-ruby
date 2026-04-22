@@ -6,8 +6,7 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
   def test_create_required_params
     skip("Mock server tests are disabled")
 
-    response =
-      @x_twitter_scraper.x.tweets.create(account: "@elonmusk", text: "Just launched our new feature!")
+    response = @x_twitter_scraper.x.tweets.create(account: "@elonmusk")
 
     assert_pattern do
       response => XTwitterScraper::Models::X::TweetCreateResponse

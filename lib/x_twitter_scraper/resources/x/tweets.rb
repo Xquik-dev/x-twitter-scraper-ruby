@@ -14,11 +14,9 @@ module XTwitterScraper
 
         # Create tweet
         #
-        # @overload create(account:, text:, attachment_url: nil, community_id: nil, is_note_tweet: nil, media_ids: nil, reply_to_tweet_id: nil, request_options: {})
+        # @overload create(account:, attachment_url: nil, community_id: nil, is_note_tweet: nil, media: nil, media_ids: nil, reply_to_tweet_id: nil, text: nil, request_options: {})
         #
         # @param account [String] X account (@username or account ID)
-        #
-        # @param text [String]
         #
         # @param attachment_url [String]
         #
@@ -26,9 +24,13 @@ module XTwitterScraper
         #
         # @param is_note_tweet [Boolean]
         #
-        # @param media_ids [Array<String>]
+        # @param media [Array<String>] Array of media URLs to attach (mutually exclusive with media_ids)
+        #
+        # @param media_ids [Array<String>] Array of media IDs to attach (mutually exclusive with media)
         #
         # @param reply_to_tweet_id [String]
+        #
+        # @param text [String] Tweet text (optional when media is provided)
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

@@ -1,9 +1,0 @@
-module XTwitterScraper
-  module Resources
-    class Bot
-      attr_reader platform_links: XTwitterScraper::Resources::Bot::PlatformLinks
-
-      def initialize: (client: XTwitterScraper::Client) -> void
-    end
-  end
-end
