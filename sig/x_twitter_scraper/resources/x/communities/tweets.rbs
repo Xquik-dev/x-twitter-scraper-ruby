@@ -8,7 +8,13 @@ module XTwitterScraper
             ?cursor: String,
             ?query_type: String,
             ?request_options: XTwitterScraper::request_opts
-          ) -> XTwitterScraper::Models::X::Communities::TweetListResponse
+          ) -> XTwitterScraper::Internal::CursorPage[XTwitterScraper::PaginatedTweets]
+
+          def list_by_community: (
+            String id,
+            ?cursor: String,
+            ?request_options: XTwitterScraper::request_opts
+          ) -> XTwitterScraper::Internal::CursorPage[XTwitterScraper::PaginatedTweets]
 
           def initialize: (client: XTwitterScraper::Client) -> void
         end

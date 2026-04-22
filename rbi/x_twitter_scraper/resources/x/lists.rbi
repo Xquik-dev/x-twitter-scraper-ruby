@@ -11,7 +11,7 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::ListRetrieveFollowersResponse)
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_followers(
           # List ID
@@ -28,7 +28,7 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::ListRetrieveMembersResponse)
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_members(
           # List ID for member lookup
@@ -48,7 +48,7 @@ module XTwitterScraper
             since_time: String,
             until_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::ListRetrieveTweetsResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def retrieve_tweets(
           # List ID for tweet lookup

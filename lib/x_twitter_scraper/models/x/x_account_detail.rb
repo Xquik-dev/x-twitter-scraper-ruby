@@ -3,6 +3,7 @@
 module XTwitterScraper
   module Models
     module X
+      # @see XTwitterScraper::Resources::X::Accounts#retrieve
       class XAccountDetail < XTwitterScraper::Internal::Type::BaseModel
         # @!attribute id
         #

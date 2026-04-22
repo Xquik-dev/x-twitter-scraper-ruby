@@ -72,9 +72,7 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(
-            XTwitterScraper::Models::X::CommunityRetrieveMembersResponse
-          )
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_members(
           # Community ID for member lookup
@@ -91,9 +89,7 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(
-            XTwitterScraper::Models::X::CommunityRetrieveModeratorsResponse
-          )
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_moderators(
           # Community ID for moderator lookup
@@ -111,7 +107,7 @@ module XTwitterScraper
             cursor: String,
             query_type: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::CommunityRetrieveSearchResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def retrieve_search(
           # Search query

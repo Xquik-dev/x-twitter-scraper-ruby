@@ -11,7 +11,7 @@ module XTwitterScraper
           goal: XTwitterScraper::DraftCreateParams::Goal::OrSymbol,
           topic: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::Models::DraftCreateResponse)
+        ).returns(XTwitterScraper::DraftDetail)
       end
       def create(text:, goal: nil, topic: nil, request_options: {})
       end
@@ -21,7 +21,7 @@ module XTwitterScraper
         params(
           id: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::Models::DraftRetrieveResponse)
+        ).returns(XTwitterScraper::DraftDetail)
       end
       def retrieve(
         # Resource ID (stringified bigint)

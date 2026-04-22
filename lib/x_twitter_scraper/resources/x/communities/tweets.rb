@@ -18,7 +18,7 @@ module XTwitterScraper
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [XTwitterScraper::Models::X::Communities::TweetListResponse]
+          # @return [XTwitterScraper::Internal::CursorPage<XTwitterScraper::Models::PaginatedTweets>]
           #
           # @see XTwitterScraper::Models::X::Communities::TweetListParams
           def list(params)
@@ -28,7 +28,34 @@ module XTwitterScraper
               method: :get,
               path: "x/communities/tweets",
               query: query.transform_keys(query_type: "queryType"),
-              model: XTwitterScraper::Models::X::Communities::TweetListResponse,
+              page: XTwitterScraper::Internal::CursorPage,
+              model: XTwitterScraper::PaginatedTweets,
+              options: options
+            )
+          end
+
+          # Get community tweets
+          #
+          # @overload list_by_community(id, cursor: nil, request_options: {})
+          #
+          # @param id [String] Community ID for tweet lookup
+          #
+          # @param cursor [String] Pagination cursor for community tweets
+          #
+          # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @return [XTwitterScraper::Internal::CursorPage<XTwitterScraper::Models::PaginatedTweets>]
+          #
+          # @see XTwitterScraper::Models::X::Communities::TweetListByCommunityParams
+          def list_by_community(id, params = {})
+            parsed, options = XTwitterScraper::X::Communities::TweetListByCommunityParams.dump_request(params)
+            query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+            @client.request(
+              method: :get,
+              path: ["x/communities/%1$s/tweets", id],
+              query: query,
+              page: XTwitterScraper::Internal::CursorPage,
+              model: XTwitterScraper::PaginatedTweets,
               options: options
             )
           end

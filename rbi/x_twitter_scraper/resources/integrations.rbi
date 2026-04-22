@@ -8,14 +8,11 @@ module XTwitterScraper
       sig do
         params(
           config: XTwitterScraper::IntegrationCreateParams::Config::OrHash,
-          event_types:
-            T::Array[
-              XTwitterScraper::IntegrationCreateParams::EventType::OrSymbol
-            ],
+          event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           name: String,
           type: XTwitterScraper::IntegrationCreateParams::Type::OrSymbol,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::Models::IntegrationCreateResponse)
+        ).returns(XTwitterScraper::Integration)
       end
       def create(
         # Integration config (e.g. Telegram chatId)
@@ -33,7 +30,7 @@ module XTwitterScraper
         params(
           id: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::Models::IntegrationRetrieveResponse)
+        ).returns(XTwitterScraper::Integration)
       end
       def retrieve(
         # Resource ID (stringified bigint)
@@ -46,10 +43,7 @@ module XTwitterScraper
       sig do
         params(
           id: String,
-          event_types:
-            T::Array[
-              XTwitterScraper::IntegrationUpdateParams::EventType::OrSymbol
-            ],
+          event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           filters: T::Hash[Symbol, T.anything],
           is_active: T::Boolean,
           message_template: T::Hash[Symbol, T.anything],
@@ -57,7 +51,7 @@ module XTwitterScraper
           scope_all_monitors: T::Boolean,
           silent_push: T::Boolean,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::Models::IntegrationUpdateResponse)
+        ).returns(XTwitterScraper::Integration)
       end
       def update(
         # Resource ID (stringified bigint)

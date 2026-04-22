@@ -3,7 +3,7 @@ module XTwitterScraper
     type integration_create_params =
       {
         config: XTwitterScraper::IntegrationCreateParams::Config,
-        event_types: ::Array[XTwitterScraper::Models::IntegrationCreateParams::event_type],
+        event_types: ::Array[XTwitterScraper::Models::event_type],
         name: String,
         type: XTwitterScraper::Models::IntegrationCreateParams::type_
       }
@@ -15,7 +15,7 @@ module XTwitterScraper
 
       attr_accessor config: XTwitterScraper::IntegrationCreateParams::Config
 
-      attr_accessor event_types: ::Array[XTwitterScraper::Models::IntegrationCreateParams::event_type]
+      attr_accessor event_types: ::Array[XTwitterScraper::Models::event_type]
 
       attr_accessor name: String
 
@@ -23,7 +23,7 @@ module XTwitterScraper
 
       def initialize: (
         config: XTwitterScraper::IntegrationCreateParams::Config,
-        event_types: ::Array[XTwitterScraper::Models::IntegrationCreateParams::event_type],
+        event_types: ::Array[XTwitterScraper::Models::event_type],
         name: String,
         type: XTwitterScraper::Models::IntegrationCreateParams::type_,
         ?request_options: XTwitterScraper::request_opts
@@ -31,7 +31,7 @@ module XTwitterScraper
 
       def to_hash: -> {
         config: XTwitterScraper::IntegrationCreateParams::Config,
-        event_types: ::Array[XTwitterScraper::Models::IntegrationCreateParams::event_type],
+        event_types: ::Array[XTwitterScraper::Models::event_type],
         name: String,
         type: XTwitterScraper::Models::IntegrationCreateParams::type_,
         request_options: XTwitterScraper::RequestOptions
@@ -45,27 +45,6 @@ module XTwitterScraper
         def initialize: (chat_id: String) -> void
 
         def to_hash: -> { chat_id: String }
-      end
-
-      type event_type =
-        :"tweet.new"
-        | :"tweet.reply"
-        | :"tweet.retweet"
-        | :"tweet.quote"
-        | :"follower.gained"
-        | :"follower.lost"
-
-      module EventType
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TWEET_NEW: :"tweet.new"
-        TWEET_REPLY: :"tweet.reply"
-        TWEET_RETWEET: :"tweet.retweet"
-        TWEET_QUOTE: :"tweet.quote"
-        FOLLOWER_GAINED: :"follower.gained"
-        FOLLOWER_LOST: :"follower.lost"
-
-        def self?.values: -> ::Array[XTwitterScraper::Models::IntegrationCreateParams::event_type]
       end
 
       type type_ = :telegram

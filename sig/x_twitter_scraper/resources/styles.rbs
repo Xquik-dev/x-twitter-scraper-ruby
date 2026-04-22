@@ -1,20 +1,42 @@
 module XTwitterScraper
   module Resources
     class Styles
+      def retrieve: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::StyleProfile
+
+      def update: (
+        String id,
+        label: String,
+        tweets: ::Array[XTwitterScraper::StyleUpdateParams::Tweet],
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::StyleProfile
+
       def list: (
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::StyleListResponse
 
+      def delete: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> nil
+
       def analyze: (
         username: String,
         ?request_options: XTwitterScraper::request_opts
-      ) -> XTwitterScraper::Models::StyleAnalyzeResponse
+      ) -> XTwitterScraper::StyleProfile
 
       def compare: (
         username1: String,
         username2: String,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::StyleCompareResponse
+
+      def get_performance: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::StyleGetPerformanceResponse
 
       def initialize: (client: XTwitterScraper::Client) -> void
     end

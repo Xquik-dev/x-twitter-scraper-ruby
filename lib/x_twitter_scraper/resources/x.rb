@@ -71,7 +71,7 @@ module XTwitterScraper
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::XGetHomeTimelineResponse]
+      # @return [XTwitterScraper::Models::PaginatedTweets]
       #
       # @see XTwitterScraper::Models::XGetHomeTimelineParams
       def get_home_timeline(params = {})
@@ -81,7 +81,7 @@ module XTwitterScraper
           method: :get,
           path: "x/timeline",
           query: query.transform_keys(seen_tweet_ids: "seenTweetIds"),
-          model: XTwitterScraper::Models::XGetHomeTimelineResponse,
+          model: XTwitterScraper::PaginatedTweets,
           options: options
         )
       end

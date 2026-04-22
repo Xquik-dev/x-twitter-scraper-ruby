@@ -6,12 +6,12 @@ module XTwitterScraper
         ?goal: XTwitterScraper::Models::DraftCreateParams::goal,
         ?topic: String,
         ?request_options: XTwitterScraper::request_opts
-      ) -> XTwitterScraper::Models::DraftCreateResponse
+      ) -> XTwitterScraper::DraftDetail
 
       def retrieve: (
         String id,
         ?request_options: XTwitterScraper::request_opts
-      ) -> XTwitterScraper::Models::DraftRetrieveResponse
+      ) -> XTwitterScraper::DraftDetail
 
       def list: (
         ?after_cursor: String,

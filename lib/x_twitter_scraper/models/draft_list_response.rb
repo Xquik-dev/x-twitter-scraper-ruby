@@ -6,9 +6,8 @@ module XTwitterScraper
     class DraftListResponse < XTwitterScraper::Internal::Type::BaseModel
       # @!attribute drafts
       #
-      #   @return [Array<XTwitterScraper::Models::DraftListResponse::Draft>]
-      required :drafts,
-               -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::DraftListResponse::Draft] }
+      #   @return [Array<XTwitterScraper::Models::Draft>]
+      required :drafts, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Draft] }
 
       # @!attribute has_more
       #
@@ -21,45 +20,9 @@ module XTwitterScraper
       optional :next_cursor, String, api_name: :nextCursor
 
       # @!method initialize(drafts:, has_more:, next_cursor: nil)
-      #   @param drafts [Array<XTwitterScraper::Models::DraftListResponse::Draft>]
+      #   @param drafts [Array<XTwitterScraper::Models::Draft>]
       #   @param has_more [Boolean]
       #   @param next_cursor [String]
-
-      class Draft < XTwitterScraper::Internal::Type::BaseModel
-        # @!attribute id
-        #
-        #   @return [String]
-        required :id, String
-
-        # @!attribute created_at
-        #
-        #   @return [Time]
-        required :created_at, Time, api_name: :createdAt
-
-        # @!attribute text
-        #
-        #   @return [String]
-        required :text, String
-
-        # @!attribute goal
-        #
-        #   @return [String, nil]
-        optional :goal, String
-
-        # @!attribute topic
-        #
-        #   @return [String, nil]
-        optional :topic, String
-
-        # @!method initialize(id:, created_at:, text:, goal: nil, topic: nil)
-        #   Saved tweet draft with optional topic and goal.
-        #
-        #   @param id [String]
-        #   @param created_at [Time]
-        #   @param text [String]
-        #   @param goal [String]
-        #   @param topic [String]
-      end
     end
   end
 end

@@ -60,14 +60,14 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
     response = @x_twitter_scraper.x.communities.retrieve_members("id")
 
     assert_pattern do
-      response => XTwitterScraper::Models::X::CommunityRetrieveMembersResponse
+      response => XTwitterScraper::PaginatedUsers
     end
 
     assert_pattern do
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::CommunityRetrieveMembersResponse::User])
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile])
       }
     end
   end
@@ -78,14 +78,14 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
     response = @x_twitter_scraper.x.communities.retrieve_moderators("id")
 
     assert_pattern do
-      response => XTwitterScraper::Models::X::CommunityRetrieveModeratorsResponse
+      response => XTwitterScraper::PaginatedUsers
     end
 
     assert_pattern do
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::CommunityRetrieveModeratorsResponse::User])
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile])
       }
     end
   end
@@ -96,14 +96,14 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
     response = @x_twitter_scraper.x.communities.retrieve_search(q: "q")
 
     assert_pattern do
-      response => XTwitterScraper::Models::X::CommunityRetrieveSearchResponse
+      response => XTwitterScraper::PaginatedTweets
     end
 
     assert_pattern do
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::CommunityRetrieveSearchResponse::Tweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
       }
     end
   end

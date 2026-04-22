@@ -94,7 +94,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::CommunityRetrieveMembersResponse]
+        # @return [XTwitterScraper::Models::PaginatedUsers]
         #
         # @see XTwitterScraper::Models::X::CommunityRetrieveMembersParams
         def retrieve_members(id, params = {})
@@ -104,7 +104,7 @@ module XTwitterScraper
             method: :get,
             path: ["x/communities/%1$s/members", id],
             query: query,
-            model: XTwitterScraper::Models::X::CommunityRetrieveMembersResponse,
+            model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end
@@ -119,7 +119,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::CommunityRetrieveModeratorsResponse]
+        # @return [XTwitterScraper::Models::PaginatedUsers]
         #
         # @see XTwitterScraper::Models::X::CommunityRetrieveModeratorsParams
         def retrieve_moderators(id, params = {})
@@ -129,7 +129,7 @@ module XTwitterScraper
             method: :get,
             path: ["x/communities/%1$s/moderators", id],
             query: query,
-            model: XTwitterScraper::Models::X::CommunityRetrieveModeratorsResponse,
+            model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end
@@ -146,7 +146,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::CommunityRetrieveSearchResponse]
+        # @return [XTwitterScraper::Models::PaginatedTweets]
         #
         # @see XTwitterScraper::Models::X::CommunityRetrieveSearchParams
         def retrieve_search(params)
@@ -156,7 +156,7 @@ module XTwitterScraper
             method: :get,
             path: "x/communities/search",
             query: query.transform_keys(query_type: "queryType"),
-            model: XTwitterScraper::Models::X::CommunityRetrieveSearchResponse,
+            model: XTwitterScraper::PaginatedTweets,
             options: options
           )
         end

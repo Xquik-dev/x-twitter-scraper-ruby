@@ -2,6 +2,7 @@
 
 module XTwitterScraper
   module Models
+    # @see XTwitterScraper::Resources::Drafts#create
     class DraftDetail < XTwitterScraper::Internal::Type::BaseModel
       # @!attribute id
       #

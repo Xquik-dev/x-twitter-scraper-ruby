@@ -3,26 +3,26 @@ module XTwitterScraper
     type x_get_article_response =
       {
         article: XTwitterScraper::Models::XGetArticleResponse::Article,
-        author: XTwitterScraper::Models::XGetArticleResponse::Author
+        author: XTwitterScraper::X::TweetAuthor
       }
 
     class XGetArticleResponse < XTwitterScraper::Internal::Type::BaseModel
       attr_accessor article: XTwitterScraper::Models::XGetArticleResponse::Article
 
-      attr_reader author: XTwitterScraper::Models::XGetArticleResponse::Author?
+      attr_reader author: XTwitterScraper::X::TweetAuthor?
 
       def author=: (
-        XTwitterScraper::Models::XGetArticleResponse::Author
-      ) -> XTwitterScraper::Models::XGetArticleResponse::Author
+        XTwitterScraper::X::TweetAuthor
+      ) -> XTwitterScraper::X::TweetAuthor
 
       def initialize: (
         article: XTwitterScraper::Models::XGetArticleResponse::Article,
-        ?author: XTwitterScraper::Models::XGetArticleResponse::Author
+        ?author: XTwitterScraper::X::TweetAuthor
       ) -> void
 
       def to_hash: -> {
         article: XTwitterScraper::Models::XGetArticleResponse::Article,
-        author: XTwitterScraper::Models::XGetArticleResponse::Author
+        author: XTwitterScraper::X::TweetAuthor
       }
 
       type article =
@@ -147,45 +147,6 @@ module XTwitterScraper
             width: Integer
           }
         end
-      end
-
-      type author =
-        {
-          id: String,
-          followers: Integer,
-          username: String,
-          verified: bool,
-          profile_picture: String
-        }
-
-      class Author < XTwitterScraper::Internal::Type::BaseModel
-        attr_accessor id: String
-
-        attr_accessor followers: Integer
-
-        attr_accessor username: String
-
-        attr_accessor verified: bool
-
-        attr_reader profile_picture: String?
-
-        def profile_picture=: (String) -> String
-
-        def initialize: (
-          id: String,
-          followers: Integer,
-          username: String,
-          verified: bool,
-          ?profile_picture: String
-        ) -> void
-
-        def to_hash: -> {
-          id: String,
-          followers: Integer,
-          username: String,
-          verified: bool,
-          profile_picture: String
-        }
       end
     end
   end

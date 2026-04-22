@@ -9,14 +9,14 @@ class XTwitterScraper::Test::Resources::X::ListsTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.lists.retrieve_followers("id")
 
     assert_pattern do
-      response => XTwitterScraper::Models::X::ListRetrieveFollowersResponse
+      response => XTwitterScraper::PaginatedUsers
     end
 
     assert_pattern do
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::ListRetrieveFollowersResponse::User])
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile])
       }
     end
   end
@@ -27,14 +27,14 @@ class XTwitterScraper::Test::Resources::X::ListsTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.lists.retrieve_members("id")
 
     assert_pattern do
-      response => XTwitterScraper::Models::X::ListRetrieveMembersResponse
+      response => XTwitterScraper::PaginatedUsers
     end
 
     assert_pattern do
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::ListRetrieveMembersResponse::User])
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile])
       }
     end
   end
@@ -45,14 +45,14 @@ class XTwitterScraper::Test::Resources::X::ListsTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.lists.retrieve_tweets("id")
 
     assert_pattern do
-      response => XTwitterScraper::Models::X::ListRetrieveTweetsResponse
+      response => XTwitterScraper::PaginatedTweets
     end
 
     assert_pattern do
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::ListRetrieveTweetsResponse::Tweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
       }
     end
   end

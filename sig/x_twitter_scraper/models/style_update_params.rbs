@@ -1,0 +1,46 @@
+module XTwitterScraper
+  module Models
+    type style_update_params =
+      {
+        id: String,
+        label: String,
+        tweets: ::Array[XTwitterScraper::StyleUpdateParams::Tweet]
+      }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class StyleUpdateParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor id: String
+
+      attr_accessor label: String
+
+      attr_accessor tweets: ::Array[XTwitterScraper::StyleUpdateParams::Tweet]
+
+      def initialize: (
+        id: String,
+        label: String,
+        tweets: ::Array[XTwitterScraper::StyleUpdateParams::Tweet],
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        label: String,
+        tweets: ::Array[XTwitterScraper::StyleUpdateParams::Tweet],
+        request_options: XTwitterScraper::RequestOptions
+      }
+
+      type tweet = { text: String }
+
+      class Tweet < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor text: String
+
+        def initialize: (text: String) -> void
+
+        def to_hash: -> { text: String }
+      end
+    end
+  end
+end

@@ -9,14 +9,21 @@ class XTwitterScraper::Test::Resources::X::BookmarksTest < XTwitterScraper::Test
     response = @x_twitter_scraper.x.bookmarks.list
 
     assert_pattern do
-      response => XTwitterScraper::Models::X::BookmarkListResponse
+      response => XTwitterScraper::Internal::CursorPage
+    end
+
+    row = response.to_enum.first
+    return if row.nil?
+
+    assert_pattern do
+      row => XTwitterScraper::PaginatedTweets
     end
 
     assert_pattern do
-      response => {
+      row => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::BookmarkListResponse::Tweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
       }
     end
   end
