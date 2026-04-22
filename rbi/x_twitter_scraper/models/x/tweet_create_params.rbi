@@ -19,9 +19,6 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :account
 
-        sig { returns(String) }
-        attr_accessor :text
-
         sig { returns(T.nilable(String)) }
         attr_reader :attachment_url
 
@@ -40,6 +37,14 @@ module XTwitterScraper
         sig { params(is_note_tweet: T::Boolean).void }
         attr_writer :is_note_tweet
 
+        # Array of media URLs to attach (mutually exclusive with media_ids)
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_reader :media
+
+        sig { params(media: T::Array[String]).void }
+        attr_writer :media
+
+        # Array of media IDs to attach (mutually exclusive with media)
         sig { returns(T.nilable(T::Array[String])) }
         attr_reader :media_ids
 
@@ -52,27 +57,39 @@ module XTwitterScraper
         sig { params(reply_to_tweet_id: String).void }
         attr_writer :reply_to_tweet_id
 
+        # Tweet text (optional when media is provided)
+        sig { returns(T.nilable(String)) }
+        attr_reader :text
+
+        sig { params(text: String).void }
+        attr_writer :text
+
         sig do
           params(
             account: String,
-            text: String,
             attachment_url: String,
             community_id: String,
             is_note_tweet: T::Boolean,
+            media: T::Array[String],
             media_ids: T::Array[String],
             reply_to_tweet_id: String,
+            text: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
           # X account (@username or account ID)
           account:,
-          text:,
           attachment_url: nil,
           community_id: nil,
           is_note_tweet: nil,
+          # Array of media URLs to attach (mutually exclusive with media_ids)
+          media: nil,
+          # Array of media IDs to attach (mutually exclusive with media)
           media_ids: nil,
           reply_to_tweet_id: nil,
+          # Tweet text (optional when media is provided)
+          text: nil,
           request_options: {}
         )
         end
@@ -81,12 +98,13 @@ module XTwitterScraper
           override.returns(
             {
               account: String,
-              text: String,
               attachment_url: String,
               community_id: String,
               is_note_tweet: T::Boolean,
+              media: T::Array[String],
               media_ids: T::Array[String],
               reply_to_tweet_id: String,
+              text: String,
               request_options: XTwitterScraper::RequestOptions
             }
           )

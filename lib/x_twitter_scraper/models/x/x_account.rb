@@ -14,6 +14,16 @@ module XTwitterScraper
         #   @return [Time]
         required :created_at, Time, api_name: :createdAt
 
+        # @!attribute health
+        #   Derived login/cookie health. `healthy` = cookies valid. `needsReauth` = user
+        #   must submit fresh credentials. `locked` = X locked the account; unlock on x.com
+        #   first. `suspended` = X banned the account. `recovering` = past cooldown, will
+        #   auto-retry on next use. `temporaryIssue` = transient backend problem; retry
+        #   shortly.
+        #
+        #   @return [Symbol, XTwitterScraper::Models::X::XAccount::Health]
+        required :health, enum: -> { XTwitterScraper::X::XAccount::Health }
+
         # @!attribute status
         #
         #   @return [String]
@@ -29,14 +39,44 @@ module XTwitterScraper
         #   @return [String]
         required :x_username, String, api_name: :xUsername
 
-        # @!method initialize(id:, created_at:, status:, x_user_id:, x_username:)
+        # @!method initialize(id:, created_at:, health:, status:, x_user_id:, x_username:)
+        #   Some parameter documentations has been truncated, see
+        #   {XTwitterScraper::Models::X::XAccount} for more details.
+        #
         #   Linked X account summary with username and connection status.
         #
         #   @param id [String]
+        #
         #   @param created_at [Time]
+        #
+        #   @param health [Symbol, XTwitterScraper::Models::X::XAccount::Health] Derived login/cookie health. `healthy` = cookies valid. `needsReauth` = user mus
+        #
         #   @param status [String]
+        #
         #   @param x_user_id [String]
+        #
         #   @param x_username [String]
+
+        # Derived login/cookie health. `healthy` = cookies valid. `needsReauth` = user
+        # must submit fresh credentials. `locked` = X locked the account; unlock on x.com
+        # first. `suspended` = X banned the account. `recovering` = past cooldown, will
+        # auto-retry on next use. `temporaryIssue` = transient backend problem; retry
+        # shortly.
+        #
+        # @see XTwitterScraper::Models::X::XAccount#health
+        module Health
+          extend XTwitterScraper::Internal::Type::Enum
+
+          HEALTHY = :healthy
+          LOCKED = :locked
+          NEEDS_REAUTH = :needsReauth
+          RECOVERING = :recovering
+          SUSPENDED = :suspended
+          TEMPORARY_ISSUE = :temporaryIssue
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
     end
 

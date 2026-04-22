@@ -15,6 +15,16 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :id
 
+        sig { returns(Time) }
+        attr_accessor :created_at
+
+        sig do
+          returns(
+            XTwitterScraper::Models::X::AccountCreateResponse::Health::TaggedSymbol
+          )
+        end
+        attr_accessor :health
+
         sig { returns(String) }
         attr_accessor :status
 
@@ -24,28 +34,115 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :x_username
 
+        # ISO-3166-1 alpha-2 country code of the Driver consumer device used for this
+        # login. Present only when the US fallback was triggered because Driver had no
+        # capacity in the declared region. Omitted otherwise.
+        sig { returns(T.nilable(String)) }
+        attr_reader :login_country
+
+        sig { params(login_country: String).void }
+        attr_writer :login_country
+
+        # Sanitized X account summary returned by connect and reauth. Includes an optional
+        # `loginCountry` field surfaced only when the declared proxy region had no Driver
+        # capacity and the login fell back to a single US consumer device for this
+        # one-time action. Future activity continues to use the selected `proxy_country`;
+        # the field is omitted on normal logins.
         sig do
           params(
             id: String,
+            created_at: Time,
+            health:
+              XTwitterScraper::Models::X::AccountCreateResponse::Health::OrSymbol,
             status: String,
             x_user_id: String,
-            x_username: String
+            x_username: String,
+            login_country: String
           ).returns(T.attached_class)
         end
-        def self.new(id:, status:, x_user_id:, x_username:)
+        def self.new(
+          id:,
+          created_at:,
+          health:,
+          status:,
+          x_user_id:,
+          x_username:,
+          # ISO-3166-1 alpha-2 country code of the Driver consumer device used for this
+          # login. Present only when the US fallback was triggered because Driver had no
+          # capacity in the declared region. Omitted otherwise.
+          login_country: nil
+        )
         end
 
         sig do
           override.returns(
             {
               id: String,
+              created_at: Time,
+              health:
+                XTwitterScraper::Models::X::AccountCreateResponse::Health::TaggedSymbol,
               status: String,
               x_user_id: String,
-              x_username: String
+              x_username: String,
+              login_country: String
             }
           )
         end
         def to_hash
+        end
+
+        module Health
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                XTwitterScraper::Models::X::AccountCreateResponse::Health
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          HEALTHY =
+            T.let(
+              :healthy,
+              XTwitterScraper::Models::X::AccountCreateResponse::Health::TaggedSymbol
+            )
+          LOCKED =
+            T.let(
+              :locked,
+              XTwitterScraper::Models::X::AccountCreateResponse::Health::TaggedSymbol
+            )
+          NEEDS_REAUTH =
+            T.let(
+              :needsReauth,
+              XTwitterScraper::Models::X::AccountCreateResponse::Health::TaggedSymbol
+            )
+          RECOVERING =
+            T.let(
+              :recovering,
+              XTwitterScraper::Models::X::AccountCreateResponse::Health::TaggedSymbol
+            )
+          SUSPENDED =
+            T.let(
+              :suspended,
+              XTwitterScraper::Models::X::AccountCreateResponse::Health::TaggedSymbol
+            )
+          TEMPORARY_ISSUE =
+            T.let(
+              :temporaryIssue,
+              XTwitterScraper::Models::X::AccountCreateResponse::Health::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::Models::X::AccountCreateResponse::Health::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
     end

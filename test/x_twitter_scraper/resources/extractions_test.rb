@@ -52,10 +52,11 @@ class XTwitterScraper::Test::Resources::ExtractionsTest < XTwitterScraper::Test:
     assert_pattern do
       response => {
         allowed: XTwitterScraper::Internal::Type::Boolean,
+        credits_available: String,
+        credits_required: String,
         estimated_results: Integer,
-        projected_percent: Float,
         source: String,
-        usage_percent: Float
+        resolved_x_user_id: String | nil
       }
     end
   end

@@ -51,6 +51,11 @@ module XTwitterScraper
           T.let(:invalid_tweet_url, XTwitterScraper::Error::Error::TaggedSymbol)
         INVALID_USERNAME =
           T.let(:invalid_username, XTwitterScraper::Error::Error::TaggedSymbol)
+        INSUFFICIENT_CREDITS =
+          T.let(
+            :insufficient_credits,
+            XTwitterScraper::Error::Error::TaggedSymbol
+          )
         MISSING_PARAMS =
           T.let(:missing_params, XTwitterScraper::Error::Error::TaggedSymbol)
         MISSING_QUERY =
@@ -65,15 +70,12 @@ module XTwitterScraper
             :monitor_limit_reached,
             XTwitterScraper::Error::Error::TaggedSymbol
           )
+        NO_CREDITS =
+          T.let(:no_credits, XTwitterScraper::Error::Error::TaggedSymbol)
         NO_SUBSCRIPTION =
           T.let(:no_subscription, XTwitterScraper::Error::Error::TaggedSymbol)
         NOT_FOUND =
           T.let(:not_found, XTwitterScraper::Error::Error::TaggedSymbol)
-        STREAM_REGISTRATION_FAILED =
-          T.let(
-            :stream_registration_failed,
-            XTwitterScraper::Error::Error::TaggedSymbol
-          )
         SUBSCRIPTION_INACTIVE =
           T.let(
             :subscription_inactive,
@@ -83,11 +85,6 @@ module XTwitterScraper
           T.let(:tweet_not_found, XTwitterScraper::Error::Error::TaggedSymbol)
         UNAUTHENTICATED =
           T.let(:unauthenticated, XTwitterScraper::Error::Error::TaggedSymbol)
-        USAGE_LIMIT_REACHED =
-          T.let(
-            :usage_limit_reached,
-            XTwitterScraper::Error::Error::TaggedSymbol
-          )
         USER_NOT_FOUND =
           T.let(:user_not_found, XTwitterScraper::Error::Error::TaggedSymbol)
         WEBHOOK_INACTIVE =

@@ -16,24 +16,29 @@ module XTwitterScraper
         sig do
           params(
             account: String,
-            text: String,
             attachment_url: String,
             community_id: String,
             is_note_tweet: T::Boolean,
+            media: T::Array[String],
             media_ids: T::Array[String],
             reply_to_tweet_id: String,
+            text: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::TweetCreateResponse)
         end
         def create(
           # X account (@username or account ID)
           account:,
-          text:,
           attachment_url: nil,
           community_id: nil,
           is_note_tweet: nil,
+          # Array of media URLs to attach (mutually exclusive with media_ids)
+          media: nil,
+          # Array of media IDs to attach (mutually exclusive with media)
           media_ids: nil,
           reply_to_tweet_id: nil,
+          # Tweet text (optional when media is provided)
+          text: nil,
           request_options: {}
         )
         end

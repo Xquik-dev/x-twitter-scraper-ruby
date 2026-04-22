@@ -114,11 +114,15 @@ module XTwitterScraper
 
         # Re-authenticate X account
         #
-        # @overload reauth(id, password:, totp_secret: nil, request_options: {})
+        # @overload reauth(id, password:, email: nil, proxy_country: nil, totp_secret: nil, request_options: {})
         #
         # @param id [String] Resource ID (stringified bigint)
         #
         # @param password [String] Updated account password
+        #
+        # @param email [String] Email for the X account (updates stored email)
+        #
+        # @param proxy_country [String] Two-letter country code for login proxy region
         #
         # @param totp_secret [String] TOTP secret for 2FA re-authentication
         #

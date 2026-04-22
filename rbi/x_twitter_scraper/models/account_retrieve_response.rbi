@@ -27,19 +27,19 @@ module XTwitterScraper
       sig do
         returns(
           T.nilable(
-            XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod
+            XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo
           )
         )
       end
-      attr_reader :current_period
+      attr_reader :credit_info
 
       sig do
         params(
-          current_period:
-            XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod::OrHash
+          credit_info:
+            XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo::OrHash
         ).void
       end
-      attr_writer :current_period
+      attr_writer :credit_info
 
       sig do
         params(
@@ -47,16 +47,11 @@ module XTwitterScraper
           monitors_used: Integer,
           plan:
             XTwitterScraper::Models::AccountRetrieveResponse::Plan::OrSymbol,
-          current_period:
-            XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod::OrHash
+          credit_info:
+            XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        monitors_allowed:,
-        monitors_used:,
-        plan:,
-        current_period: nil
-      )
+      def self.new(monitors_allowed:, monitors_used:, plan:, credit_info: nil)
       end
 
       sig do
@@ -66,8 +61,8 @@ module XTwitterScraper
             monitors_used: Integer,
             plan:
               XTwitterScraper::Models::AccountRetrieveResponse::Plan::TaggedSymbol,
-            current_period:
-              XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod
+            credit_info:
+              XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo
           }
         )
       end
@@ -108,34 +103,52 @@ module XTwitterScraper
         end
       end
 
-      class CurrentPeriod < XTwitterScraper::Internal::Type::BaseModel
+      class CreditInfo < XTwitterScraper::Internal::Type::BaseModel
         OrHash =
           T.type_alias do
             T.any(
-              XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod,
+              XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo,
               XTwitterScraper::Internal::AnyHash
             )
           end
 
-        sig { returns(Time) }
-        attr_accessor :end_
+        sig { returns(T::Boolean) }
+        attr_accessor :auto_topup_enabled
 
-        sig { returns(Time) }
-        attr_accessor :start
+        sig { returns(Integer) }
+        attr_accessor :balance
 
-        sig { returns(Float) }
-        attr_accessor :usage_percent
+        sig { returns(Integer) }
+        attr_accessor :lifetime_purchased
+
+        sig { returns(Integer) }
+        attr_accessor :lifetime_used
 
         sig do
-          params(end_: Time, start: Time, usage_percent: Float).returns(
-            T.attached_class
+          params(
+            auto_topup_enabled: T::Boolean,
+            balance: Integer,
+            lifetime_purchased: Integer,
+            lifetime_used: Integer
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          auto_topup_enabled:,
+          balance:,
+          lifetime_purchased:,
+          lifetime_used:
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              auto_topup_enabled: T::Boolean,
+              balance: Integer,
+              lifetime_purchased: Integer,
+              lifetime_used: Integer
+            }
           )
-        end
-        def self.new(end_:, start:, usage_percent:)
-        end
-
-        sig do
-          override.returns({ end_: Time, start: Time, usage_percent: Float })
         end
         def to_hash
         end

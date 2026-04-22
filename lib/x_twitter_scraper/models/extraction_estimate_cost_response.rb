@@ -9,32 +9,38 @@ module XTwitterScraper
       #   @return [Boolean]
       required :allowed, XTwitterScraper::Internal::Type::Boolean
 
+      # @!attribute credits_available
+      #
+      #   @return [String]
+      required :credits_available, String, api_name: :creditsAvailable
+
+      # @!attribute credits_required
+      #
+      #   @return [String]
+      required :credits_required, String, api_name: :creditsRequired
+
       # @!attribute estimated_results
       #
       #   @return [Integer]
       required :estimated_results, Integer, api_name: :estimatedResults
-
-      # @!attribute projected_percent
-      #
-      #   @return [Float]
-      required :projected_percent, Float, api_name: :projectedPercent
 
       # @!attribute source
       #
       #   @return [String]
       required :source, String
 
-      # @!attribute usage_percent
+      # @!attribute resolved_x_user_id
       #
-      #   @return [Float]
-      required :usage_percent, Float, api_name: :usagePercent
+      #   @return [String, nil]
+      optional :resolved_x_user_id, String, api_name: :resolvedXUserId
 
-      # @!method initialize(allowed:, estimated_results:, projected_percent:, source:, usage_percent:)
+      # @!method initialize(allowed:, credits_available:, credits_required:, estimated_results:, source:, resolved_x_user_id: nil)
       #   @param allowed [Boolean]
+      #   @param credits_available [String]
+      #   @param credits_required [String]
       #   @param estimated_results [Integer]
-      #   @param projected_percent [Float]
       #   @param source [String]
-      #   @param usage_percent [Float]
+      #   @param resolved_x_user_id [String]
     end
   end
 end

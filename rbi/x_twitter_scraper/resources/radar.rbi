@@ -7,9 +7,11 @@ module XTwitterScraper
       # Get trending topics from curated sources
       sig do
         params(
-          category: String,
-          count: Integer,
+          after: String,
+          category:
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Category::OrSymbol,
           hours: Integer,
+          limit: Integer,
           region: String,
           source:
             XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source::OrSymbol,
@@ -17,12 +19,14 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::RadarRetrieveTrendingTopicsResponse)
       end
       def retrieve_trending_topics(
-        # Filter by category (general, tech, dev, etc.)
+        # Cursor for pagination (from prior response nextCursor).
+        after: nil,
+        # Filter by category.
         category: nil,
-        # Number of items to return
-        count: nil,
-        # Lookback window in hours
+        # Lookback window in hours (1-168, default 24).
         hours: nil,
+        # Number of items to return (1-100, default 50).
+        limit: nil,
         # Region filter (us, global, etc.)
         region: nil,
         # Source filter. One of: github, google_trends, hacker_news, polymarket, reddit,

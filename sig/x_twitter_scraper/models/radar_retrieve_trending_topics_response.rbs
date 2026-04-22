@@ -1,21 +1,31 @@
 module XTwitterScraper
   module Models
     type radar_retrieve_trending_topics_response =
-      { items: ::Array[XTwitterScraper::RadarItem], total: Integer }
+      {
+        has_more: bool,
+        items: ::Array[XTwitterScraper::RadarItem],
+        next_cursor: String
+      }
 
     class RadarRetrieveTrendingTopicsResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor has_more: bool
+
       attr_accessor items: ::Array[XTwitterScraper::RadarItem]
 
-      attr_accessor total: Integer
+      attr_reader next_cursor: String?
+
+      def next_cursor=: (String) -> String
 
       def initialize: (
+        has_more: bool,
         items: ::Array[XTwitterScraper::RadarItem],
-        total: Integer
+        ?next_cursor: String
       ) -> void
 
       def to_hash: -> {
+        has_more: bool,
         items: ::Array[XTwitterScraper::RadarItem],
-        total: Integer
+        next_cursor: String
       }
     end
   end

@@ -74,25 +74,6 @@ module XTwitterScraper
 
   ExtractionRunParams = XTwitterScraper::Models::ExtractionRunParams
 
-  Integration = XTwitterScraper::Models::Integration
-
-  IntegrationCreateParams = XTwitterScraper::Models::IntegrationCreateParams
-
-  IntegrationDeleteParams = XTwitterScraper::Models::IntegrationDeleteParams
-
-  IntegrationDelivery = XTwitterScraper::Models::IntegrationDelivery
-
-  IntegrationListDeliveriesParams =
-    XTwitterScraper::Models::IntegrationListDeliveriesParams
-
-  IntegrationListParams = XTwitterScraper::Models::IntegrationListParams
-
-  IntegrationRetrieveParams = XTwitterScraper::Models::IntegrationRetrieveParams
-
-  IntegrationSendTestParams = XTwitterScraper::Models::IntegrationSendTestParams
-
-  IntegrationUpdateParams = XTwitterScraper::Models::IntegrationUpdateParams
-
   Monitor = XTwitterScraper::Models::Monitor
 
   MonitorCreateParams = XTwitterScraper::Models::MonitorCreateParams
