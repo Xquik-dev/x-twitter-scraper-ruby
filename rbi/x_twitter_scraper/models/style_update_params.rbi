@@ -15,7 +15,7 @@ module XTwitterScraper
         end
 
       sig { returns(String) }
-      attr_accessor :username
+      attr_accessor :id
 
       # Display label for the style
       sig { returns(String) }
@@ -27,14 +27,14 @@ module XTwitterScraper
 
       sig do
         params(
-          username: String,
+          id: String,
           label: String,
           tweets: T::Array[XTwitterScraper::StyleUpdateParams::Tweet::OrHash],
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
-        username:,
+        id:,
         # Display label for the style
         label:,
         # Array of tweet objects
@@ -46,7 +46,7 @@ module XTwitterScraper
       sig do
         override.returns(
           {
-            username: String,
+            id: String,
             label: String,
             tweets: T::Array[XTwitterScraper::StyleUpdateParams::Tweet],
             request_options: XTwitterScraper::RequestOptions

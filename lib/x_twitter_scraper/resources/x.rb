@@ -45,7 +45,8 @@ module XTwitterScraper
       #
       # @overload get_article(tweet_id, request_options: {})
       #
-      # @param tweet_id [String]
+      # @param tweet_id [String] Tweet ID of the article
+      #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [XTwitterScraper::Models::XGetArticleResponse]
@@ -64,13 +65,13 @@ module XTwitterScraper
       #
       # @overload get_home_timeline(cursor: nil, seen_tweet_ids: nil, request_options: {})
       #
-      # @param cursor [String] Pagination cursor from previous response
+      # @param cursor [String] Pagination cursor for timeline
       #
       # @param seen_tweet_ids [String] Comma-separated tweet IDs to exclude from results
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::XGetHomeTimelineResponse]
+      # @return [XTwitterScraper::Models::PaginatedTweets]
       #
       # @see XTwitterScraper::Models::XGetHomeTimelineParams
       def get_home_timeline(params = {})
@@ -80,7 +81,7 @@ module XTwitterScraper
           method: :get,
           path: "x/timeline",
           query: query.transform_keys(seen_tweet_ids: "seenTweetIds"),
-          model: XTwitterScraper::Models::XGetHomeTimelineResponse,
+          model: XTwitterScraper::PaginatedTweets,
           options: options
         )
       end
@@ -89,7 +90,7 @@ module XTwitterScraper
       #
       # @overload get_notifications(cursor: nil, type: nil, request_options: {})
       #
-      # @param cursor [String] Pagination cursor from previous response
+      # @param cursor [String] Pagination cursor for notifications
       #
       # @param type [Symbol, XTwitterScraper::Models::XGetNotificationsParams::Type] Notification type filter
       #
@@ -116,11 +117,16 @@ module XTwitterScraper
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [nil]
+      # @return [XTwitterScraper::Models::XGetTrendsResponse]
       #
       # @see XTwitterScraper::Models::XGetTrendsParams
       def get_trends(params = {})
-        @client.request(method: :get, path: "x/trends", model: NilClass, options: params[:request_options])
+        @client.request(
+          method: :get,
+          path: "x/trends",
+          model: XTwitterScraper::Models::XGetTrendsResponse,
+          options: params[:request_options]
+        )
       end
 
       # @api private

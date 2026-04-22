@@ -1,21 +1,21 @@
 module XTwitterScraper
   module Models
     type style_get_performance_params =
-      { username: String } & XTwitterScraper::Internal::Type::request_parameters
+      { id: String } & XTwitterScraper::Internal::Type::request_parameters
 
     class StyleGetPerformanceParams < XTwitterScraper::Internal::Type::BaseModel
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      attr_accessor username: String
+      attr_accessor id: String
 
       def initialize: (
-        username: String,
+        id: String,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
       def to_hash: -> {
-        username: String,
+        id: String,
         request_options: XTwitterScraper::RequestOptions
       }
     end

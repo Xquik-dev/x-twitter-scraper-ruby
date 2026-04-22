@@ -14,8 +14,8 @@ class XTwitterScraper::Test::Resources::DrawsTest < XTwitterScraper::Test::Resou
 
     assert_pattern do
       response => {
-        draw: XTwitterScraper::Models::DrawRetrieveResponse::Draw,
-        winners: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::DrawRetrieveResponse::Winner])
+        draw: XTwitterScraper::DrawDetail,
+        winners: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Winner])
       }
     end
   end
@@ -31,7 +31,7 @@ class XTwitterScraper::Test::Resources::DrawsTest < XTwitterScraper::Test::Resou
 
     assert_pattern do
       response => {
-        draws: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::DrawListResponse::Draw]),
+        draws: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::DrawListItem]),
         has_more: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String | nil
       }
@@ -51,7 +51,7 @@ class XTwitterScraper::Test::Resources::DrawsTest < XTwitterScraper::Test::Resou
   def test_run_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.draws.run(tweet_url: "https://example.com")
+    response = @x_twitter_scraper.draws.run(tweet_url: "https://x.com/elonmusk/status/1234567890")
 
     assert_pattern do
       response => XTwitterScraper::Models::DrawRunResponse
@@ -63,7 +63,7 @@ class XTwitterScraper::Test::Resources::DrawsTest < XTwitterScraper::Test::Resou
         total_entries: Integer,
         tweet_id: String,
         valid_entries: Integer,
-        winners: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::DrawRunResponse::Winner])
+        winners: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Winner])
       }
     end
   end

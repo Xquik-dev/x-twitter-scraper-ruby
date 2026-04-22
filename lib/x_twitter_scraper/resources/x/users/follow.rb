@@ -8,22 +8,22 @@ module XTwitterScraper
         class Follow
           # Follow user
           #
-          # @overload create(user_id, account:, request_options: {})
+          # @overload create(id, account:, request_options: {})
           #
-          # @param user_id [String] User ID to follow
+          # @param id [String] User ID to follow
           #
-          # @param account [String] X account (@username or account ID)
+          # @param account [String] X account identifier (@username or account ID)
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [XTwitterScraper::Models::X::Users::FollowCreateResponse]
           #
           # @see XTwitterScraper::Models::X::Users::FollowCreateParams
-          def create(user_id, params)
+          def create(id, params)
             parsed, options = XTwitterScraper::X::Users::FollowCreateParams.dump_request(params)
             @client.request(
               method: :post,
-              path: ["x/users/%1$s/follow", user_id],
+              path: ["x/users/%1$s/follow", id],
               body: parsed,
               model: XTwitterScraper::Models::X::Users::FollowCreateResponse,
               options: options
@@ -32,22 +32,22 @@ module XTwitterScraper
 
           # Unfollow user
           #
-          # @overload delete_all(user_id, account:, request_options: {})
+          # @overload delete_all(id, account:, request_options: {})
           #
-          # @param user_id [String] User ID to unfollow
+          # @param id [String] User ID to unfollow
           #
-          # @param account [String] X account (@username or account ID)
+          # @param account [String] X account identifier (@username or account ID)
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [XTwitterScraper::Models::X::Users::FollowDeleteAllResponse]
           #
           # @see XTwitterScraper::Models::X::Users::FollowDeleteAllParams
-          def delete_all(user_id, params)
+          def delete_all(id, params)
             parsed, options = XTwitterScraper::X::Users::FollowDeleteAllParams.dump_request(params)
             @client.request(
               method: :delete,
-              path: ["x/users/%1$s/follow", user_id],
+              path: ["x/users/%1$s/follow", id],
               body: parsed,
               model: XTwitterScraper::Models::X::Users::FollowDeleteAllResponse,
               options: options

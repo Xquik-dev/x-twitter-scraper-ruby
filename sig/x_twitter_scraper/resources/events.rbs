@@ -4,11 +4,11 @@ module XTwitterScraper
       def retrieve: (
         String id,
         ?request_options: XTwitterScraper::request_opts
-      ) -> XTwitterScraper::Models::EventRetrieveResponse
+      ) -> XTwitterScraper::EventDetail
 
       def list: (
         ?after: String,
-        ?event_type: XTwitterScraper::Models::EventListParams::event_type,
+        ?event_type: XTwitterScraper::Models::event_type,
         ?limit: Integer,
         ?monitor_id: String,
         ?request_options: XTwitterScraper::request_opts

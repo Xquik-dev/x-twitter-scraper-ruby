@@ -3,20 +3,20 @@ module XTwitterScraper
     class Integrations
       def create: (
         config: XTwitterScraper::IntegrationCreateParams::Config,
-        event_types: ::Array[XTwitterScraper::Models::IntegrationCreateParams::event_type],
+        event_types: ::Array[XTwitterScraper::Models::event_type],
         name: String,
-        type: XTwitterScraper::Models::IntegrationCreateParams::type_,
+        ?type: :telegram,
         ?request_options: XTwitterScraper::request_opts
-      ) -> XTwitterScraper::Models::IntegrationCreateResponse
+      ) -> XTwitterScraper::Integration
 
       def retrieve: (
         String id,
         ?request_options: XTwitterScraper::request_opts
-      ) -> XTwitterScraper::Models::IntegrationRetrieveResponse
+      ) -> XTwitterScraper::Integration
 
       def update: (
         String id,
-        ?event_types: ::Array[XTwitterScraper::Models::IntegrationUpdateParams::event_type],
+        ?event_types: ::Array[XTwitterScraper::Models::event_type],
         ?filters: ::Hash[Symbol, top],
         ?is_active: bool,
         ?message_template: ::Hash[Symbol, top],
@@ -24,7 +24,7 @@ module XTwitterScraper
         ?scope_all_monitors: bool,
         ?silent_push: bool,
         ?request_options: XTwitterScraper::request_opts
-      ) -> XTwitterScraper::Models::IntegrationUpdateResponse
+      ) -> XTwitterScraper::Integration
 
       def list: (
         ?request_options: XTwitterScraper::request_opts

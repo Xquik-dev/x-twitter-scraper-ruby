@@ -12,11 +12,11 @@ module XTwitterScraper
           #
           # @param id [String] Resource ID (stringified bigint)
           #
-          # @param account [String] X account (@username or account ID)
+          # @param account [String] X account identifier (@username or account ID)
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [XTwitterScraper::Models::X::Communities::JoinCreateResponse]
+          # @return [XTwitterScraper::Models::X::CommunityActionResult]
           #
           # @see XTwitterScraper::Models::X::Communities::JoinCreateParams
           def create(id, params)
@@ -25,7 +25,7 @@ module XTwitterScraper
               method: :post,
               path: ["x/communities/%1$s/join", id],
               body: parsed,
-              model: XTwitterScraper::Models::X::Communities::JoinCreateResponse,
+              model: XTwitterScraper::X::CommunityActionResult,
               options: options
             )
           end
@@ -36,11 +36,11 @@ module XTwitterScraper
           #
           # @param id [String] Resource ID (stringified bigint)
           #
-          # @param account [String] X account (@username or account ID)
+          # @param account [String] X account identifier (@username or account ID)
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [XTwitterScraper::Models::X::Communities::JoinDeleteAllResponse]
+          # @return [XTwitterScraper::Models::X::CommunityActionResult]
           #
           # @see XTwitterScraper::Models::X::Communities::JoinDeleteAllParams
           def delete_all(id, params)
@@ -49,7 +49,7 @@ module XTwitterScraper
               method: :delete,
               path: ["x/communities/%1$s/join", id],
               body: parsed,
-              model: XTwitterScraper::Models::X::Communities::JoinDeleteAllResponse,
+              model: XTwitterScraper::X::CommunityActionResult,
               options: options
             )
           end

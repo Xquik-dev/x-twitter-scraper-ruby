@@ -2,6 +2,7 @@
 
 module XTwitterScraper
   module Models
+    # @see XTwitterScraper::Resources::Drafts#create
     class DraftDetail < XTwitterScraper::Internal::Type::BaseModel
       # @!attribute id
       #
@@ -34,6 +35,8 @@ module XTwitterScraper
       optional :topic, String
 
       # @!method initialize(id:, created_at:, text:, updated_at:, goal: nil, topic: nil)
+      #   Full tweet draft including update timestamp.
+      #
       #   @param id [String]
       #   @param created_at [Time]
       #   @param text [String]

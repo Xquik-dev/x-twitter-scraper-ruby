@@ -6,19 +6,19 @@ module XTwitterScraper
     class Integrations
       # Create integration
       #
-      # @overload create(config:, event_types:, name:, type:, request_options: {})
+      # @overload create(config:, event_types:, name:, type: :telegram, request_options: {})
       #
       # @param config [XTwitterScraper::Models::IntegrationCreateParams::Config] Integration config (e.g. Telegram chatId)
       #
-      # @param event_types [Array<Symbol, XTwitterScraper::Models::IntegrationCreateParams::EventType>]
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
       #
       # @param name [String]
       #
-      # @param type [Symbol, XTwitterScraper::Models::IntegrationCreateParams::Type]
+      # @param type [Symbol, :telegram]
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::IntegrationCreateResponse]
+      # @return [XTwitterScraper::Models::Integration]
       #
       # @see XTwitterScraper::Models::IntegrationCreateParams
       def create(params)
@@ -27,7 +27,7 @@ module XTwitterScraper
           method: :post,
           path: "integrations",
           body: parsed,
-          model: XTwitterScraper::Models::IntegrationCreateResponse,
+          model: XTwitterScraper::Integration,
           options: options
         )
       end
@@ -40,14 +40,14 @@ module XTwitterScraper
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::IntegrationRetrieveResponse]
+      # @return [XTwitterScraper::Models::Integration]
       #
       # @see XTwitterScraper::Models::IntegrationRetrieveParams
       def retrieve(id, params = {})
         @client.request(
           method: :get,
           path: ["integrations/%1$s", id],
-          model: XTwitterScraper::Models::IntegrationRetrieveResponse,
+          model: XTwitterScraper::Integration,
           options: params[:request_options]
         )
       end
@@ -58,7 +58,7 @@ module XTwitterScraper
       #
       # @param id [String] Resource ID (stringified bigint)
       #
-      # @param event_types [Array<Symbol, XTwitterScraper::Models::IntegrationUpdateParams::EventType>]
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
       #
       # @param filters [Hash{Symbol=>Object}] Event filter rules (JSON)
       #
@@ -74,7 +74,7 @@ module XTwitterScraper
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::IntegrationUpdateResponse]
+      # @return [XTwitterScraper::Models::Integration]
       #
       # @see XTwitterScraper::Models::IntegrationUpdateParams
       def update(id, params = {})
@@ -83,7 +83,7 @@ module XTwitterScraper
           method: :patch,
           path: ["integrations/%1$s", id],
           body: parsed,
-          model: XTwitterScraper::Models::IntegrationUpdateResponse,
+          model: XTwitterScraper::Integration,
           options: options
         )
       end
@@ -132,7 +132,7 @@ module XTwitterScraper
       #
       # @param id [String] Resource ID (stringified bigint)
       #
-      # @param limit [Integer]
+      # @param limit [Integer] Maximum number of items to return (1-100, default 50)
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #

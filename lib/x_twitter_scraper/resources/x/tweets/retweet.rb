@@ -8,22 +8,22 @@ module XTwitterScraper
         class Retweet
           # Retweet
           #
-          # @overload create(tweet_id, account:, request_options: {})
+          # @overload create(id, account:, request_options: {})
           #
-          # @param tweet_id [String]
+          # @param id [String] Tweet ID to retweet
           #
-          # @param account [String] X account (@username or account ID)
+          # @param account [String] X account identifier (@username or account ID)
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [XTwitterScraper::Models::X::Tweets::RetweetCreateResponse]
           #
           # @see XTwitterScraper::Models::X::Tweets::RetweetCreateParams
-          def create(tweet_id, params)
+          def create(id, params)
             parsed, options = XTwitterScraper::X::Tweets::RetweetCreateParams.dump_request(params)
             @client.request(
               method: :post,
-              path: ["x/tweets/%1$s/retweet", tweet_id],
+              path: ["x/tweets/%1$s/retweet", id],
               body: parsed,
               model: XTwitterScraper::Models::X::Tweets::RetweetCreateResponse,
               options: options
@@ -32,22 +32,22 @@ module XTwitterScraper
 
           # Unretweet
           #
-          # @overload delete(tweet_id, account:, request_options: {})
+          # @overload delete(id, account:, request_options: {})
           #
-          # @param tweet_id [String]
+          # @param id [String] Tweet ID to unretweet
           #
-          # @param account [String] X account (@username or account ID)
+          # @param account [String] X account identifier (@username or account ID)
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [XTwitterScraper::Models::X::Tweets::RetweetDeleteResponse]
           #
           # @see XTwitterScraper::Models::X::Tweets::RetweetDeleteParams
-          def delete(tweet_id, params)
+          def delete(id, params)
             parsed, options = XTwitterScraper::X::Tweets::RetweetDeleteParams.dump_request(params)
             @client.request(
               method: :delete,
-              path: ["x/tweets/%1$s/retweet", tweet_id],
+              path: ["x/tweets/%1$s/retweet", id],
               body: parsed,
               model: XTwitterScraper::Models::X::Tweets::RetweetDeleteResponse,
               options: options

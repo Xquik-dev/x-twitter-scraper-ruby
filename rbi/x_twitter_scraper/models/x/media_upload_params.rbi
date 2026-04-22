@@ -15,7 +15,7 @@ module XTwitterScraper
             )
           end
 
-        # X account (@username or account ID)
+        # X account (@username or ID) uploading media
         sig { returns(String) }
         attr_accessor :account
 
@@ -38,7 +38,7 @@ module XTwitterScraper
           ).returns(T.attached_class)
         end
         def self.new(
-          # X account (@username or account ID)
+          # X account (@username or ID) uploading media
           account:,
           # Media file to upload
           file:,

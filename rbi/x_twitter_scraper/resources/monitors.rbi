@@ -7,13 +7,13 @@ module XTwitterScraper
       # Create monitor
       sig do
         params(
-          event_types:
-            T::Array[XTwitterScraper::MonitorCreateParams::EventType::OrSymbol],
+          event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           username: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Models::MonitorCreateResponse)
       end
       def create(
+        # Array of event types to subscribe to.
         event_types:,
         # X username (without @)
         username:,
@@ -26,7 +26,7 @@ module XTwitterScraper
         params(
           id: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::Models::MonitorRetrieveResponse)
+        ).returns(XTwitterScraper::Monitor)
       end
       def retrieve(
         # Resource ID (stringified bigint)
@@ -39,15 +39,15 @@ module XTwitterScraper
       sig do
         params(
           id: String,
-          event_types:
-            T::Array[XTwitterScraper::MonitorUpdateParams::EventType::OrSymbol],
+          event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           is_active: T::Boolean,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::Models::MonitorUpdateResponse)
+        ).returns(XTwitterScraper::Monitor)
       end
       def update(
         # Resource ID (stringified bigint)
         id,
+        # Array of event types to subscribe to.
         event_types: nil,
         is_active: nil,
         request_options: {}

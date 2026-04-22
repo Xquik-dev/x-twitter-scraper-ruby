@@ -30,7 +30,7 @@ module XTwitterScraper
         ?cursor: String,
         ?seen_tweet_ids: String,
         ?request_options: XTwitterScraper::request_opts
-      ) -> XTwitterScraper::Models::XGetHomeTimelineResponse
+      ) -> XTwitterScraper::PaginatedTweets
 
       def get_notifications: (
         ?cursor: String,
@@ -38,7 +38,9 @@ module XTwitterScraper
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::XGetNotificationsResponse
 
-      def get_trends: (?request_options: XTwitterScraper::request_opts) -> nil
+      def get_trends: (
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::XGetTrendsResponse
 
       def initialize: (client: XTwitterScraper::Client) -> void
     end

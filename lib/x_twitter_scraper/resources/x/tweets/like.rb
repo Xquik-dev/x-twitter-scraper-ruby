@@ -8,22 +8,22 @@ module XTwitterScraper
         class Like
           # Like tweet
           #
-          # @overload create(tweet_id, account:, request_options: {})
+          # @overload create(id, account:, request_options: {})
           #
-          # @param tweet_id [String]
+          # @param id [String] Tweet ID to like
           #
-          # @param account [String] X account (@username or account ID)
+          # @param account [String] X account identifier (@username or account ID)
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [XTwitterScraper::Models::X::Tweets::LikeCreateResponse]
           #
           # @see XTwitterScraper::Models::X::Tweets::LikeCreateParams
-          def create(tweet_id, params)
+          def create(id, params)
             parsed, options = XTwitterScraper::X::Tweets::LikeCreateParams.dump_request(params)
             @client.request(
               method: :post,
-              path: ["x/tweets/%1$s/like", tweet_id],
+              path: ["x/tweets/%1$s/like", id],
               body: parsed,
               model: XTwitterScraper::Models::X::Tweets::LikeCreateResponse,
               options: options
@@ -32,22 +32,22 @@ module XTwitterScraper
 
           # Unlike tweet
           #
-          # @overload delete(tweet_id, account:, request_options: {})
+          # @overload delete(id, account:, request_options: {})
           #
-          # @param tweet_id [String]
+          # @param id [String] Tweet ID to unlike
           #
-          # @param account [String] X account (@username or account ID)
+          # @param account [String] X account identifier (@username or account ID)
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [XTwitterScraper::Models::X::Tweets::LikeDeleteResponse]
           #
           # @see XTwitterScraper::Models::X::Tweets::LikeDeleteParams
-          def delete(tweet_id, params)
+          def delete(id, params)
             parsed, options = XTwitterScraper::X::Tweets::LikeDeleteParams.dump_request(params)
             @client.request(
               method: :delete,
-              path: ["x/tweets/%1$s/like", tweet_id],
+              path: ["x/tweets/%1$s/like", id],
               body: parsed,
               model: XTwitterScraper::Models::X::Tweets::LikeDeleteResponse,
               options: options

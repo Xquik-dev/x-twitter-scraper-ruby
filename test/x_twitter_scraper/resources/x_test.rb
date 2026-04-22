@@ -15,7 +15,7 @@ class XTwitterScraper::Test::Resources::XTest < XTwitterScraper::Test::ResourceT
     assert_pattern do
       response => {
         article: XTwitterScraper::Models::XGetArticleResponse::Article,
-        author: XTwitterScraper::Models::XGetArticleResponse::Author | nil
+        author: XTwitterScraper::X::TweetAuthor | nil
       }
     end
   end
@@ -26,14 +26,14 @@ class XTwitterScraper::Test::Resources::XTest < XTwitterScraper::Test::ResourceT
     response = @x_twitter_scraper.x.get_home_timeline
 
     assert_pattern do
-      response => XTwitterScraper::Models::XGetHomeTimelineResponse
+      response => XTwitterScraper::PaginatedTweets
     end
 
     assert_pattern do
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::XGetHomeTimelineResponse::Tweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
       }
     end
   end
@@ -62,7 +62,15 @@ class XTwitterScraper::Test::Resources::XTest < XTwitterScraper::Test::ResourceT
     response = @x_twitter_scraper.x.get_trends
 
     assert_pattern do
-      response => nil
+      response => XTwitterScraper::Models::XGetTrendsResponse
+    end
+
+    assert_pattern do
+      response => {
+        count: Integer,
+        trends: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::XGetTrendsResponse::Trend]),
+        woeid: Integer
+      }
     end
   end
 end

@@ -9,14 +9,15 @@ module XTwitterScraper
           # Retweet
           sig do
             params(
-              tweet_id: String,
+              id: String,
               account: String,
               request_options: XTwitterScraper::RequestOptions::OrHash
             ).returns(XTwitterScraper::Models::X::Tweets::RetweetCreateResponse)
           end
           def create(
-            tweet_id,
-            # X account (@username or account ID)
+            # Tweet ID to retweet
+            id,
+            # X account identifier (@username or account ID)
             account:,
             request_options: {}
           )
@@ -25,14 +26,15 @@ module XTwitterScraper
           # Unretweet
           sig do
             params(
-              tweet_id: String,
+              id: String,
               account: String,
               request_options: XTwitterScraper::RequestOptions::OrHash
             ).returns(XTwitterScraper::Models::X::Tweets::RetweetDeleteResponse)
           end
           def delete(
-            tweet_id,
-            # X account (@username or account ID)
+            # Tweet ID to unretweet
+            id,
+            # X account identifier (@username or account ID)
             account:,
             request_options: {}
           )

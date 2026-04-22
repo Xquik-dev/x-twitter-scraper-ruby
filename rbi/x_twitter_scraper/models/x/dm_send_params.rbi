@@ -18,7 +18,7 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :user_id
 
-        # X account (@username or account ID)
+        # X account (@username or ID) sending the DM
         sig { returns(String) }
         attr_accessor :account
 
@@ -49,7 +49,7 @@ module XTwitterScraper
         end
         def self.new(
           user_id:,
-          # X account (@username or account ID)
+          # X account (@username or ID) sending the DM
           account:,
           text:,
           media_ids: nil,

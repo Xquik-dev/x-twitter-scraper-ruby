@@ -21,6 +21,7 @@ module XTwitterScraper
       sig { params(after_cursor: String).void }
       attr_writer :after_cursor
 
+      # Maximum number of items to return (1-100, default 50)
       sig { returns(T.nilable(Integer)) }
       attr_reader :limit
 
@@ -37,6 +38,7 @@ module XTwitterScraper
       def self.new(
         # Cursor for pagination
         after_cursor: nil,
+        # Maximum number of items to return (1-100, default 50)
         limit: nil,
         request_options: {}
       )

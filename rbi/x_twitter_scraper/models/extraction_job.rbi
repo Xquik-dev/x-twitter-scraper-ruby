@@ -17,10 +17,11 @@ module XTwitterScraper
       sig { returns(Time) }
       attr_accessor :created_at
 
-      sig { returns(XTwitterScraper::ExtractionJob::Status::OrSymbol) }
+      sig { returns(XTwitterScraper::ExtractionJob::Status::TaggedSymbol) }
       attr_accessor :status
 
-      sig { returns(XTwitterScraper::ExtractionJob::ToolType::OrSymbol) }
+      # Identifier for the extraction tool used to run a job.
+      sig { returns(XTwitterScraper::ExtractionJob::ToolType::TaggedSymbol) }
       attr_accessor :tool_type
 
       sig { returns(Integer) }
@@ -32,6 +33,7 @@ module XTwitterScraper
       sig { params(completed_at: Time).void }
       attr_writer :completed_at
 
+      # Extraction job tracking status, tool type, and result count.
       sig do
         params(
           id: String,
@@ -46,6 +48,7 @@ module XTwitterScraper
         id:,
         created_at:,
         status:,
+        # Identifier for the extraction tool used to run a job.
         tool_type:,
         total_results:,
         completed_at: nil
@@ -57,8 +60,8 @@ module XTwitterScraper
           {
             id: String,
             created_at: Time,
-            status: XTwitterScraper::ExtractionJob::Status::OrSymbol,
-            tool_type: XTwitterScraper::ExtractionJob::ToolType::OrSymbol,
+            status: XTwitterScraper::ExtractionJob::Status::TaggedSymbol,
+            tool_type: XTwitterScraper::ExtractionJob::ToolType::TaggedSymbol,
             total_results: Integer,
             completed_at: Time
           }
@@ -93,6 +96,7 @@ module XTwitterScraper
         end
       end
 
+      # Identifier for the extraction tool used to run a job.
       module ToolType
         extend XTwitterScraper::Internal::Type::Enum
 

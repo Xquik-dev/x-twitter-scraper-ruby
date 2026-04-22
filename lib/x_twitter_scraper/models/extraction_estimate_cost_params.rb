@@ -8,6 +8,7 @@ module XTwitterScraper
       include XTwitterScraper::Internal::Type::RequestParameters
 
       # @!attribute tool_type
+      #   Identifier for the extraction tool used to run a job.
       #
       #   @return [Symbol, XTwitterScraper::Models::ExtractionEstimateCostParams::ToolType]
       required :tool_type,
@@ -15,19 +16,19 @@ module XTwitterScraper
                api_name: :toolType
 
       # @!attribute advanced_query
-      #   Raw advanced search query appended as-is (tweet_search_extractor)
+      #   Raw advanced query string appended to the estimate (tweet_search_extractor)
       #
       #   @return [String, nil]
       optional :advanced_query, String, api_name: :advancedQuery
 
       # @!attribute exact_phrase
-      #   Exact phrase to match (tweet_search_extractor)
+      #   Exact phrase filter for search estimation
       #
       #   @return [String, nil]
       optional :exact_phrase, String, api_name: :exactPhrase
 
       # @!attribute exclude_words
-      #   Words to exclude from results (tweet_search_extractor)
+      #   Words excluded from estimated search results
       #
       #   @return [String, nil]
       optional :exclude_words, String, api_name: :excludeWords
@@ -63,13 +64,13 @@ module XTwitterScraper
       optional :target_username, String, api_name: :targetUsername
 
       # @!method initialize(tool_type:, advanced_query: nil, exact_phrase: nil, exclude_words: nil, search_query: nil, target_community_id: nil, target_list_id: nil, target_space_id: nil, target_tweet_id: nil, target_username: nil, request_options: {})
-      #   @param tool_type [Symbol, XTwitterScraper::Models::ExtractionEstimateCostParams::ToolType]
+      #   @param tool_type [Symbol, XTwitterScraper::Models::ExtractionEstimateCostParams::ToolType] Identifier for the extraction tool used to run a job.
       #
-      #   @param advanced_query [String] Raw advanced search query appended as-is (tweet_search_extractor)
+      #   @param advanced_query [String] Raw advanced query string appended to the estimate (tweet_search_extractor)
       #
-      #   @param exact_phrase [String] Exact phrase to match (tweet_search_extractor)
+      #   @param exact_phrase [String] Exact phrase filter for search estimation
       #
-      #   @param exclude_words [String] Words to exclude from results (tweet_search_extractor)
+      #   @param exclude_words [String] Words excluded from estimated search results
       #
       #   @param search_query [String]
       #
@@ -85,6 +86,7 @@ module XTwitterScraper
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
 
+      # Identifier for the extraction tool used to run a job.
       module ToolType
         extend XTwitterScraper::Internal::Type::Enum
 

@@ -16,7 +16,7 @@ module XTwitterScraper
         #
         # @overload create(account:, name:, description: nil, request_options: {})
         #
-        # @param account [String] X account (@username or account ID)
+        # @param account [String] X account (@username or ID) creating the community
         #
         # @param name [String] Community name
         #
@@ -44,7 +44,7 @@ module XTwitterScraper
         #
         # @param id [String] Resource ID (stringified bigint)
         #
-        # @param account [String] X account (@username or account ID)
+        # @param account [String] X account (@username or ID) deleting the community
         #
         # @param community_name [String] Community name for confirmation
         #
@@ -88,13 +88,13 @@ module XTwitterScraper
         #
         # @overload retrieve_members(id, cursor: nil, request_options: {})
         #
-        # @param id [String] Community ID
+        # @param id [String] Community ID for member lookup
         #
         # @param cursor [String] Pagination cursor
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [nil]
+        # @return [XTwitterScraper::Models::PaginatedUsers]
         #
         # @see XTwitterScraper::Models::X::CommunityRetrieveMembersParams
         def retrieve_members(id, params = {})
@@ -104,7 +104,7 @@ module XTwitterScraper
             method: :get,
             path: ["x/communities/%1$s/members", id],
             query: query,
-            model: NilClass,
+            model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end
@@ -113,13 +113,13 @@ module XTwitterScraper
         #
         # @overload retrieve_moderators(id, cursor: nil, request_options: {})
         #
-        # @param id [String] Community ID
+        # @param id [String] Community ID for moderator lookup
         #
-        # @param cursor [String] Pagination cursor
+        # @param cursor [String] Pagination cursor for community moderators
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [nil]
+        # @return [XTwitterScraper::Models::PaginatedUsers]
         #
         # @see XTwitterScraper::Models::X::CommunityRetrieveModeratorsParams
         def retrieve_moderators(id, params = {})
@@ -129,7 +129,7 @@ module XTwitterScraper
             method: :get,
             path: ["x/communities/%1$s/moderators", id],
             query: query,
-            model: NilClass,
+            model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end
@@ -140,13 +140,13 @@ module XTwitterScraper
         #
         # @param q [String] Search query
         #
-        # @param cursor [String] Pagination cursor
+        # @param cursor [String] Pagination cursor for community search
         #
         # @param query_type [String] Sort order (Latest or Top)
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [nil]
+        # @return [XTwitterScraper::Models::PaginatedTweets]
         #
         # @see XTwitterScraper::Models::X::CommunityRetrieveSearchParams
         def retrieve_search(params)
@@ -156,7 +156,7 @@ module XTwitterScraper
             method: :get,
             path: "x/communities/search",
             query: query.transform_keys(query_type: "queryType"),
-            model: NilClass,
+            model: XTwitterScraper::PaginatedTweets,
             options: options
           )
         end

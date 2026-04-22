@@ -30,6 +30,7 @@ module XTwitterScraper
         sig { params(profile_picture: String).void }
         attr_writer :profile_picture
 
+        # Author of a tweet with follower count and verification status.
         sig do
           params(
             id: String,

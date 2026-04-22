@@ -30,6 +30,8 @@ module XTwitterScraper
         required :x_username, String, api_name: :xUsername
 
         # @!method initialize(id:, created_at:, status:, x_user_id:, x_username:)
+        #   Linked X account summary with username and connection status.
+        #
         #   @param id [String]
         #   @param created_at [Time]
         #   @param status [String]

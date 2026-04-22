@@ -14,7 +14,7 @@ module XTwitterScraper
           )
         end
 
-      # Pagination cursor from previous response
+      # Pagination cursor for notifications
       sig { returns(T.nilable(String)) }
       attr_reader :cursor
 
@@ -44,7 +44,7 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
-        # Pagination cursor from previous response
+        # Pagination cursor for notifications
         cursor: nil,
         # Notification type filter
         type: nil,

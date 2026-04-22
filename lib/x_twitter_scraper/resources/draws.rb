@@ -28,9 +28,9 @@ module XTwitterScraper
       #
       # @overload list(after: nil, limit: nil, request_options: {})
       #
-      # @param after [String] Cursor for pagination
+      # @param after [String] Cursor for keyset pagination
       #
-      # @param limit [Integer]
+      # @param limit [Integer] Maximum number of items to return (1-100, default 50)
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -55,7 +55,7 @@ module XTwitterScraper
       #
       # @param id [String] Resource ID (stringified bigint)
       #
-      # @param format_ [Symbol, XTwitterScraper::Models::DrawExportParams::Format]
+      # @param format_ [Symbol, XTwitterScraper::Models::DrawExportParams::Format] Export output format
       #
       # @param type [Symbol, XTwitterScraper::Models::DrawExportParams::Type] Export winners or all entries
       #

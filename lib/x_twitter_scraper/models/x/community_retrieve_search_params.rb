@@ -15,7 +15,7 @@ module XTwitterScraper
         required :q, String
 
         # @!attribute cursor
-        #   Pagination cursor
+        #   Pagination cursor for community search
         #
         #   @return [String, nil]
         optional :cursor, String
@@ -29,7 +29,7 @@ module XTwitterScraper
         # @!method initialize(q:, cursor: nil, query_type: nil, request_options: {})
         #   @param q [String] Search query
         #
-        #   @param cursor [String] Pagination cursor
+        #   @param cursor [String] Pagination cursor for community search
         #
         #   @param query_type [String] Sort order (Latest or Top)
         #

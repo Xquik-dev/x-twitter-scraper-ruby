@@ -10,13 +10,15 @@ module XTwitterScraper
       required :article, -> { XTwitterScraper::Models::XGetArticleResponse::Article }
 
       # @!attribute author
+      #   Author of a tweet with follower count and verification status.
       #
-      #   @return [XTwitterScraper::Models::XGetArticleResponse::Author, nil]
-      optional :author, -> { XTwitterScraper::Models::XGetArticleResponse::Author }
+      #   @return [XTwitterScraper::Models::X::TweetAuthor, nil]
+      optional :author, -> { XTwitterScraper::X::TweetAuthor }
 
       # @!method initialize(article:, author: nil)
       #   @param article [XTwitterScraper::Models::XGetArticleResponse::Article]
-      #   @param author [XTwitterScraper::Models::XGetArticleResponse::Author]
+      #
+      #   @param author [XTwitterScraper::Models::X::TweetAuthor] Author of a tweet with follower count and verification status.
 
       # @see XTwitterScraper::Models::XGetArticleResponse#article
       class Article < XTwitterScraper::Internal::Type::BaseModel
@@ -121,41 +123,6 @@ module XTwitterScraper
           #
           #   @param width [Integer]
         end
-      end
-
-      # @see XTwitterScraper::Models::XGetArticleResponse#author
-      class Author < XTwitterScraper::Internal::Type::BaseModel
-        # @!attribute id
-        #
-        #   @return [String]
-        required :id, String
-
-        # @!attribute followers
-        #
-        #   @return [Integer]
-        required :followers, Integer
-
-        # @!attribute username
-        #
-        #   @return [String]
-        required :username, String
-
-        # @!attribute verified
-        #
-        #   @return [Boolean]
-        required :verified, XTwitterScraper::Internal::Type::Boolean
-
-        # @!attribute profile_picture
-        #
-        #   @return [String, nil]
-        optional :profile_picture, String, api_name: :profilePicture
-
-        # @!method initialize(id:, followers:, username:, verified:, profile_picture: nil)
-        #   @param id [String]
-        #   @param followers [Integer]
-        #   @param username [String]
-        #   @param verified [Boolean]
-        #   @param profile_picture [String]
       end
     end
   end

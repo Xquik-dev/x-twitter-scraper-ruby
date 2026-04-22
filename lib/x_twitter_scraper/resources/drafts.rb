@@ -13,7 +13,7 @@ module XTwitterScraper
       # @param topic [String]
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::DraftCreateResponse]
+      # @return [XTwitterScraper::Models::DraftDetail]
       #
       # @see XTwitterScraper::Models::DraftCreateParams
       def create(params)
@@ -22,7 +22,7 @@ module XTwitterScraper
           method: :post,
           path: "drafts",
           body: parsed,
-          model: XTwitterScraper::Models::DraftCreateResponse,
+          model: XTwitterScraper::DraftDetail,
           options: options
         )
       end
@@ -35,14 +35,14 @@ module XTwitterScraper
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::DraftRetrieveResponse]
+      # @return [XTwitterScraper::Models::DraftDetail]
       #
       # @see XTwitterScraper::Models::DraftRetrieveParams
       def retrieve(id, params = {})
         @client.request(
           method: :get,
           path: ["drafts/%1$s", id],
-          model: XTwitterScraper::Models::DraftRetrieveResponse,
+          model: XTwitterScraper::DraftDetail,
           options: params[:request_options]
         )
       end
@@ -53,7 +53,7 @@ module XTwitterScraper
       #
       # @param after_cursor [String] Cursor for pagination
       #
-      # @param limit [Integer]
+      # @param limit [Integer] Maximum number of items to return (1-100, default 50)
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #

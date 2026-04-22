@@ -29,20 +29,20 @@ module XTwitterScraper
           String id,
           ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> nil
+        ) -> XTwitterScraper::PaginatedUsers
 
         def retrieve_moderators: (
           String id,
           ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> nil
+        ) -> XTwitterScraper::PaginatedUsers
 
         def retrieve_search: (
           q: String,
           ?cursor: String,
           ?query_type: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> nil
+        ) -> XTwitterScraper::PaginatedTweets
 
         def initialize: (client: XTwitterScraper::Client) -> void
       end

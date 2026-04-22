@@ -6,7 +6,7 @@ module XTwitterScraper
         total_entries: Integer,
         tweet_id: String,
         valid_entries: Integer,
-        winners: ::Array[XTwitterScraper::Models::DrawRunResponse::Winner]
+        winners: ::Array[XTwitterScraper::Winner]
       }
 
     class DrawRunResponse < XTwitterScraper::Internal::Type::BaseModel
@@ -18,14 +18,14 @@ module XTwitterScraper
 
       attr_accessor valid_entries: Integer
 
-      attr_accessor winners: ::Array[XTwitterScraper::Models::DrawRunResponse::Winner]
+      attr_accessor winners: ::Array[XTwitterScraper::Winner]
 
       def initialize: (
         id: String,
         total_entries: Integer,
         tweet_id: String,
         valid_entries: Integer,
-        winners: ::Array[XTwitterScraper::Models::DrawRunResponse::Winner]
+        winners: ::Array[XTwitterScraper::Winner]
       ) -> void
 
       def to_hash: -> {
@@ -33,40 +33,8 @@ module XTwitterScraper
         total_entries: Integer,
         tweet_id: String,
         valid_entries: Integer,
-        winners: ::Array[XTwitterScraper::Models::DrawRunResponse::Winner]
+        winners: ::Array[XTwitterScraper::Winner]
       }
-
-      type winner =
-        {
-          author_username: String,
-          is_backup: bool,
-          position: Integer,
-          tweet_id: String
-        }
-
-      class Winner < XTwitterScraper::Internal::Type::BaseModel
-        attr_accessor author_username: String
-
-        attr_accessor is_backup: bool
-
-        attr_accessor position: Integer
-
-        attr_accessor tweet_id: String
-
-        def initialize: (
-          author_username: String,
-          is_backup: bool,
-          position: Integer,
-          tweet_id: String
-        ) -> void
-
-        def to_hash: -> {
-          author_username: String,
-          is_backup: bool,
-          position: Integer,
-          tweet_id: String
-        }
-      end
     end
   end
 end

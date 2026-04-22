@@ -14,7 +14,7 @@ module XTwitterScraper
         required :id, String
 
         # @!attribute cursor
-        #   Pagination cursor
+        #   Pagination cursor for list followers
         #
         #   @return [String, nil]
         optional :cursor, String
@@ -22,7 +22,7 @@ module XTwitterScraper
         # @!method initialize(id:, cursor: nil, request_options: {})
         #   @param id [String]
         #
-        #   @param cursor [String] Pagination cursor
+        #   @param cursor [String] Pagination cursor for list followers
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end

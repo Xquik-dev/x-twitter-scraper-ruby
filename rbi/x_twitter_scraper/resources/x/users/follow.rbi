@@ -9,15 +9,15 @@ module XTwitterScraper
           # Follow user
           sig do
             params(
-              user_id: String,
+              id: String,
               account: String,
               request_options: XTwitterScraper::RequestOptions::OrHash
             ).returns(XTwitterScraper::Models::X::Users::FollowCreateResponse)
           end
           def create(
             # User ID to follow
-            user_id,
-            # X account (@username or account ID)
+            id,
+            # X account identifier (@username or account ID)
             account:,
             request_options: {}
           )
@@ -26,7 +26,7 @@ module XTwitterScraper
           # Unfollow user
           sig do
             params(
-              user_id: String,
+              id: String,
               account: String,
               request_options: XTwitterScraper::RequestOptions::OrHash
             ).returns(
@@ -35,8 +35,8 @@ module XTwitterScraper
           end
           def delete_all(
             # User ID to unfollow
-            user_id,
-            # X account (@username or account ID)
+            id,
+            # X account identifier (@username or account ID)
             account:,
             request_options: {}
           )

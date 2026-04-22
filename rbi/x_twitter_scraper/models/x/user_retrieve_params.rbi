@@ -16,23 +16,20 @@ module XTwitterScraper
           end
 
         sig { returns(String) }
-        attr_accessor :username
+        attr_accessor :id
 
         sig do
           params(
-            username: String,
+            id: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
-        def self.new(username:, request_options: {})
+        def self.new(id:, request_options: {})
         end
 
         sig do
           override.returns(
-            {
-              username: String,
-              request_options: XTwitterScraper::RequestOptions
-            }
+            { id: String, request_options: XTwitterScraper::RequestOptions }
           )
         end
         def to_hash

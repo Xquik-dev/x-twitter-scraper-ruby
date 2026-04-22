@@ -7,10 +7,10 @@ module XTwitterScraper
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      # @!attribute username
+      # @!attribute id
       #
       #   @return [String]
-      required :username, String
+      required :id, String
 
       # @!attribute label
       #   Display label for the style
@@ -25,8 +25,8 @@ module XTwitterScraper
       required :tweets,
                -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::StyleUpdateParams::Tweet] }
 
-      # @!method initialize(username:, label:, tweets:, request_options: {})
-      #   @param username [String]
+      # @!method initialize(id:, label:, tweets:, request_options: {})
+      #   @param id [String]
       #
       #   @param label [String] Display label for the style
       #

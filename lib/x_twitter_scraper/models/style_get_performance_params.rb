@@ -7,13 +7,13 @@ module XTwitterScraper
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      # @!attribute username
+      # @!attribute id
       #
       #   @return [String]
-      required :username, String
+      required :id, String
 
-      # @!method initialize(username:, request_options: {})
-      #   @param username [String]
+      # @!method initialize(id:, request_options: {})
+      #   @param id [String]
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
     end
   end

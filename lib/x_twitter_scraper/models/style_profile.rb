@@ -2,6 +2,7 @@
 
 module XTwitterScraper
   module Models
+    # @see XTwitterScraper::Resources::Styles#retrieve
     class StyleProfile < XTwitterScraper::Internal::Type::BaseModel
       # @!attribute fetched_at
       #
@@ -29,6 +30,8 @@ module XTwitterScraper
       required :x_username, String, api_name: :xUsername
 
       # @!method initialize(fetched_at:, is_own_account:, tweet_count:, tweets:, x_username:)
+      #   Full style profile with sampled tweets used for tone analysis.
+      #
       #   @param fetched_at [Time]
       #   @param is_own_account [Boolean]
       #   @param tweet_count [Integer]

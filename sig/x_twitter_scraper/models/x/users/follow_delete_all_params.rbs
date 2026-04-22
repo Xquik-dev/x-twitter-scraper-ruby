@@ -3,25 +3,25 @@ module XTwitterScraper
     module X
       module Users
         type follow_delete_all_params =
-          { user_id: String, account: String }
+          { id: String, account: String }
           & XTwitterScraper::Internal::Type::request_parameters
 
         class FollowDeleteAllParams < XTwitterScraper::Internal::Type::BaseModel
           extend XTwitterScraper::Internal::Type::RequestParameters::Converter
           include XTwitterScraper::Internal::Type::RequestParameters
 
-          attr_accessor user_id: String
+          attr_accessor id: String
 
           attr_accessor account: String
 
           def initialize: (
-            user_id: String,
+            id: String,
             account: String,
             ?request_options: XTwitterScraper::request_opts
           ) -> void
 
           def to_hash: -> {
-            user_id: String,
+            id: String,
             account: String,
             request_options: XTwitterScraper::RequestOptions
           }

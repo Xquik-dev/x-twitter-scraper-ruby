@@ -38,6 +38,13 @@ module XTwitterScraper
         sig { params(created_at: String).void }
         attr_writer :created_at
 
+        # True for Note Tweets (long-form content, up to 25,000 characters)
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :is_note_tweet
+
+        sig { params(is_note_tweet: T::Boolean).void }
+        attr_writer :is_note_tweet
+
         sig { returns(T.nilable(Integer)) }
         attr_reader :like_count
 
@@ -68,6 +75,7 @@ module XTwitterScraper
         sig { params(view_count: Integer).void }
         attr_writer :view_count
 
+        # Tweet returned from search results with inline author info.
         sig do
           params(
             id: String,
@@ -75,6 +83,7 @@ module XTwitterScraper
             author: XTwitterScraper::X::SearchTweet::Author::OrHash,
             bookmark_count: Integer,
             created_at: String,
+            is_note_tweet: T::Boolean,
             like_count: Integer,
             quote_count: Integer,
             reply_count: Integer,
@@ -88,6 +97,8 @@ module XTwitterScraper
           author: nil,
           bookmark_count: nil,
           created_at: nil,
+          # True for Note Tweets (long-form content, up to 25,000 characters)
+          is_note_tweet: nil,
           like_count: nil,
           quote_count: nil,
           reply_count: nil,
@@ -104,6 +115,7 @@ module XTwitterScraper
               author: XTwitterScraper::X::SearchTweet::Author,
               bookmark_count: Integer,
               created_at: String,
+              is_note_tweet: T::Boolean,
               like_count: Integer,
               quote_count: Integer,
               reply_count: Integer,

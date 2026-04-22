@@ -16,7 +16,7 @@ module XTwitterScraper
         def retrieve_history(
           # Target user ID
           user_id,
-          # Pagination cursor from previous response
+          # Pagination cursor for DM history
           cursor: nil,
           # Legacy pagination cursor (backward compat)
           max_id: nil,
@@ -38,7 +38,7 @@ module XTwitterScraper
         def send_(
           # Recipient user ID
           user_id,
-          # X account (@username or account ID)
+          # X account (@username or ID) sending the DM
           account:,
           text:,
           media_ids: nil,

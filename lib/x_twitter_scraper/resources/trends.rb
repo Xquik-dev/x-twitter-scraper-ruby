@@ -4,11 +4,11 @@ module XTwitterScraper
   module Resources
     # Trending topics by region
     class Trends
-      # Get trending topics
+      # Get regional trending topics
       #
       # @overload list(count: nil, woeid: nil, request_options: {})
       #
-      # @param count [Integer]
+      # @param count [Integer] Number of trending topics to return (1-50, default 30)
       #
       # @param woeid [Integer] Region WOEID (1=Worldwide, 23424977=US, 23424975=UK, 23424969=Turkey)
       #

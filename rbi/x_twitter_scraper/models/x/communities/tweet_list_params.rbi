@@ -16,18 +16,18 @@ module XTwitterScraper
               )
             end
 
-          # Search query
+          # Search query for cross-community tweets
           sig { returns(String) }
           attr_accessor :q
 
-          # Pagination cursor
+          # Pagination cursor for cross-community results
           sig { returns(T.nilable(String)) }
           attr_reader :cursor
 
           sig { params(cursor: String).void }
           attr_writer :cursor
 
-          # Sort order (Latest or Top)
+          # Sort order for cross-community results (Latest or Top)
           sig { returns(T.nilable(String)) }
           attr_reader :query_type
 
@@ -43,11 +43,11 @@ module XTwitterScraper
             ).returns(T.attached_class)
           end
           def self.new(
-            # Search query
+            # Search query for cross-community tweets
             q:,
-            # Pagination cursor
+            # Pagination cursor for cross-community results
             cursor: nil,
-            # Sort order (Latest or Top)
+            # Sort order for cross-community results (Latest or Top)
             query_type: nil,
             request_options: {}
           )

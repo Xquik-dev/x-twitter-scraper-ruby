@@ -23,6 +23,7 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :x_username
 
+      # Style profile summary with tweet count and ownership flag.
       sig do
         params(
           fetched_at: Time,

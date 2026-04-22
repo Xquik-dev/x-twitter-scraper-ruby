@@ -6,10 +6,10 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
   def test_retrieve
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.styles.retrieve("username")
+    response = @x_twitter_scraper.styles.retrieve("id")
 
     assert_pattern do
-      response => XTwitterScraper::Models::StyleRetrieveResponse
+      response => XTwitterScraper::StyleProfile
     end
 
     assert_pattern do
@@ -17,7 +17,7 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
         fetched_at: Time,
         is_own_account: XTwitterScraper::Internal::Type::Boolean,
         tweet_count: Integer,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::StyleRetrieveResponse::Tweet]),
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::StyleProfile::Tweet]),
         x_username: String
       }
     end
@@ -26,10 +26,15 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
   def test_update_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.styles.update("username", label: "label", tweets: [{text: "text"}])
+    response =
+      @x_twitter_scraper.styles.update(
+        "id",
+        label: "Professional Voice",
+        tweets: [{text: "Excited to share our latest research findings."}]
+      )
 
     assert_pattern do
-      response => XTwitterScraper::Models::StyleUpdateResponse
+      response => XTwitterScraper::StyleProfile
     end
 
     assert_pattern do
@@ -37,7 +42,7 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
         fetched_at: Time,
         is_own_account: XTwitterScraper::Internal::Type::Boolean,
         tweet_count: Integer,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::StyleUpdateResponse::Tweet]),
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::StyleProfile::Tweet]),
         x_username: String
       }
     end
@@ -54,7 +59,7 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
 
     assert_pattern do
       response => {
-        styles: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::StyleListResponse::Style])
+        styles: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::StyleProfileSummary])
       }
     end
   end
@@ -62,7 +67,7 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
   def test_delete
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.styles.delete("username")
+    response = @x_twitter_scraper.styles.delete("id")
 
     assert_pattern do
       response => nil
@@ -72,10 +77,10 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
   def test_analyze_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.styles.analyze(username: "username")
+    response = @x_twitter_scraper.styles.analyze(username: "elonmusk")
 
     assert_pattern do
-      response => XTwitterScraper::Models::StyleAnalyzeResponse
+      response => XTwitterScraper::StyleProfile
     end
 
     assert_pattern do
@@ -83,7 +88,7 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
         fetched_at: Time,
         is_own_account: XTwitterScraper::Internal::Type::Boolean,
         tweet_count: Integer,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::StyleAnalyzeResponse::Tweet]),
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::StyleProfile::Tweet]),
         x_username: String
       }
     end
@@ -100,8 +105,8 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
 
     assert_pattern do
       response => {
-        style1: XTwitterScraper::Models::StyleCompareResponse::Style1,
-        style2: XTwitterScraper::Models::StyleCompareResponse::Style2
+        style1: XTwitterScraper::StyleProfile,
+        style2: XTwitterScraper::StyleProfile
       }
     end
   end
@@ -109,7 +114,7 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
   def test_get_performance
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.styles.get_performance("username")
+    response = @x_twitter_scraper.styles.get_performance("id")
 
     assert_pattern do
       response => XTwitterScraper::Models::StyleGetPerformanceResponse

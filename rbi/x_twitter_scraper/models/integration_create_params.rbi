@@ -25,39 +25,32 @@ module XTwitterScraper
       end
       attr_writer :config
 
-      sig do
-        returns(
-          T::Array[
-            XTwitterScraper::IntegrationCreateParams::EventType::OrSymbol
-          ]
-        )
-      end
+      # Array of event types to subscribe to.
+      sig { returns(T::Array[XTwitterScraper::EventType::OrSymbol]) }
       attr_accessor :event_types
 
       sig { returns(String) }
       attr_accessor :name
 
-      sig { returns(XTwitterScraper::IntegrationCreateParams::Type::OrSymbol) }
+      sig { returns(Symbol) }
       attr_accessor :type
 
       sig do
         params(
           config: XTwitterScraper::IntegrationCreateParams::Config::OrHash,
-          event_types:
-            T::Array[
-              XTwitterScraper::IntegrationCreateParams::EventType::OrSymbol
-            ],
+          event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           name: String,
-          type: XTwitterScraper::IntegrationCreateParams::Type::OrSymbol,
+          type: Symbol,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
         # Integration config (e.g. Telegram chatId)
         config:,
+        # Array of event types to subscribe to.
         event_types:,
         name:,
-        type:,
+        type: :telegram,
         request_options: {}
       )
       end
@@ -66,12 +59,9 @@ module XTwitterScraper
         override.returns(
           {
             config: XTwitterScraper::IntegrationCreateParams::Config,
-            event_types:
-              T::Array[
-                XTwitterScraper::IntegrationCreateParams::EventType::OrSymbol
-              ],
+            event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
             name: String,
-            type: XTwitterScraper::IntegrationCreateParams::Type::OrSymbol,
+            type: Symbol,
             request_options: XTwitterScraper::RequestOptions
           }
         )
@@ -98,83 +88,6 @@ module XTwitterScraper
 
         sig { override.returns({ chat_id: String }) }
         def to_hash
-        end
-      end
-
-      module EventType
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, XTwitterScraper::IntegrationCreateParams::EventType)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        TWEET_NEW =
-          T.let(
-            :"tweet.new",
-            XTwitterScraper::IntegrationCreateParams::EventType::TaggedSymbol
-          )
-        TWEET_REPLY =
-          T.let(
-            :"tweet.reply",
-            XTwitterScraper::IntegrationCreateParams::EventType::TaggedSymbol
-          )
-        TWEET_RETWEET =
-          T.let(
-            :"tweet.retweet",
-            XTwitterScraper::IntegrationCreateParams::EventType::TaggedSymbol
-          )
-        TWEET_QUOTE =
-          T.let(
-            :"tweet.quote",
-            XTwitterScraper::IntegrationCreateParams::EventType::TaggedSymbol
-          )
-        FOLLOWER_GAINED =
-          T.let(
-            :"follower.gained",
-            XTwitterScraper::IntegrationCreateParams::EventType::TaggedSymbol
-          )
-        FOLLOWER_LOST =
-          T.let(
-            :"follower.lost",
-            XTwitterScraper::IntegrationCreateParams::EventType::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              XTwitterScraper::IntegrationCreateParams::EventType::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
-      end
-
-      module Type
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, XTwitterScraper::IntegrationCreateParams::Type)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        TELEGRAM =
-          T.let(
-            :telegram,
-            XTwitterScraper::IntegrationCreateParams::Type::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              XTwitterScraper::IntegrationCreateParams::Type::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
         end
       end
     end

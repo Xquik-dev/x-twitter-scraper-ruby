@@ -8,6 +8,7 @@ module XTwitterScraper
       include XTwitterScraper::Internal::Type::RequestParameters
 
       # @!attribute tool_type
+      #   Identifier for the extraction tool used to run a job.
       #
       #   @return [Symbol, XTwitterScraper::Models::ExtractionRunParams::ToolType]
       required :tool_type, enum: -> { XTwitterScraper::ExtractionRunParams::ToolType }, api_name: :toolType
@@ -61,7 +62,7 @@ module XTwitterScraper
       optional :target_username, String, api_name: :targetUsername
 
       # @!method initialize(tool_type:, advanced_query: nil, exact_phrase: nil, exclude_words: nil, search_query: nil, target_community_id: nil, target_list_id: nil, target_space_id: nil, target_tweet_id: nil, target_username: nil, request_options: {})
-      #   @param tool_type [Symbol, XTwitterScraper::Models::ExtractionRunParams::ToolType]
+      #   @param tool_type [Symbol, XTwitterScraper::Models::ExtractionRunParams::ToolType] Identifier for the extraction tool used to run a job.
       #
       #   @param advanced_query [String] Raw advanced search query appended as-is (tweet_search_extractor)
       #
@@ -83,6 +84,7 @@ module XTwitterScraper
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
 
+      # Identifier for the extraction tool used to run a job.
       module ToolType
         extend XTwitterScraper::Internal::Type::Enum
 

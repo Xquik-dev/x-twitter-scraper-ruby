@@ -2,6 +2,7 @@
 
 module XTwitterScraper
   module Models
+    # Type of monitor event fired when account activity occurs.
     module EventType
       extend XTwitterScraper::Internal::Type::Enum
 

@@ -44,14 +44,14 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::AccountRetrieveResponse]
+        # @return [XTwitterScraper::Models::X::XAccountDetail]
         #
         # @see XTwitterScraper::Models::X::AccountRetrieveParams
         def retrieve(id, params = {})
           @client.request(
             method: :get,
             path: ["x/accounts/%1$s", id],
-            model: XTwitterScraper::Models::X::AccountRetrieveResponse,
+            model: XTwitterScraper::X::XAccountDetail,
             security: {auth_api_key: true},
             options: params[:request_options]
           )
@@ -97,15 +97,35 @@ module XTwitterScraper
           )
         end
 
+        # Clears loginFailedAt and loginFailureReason for all accounts with transient or
+        # automated failure reasons, making them eligible for retry on next use.
+        #
+        # @overload bulk_retry(request_options: {})
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::AccountBulkRetryResponse]
+        #
+        # @see XTwitterScraper::Models::X::AccountBulkRetryParams
+        def bulk_retry(params = {})
+          @client.request(
+            method: :post,
+            path: "x/accounts/bulk-retry",
+            model: XTwitterScraper::Models::X::AccountBulkRetryResponse,
+            security: {auth_api_key: true},
+            options: params[:request_options]
+          )
+        end
+
         # Re-authenticate X account
         #
         # @overload reauth(id, password:, totp_secret: nil, request_options: {})
         #
         # @param id [String] Resource ID (stringified bigint)
         #
-        # @param password [String] Account password
+        # @param password [String] Updated account password
         #
-        # @param totp_secret [String] TOTP secret for 2FA
+        # @param totp_secret [String] TOTP secret for 2FA re-authentication
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

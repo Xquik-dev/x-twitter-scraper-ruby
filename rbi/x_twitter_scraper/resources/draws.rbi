@@ -27,8 +27,9 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::DrawListResponse)
       end
       def list(
-        # Cursor for pagination
+        # Cursor for keyset pagination
         after: nil,
+        # Maximum number of items to return (1-100, default 50)
         limit: nil,
         request_options: {}
       )
@@ -46,6 +47,7 @@ module XTwitterScraper
       def export(
         # Resource ID (stringified bigint)
         id,
+        # Export output format
         format_: nil,
         # Export winners or all entries
         type: nil,

@@ -6,13 +6,13 @@ module XTwitterScraper
           String id,
           ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> nil
+        ) -> XTwitterScraper::PaginatedUsers
 
         def retrieve_members: (
           String id,
           ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> nil
+        ) -> XTwitterScraper::PaginatedUsers
 
         def retrieve_tweets: (
           String id,
@@ -21,7 +21,7 @@ module XTwitterScraper
           ?since_time: String,
           ?until_time: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> nil
+        ) -> XTwitterScraper::PaginatedTweets
 
         def initialize: (client: XTwitterScraper::Client) -> void
       end

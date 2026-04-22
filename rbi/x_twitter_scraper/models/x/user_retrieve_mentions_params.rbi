@@ -18,21 +18,21 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :id
 
-        # Pagination cursor
+        # Pagination cursor for mentions
         sig { returns(T.nilable(String)) }
         attr_reader :cursor
 
         sig { params(cursor: String).void }
         attr_writer :cursor
 
-        # Unix timestamp - filter after
+        # Unix timestamp - return mentions after this time
         sig { returns(T.nilable(String)) }
         attr_reader :since_time
 
         sig { params(since_time: String).void }
         attr_writer :since_time
 
-        # Unix timestamp - filter before
+        # Unix timestamp - return mentions before this time
         sig { returns(T.nilable(String)) }
         attr_reader :until_time
 
@@ -50,11 +50,11 @@ module XTwitterScraper
         end
         def self.new(
           id:,
-          # Pagination cursor
+          # Pagination cursor for mentions
           cursor: nil,
-          # Unix timestamp - filter after
+          # Unix timestamp - return mentions after this time
           since_time: nil,
-          # Unix timestamp - filter before
+          # Unix timestamp - return mentions before this time
           until_time: nil,
           request_options: {}
         )

@@ -9,7 +9,7 @@ module XTwitterScraper
         include XTwitterScraper::Internal::Type::RequestParameters
 
         # @!attribute cursor
-        #   Pagination cursor from previous response
+        #   Pagination cursor for bookmarks
         #
         #   @return [String, nil]
         optional :cursor, String
@@ -21,7 +21,7 @@ module XTwitterScraper
         optional :folder_id, String
 
         # @!method initialize(cursor: nil, folder_id: nil, request_options: {})
-        #   @param cursor [String] Pagination cursor from previous response
+        #   @param cursor [String] Pagination cursor for bookmarks
         #
         #   @param folder_id [String] Optional bookmark folder ID
         #

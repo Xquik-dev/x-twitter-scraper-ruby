@@ -6,29 +6,29 @@ module XTwitterScraper
     class Styles
       # Get cached style profile
       #
-      # @overload retrieve(username, request_options: {})
+      # @overload retrieve(id, request_options: {})
       #
-      # @param username [String] X username of cached style
+      # @param id [String] Style profile ID or X username
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::StyleRetrieveResponse]
+      # @return [XTwitterScraper::Models::StyleProfile]
       #
       # @see XTwitterScraper::Models::StyleRetrieveParams
-      def retrieve(username, params = {})
+      def retrieve(id, params = {})
         @client.request(
           method: :get,
-          path: ["styles/%1$s", username],
-          model: XTwitterScraper::Models::StyleRetrieveResponse,
+          path: ["styles/%1$s", id],
+          model: XTwitterScraper::StyleProfile,
           options: params[:request_options]
         )
       end
 
       # Save style profile with custom tweets
       #
-      # @overload update(username, label:, tweets:, request_options: {})
+      # @overload update(id, label:, tweets:, request_options: {})
       #
-      # @param username [String] X username of cached style
+      # @param id [String] Style profile ID or X username
       #
       # @param label [String] Display label for the style
       #
@@ -36,16 +36,16 @@ module XTwitterScraper
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::StyleUpdateResponse]
+      # @return [XTwitterScraper::Models::StyleProfile]
       #
       # @see XTwitterScraper::Models::StyleUpdateParams
-      def update(username, params)
+      def update(id, params)
         parsed, options = XTwitterScraper::StyleUpdateParams.dump_request(params)
         @client.request(
           method: :put,
-          path: ["styles/%1$s", username],
+          path: ["styles/%1$s", id],
           body: parsed,
-          model: XTwitterScraper::Models::StyleUpdateResponse,
+          model: XTwitterScraper::StyleProfile,
           options: options
         )
       end
@@ -70,19 +70,19 @@ module XTwitterScraper
 
       # Delete a style profile
       #
-      # @overload delete(username, request_options: {})
+      # @overload delete(id, request_options: {})
       #
-      # @param username [String] X username of cached style
+      # @param id [String] Style profile ID or X username
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
       #
       # @see XTwitterScraper::Models::StyleDeleteParams
-      def delete(username, params = {})
+      def delete(id, params = {})
         @client.request(
           method: :delete,
-          path: ["styles/%1$s", username],
+          path: ["styles/%1$s", id],
           model: NilClass,
           options: params[:request_options]
         )
@@ -96,7 +96,7 @@ module XTwitterScraper
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::StyleAnalyzeResponse]
+      # @return [XTwitterScraper::Models::StyleProfile]
       #
       # @see XTwitterScraper::Models::StyleAnalyzeParams
       def analyze(params)
@@ -105,7 +105,7 @@ module XTwitterScraper
           method: :post,
           path: "styles",
           body: parsed,
-          model: XTwitterScraper::Models::StyleAnalyzeResponse,
+          model: XTwitterScraper::StyleProfile,
           options: options
         )
       end
@@ -137,19 +137,19 @@ module XTwitterScraper
 
       # Get engagement metrics for style tweets
       #
-      # @overload get_performance(username, request_options: {})
+      # @overload get_performance(id, request_options: {})
       #
-      # @param username [String] X username of cached style
+      # @param id [String] Style profile ID or X username
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [XTwitterScraper::Models::StyleGetPerformanceResponse]
       #
       # @see XTwitterScraper::Models::StyleGetPerformanceParams
-      def get_performance(username, params = {})
+      def get_performance(id, params = {})
         @client.request(
           method: :get,
-          path: ["styles/%1$s/performance", username],
+          path: ["styles/%1$s/performance", id],
           model: XTwitterScraper::Models::StyleGetPerformanceResponse,
           options: params[:request_options]
         )

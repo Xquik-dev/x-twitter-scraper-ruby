@@ -12,13 +12,13 @@ module XTwitterScraper
         # Look up X user
         sig do
           params(
-            username: String,
+            id: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::UserRetrieveResponse)
+          ).returns(XTwitterScraper::X::UserProfile)
         end
         def retrieve(
-          # X username (without @)
-          username,
+          # X username (without @) or user ID
+          id,
           request_options: {}
         )
         end
@@ -28,7 +28,7 @@ module XTwitterScraper
           params(
             ids: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).void
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_batch(
           # Comma-separated user IDs (max 100)
@@ -44,12 +44,12 @@ module XTwitterScraper
             cursor: String,
             page_size: Integer,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).void
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_followers(
           # User ID or username
           id,
-          # Pagination cursor
+          # Pagination cursor for followers list
           cursor: nil,
           # Items per page (20-200, default 200)
           page_size: nil,
@@ -63,14 +63,12 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(
-            XTwitterScraper::Models::X::UserRetrieveFollowersYouKnowResponse
-          )
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_followers_you_know(
-          # User ID
+          # User ID for followers-you-know lookup
           id,
-          # Pagination cursor from previous response
+          # Pagination cursor for followers-you-know
           cursor: nil,
           request_options: {}
         )
@@ -83,14 +81,14 @@ module XTwitterScraper
             cursor: String,
             page_size: Integer,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).void
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_following(
-          # User ID or username
+          # User ID or username for following lookup
           id,
-          # Pagination cursor
+          # Pagination cursor for following list
           cursor: nil,
-          # Items per page (20-200, default 200)
+          # Results per page (20-200, default 200)
           page_size: nil,
           request_options: {}
         )
@@ -102,12 +100,12 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::UserRetrieveLikesResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def retrieve_likes(
           # User ID
           id,
-          # Pagination cursor from previous response
+          # Pagination cursor for liked tweets
           cursor: nil,
           request_options: {}
         )
@@ -119,12 +117,12 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::UserRetrieveMediaResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def retrieve_media(
-          # User ID
+          # User ID for media lookup
           id,
-          # Pagination cursor from previous response
+          # Pagination cursor for media tweets
           cursor: nil,
           request_options: {}
         )
@@ -138,16 +136,16 @@ module XTwitterScraper
             since_time: String,
             until_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).void
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def retrieve_mentions(
-          # User ID or username
+          # User ID or username for mentions lookup
           id,
-          # Pagination cursor
+          # Pagination cursor for mentions
           cursor: nil,
-          # Unix timestamp - filter after
+          # Unix timestamp - return mentions after this time
           since_time: nil,
-          # Unix timestamp - filter before
+          # Unix timestamp - return mentions before this time
           until_time: nil,
           request_options: {}
         )
@@ -159,12 +157,12 @@ module XTwitterScraper
             q: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).void
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_search(
-          # Search query
+          # User search query
           q:,
-          # Pagination cursor
+          # Pagination cursor for user search
           cursor: nil,
           request_options: {}
         )
@@ -178,11 +176,12 @@ module XTwitterScraper
             include_parent_tweet: T::Boolean,
             include_replies: T::Boolean,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::UserRetrieveTweetsResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def retrieve_tweets(
+          # X user ID or username
           id,
-          # Pagination cursor from previous response
+          # Pagination cursor for user tweets
           cursor: nil,
           # Include parent tweet for replies
           include_parent_tweet: nil,
@@ -198,12 +197,12 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).void
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_verified_followers(
-          # User ID or username
+          # User ID or username for verified followers
           id,
-          # Pagination cursor
+          # Pagination cursor for verified followers
           cursor: nil,
           request_options: {}
         )

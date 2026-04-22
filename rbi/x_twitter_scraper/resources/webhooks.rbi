@@ -7,13 +7,13 @@ module XTwitterScraper
       # Create webhook
       sig do
         params(
-          event_types:
-            T::Array[XTwitterScraper::WebhookCreateParams::EventType::OrSymbol],
+          event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           url: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Models::WebhookCreateResponse)
       end
       def create(
+        # Array of event types to subscribe to.
         event_types:,
         # HTTPS URL
         url:,
@@ -25,16 +25,16 @@ module XTwitterScraper
       sig do
         params(
           id: String,
-          event_types:
-            T::Array[XTwitterScraper::WebhookUpdateParams::EventType::OrSymbol],
+          event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           is_active: T::Boolean,
           url: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::Models::WebhookUpdateResponse)
+        ).returns(XTwitterScraper::Webhook)
       end
       def update(
         # Resource ID (stringified bigint)
         id,
+        # Array of event types to subscribe to.
         event_types: nil,
         is_active: nil,
         url: nil,

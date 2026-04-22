@@ -6,7 +6,11 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
   def test_create_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.monitors.create(event_types: [:"tweet.new"], username: "username")
+    response =
+      @x_twitter_scraper.monitors.create(
+        event_types: [:"tweet.new", :"follower.gained"],
+        username: "elonmusk"
+      )
 
     assert_pattern do
       response => XTwitterScraper::Models::MonitorCreateResponse
@@ -16,7 +20,7 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
       response => {
         id: String,
         created_at: Time,
-        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Models::MonitorCreateResponse::EventType]),
+        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
         username: String,
         x_user_id: String
       }
@@ -29,14 +33,14 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.monitors.retrieve("id")
 
     assert_pattern do
-      response => XTwitterScraper::Models::MonitorRetrieveResponse
+      response => XTwitterScraper::Monitor
     end
 
     assert_pattern do
       response => {
         id: String,
         created_at: Time,
-        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Models::MonitorRetrieveResponse::EventType]),
+        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
         is_active: XTwitterScraper::Internal::Type::Boolean,
         username: String,
         x_user_id: String
@@ -50,14 +54,14 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.monitors.update("id")
 
     assert_pattern do
-      response => XTwitterScraper::Models::MonitorUpdateResponse
+      response => XTwitterScraper::Monitor
     end
 
     assert_pattern do
       response => {
         id: String,
         created_at: Time,
-        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Models::MonitorUpdateResponse::EventType]),
+        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
         is_active: XTwitterScraper::Internal::Type::Boolean,
         username: String,
         x_user_id: String
@@ -76,7 +80,7 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
 
     assert_pattern do
       response => {
-        monitors: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::MonitorListResponse::Monitor]),
+        monitors: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Monitor]),
         total: Integer
       }
     end

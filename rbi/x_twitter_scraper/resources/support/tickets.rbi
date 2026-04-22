@@ -23,7 +23,11 @@ module XTwitterScraper
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::Support::TicketRetrieveResponse)
         end
-        def retrieve(id, request_options: {})
+        def retrieve(
+          # Support ticket ID
+          id,
+          request_options: {}
+        )
         end
 
         # Update ticket status
@@ -35,7 +39,12 @@ module XTwitterScraper
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::Support::TicketUpdateResponse)
         end
-        def update(id, status:, request_options: {})
+        def update(
+          # Support ticket ID to update
+          id,
+          status:,
+          request_options: {}
+        )
         end
 
         # List user's support tickets
@@ -55,7 +64,12 @@ module XTwitterScraper
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::Support::TicketReplyResponse)
         end
-        def reply(id, body:, request_options: {})
+        def reply(
+          # Support ticket ID for the reply
+          id,
+          body:,
+          request_options: {}
+        )
         end
 
         # @api private

@@ -2,7 +2,7 @@ module XTwitterScraper
   module Models
     type style_update_params =
       {
-        username: String,
+        id: String,
         label: String,
         tweets: ::Array[XTwitterScraper::StyleUpdateParams::Tweet]
       }
@@ -12,21 +12,21 @@ module XTwitterScraper
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      attr_accessor username: String
+      attr_accessor id: String
 
       attr_accessor label: String
 
       attr_accessor tweets: ::Array[XTwitterScraper::StyleUpdateParams::Tweet]
 
       def initialize: (
-        username: String,
+        id: String,
         label: String,
         tweets: ::Array[XTwitterScraper::StyleUpdateParams::Tweet],
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
       def to_hash: -> {
-        username: String,
+        id: String,
         label: String,
         tweets: ::Array[XTwitterScraper::StyleUpdateParams::Tweet],
         request_options: XTwitterScraper::RequestOptions

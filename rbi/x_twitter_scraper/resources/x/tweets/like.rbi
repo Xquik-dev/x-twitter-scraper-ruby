@@ -9,14 +9,15 @@ module XTwitterScraper
           # Like tweet
           sig do
             params(
-              tweet_id: String,
+              id: String,
               account: String,
               request_options: XTwitterScraper::RequestOptions::OrHash
             ).returns(XTwitterScraper::Models::X::Tweets::LikeCreateResponse)
           end
           def create(
-            tweet_id,
-            # X account (@username or account ID)
+            # Tweet ID to like
+            id,
+            # X account identifier (@username or account ID)
             account:,
             request_options: {}
           )
@@ -25,14 +26,15 @@ module XTwitterScraper
           # Unlike tweet
           sig do
             params(
-              tweet_id: String,
+              id: String,
               account: String,
               request_options: XTwitterScraper::RequestOptions::OrHash
             ).returns(XTwitterScraper::Models::X::Tweets::LikeDeleteResponse)
           end
           def delete(
-            tweet_id,
-            # X account (@username or account ID)
+            # Tweet ID to unlike
+            id,
+            # X account identifier (@username or account ID)
             account:,
             request_options: {}
           )

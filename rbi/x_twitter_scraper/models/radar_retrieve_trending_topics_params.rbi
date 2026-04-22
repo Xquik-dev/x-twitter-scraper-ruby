@@ -44,10 +44,21 @@ module XTwitterScraper
 
       # Source filter. One of: github, google_trends, hacker_news, polymarket, reddit,
       # trustmrr, wikipedia
-      sig { returns(T.nilable(String)) }
+      sig do
+        returns(
+          T.nilable(
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source::OrSymbol
+          )
+        )
+      end
       attr_reader :source
 
-      sig { params(source: String).void }
+      sig do
+        params(
+          source:
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source::OrSymbol
+        ).void
+      end
       attr_writer :source
 
       sig do
@@ -56,7 +67,8 @@ module XTwitterScraper
           count: Integer,
           hours: Integer,
           region: String,
-          source: String,
+          source:
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source::OrSymbol,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -83,12 +95,74 @@ module XTwitterScraper
             count: Integer,
             hours: Integer,
             region: String,
-            source: String,
+            source:
+              XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source::OrSymbol,
             request_options: XTwitterScraper::RequestOptions
           }
         )
       end
       def to_hash
+      end
+
+      # Source filter. One of: github, google_trends, hacker_news, polymarket, reddit,
+      # trustmrr, wikipedia
+      module Source
+        extend XTwitterScraper::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(
+              Symbol,
+              XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source
+            )
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        GITHUB =
+          T.let(
+            :github,
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source::TaggedSymbol
+          )
+        GOOGLE_TRENDS =
+          T.let(
+            :google_trends,
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source::TaggedSymbol
+          )
+        HACKER_NEWS =
+          T.let(
+            :hacker_news,
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source::TaggedSymbol
+          )
+        POLYMARKET =
+          T.let(
+            :polymarket,
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source::TaggedSymbol
+          )
+        REDDIT =
+          T.let(
+            :reddit,
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source::TaggedSymbol
+          )
+        TRUSTMRR =
+          T.let(
+            :trustmrr,
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source::TaggedSymbol
+          )
+        WIKIPEDIA =
+          T.let(
+            :wikipedia,
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
       end
     end
   end

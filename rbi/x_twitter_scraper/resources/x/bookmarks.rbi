@@ -11,10 +11,10 @@ module XTwitterScraper
             cursor: String,
             folder_id: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::BookmarkListResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def list(
-          # Pagination cursor from previous response
+          # Pagination cursor for bookmarks
           cursor: nil,
           # Optional bookmark folder ID
           folder_id: nil,

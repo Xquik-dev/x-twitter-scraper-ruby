@@ -24,9 +24,10 @@ module XTwitterScraper
       required :occurred_at, Time, api_name: :occurredAt
 
       # @!attribute type
+      #   Type of monitor event fired when account activity occurs.
       #
-      #   @return [Symbol, XTwitterScraper::Models::Event::Type]
-      required :type, enum: -> { XTwitterScraper::Event::Type }
+      #   @return [Symbol, XTwitterScraper::Models::EventType]
+      required :type, enum: -> { XTwitterScraper::EventType }
 
       # @!attribute username
       #
@@ -34,27 +35,19 @@ module XTwitterScraper
       required :username, String
 
       # @!method initialize(id:, data:, monitor_id:, occurred_at:, type:, username:)
+      #   Monitor event summary with type, username, and occurrence time.
+      #
       #   @param id [String]
+      #
       #   @param data [Hash{Symbol=>Object}]
+      #
       #   @param monitor_id [String]
+      #
       #   @param occurred_at [Time]
-      #   @param type [Symbol, XTwitterScraper::Models::Event::Type]
+      #
+      #   @param type [Symbol, XTwitterScraper::Models::EventType] Type of monitor event fired when account activity occurs.
+      #
       #   @param username [String]
-
-      # @see XTwitterScraper::Models::Event#type
-      module Type
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TWEET_NEW = :"tweet.new"
-        TWEET_REPLY = :"tweet.reply"
-        TWEET_RETWEET = :"tweet.retweet"
-        TWEET_QUOTE = :"tweet.quote"
-        FOLLOWER_GAINED = :"follower.gained"
-        FOLLOWER_LOST = :"follower.lost"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
     end
   end
 end

@@ -25,7 +25,7 @@ class XTwitterScraper::Test::Resources::AccountTest < XTwitterScraper::Test::Res
   def test_set_x_username_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.account.set_x_username(username: "username")
+    response = @x_twitter_scraper.account.set_x_username(username: "elonmusk")
 
     assert_pattern do
       response => XTwitterScraper::Models::AccountSetXUsernameResponse

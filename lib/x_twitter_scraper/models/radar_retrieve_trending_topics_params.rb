@@ -35,8 +35,8 @@ module XTwitterScraper
       #   Source filter. One of: github, google_trends, hacker_news, polymarket, reddit,
       #   trustmrr, wikipedia
       #
-      #   @return [String, nil]
-      optional :source, String
+      #   @return [Symbol, XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::Source, nil]
+      optional :source, enum: -> { XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source }
 
       # @!method initialize(category: nil, count: nil, hours: nil, region: nil, source: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
@@ -50,9 +50,26 @@ module XTwitterScraper
       #
       #   @param region [String] Region filter (us, global, etc.)
       #
-      #   @param source [String] Source filter. One of: github, google_trends, hacker_news, polymarket, reddit, t
+      #   @param source [Symbol, XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::Source] Source filter. One of: github, google_trends, hacker_news, polymarket, reddit, t
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
+
+      # Source filter. One of: github, google_trends, hacker_news, polymarket, reddit,
+      # trustmrr, wikipedia
+      module Source
+        extend XTwitterScraper::Internal::Type::Enum
+
+        GITHUB = :github
+        GOOGLE_TRENDS = :google_trends
+        HACKER_NEWS = :hacker_news
+        POLYMARKET = :polymarket
+        REDDIT = :reddit
+        TRUSTMRR = :trustmrr
+        WIKIPEDIA = :wikipedia
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
     end
   end
 end

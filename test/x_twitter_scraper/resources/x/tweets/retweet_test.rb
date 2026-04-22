@@ -6,7 +6,7 @@ class XTwitterScraper::Test::Resources::X::Tweets::RetweetTest < XTwitterScraper
   def test_create_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.tweets.retweet.create("tweetId", account: "account")
+    response = @x_twitter_scraper.x.tweets.retweet.create("id", account: "@elonmusk")
 
     assert_pattern do
       response => XTwitterScraper::Models::X::Tweets::RetweetCreateResponse
@@ -22,7 +22,7 @@ class XTwitterScraper::Test::Resources::X::Tweets::RetweetTest < XTwitterScraper
   def test_delete_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.tweets.retweet.delete("tweetId", account: "account")
+    response = @x_twitter_scraper.x.tweets.retweet.delete("id", account: "@elonmusk")
 
     assert_pattern do
       response => XTwitterScraper::Models::X::Tweets::RetweetDeleteResponse

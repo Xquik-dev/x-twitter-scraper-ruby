@@ -3,6 +3,7 @@
 module XTwitterScraper
   module Models
     module X
+      # @see XTwitterScraper::Resources::X::Users#retrieve
       class UserProfile < XTwitterScraper::Internal::Type::BaseModel
         # @!attribute id
         #
@@ -60,6 +61,8 @@ module XTwitterScraper
         optional :verified, XTwitterScraper::Internal::Type::Boolean
 
         # @!method initialize(id:, name:, username:, created_at: nil, description: nil, followers: nil, following: nil, location: nil, profile_picture: nil, statuses_count: nil, verified: nil)
+        #   X user profile with bio, follower counts, and verification status.
+        #
         #   @param id [String]
         #   @param name [String]
         #   @param username [String]

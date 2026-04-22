@@ -17,20 +17,12 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :id
 
-      sig do
-        returns(
-          T.nilable(
-            T::Array[XTwitterScraper::MonitorUpdateParams::EventType::OrSymbol]
-          )
-        )
-      end
+      # Array of event types to subscribe to.
+      sig { returns(T.nilable(T::Array[XTwitterScraper::EventType::OrSymbol])) }
       attr_reader :event_types
 
       sig do
-        params(
-          event_types:
-            T::Array[XTwitterScraper::MonitorUpdateParams::EventType::OrSymbol]
-        ).void
+        params(event_types: T::Array[XTwitterScraper::EventType::OrSymbol]).void
       end
       attr_writer :event_types
 
@@ -43,80 +35,31 @@ module XTwitterScraper
       sig do
         params(
           id: String,
-          event_types:
-            T::Array[XTwitterScraper::MonitorUpdateParams::EventType::OrSymbol],
+          event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           is_active: T::Boolean,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(id:, event_types: nil, is_active: nil, request_options: {})
+      def self.new(
+        id:,
+        # Array of event types to subscribe to.
+        event_types: nil,
+        is_active: nil,
+        request_options: {}
+      )
       end
 
       sig do
         override.returns(
           {
             id: String,
-            event_types:
-              T::Array[
-                XTwitterScraper::MonitorUpdateParams::EventType::OrSymbol
-              ],
+            event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
             is_active: T::Boolean,
             request_options: XTwitterScraper::RequestOptions
           }
         )
       end
       def to_hash
-      end
-
-      module EventType
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, XTwitterScraper::MonitorUpdateParams::EventType)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        TWEET_NEW =
-          T.let(
-            :"tweet.new",
-            XTwitterScraper::MonitorUpdateParams::EventType::TaggedSymbol
-          )
-        TWEET_REPLY =
-          T.let(
-            :"tweet.reply",
-            XTwitterScraper::MonitorUpdateParams::EventType::TaggedSymbol
-          )
-        TWEET_RETWEET =
-          T.let(
-            :"tweet.retweet",
-            XTwitterScraper::MonitorUpdateParams::EventType::TaggedSymbol
-          )
-        TWEET_QUOTE =
-          T.let(
-            :"tweet.quote",
-            XTwitterScraper::MonitorUpdateParams::EventType::TaggedSymbol
-          )
-        FOLLOWER_GAINED =
-          T.let(
-            :"follower.gained",
-            XTwitterScraper::MonitorUpdateParams::EventType::TaggedSymbol
-          )
-        FOLLOWER_LOST =
-          T.let(
-            :"follower.lost",
-            XTwitterScraper::MonitorUpdateParams::EventType::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              XTwitterScraper::MonitorUpdateParams::EventType::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
       end
     end
   end

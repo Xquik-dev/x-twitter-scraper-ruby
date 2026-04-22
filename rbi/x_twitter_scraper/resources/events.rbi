@@ -9,7 +9,7 @@ module XTwitterScraper
         params(
           id: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::Models::EventRetrieveResponse)
+        ).returns(XTwitterScraper::EventDetail)
       end
       def retrieve(
         # Resource ID (stringified bigint)
@@ -22,17 +22,20 @@ module XTwitterScraper
       sig do
         params(
           after: String,
-          event_type: XTwitterScraper::EventListParams::EventType::OrSymbol,
+          event_type: XTwitterScraper::EventType::OrSymbol,
           limit: Integer,
           monitor_id: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Models::EventListResponse)
       end
       def list(
-        # Cursor for pagination
+        # Cursor for keyset pagination
         after: nil,
+        # Filter events by type
         event_type: nil,
+        # Maximum number of items to return (1-100, default 50)
         limit: nil,
+        # Filter events by monitor ID
         monitor_id: nil,
         request_options: {}
       )

@@ -14,7 +14,7 @@ class XTwitterScraper::Test::Resources::RadarTest < XTwitterScraper::Test::Resou
 
     assert_pattern do
       response => {
-        items: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::RadarRetrieveTrendingTopicsResponse::Item]),
+        items: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::RadarItem]),
         total: Integer
       }
     end

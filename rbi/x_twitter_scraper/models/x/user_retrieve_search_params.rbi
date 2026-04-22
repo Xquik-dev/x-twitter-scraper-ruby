@@ -15,11 +15,11 @@ module XTwitterScraper
             )
           end
 
-        # Search query
+        # User search query
         sig { returns(String) }
         attr_accessor :q
 
-        # Pagination cursor
+        # Pagination cursor for user search
         sig { returns(T.nilable(String)) }
         attr_reader :cursor
 
@@ -34,9 +34,9 @@ module XTwitterScraper
           ).returns(T.attached_class)
         end
         def self.new(
-          # Search query
+          # User search query
           q:,
-          # Pagination cursor
+          # Pagination cursor for user search
           cursor: nil,
           request_options: {}
         )

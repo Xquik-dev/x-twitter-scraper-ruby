@@ -36,7 +36,7 @@ module XTwitterScraper
           params(
             id: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::AccountRetrieveResponse)
+          ).returns(XTwitterScraper::X::XAccountDetail)
         end
         def retrieve(
           # Resource ID (stringified bigint)
@@ -68,6 +68,16 @@ module XTwitterScraper
         )
         end
 
+        # Clears loginFailedAt and loginFailureReason for all accounts with transient or
+        # automated failure reasons, making them eligible for retry on next use.
+        sig do
+          params(
+            request_options: XTwitterScraper::RequestOptions::OrHash
+          ).returns(XTwitterScraper::Models::X::AccountBulkRetryResponse)
+        end
+        def bulk_retry(request_options: {})
+        end
+
         # Re-authenticate X account
         sig do
           params(
@@ -80,9 +90,9 @@ module XTwitterScraper
         def reauth(
           # Resource ID (stringified bigint)
           id,
-          # Account password
+          # Updated account password
           password:,
-          # TOTP secret for 2FA
+          # TOTP secret for 2FA re-authentication
           totp_secret: nil,
           request_options: {}
         )

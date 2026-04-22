@@ -2,6 +2,7 @@
 
 module XTwitterScraper
   module Models
+    # @see XTwitterScraper::Resources::Integrations#create
     class Integration < XTwitterScraper::Internal::Type::BaseModel
       # @!attribute id
       #
@@ -20,10 +21,11 @@ module XTwitterScraper
       required :created_at, Time, api_name: :createdAt
 
       # @!attribute event_types
+      #   Array of event types to subscribe to.
       #
-      #   @return [Array<Symbol, XTwitterScraper::Models::Integration::EventType>]
+      #   @return [Array<Symbol, XTwitterScraper::Models::EventType>]
       required :event_types,
-               -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Integration::EventType] },
+               -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType] },
                api_name: :eventTypes
 
       # @!attribute is_active
@@ -38,8 +40,8 @@ module XTwitterScraper
 
       # @!attribute type
       #
-      #   @return [Symbol, XTwitterScraper::Models::Integration::Type]
-      required :type, enum: -> { XTwitterScraper::Integration::Type }
+      #   @return [Symbol, :telegram]
+      required :type, const: :telegram
 
       # @!attribute filters
       #   Event filter rules (JSON)
@@ -62,20 +64,20 @@ module XTwitterScraper
       #   @return [Boolean, nil]
       optional :silent_push, XTwitterScraper::Internal::Type::Boolean, api_name: :silentPush
 
-      # @!method initialize(id:, config:, created_at:, event_types:, is_active:, name:, type:, filters: nil, message_template: nil, scope_all_monitors: nil, silent_push: nil)
+      # @!method initialize(id:, config:, created_at:, event_types:, is_active:, name:, filters: nil, message_template: nil, scope_all_monitors: nil, silent_push: nil, type: :telegram)
+      #   Third-party integration (e.g. Telegram) subscribed to monitor events.
+      #
       #   @param id [String]
       #
       #   @param config [Hash{Symbol=>Object}] Integration config — shape varies by type (JSON)
       #
       #   @param created_at [Time]
       #
-      #   @param event_types [Array<Symbol, XTwitterScraper::Models::Integration::EventType>]
+      #   @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
       #
       #   @param is_active [Boolean]
       #
       #   @param name [String]
-      #
-      #   @param type [Symbol, XTwitterScraper::Models::Integration::Type]
       #
       #   @param filters [Hash{Symbol=>Object}] Event filter rules (JSON)
       #
@@ -84,30 +86,8 @@ module XTwitterScraper
       #   @param scope_all_monitors [Boolean]
       #
       #   @param silent_push [Boolean]
-
-      module EventType
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TWEET_NEW = :"tweet.new"
-        TWEET_REPLY = :"tweet.reply"
-        TWEET_RETWEET = :"tweet.retweet"
-        TWEET_QUOTE = :"tweet.quote"
-        FOLLOWER_GAINED = :"follower.gained"
-        FOLLOWER_LOST = :"follower.lost"
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
-
-      # @see XTwitterScraper::Models::Integration#type
-      module Type
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TELEGRAM = :telegram
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      #
+      #   @param type [Symbol, :telegram]
     end
   end
 end

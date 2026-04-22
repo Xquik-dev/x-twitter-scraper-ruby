@@ -41,11 +41,15 @@ module XTwitterScraper
         # Look up tweet
         sig do
           params(
-            tweet_id: String,
+            id: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::TweetRetrieveResponse)
         end
-        def retrieve(tweet_id, request_options: {})
+        def retrieve(
+          # Tweet ID
+          id,
+          request_options: {}
+        )
         end
 
         # Get multiple tweets by IDs
@@ -53,7 +57,7 @@ module XTwitterScraper
           params(
             ids: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).void
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def list(
           # Comma-separated tweet IDs (max 100)
@@ -65,14 +69,15 @@ module XTwitterScraper
         # Delete tweet
         sig do
           params(
-            tweet_id: String,
+            id: String,
             account: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::TweetDeleteResponse)
         end
         def delete(
-          tweet_id,
-          # X account (@username or account ID)
+          # Tweet ID to delete
+          id,
+          # X account identifier (@username or account ID)
           account:,
           request_options: {}
         )
@@ -84,12 +89,12 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::TweetGetFavoritersResponse)
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def get_favoriters(
-          # Tweet ID
+          # Tweet ID to get favoriters
           id,
-          # Pagination cursor from previous response
+          # Pagination cursor for favoriters
           cursor: nil,
           request_options: {}
         )
@@ -104,18 +109,18 @@ module XTwitterScraper
             since_time: String,
             until_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::TweetGetQuotesResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def get_quotes(
-          # Tweet ID
+          # Tweet ID to get quotes
           id,
-          # Pagination cursor
+          # Pagination cursor for quote tweets
           cursor: nil,
-          # Include replies (default false)
+          # Include reply quotes (default false)
           include_replies: nil,
-          # Unix timestamp - filter after
+          # Unix timestamp - return quotes posted after this time
           since_time: nil,
-          # Unix timestamp - filter before
+          # Unix timestamp - return quotes posted before this time
           until_time: nil,
           request_options: {}
         )
@@ -129,16 +134,16 @@ module XTwitterScraper
             since_time: String,
             until_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::TweetGetRepliesResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def get_replies(
-          # Tweet ID
+          # Tweet ID to get replies
           id,
-          # Pagination cursor
+          # Pagination cursor for tweet replies
           cursor: nil,
-          # Unix timestamp - filter after
+          # Unix timestamp - return replies posted after this time
           since_time: nil,
-          # Unix timestamp - filter before
+          # Unix timestamp - return replies posted before this time
           until_time: nil,
           request_options: {}
         )
@@ -150,12 +155,12 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::TweetGetRetweetersResponse)
+          ).returns(XTwitterScraper::PaginatedUsers)
         end
         def get_retweeters(
-          # Tweet ID
+          # Tweet ID to get retweeters
           id,
-          # Pagination cursor
+          # Pagination cursor for retweeters
           cursor: nil,
           request_options: {}
         )
@@ -167,12 +172,12 @@ module XTwitterScraper
             id: String,
             cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::TweetGetThreadResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def get_thread(
-          # Tweet ID
+          # Tweet ID to get thread context
           id,
-          # Pagination cursor
+          # Pagination cursor for thread tweets
           cursor: nil,
           request_options: {}
         )
@@ -189,14 +194,14 @@ module XTwitterScraper
             since_time: String,
             until_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::TweetSearchResponse)
+          ).returns(XTwitterScraper::PaginatedTweets)
         end
         def search(
           # Search query (keywords,
           q:,
           # Pagination cursor from previous response
           cursor: nil,
-          # Deprecated — use cursor-based pagination instead
+          # Max tweets to return (server paginates internally). Omit for single page (~20).
           limit: nil,
           # Sort order — Latest (chronological) or Top (engagement-ranked)
           query_type: nil,

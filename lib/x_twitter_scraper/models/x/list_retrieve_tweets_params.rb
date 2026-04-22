@@ -14,7 +14,7 @@ module XTwitterScraper
         required :id, String
 
         # @!attribute cursor
-        #   Pagination cursor
+        #   Pagination cursor for list tweets
         #
         #   @return [String, nil]
         optional :cursor, String
@@ -40,7 +40,7 @@ module XTwitterScraper
         # @!method initialize(id:, cursor: nil, include_replies: nil, since_time: nil, until_time: nil, request_options: {})
         #   @param id [String]
         #
-        #   @param cursor [String] Pagination cursor
+        #   @param cursor [String] Pagination cursor for list tweets
         #
         #   @param include_replies [Boolean] Include replies (default false)
         #

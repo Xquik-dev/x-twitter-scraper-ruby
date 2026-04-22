@@ -14,6 +14,7 @@ module XTwitterScraper
           )
         end
 
+      # Identifier for the extraction tool used to run a job.
       sig do
         returns(
           XTwitterScraper::ExtractionEstimateCostParams::ToolType::OrSymbol
@@ -21,21 +22,21 @@ module XTwitterScraper
       end
       attr_accessor :tool_type
 
-      # Raw advanced search query appended as-is (tweet_search_extractor)
+      # Raw advanced query string appended to the estimate (tweet_search_extractor)
       sig { returns(T.nilable(String)) }
       attr_reader :advanced_query
 
       sig { params(advanced_query: String).void }
       attr_writer :advanced_query
 
-      # Exact phrase to match (tweet_search_extractor)
+      # Exact phrase filter for search estimation
       sig { returns(T.nilable(String)) }
       attr_reader :exact_phrase
 
       sig { params(exact_phrase: String).void }
       attr_writer :exact_phrase
 
-      # Words to exclude from results (tweet_search_extractor)
+      # Words excluded from estimated search results
       sig { returns(T.nilable(String)) }
       attr_reader :exclude_words
 
@@ -95,12 +96,13 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
+        # Identifier for the extraction tool used to run a job.
         tool_type:,
-        # Raw advanced search query appended as-is (tweet_search_extractor)
+        # Raw advanced query string appended to the estimate (tweet_search_extractor)
         advanced_query: nil,
-        # Exact phrase to match (tweet_search_extractor)
+        # Exact phrase filter for search estimation
         exact_phrase: nil,
-        # Words to exclude from results (tweet_search_extractor)
+        # Words excluded from estimated search results
         exclude_words: nil,
         search_query: nil,
         target_community_id: nil,
@@ -133,6 +135,7 @@ module XTwitterScraper
       def to_hash
       end
 
+      # Identifier for the extraction tool used to run a job.
       module ToolType
         extend XTwitterScraper::Internal::Type::Enum
 

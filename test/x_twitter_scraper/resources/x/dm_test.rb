@@ -24,7 +24,7 @@ class XTwitterScraper::Test::Resources::X::DmTest < XTwitterScraper::Test::Resou
   def test_send__required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.dm.send_("userId", account: "account", text: "text")
+    response = @x_twitter_scraper.x.dm.send_("userId", account: "@elonmusk", text: "Example text content")
 
     assert_pattern do
       response => XTwitterScraper::Models::X::DmSendResponse

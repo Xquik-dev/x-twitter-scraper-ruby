@@ -16,22 +16,22 @@ module XTwitterScraper
           end
 
         sig { returns(String) }
-        attr_accessor :tweet_id
+        attr_accessor :id
 
-        # X account (@username or account ID)
+        # X account identifier (@username or account ID)
         sig { returns(String) }
         attr_accessor :account
 
         sig do
           params(
-            tweet_id: String,
+            id: String,
             account: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
-          tweet_id:,
-          # X account (@username or account ID)
+          id:,
+          # X account identifier (@username or account ID)
           account:,
           request_options: {}
         )
@@ -40,7 +40,7 @@ module XTwitterScraper
         sig do
           override.returns(
             {
-              tweet_id: String,
+              id: String,
               account: String,
               request_options: XTwitterScraper::RequestOptions
             }

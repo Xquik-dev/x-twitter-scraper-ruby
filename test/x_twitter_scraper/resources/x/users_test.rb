@@ -6,10 +6,10 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
   def test_retrieve
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.users.retrieve("username")
+    response = @x_twitter_scraper.x.users.retrieve("id")
 
     assert_pattern do
-      response => XTwitterScraper::Models::X::UserRetrieveResponse
+      response => XTwitterScraper::X::UserProfile
     end
 
     assert_pattern do
@@ -35,7 +35,15 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_batch(ids: "ids")
 
     assert_pattern do
-      response => nil
+      response => XTwitterScraper::PaginatedUsers
+    end
+
+    assert_pattern do
+      response => {
+        has_next_page: XTwitterScraper::Internal::Type::Boolean,
+        next_cursor: String,
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile])
+      }
     end
   end
 
@@ -45,7 +53,15 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_followers("id")
 
     assert_pattern do
-      response => nil
+      response => XTwitterScraper::PaginatedUsers
+    end
+
+    assert_pattern do
+      response => {
+        has_next_page: XTwitterScraper::Internal::Type::Boolean,
+        next_cursor: String,
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile])
+      }
     end
   end
 
@@ -55,14 +71,14 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_followers_you_know("id")
 
     assert_pattern do
-      response => XTwitterScraper::Models::X::UserRetrieveFollowersYouKnowResponse
+      response => XTwitterScraper::PaginatedUsers
     end
 
     assert_pattern do
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::UserRetrieveFollowersYouKnowResponse::User])
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile])
       }
     end
   end
@@ -73,7 +89,15 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_following("id")
 
     assert_pattern do
-      response => nil
+      response => XTwitterScraper::PaginatedUsers
+    end
+
+    assert_pattern do
+      response => {
+        has_next_page: XTwitterScraper::Internal::Type::Boolean,
+        next_cursor: String,
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile])
+      }
     end
   end
 
@@ -83,14 +107,14 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_likes("id")
 
     assert_pattern do
-      response => XTwitterScraper::Models::X::UserRetrieveLikesResponse
+      response => XTwitterScraper::PaginatedTweets
     end
 
     assert_pattern do
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::UserRetrieveLikesResponse::Tweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
       }
     end
   end
@@ -101,14 +125,14 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_media("id")
 
     assert_pattern do
-      response => XTwitterScraper::Models::X::UserRetrieveMediaResponse
+      response => XTwitterScraper::PaginatedTweets
     end
 
     assert_pattern do
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::UserRetrieveMediaResponse::Tweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
       }
     end
   end
@@ -119,7 +143,15 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_mentions("id")
 
     assert_pattern do
-      response => nil
+      response => XTwitterScraper::PaginatedTweets
+    end
+
+    assert_pattern do
+      response => {
+        has_next_page: XTwitterScraper::Internal::Type::Boolean,
+        next_cursor: String,
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
+      }
     end
   end
 
@@ -129,7 +161,15 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_search(q: "q")
 
     assert_pattern do
-      response => nil
+      response => XTwitterScraper::PaginatedUsers
+    end
+
+    assert_pattern do
+      response => {
+        has_next_page: XTwitterScraper::Internal::Type::Boolean,
+        next_cursor: String,
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile])
+      }
     end
   end
 
@@ -139,14 +179,14 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_tweets("id")
 
     assert_pattern do
-      response => XTwitterScraper::Models::X::UserRetrieveTweetsResponse
+      response => XTwitterScraper::PaginatedTweets
     end
 
     assert_pattern do
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::UserRetrieveTweetsResponse::Tweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
       }
     end
   end
@@ -157,7 +197,15 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_verified_followers("id")
 
     assert_pattern do
-      response => nil
+      response => XTwitterScraper::PaginatedUsers
+    end
+
+    assert_pattern do
+      response => {
+        has_next_page: XTwitterScraper::Internal::Type::Boolean,
+        next_cursor: String,
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile])
+      }
     end
   end
 end

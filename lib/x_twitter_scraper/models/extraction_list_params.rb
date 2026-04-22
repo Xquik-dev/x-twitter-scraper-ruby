@@ -8,37 +8,41 @@ module XTwitterScraper
       include XTwitterScraper::Internal::Type::RequestParameters
 
       # @!attribute after
-      #   Cursor for pagination
+      #   Cursor for keyset pagination
       #
       #   @return [String, nil]
       optional :after, String
 
       # @!attribute limit
+      #   Maximum number of items to return (1-100, default 50)
       #
       #   @return [Integer, nil]
       optional :limit, Integer
 
       # @!attribute status
+      #   Filter by job status
       #
       #   @return [Symbol, XTwitterScraper::Models::ExtractionListParams::Status, nil]
       optional :status, enum: -> { XTwitterScraper::ExtractionListParams::Status }
 
       # @!attribute tool_type
+      #   Filter by extraction tool type
       #
       #   @return [Symbol, XTwitterScraper::Models::ExtractionListParams::ToolType, nil]
       optional :tool_type, enum: -> { XTwitterScraper::ExtractionListParams::ToolType }
 
       # @!method initialize(after: nil, limit: nil, status: nil, tool_type: nil, request_options: {})
-      #   @param after [String] Cursor for pagination
+      #   @param after [String] Cursor for keyset pagination
       #
-      #   @param limit [Integer]
+      #   @param limit [Integer] Maximum number of items to return (1-100, default 50)
       #
-      #   @param status [Symbol, XTwitterScraper::Models::ExtractionListParams::Status]
+      #   @param status [Symbol, XTwitterScraper::Models::ExtractionListParams::Status] Filter by job status
       #
-      #   @param tool_type [Symbol, XTwitterScraper::Models::ExtractionListParams::ToolType]
+      #   @param tool_type [Symbol, XTwitterScraper::Models::ExtractionListParams::ToolType] Filter by extraction tool type
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
 
+      # Filter by job status
       module Status
         extend XTwitterScraper::Internal::Type::Enum
 
@@ -50,6 +54,7 @@ module XTwitterScraper
         #   @return [Array<Symbol>]
       end
 
+      # Filter by extraction tool type
       module ToolType
         extend XTwitterScraper::Internal::Type::Enum
 

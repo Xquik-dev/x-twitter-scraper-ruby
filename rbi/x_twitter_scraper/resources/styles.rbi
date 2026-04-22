@@ -7,13 +7,13 @@ module XTwitterScraper
       # Get cached style profile
       sig do
         params(
-          username: String,
+          id: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::Models::StyleRetrieveResponse)
+        ).returns(XTwitterScraper::StyleProfile)
       end
       def retrieve(
-        # X username of cached style
-        username,
+        # Style profile ID or X username
+        id,
         request_options: {}
       )
       end
@@ -21,15 +21,15 @@ module XTwitterScraper
       # Save style profile with custom tweets
       sig do
         params(
-          username: String,
+          id: String,
           label: String,
           tweets: T::Array[XTwitterScraper::StyleUpdateParams::Tweet::OrHash],
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::Models::StyleUpdateResponse)
+        ).returns(XTwitterScraper::StyleProfile)
       end
       def update(
-        # X username of cached style
-        username,
+        # Style profile ID or X username
+        id,
         # Display label for the style
         label:,
         # Array of tweet objects
@@ -50,13 +50,13 @@ module XTwitterScraper
       # Delete a style profile
       sig do
         params(
-          username: String,
+          id: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).void
       end
       def delete(
-        # X username of cached style
-        username,
+        # Style profile ID or X username
+        id,
         request_options: {}
       )
       end
@@ -66,7 +66,7 @@ module XTwitterScraper
         params(
           username: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::Models::StyleAnalyzeResponse)
+        ).returns(XTwitterScraper::StyleProfile)
       end
       def analyze(
         # X username to analyze
@@ -95,13 +95,13 @@ module XTwitterScraper
       # Get engagement metrics for style tweets
       sig do
         params(
-          username: String,
+          id: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Models::StyleGetPerformanceResponse)
       end
       def get_performance(
-        # X username of cached style
-        username,
+        # Style profile ID or X username
+        id,
         request_options: {}
       )
       end

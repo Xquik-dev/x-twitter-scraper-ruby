@@ -19,7 +19,7 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :q
 
-        # Pagination cursor
+        # Pagination cursor for community search
         sig { returns(T.nilable(String)) }
         attr_reader :cursor
 
@@ -44,7 +44,7 @@ module XTwitterScraper
         def self.new(
           # Search query
           q:,
-          # Pagination cursor
+          # Pagination cursor for community search
           cursor: nil,
           # Sort order (Latest or Top)
           query_type: nil,

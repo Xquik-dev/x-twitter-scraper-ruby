@@ -6,7 +6,7 @@ class XTwitterScraper::Test::Resources::X::Users::FollowTest < XTwitterScraper::
   def test_create_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.users.follow.create("userId", account: "account")
+    response = @x_twitter_scraper.x.users.follow.create("id", account: "@elonmusk")
 
     assert_pattern do
       response => XTwitterScraper::Models::X::Users::FollowCreateResponse
@@ -22,7 +22,7 @@ class XTwitterScraper::Test::Resources::X::Users::FollowTest < XTwitterScraper::
   def test_delete_all_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.users.follow.delete_all("userId", account: "account")
+    response = @x_twitter_scraper.x.users.follow.delete_all("id", account: "@elonmusk")
 
     assert_pattern do
       response => XTwitterScraper::Models::X::Users::FollowDeleteAllResponse

@@ -14,19 +14,21 @@ module XTwitterScraper
           )
         end
 
-      # Cursor for pagination
+      # Cursor for keyset pagination
       sig { returns(T.nilable(String)) }
       attr_reader :after
 
       sig { params(after: String).void }
       attr_writer :after
 
+      # Maximum number of items to return (1-100, default 50)
       sig { returns(T.nilable(Integer)) }
       attr_reader :limit
 
       sig { params(limit: Integer).void }
       attr_writer :limit
 
+      # Filter by job status
       sig do
         returns(
           T.nilable(XTwitterScraper::ExtractionListParams::Status::OrSymbol)
@@ -41,6 +43,7 @@ module XTwitterScraper
       end
       attr_writer :status
 
+      # Filter by extraction tool type
       sig do
         returns(
           T.nilable(XTwitterScraper::ExtractionListParams::ToolType::OrSymbol)
@@ -65,10 +68,13 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
-        # Cursor for pagination
+        # Cursor for keyset pagination
         after: nil,
+        # Maximum number of items to return (1-100, default 50)
         limit: nil,
+        # Filter by job status
         status: nil,
+        # Filter by extraction tool type
         tool_type: nil,
         request_options: {}
       )
@@ -89,6 +95,7 @@ module XTwitterScraper
       def to_hash
       end
 
+      # Filter by job status
       module Status
         extend XTwitterScraper::Internal::Type::Enum
 
@@ -125,6 +132,7 @@ module XTwitterScraper
         end
       end
 
+      # Filter by extraction tool type
       module ToolType
         extend XTwitterScraper::Internal::Type::Enum
 
