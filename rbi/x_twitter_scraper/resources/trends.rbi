@@ -4,7 +4,7 @@ module XTwitterScraper
   module Resources
     # Trending topics and hashtags by region
     class Trends
-      # Get trending hashtags & topics by region (alias)
+      # Get trending hashtags and topics by region (alias)
       sig do
         params(
           count: Integer,
