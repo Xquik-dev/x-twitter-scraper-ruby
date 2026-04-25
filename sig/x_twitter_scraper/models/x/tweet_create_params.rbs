@@ -8,7 +8,6 @@ module XTwitterScraper
           community_id: String,
           is_note_tweet: bool,
           media: ::Array[String],
-          media_ids: ::Array[String],
           reply_to_tweet_id: String,
           text: String
         }
@@ -36,10 +35,6 @@ module XTwitterScraper
 
         def media=: (::Array[String]) -> ::Array[String]
 
-        attr_reader media_ids: ::Array[String]?
-
-        def media_ids=: (::Array[String]) -> ::Array[String]
-
         attr_reader reply_to_tweet_id: String?
 
         def reply_to_tweet_id=: (String) -> String
@@ -54,7 +49,6 @@ module XTwitterScraper
           ?community_id: String,
           ?is_note_tweet: bool,
           ?media: ::Array[String],
-          ?media_ids: ::Array[String],
           ?reply_to_tweet_id: String,
           ?text: String,
           ?request_options: XTwitterScraper::request_opts
@@ -66,7 +60,6 @@ module XTwitterScraper
           community_id: String,
           is_note_tweet: bool,
           media: ::Array[String],
-          media_ids: ::Array[String],
           reply_to_tweet_id: String,
           text: String,
           request_options: XTwitterScraper::RequestOptions

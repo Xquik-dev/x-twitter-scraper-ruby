@@ -27,6 +27,7 @@ module XTwitterScraper
           params(
             id: String,
             cursor: String,
+            page_size: Integer,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::PaginatedUsers)
         end
@@ -35,6 +36,8 @@ module XTwitterScraper
           id,
           # Pagination cursor for list members
           cursor: nil,
+          # Members per page (20-200, default 20)
+          page_size: nil,
           request_options: {}
         )
         end

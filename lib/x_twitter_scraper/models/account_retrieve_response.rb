@@ -26,11 +26,22 @@ module XTwitterScraper
                -> { XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo },
                api_name: :creditInfo
 
-      # @!method initialize(monitors_allowed:, monitors_used:, plan:, credit_info: nil)
+      # @!attribute x_username
+      #   Linked X username, omitted when no X account is connected.
+      #
+      #   @return [String, nil]
+      optional :x_username, String, api_name: :xUsername
+
+      # @!method initialize(monitors_allowed:, monitors_used:, plan:, credit_info: nil, x_username: nil)
       #   @param monitors_allowed [Integer]
+      #
       #   @param monitors_used [Integer]
+      #
       #   @param plan [Symbol, XTwitterScraper::Models::AccountRetrieveResponse::Plan]
+      #
       #   @param credit_info [XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo]
+      #
+      #   @param x_username [String] Linked X username, omitted when no X account is connected.
 
       # @see XTwitterScraper::Models::AccountRetrieveResponse#plan
       module Plan

@@ -12,7 +12,6 @@ module XTwitterScraper
           ?community_id: String,
           ?is_note_tweet: bool,
           ?media: ::Array[String],
-          ?media_ids: ::Array[String],
           ?reply_to_tweet_id: String,
           ?text: String,
           ?request_options: XTwitterScraper::request_opts

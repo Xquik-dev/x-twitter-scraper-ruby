@@ -20,7 +20,6 @@ module XTwitterScraper
             community_id: String,
             is_note_tweet: T::Boolean,
             media: T::Array[String],
-            media_ids: T::Array[String],
             reply_to_tweet_id: String,
             text: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
@@ -32,10 +31,9 @@ module XTwitterScraper
           attachment_url: nil,
           community_id: nil,
           is_note_tweet: nil,
-          # Array of media URLs to attach (mutually exclusive with media_ids)
+          # Array of public image URLs to attach (max 4). Each URL must be publicly
+          # reachable - the browser composer fetches them directly.
           media: nil,
-          # Array of media IDs to attach (mutually exclusive with media)
-          media_ids: nil,
           reply_to_tweet_id: nil,
           # Tweet text (optional when media is provided)
           text: nil,
@@ -43,7 +41,7 @@ module XTwitterScraper
         )
         end
 
-        # Get tweet with full text, author, metrics and media
+        # Get tweet with full text, author, metrics & media
         sig do
           params(
             id: String,
@@ -188,7 +186,7 @@ module XTwitterScraper
         )
         end
 
-        # Search tweets with X query operators and pagination
+        # Search tweets with X query operators & pagination
         sig do
           params(
             q: String,
@@ -208,11 +206,11 @@ module XTwitterScraper
           cursor: nil,
           # Max tweets to return (server paginates internally). Omit for single page (~20).
           limit: nil,
-          # Sort order — Latest (chronological) or Top (engagement-ranked)
+          # Sort order - Latest (chronological) or Top (engagement-ranked)
           query_type: nil,
-          # ISO 8601 timestamp — only return tweets after this time
+          # ISO 8601 timestamp - only return tweets after this time
           since_time: nil,
-          # ISO 8601 timestamp — only return tweets before this time
+          # ISO 8601 timestamp - only return tweets before this time
           until_time: nil,
           request_options: {}
         )

@@ -10,7 +10,7 @@ module XTwitterScraper
       required :has_more, XTwitterScraper::Internal::Type::Boolean, api_name: :hasMore
 
       # @!attribute job
-      #   Extraction job metadata — shape varies by tool type (JSON)
+      #   Extraction job metadata - shape varies by tool type (JSON)
       #
       #   @return [Hash{Symbol=>Object}]
       required :job, XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]
@@ -29,7 +29,7 @@ module XTwitterScraper
       # @!method initialize(has_more:, job:, results:, next_cursor: nil)
       #   @param has_more [Boolean]
       #
-      #   @param job [Hash{Symbol=>Object}] Extraction job metadata — shape varies by tool type (JSON)
+      #   @param job [Hash{Symbol=>Object}] Extraction job metadata - shape varies by tool type (JSON)
       #
       #   @param results [Array<Hash{Symbol=>Object}>]
       #

@@ -5,7 +5,7 @@ module XTwitterScraper
     class X
       # Media upload and download
       class Media
-        # Download images and videos from tweets
+        # Download images & videos from tweets
         sig do
           params(
             tweet_ids: T::Array[String],

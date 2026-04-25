@@ -11,6 +11,7 @@ module XTwitterScraper
         def retrieve_members: (
           String id,
           ?cursor: String,
+          ?page_size: Integer,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::PaginatedUsers
 

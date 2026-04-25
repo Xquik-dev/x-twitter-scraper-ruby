@@ -37,19 +37,13 @@ module XTwitterScraper
         sig { params(is_note_tweet: T::Boolean).void }
         attr_writer :is_note_tweet
 
-        # Array of media URLs to attach (mutually exclusive with media_ids)
+        # Array of public image URLs to attach (max 4). Each URL must be publicly
+        # reachable - the browser composer fetches them directly.
         sig { returns(T.nilable(T::Array[String])) }
         attr_reader :media
 
         sig { params(media: T::Array[String]).void }
         attr_writer :media
-
-        # Array of media IDs to attach (mutually exclusive with media)
-        sig { returns(T.nilable(T::Array[String])) }
-        attr_reader :media_ids
-
-        sig { params(media_ids: T::Array[String]).void }
-        attr_writer :media_ids
 
         sig { returns(T.nilable(String)) }
         attr_reader :reply_to_tweet_id
@@ -71,7 +65,6 @@ module XTwitterScraper
             community_id: String,
             is_note_tweet: T::Boolean,
             media: T::Array[String],
-            media_ids: T::Array[String],
             reply_to_tweet_id: String,
             text: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
@@ -83,10 +76,9 @@ module XTwitterScraper
           attachment_url: nil,
           community_id: nil,
           is_note_tweet: nil,
-          # Array of media URLs to attach (mutually exclusive with media_ids)
+          # Array of public image URLs to attach (max 4). Each URL must be publicly
+          # reachable - the browser composer fetches them directly.
           media: nil,
-          # Array of media IDs to attach (mutually exclusive with media)
-          media_ids: nil,
           reply_to_tweet_id: nil,
           # Tweet text (optional when media is provided)
           text: nil,
@@ -102,7 +94,6 @@ module XTwitterScraper
               community_id: String,
               is_note_tweet: T::Boolean,
               media: T::Array[String],
-              media_ids: T::Array[String],
               reply_to_tweet_id: String,
               text: String,
               request_options: XTwitterScraper::RequestOptions

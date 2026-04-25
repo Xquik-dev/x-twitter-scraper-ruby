@@ -41,6 +41,13 @@ module XTwitterScraper
       end
       attr_writer :credit_info
 
+      # Linked X username, omitted when no X account is connected.
+      sig { returns(T.nilable(String)) }
+      attr_reader :x_username
+
+      sig { params(x_username: String).void }
+      attr_writer :x_username
+
       sig do
         params(
           monitors_allowed: Integer,
@@ -48,10 +55,18 @@ module XTwitterScraper
           plan:
             XTwitterScraper::Models::AccountRetrieveResponse::Plan::OrSymbol,
           credit_info:
-            XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo::OrHash
+            XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo::OrHash,
+          x_username: String
         ).returns(T.attached_class)
       end
-      def self.new(monitors_allowed:, monitors_used:, plan:, credit_info: nil)
+      def self.new(
+        monitors_allowed:,
+        monitors_used:,
+        plan:,
+        credit_info: nil,
+        # Linked X username, omitted when no X account is connected.
+        x_username: nil
+      )
       end
 
       sig do
@@ -62,7 +77,8 @@ module XTwitterScraper
             plan:
               XTwitterScraper::Models::AccountRetrieveResponse::Plan::TaggedSymbol,
             credit_info:
-              XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo
+              XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo,
+            x_username: String
           }
         )
       end

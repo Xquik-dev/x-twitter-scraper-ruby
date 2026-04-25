@@ -33,7 +33,7 @@ module XTwitterScraper
         sig { params(limit: Integer).void }
         attr_writer :limit
 
-        # Sort order — Latest (chronological) or Top (engagement-ranked)
+        # Sort order - Latest (chronological) or Top (engagement-ranked)
         sig do
           returns(
             T.nilable(
@@ -51,14 +51,14 @@ module XTwitterScraper
         end
         attr_writer :query_type
 
-        # ISO 8601 timestamp — only return tweets after this time
+        # ISO 8601 timestamp - only return tweets after this time
         sig { returns(T.nilable(String)) }
         attr_reader :since_time
 
         sig { params(since_time: String).void }
         attr_writer :since_time
 
-        # ISO 8601 timestamp — only return tweets before this time
+        # ISO 8601 timestamp - only return tweets before this time
         sig { returns(T.nilable(String)) }
         attr_reader :until_time
 
@@ -84,11 +84,11 @@ module XTwitterScraper
           cursor: nil,
           # Max tweets to return (server paginates internally). Omit for single page (~20).
           limit: nil,
-          # Sort order — Latest (chronological) or Top (engagement-ranked)
+          # Sort order - Latest (chronological) or Top (engagement-ranked)
           query_type: nil,
-          # ISO 8601 timestamp — only return tweets after this time
+          # ISO 8601 timestamp - only return tweets after this time
           since_time: nil,
-          # ISO 8601 timestamp — only return tweets before this time
+          # ISO 8601 timestamp - only return tweets before this time
           until_time: nil,
           request_options: {}
         )
@@ -111,7 +111,7 @@ module XTwitterScraper
         def to_hash
         end
 
-        # Sort order — Latest (chronological) or Top (engagement-ranked)
+        # Sort order - Latest (chronological) or Top (engagement-ranked)
         module QueryType
           extend XTwitterScraper::Internal::Type::Enum
 

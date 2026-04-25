@@ -88,7 +88,7 @@ module XTwitterScraper
       )
       end
 
-      # Get trending hashtags and topics from X by region
+      # Get trending hashtags & topics from X by region
       sig do
         params(
           count: Integer,

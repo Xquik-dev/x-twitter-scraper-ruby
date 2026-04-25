@@ -9,7 +9,7 @@ module XTwitterScraper
         # @return [XTwitterScraper::Resources::X::Users::Follow]
         attr_reader :follow
 
-        # Get user profile with follower counts and verification
+        # Get user profile with follower counts & verification
         #
         # @overload retrieve(id, request_options: {})
         #

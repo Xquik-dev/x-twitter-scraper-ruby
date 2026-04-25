@@ -32,11 +32,13 @@ module XTwitterScraper
 
         # List members of an X List
         #
-        # @overload retrieve_members(id, cursor: nil, request_options: {})
+        # @overload retrieve_members(id, cursor: nil, page_size: nil, request_options: {})
         #
         # @param id [String] List ID for member lookup
         #
         # @param cursor [String] Pagination cursor for list members
+        #
+        # @param page_size [Integer] Members per page (20-200, default 20)
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -49,7 +51,7 @@ module XTwitterScraper
           @client.request(
             method: :get,
             path: ["x/lists/%1$s/members", id],
-            query: query,
+            query: query.transform_keys(page_size: "pageSize"),
             model: XTwitterScraper::PaginatedUsers,
             options: options
           )

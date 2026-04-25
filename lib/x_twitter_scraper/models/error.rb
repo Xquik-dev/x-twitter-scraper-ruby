@@ -37,6 +37,7 @@ module XTwitterScraper
         SUBSCRIPTION_INACTIVE = :subscription_inactive
         TWEET_NOT_FOUND = :tweet_not_found
         UNAUTHENTICATED = :unauthenticated
+        UNSUPPORTED_FIELD = :unsupported_field
         USER_NOT_FOUND = :user_not_found
         WEBHOOK_INACTIVE = :webhook_inactive
         X_API_RATE_LIMITED = :x_api_rate_limited

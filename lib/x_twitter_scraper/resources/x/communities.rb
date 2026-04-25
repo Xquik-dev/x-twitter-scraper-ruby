@@ -64,7 +64,7 @@ module XTwitterScraper
           )
         end
 
-        # Get community name, description and member count
+        # Get community name, description & member count
         #
         # @overload retrieve_info(id, request_options: {})
         #
@@ -86,11 +86,13 @@ module XTwitterScraper
 
         # List members of a community
         #
-        # @overload retrieve_members(id, cursor: nil, request_options: {})
+        # @overload retrieve_members(id, cursor: nil, page_size: nil, request_options: {})
         #
         # @param id [String] Community ID for member lookup
         #
         # @param cursor [String] Pagination cursor
+        #
+        # @param page_size [Integer] Items per page (20-200, default 20)
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -103,7 +105,7 @@ module XTwitterScraper
           @client.request(
             method: :get,
             path: ["x/communities/%1$s/members", id],
-            query: query,
+            query: query.transform_keys(page_size: "pageSize"),
             model: XTwitterScraper::PaginatedUsers,
             options: options
           )

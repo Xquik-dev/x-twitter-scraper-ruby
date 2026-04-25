@@ -5,7 +5,8 @@ module XTwitterScraper
         monitors_allowed: Integer,
         monitors_used: Integer,
         plan: XTwitterScraper::Models::AccountRetrieveResponse::plan,
-        credit_info: XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo
+        credit_info: XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo,
+        x_username: String
       }
 
     class AccountRetrieveResponse < XTwitterScraper::Internal::Type::BaseModel
@@ -21,18 +22,24 @@ module XTwitterScraper
         XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo
       ) -> XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo
 
+      attr_reader x_username: String?
+
+      def x_username=: (String) -> String
+
       def initialize: (
         monitors_allowed: Integer,
         monitors_used: Integer,
         plan: XTwitterScraper::Models::AccountRetrieveResponse::plan,
-        ?credit_info: XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo
+        ?credit_info: XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo,
+        ?x_username: String
       ) -> void
 
       def to_hash: -> {
         monitors_allowed: Integer,
         monitors_used: Integer,
         plan: XTwitterScraper::Models::AccountRetrieveResponse::plan,
-        credit_info: XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo
+        credit_info: XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo,
+        x_username: String
       }
 
       type plan = :active | :inactive

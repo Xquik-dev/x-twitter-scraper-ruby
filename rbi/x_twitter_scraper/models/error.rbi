@@ -85,6 +85,8 @@ module XTwitterScraper
           T.let(:tweet_not_found, XTwitterScraper::Error::Error::TaggedSymbol)
         UNAUTHENTICATED =
           T.let(:unauthenticated, XTwitterScraper::Error::Error::TaggedSymbol)
+        UNSUPPORTED_FIELD =
+          T.let(:unsupported_field, XTwitterScraper::Error::Error::TaggedSymbol)
         USER_NOT_FOUND =
           T.let(:user_not_found, XTwitterScraper::Error::Error::TaggedSymbol)
         WEBHOOK_INACTIVE =

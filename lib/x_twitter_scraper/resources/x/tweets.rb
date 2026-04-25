@@ -12,9 +12,12 @@ module XTwitterScraper
         # @return [XTwitterScraper::Resources::X::Tweets::Retweet]
         attr_reader :retweet
 
+        # Some parameter documentations has been truncated, see
+        # {XTwitterScraper::Models::X::TweetCreateParams} for more details.
+        #
         # Create tweet
         #
-        # @overload create(account:, attachment_url: nil, community_id: nil, is_note_tweet: nil, media: nil, media_ids: nil, reply_to_tweet_id: nil, text: nil, request_options: {})
+        # @overload create(account:, attachment_url: nil, community_id: nil, is_note_tweet: nil, media: nil, reply_to_tweet_id: nil, text: nil, request_options: {})
         #
         # @param account [String] X account (@username or account ID)
         #
@@ -24,9 +27,7 @@ module XTwitterScraper
         #
         # @param is_note_tweet [Boolean]
         #
-        # @param media [Array<String>] Array of media URLs to attach (mutually exclusive with media_ids)
-        #
-        # @param media_ids [Array<String>] Array of media IDs to attach (mutually exclusive with media)
+        # @param media [Array<String>] Array of public image URLs to attach (max 4). Each URL must be publicly reachabl
         #
         # @param reply_to_tweet_id [String]
         #
@@ -48,7 +49,7 @@ module XTwitterScraper
           )
         end
 
-        # Get tweet with full text, author, metrics and media
+        # Get tweet with full text, author, metrics & media
         #
         # @overload retrieve(id, request_options: {})
         #
@@ -254,7 +255,7 @@ module XTwitterScraper
           )
         end
 
-        # Search tweets with X query operators and pagination
+        # Search tweets with X query operators & pagination
         #
         # @overload search(q:, cursor: nil, limit: nil, query_type: nil, since_time: nil, until_time: nil, request_options: {})
         #
@@ -264,11 +265,11 @@ module XTwitterScraper
         #
         # @param limit [Integer] Max tweets to return (server paginates internally). Omit for single page (~20).
         #
-        # @param query_type [Symbol, XTwitterScraper::Models::X::TweetSearchParams::QueryType] Sort order — Latest (chronological) or Top (engagement-ranked)
+        # @param query_type [Symbol, XTwitterScraper::Models::X::TweetSearchParams::QueryType] Sort order - Latest (chronological) or Top (engagement-ranked)
         #
-        # @param since_time [String] ISO 8601 timestamp — only return tweets after this time
+        # @param since_time [String] ISO 8601 timestamp - only return tweets after this time
         #
-        # @param until_time [String] ISO 8601 timestamp — only return tweets before this time
+        # @param until_time [String] ISO 8601 timestamp - only return tweets before this time
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

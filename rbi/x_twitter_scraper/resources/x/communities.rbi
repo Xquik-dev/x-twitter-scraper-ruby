@@ -52,7 +52,7 @@ module XTwitterScraper
         )
         end
 
-        # Get community name, description and member count
+        # Get community name, description & member count
         sig do
           params(
             id: String,
@@ -71,6 +71,7 @@ module XTwitterScraper
           params(
             id: String,
             cursor: String,
+            page_size: Integer,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::PaginatedUsers)
         end
@@ -79,6 +80,8 @@ module XTwitterScraper
           id,
           # Pagination cursor
           cursor: nil,
+          # Items per page (20-200, default 20)
+          page_size: nil,
           request_options: {}
         )
         end

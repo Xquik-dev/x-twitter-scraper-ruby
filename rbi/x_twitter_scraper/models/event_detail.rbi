@@ -14,7 +14,7 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :id
 
-      # Event payload — shape varies by event type (JSON)
+      # Event payload - shape varies by event type (JSON)
       sig { returns(T::Hash[Symbol, T.anything]) }
       attr_accessor :data
 
@@ -51,7 +51,7 @@ module XTwitterScraper
       end
       def self.new(
         id:,
-        # Event payload — shape varies by event type (JSON)
+        # Event payload - shape varies by event type (JSON)
         data:,
         monitor_id:,
         occurred_at:,
