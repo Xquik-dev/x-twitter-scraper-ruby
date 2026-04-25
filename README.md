@@ -62,7 +62,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```ruby
 begin
-  tweet = x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
+  account = x_twitter_scraper.account.retrieve
 rescue XTwitterScraper::Errors::APIConnectionError => e
   puts("The server could not be reached")
   puts(e.cause)  # an underlying Exception, likely raised within `net/http`
@@ -105,7 +105,7 @@ x_twitter_scraper = XTwitterScraper::Client.new(
 )
 
 # Or, configure per-request:
-x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10, request_options: {max_retries: 5})
+x_twitter_scraper.account.retrieve(request_options: {max_retries: 5})
 ```
 
 ### Timeouts
@@ -119,7 +119,7 @@ x_twitter_scraper = XTwitterScraper::Client.new(
 )
 
 # Or, configure per-request:
-x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10, request_options: {timeout: 5})
+x_twitter_scraper.account.retrieve(request_options: {timeout: 5})
 ```
 
 On timeout, `XTwitterScraper::Errors::APITimeoutError` is raised.
@@ -149,10 +149,8 @@ You can send undocumented parameters to any endpoint, and read undocumented resp
 Note: the `extra_` parameters of the same name overrides the documented parameters.
 
 ```ruby
-paginated_tweets =
-  x_twitter_scraper.x.tweets.search(
-    q: "from:elonmusk",
-    limit: 10,
+account =
+  x_twitter_scraper.account.retrieve(
     request_options: {
       extra_query: {my_query_parameter: value},
       extra_body: {my_body_parameter: value},
@@ -160,7 +158,7 @@ paginated_tweets =
     }
   )
 
-puts(paginated_tweets[:my_undocumented_property])
+puts(account[:my_undocumented_property])
 ```
 
 #### Undocumented request params
