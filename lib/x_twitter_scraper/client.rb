@@ -134,6 +134,19 @@ module XTwitterScraper
     )
       base_url ||= "https://xquik.com/api/v1"
 
+      headers = {}
+      custom_headers_env = ENV["X_TWITTER_SCRAPER_CUSTOM_HEADERS"]
+      unless custom_headers_env.nil?
+        parsed = {}
+        custom_headers_env.split("\n").each do |line|
+          colon = line.index(":")
+          unless colon.nil?
+            parsed[line[0...colon].strip] = line[(colon + 1)..].strip
+          end
+        end
+        headers = parsed.merge(headers)
+      end
+
       @api_key = api_key&.to_s
       @bearer_token = bearer_token&.to_s
 
@@ -142,7 +155,8 @@ module XTwitterScraper
         timeout: timeout,
         max_retries: max_retries,
         initial_retry_delay: initial_retry_delay,
-        max_retry_delay: max_retry_delay
+        max_retry_delay: max_retry_delay,
+        headers: headers
       )
 
       @account = XTwitterScraper::Resources::Account.new(client: self)
