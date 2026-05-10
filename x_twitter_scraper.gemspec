@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.metadata["documentation_uri"] = "https://gemdocs.org/gems/x-twitter-scraper"
   s.metadata["funding_uri"] = "https://xquik.com"
   s.metadata["source_code_uri"] = "https://github.com/Xquik-dev/x-twitter-scraper-ruby"
-  s.metadata["rubygems_mfa_required"] = false.to_s
+  s.metadata["rubygems_mfa_required"] = true.to_s
   s.required_ruby_version = ">= 3.2.0"
 
   s.files = Dir[
