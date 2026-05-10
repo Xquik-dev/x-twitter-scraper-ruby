@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.summary = "Official Ruby SDK for Xquik tweet search, profile tweets, followers, webhooks, and X automation."
   s.authors = ["X Twitter Scraper"]
   s.email = "support@xquik.com"
-  s.license = "Apache-2.0"
+  s.licenses = ["Apache-2.0"]
   s.homepage = "https://docs.xquik.com/sdks/ruby"
   s.metadata["homepage_uri"] = s.homepage
   s.metadata["bug_tracker_uri"] = "https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues"
