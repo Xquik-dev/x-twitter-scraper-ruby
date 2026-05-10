@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.1 (2026-05-10)
+
+Full Changelog: [v0.4.0...v0.4.1](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.4.0...v0.4.1)
+
+### Bug Fixes
+
+* expose RubyGems license, issue tracker, changelog, and funding metadata
+
 ## 0.4.0 (2026-04-22)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.3.0...v0.4.0)
