@@ -5,13 +5,16 @@ require_relative "lib/x_twitter_scraper/version"
 Gem::Specification.new do |s|
   s.name = "x-twitter-scraper"
   s.version = XTwitterScraper::VERSION
-  s.summary = "Ruby library to access the X Twitter Scraper API"
+  s.summary = "Official Ruby SDK for Xquik tweet search, profile tweets, followers, webhooks, and X automation."
   s.authors = ["X Twitter Scraper"]
   s.email = "support@xquik.com"
   s.license = "Apache-2.0"
-  s.homepage = "https://docs.xquik.com"
+  s.homepage = "https://docs.xquik.com/sdks/ruby"
   s.metadata["homepage_uri"] = s.homepage
+  s.metadata["bug_tracker_uri"] = "https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues"
+  s.metadata["changelog_uri"] = "https://github.com/Xquik-dev/x-twitter-scraper-ruby/blob/main/CHANGELOG.md"
   s.metadata["documentation_uri"] = "https://gemdocs.org/gems/x-twitter-scraper"
+  s.metadata["funding_uri"] = "https://xquik.com"
   s.metadata["source_code_uri"] = "https://github.com/Xquik-dev/x-twitter-scraper-ruby"
   s.metadata["rubygems_mfa_required"] = false.to_s
   s.required_ruby_version = ">= 3.2.0"
