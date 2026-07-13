@@ -36,21 +36,15 @@ module XTwitterScraper
 
     attr_reader webhooks: XTwitterScraper::Resources::Webhooks
 
-    attr_reader integrations: XTwitterScraper::Resources::Integrations
-
     attr_reader x: XTwitterScraper::Resources::X
 
     attr_reader trends: XTwitterScraper::Resources::Trends
-
-    attr_reader bot: XTwitterScraper::Resources::Bot
 
     attr_reader support: XTwitterScraper::Resources::Support
 
     attr_reader credits: XTwitterScraper::Resources::Credits
 
-    private def auth_headers: (
-      security: { auth_api_key: bool, oauth_bearer: bool }
-    ) -> ::Hash[String, String]
+    private def auth_headers: -> ::Hash[String, String]
 
     private def auth_api_key: -> ::Hash[String, String]
 

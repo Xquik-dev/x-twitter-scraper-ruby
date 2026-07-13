@@ -8,21 +8,24 @@ module XTwitterScraper
       include XTwitterScraper::Internal::Type::RequestParameters
 
       # @!attribute count
-      #   Number of trending topics to return (1-50, default 30)
+      #   Number of trending topics returned (1-50, default 30)
       #
       #   @return [Integer, nil]
       optional :count, Integer
 
       # @!attribute woeid
-      #   Region WOEID (1=Worldwide, 23424977=US, 23424975=UK, 23424969=Turkey)
+      #   Region Yahoo WOEID code (1=Worldwide, 23424977=US, 23424975=UK, 23424969=Turkey)
       #
       #   @return [Integer, nil]
       optional :woeid, Integer
 
       # @!method initialize(count: nil, woeid: nil, request_options: {})
-      #   @param count [Integer] Number of trending topics to return (1-50, default 30)
+      #   Some parameter documentations has been truncated, see
+      #   {XTwitterScraper::Models::TrendListParams} for more details.
       #
-      #   @param woeid [Integer] Region WOEID (1=Worldwide, 23424977=US, 23424975=UK, 23424969=Turkey)
+      #   @param count [Integer] Number of trending topics returned (1-50, default 30)
+      #
+      #   @param woeid [Integer] Region Yahoo WOEID code (1=Worldwide, 23424977=US, 23424975=UK, 23424969=Turkey)
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
     end

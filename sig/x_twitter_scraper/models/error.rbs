@@ -19,17 +19,18 @@ module XTwitterScraper
         | :invalid_tweet_id
         | :invalid_tweet_url
         | :invalid_username
+        | :insufficient_credits
         | :missing_params
         | :missing_query
         | :monitor_already_exists
         | :monitor_limit_reached
+        | :no_credits
         | :no_subscription
         | :not_found
-        | :stream_registration_failed
         | :subscription_inactive
         | :tweet_not_found
         | :unauthenticated
-        | :usage_limit_reached
+        | :unsupported_field
         | :user_not_found
         | :webhook_inactive
         | :x_api_rate_limited
@@ -48,17 +49,18 @@ module XTwitterScraper
         INVALID_TWEET_ID: :invalid_tweet_id
         INVALID_TWEET_URL: :invalid_tweet_url
         INVALID_USERNAME: :invalid_username
+        INSUFFICIENT_CREDITS: :insufficient_credits
         MISSING_PARAMS: :missing_params
         MISSING_QUERY: :missing_query
         MONITOR_ALREADY_EXISTS: :monitor_already_exists
         MONITOR_LIMIT_REACHED: :monitor_limit_reached
+        NO_CREDITS: :no_credits
         NO_SUBSCRIPTION: :no_subscription
         NOT_FOUND: :not_found
-        STREAM_REGISTRATION_FAILED: :stream_registration_failed
         SUBSCRIPTION_INACTIVE: :subscription_inactive
         TWEET_NOT_FOUND: :tweet_not_found
         UNAUTHENTICATED: :unauthenticated
-        USAGE_LIMIT_REACHED: :usage_limit_reached
+        UNSUPPORTED_FIELD: :unsupported_field
         USER_NOT_FOUND: :user_not_found
         WEBHOOK_INACTIVE: :webhook_inactive
         X_API_RATE_LIMITED: :x_api_rate_limited

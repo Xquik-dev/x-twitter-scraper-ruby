@@ -17,7 +17,8 @@ class XTwitterScraper::Test::Resources::AccountTest < XTwitterScraper::Test::Res
         monitors_allowed: Integer,
         monitors_used: Integer,
         plan: XTwitterScraper::Models::AccountRetrieveResponse::Plan,
-        current_period: XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod | nil
+        credit_info: XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo | nil,
+        x_username: String | nil
       }
     end
   end

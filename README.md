@@ -1,14 +1,6 @@
-# X (Twitter) Scraper Ruby SDK: Tweet Search, Profile Tweets, Followers & Posting
+# Xquik API library
 
-> **Xquik is an independent third-party service.** Not affiliated with X Corp.
-> "Twitter" and "X" are trademarks of X Corp.
-
-[![Ask DeepWiki](https://deepwiki.com/badge.svg?url=https%3A%2F%2Fgithub.com%2FXquik-dev%2Fx-twitter-scraper-ruby)](https://deepwiki.com/Xquik-dev/x-twitter-scraper-ruby)
-[![Skills.sh x-twitter-scraper Skill](https://skills.sh/b/xquik-dev/x-twitter-scraper)](https://skills.sh/xquik-dev/x-twitter-scraper)
-
-The Xquik Ruby SDK is a Twitter API SDK and X API alternative for tweet search, advanced Twitter search queries, profile tweets, user lookup, follower export, media download, media upload, monitoring, webhooks, and posting automation.
-
-Use it from Ruby 3.2.0+ applications to get tweets from profiles, search tweets by keyword or operator query, send tweets, post replies, like, repost, follow, DM, run giveaway draws, and automate X workflows. It ships with comprehensive types and docstrings in Yard, RBS, and RBI. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
+The Xquik library provides convenient access to the X Twitter Scraper REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/stainless-sdks/x-twitter-scraper-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -22,13 +14,9 @@ The REST API documentation can be found on [xquik.com](https://xquik.com).
 
 To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
 
-<!-- x-release-please-start-version -->
-
 ```ruby
 gem "x-twitter-scraper", "~> 0.4.0"
 ```
-
-<!-- x-release-please-end -->
 
 ## Usage
 
@@ -74,7 +62,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```ruby
 begin
-  tweet = x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
+  account = x_twitter_scraper.account.retrieve
 rescue XTwitterScraper::Errors::APIConnectionError => e
   puts("The server could not be reached")
   puts(e.cause)  # an underlying Exception, likely raised within `net/http`
@@ -117,7 +105,7 @@ x_twitter_scraper = XTwitterScraper::Client.new(
 )
 
 # Or, configure per-request:
-x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10, request_options: {max_retries: 5})
+x_twitter_scraper.account.retrieve(request_options: {max_retries: 5})
 ```
 
 ### Timeouts
@@ -131,7 +119,7 @@ x_twitter_scraper = XTwitterScraper::Client.new(
 )
 
 # Or, configure per-request:
-x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10, request_options: {timeout: 5})
+x_twitter_scraper.account.retrieve(request_options: {timeout: 5})
 ```
 
 On timeout, `XTwitterScraper::Errors::APITimeoutError` is raised.
@@ -161,10 +149,8 @@ You can send undocumented parameters to any endpoint, and read undocumented resp
 Note: the `extra_` parameters of the same name overrides the documented parameters.
 
 ```ruby
-paginated_tweets =
-  x_twitter_scraper.x.tweets.search(
-    q: "from:elonmusk",
-    limit: 10,
+account =
+  x_twitter_scraper.account.retrieve(
     request_options: {
       extra_query: {my_query_parameter: value},
       extra_body: {my_body_parameter: value},
@@ -172,7 +158,7 @@ paginated_tweets =
     }
   )
 
-puts(paginated_tweets[:my_undocumented_property])
+puts(account[:my_undocumented_property])
 ```
 
 #### Undocumented request params
@@ -264,4 +250,4 @@ Ruby 3.2.0 or higher.
 
 ## Contributing
 
-See [the contributing documentation](https://github.com/Xquik-dev/x-twitter-scraper-ruby/tree/main/CONTRIBUTING.md).
+See [the contributing documentation](https://github.com/stainless-sdks/x-twitter-scraper-ruby/tree/main/CONTRIBUTING.md).

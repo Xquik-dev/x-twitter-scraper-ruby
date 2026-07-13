@@ -14,14 +14,14 @@ module XTwitterScraper
           )
         end
 
-      # Number of trending topics to return (1-50, default 30)
+      # Number of trending topics returned (1-50, default 30)
       sig { returns(T.nilable(Integer)) }
       attr_reader :count
 
       sig { params(count: Integer).void }
       attr_writer :count
 
-      # Region WOEID (1=Worldwide, 23424977=US, 23424975=UK, 23424969=Turkey)
+      # Region Yahoo WOEID code (1=Worldwide, 23424977=US, 23424975=UK, 23424969=Turkey)
       sig { returns(T.nilable(Integer)) }
       attr_reader :woeid
 
@@ -36,9 +36,9 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
-        # Number of trending topics to return (1-50, default 30)
+        # Number of trending topics returned (1-50, default 30)
         count: nil,
-        # Region WOEID (1=Worldwide, 23424977=US, 23424975=UK, 23424969=Turkey)
+        # Region Yahoo WOEID code (1=Worldwide, 23424977=US, 23424975=UK, 23424969=Turkey)
         woeid: nil,
         request_options: {}
       )

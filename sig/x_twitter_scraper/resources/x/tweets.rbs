@@ -8,12 +8,12 @@ module XTwitterScraper
 
         def create: (
           account: String,
-          text: String,
           ?attachment_url: String,
           ?community_id: String,
           ?is_note_tweet: bool,
-          ?media_ids: ::Array[String],
+          ?media: ::Array[String],
           ?reply_to_tweet_id: String,
+          ?text: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::TweetCreateResponse
 

@@ -31,7 +31,6 @@ module XTwitterScraper
             path: "x/accounts",
             body: parsed,
             model: XTwitterScraper::Models::X::AccountCreateResponse,
-            security: {auth_api_key: true},
             options: options
           )
         end
@@ -52,7 +51,6 @@ module XTwitterScraper
             method: :get,
             path: ["x/accounts/%1$s", id],
             model: XTwitterScraper::X::XAccountDetail,
-            security: {auth_api_key: true},
             options: params[:request_options]
           )
         end
@@ -71,7 +69,6 @@ module XTwitterScraper
             method: :get,
             path: "x/accounts",
             model: XTwitterScraper::Models::X::AccountListResponse,
-            security: {auth_api_key: true},
             options: params[:request_options]
           )
         end
@@ -92,7 +89,6 @@ module XTwitterScraper
             method: :delete,
             path: ["x/accounts/%1$s", id],
             model: XTwitterScraper::Models::X::AccountDeleteResponse,
-            security: {auth_api_key: true},
             options: params[:request_options]
           )
         end
@@ -112,18 +108,21 @@ module XTwitterScraper
             method: :post,
             path: "x/accounts/bulk-retry",
             model: XTwitterScraper::Models::X::AccountBulkRetryResponse,
-            security: {auth_api_key: true},
             options: params[:request_options]
           )
         end
 
         # Re-authenticate X account
         #
-        # @overload reauth(id, password:, totp_secret: nil, request_options: {})
+        # @overload reauth(id, password:, email: nil, proxy_country: nil, totp_secret: nil, request_options: {})
         #
         # @param id [String] Resource ID (stringified bigint)
         #
         # @param password [String] Updated account password
+        #
+        # @param email [String] Email for the X account (updates stored email)
+        #
+        # @param proxy_country [String] Two-letter country code for login proxy region
         #
         # @param totp_secret [String] TOTP secret for 2FA re-authentication
         #
@@ -139,7 +138,6 @@ module XTwitterScraper
             path: ["x/accounts/%1$s/reauth", id],
             body: parsed,
             model: XTwitterScraper::Models::X::AccountReauthResponse,
-            security: {auth_api_key: true},
             options: options
           )
         end

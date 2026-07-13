@@ -4,12 +4,12 @@ module XTwitterScraper
       type tweet_create_params =
         {
           account: String,
-          text: String,
           attachment_url: String,
           community_id: String,
           is_note_tweet: bool,
-          media_ids: ::Array[String],
-          reply_to_tweet_id: String
+          media: ::Array[String],
+          reply_to_tweet_id: String,
+          text: String
         }
         & XTwitterScraper::Internal::Type::request_parameters
 
@@ -18,8 +18,6 @@ module XTwitterScraper
         include XTwitterScraper::Internal::Type::RequestParameters
 
         attr_accessor account: String
-
-        attr_accessor text: String
 
         attr_reader attachment_url: String?
 
@@ -33,33 +31,37 @@ module XTwitterScraper
 
         def is_note_tweet=: (bool) -> bool
 
-        attr_reader media_ids: ::Array[String]?
+        attr_reader media: ::Array[String]?
 
-        def media_ids=: (::Array[String]) -> ::Array[String]
+        def media=: (::Array[String]) -> ::Array[String]
 
         attr_reader reply_to_tweet_id: String?
 
         def reply_to_tweet_id=: (String) -> String
 
+        attr_reader text: String?
+
+        def text=: (String) -> String
+
         def initialize: (
           account: String,
-          text: String,
           ?attachment_url: String,
           ?community_id: String,
           ?is_note_tweet: bool,
-          ?media_ids: ::Array[String],
+          ?media: ::Array[String],
           ?reply_to_tweet_id: String,
+          ?text: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
         def to_hash: -> {
           account: String,
-          text: String,
           attachment_url: String,
           community_id: String,
           is_note_tweet: bool,
-          media_ids: ::Array[String],
+          media: ::Array[String],
           reply_to_tweet_id: String,
+          text: String,
           request_options: XTwitterScraper::RequestOptions
         }
       end

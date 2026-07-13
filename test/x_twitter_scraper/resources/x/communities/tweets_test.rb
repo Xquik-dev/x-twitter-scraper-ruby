@@ -16,7 +16,7 @@ class XTwitterScraper::Test::Resources::X::Communities::TweetsTest < XTwitterScr
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet])
       }
     end
   end
@@ -34,7 +34,7 @@ class XTwitterScraper::Test::Resources::X::Communities::TweetsTest < XTwitterScr
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet])
       }
     end
   end

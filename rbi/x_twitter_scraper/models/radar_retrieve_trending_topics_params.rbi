@@ -14,26 +14,44 @@ module XTwitterScraper
           )
         end
 
-      # Filter by category (general, tech, dev, etc.)
+      # Cursor for pagination (from prior response nextCursor).
       sig { returns(T.nilable(String)) }
+      attr_reader :after
+
+      sig { params(after: String).void }
+      attr_writer :after
+
+      # Filter by category.
+      sig do
+        returns(
+          T.nilable(
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Category::OrSymbol
+          )
+        )
+      end
       attr_reader :category
 
-      sig { params(category: String).void }
+      sig do
+        params(
+          category:
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Category::OrSymbol
+        ).void
+      end
       attr_writer :category
 
-      # Number of items to return
-      sig { returns(T.nilable(Integer)) }
-      attr_reader :count
-
-      sig { params(count: Integer).void }
-      attr_writer :count
-
-      # Lookback window in hours
+      # Lookback window in hours (1-168, default 24).
       sig { returns(T.nilable(Integer)) }
       attr_reader :hours
 
       sig { params(hours: Integer).void }
       attr_writer :hours
+
+      # Number of items to return (1-100, default 50).
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :limit
+
+      sig { params(limit: Integer).void }
+      attr_writer :limit
 
       # Region filter (us, global, etc.)
       sig { returns(T.nilable(String)) }
@@ -63,9 +81,11 @@ module XTwitterScraper
 
       sig do
         params(
-          category: String,
-          count: Integer,
+          after: String,
+          category:
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Category::OrSymbol,
           hours: Integer,
+          limit: Integer,
           region: String,
           source:
             XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source::OrSymbol,
@@ -73,12 +93,14 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
-        # Filter by category (general, tech, dev, etc.)
+        # Cursor for pagination (from prior response nextCursor).
+        after: nil,
+        # Filter by category.
         category: nil,
-        # Number of items to return
-        count: nil,
-        # Lookback window in hours
+        # Lookback window in hours (1-168, default 24).
         hours: nil,
+        # Number of items to return (1-100, default 50).
+        limit: nil,
         # Region filter (us, global, etc.)
         region: nil,
         # Source filter. One of: github, google_trends, hacker_news, polymarket, reddit,
@@ -91,9 +113,11 @@ module XTwitterScraper
       sig do
         override.returns(
           {
-            category: String,
-            count: Integer,
+            after: String,
+            category:
+              XTwitterScraper::RadarRetrieveTrendingTopicsParams::Category::OrSymbol,
             hours: Integer,
+            limit: Integer,
             region: String,
             source:
               XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source::OrSymbol,
@@ -102,6 +126,71 @@ module XTwitterScraper
         )
       end
       def to_hash
+      end
+
+      # Filter by category.
+      module Category
+        extend XTwitterScraper::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(
+              Symbol,
+              XTwitterScraper::RadarRetrieveTrendingTopicsParams::Category
+            )
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        GENERAL =
+          T.let(
+            :general,
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Category::TaggedSymbol
+          )
+        TECH =
+          T.let(
+            :tech,
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Category::TaggedSymbol
+          )
+        DEV =
+          T.let(
+            :dev,
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Category::TaggedSymbol
+          )
+        SCIENCE =
+          T.let(
+            :science,
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Category::TaggedSymbol
+          )
+        CULTURE =
+          T.let(
+            :culture,
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Category::TaggedSymbol
+          )
+        POLITICS =
+          T.let(
+            :politics,
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Category::TaggedSymbol
+          )
+        BUSINESS =
+          T.let(
+            :business,
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Category::TaggedSymbol
+          )
+        ENTERTAINMENT =
+          T.let(
+            :entertainment,
+            XTwitterScraper::RadarRetrieveTrendingTopicsParams::Category::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              XTwitterScraper::RadarRetrieveTrendingTopicsParams::Category::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
       end
 
       # Source filter. One of: github, google_trends, hacker_news, polymarket, reddit,

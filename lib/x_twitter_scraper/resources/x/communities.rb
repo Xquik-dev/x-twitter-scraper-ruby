@@ -8,7 +8,7 @@ module XTwitterScraper
         # @return [XTwitterScraper::Resources::X::Communities::Join]
         attr_reader :join
 
-        # X data lookups (subscription required)
+        # X Community info, members, and tweets
         # @return [XTwitterScraper::Resources::X::Communities::Tweets]
         attr_reader :tweets
 
@@ -64,7 +64,7 @@ module XTwitterScraper
           )
         end
 
-        # Get community details
+        # Get community name, description & member count
         #
         # @overload retrieve_info(id, request_options: {})
         #
@@ -84,13 +84,15 @@ module XTwitterScraper
           )
         end
 
-        # Get community members
+        # List members of a community
         #
-        # @overload retrieve_members(id, cursor: nil, request_options: {})
+        # @overload retrieve_members(id, cursor: nil, page_size: nil, request_options: {})
         #
         # @param id [String] Community ID for member lookup
         #
         # @param cursor [String] Pagination cursor
+        #
+        # @param page_size [Integer] Items per page (20-200, default 20)
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -103,13 +105,13 @@ module XTwitterScraper
           @client.request(
             method: :get,
             path: ["x/communities/%1$s/members", id],
-            query: query,
+            query: query.transform_keys(page_size: "pageSize"),
             model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end
 
-        # Get community moderators
+        # List moderators of a community
         #
         # @overload retrieve_moderators(id, cursor: nil, request_options: {})
         #
@@ -134,7 +136,7 @@ module XTwitterScraper
           )
         end
 
-        # Search tweets across communities
+        # Search for communities by keyword
         #
         # @overload retrieve_search(q:, cursor: nil, query_type: nil, request_options: {})
         #

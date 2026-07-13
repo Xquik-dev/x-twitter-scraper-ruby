@@ -3,9 +3,9 @@
 module XTwitterScraper
   module Resources
     class X
-      # Media upload & download
+      # Media upload and download
       class Media
-        # Download tweet media
+        # Download images & videos from tweets
         #
         # @overload download(tweet_ids: nil, tweet_input: nil, request_options: {})
         #

@@ -32,6 +32,8 @@ module XTwitterScraper
         def reauth: (
           String id,
           password: String,
+          ?email: String,
+          ?proxy_country: String,
           ?totp_secret: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::AccountReauthResponse

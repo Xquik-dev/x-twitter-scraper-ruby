@@ -3,7 +3,7 @@
 module XTwitterScraper
   module Resources
     class X
-      # X data lookups (subscription required)
+      # Look up, search, and analyze individual tweets
       class Bookmarks
         # Get bookmarked tweets
         sig do

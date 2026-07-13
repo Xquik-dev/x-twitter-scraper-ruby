@@ -21,7 +21,6 @@ module XTwitterScraper
           path: "api-keys",
           body: parsed,
           model: XTwitterScraper::Models::APIKeyCreateResponse,
-          security: {auth_api_key: true},
           options: options
         )
       end
@@ -40,7 +39,6 @@ module XTwitterScraper
           method: :get,
           path: "api-keys",
           model: XTwitterScraper::Models::APIKeyListResponse,
-          security: {auth_api_key: true},
           options: params[:request_options]
         )
       end
@@ -61,7 +59,6 @@ module XTwitterScraper
           method: :delete,
           path: ["api-keys/%1$s", id],
           model: XTwitterScraper::Models::APIKeyRevokeResponse,
-          security: {auth_api_key: true},
           options: params[:request_options]
         )
       end

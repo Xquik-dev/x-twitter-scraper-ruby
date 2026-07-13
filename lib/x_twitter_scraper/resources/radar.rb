@@ -2,20 +2,22 @@
 
 module XTwitterScraper
   module Resources
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     class Radar
       # Some parameter documentations has been truncated, see
       # {XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams} for more details.
       #
       # Get trending topics from curated sources
       #
-      # @overload retrieve_trending_topics(category: nil, count: nil, hours: nil, region: nil, source: nil, request_options: {})
+      # @overload retrieve_trending_topics(after: nil, category: nil, hours: nil, limit: nil, region: nil, source: nil, request_options: {})
       #
-      # @param category [String] Filter by category (general, tech, dev, etc.)
+      # @param after [String] Cursor for pagination (from prior response nextCursor).
       #
-      # @param count [Integer] Number of items to return
+      # @param category [Symbol, XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::Category] Filter by category.
       #
-      # @param hours [Integer] Lookback window in hours
+      # @param hours [Integer] Lookback window in hours (1-168, default 24).
+      #
+      # @param limit [Integer] Number of items to return (1-100, default 50).
       #
       # @param region [String] Region filter (us, global, etc.)
       #

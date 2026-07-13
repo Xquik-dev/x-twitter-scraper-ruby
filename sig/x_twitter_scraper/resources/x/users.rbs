@@ -7,7 +7,7 @@ module XTwitterScraper
         def retrieve: (
           String id,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::X::UserProfile
+        ) -> XTwitterScraper::UserProfile
 
         def retrieve_batch: (
           ids: String,

@@ -67,7 +67,7 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile])
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile])
       }
     end
   end
@@ -85,7 +85,7 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile])
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile])
       }
     end
   end
@@ -103,7 +103,7 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet])
       }
     end
   end

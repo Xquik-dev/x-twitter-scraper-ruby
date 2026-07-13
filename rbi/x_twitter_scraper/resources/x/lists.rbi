@@ -3,9 +3,9 @@
 module XTwitterScraper
   module Resources
     class X
-      # X data lookups (subscription required)
+      # X List followers, members, and tweets
       class Lists
-        # Get list followers
+        # List followers of an X List
         sig do
           params(
             id: String,
@@ -22,11 +22,12 @@ module XTwitterScraper
         )
         end
 
-        # Get list members
+        # List members of an X List
         sig do
           params(
             id: String,
             cursor: String,
+            page_size: Integer,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::PaginatedUsers)
         end
@@ -35,11 +36,13 @@ module XTwitterScraper
           id,
           # Pagination cursor for list members
           cursor: nil,
+          # Members per page (20-200, default 20)
+          page_size: nil,
           request_options: {}
         )
         end
 
-        # Get list tweets
+        # List tweets from an X List
         sig do
           params(
             id: String,

@@ -4,9 +4,9 @@ module XTwitterScraper
   module Resources
     class X
       class Communities
-        # X data lookups (subscription required)
+        # X Community info, members, and tweets
         class Tweets
-          # Search tweets across all communities
+          # List tweets across all communities
           #
           # @overload list(q:, cursor: nil, query_type: nil, request_options: {})
           #
@@ -33,7 +33,7 @@ module XTwitterScraper
             )
           end
 
-          # Get community tweets
+          # List tweets posted in a community
           #
           # @overload list_by_community(id, cursor: nil, request_options: {})
           #

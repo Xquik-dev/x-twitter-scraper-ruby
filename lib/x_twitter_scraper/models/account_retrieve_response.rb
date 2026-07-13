@@ -19,18 +19,29 @@ module XTwitterScraper
       #   @return [Symbol, XTwitterScraper::Models::AccountRetrieveResponse::Plan]
       required :plan, enum: -> { XTwitterScraper::Models::AccountRetrieveResponse::Plan }
 
-      # @!attribute current_period
+      # @!attribute credit_info
       #
-      #   @return [XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod, nil]
-      optional :current_period,
-               -> { XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod },
-               api_name: :currentPeriod
+      #   @return [XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo, nil]
+      optional :credit_info,
+               -> { XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo },
+               api_name: :creditInfo
 
-      # @!method initialize(monitors_allowed:, monitors_used:, plan:, current_period: nil)
+      # @!attribute x_username
+      #   Linked X username, omitted when no X account is connected.
+      #
+      #   @return [String, nil]
+      optional :x_username, String, api_name: :xUsername
+
+      # @!method initialize(monitors_allowed:, monitors_used:, plan:, credit_info: nil, x_username: nil)
       #   @param monitors_allowed [Integer]
+      #
       #   @param monitors_used [Integer]
+      #
       #   @param plan [Symbol, XTwitterScraper::Models::AccountRetrieveResponse::Plan]
-      #   @param current_period [XTwitterScraper::Models::AccountRetrieveResponse::CurrentPeriod]
+      #
+      #   @param credit_info [XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo]
+      #
+      #   @param x_username [String] Linked X username, omitted when no X account is connected.
 
       # @see XTwitterScraper::Models::AccountRetrieveResponse#plan
       module Plan
@@ -43,27 +54,33 @@ module XTwitterScraper
         #   @return [Array<Symbol>]
       end
 
-      # @see XTwitterScraper::Models::AccountRetrieveResponse#current_period
-      class CurrentPeriod < XTwitterScraper::Internal::Type::BaseModel
-        # @!attribute end_
+      # @see XTwitterScraper::Models::AccountRetrieveResponse#credit_info
+      class CreditInfo < XTwitterScraper::Internal::Type::BaseModel
+        # @!attribute auto_topup_enabled
         #
-        #   @return [Time]
-        required :end_, Time, api_name: :end
+        #   @return [Boolean]
+        required :auto_topup_enabled, XTwitterScraper::Internal::Type::Boolean, api_name: :autoTopupEnabled
 
-        # @!attribute start
+        # @!attribute balance
         #
-        #   @return [Time]
-        required :start, Time
+        #   @return [Integer]
+        required :balance, Integer
 
-        # @!attribute usage_percent
+        # @!attribute lifetime_purchased
         #
-        #   @return [Float]
-        required :usage_percent, Float, api_name: :usagePercent
+        #   @return [Integer]
+        required :lifetime_purchased, Integer, api_name: :lifetimePurchased
 
-        # @!method initialize(end_:, start:, usage_percent:)
-        #   @param end_ [Time]
-        #   @param start [Time]
-        #   @param usage_percent [Float]
+        # @!attribute lifetime_used
+        #
+        #   @return [Integer]
+        required :lifetime_used, Integer, api_name: :lifetimeUsed
+
+        # @!method initialize(auto_topup_enabled:, balance:, lifetime_purchased:, lifetime_used:)
+        #   @param auto_topup_enabled [Boolean]
+        #   @param balance [Integer]
+        #   @param lifetime_purchased [Integer]
+        #   @param lifetime_used [Integer]
       end
     end
   end

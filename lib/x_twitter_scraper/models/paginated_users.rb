@@ -15,15 +15,15 @@ module XTwitterScraper
 
       # @!attribute users
       #
-      #   @return [Array<XTwitterScraper::Models::X::UserProfile>]
-      required :users, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile] }
+      #   @return [Array<XTwitterScraper::Models::UserProfile>]
+      required :users, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile] }
 
       # @!method initialize(has_next_page:, next_cursor:, users:)
       #   Paginated list of user profiles with cursor-based navigation.
       #
       #   @param has_next_page [Boolean]
       #   @param next_cursor [String]
-      #   @param users [Array<XTwitterScraper::Models::X::UserProfile>]
+      #   @param users [Array<XTwitterScraper::Models::UserProfile>]
     end
   end
 end

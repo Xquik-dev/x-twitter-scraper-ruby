@@ -16,29 +16,32 @@ module XTwitterScraper
         sig do
           params(
             account: String,
-            text: String,
             attachment_url: String,
             community_id: String,
             is_note_tweet: T::Boolean,
-            media_ids: T::Array[String],
+            media: T::Array[String],
             reply_to_tweet_id: String,
+            text: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::TweetCreateResponse)
         end
         def create(
           # X account (@username or account ID)
           account:,
-          text:,
           attachment_url: nil,
           community_id: nil,
           is_note_tweet: nil,
-          media_ids: nil,
+          # Array of public image URLs to attach (max 4). Each URL must be publicly
+          # reachable - the browser composer fetches them directly.
+          media: nil,
           reply_to_tweet_id: nil,
+          # Tweet text (optional when media is provided)
+          text: nil,
           request_options: {}
         )
         end
 
-        # Look up tweet
+        # Get tweet with full text, author, metrics & media
         sig do
           params(
             id: String,
@@ -83,7 +86,7 @@ module XTwitterScraper
         )
         end
 
-        # Get users who liked a tweet
+        # List users who liked a tweet
         sig do
           params(
             id: String,
@@ -100,7 +103,7 @@ module XTwitterScraper
         )
         end
 
-        # Get quote tweets of a tweet
+        # List quote tweets of a tweet
         sig do
           params(
             id: String,
@@ -126,7 +129,7 @@ module XTwitterScraper
         )
         end
 
-        # Get replies to a tweet
+        # List replies to a tweet
         sig do
           params(
             id: String,
@@ -149,7 +152,7 @@ module XTwitterScraper
         )
         end
 
-        # Get users who retweeted a tweet
+        # List users who retweeted a tweet
         sig do
           params(
             id: String,
@@ -166,7 +169,7 @@ module XTwitterScraper
         )
         end
 
-        # Get thread context for a tweet
+        # Get full conversation thread for a tweet
         sig do
           params(
             id: String,
@@ -183,7 +186,7 @@ module XTwitterScraper
         )
         end
 
-        # Search tweets
+        # Search tweets with X query operators & pagination
         sig do
           params(
             q: String,
@@ -203,11 +206,11 @@ module XTwitterScraper
           cursor: nil,
           # Max tweets to return (server paginates internally). Omit for single page (~20).
           limit: nil,
-          # Sort order — Latest (chronological) or Top (engagement-ranked)
+          # Sort order - Latest (chronological) or Top (engagement-ranked)
           query_type: nil,
-          # ISO 8601 timestamp — only return tweets after this time
+          # ISO 8601 timestamp - only return tweets after this time
           since_time: nil,
-          # ISO 8601 timestamp — only return tweets before this time
+          # ISO 8601 timestamp - only return tweets before this time
           until_time: nil,
           request_options: {}
         )
