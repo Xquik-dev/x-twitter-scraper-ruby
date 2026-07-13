@@ -1,6 +1,6 @@
 # Xquik API library
 
-The Xquik library provides convenient access to the X Twitter Scraper REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/stainless-sdks/x-twitter-scraper-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
+The Xquik library provides convenient access to the X Twitter Scraper REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/Xquik-dev/x-twitter-scraper-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -14,9 +14,13 @@ The REST API documentation can be found on [xquik.com](https://xquik.com).
 
 To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
 
+<!-- x-release-please-start-version -->
+
 ```ruby
 gem "x-twitter-scraper", "~> 0.4.0"
 ```
+
+<!-- x-release-please-end -->
 
 ## Usage
 
@@ -32,29 +36,6 @@ paginated_tweets = x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 
 
 puts(paginated_tweets.has_next_page)
 ```
-
-### File uploads
-
-Request parameters that correspond to file uploads can be passed as raw contents, a [`Pathname`](https://rubyapi.org/3.2/o/pathname) instance, [`StringIO`](https://rubyapi.org/3.2/o/stringio), or more.
-
-```ruby
-require "pathname"
-
-# Use `Pathname` to send the filename and/or avoid paging a large file into memory:
-response = x_twitter_scraper.x.media.upload(file: Pathname("/path/to/file"))
-
-# Alternatively, pass file contents or a `StringIO` directly:
-response = x_twitter_scraper.x.media.upload(file: File.read("/path/to/file"))
-
-# Or, to control the filename and/or content type:
-file =
-  XTwitterScraper::FilePart.new(File.read("/path/to/file"), filename: "/path/to/file", content_type: "…")
-response = x_twitter_scraper.x.media.upload(file: file)
-
-puts(response.mediaId)
-```
-
-Note that you can also pass a raw `IO` descriptor, but this disables retries, as the library can't be sure if the descriptor is a file or pipe (which cannot be rewound).
 
 ### Handling errors
 
@@ -250,4 +231,4 @@ Ruby 3.2.0 or higher.
 
 ## Contributing
 
-See [the contributing documentation](https://github.com/stainless-sdks/x-twitter-scraper-ruby/tree/main/CONTRIBUTING.md).
+See [the contributing documentation](https://github.com/Xquik-dev/x-twitter-scraper-ruby/tree/main/CONTRIBUTING.md).

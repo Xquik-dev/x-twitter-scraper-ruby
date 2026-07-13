@@ -2,7 +2,13 @@ module XTwitterScraper
   module Models
     module X
       type user_retrieve_followers_params =
-        { id: String, cursor: String, page_size: Integer }
+        {
+          id: String,
+          after: String,
+          cursor: String,
+          limit: Integer,
+          page_size: Integer
+        }
         & XTwitterScraper::Internal::Type::request_parameters
 
       class UserRetrieveFollowersParams < XTwitterScraper::Internal::Type::BaseModel
@@ -11,9 +17,17 @@ module XTwitterScraper
 
         attr_accessor id: String
 
+        attr_reader after: String?
+
+        def after=: (String) -> String
+
         attr_reader cursor: String?
 
         def cursor=: (String) -> String
+
+        attr_reader limit: Integer?
+
+        def limit=: (Integer) -> Integer
 
         attr_reader page_size: Integer?
 
@@ -21,14 +35,18 @@ module XTwitterScraper
 
         def initialize: (
           id: String,
+          ?after: String,
           ?cursor: String,
+          ?limit: Integer,
           ?page_size: Integer,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
         def to_hash: -> {
           id: String,
+          after: String,
           cursor: String,
+          limit: Integer,
           page_size: Integer,
           request_options: XTwitterScraper::RequestOptions
         }

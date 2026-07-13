@@ -30,8 +30,9 @@ module XTwitterScraper
         optional :is_note_tweet, XTwitterScraper::Internal::Type::Boolean
 
         # @!attribute media
-        #   Array of public image URLs to attach (max 4). Each URL must be publicly
-        #   reachable - the browser composer fetches them directly.
+        #   Array of public media URLs to attach. Supports up to 4 images or exactly 1 MP4
+        #   video up to 100 MB. Each URL must be publicly reachable. Attached media adds 2
+        #   credits per started MB across all files.
         #
         #   @return [Array<String>, nil]
         optional :media, XTwitterScraper::Internal::Type::ArrayOf[String]
@@ -59,7 +60,7 @@ module XTwitterScraper
         #
         #   @param is_note_tweet [Boolean]
         #
-        #   @param media [Array<String>] Array of public image URLs to attach (max 4). Each URL must be publicly reachabl
+        #   @param media [Array<String>] Array of public media URLs to attach. Supports up to 4 images or exactly 1 MP4 v
         #
         #   @param reply_to_tweet_id [String]
         #

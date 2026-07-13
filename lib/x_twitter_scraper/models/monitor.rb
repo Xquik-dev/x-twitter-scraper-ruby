@@ -27,6 +27,12 @@ module XTwitterScraper
       #   @return [Boolean]
       required :is_active, XTwitterScraper::Internal::Type::Boolean, api_name: :isActive
 
+      # @!attribute next_billing_at
+      #   Next hourly credit charge time for this account monitor.
+      #
+      #   @return [Time]
+      required :next_billing_at, Time, api_name: :nextBillingAt
+
       # @!attribute username
       #
       #   @return [String]
@@ -37,7 +43,7 @@ module XTwitterScraper
       #   @return [String]
       required :x_user_id, String, api_name: :xUserId
 
-      # @!method initialize(id:, created_at:, event_types:, is_active:, username:, x_user_id:)
+      # @!method initialize(id:, created_at:, event_types:, is_active:, next_billing_at:, username:, x_user_id:)
       #   Account monitor that tracks activity for a given X user.
       #
       #   @param id [String]
@@ -47,6 +53,8 @@ module XTwitterScraper
       #   @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
       #
       #   @param is_active [Boolean]
+      #
+      #   @param next_billing_at [Time] Next hourly credit charge time for this account monitor.
       #
       #   @param username [String]
       #

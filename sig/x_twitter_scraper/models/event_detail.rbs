@@ -5,8 +5,11 @@ module XTwitterScraper
         id: String,
         data: ::Hash[Symbol, top],
         monitor_id: String,
+        monitor_type: XTwitterScraper::Models::EventDetail::monitor_type,
         occurred_at: Time,
         type: XTwitterScraper::Models::event_type,
+        keyword_monitor_id: String,
+        query: String,
         username: String,
         x_event_id: String
       }
@@ -18,11 +21,23 @@ module XTwitterScraper
 
       attr_accessor monitor_id: String
 
+      attr_accessor monitor_type: XTwitterScraper::Models::EventDetail::monitor_type
+
       attr_accessor occurred_at: Time
 
       attr_accessor type: XTwitterScraper::Models::event_type
 
-      attr_accessor username: String
+      attr_reader keyword_monitor_id: String?
+
+      def keyword_monitor_id=: (String) -> String
+
+      attr_reader query: String?
+
+      def query=: (String) -> String
+
+      attr_reader username: String?
+
+      def username=: (String) -> String
 
       attr_reader x_event_id: String?
 
@@ -32,9 +47,12 @@ module XTwitterScraper
         id: String,
         data: ::Hash[Symbol, top],
         monitor_id: String,
+        monitor_type: XTwitterScraper::Models::EventDetail::monitor_type,
         occurred_at: Time,
         type: XTwitterScraper::Models::event_type,
-        username: String,
+        ?keyword_monitor_id: String,
+        ?query: String,
+        ?username: String,
         ?x_event_id: String
       ) -> void
 
@@ -42,11 +60,25 @@ module XTwitterScraper
         id: String,
         data: ::Hash[Symbol, top],
         monitor_id: String,
+        monitor_type: XTwitterScraper::Models::EventDetail::monitor_type,
         occurred_at: Time,
         type: XTwitterScraper::Models::event_type,
+        keyword_monitor_id: String,
+        query: String,
         username: String,
         x_event_id: String
       }
+
+      type monitor_type = :account | :keyword
+
+      module MonitorType
+        extend XTwitterScraper::Internal::Type::Enum
+
+        ACCOUNT: :account
+        KEYWORD: :keyword
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::EventDetail::monitor_type]
+      end
     end
   end
 end

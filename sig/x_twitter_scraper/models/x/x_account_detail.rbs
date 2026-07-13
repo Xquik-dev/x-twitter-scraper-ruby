@@ -12,7 +12,6 @@ module XTwitterScraper
           x_user_id: String,
           x_username: String,
           cookies_obtained_at: Time,
-          proxy_country: String,
           updated_at: Time
         }
 
@@ -33,10 +32,6 @@ module XTwitterScraper
 
         def cookies_obtained_at=: (Time) -> Time
 
-        attr_reader proxy_country: String?
-
-        def proxy_country=: (String) -> String
-
         attr_reader updated_at: Time?
 
         def updated_at=: (Time) -> Time
@@ -49,7 +44,6 @@ module XTwitterScraper
           x_user_id: String,
           x_username: String,
           ?cookies_obtained_at: Time,
-          ?proxy_country: String,
           ?updated_at: Time
         ) -> void
 
@@ -61,7 +55,6 @@ module XTwitterScraper
           x_user_id: String,
           x_username: String,
           cookies_obtained_at: Time,
-          proxy_country: String,
           updated_at: Time
         }
 

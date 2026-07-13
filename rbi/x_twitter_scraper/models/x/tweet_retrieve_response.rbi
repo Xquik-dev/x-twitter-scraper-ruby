@@ -12,14 +12,16 @@ module XTwitterScraper
             )
           end
 
-        # Full tweet with text, engagement metrics, media, and metadata.
+        # Full tweet with text, engagement metrics, media, and metadata. A zero metric can
+        # mean X did not report the count.
         sig { returns(XTwitterScraper::X::TweetDetail) }
         attr_reader :tweet
 
         sig { params(tweet: XTwitterScraper::X::TweetDetail::OrHash).void }
         attr_writer :tweet
 
-        # Author of a tweet with follower count and verification status.
+        # Tweet author profile. The lookup route always includes follower count and
+        # verification state. Other profile fields appear when available.
         sig { returns(T.nilable(XTwitterScraper::X::TweetAuthor)) }
         attr_reader :author
 
@@ -33,9 +35,11 @@ module XTwitterScraper
           ).returns(T.attached_class)
         end
         def self.new(
-          # Full tweet with text, engagement metrics, media, and metadata.
+          # Full tweet with text, engagement metrics, media, and metadata. A zero metric can
+          # mean X did not report the count.
           tweet:,
-          # Author of a tweet with follower count and verification status.
+          # Tweet author profile. The lookup route always includes follower count and
+          # verification state. Other profile fields appear when available.
           author: nil
         )
         end

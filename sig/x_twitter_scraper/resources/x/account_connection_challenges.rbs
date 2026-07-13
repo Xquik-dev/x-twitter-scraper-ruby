@@ -1,0 +1,15 @@
+module XTwitterScraper
+  module Resources
+    class X
+      class AccountConnectionChallenges
+        def submit: (
+          String id,
+          email_code: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

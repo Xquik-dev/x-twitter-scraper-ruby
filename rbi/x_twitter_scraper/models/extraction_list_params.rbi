@@ -14,14 +14,17 @@ module XTwitterScraper
           )
         end
 
-      # Cursor for keyset pagination
+      # Cursor for keyset pagination from prior response next_cursor
       sig { returns(T.nilable(String)) }
-      attr_reader :after
+      attr_reader :cursor
 
-      sig { params(after: String).void }
-      attr_writer :after
+      sig { params(cursor: String).void }
+      attr_writer :cursor
 
-      # Maximum number of items to return (1-100, default 50)
+      # Maximum number of items to return (1-100, default 50). For paid per-result
+      # endpoints, the returned count may be lower when remaining credits cannot cover
+      # the requested page. If zero paid results are affordable, the endpoint returns
+      # 402 insufficient_credits.
       sig { returns(T.nilable(Integer)) }
       attr_reader :limit
 
@@ -60,7 +63,7 @@ module XTwitterScraper
 
       sig do
         params(
-          after: String,
+          cursor: String,
           limit: Integer,
           status: XTwitterScraper::ExtractionListParams::Status::OrSymbol,
           tool_type: XTwitterScraper::ExtractionListParams::ToolType::OrSymbol,
@@ -68,9 +71,12 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
-        # Cursor for keyset pagination
-        after: nil,
-        # Maximum number of items to return (1-100, default 50)
+        # Cursor for keyset pagination from prior response next_cursor
+        cursor: nil,
+        # Maximum number of items to return (1-100, default 50). For paid per-result
+        # endpoints, the returned count may be lower when remaining credits cannot cover
+        # the requested page. If zero paid results are affordable, the endpoint returns
+        # 402 insufficient_credits.
         limit: nil,
         # Filter by job status
         status: nil,
@@ -83,7 +89,7 @@ module XTwitterScraper
       sig do
         override.returns(
           {
-            after: String,
+            cursor: String,
             limit: Integer,
             status: XTwitterScraper::ExtractionListParams::Status::OrSymbol,
             tool_type:
@@ -167,6 +173,11 @@ module XTwitterScraper
             :community_search,
             XTwitterScraper::ExtractionListParams::ToolType::TaggedSymbol
           )
+        FAVORITERS =
+          T.let(
+            :favoriters,
+            XTwitterScraper::ExtractionListParams::ToolType::TaggedSymbol
+          )
         FOLLOWER_EXPLORER =
           T.let(
             :follower_explorer,
@@ -235,6 +246,16 @@ module XTwitterScraper
         TWEET_SEARCH_EXTRACTOR =
           T.let(
             :tweet_search_extractor,
+            XTwitterScraper::ExtractionListParams::ToolType::TaggedSymbol
+          )
+        USER_LIKES =
+          T.let(
+            :user_likes,
+            XTwitterScraper::ExtractionListParams::ToolType::TaggedSymbol
+          )
+        USER_MEDIA =
+          T.let(
+            :user_media,
             XTwitterScraper::ExtractionListParams::ToolType::TaggedSymbol
           )
         VERIFIED_FOLLOWER_EXPLORER =

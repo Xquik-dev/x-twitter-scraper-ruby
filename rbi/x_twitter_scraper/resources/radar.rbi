@@ -23,11 +23,11 @@ module XTwitterScraper
         after: nil,
         # Filter by category.
         category: nil,
-        # Lookback window in hours (1-168, default 24).
+        # Lookback window in hours (1-72, default 6).
         hours: nil,
         # Number of items to return (1-100, default 50).
         limit: nil,
-        # Region filter (us, global, etc.)
+        # Region filter. Use `global` or a region code such as `US`, `GB`, `TR`, or `ES`.
         region: nil,
         # Source filter. One of: github, google_trends, hacker_news, polymarket, reddit,
         # trustmrr, wikipedia

@@ -4,6 +4,7 @@ module XTwitterScraper
   module Models
     class DrawListItem < XTwitterScraper::Internal::Type::BaseModel
       # @!attribute id
+      #   Draw public ID for detail responses.
       #
       #   @return [String]
       required :id, String
@@ -41,12 +42,18 @@ module XTwitterScraper
       # @!method initialize(id:, created_at:, status:, total_entries:, tweet_url:, valid_entries:, drawn_at: nil)
       #   Giveaway draw summary with entry counts and status.
       #
-      #   @param id [String]
+      #   @param id [String] Draw public ID for detail responses.
+      #
       #   @param created_at [Time]
+      #
       #   @param status [String]
+      #
       #   @param total_entries [Integer]
+      #
       #   @param tweet_url [String]
+      #
       #   @param valid_entries [Integer]
+      #
       #   @param drawn_at [Time]
     end
   end

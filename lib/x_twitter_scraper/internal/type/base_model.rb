@@ -443,9 +443,10 @@ module XTwitterScraper
         # @return [Hash{Symbol=>Object}]
         #
         # @example
-        #   # `error` is a `XTwitterScraper::Error`
-        #   error => {
-        #     error: error
+        #   # `content_disclosure` is a `XTwitterScraper::ContentDisclosure`
+        #   content_disclosure => {
+        #     advertising: advertising,
+        #     ai_generated: ai_generated
         #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)

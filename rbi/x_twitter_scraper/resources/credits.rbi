@@ -4,6 +4,20 @@ module XTwitterScraper
   module Resources
     # Subscription, billing, and credits
     class Credits
+      # Redirect to an active top-up payment page
+      sig do
+        params(
+          session_id: String,
+          request_options: XTwitterScraper::RequestOptions::OrHash
+        ).void
+      end
+      def redirect_topup_checkout(
+        # Billing session ID returned by the top-up billing flow.
+        session_id:,
+        request_options: {}
+      )
+      end
+
       # Get credits balance
       sig do
         params(
@@ -13,16 +27,34 @@ module XTwitterScraper
       def retrieve_balance(request_options: {})
       end
 
-      # Top up credits balance
+      # Get top-up billing status
       sig do
         params(
-          amount: Integer,
+          session_id: String,
+          request_options: XTwitterScraper::RequestOptions::OrHash
+        ).returns(XTwitterScraper::Models::CreditRetrieveTopupStatusResponse)
+      end
+      def retrieve_topup_status(
+        # Billing session ID returned by the top-up billing flow.
+        session_id:,
+        request_options: {}
+      )
+      end
+
+      # Create a Stripe Checkout session only after the user confirms. The request never
+      # completes payment or adds credits by itself.
+      sig do
+        params(
+          dollars: Integer,
+          locale: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Models::CreditTopupBalanceResponse)
       end
       def topup_balance(
-        # Amount to top up in credits
-        amount:,
+        # Amount to top up in US dollars. Minimum 10.
+        dollars:,
+        # Optional checkout locale. Defaults to en.
+        locale: nil,
         request_options: {}
       )
       end

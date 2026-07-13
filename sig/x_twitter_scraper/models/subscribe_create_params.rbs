@@ -1,15 +1,40 @@
 module XTwitterScraper
   module Models
     type subscribe_create_params =
-      {  } & XTwitterScraper::Internal::Type::request_parameters
+      { tier: XTwitterScraper::Models::SubscribeCreateParams::tier }
+      & XTwitterScraper::Internal::Type::request_parameters
 
     class SubscribeCreateParams < XTwitterScraper::Internal::Type::BaseModel
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      def initialize: (?request_options: XTwitterScraper::request_opts) -> void
+      attr_reader tier: XTwitterScraper::Models::SubscribeCreateParams::tier?
 
-      def to_hash: -> { request_options: XTwitterScraper::RequestOptions }
+      def tier=: (
+        XTwitterScraper::Models::SubscribeCreateParams::tier
+      ) -> XTwitterScraper::Models::SubscribeCreateParams::tier
+
+      def initialize: (
+        ?tier: XTwitterScraper::Models::SubscribeCreateParams::tier,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        tier: XTwitterScraper::Models::SubscribeCreateParams::tier,
+        request_options: XTwitterScraper::RequestOptions
+      }
+
+      type tier = :starter | :pro | :business
+
+      module Tier
+        extend XTwitterScraper::Internal::Type::Enum
+
+        STARTER: :starter
+        PRO: :pro
+        BUSINESS: :business
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::SubscribeCreateParams::tier]
+      end
     end
   end
 end

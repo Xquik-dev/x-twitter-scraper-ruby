@@ -93,7 +93,7 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
   def test_retrieve_search_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.communities.retrieve_search(q: "q")
+    response = @x_twitter_scraper.x.communities.retrieve_search(community_id: "321669910225", q: "q")
 
     assert_pattern do
       response => XTwitterScraper::PaginatedTweets

@@ -4,7 +4,14 @@ module XTwitterScraper
   module Resources
     # Real-time X account monitoring
     class Monitors
-      # Create monitor
+      # Real-time X account monitoring
+      # @return [XTwitterScraper::Resources::Monitors::Keywords]
+      attr_reader :keywords
+
+      # Creates an instant monitor. Monitors are unlimited. Active monitors check every
+      # 1 second and cost 21 credits per hour. Events and webhook deliveries are
+      # included. Creation requires available credits for the first hourly charge and
+      # username lookup.
       #
       # @overload create(event_types:, username:, request_options: {})
       #
@@ -32,7 +39,7 @@ module XTwitterScraper
       #
       # @overload retrieve(id, request_options: {})
       #
-      # @param id [String] Resource ID (stringified bigint)
+      # @param id [String] Resource ID returned by the matching create or list endpoint.
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -52,7 +59,7 @@ module XTwitterScraper
       #
       # @overload update(id, event_types: nil, is_active: nil, request_options: {})
       #
-      # @param id [String] Resource ID (stringified bigint)
+      # @param id [String] Resource ID returned by the matching create or list endpoint.
       #
       # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
       #
@@ -92,11 +99,11 @@ module XTwitterScraper
         )
       end
 
-      # Deactivate monitor
+      # Delete monitor
       #
       # @overload deactivate(id, request_options: {})
       #
-      # @param id [String] Resource ID (stringified bigint)
+      # @param id [String] Resource ID returned by the matching create or list endpoint.
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -117,6 +124,7 @@ module XTwitterScraper
       # @param client [XTwitterScraper::Client]
       def initialize(client:)
         @client = client
+        @keywords = XTwitterScraper::Resources::Monitors::Keywords.new(client: client)
       end
     end
   end

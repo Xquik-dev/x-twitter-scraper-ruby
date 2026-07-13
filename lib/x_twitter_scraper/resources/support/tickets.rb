@@ -31,7 +31,7 @@ module XTwitterScraper
         #
         # @overload retrieve(id, request_options: {})
         #
-        # @param id [String] Support ticket ID
+        # @param id [String] Support ticket public ID
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -51,7 +51,7 @@ module XTwitterScraper
         #
         # @overload update(id, status:, request_options: {})
         #
-        # @param id [String] Support ticket ID to update
+        # @param id [String] Support ticket public ID to update
         #
         # @param status [Symbol, XTwitterScraper::Models::Support::TicketUpdateParams::Status]
         #
@@ -93,7 +93,7 @@ module XTwitterScraper
         #
         # @overload reply(id, body:, request_options: {})
         #
-        # @param id [String] Support ticket ID for the reply
+        # @param id [String] Support ticket public ID for the reply
         #
         # @param body [String]
         #

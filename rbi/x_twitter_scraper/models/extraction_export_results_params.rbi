@@ -20,20 +20,10 @@ module XTwitterScraper
       # Export file format
       sig do
         returns(
-          T.nilable(
-            XTwitterScraper::ExtractionExportResultsParams::Format::OrSymbol
-          )
+          XTwitterScraper::ExtractionExportResultsParams::Format::OrSymbol
         )
       end
-      attr_reader :format_
-
-      sig do
-        params(
-          format_:
-            XTwitterScraper::ExtractionExportResultsParams::Format::OrSymbol
-        ).void
-      end
-      attr_writer :format_
+      attr_accessor :format_
 
       sig do
         params(
@@ -46,7 +36,7 @@ module XTwitterScraper
       def self.new(
         id:,
         # Export file format
-        format_: nil,
+        format_:,
         request_options: {}
       )
       end

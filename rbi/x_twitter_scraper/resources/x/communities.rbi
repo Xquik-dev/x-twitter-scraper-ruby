@@ -42,7 +42,7 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::CommunityDeleteResponse)
         end
         def delete(
-          # Resource ID (stringified bigint)
+          # Resource ID returned by the matching create or list endpoint.
           id,
           # X account (@username or ID) deleting the community
           account:,
@@ -80,7 +80,9 @@ module XTwitterScraper
           id,
           # Pagination cursor
           cursor: nil,
-          # Items per page (20-200, default 20)
+          # Items per page (20-200, default 20). This is an upper bound for paid
+          # authenticated calls: remaining credits can reduce the returned page size, and
+          # zero affordable results returns 402 insufficient_credits.
           page_size: nil,
           request_options: {}
         )
@@ -103,20 +105,31 @@ module XTwitterScraper
         )
         end
 
-        # Search for communities by keyword
+        # Returns tweets, not community records. Requires a Community ID.
         sig do
           params(
+            community_id: String,
             q: String,
             cursor: String,
-            query_type: String,
+            page_size: Integer,
+            query_type:
+              XTwitterScraper::X::CommunityRetrieveSearchParams::QueryType::OrSymbol,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::PaginatedTweets)
         end
         def retrieve_search(
+          # Numeric ID of the community whose posts to search
+          community_id:,
           # Search query
           q:,
           # Pagination cursor for community search
           cursor: nil,
+          # Maximum items requested from this page (1-100, default 20). The response can
+          # contain fewer items because the source returned fewer, filters removed items, or
+          # remaining credits cover fewer results. Keep requesting next_cursor while
+          # has_next_page is true, even when a page is empty. The deprecated limit and count
+          # aliases remain accepted.
+          page_size: nil,
           # Sort order (Latest or Top)
           query_type: nil,
           request_options: {}

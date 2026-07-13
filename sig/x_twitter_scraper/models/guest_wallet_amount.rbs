@@ -1,0 +1,15 @@
+module XTwitterScraper
+  module Models
+    type guest_wallet_amount = { amount_minor: Integer, currency: :usd }
+
+    class GuestWalletAmount < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor amount_minor: Integer
+
+      attr_accessor currency: :usd
+
+      def initialize: (amount_minor: Integer, ?currency: :usd) -> void
+
+      def to_hash: -> { amount_minor: Integer, currency: :usd }
+    end
+  end
+end

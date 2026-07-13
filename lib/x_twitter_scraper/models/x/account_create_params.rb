@@ -26,26 +26,18 @@ module XTwitterScraper
         #   @return [String]
         required :username, String
 
-        # @!attribute proxy_country
-        #   Proxy country code
-        #
-        #   @return [String, nil]
-        optional :proxy_country, String
-
         # @!attribute totp_secret
         #   TOTP secret for 2FA
         #
         #   @return [String, nil]
         optional :totp_secret, String
 
-        # @!method initialize(email:, password:, username:, proxy_country: nil, totp_secret: nil, request_options: {})
+        # @!method initialize(email:, password:, username:, totp_secret: nil, request_options: {})
         #   @param email [String] Account email
         #
         #   @param password [String] Account password
         #
         #   @param username [String] X username
-        #
-        #   @param proxy_country [String] Proxy country code
         #
         #   @param totp_secret [String] TOTP secret for 2FA
         #

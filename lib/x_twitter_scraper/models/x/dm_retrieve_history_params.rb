@@ -13,6 +13,13 @@ module XTwitterScraper
         #   @return [String]
         required :user_id, String
 
+        # @!attribute account
+        #   X handle (without the `@` prefix) of the connected X account used to read the
+        #   conversation. The account must be a participant in the conversation.
+        #
+        #   @return [String]
+        required :account, String
+
         # @!attribute cursor
         #   Pagination cursor for DM history
         #
@@ -25,8 +32,13 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :max_id, String
 
-        # @!method initialize(user_id:, cursor: nil, max_id: nil, request_options: {})
+        # @!method initialize(user_id:, account:, cursor: nil, max_id: nil, request_options: {})
+        #   Some parameter documentations has been truncated, see
+        #   {XTwitterScraper::Models::X::DmRetrieveHistoryParams} for more details.
+        #
         #   @param user_id [String]
+        #
+        #   @param account [String] X handle (without the `@` prefix) of the connected X account used to read the co
         #
         #   @param cursor [String] Pagination cursor for DM history
         #

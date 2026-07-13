@@ -9,13 +9,11 @@ class XTwitterScraper::Test::Resources::X::Communities::JoinTest < XTwitterScrap
     response = @x_twitter_scraper.x.communities.join.create("id", account: "@elonmusk")
 
     assert_pattern do
-      response => XTwitterScraper::X::CommunityActionResult
+      response => XTwitterScraper::Models::X::Communities::JoinCreateResponse
     end
 
     assert_pattern do
       response => {
-        community_id: String,
-        community_name: String,
         success: true | false
       }
     end
@@ -27,13 +25,11 @@ class XTwitterScraper::Test::Resources::X::Communities::JoinTest < XTwitterScrap
     response = @x_twitter_scraper.x.communities.join.delete_all("id", account: "@elonmusk")
 
     assert_pattern do
-      response => XTwitterScraper::X::CommunityActionResult
+      response => XTwitterScraper::Models::X::Communities::JoinDeleteAllResponse
     end
 
     assert_pattern do
       response => {
-        community_id: String,
-        community_name: String,
         success: true | false
       }
     end

@@ -12,7 +12,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::DrawRetrieveResponse)
       end
       def retrieve(
-        # Resource ID (stringified bigint)
+        # Draw public ID returned by create and list draw responses.
         id,
         request_options: {}
       )
@@ -21,15 +21,18 @@ module XTwitterScraper
       # List draws
       sig do
         params(
-          after: String,
+          cursor: String,
           limit: Integer,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Models::DrawListResponse)
       end
       def list(
-        # Cursor for keyset pagination
-        after: nil,
-        # Maximum number of items to return (1-100, default 50)
+        # Cursor for keyset pagination from prior response next_cursor
+        cursor: nil,
+        # Maximum number of items to return (1-100, default 50). For paid per-result
+        # endpoints, the returned count may be lower when remaining credits cannot cover
+        # the requested page. If zero paid results are affordable, the endpoint returns
+        # 402 insufficient_credits.
         limit: nil,
         request_options: {}
       )
@@ -45,17 +48,20 @@ module XTwitterScraper
         ).returns(StringIO)
       end
       def export(
-        # Resource ID (stringified bigint)
+        # Draw public ID returned by create and list draw responses.
         id,
         # Export output format
-        format_: nil,
+        format_:,
         # Export winners or all entries
         type: nil,
         request_options: {}
       )
       end
 
-      # Run giveaway draw
+      # Runs a giveaway draw from a source tweet. The draw first checks the minimum
+      # credits needed to inspect the source tweet and at least one candidate. Remaining
+      # credits cap how many replies and retweeters can be inspected before filters and
+      # winner selection run.
       sig do
         params(
           tweet_url: String,

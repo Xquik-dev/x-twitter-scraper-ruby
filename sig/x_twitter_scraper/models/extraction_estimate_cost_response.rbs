@@ -6,7 +6,7 @@ module XTwitterScraper
         credits_available: String,
         credits_required: String,
         estimated_results: Integer,
-        source: String,
+        source: XTwitterScraper::Models::ExtractionEstimateCostResponse::source,
         resolved_x_user_id: String
       }
 
@@ -19,7 +19,7 @@ module XTwitterScraper
 
       attr_accessor estimated_results: Integer
 
-      attr_accessor source: String
+      attr_accessor source: XTwitterScraper::Models::ExtractionEstimateCostResponse::source
 
       attr_reader resolved_x_user_id: String?
 
@@ -30,7 +30,7 @@ module XTwitterScraper
         credits_available: String,
         credits_required: String,
         estimated_results: Integer,
-        source: String,
+        source: XTwitterScraper::Models::ExtractionEstimateCostResponse::source,
         ?resolved_x_user_id: String
       ) -> void
 
@@ -39,9 +39,36 @@ module XTwitterScraper
         credits_available: String,
         credits_required: String,
         estimated_results: Integer,
-        source: String,
+        source: XTwitterScraper::Models::ExtractionEstimateCostResponse::source,
         resolved_x_user_id: String
       }
+
+      type source =
+        :followers
+        | :following
+        | :paginationCap
+        | :posts
+        | :quoteCount
+        | :replyCount
+        | :resultsLimit
+        | :retweetCount
+        | :unknown
+
+      module Source
+        extend XTwitterScraper::Internal::Type::Enum
+
+        FOLLOWERS: :followers
+        FOLLOWING: :following
+        PAGINATION_CAP: :paginationCap
+        POSTS: :posts
+        QUOTE_COUNT: :quoteCount
+        REPLY_COUNT: :replyCount
+        RESULTS_LIMIT: :resultsLimit
+        RETWEET_COUNT: :retweetCount
+        UNKNOWN: :unknown
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionEstimateCostResponse::source]
+      end
     end
   end
 end

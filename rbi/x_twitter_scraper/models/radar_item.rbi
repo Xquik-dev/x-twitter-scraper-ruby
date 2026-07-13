@@ -8,7 +8,7 @@ module XTwitterScraper
           T.any(XTwitterScraper::RadarItem, XTwitterScraper::Internal::AnyHash)
         end
 
-      # Internal numeric identifier (stringified bigint).
+      # Radar item identifier.
       sig { returns(String) }
       attr_accessor :id
 
@@ -93,7 +93,7 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
-        # Internal numeric identifier (stringified bigint).
+        # Radar item identifier.
         id:,
         category:,
         created_at:,

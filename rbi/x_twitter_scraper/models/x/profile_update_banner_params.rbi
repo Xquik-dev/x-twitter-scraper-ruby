@@ -15,26 +15,26 @@ module XTwitterScraper
             )
           end
 
-        # X account (@username or ID) for banner update
+        # X account (@username or ID) receiving banner from URL
         sig { returns(String) }
         attr_accessor :account
 
-        # Banner image (max 2MB)
-        sig { returns(XTwitterScraper::Internal::FileInput) }
-        attr_accessor :file
+        # HTTPS URL to the banner image to download
+        sig { returns(String) }
+        attr_accessor :url
 
         sig do
           params(
             account: String,
-            file: XTwitterScraper::Internal::FileInput,
+            url: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
-          # X account (@username or ID) for banner update
+          # X account (@username or ID) receiving banner from URL
           account:,
-          # Banner image (max 2MB)
-          file:,
+          # HTTPS URL to the banner image to download
+          url:,
           request_options: {}
         )
         end
@@ -43,7 +43,7 @@ module XTwitterScraper
           override.returns(
             {
               account: String,
-              file: XTwitterScraper::Internal::FileInput,
+              url: String,
               request_options: XTwitterScraper::RequestOptions
             }
           )

@@ -40,19 +40,13 @@ module XTwitterScraper
         sig { params(cookies_obtained_at: Time).void }
         attr_writer :cookies_obtained_at
 
-        sig { returns(T.nilable(String)) }
-        attr_reader :proxy_country
-
-        sig { params(proxy_country: String).void }
-        attr_writer :proxy_country
-
         sig { returns(T.nilable(Time)) }
         attr_reader :updated_at
 
         sig { params(updated_at: Time).void }
         attr_writer :updated_at
 
-        # Full X account details including proxy, cookies, and update timestamp.
+        # Full X account details with status, cookies, and update timestamp.
         sig do
           params(
             id: String,
@@ -62,7 +56,6 @@ module XTwitterScraper
             x_user_id: String,
             x_username: String,
             cookies_obtained_at: Time,
-            proxy_country: String,
             updated_at: Time
           ).returns(T.attached_class)
         end
@@ -74,7 +67,6 @@ module XTwitterScraper
           x_user_id:,
           x_username:,
           cookies_obtained_at: nil,
-          proxy_country: nil,
           updated_at: nil
         )
         end
@@ -89,7 +81,6 @@ module XTwitterScraper
               x_user_id: String,
               x_username: String,
               cookies_obtained_at: Time,
-              proxy_country: String,
               updated_at: Time
             }
           )

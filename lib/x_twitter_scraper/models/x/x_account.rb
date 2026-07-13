@@ -29,6 +29,11 @@ module XTwitterScraper
         #   @return [String]
         required :status, String
 
+        # @!attribute updated_at
+        #
+        #   @return [Time]
+        required :updated_at, Time, api_name: :updatedAt
+
         # @!attribute x_user_id
         #
         #   @return [String]
@@ -39,11 +44,16 @@ module XTwitterScraper
         #   @return [String]
         required :x_username, String, api_name: :xUsername
 
-        # @!method initialize(id:, created_at:, health:, status:, x_user_id:, x_username:)
+        # @!attribute cookies_obtained_at
+        #
+        #   @return [Time, nil]
+        optional :cookies_obtained_at, Time, api_name: :cookiesObtainedAt
+
+        # @!method initialize(id:, created_at:, health:, status:, updated_at:, x_user_id:, x_username:, cookies_obtained_at: nil)
         #   Some parameter documentations has been truncated, see
         #   {XTwitterScraper::Models::X::XAccount} for more details.
         #
-        #   Linked X account summary with username and connection status.
+        #   Linked X account summary with connection status, health, and timestamp metadata.
         #
         #   @param id [String]
         #
@@ -53,9 +63,13 @@ module XTwitterScraper
         #
         #   @param status [String]
         #
+        #   @param updated_at [Time]
+        #
         #   @param x_user_id [String]
         #
         #   @param x_username [String]
+        #
+        #   @param cookies_obtained_at [Time]
 
         # Derived login/cookie health. `healthy` = cookies valid. `needsReauth` = user
         # must submit fresh credentials. `locked` = X locked the account; unlock on x.com

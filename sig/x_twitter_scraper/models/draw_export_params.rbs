@@ -14,11 +14,7 @@ module XTwitterScraper
 
       attr_accessor id: String
 
-      attr_reader format_: XTwitterScraper::Models::DrawExportParams::format_?
-
-      def format_=: (
-        XTwitterScraper::Models::DrawExportParams::format_
-      ) -> XTwitterScraper::Models::DrawExportParams::format_
+      attr_accessor format_: XTwitterScraper::Models::DrawExportParams::format_
 
       attr_reader type: XTwitterScraper::Models::DrawExportParams::type_?
 
@@ -28,7 +24,7 @@ module XTwitterScraper
 
       def initialize: (
         id: String,
-        ?format_: XTwitterScraper::Models::DrawExportParams::format_,
+        format_: XTwitterScraper::Models::DrawExportParams::format_,
         ?type: XTwitterScraper::Models::DrawExportParams::type_,
         ?request_options: XTwitterScraper::request_opts
       ) -> void

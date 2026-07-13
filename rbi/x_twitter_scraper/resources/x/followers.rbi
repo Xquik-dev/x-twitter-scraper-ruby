@@ -14,9 +14,9 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::FollowerCheckResponse)
         end
         def check(
-          # Username to check (without @)
+          # Source username, @username, or X or Twitter profile URL
           source:,
-          # Target username (without @)
+          # Target username, @username, or X or Twitter profile URL
           target:,
           request_options: {}
         )

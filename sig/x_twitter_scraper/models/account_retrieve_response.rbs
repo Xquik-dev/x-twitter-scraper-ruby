@@ -2,6 +2,7 @@ module XTwitterScraper
   module Models
     type account_retrieve_response =
       {
+        monitor_billing: XTwitterScraper::Models::AccountRetrieveResponse::MonitorBilling,
         monitors_allowed: Integer,
         monitors_used: Integer,
         plan: XTwitterScraper::Models::AccountRetrieveResponse::plan,
@@ -10,6 +11,8 @@ module XTwitterScraper
       }
 
     class AccountRetrieveResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor monitor_billing: XTwitterScraper::Models::AccountRetrieveResponse::MonitorBilling
+
       attr_accessor monitors_allowed: Integer
 
       attr_accessor monitors_used: Integer
@@ -27,6 +30,7 @@ module XTwitterScraper
       def x_username=: (String) -> String
 
       def initialize: (
+        monitor_billing: XTwitterScraper::Models::AccountRetrieveResponse::MonitorBilling,
         monitors_allowed: Integer,
         monitors_used: Integer,
         plan: XTwitterScraper::Models::AccountRetrieveResponse::plan,
@@ -35,12 +39,60 @@ module XTwitterScraper
       ) -> void
 
       def to_hash: -> {
+        monitor_billing: XTwitterScraper::Models::AccountRetrieveResponse::MonitorBilling,
         monitors_allowed: Integer,
         monitors_used: Integer,
         plan: XTwitterScraper::Models::AccountRetrieveResponse::plan,
         credit_info: XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo,
         x_username: String
       }
+
+      type monitor_billing =
+        {
+          active_daily_estimate: String,
+          active_hourly_burn: String,
+          credits_per_active_monitor_day: String,
+          credits_per_active_monitor_hour: String,
+          events_included: bool,
+          instant_check_interval_seconds: Integer,
+          unlimited_slots: bool
+        }
+
+      class MonitorBilling < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor active_daily_estimate: String
+
+        attr_accessor active_hourly_burn: String
+
+        attr_accessor credits_per_active_monitor_day: String
+
+        attr_accessor credits_per_active_monitor_hour: String
+
+        attr_accessor events_included: bool
+
+        attr_accessor instant_check_interval_seconds: Integer
+
+        attr_accessor unlimited_slots: bool
+
+        def initialize: (
+          active_daily_estimate: String,
+          active_hourly_burn: String,
+          credits_per_active_monitor_day: String,
+          credits_per_active_monitor_hour: String,
+          events_included: bool,
+          instant_check_interval_seconds: Integer,
+          unlimited_slots: bool
+        ) -> void
+
+        def to_hash: -> {
+          active_daily_estimate: String,
+          active_hourly_burn: String,
+          credits_per_active_monitor_day: String,
+          credits_per_active_monitor_hour: String,
+          events_included: bool,
+          instant_check_interval_seconds: Integer,
+          unlimited_slots: bool
+        }
+      end
 
       type plan = :active | :inactive
 
@@ -55,33 +107,43 @@ module XTwitterScraper
 
       type credit_info =
         {
+          auto_topup_amount_dollars: Float,
           auto_topup_enabled: bool,
-          balance: Integer,
-          lifetime_purchased: Integer,
-          lifetime_used: Integer
+          auto_topup_threshold: String,
+          balance: String,
+          lifetime_purchased: String,
+          lifetime_used: String
         }
 
       class CreditInfo < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor auto_topup_amount_dollars: Float
+
         attr_accessor auto_topup_enabled: bool
 
-        attr_accessor balance: Integer
+        attr_accessor auto_topup_threshold: String
 
-        attr_accessor lifetime_purchased: Integer
+        attr_accessor balance: String
 
-        attr_accessor lifetime_used: Integer
+        attr_accessor lifetime_purchased: String
+
+        attr_accessor lifetime_used: String
 
         def initialize: (
+          auto_topup_amount_dollars: Float,
           auto_topup_enabled: bool,
-          balance: Integer,
-          lifetime_purchased: Integer,
-          lifetime_used: Integer
+          auto_topup_threshold: String,
+          balance: String,
+          lifetime_purchased: String,
+          lifetime_used: String
         ) -> void
 
         def to_hash: -> {
+          auto_topup_amount_dollars: Float,
           auto_topup_enabled: bool,
-          balance: Integer,
-          lifetime_purchased: Integer,
-          lifetime_used: Integer
+          auto_topup_threshold: String,
+          balance: String,
+          lifetime_purchased: String,
+          lifetime_used: String
         }
       end
     end

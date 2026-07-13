@@ -1,0 +1,69 @@
+module XTwitterScraper
+  module Models
+    module Monitors
+      type keyword_list_response =
+        {
+          monitors: ::Array[XTwitterScraper::Models::Monitors::KeywordListResponse::Monitor],
+          total: Integer
+        }
+
+      class KeywordListResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor monitors: ::Array[XTwitterScraper::Models::Monitors::KeywordListResponse::Monitor]
+
+        attr_accessor total: Integer
+
+        def initialize: (
+          monitors: ::Array[XTwitterScraper::Models::Monitors::KeywordListResponse::Monitor],
+          total: Integer
+        ) -> void
+
+        def to_hash: -> {
+          monitors: ::Array[XTwitterScraper::Models::Monitors::KeywordListResponse::Monitor],
+          total: Integer
+        }
+
+        type monitor =
+          {
+            id: String,
+            created_at: Time,
+            event_types: ::Array[XTwitterScraper::Models::event_type],
+            is_active: bool,
+            next_billing_at: Time,
+            query: String
+          }
+
+        class Monitor < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor event_types: ::Array[XTwitterScraper::Models::event_type]
+
+          attr_accessor is_active: bool
+
+          attr_accessor next_billing_at: Time
+
+          attr_accessor query: String
+
+          def initialize: (
+            id: String,
+            created_at: Time,
+            event_types: ::Array[XTwitterScraper::Models::event_type],
+            is_active: bool,
+            next_billing_at: Time,
+            query: String
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            created_at: Time,
+            event_types: ::Array[XTwitterScraper::Models::event_type],
+            is_active: bool,
+            next_billing_at: Time,
+            query: String
+          }
+        end
+      end
+    end
+  end
+end

@@ -5,17 +5,15 @@ module XTwitterScraper
 
   class AccountUpdateLocaleParams = XTwitterScraper::Models::AccountUpdateLocaleParams
 
-  class APIKey = XTwitterScraper::Models::APIKey
-
-  class APIKeyCreateParams = XTwitterScraper::Models::APIKeyCreateParams
-
-  class APIKeyListParams = XTwitterScraper::Models::APIKeyListParams
-
-  class APIKeyRevokeParams = XTwitterScraper::Models::APIKeyRevokeParams
-
   class ComposeCreateParams = XTwitterScraper::Models::ComposeCreateParams
 
+  class ContentDisclosure = XTwitterScraper::Models::ContentDisclosure
+
+  class CreditRedirectTopupCheckoutParams = XTwitterScraper::Models::CreditRedirectTopupCheckoutParams
+
   class CreditRetrieveBalanceParams = XTwitterScraper::Models::CreditRetrieveBalanceParams
+
+  class CreditRetrieveTopupStatusParams = XTwitterScraper::Models::CreditRetrieveTopupStatusParams
 
   class CreditTopupBalanceParams = XTwitterScraper::Models::CreditTopupBalanceParams
 
@@ -45,6 +43,8 @@ module XTwitterScraper
 
   class DrawRunParams = XTwitterScraper::Models::DrawRunParams
 
+  class EmbeddedTweet = XTwitterScraper::Models::EmbeddedTweet
+
   class Error = XTwitterScraper::Models::Error
 
   class Event = XTwitterScraper::Models::Event
@@ -69,6 +69,14 @@ module XTwitterScraper
 
   class ExtractionRunParams = XTwitterScraper::Models::ExtractionRunParams
 
+  class GuestWalletAmount = XTwitterScraper::Models::GuestWalletAmount
+
+  class GuestWalletCreateParams = XTwitterScraper::Models::GuestWalletCreateParams
+
+  class GuestWalletRetrieveStatusParams = XTwitterScraper::Models::GuestWalletRetrieveStatusParams
+
+  class GuestWalletTopupParams = XTwitterScraper::Models::GuestWalletTopupParams
+
   class Monitor = XTwitterScraper::Models::Monitor
 
   class MonitorCreateParams = XTwitterScraper::Models::MonitorCreateParams
@@ -78,6 +86,8 @@ module XTwitterScraper
   class MonitorListParams = XTwitterScraper::Models::MonitorListParams
 
   class MonitorRetrieveParams = XTwitterScraper::Models::MonitorRetrieveParams
+
+  module Monitors = XTwitterScraper::Models::Monitors
 
   class MonitorUpdateParams = XTwitterScraper::Models::MonitorUpdateParams
 
@@ -115,6 +125,8 @@ module XTwitterScraper
 
   class TrendListParams = XTwitterScraper::Models::TrendListParams
 
+  class TweetMedia = XTwitterScraper::Models::TweetMedia
+
   class UserProfile = XTwitterScraper::Models::UserProfile
 
   class Webhook = XTwitterScraper::Models::Webhook
@@ -126,6 +138,8 @@ module XTwitterScraper
   class WebhookListDeliveriesParams = XTwitterScraper::Models::WebhookListDeliveriesParams
 
   class WebhookListParams = XTwitterScraper::Models::WebhookListParams
+
+  class WebhookResumeParams = XTwitterScraper::Models::WebhookResumeParams
 
   class WebhookTestParams = XTwitterScraper::Models::WebhookTestParams
 

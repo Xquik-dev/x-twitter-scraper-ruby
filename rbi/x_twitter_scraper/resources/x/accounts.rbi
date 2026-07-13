@@ -11,7 +11,6 @@ module XTwitterScraper
             email: String,
             password: String,
             username: String,
-            proxy_country: String,
             totp_secret: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::AccountCreateResponse)
@@ -23,8 +22,6 @@ module XTwitterScraper
           password:,
           # X username
           username:,
-          # Proxy country code
-          proxy_country: nil,
           # TOTP secret for 2FA
           totp_secret: nil,
           request_options: {}
@@ -39,7 +36,7 @@ module XTwitterScraper
           ).returns(XTwitterScraper::X::XAccountDetail)
         end
         def retrieve(
-          # Resource ID (stringified bigint)
+          # Resource ID returned by the matching create or list endpoint.
           id,
           request_options: {}
         )
@@ -62,7 +59,7 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::AccountDeleteResponse)
         end
         def delete(
-          # Resource ID (stringified bigint)
+          # Resource ID returned by the matching create or list endpoint.
           id,
           request_options: {}
         )
@@ -84,20 +81,17 @@ module XTwitterScraper
             id: String,
             password: String,
             email: String,
-            proxy_country: String,
             totp_secret: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::AccountReauthResponse)
         end
         def reauth(
-          # Resource ID (stringified bigint)
+          # Resource ID returned by the matching create or list endpoint.
           id,
           # Updated account password
           password:,
           # Email for the X account (updates stored email)
           email: nil,
-          # Two-letter country code for login proxy region
-          proxy_country: nil,
           # TOTP secret for 2FA re-authentication
           totp_secret: nil,
           request_options: {}

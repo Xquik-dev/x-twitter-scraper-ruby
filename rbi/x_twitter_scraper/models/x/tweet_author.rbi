@@ -3,7 +3,7 @@
 module XTwitterScraper
   module Models
     module X
-      class TweetAuthor < XTwitterScraper::Internal::Type::BaseModel
+      class TweetAuthor < XTwitterScraper::Models::UserProfile
         OrHash =
           T.type_alias do
             T.any(
@@ -12,54 +12,23 @@ module XTwitterScraper
             )
           end
 
-        sig { returns(String) }
-        attr_accessor :id
-
         sig { returns(Integer) }
         attr_accessor :followers
-
-        sig { returns(String) }
-        attr_accessor :username
 
         sig { returns(T::Boolean) }
         attr_accessor :verified
 
-        sig { returns(T.nilable(String)) }
-        attr_reader :profile_picture
-
-        sig { params(profile_picture: String).void }
-        attr_writer :profile_picture
-
-        # Author of a tweet with follower count and verification status.
+        # Tweet author profile. The lookup route always includes follower count and
+        # verification state. Other profile fields appear when available.
         sig do
-          params(
-            id: String,
-            followers: Integer,
-            username: String,
-            verified: T::Boolean,
-            profile_picture: String
-          ).returns(T.attached_class)
-        end
-        def self.new(
-          id:,
-          followers:,
-          username:,
-          verified:,
-          profile_picture: nil
-        )
-        end
-
-        sig do
-          override.returns(
-            {
-              id: String,
-              followers: Integer,
-              username: String,
-              verified: T::Boolean,
-              profile_picture: String
-            }
+          params(followers: Integer, verified: T::Boolean).returns(
+            T.attached_class
           )
         end
+        def self.new(followers:, verified:)
+        end
+
+        sig { override.returns({ followers: Integer, verified: T::Boolean }) }
         def to_hash
         end
       end

@@ -14,8 +14,6 @@ module XTwitterScraper
 
     attr_reader account: XTwitterScraper::Resources::Account
 
-    attr_reader api_keys: XTwitterScraper::Resources::APIKeys
-
     attr_reader subscribe: XTwitterScraper::Resources::Subscribe
 
     attr_reader compose: XTwitterScraper::Resources::Compose
@@ -44,7 +42,11 @@ module XTwitterScraper
 
     attr_reader credits: XTwitterScraper::Resources::Credits
 
-    private def auth_headers: -> ::Hash[String, String]
+    attr_reader guest_wallets: XTwitterScraper::Resources::GuestWallets
+
+    private def auth_headers: (
+      security: { auth_api_key: bool, oauth_bearer: bool }
+    ) -> ::Hash[String, String]
 
     private def auth_api_key: -> ::Hash[String, String]
 

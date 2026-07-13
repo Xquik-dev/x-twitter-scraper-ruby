@@ -26,10 +26,6 @@ module XTwitterScraper
     # @return [XTwitterScraper::Resources::Account]
     attr_reader :account
 
-    # API key management (session auth only)
-    # @return [XTwitterScraper::Resources::APIKeys]
-    attr_reader :api_keys
-
     # Subscription, billing, and credits
     # @return [XTwitterScraper::Resources::Subscribe]
     attr_reader :subscribe
@@ -58,7 +54,7 @@ module XTwitterScraper
     # @return [XTwitterScraper::Resources::Events]
     attr_reader :events
 
-    # Bulk data extraction (20 tool types)
+    # Bulk data extraction (23 tool types)
     # @return [XTwitterScraper::Resources::Extractions]
     attr_reader :extractions
 
@@ -84,11 +80,17 @@ module XTwitterScraper
     # @return [XTwitterScraper::Resources::Credits]
     attr_reader :credits
 
+    # Accountless prepaid access for paid read endpoints
+    # @return [XTwitterScraper::Resources::GuestWallets]
+    attr_reader :guest_wallets
+
     # @api private
     #
+    # @param security [Hash{Symbol=>Boolean}]
+    #
     # @return [Hash{String=>String}]
-    private def auth_headers
-      {**auth_api_key, **oauth_bearer}
+    private def auth_headers(security:)
+      {auth_api_key:, oauth_bearer:}.slice(*security.keys).values.reduce({}, :merge)
     end
 
     # @api private
@@ -160,7 +162,6 @@ module XTwitterScraper
       )
 
       @account = XTwitterScraper::Resources::Account.new(client: self)
-      @api_keys = XTwitterScraper::Resources::APIKeys.new(client: self)
       @subscribe = XTwitterScraper::Resources::Subscribe.new(client: self)
       @compose = XTwitterScraper::Resources::Compose.new(client: self)
       @drafts = XTwitterScraper::Resources::Drafts.new(client: self)
@@ -175,6 +176,7 @@ module XTwitterScraper
       @trends = XTwitterScraper::Resources::Trends.new(client: self)
       @support = XTwitterScraper::Resources::Support.new(client: self)
       @credits = XTwitterScraper::Resources::Credits.new(client: self)
+      @guest_wallets = XTwitterScraper::Resources::GuestWallets.new(client: self)
     end
   end
 end

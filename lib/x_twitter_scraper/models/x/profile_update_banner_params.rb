@@ -9,21 +9,21 @@ module XTwitterScraper
         include XTwitterScraper::Internal::Type::RequestParameters
 
         # @!attribute account
-        #   X account (@username or ID) for banner update
+        #   X account (@username or ID) receiving banner from URL
         #
         #   @return [String]
         required :account, String
 
-        # @!attribute file
-        #   Banner image (max 2MB)
+        # @!attribute url
+        #   HTTPS URL to the banner image to download
         #
-        #   @return [Pathname, StringIO, IO, String, XTwitterScraper::FilePart]
-        required :file, XTwitterScraper::Internal::Type::FileInput
+        #   @return [String]
+        required :url, String
 
-        # @!method initialize(account:, file:, request_options: {})
-        #   @param account [String] X account (@username or ID) for banner update
+        # @!method initialize(account:, url:, request_options: {})
+        #   @param account [String] X account (@username or ID) receiving banner from URL
         #
-        #   @param file [Pathname, StringIO, IO, String, XTwitterScraper::FilePart] Banner image (max 2MB)
+        #   @param url [String] HTTPS URL to the banner image to download
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end

@@ -1,0 +1,56 @@
+# typed: strong
+
+module XTwitterScraper
+  module Models
+    module Monitors
+      class KeywordCreateParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        OrHash =
+          T.type_alias do
+            T.any(
+              XTwitterScraper::Monitors::KeywordCreateParams,
+              XTwitterScraper::Internal::AnyHash
+            )
+          end
+
+        # Array of event types to subscribe to.
+        sig { returns(T::Array[XTwitterScraper::EventType::OrSymbol]) }
+        attr_accessor :event_types
+
+        # X search query to monitor. Whitespace is normalized.
+        sig { returns(String) }
+        attr_accessor :query
+
+        sig do
+          params(
+            event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
+            query: String,
+            request_options: XTwitterScraper::RequestOptions::OrHash
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Array of event types to subscribe to.
+          event_types:,
+          # X search query to monitor. Whitespace is normalized.
+          query:,
+          request_options: {}
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
+              query: String,
+              request_options: XTwitterScraper::RequestOptions
+            }
+          )
+        end
+        def to_hash
+        end
+      end
+    end
+  end
+end

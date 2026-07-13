@@ -18,17 +18,8 @@ module XTwitterScraper
       attr_accessor :id
 
       # Export output format
-      sig do
-        returns(T.nilable(XTwitterScraper::DrawExportParams::Format::OrSymbol))
-      end
-      attr_reader :format_
-
-      sig do
-        params(
-          format_: XTwitterScraper::DrawExportParams::Format::OrSymbol
-        ).void
-      end
-      attr_writer :format_
+      sig { returns(XTwitterScraper::DrawExportParams::Format::OrSymbol) }
+      attr_accessor :format_
 
       # Export winners or all entries
       sig do
@@ -52,7 +43,7 @@ module XTwitterScraper
       def self.new(
         id:,
         # Export output format
-        format_: nil,
+        format_:,
         # Export winners or all entries
         type: nil,
         request_options: {}

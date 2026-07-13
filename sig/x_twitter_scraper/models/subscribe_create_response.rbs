@@ -2,34 +2,28 @@ module XTwitterScraper
   module Models
     type subscribe_create_response =
       {
-        url: String,
         message: String,
-        status: XTwitterScraper::Models::SubscribeCreateResponse::status
+        status: XTwitterScraper::Models::SubscribeCreateResponse::status,
+        url: String
       }
 
     class SubscribeCreateResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor message: String
+
+      attr_accessor status: XTwitterScraper::Models::SubscribeCreateResponse::status
+
       attr_accessor url: String
 
-      attr_reader message: String?
-
-      def message=: (String) -> String
-
-      attr_reader status: XTwitterScraper::Models::SubscribeCreateResponse::status?
-
-      def status=: (
-        XTwitterScraper::Models::SubscribeCreateResponse::status
-      ) -> XTwitterScraper::Models::SubscribeCreateResponse::status
-
       def initialize: (
-        url: String,
-        ?message: String,
-        ?status: XTwitterScraper::Models::SubscribeCreateResponse::status
+        message: String,
+        status: XTwitterScraper::Models::SubscribeCreateResponse::status,
+        url: String
       ) -> void
 
       def to_hash: -> {
-        url: String,
         message: String,
-        status: XTwitterScraper::Models::SubscribeCreateResponse::status
+        status: XTwitterScraper::Models::SubscribeCreateResponse::status,
+        url: String
       }
 
       type status = :checkout_created | :already_subscribed | :payment_issue

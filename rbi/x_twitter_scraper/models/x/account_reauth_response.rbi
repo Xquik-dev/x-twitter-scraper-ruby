@@ -34,20 +34,7 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :x_username
 
-        # ISO-3166-1 alpha-2 country code of the Driver consumer device used for this
-        # login. Present only when the US fallback was triggered because Driver had no
-        # capacity in the declared region. Omitted otherwise.
-        sig { returns(T.nilable(String)) }
-        attr_reader :login_country
-
-        sig { params(login_country: String).void }
-        attr_writer :login_country
-
-        # Sanitized X account summary returned by connect and reauth. Includes an optional
-        # `loginCountry` field surfaced only when the declared proxy region had no Driver
-        # capacity and the login fell back to a single US consumer device for this
-        # one-time action. Future activity continues to use the selected `proxy_country`;
-        # the field is omitted on normal logins.
+        # Sanitized X account summary returned by connect and reauth.
         sig do
           params(
             id: String,
@@ -56,8 +43,7 @@ module XTwitterScraper
               XTwitterScraper::Models::X::AccountReauthResponse::Health::OrSymbol,
             status: String,
             x_user_id: String,
-            x_username: String,
-            login_country: String
+            x_username: String
           ).returns(T.attached_class)
         end
         def self.new(
@@ -66,11 +52,7 @@ module XTwitterScraper
           health:,
           status:,
           x_user_id:,
-          x_username:,
-          # ISO-3166-1 alpha-2 country code of the Driver consumer device used for this
-          # login. Present only when the US fallback was triggered because Driver had no
-          # capacity in the declared region. Omitted otherwise.
-          login_country: nil
+          x_username:
         )
         end
 
@@ -83,8 +65,7 @@ module XTwitterScraper
                 XTwitterScraper::Models::X::AccountReauthResponse::Health::TaggedSymbol,
               status: String,
               x_user_id: String,
-              x_username: String,
-              login_country: String
+              x_username: String
             }
           )
         end

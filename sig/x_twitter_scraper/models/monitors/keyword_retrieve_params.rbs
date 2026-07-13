@@ -1,0 +1,25 @@
+module XTwitterScraper
+  module Models
+    module Monitors
+      type keyword_retrieve_params =
+        { id: String } & XTwitterScraper::Internal::Type::request_parameters
+
+      class KeywordRetrieveParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        def initialize: (
+          id: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

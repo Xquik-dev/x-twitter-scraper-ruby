@@ -40,18 +40,13 @@ module XTwitterScraper
         #   @return [Time, nil]
         optional :cookies_obtained_at, Time, api_name: :cookiesObtainedAt
 
-        # @!attribute proxy_country
-        #
-        #   @return [String, nil]
-        optional :proxy_country, String, api_name: :proxyCountry
-
         # @!attribute updated_at
         #
         #   @return [Time, nil]
         optional :updated_at, Time, api_name: :updatedAt
 
-        # @!method initialize(id:, created_at:, health:, status:, x_user_id:, x_username:, cookies_obtained_at: nil, proxy_country: nil, updated_at: nil)
-        #   Full X account details including proxy, cookies, and update timestamp.
+        # @!method initialize(id:, created_at:, health:, status:, x_user_id:, x_username:, cookies_obtained_at: nil, updated_at: nil)
+        #   Full X account details with status, cookies, and update timestamp.
         #
         #   @param id [String]
         #   @param created_at [Time]
@@ -60,7 +55,6 @@ module XTwitterScraper
         #   @param x_user_id [String]
         #   @param x_username [String]
         #   @param cookies_obtained_at [Time]
-        #   @param proxy_country [String]
         #   @param updated_at [Time]
 
         # @see XTwitterScraper::Models::X::XAccountDetail#health

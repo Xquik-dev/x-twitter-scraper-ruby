@@ -67,23 +67,25 @@ module XTwitterScraper
           sig { returns(String) }
           attr_accessor :id
 
+          sig { returns(String) }
+          attr_accessor :receiver_id
+
+          sig { returns(String) }
+          attr_accessor :sender_id
+
           sig { returns(T.nilable(String)) }
           attr_reader :created_at
 
           sig { params(created_at: String).void }
           attr_writer :created_at
 
+          # URL of attached media (image, GIF, or video). Omitted when the message has no
+          # media attachment.
           sig { returns(T.nilable(String)) }
-          attr_reader :receiver_id
+          attr_reader :media_url
 
-          sig { params(receiver_id: String).void }
-          attr_writer :receiver_id
-
-          sig { returns(T.nilable(String)) }
-          attr_reader :sender_id
-
-          sig { params(sender_id: String).void }
-          attr_writer :sender_id
+          sig { params(media_url: String).void }
+          attr_writer :media_url
 
           sig { returns(T.nilable(String)) }
           attr_reader :text
@@ -94,17 +96,21 @@ module XTwitterScraper
           sig do
             params(
               id: String,
-              created_at: String,
               receiver_id: String,
               sender_id: String,
+              created_at: String,
+              media_url: String,
               text: String
             ).returns(T.attached_class)
           end
           def self.new(
             id:,
+            receiver_id:,
+            sender_id:,
             created_at: nil,
-            receiver_id: nil,
-            sender_id: nil,
+            # URL of attached media (image, GIF, or video). Omitted when the message has no
+            # media attachment.
+            media_url: nil,
             text: nil
           )
           end
@@ -113,9 +119,10 @@ module XTwitterScraper
             override.returns(
               {
                 id: String,
-                created_at: String,
                 receiver_id: String,
                 sender_id: String,
+                created_at: String,
+                media_url: String,
                 text: String
               }
             )

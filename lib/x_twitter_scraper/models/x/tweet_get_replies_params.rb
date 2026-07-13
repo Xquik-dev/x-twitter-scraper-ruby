@@ -13,11 +13,148 @@ module XTwitterScraper
         #   @return [String]
         required :id, String
 
+        # @!attribute any_words
+        #   Words or quoted phrases where any one can match. Separate with spaces, commas,
+        #   or lines.
+        #
+        #   @return [String, nil]
+        optional :any_words, String
+
+        # @!attribute cashtags
+        #   Cashtags separated by spaces, commas, or lines.
+        #
+        #   @return [String, nil]
+        optional :cashtags, String
+
+        # @!attribute conversation_id
+        #   Conversation ID filter.
+        #
+        #   @return [String, nil]
+        optional :conversation_id, String
+
         # @!attribute cursor
         #   Pagination cursor for tweet replies
         #
         #   @return [String, nil]
         optional :cursor, String
+
+        # @!attribute exact_phrase
+        #   Exact phrase to match.
+        #
+        #   @return [String, nil]
+        optional :exact_phrase, String
+
+        # @!attribute exclude_words
+        #   Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
+        #
+        #   @return [String, nil]
+        optional :exclude_words, String
+
+        # @!attribute from_user
+        #   Filter by author username.
+        #
+        #   @return [String, nil]
+        optional :from_user, String
+
+        # @!attribute hashtags
+        #   Hashtags separated by spaces, commas, or lines.
+        #
+        #   @return [String, nil]
+        optional :hashtags, String
+
+        # @!attribute in_reply_to_tweet_id
+        #   Only replies to this tweet ID.
+        #
+        #   @return [String, nil]
+        optional :in_reply_to_tweet_id, String
+
+        # @!attribute language
+        #   Language code filter, e.g. en or tr.
+        #
+        #   @return [String, nil]
+        optional :language, String
+
+        # @!attribute media_type
+        #   Filter by media type.
+        #
+        #   @return [Symbol, XTwitterScraper::Models::X::TweetGetRepliesParams::MediaType, nil]
+        optional :media_type, enum: -> { XTwitterScraper::X::TweetGetRepliesParams::MediaType }
+
+        # @!attribute mentioning
+        #   Filter tweets mentioning a username.
+        #
+        #   @return [String, nil]
+        optional :mentioning, String
+
+        # @!attribute min_faves
+        #   Minimum likes threshold.
+        #
+        #   @return [Integer, nil]
+        optional :min_faves, Integer
+
+        # @!attribute min_quotes
+        #   Minimum quote count threshold.
+        #
+        #   @return [Integer, nil]
+        optional :min_quotes, Integer
+
+        # @!attribute min_replies
+        #   Minimum replies threshold.
+        #
+        #   @return [Integer, nil]
+        optional :min_replies, Integer
+
+        # @!attribute min_retweets
+        #   Minimum retweets threshold.
+        #
+        #   @return [Integer, nil]
+        optional :min_retweets, Integer
+
+        # @!attribute page_size
+        #   Maximum items requested from this page (1-100, default 20). The response can
+        #   contain fewer items because the source returned fewer, filters removed items, or
+        #   remaining credits cover fewer results. Keep requesting next_cursor while
+        #   has_next_page is true, even when a page is empty. The deprecated limit and count
+        #   aliases remain accepted.
+        #
+        #   @return [Integer, nil]
+        optional :page_size, Integer
+
+        # @!attribute quotes
+        #   Quote mode.
+        #
+        #   @return [Symbol, XTwitterScraper::Models::X::TweetGetRepliesParams::Quotes, nil]
+        optional :quotes, enum: -> { XTwitterScraper::X::TweetGetRepliesParams::Quotes }
+
+        # @!attribute quotes_of_tweet_id
+        #   Only quotes of this tweet ID.
+        #
+        #   @return [String, nil]
+        optional :quotes_of_tweet_id, String
+
+        # @!attribute replies
+        #   Reply mode.
+        #
+        #   @return [Symbol, XTwitterScraper::Models::X::TweetGetRepliesParams::Replies, nil]
+        optional :replies, enum: -> { XTwitterScraper::X::TweetGetRepliesParams::Replies }
+
+        # @!attribute retweets
+        #   Retweet mode.
+        #
+        #   @return [Symbol, XTwitterScraper::Models::X::TweetGetRepliesParams::Retweets, nil]
+        optional :retweets, enum: -> { XTwitterScraper::X::TweetGetRepliesParams::Retweets }
+
+        # @!attribute retweets_of_tweet_id
+        #   Only retweets of this tweet ID.
+        #
+        #   @return [String, nil]
+        optional :retweets_of_tweet_id, String
+
+        # @!attribute since_date
+        #   Start date in YYYY-MM-DD format.
+        #
+        #   @return [Date, nil]
+        optional :since_date, Date
 
         # @!attribute since_time
         #   Unix timestamp - return replies posted after this time
@@ -25,22 +162,152 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :since_time, String
 
+        # @!attribute to_user
+        #   Filter replies sent to a username.
+        #
+        #   @return [String, nil]
+        optional :to_user, String
+
+        # @!attribute until_date
+        #   End date in YYYY-MM-DD format.
+        #
+        #   @return [Date, nil]
+        optional :until_date, Date
+
         # @!attribute until_time
         #   Unix timestamp - return replies posted before this time
         #
         #   @return [String, nil]
         optional :until_time, String
 
-        # @!method initialize(id:, cursor: nil, since_time: nil, until_time: nil, request_options: {})
+        # @!attribute url
+        #   URL substring or domain filter.
+        #
+        #   @return [String, nil]
+        optional :url, String
+
+        # @!attribute verified_only
+        #   Only return tweets from verified authors.
+        #
+        #   @return [Boolean, nil]
+        optional :verified_only, XTwitterScraper::Internal::Type::Boolean
+
+        # @!method initialize(id:, any_words: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, media_type: nil, mentioning: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, since_time: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, request_options: {})
+        #   Some parameter documentations has been truncated, see
+        #   {XTwitterScraper::Models::X::TweetGetRepliesParams} for more details.
+        #
         #   @param id [String]
+        #
+        #   @param any_words [String] Words or quoted phrases where any one can match. Separate with spaces, commas, o
+        #
+        #   @param cashtags [String] Cashtags separated by spaces, commas, or lines.
+        #
+        #   @param conversation_id [String] Conversation ID filter.
         #
         #   @param cursor [String] Pagination cursor for tweet replies
         #
+        #   @param exact_phrase [String] Exact phrase to match.
+        #
+        #   @param exclude_words [String] Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
+        #
+        #   @param from_user [String] Filter by author username.
+        #
+        #   @param hashtags [String] Hashtags separated by spaces, commas, or lines.
+        #
+        #   @param in_reply_to_tweet_id [String] Only replies to this tweet ID.
+        #
+        #   @param language [String] Language code filter, e.g. en or tr.
+        #
+        #   @param media_type [Symbol, XTwitterScraper::Models::X::TweetGetRepliesParams::MediaType] Filter by media type.
+        #
+        #   @param mentioning [String] Filter tweets mentioning a username.
+        #
+        #   @param min_faves [Integer] Minimum likes threshold.
+        #
+        #   @param min_quotes [Integer] Minimum quote count threshold.
+        #
+        #   @param min_replies [Integer] Minimum replies threshold.
+        #
+        #   @param min_retweets [Integer] Minimum retweets threshold.
+        #
+        #   @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
+        #
+        #   @param quotes [Symbol, XTwitterScraper::Models::X::TweetGetRepliesParams::Quotes] Quote mode.
+        #
+        #   @param quotes_of_tweet_id [String] Only quotes of this tweet ID.
+        #
+        #   @param replies [Symbol, XTwitterScraper::Models::X::TweetGetRepliesParams::Replies] Reply mode.
+        #
+        #   @param retweets [Symbol, XTwitterScraper::Models::X::TweetGetRepliesParams::Retweets] Retweet mode.
+        #
+        #   @param retweets_of_tweet_id [String] Only retweets of this tweet ID.
+        #
+        #   @param since_date [Date] Start date in YYYY-MM-DD format.
+        #
         #   @param since_time [String] Unix timestamp - return replies posted after this time
+        #
+        #   @param to_user [String] Filter replies sent to a username.
+        #
+        #   @param until_date [Date] End date in YYYY-MM-DD format.
         #
         #   @param until_time [String] Unix timestamp - return replies posted before this time
         #
+        #   @param url [String] URL substring or domain filter.
+        #
+        #   @param verified_only [Boolean] Only return tweets from verified authors.
+        #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
+
+        # Filter by media type.
+        module MediaType
+          extend XTwitterScraper::Internal::Type::Enum
+
+          IMAGES = :images
+          VIDEOS = :videos
+          GIFS = :gifs
+          MEDIA = :media
+          LINKS = :links
+          NONE = :none
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # Quote mode.
+        module Quotes
+          extend XTwitterScraper::Internal::Type::Enum
+
+          INCLUDE = :include
+          EXCLUDE = :exclude
+          ONLY = :only
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # Reply mode.
+        module Replies
+          extend XTwitterScraper::Internal::Type::Enum
+
+          INCLUDE = :include
+          EXCLUDE = :exclude
+          ONLY = :only
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # Retweet mode.
+        module Retweets
+          extend XTwitterScraper::Internal::Type::Enum
+
+          INCLUDE = :include
+          EXCLUDE = :exclude
+          ONLY = :only
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
     end
   end

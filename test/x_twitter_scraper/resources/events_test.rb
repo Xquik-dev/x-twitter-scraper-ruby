@@ -17,9 +17,12 @@ class XTwitterScraper::Test::Resources::EventsTest < XTwitterScraper::Test::Reso
         id: String,
         data: ^(XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]),
         monitor_id: String,
+        monitor_type: XTwitterScraper::EventDetail::MonitorType,
         occurred_at: Time,
         type: XTwitterScraper::EventType,
-        username: String,
+        keyword_monitor_id: String | nil,
+        query: String | nil,
+        username: String | nil,
         x_event_id: String | nil
       }
     end

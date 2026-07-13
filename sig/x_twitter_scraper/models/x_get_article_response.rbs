@@ -3,30 +3,31 @@ module XTwitterScraper
     type x_get_article_response =
       {
         article: XTwitterScraper::Models::XGetArticleResponse::Article,
-        author: XTwitterScraper::X::TweetAuthor
+        author: XTwitterScraper::Models::XGetArticleResponse::Author
       }
 
     class XGetArticleResponse < XTwitterScraper::Internal::Type::BaseModel
       attr_accessor article: XTwitterScraper::Models::XGetArticleResponse::Article
 
-      attr_reader author: XTwitterScraper::X::TweetAuthor?
+      attr_reader author: XTwitterScraper::Models::XGetArticleResponse::Author?
 
       def author=: (
-        XTwitterScraper::X::TweetAuthor
-      ) -> XTwitterScraper::X::TweetAuthor
+        XTwitterScraper::Models::XGetArticleResponse::Author
+      ) -> XTwitterScraper::Models::XGetArticleResponse::Author
 
       def initialize: (
         article: XTwitterScraper::Models::XGetArticleResponse::Article,
-        ?author: XTwitterScraper::X::TweetAuthor
+        ?author: XTwitterScraper::Models::XGetArticleResponse::Author
       ) -> void
 
       def to_hash: -> {
         article: XTwitterScraper::Models::XGetArticleResponse::Article,
-        author: XTwitterScraper::X::TweetAuthor
+        author: XTwitterScraper::Models::XGetArticleResponse::Author
       }
 
       type article =
         {
+          body_text: String,
           contents: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content],
           cover_image_url: String,
           created_at: String,
@@ -39,6 +40,10 @@ module XTwitterScraper
         }
 
       class Article < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader body_text: String?
+
+        def body_text=: (String) -> String
+
         attr_reader contents: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content]?
 
         def contents=: (
@@ -78,6 +83,7 @@ module XTwitterScraper
         def view_count=: (Integer) -> Integer
 
         def initialize: (
+          ?body_text: String,
           ?contents: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content],
           ?cover_image_url: String,
           ?created_at: String,
@@ -90,6 +96,7 @@ module XTwitterScraper
         ) -> void
 
         def to_hash: -> {
+          body_text: String,
           contents: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content],
           cover_image_url: String,
           created_at: String,
@@ -104,6 +111,8 @@ module XTwitterScraper
         type content =
           {
             height: Integer,
+            inline_style_ranges: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::InlineStyleRange],
+            preview_url: String,
             text: String,
             type: String,
             url: String,
@@ -114,6 +123,16 @@ module XTwitterScraper
           attr_reader height: Integer?
 
           def height=: (Integer) -> Integer
+
+          attr_reader inline_style_ranges: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::InlineStyleRange]?
+
+          def inline_style_ranges=: (
+            ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::InlineStyleRange]
+          ) -> ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::InlineStyleRange]
+
+          attr_reader preview_url: String?
+
+          def preview_url=: (String) -> String
 
           attr_reader text: String?
 
@@ -133,6 +152,8 @@ module XTwitterScraper
 
           def initialize: (
             ?height: Integer,
+            ?inline_style_ranges: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::InlineStyleRange],
+            ?preview_url: String,
             ?text: String,
             ?type: String,
             ?url: String,
@@ -141,12 +162,178 @@ module XTwitterScraper
 
           def to_hash: -> {
             height: Integer,
+            inline_style_ranges: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::InlineStyleRange],
+            preview_url: String,
             text: String,
             type: String,
             url: String,
             width: Integer
           }
+
+          type inline_style_range =
+            { length: Integer, offset: Integer, style: String }
+
+          class InlineStyleRange < XTwitterScraper::Internal::Type::BaseModel
+            attr_reader length: Integer?
+
+            def length=: (Integer) -> Integer
+
+            attr_reader offset: Integer?
+
+            def offset=: (Integer) -> Integer
+
+            attr_reader style: String?
+
+            def style=: (String) -> String
+
+            def initialize: (
+              ?length: Integer,
+              ?offset: Integer,
+              ?style: String
+            ) -> void
+
+            def to_hash: -> { length: Integer, offset: Integer, style: String }
+          end
         end
+      end
+
+      type author =
+        {
+          id: String,
+          name: String,
+          username: String,
+          can_dm: bool,
+          created_at: String,
+          description: String,
+          favourites_count: Integer,
+          followers_count: Integer,
+          following_count: Integer,
+          is_blue_verified: bool,
+          is_translator: bool,
+          is_verified: bool,
+          location: String,
+          media_count: Integer,
+          profile_banner_url: String,
+          profile_picture: String,
+          protected: bool,
+          statuses_count: Integer,
+          url: String
+        }
+
+      class Author < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor name: String
+
+        attr_accessor username: String
+
+        attr_reader can_dm: bool?
+
+        def can_dm=: (bool) -> bool
+
+        attr_reader created_at: String?
+
+        def created_at=: (String) -> String
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        attr_reader favourites_count: Integer?
+
+        def favourites_count=: (Integer) -> Integer
+
+        attr_reader followers_count: Integer?
+
+        def followers_count=: (Integer) -> Integer
+
+        attr_reader following_count: Integer?
+
+        def following_count=: (Integer) -> Integer
+
+        attr_reader is_blue_verified: bool?
+
+        def is_blue_verified=: (bool) -> bool
+
+        attr_reader is_translator: bool?
+
+        def is_translator=: (bool) -> bool
+
+        attr_reader is_verified: bool?
+
+        def is_verified=: (bool) -> bool
+
+        attr_reader location: String?
+
+        def location=: (String) -> String
+
+        attr_reader media_count: Integer?
+
+        def media_count=: (Integer) -> Integer
+
+        attr_reader profile_banner_url: String?
+
+        def profile_banner_url=: (String) -> String
+
+        attr_reader profile_picture: String?
+
+        def profile_picture=: (String) -> String
+
+        attr_reader protected: bool?
+
+        def protected=: (bool) -> bool
+
+        attr_reader statuses_count: Integer?
+
+        def statuses_count=: (Integer) -> Integer
+
+        attr_reader url: String?
+
+        def url=: (String) -> String
+
+        def initialize: (
+          id: String,
+          name: String,
+          username: String,
+          ?can_dm: bool,
+          ?created_at: String,
+          ?description: String,
+          ?favourites_count: Integer,
+          ?followers_count: Integer,
+          ?following_count: Integer,
+          ?is_blue_verified: bool,
+          ?is_translator: bool,
+          ?is_verified: bool,
+          ?location: String,
+          ?media_count: Integer,
+          ?profile_banner_url: String,
+          ?profile_picture: String,
+          ?protected: bool,
+          ?statuses_count: Integer,
+          ?url: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          name: String,
+          username: String,
+          can_dm: bool,
+          created_at: String,
+          description: String,
+          favourites_count: Integer,
+          followers_count: Integer,
+          following_count: Integer,
+          is_blue_verified: bool,
+          is_translator: bool,
+          is_verified: bool,
+          location: String,
+          media_count: Integer,
+          profile_banner_url: String,
+          profile_picture: String,
+          protected: bool,
+          statuses_count: Integer,
+          url: String
+        }
       end
     end
   end

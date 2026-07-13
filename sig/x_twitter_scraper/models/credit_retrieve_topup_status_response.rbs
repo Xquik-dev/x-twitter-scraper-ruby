@@ -1,0 +1,45 @@
+module XTwitterScraper
+  module Models
+    type credit_retrieve_topup_status_response =
+      {
+        status: XTwitterScraper::Models::CreditRetrieveTopupStatusResponse::status,
+        amount_dollars: Integer?,
+        credits: String
+      }
+
+    class CreditRetrieveTopupStatusResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor status: XTwitterScraper::Models::CreditRetrieveTopupStatusResponse::status
+
+      attr_accessor amount_dollars: Integer?
+
+      attr_reader credits: String?
+
+      def credits=: (String) -> String
+
+      def initialize: (
+        status: XTwitterScraper::Models::CreditRetrieveTopupStatusResponse::status,
+        ?amount_dollars: Integer?,
+        ?credits: String
+      ) -> void
+
+      def to_hash: -> {
+        status: XTwitterScraper::Models::CreditRetrieveTopupStatusResponse::status,
+        amount_dollars: Integer?,
+        credits: String
+      }
+
+      type status = :paid | :processing | :failed | :expired
+
+      module Status
+        extend XTwitterScraper::Internal::Type::Enum
+
+        PAID: :paid
+        PROCESSING: :processing
+        FAILED: :failed
+        EXPIRED: :expired
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::CreditRetrieveTopupStatusResponse::status]
+      end
+    end
+  end
+end

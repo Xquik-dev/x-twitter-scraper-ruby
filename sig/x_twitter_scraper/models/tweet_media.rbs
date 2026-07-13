@@ -1,0 +1,72 @@
+module XTwitterScraper
+  module Models
+    type tweet_media =
+      {
+        media_url: String,
+        type: XTwitterScraper::Models::TweetMedia::type_,
+        url: String,
+        video_variants: ::Array[XTwitterScraper::TweetMedia::VideoVariant]
+      }
+
+    class TweetMedia < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor media_url: String
+
+      attr_accessor type: XTwitterScraper::Models::TweetMedia::type_
+
+      attr_accessor url: String
+
+      attr_reader video_variants: ::Array[XTwitterScraper::TweetMedia::VideoVariant]?
+
+      def video_variants=: (
+        ::Array[XTwitterScraper::TweetMedia::VideoVariant]
+      ) -> ::Array[XTwitterScraper::TweetMedia::VideoVariant]
+
+      def initialize: (
+        media_url: String,
+        type: XTwitterScraper::Models::TweetMedia::type_,
+        url: String,
+        ?video_variants: ::Array[XTwitterScraper::TweetMedia::VideoVariant]
+      ) -> void
+
+      def to_hash: -> {
+        media_url: String,
+        type: XTwitterScraper::Models::TweetMedia::type_,
+        url: String,
+        video_variants: ::Array[XTwitterScraper::TweetMedia::VideoVariant]
+      }
+
+      type type_ = :photo | :video | :animated_gif
+
+      module Type
+        extend XTwitterScraper::Internal::Type::Enum
+
+        PHOTO: :photo
+        VIDEO: :video
+        ANIMATED_GIF: :animated_gif
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::TweetMedia::type_]
+      end
+
+      type video_variant =
+        { content_type: String, url: String, bitrate: Integer }
+
+      class VideoVariant < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor content_type: String
+
+        attr_accessor url: String
+
+        attr_reader bitrate: Integer?
+
+        def bitrate=: (Integer) -> Integer
+
+        def initialize: (
+          content_type: String,
+          url: String,
+          ?bitrate: Integer
+        ) -> void
+
+        def to_hash: -> { content_type: String, url: String, bitrate: Integer }
+      end
+    end
+  end
+end

@@ -15,18 +15,33 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :media_id
 
+        # Public media URL for tweet `media` arrays.
+        sig { returns(String) }
+        attr_accessor :media_url
+
         sig { returns(T::Boolean) }
         attr_accessor :success
 
         sig do
-          params(media_id: String, success: T::Boolean).returns(
-            T.attached_class
-          )
+          params(
+            media_id: String,
+            media_url: String,
+            success: T::Boolean
+          ).returns(T.attached_class)
         end
-        def self.new(media_id:, success: true)
+        def self.new(
+          media_id:,
+          # Public media URL for tweet `media` arrays.
+          media_url:,
+          success: true
+        )
         end
 
-        sig { override.returns({ media_id: String, success: T::Boolean }) }
+        sig do
+          override.returns(
+            { media_id: String, media_url: String, success: T::Boolean }
+          )
+        end
         def to_hash
         end
       end

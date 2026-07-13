@@ -6,6 +6,9 @@ module XTwitterScraper
       module Communities
       end
 
+      module Monitors
+      end
+
       module Support
       end
 

@@ -40,6 +40,7 @@ module XTwitterScraper
         COMMUNITY_MODERATOR_EXPLORER = :community_moderator_explorer
         COMMUNITY_POST_EXTRACTOR = :community_post_extractor
         COMMUNITY_SEARCH = :community_search
+        FAVORITERS = :favoriters
         FOLLOWER_EXPLORER = :follower_explorer
         FOLLOWING_EXPLORER = :following_explorer
         LIST_FOLLOWER_EXPLORER = :list_follower_explorer
@@ -54,6 +55,8 @@ module XTwitterScraper
         SPACE_EXPLORER = :space_explorer
         THREAD_EXTRACTOR = :thread_extractor
         TWEET_SEARCH_EXTRACTOR = :tweet_search_extractor
+        USER_LIKES = :user_likes
+        USER_MEDIA = :user_media
         VERIFIED_FOLLOWER_EXPLORER = :verified_follower_explorer
 
         # @!method self.values

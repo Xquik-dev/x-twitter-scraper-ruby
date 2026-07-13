@@ -23,7 +23,11 @@ module XTwitterScraper
       sig { returns(Integer) }
       attr_accessor :estimated_results
 
-      sig { returns(String) }
+      sig do
+        returns(
+          XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
+        )
+      end
       attr_accessor :source
 
       sig { returns(T.nilable(String)) }
@@ -38,7 +42,8 @@ module XTwitterScraper
           credits_available: String,
           credits_required: String,
           estimated_results: Integer,
-          source: String,
+          source:
+            XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::OrSymbol,
           resolved_x_user_id: String
         ).returns(T.attached_class)
       end
@@ -59,12 +64,82 @@ module XTwitterScraper
             credits_available: String,
             credits_required: String,
             estimated_results: Integer,
-            source: String,
+            source:
+              XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol,
             resolved_x_user_id: String
           }
         )
       end
       def to_hash
+      end
+
+      module Source
+        extend XTwitterScraper::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(
+              Symbol,
+              XTwitterScraper::Models::ExtractionEstimateCostResponse::Source
+            )
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        FOLLOWERS =
+          T.let(
+            :followers,
+            XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
+          )
+        FOLLOWING =
+          T.let(
+            :following,
+            XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
+          )
+        PAGINATION_CAP =
+          T.let(
+            :paginationCap,
+            XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
+          )
+        POSTS =
+          T.let(
+            :posts,
+            XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
+          )
+        QUOTE_COUNT =
+          T.let(
+            :quoteCount,
+            XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
+          )
+        REPLY_COUNT =
+          T.let(
+            :replyCount,
+            XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
+          )
+        RESULTS_LIMIT =
+          T.let(
+            :resultsLimit,
+            XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
+          )
+        RETWEET_COUNT =
+          T.let(
+            :retweetCount,
+            XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
+          )
+        UNKNOWN =
+          T.let(
+            :unknown,
+            XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
       end
     end
   end

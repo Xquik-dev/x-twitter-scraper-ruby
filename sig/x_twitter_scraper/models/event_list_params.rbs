@@ -2,7 +2,7 @@ module XTwitterScraper
   module Models
     type event_list_params =
       {
-        after: String,
+        cursor: String,
         event_type: XTwitterScraper::Models::event_type,
         limit: Integer,
         monitor_id: String
@@ -13,9 +13,9 @@ module XTwitterScraper
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      attr_reader after: String?
+      attr_reader cursor: String?
 
-      def after=: (String) -> String
+      def cursor=: (String) -> String
 
       attr_reader event_type: XTwitterScraper::Models::event_type?
 
@@ -32,7 +32,7 @@ module XTwitterScraper
       def monitor_id=: (String) -> String
 
       def initialize: (
-        ?after: String,
+        ?cursor: String,
         ?event_type: XTwitterScraper::Models::event_type,
         ?limit: Integer,
         ?monitor_id: String,
@@ -40,7 +40,7 @@ module XTwitterScraper
       ) -> void
 
       def to_hash: -> {
-        after: String,
+        cursor: String,
         event_type: XTwitterScraper::Models::event_type,
         limit: Integer,
         monitor_id: String,

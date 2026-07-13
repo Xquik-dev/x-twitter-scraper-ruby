@@ -24,7 +24,7 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::Support::TicketRetrieveResponse)
         end
         def retrieve(
-          # Support ticket ID
+          # Support ticket public ID
           id,
           request_options: {}
         )
@@ -40,7 +40,7 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::Support::TicketUpdateResponse)
         end
         def update(
-          # Support ticket ID to update
+          # Support ticket public ID to update
           id,
           status:,
           request_options: {}
@@ -65,7 +65,7 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::Support::TicketReplyResponse)
         end
         def reply(
-          # Support ticket ID for the reply
+          # Support ticket public ID for the reply
           id,
           body:,
           request_options: {}

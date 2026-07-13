@@ -7,14 +7,17 @@ module XTwitterScraper
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      # @!attribute after
-      #   Cursor for keyset pagination
+      # @!attribute cursor
+      #   Cursor for keyset pagination from prior response next_cursor
       #
       #   @return [String, nil]
-      optional :after, String
+      optional :cursor, String
 
       # @!attribute limit
-      #   Maximum number of items to return (1-100, default 50)
+      #   Maximum number of items to return (1-100, default 50). For paid per-result
+      #   endpoints, the returned count may be lower when remaining credits cannot cover
+      #   the requested page. If zero paid results are affordable, the endpoint returns
+      #   402 insufficient_credits.
       #
       #   @return [Integer, nil]
       optional :limit, Integer
@@ -31,10 +34,13 @@ module XTwitterScraper
       #   @return [Symbol, XTwitterScraper::Models::ExtractionListParams::ToolType, nil]
       optional :tool_type, enum: -> { XTwitterScraper::ExtractionListParams::ToolType }
 
-      # @!method initialize(after: nil, limit: nil, status: nil, tool_type: nil, request_options: {})
-      #   @param after [String] Cursor for keyset pagination
+      # @!method initialize(cursor: nil, limit: nil, status: nil, tool_type: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {XTwitterScraper::Models::ExtractionListParams} for more details.
       #
-      #   @param limit [Integer] Maximum number of items to return (1-100, default 50)
+      #   @param cursor [String] Cursor for keyset pagination from prior response next_cursor
+      #
+      #   @param limit [Integer] Maximum number of items to return (1-100, default 50). For paid per-result endpo
       #
       #   @param status [Symbol, XTwitterScraper::Models::ExtractionListParams::Status] Filter by job status
       #
@@ -63,6 +69,7 @@ module XTwitterScraper
         COMMUNITY_MODERATOR_EXPLORER = :community_moderator_explorer
         COMMUNITY_POST_EXTRACTOR = :community_post_extractor
         COMMUNITY_SEARCH = :community_search
+        FAVORITERS = :favoriters
         FOLLOWER_EXPLORER = :follower_explorer
         FOLLOWING_EXPLORER = :following_explorer
         LIST_FOLLOWER_EXPLORER = :list_follower_explorer
@@ -77,6 +84,8 @@ module XTwitterScraper
         SPACE_EXPLORER = :space_explorer
         THREAD_EXTRACTOR = :thread_extractor
         TWEET_SEARCH_EXTRACTOR = :tweet_search_extractor
+        USER_LIKES = :user_likes
+        USER_MEDIA = :user_media
         VERIFIED_FOLLOWER_EXPLORER = :verified_follower_explorer
 
         # @!method self.values

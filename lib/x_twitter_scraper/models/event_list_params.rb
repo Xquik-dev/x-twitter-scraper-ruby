@@ -7,11 +7,11 @@ module XTwitterScraper
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      # @!attribute after
-      #   Cursor for keyset pagination
+      # @!attribute cursor
+      #   Cursor for keyset pagination from prior response next_cursor
       #
       #   @return [String, nil]
-      optional :after, String
+      optional :cursor, String
 
       # @!attribute event_type
       #   Filter events by type
@@ -20,7 +20,10 @@ module XTwitterScraper
       optional :event_type, enum: -> { XTwitterScraper::EventType }
 
       # @!attribute limit
-      #   Maximum number of items to return (1-100, default 50)
+      #   Maximum number of items to return (1-100, default 50). For paid per-result
+      #   endpoints, the returned count may be lower when remaining credits cannot cover
+      #   the requested page. If zero paid results are affordable, the endpoint returns
+      #   402 insufficient_credits.
       #
       #   @return [Integer, nil]
       optional :limit, Integer
@@ -31,12 +34,15 @@ module XTwitterScraper
       #   @return [String, nil]
       optional :monitor_id, String
 
-      # @!method initialize(after: nil, event_type: nil, limit: nil, monitor_id: nil, request_options: {})
-      #   @param after [String] Cursor for keyset pagination
+      # @!method initialize(cursor: nil, event_type: nil, limit: nil, monitor_id: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {XTwitterScraper::Models::EventListParams} for more details.
+      #
+      #   @param cursor [String] Cursor for keyset pagination from prior response next_cursor
       #
       #   @param event_type [Symbol, XTwitterScraper::Models::EventType] Filter events by type
       #
-      #   @param limit [Integer] Maximum number of items to return (1-100, default 50)
+      #   @param limit [Integer] Maximum number of items to return (1-100, default 50). For paid per-result endpo
       #
       #   @param monitor_id [String] Filter events by monitor ID
       #

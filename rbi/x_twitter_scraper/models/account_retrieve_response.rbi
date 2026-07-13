@@ -11,6 +11,23 @@ module XTwitterScraper
           )
         end
 
+      sig do
+        returns(
+          XTwitterScraper::Models::AccountRetrieveResponse::MonitorBilling
+        )
+      end
+      attr_reader :monitor_billing
+
+      sig do
+        params(
+          monitor_billing:
+            XTwitterScraper::Models::AccountRetrieveResponse::MonitorBilling::OrHash
+        ).void
+      end
+      attr_writer :monitor_billing
+
+      # Deprecated. Monitor slots are unlimited, so this is always
+      # Number.MAX_SAFE_INTEGER.
       sig { returns(Integer) }
       attr_accessor :monitors_allowed
 
@@ -50,6 +67,8 @@ module XTwitterScraper
 
       sig do
         params(
+          monitor_billing:
+            XTwitterScraper::Models::AccountRetrieveResponse::MonitorBilling::OrHash,
           monitors_allowed: Integer,
           monitors_used: Integer,
           plan:
@@ -60,6 +79,9 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
+        monitor_billing:,
+        # Deprecated. Monitor slots are unlimited, so this is always
+        # Number.MAX_SAFE_INTEGER.
         monitors_allowed:,
         monitors_used:,
         plan:,
@@ -72,6 +94,8 @@ module XTwitterScraper
       sig do
         override.returns(
           {
+            monitor_billing:
+              XTwitterScraper::Models::AccountRetrieveResponse::MonitorBilling,
             monitors_allowed: Integer,
             monitors_used: Integer,
             plan:
@@ -83,6 +107,89 @@ module XTwitterScraper
         )
       end
       def to_hash
+      end
+
+      class MonitorBilling < XTwitterScraper::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              XTwitterScraper::Models::AccountRetrieveResponse::MonitorBilling,
+              XTwitterScraper::Internal::AnyHash
+            )
+          end
+
+        # Estimated daily credits for currently active monitors.
+        sig { returns(String) }
+        attr_accessor :active_daily_estimate
+
+        # Credits charged each hour for currently active monitors.
+        sig { returns(String) }
+        attr_accessor :active_hourly_burn
+
+        # Estimated daily credits for 1 active instant monitor.
+        sig { returns(String) }
+        attr_accessor :credits_per_active_monitor_day
+
+        # Hourly credits charged for 1 active instant monitor.
+        sig { returns(String) }
+        attr_accessor :credits_per_active_monitor_hour
+
+        # Webhook and event deliveries are included in monitor billing.
+        sig { returns(T::Boolean) }
+        attr_accessor :events_included
+
+        # Active monitors check every 1 second.
+        sig { returns(Integer) }
+        attr_accessor :instant_check_interval_seconds
+
+        # Monitor slot count is unlimited.
+        sig { returns(T::Boolean) }
+        attr_accessor :unlimited_slots
+
+        sig do
+          params(
+            active_daily_estimate: String,
+            active_hourly_burn: String,
+            credits_per_active_monitor_day: String,
+            credits_per_active_monitor_hour: String,
+            events_included: T::Boolean,
+            instant_check_interval_seconds: Integer,
+            unlimited_slots: T::Boolean
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Estimated daily credits for currently active monitors.
+          active_daily_estimate:,
+          # Credits charged each hour for currently active monitors.
+          active_hourly_burn:,
+          # Estimated daily credits for 1 active instant monitor.
+          credits_per_active_monitor_day:,
+          # Hourly credits charged for 1 active instant monitor.
+          credits_per_active_monitor_hour:,
+          # Webhook and event deliveries are included in monitor billing.
+          events_included:,
+          # Active monitors check every 1 second.
+          instant_check_interval_seconds:,
+          # Monitor slot count is unlimited.
+          unlimited_slots:
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              active_daily_estimate: String,
+              active_hourly_burn: String,
+              credits_per_active_monitor_day: String,
+              credits_per_active_monitor_hour: String,
+              events_included: T::Boolean,
+              instant_check_interval_seconds: Integer,
+              unlimited_slots: T::Boolean
+            }
+          )
+        end
+        def to_hash
+        end
       end
 
       module Plan
@@ -128,30 +235,50 @@ module XTwitterScraper
             )
           end
 
+        # Dollar amount charged when automatic top-up runs.
+        sig { returns(Float) }
+        attr_accessor :auto_topup_amount_dollars
+
         sig { returns(T::Boolean) }
         attr_accessor :auto_topup_enabled
 
-        sig { returns(Integer) }
+        # Bigint string threshold that triggers automatic top-up when enabled.
+        sig { returns(String) }
+        attr_accessor :auto_topup_threshold
+
+        # Bigint string to preserve precision above Number.MAX_SAFE_INTEGER.
+        sig { returns(String) }
         attr_accessor :balance
 
-        sig { returns(Integer) }
+        # Total purchased credits as a bigint string.
+        sig { returns(String) }
         attr_accessor :lifetime_purchased
 
-        sig { returns(Integer) }
+        # Total consumed credits as a bigint string.
+        sig { returns(String) }
         attr_accessor :lifetime_used
 
         sig do
           params(
+            auto_topup_amount_dollars: Float,
             auto_topup_enabled: T::Boolean,
-            balance: Integer,
-            lifetime_purchased: Integer,
-            lifetime_used: Integer
+            auto_topup_threshold: String,
+            balance: String,
+            lifetime_purchased: String,
+            lifetime_used: String
           ).returns(T.attached_class)
         end
         def self.new(
+          # Dollar amount charged when automatic top-up runs.
+          auto_topup_amount_dollars:,
           auto_topup_enabled:,
+          # Bigint string threshold that triggers automatic top-up when enabled.
+          auto_topup_threshold:,
+          # Bigint string to preserve precision above Number.MAX_SAFE_INTEGER.
           balance:,
+          # Total purchased credits as a bigint string.
           lifetime_purchased:,
+          # Total consumed credits as a bigint string.
           lifetime_used:
         )
         end
@@ -159,10 +286,12 @@ module XTwitterScraper
         sig do
           override.returns(
             {
+              auto_topup_amount_dollars: Float,
               auto_topup_enabled: T::Boolean,
-              balance: Integer,
-              lifetime_purchased: Integer,
-              lifetime_used: Integer
+              auto_topup_threshold: String,
+              balance: String,
+              lifetime_purchased: String,
+              lifetime_used: String
             }
           )
         end

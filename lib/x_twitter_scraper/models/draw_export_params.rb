@@ -15,8 +15,8 @@ module XTwitterScraper
       # @!attribute format_
       #   Export output format
       #
-      #   @return [Symbol, XTwitterScraper::Models::DrawExportParams::Format, nil]
-      optional :format_, enum: -> { XTwitterScraper::DrawExportParams::Format }
+      #   @return [Symbol, XTwitterScraper::Models::DrawExportParams::Format]
+      required :format_, enum: -> { XTwitterScraper::DrawExportParams::Format }
 
       # @!attribute type
       #   Export winners or all entries
@@ -24,7 +24,7 @@ module XTwitterScraper
       #   @return [Symbol, XTwitterScraper::Models::DrawExportParams::Type, nil]
       optional :type, enum: -> { XTwitterScraper::DrawExportParams::Type }
 
-      # @!method initialize(id:, format_: nil, type: nil, request_options: {})
+      # @!method initialize(id:, format_:, type: nil, request_options: {})
       #   @param id [String]
       #
       #   @param format_ [Symbol, XTwitterScraper::Models::DrawExportParams::Format] Export output format

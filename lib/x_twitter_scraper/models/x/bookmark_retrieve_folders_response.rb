@@ -12,19 +12,23 @@ module XTwitterScraper
                  -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder] }
 
         # @!attribute has_next_page
+        #   Always false for the current bookmark folder route
         #
         #   @return [Boolean]
         required :has_next_page, XTwitterScraper::Internal::Type::Boolean
 
         # @!attribute next_cursor
+        #   Always empty for the current bookmark folder route
         #
         #   @return [String]
         required :next_cursor, String
 
         # @!method initialize(folders:, has_next_page:, next_cursor:)
         #   @param folders [Array<XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder>]
-        #   @param has_next_page [Boolean]
-        #   @param next_cursor [String]
+        #
+        #   @param has_next_page [Boolean] Always false for the current bookmark folder route
+        #
+        #   @param next_cursor [String] Always empty for the current bookmark folder route
 
         class Folder < XTwitterScraper::Internal::Type::BaseModel
           # @!attribute id

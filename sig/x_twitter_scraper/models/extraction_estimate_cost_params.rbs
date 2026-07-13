@@ -4,14 +4,43 @@ module XTwitterScraper
       {
         tool_type: XTwitterScraper::Models::ExtractionEstimateCostParams::tool_type,
         advanced_query: String,
+        any_words: String,
+        bounding_box: String,
+        cashtags: String,
+        conversation_id: String,
         exact_phrase: String,
         exclude_words: String,
+        from_user: String,
+        hashtags: String,
+        in_reply_to_tweet_id: String,
+        language: String,
+        list_id: String,
+        media_type: XTwitterScraper::Models::ExtractionEstimateCostParams::media_type,
+        mentioning: String,
+        min_faves: Integer,
+        min_quotes: Integer,
+        min_replies: Integer,
+        min_retweets: Integer,
+        place: String,
+        place_country: String,
+        point_radius: String,
+        quotes: XTwitterScraper::Models::ExtractionEstimateCostParams::quotes,
+        quotes_of_tweet_id: String,
+        replies: XTwitterScraper::Models::ExtractionEstimateCostParams::replies,
+        results_limit: Integer,
+        retweets: XTwitterScraper::Models::ExtractionEstimateCostParams::retweets,
+        retweets_of_tweet_id: String,
         search_query: String,
+        since_date: Date,
         target_community_id: String,
         target_list_id: String,
         target_space_id: String,
         target_tweet_id: String,
-        target_username: String
+        target_username: String,
+        to_user: String,
+        until_date: Date,
+        url: String,
+        verified_only: bool
       }
       & XTwitterScraper::Internal::Type::request_parameters
 
@@ -25,6 +54,22 @@ module XTwitterScraper
 
       def advanced_query=: (String) -> String
 
+      attr_reader any_words: String?
+
+      def any_words=: (String) -> String
+
+      attr_reader bounding_box: String?
+
+      def bounding_box=: (String) -> String
+
+      attr_reader cashtags: String?
+
+      def cashtags=: (String) -> String
+
+      attr_reader conversation_id: String?
+
+      def conversation_id=: (String) -> String
+
       attr_reader exact_phrase: String?
 
       def exact_phrase=: (String) -> String
@@ -33,9 +78,101 @@ module XTwitterScraper
 
       def exclude_words=: (String) -> String
 
+      attr_reader from_user: String?
+
+      def from_user=: (String) -> String
+
+      attr_reader hashtags: String?
+
+      def hashtags=: (String) -> String
+
+      attr_reader in_reply_to_tweet_id: String?
+
+      def in_reply_to_tweet_id=: (String) -> String
+
+      attr_reader language: String?
+
+      def language=: (String) -> String
+
+      attr_reader list_id: String?
+
+      def list_id=: (String) -> String
+
+      attr_reader media_type: XTwitterScraper::Models::ExtractionEstimateCostParams::media_type?
+
+      def media_type=: (
+        XTwitterScraper::Models::ExtractionEstimateCostParams::media_type
+      ) -> XTwitterScraper::Models::ExtractionEstimateCostParams::media_type
+
+      attr_reader mentioning: String?
+
+      def mentioning=: (String) -> String
+
+      attr_reader min_faves: Integer?
+
+      def min_faves=: (Integer) -> Integer
+
+      attr_reader min_quotes: Integer?
+
+      def min_quotes=: (Integer) -> Integer
+
+      attr_reader min_replies: Integer?
+
+      def min_replies=: (Integer) -> Integer
+
+      attr_reader min_retweets: Integer?
+
+      def min_retweets=: (Integer) -> Integer
+
+      attr_reader place: String?
+
+      def place=: (String) -> String
+
+      attr_reader place_country: String?
+
+      def place_country=: (String) -> String
+
+      attr_reader point_radius: String?
+
+      def point_radius=: (String) -> String
+
+      attr_reader quotes: XTwitterScraper::Models::ExtractionEstimateCostParams::quotes?
+
+      def quotes=: (
+        XTwitterScraper::Models::ExtractionEstimateCostParams::quotes
+      ) -> XTwitterScraper::Models::ExtractionEstimateCostParams::quotes
+
+      attr_reader quotes_of_tweet_id: String?
+
+      def quotes_of_tweet_id=: (String) -> String
+
+      attr_reader replies: XTwitterScraper::Models::ExtractionEstimateCostParams::replies?
+
+      def replies=: (
+        XTwitterScraper::Models::ExtractionEstimateCostParams::replies
+      ) -> XTwitterScraper::Models::ExtractionEstimateCostParams::replies
+
+      attr_reader results_limit: Integer?
+
+      def results_limit=: (Integer) -> Integer
+
+      attr_reader retweets: XTwitterScraper::Models::ExtractionEstimateCostParams::retweets?
+
+      def retweets=: (
+        XTwitterScraper::Models::ExtractionEstimateCostParams::retweets
+      ) -> XTwitterScraper::Models::ExtractionEstimateCostParams::retweets
+
+      attr_reader retweets_of_tweet_id: String?
+
+      def retweets_of_tweet_id=: (String) -> String
+
       attr_reader search_query: String?
 
       def search_query=: (String) -> String
+
+      attr_reader since_date: Date?
+
+      def since_date=: (Date) -> Date
 
       attr_reader target_community_id: String?
 
@@ -57,31 +194,105 @@ module XTwitterScraper
 
       def target_username=: (String) -> String
 
+      attr_reader to_user: String?
+
+      def to_user=: (String) -> String
+
+      attr_reader until_date: Date?
+
+      def until_date=: (Date) -> Date
+
+      attr_reader url: String?
+
+      def url=: (String) -> String
+
+      attr_reader verified_only: bool?
+
+      def verified_only=: (bool) -> bool
+
       def initialize: (
         tool_type: XTwitterScraper::Models::ExtractionEstimateCostParams::tool_type,
         ?advanced_query: String,
+        ?any_words: String,
+        ?bounding_box: String,
+        ?cashtags: String,
+        ?conversation_id: String,
         ?exact_phrase: String,
         ?exclude_words: String,
+        ?from_user: String,
+        ?hashtags: String,
+        ?in_reply_to_tweet_id: String,
+        ?language: String,
+        ?list_id: String,
+        ?media_type: XTwitterScraper::Models::ExtractionEstimateCostParams::media_type,
+        ?mentioning: String,
+        ?min_faves: Integer,
+        ?min_quotes: Integer,
+        ?min_replies: Integer,
+        ?min_retweets: Integer,
+        ?place: String,
+        ?place_country: String,
+        ?point_radius: String,
+        ?quotes: XTwitterScraper::Models::ExtractionEstimateCostParams::quotes,
+        ?quotes_of_tweet_id: String,
+        ?replies: XTwitterScraper::Models::ExtractionEstimateCostParams::replies,
+        ?results_limit: Integer,
+        ?retweets: XTwitterScraper::Models::ExtractionEstimateCostParams::retweets,
+        ?retweets_of_tweet_id: String,
         ?search_query: String,
+        ?since_date: Date,
         ?target_community_id: String,
         ?target_list_id: String,
         ?target_space_id: String,
         ?target_tweet_id: String,
         ?target_username: String,
+        ?to_user: String,
+        ?until_date: Date,
+        ?url: String,
+        ?verified_only: bool,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
       def to_hash: -> {
         tool_type: XTwitterScraper::Models::ExtractionEstimateCostParams::tool_type,
         advanced_query: String,
+        any_words: String,
+        bounding_box: String,
+        cashtags: String,
+        conversation_id: String,
         exact_phrase: String,
         exclude_words: String,
+        from_user: String,
+        hashtags: String,
+        in_reply_to_tweet_id: String,
+        language: String,
+        list_id: String,
+        media_type: XTwitterScraper::Models::ExtractionEstimateCostParams::media_type,
+        mentioning: String,
+        min_faves: Integer,
+        min_quotes: Integer,
+        min_replies: Integer,
+        min_retweets: Integer,
+        place: String,
+        place_country: String,
+        point_radius: String,
+        quotes: XTwitterScraper::Models::ExtractionEstimateCostParams::quotes,
+        quotes_of_tweet_id: String,
+        replies: XTwitterScraper::Models::ExtractionEstimateCostParams::replies,
+        results_limit: Integer,
+        retweets: XTwitterScraper::Models::ExtractionEstimateCostParams::retweets,
+        retweets_of_tweet_id: String,
         search_query: String,
+        since_date: Date,
         target_community_id: String,
         target_list_id: String,
         target_space_id: String,
         target_tweet_id: String,
         target_username: String,
+        to_user: String,
+        until_date: Date,
+        url: String,
+        verified_only: bool,
         request_options: XTwitterScraper::RequestOptions
       }
 
@@ -91,6 +302,7 @@ module XTwitterScraper
         | :community_moderator_explorer
         | :community_post_extractor
         | :community_search
+        | :favoriters
         | :follower_explorer
         | :following_explorer
         | :list_follower_explorer
@@ -105,6 +317,8 @@ module XTwitterScraper
         | :space_explorer
         | :thread_extractor
         | :tweet_search_extractor
+        | :user_likes
+        | :user_media
         | :verified_follower_explorer
 
       module ToolType
@@ -115,6 +329,7 @@ module XTwitterScraper
         COMMUNITY_MODERATOR_EXPLORER: :community_moderator_explorer
         COMMUNITY_POST_EXTRACTOR: :community_post_extractor
         COMMUNITY_SEARCH: :community_search
+        FAVORITERS: :favoriters
         FOLLOWER_EXPLORER: :follower_explorer
         FOLLOWING_EXPLORER: :following_explorer
         LIST_FOLLOWER_EXPLORER: :list_follower_explorer
@@ -129,9 +344,62 @@ module XTwitterScraper
         SPACE_EXPLORER: :space_explorer
         THREAD_EXTRACTOR: :thread_extractor
         TWEET_SEARCH_EXTRACTOR: :tweet_search_extractor
+        USER_LIKES: :user_likes
+        USER_MEDIA: :user_media
         VERIFIED_FOLLOWER_EXPLORER: :verified_follower_explorer
 
         def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionEstimateCostParams::tool_type]
+      end
+
+      type media_type = :images | :videos | :gifs | :media | :links | :none
+
+      module MediaType
+        extend XTwitterScraper::Internal::Type::Enum
+
+        IMAGES: :images
+        VIDEOS: :videos
+        GIFS: :gifs
+        MEDIA: :media
+        LINKS: :links
+        NONE: :none
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionEstimateCostParams::media_type]
+      end
+
+      type quotes = :include | :exclude | :only
+
+      module Quotes
+        extend XTwitterScraper::Internal::Type::Enum
+
+        INCLUDE: :include
+        EXCLUDE: :exclude
+        ONLY: :only
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionEstimateCostParams::quotes]
+      end
+
+      type replies = :include | :exclude | :only
+
+      module Replies
+        extend XTwitterScraper::Internal::Type::Enum
+
+        INCLUDE: :include
+        EXCLUDE: :exclude
+        ONLY: :only
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionEstimateCostParams::replies]
+      end
+
+      type retweets = :include | :exclude | :only
+
+      module Retweets
+        extend XTwitterScraper::Internal::Type::Enum
+
+        INCLUDE: :include
+        EXCLUDE: :exclude
+        ONLY: :only
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionEstimateCostParams::retweets]
       end
     end
   end

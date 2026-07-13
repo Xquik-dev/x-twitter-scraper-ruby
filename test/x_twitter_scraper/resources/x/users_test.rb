@@ -17,14 +17,53 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
         id: String,
         name: String,
         username: String,
+        automated_by: String | nil,
+        can_dm: XTwitterScraper::Internal::Type::Boolean | nil,
+        community_role: String | nil,
+        cover_picture: String | nil,
         created_at: String | nil,
         description: String | nil,
+        favourites_count: Integer | nil,
         followers: Integer | nil,
         following: Integer | nil,
+        has_custom_timelines: XTwitterScraper::Internal::Type::Boolean | nil,
+        is_automated: XTwitterScraper::Internal::Type::Boolean | nil,
+        is_blue_verified: XTwitterScraper::Internal::Type::Boolean | nil,
+        is_translator: XTwitterScraper::Internal::Type::Boolean | nil,
+        is_verified: XTwitterScraper::Internal::Type::Boolean | nil,
         location: String | nil,
+        media_count: Integer | nil,
+        pinned_tweet_ids: ^(XTwitterScraper::Internal::Type::ArrayOf[String]) | nil,
+        possibly_sensitive: XTwitterScraper::Internal::Type::Boolean | nil,
+        profile_bio: ^(XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]) | nil,
+        profile_banner_url: String | nil,
         profile_picture: String | nil,
+        protected: XTwitterScraper::Internal::Type::Boolean | nil,
         statuses_count: Integer | nil,
-        verified: XTwitterScraper::Internal::Type::Boolean | nil
+        unavailable: XTwitterScraper::Internal::Type::Boolean | nil,
+        unavailable_reason: String | nil,
+        url: String | nil,
+        verified: XTwitterScraper::Internal::Type::Boolean | nil,
+        verified_type: String | nil,
+        viewer_followed_by: XTwitterScraper::Internal::Type::Boolean | nil,
+        viewer_following: XTwitterScraper::Internal::Type::Boolean | nil,
+        withheld_in_countries: ^(XTwitterScraper::Internal::Type::ArrayOf[String]) | nil
+      }
+    end
+  end
+
+  def test_remove_follower_required_params
+    skip("Mock server tests are disabled")
+
+    response = @x_twitter_scraper.x.users.remove_follower("id", account: "@elonmusk")
+
+    assert_pattern do
+      response => XTwitterScraper::Models::X::UserRemoveFollowerResponse
+    end
+
+    assert_pattern do
+      response => {
+        success: true | false
       }
     end
   end
@@ -35,13 +74,18 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_batch(ids: "ids")
 
     assert_pattern do
-      response => XTwitterScraper::PaginatedUsers
+      response => XTwitterScraper::Models::X::UserRetrieveBatchResponse
     end
 
     assert_pattern do
       response => {
-        has_next_page: XTwitterScraper::Internal::Type::Boolean,
+        has_next_page: true | false,
         next_cursor: String,
+        processed_count: Integer,
+        requested_count: Integer,
+        returned_count: Integer,
+        unavailable_ids: ^(XTwitterScraper::Internal::Type::ArrayOf[String]),
+        unprocessed_ids: ^(XTwitterScraper::Internal::Type::ArrayOf[String]),
         users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile])
       }
     end
@@ -141,6 +185,24 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     skip("Mock server tests are disabled")
 
     response = @x_twitter_scraper.x.users.retrieve_mentions("id")
+
+    assert_pattern do
+      response => XTwitterScraper::PaginatedTweets
+    end
+
+    assert_pattern do
+      response => {
+        has_next_page: XTwitterScraper::Internal::Type::Boolean,
+        next_cursor: String,
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet])
+      }
+    end
+  end
+
+  def test_retrieve_replies
+    skip("Mock server tests are disabled")
+
+    response = @x_twitter_scraper.x.users.retrieve_replies("id")
 
     assert_pattern do
       response => XTwitterScraper::PaginatedTweets

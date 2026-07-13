@@ -15,7 +15,8 @@ module XTwitterScraper
             )
           end
 
-        # Comma-separated user IDs (max 100)
+        # Comma-separated numeric user IDs (1-100 values). Duplicate IDs are ignored while
+        # preserving first-seen order.
         sig { returns(String) }
         attr_accessor :ids
 
@@ -26,7 +27,8 @@ module XTwitterScraper
           ).returns(T.attached_class)
         end
         def self.new(
-          # Comma-separated user IDs (max 100)
+          # Comma-separated numeric user IDs (1-100 values). Duplicate IDs are ignored while
+          # preserving first-seen order.
           ids:,
           request_options: {}
         )

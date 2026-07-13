@@ -2,7 +2,7 @@ module XTwitterScraper
   module Models
     module X
       type dm_retrieve_history_params =
-        { user_id: String, cursor: String, max_id: String }
+        { user_id: String, account: String, cursor: String, max_id: String }
         & XTwitterScraper::Internal::Type::request_parameters
 
       class DmRetrieveHistoryParams < XTwitterScraper::Internal::Type::BaseModel
@@ -10,6 +10,8 @@ module XTwitterScraper
         include XTwitterScraper::Internal::Type::RequestParameters
 
         attr_accessor user_id: String
+
+        attr_accessor account: String
 
         attr_reader cursor: String?
 
@@ -21,6 +23,7 @@ module XTwitterScraper
 
         def initialize: (
           user_id: String,
+          account: String,
           ?cursor: String,
           ?max_id: String,
           ?request_options: XTwitterScraper::request_opts
@@ -28,6 +31,7 @@ module XTwitterScraper
 
         def to_hash: -> {
           user_id: String,
+          account: String,
           cursor: String,
           max_id: String,
           request_options: XTwitterScraper::RequestOptions

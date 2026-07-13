@@ -15,7 +15,7 @@ class XTwitterScraper::Test::Resources::XTest < XTwitterScraper::Test::ResourceT
     assert_pattern do
       response => {
         article: XTwitterScraper::Models::XGetArticleResponse::Article,
-        author: XTwitterScraper::X::TweetAuthor | nil
+        author: XTwitterScraper::Models::XGetArticleResponse::Author | nil
       }
     end
   end

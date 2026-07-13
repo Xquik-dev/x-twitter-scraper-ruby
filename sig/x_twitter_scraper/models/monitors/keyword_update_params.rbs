@@ -1,0 +1,44 @@
+module XTwitterScraper
+  module Models
+    module Monitors
+      type keyword_update_params =
+        {
+          id: String,
+          event_types: ::Array[XTwitterScraper::Models::event_type],
+          is_active: bool
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class KeywordUpdateParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_reader event_types: ::Array[XTwitterScraper::Models::event_type]?
+
+        def event_types=: (
+          ::Array[XTwitterScraper::Models::event_type]
+        ) -> ::Array[XTwitterScraper::Models::event_type]
+
+        attr_reader is_active: bool?
+
+        def is_active=: (bool) -> bool
+
+        def initialize: (
+          id: String,
+          ?event_types: ::Array[XTwitterScraper::Models::event_type],
+          ?is_active: bool,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          event_types: ::Array[XTwitterScraper::Models::event_type],
+          is_active: bool,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

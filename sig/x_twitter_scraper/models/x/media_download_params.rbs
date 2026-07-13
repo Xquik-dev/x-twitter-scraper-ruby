@@ -2,12 +2,21 @@ module XTwitterScraper
   module Models
     module X
       type media_download_params =
-        { tweet_ids: ::Array[String], tweet_input: String }
+        {
+          tweet_id: String,
+          tweet_ids: ::Array[String],
+          tweet_input: String,
+          tweet_url: String
+        }
         & XTwitterScraper::Internal::Type::request_parameters
 
       class MediaDownloadParams < XTwitterScraper::Internal::Type::BaseModel
         extend XTwitterScraper::Internal::Type::RequestParameters::Converter
         include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_reader tweet_id: String?
+
+        def tweet_id=: (String) -> String
 
         attr_reader tweet_ids: ::Array[String]?
 
@@ -17,15 +26,23 @@ module XTwitterScraper
 
         def tweet_input=: (String) -> String
 
+        attr_reader tweet_url: String?
+
+        def tweet_url=: (String) -> String
+
         def initialize: (
+          ?tweet_id: String,
           ?tweet_ids: ::Array[String],
           ?tweet_input: String,
+          ?tweet_url: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
         def to_hash: -> {
+          tweet_id: String,
           tweet_ids: ::Array[String],
           tweet_input: String,
+          tweet_url: String,
           request_options: XTwitterScraper::RequestOptions
         }
       end

@@ -2,7 +2,36 @@ module XTwitterScraper
   module Models
     module X
       type user_retrieve_media_params =
-        { id: String, cursor: String }
+        {
+          id: String,
+          any_words: String,
+          cashtags: String,
+          conversation_id: String,
+          cursor: String,
+          exact_phrase: String,
+          exclude_words: String,
+          from_user: String,
+          hashtags: String,
+          in_reply_to_tweet_id: String,
+          language: String,
+          media_type: XTwitterScraper::Models::X::UserRetrieveMediaParams::media_type,
+          mentioning: String,
+          min_faves: Integer,
+          min_quotes: Integer,
+          min_replies: Integer,
+          min_retweets: Integer,
+          page_size: Integer,
+          quotes: XTwitterScraper::Models::X::UserRetrieveMediaParams::quotes,
+          quotes_of_tweet_id: String,
+          replies: XTwitterScraper::Models::X::UserRetrieveMediaParams::replies,
+          retweets: XTwitterScraper::Models::X::UserRetrieveMediaParams::retweets,
+          retweets_of_tweet_id: String,
+          since_date: Date,
+          to_user: String,
+          until_date: Date,
+          url: String,
+          verified_only: bool
+        }
         & XTwitterScraper::Internal::Type::request_parameters
 
       class UserRetrieveMediaParams < XTwitterScraper::Internal::Type::BaseModel
@@ -11,21 +40,236 @@ module XTwitterScraper
 
         attr_accessor id: String
 
+        attr_reader any_words: String?
+
+        def any_words=: (String) -> String
+
+        attr_reader cashtags: String?
+
+        def cashtags=: (String) -> String
+
+        attr_reader conversation_id: String?
+
+        def conversation_id=: (String) -> String
+
         attr_reader cursor: String?
 
         def cursor=: (String) -> String
 
+        attr_reader exact_phrase: String?
+
+        def exact_phrase=: (String) -> String
+
+        attr_reader exclude_words: String?
+
+        def exclude_words=: (String) -> String
+
+        attr_reader from_user: String?
+
+        def from_user=: (String) -> String
+
+        attr_reader hashtags: String?
+
+        def hashtags=: (String) -> String
+
+        attr_reader in_reply_to_tweet_id: String?
+
+        def in_reply_to_tweet_id=: (String) -> String
+
+        attr_reader language: String?
+
+        def language=: (String) -> String
+
+        attr_reader media_type: XTwitterScraper::Models::X::UserRetrieveMediaParams::media_type?
+
+        def media_type=: (
+          XTwitterScraper::Models::X::UserRetrieveMediaParams::media_type
+        ) -> XTwitterScraper::Models::X::UserRetrieveMediaParams::media_type
+
+        attr_reader mentioning: String?
+
+        def mentioning=: (String) -> String
+
+        attr_reader min_faves: Integer?
+
+        def min_faves=: (Integer) -> Integer
+
+        attr_reader min_quotes: Integer?
+
+        def min_quotes=: (Integer) -> Integer
+
+        attr_reader min_replies: Integer?
+
+        def min_replies=: (Integer) -> Integer
+
+        attr_reader min_retweets: Integer?
+
+        def min_retweets=: (Integer) -> Integer
+
+        attr_reader page_size: Integer?
+
+        def page_size=: (Integer) -> Integer
+
+        attr_reader quotes: XTwitterScraper::Models::X::UserRetrieveMediaParams::quotes?
+
+        def quotes=: (
+          XTwitterScraper::Models::X::UserRetrieveMediaParams::quotes
+        ) -> XTwitterScraper::Models::X::UserRetrieveMediaParams::quotes
+
+        attr_reader quotes_of_tweet_id: String?
+
+        def quotes_of_tweet_id=: (String) -> String
+
+        attr_reader replies: XTwitterScraper::Models::X::UserRetrieveMediaParams::replies?
+
+        def replies=: (
+          XTwitterScraper::Models::X::UserRetrieveMediaParams::replies
+        ) -> XTwitterScraper::Models::X::UserRetrieveMediaParams::replies
+
+        attr_reader retweets: XTwitterScraper::Models::X::UserRetrieveMediaParams::retweets?
+
+        def retweets=: (
+          XTwitterScraper::Models::X::UserRetrieveMediaParams::retweets
+        ) -> XTwitterScraper::Models::X::UserRetrieveMediaParams::retweets
+
+        attr_reader retweets_of_tweet_id: String?
+
+        def retweets_of_tweet_id=: (String) -> String
+
+        attr_reader since_date: Date?
+
+        def since_date=: (Date) -> Date
+
+        attr_reader to_user: String?
+
+        def to_user=: (String) -> String
+
+        attr_reader until_date: Date?
+
+        def until_date=: (Date) -> Date
+
+        attr_reader url: String?
+
+        def url=: (String) -> String
+
+        attr_reader verified_only: bool?
+
+        def verified_only=: (bool) -> bool
+
         def initialize: (
           id: String,
+          ?any_words: String,
+          ?cashtags: String,
+          ?conversation_id: String,
           ?cursor: String,
+          ?exact_phrase: String,
+          ?exclude_words: String,
+          ?from_user: String,
+          ?hashtags: String,
+          ?in_reply_to_tweet_id: String,
+          ?language: String,
+          ?media_type: XTwitterScraper::Models::X::UserRetrieveMediaParams::media_type,
+          ?mentioning: String,
+          ?min_faves: Integer,
+          ?min_quotes: Integer,
+          ?min_replies: Integer,
+          ?min_retweets: Integer,
+          ?page_size: Integer,
+          ?quotes: XTwitterScraper::Models::X::UserRetrieveMediaParams::quotes,
+          ?quotes_of_tweet_id: String,
+          ?replies: XTwitterScraper::Models::X::UserRetrieveMediaParams::replies,
+          ?retweets: XTwitterScraper::Models::X::UserRetrieveMediaParams::retweets,
+          ?retweets_of_tweet_id: String,
+          ?since_date: Date,
+          ?to_user: String,
+          ?until_date: Date,
+          ?url: String,
+          ?verified_only: bool,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
         def to_hash: -> {
           id: String,
+          any_words: String,
+          cashtags: String,
+          conversation_id: String,
           cursor: String,
+          exact_phrase: String,
+          exclude_words: String,
+          from_user: String,
+          hashtags: String,
+          in_reply_to_tweet_id: String,
+          language: String,
+          media_type: XTwitterScraper::Models::X::UserRetrieveMediaParams::media_type,
+          mentioning: String,
+          min_faves: Integer,
+          min_quotes: Integer,
+          min_replies: Integer,
+          min_retweets: Integer,
+          page_size: Integer,
+          quotes: XTwitterScraper::Models::X::UserRetrieveMediaParams::quotes,
+          quotes_of_tweet_id: String,
+          replies: XTwitterScraper::Models::X::UserRetrieveMediaParams::replies,
+          retweets: XTwitterScraper::Models::X::UserRetrieveMediaParams::retweets,
+          retweets_of_tweet_id: String,
+          since_date: Date,
+          to_user: String,
+          until_date: Date,
+          url: String,
+          verified_only: bool,
           request_options: XTwitterScraper::RequestOptions
         }
+
+        type media_type = :images | :videos | :gifs | :media | :links | :none
+
+        module MediaType
+          extend XTwitterScraper::Internal::Type::Enum
+
+          IMAGES: :images
+          VIDEOS: :videos
+          GIFS: :gifs
+          MEDIA: :media
+          LINKS: :links
+          NONE: :none
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::UserRetrieveMediaParams::media_type]
+        end
+
+        type quotes = :include | :exclude | :only
+
+        module Quotes
+          extend XTwitterScraper::Internal::Type::Enum
+
+          INCLUDE: :include
+          EXCLUDE: :exclude
+          ONLY: :only
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::UserRetrieveMediaParams::quotes]
+        end
+
+        type replies = :include | :exclude | :only
+
+        module Replies
+          extend XTwitterScraper::Internal::Type::Enum
+
+          INCLUDE: :include
+          EXCLUDE: :exclude
+          ONLY: :only
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::UserRetrieveMediaParams::replies]
+        end
+
+        type retweets = :include | :exclude | :only
+
+        module Retweets
+          extend XTwitterScraper::Internal::Type::Enum
+
+          INCLUDE: :include
+          EXCLUDE: :exclude
+          ONLY: :only
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::UserRetrieveMediaParams::retweets]
+        end
       end
     end
   end

@@ -32,7 +32,7 @@ module XTwitterScraper
       #
       # @overload update(id, event_types: nil, is_active: nil, url: nil, request_options: {})
       #
-      # @param id [String] Resource ID (stringified bigint)
+      # @param id [String] Resource ID returned by the matching create or list endpoint.
       #
       # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
       #
@@ -78,7 +78,7 @@ module XTwitterScraper
       #
       # @overload deactivate(id, request_options: {})
       #
-      # @param id [String] Resource ID (stringified bigint)
+      # @param id [String] Resource ID returned by the matching create or list endpoint.
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -98,7 +98,7 @@ module XTwitterScraper
       #
       # @overload list_deliveries(id, request_options: {})
       #
-      # @param id [String] Resource ID (stringified bigint)
+      # @param id [String] Resource ID returned by the matching create or list endpoint.
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -114,11 +114,31 @@ module XTwitterScraper
         )
       end
 
+      # Test and resume webhook endpoint
+      #
+      # @overload resume(id, request_options: {})
+      #
+      # @param id [String] Resource ID returned by the matching create or list endpoint.
+      #
+      # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [XTwitterScraper::Models::WebhookResumeResponse]
+      #
+      # @see XTwitterScraper::Models::WebhookResumeParams
+      def resume(id, params = {})
+        @client.request(
+          method: :post,
+          path: ["webhooks/%1$s/resume", id],
+          model: XTwitterScraper::Models::WebhookResumeResponse,
+          options: params[:request_options]
+        )
+      end
+
       # Test webhook endpoint
       #
       # @overload test_(id, request_options: {})
       #
-      # @param id [String] Resource ID (stringified bigint)
+      # @param id [String] Resource ID returned by the matching create or list endpoint.
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #

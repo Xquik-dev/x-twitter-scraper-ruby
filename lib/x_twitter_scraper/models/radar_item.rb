@@ -4,7 +4,7 @@ module XTwitterScraper
   module Models
     class RadarItem < XTwitterScraper::Internal::Type::BaseModel
       # @!attribute id
-      #   Internal numeric identifier (stringified bigint).
+      #   Radar item identifier.
       #
       #   @return [String]
       required :id, String
@@ -93,7 +93,7 @@ module XTwitterScraper
       #   Trending topic with score, category, source, region, language, and
       #   source-specific metadata.
       #
-      #   @param id [String] Internal numeric identifier (stringified bigint).
+      #   @param id [String] Radar item identifier.
       #
       #   @param category [Symbol, XTwitterScraper::Models::RadarItem::Category]
       #

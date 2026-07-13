@@ -21,6 +21,7 @@ module XTwitterScraper
       sig { returns(T::Array[XTwitterScraper::EventType::TaggedSymbol]) }
       attr_accessor :event_types
 
+      # Plaintext HMAC signing secret returned only at creation.
       sig { returns(String) }
       attr_accessor :secret
 
@@ -41,6 +42,7 @@ module XTwitterScraper
         created_at:,
         # Array of event types to subscribe to.
         event_types:,
+        # Plaintext HMAC signing secret returned only at creation.
         secret:,
         url:
       )

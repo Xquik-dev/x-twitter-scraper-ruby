@@ -42,7 +42,7 @@ module XTwitterScraper
         #
         # @overload delete(id, account:, community_name:, request_options: {})
         #
-        # @param id [String] Resource ID (stringified bigint)
+        # @param id [String] Resource ID returned by the matching create or list endpoint.
         #
         # @param account [String] X account (@username or ID) deleting the community
         #
@@ -84,6 +84,9 @@ module XTwitterScraper
           )
         end
 
+        # Some parameter documentations has been truncated, see
+        # {XTwitterScraper::Models::X::CommunityRetrieveMembersParams} for more details.
+        #
         # List members of a community
         #
         # @overload retrieve_members(id, cursor: nil, page_size: nil, request_options: {})
@@ -92,7 +95,7 @@ module XTwitterScraper
         #
         # @param cursor [String] Pagination cursor
         #
-        # @param page_size [Integer] Items per page (20-200, default 20)
+        # @param page_size [Integer] Items per page (20-200, default 20). This is an upper bound for paid authenticat
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -136,15 +139,22 @@ module XTwitterScraper
           )
         end
 
-        # Search for communities by keyword
+        # Some parameter documentations has been truncated, see
+        # {XTwitterScraper::Models::X::CommunityRetrieveSearchParams} for more details.
         #
-        # @overload retrieve_search(q:, cursor: nil, query_type: nil, request_options: {})
+        # Returns tweets, not community records. Requires a Community ID.
+        #
+        # @overload retrieve_search(community_id:, q:, cursor: nil, page_size: nil, query_type: nil, request_options: {})
+        #
+        # @param community_id [String] Numeric ID of the community whose posts to search
         #
         # @param q [String] Search query
         #
         # @param cursor [String] Pagination cursor for community search
         #
-        # @param query_type [String] Sort order (Latest or Top)
+        # @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
+        #
+        # @param query_type [Symbol, XTwitterScraper::Models::X::CommunityRetrieveSearchParams::QueryType] Sort order (Latest or Top)
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -157,7 +167,11 @@ module XTwitterScraper
           @client.request(
             method: :get,
             path: "x/communities/search",
-            query: query.transform_keys(query_type: "queryType"),
+            query: query.transform_keys(
+              community_id: "communityId",
+              page_size: "pageSize",
+              query_type: "queryType"
+            ),
             model: XTwitterScraper::PaginatedTweets,
             options: options
           )

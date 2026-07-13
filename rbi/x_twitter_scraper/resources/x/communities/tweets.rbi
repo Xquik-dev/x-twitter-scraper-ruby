@@ -6,21 +6,32 @@ module XTwitterScraper
       class Communities
         # X Community info, members, and tweets
         class Tweets
-          # List tweets across all communities
+          # Requires a Community ID and keyword query.
           sig do
             params(
+              community_id: String,
               q: String,
               cursor: String,
-              query_type: String,
+              page_size: Integer,
+              query_type:
+                XTwitterScraper::X::Communities::TweetListParams::QueryType::OrSymbol,
               request_options: XTwitterScraper::RequestOptions::OrHash
             ).returns(XTwitterScraper::PaginatedTweets)
           end
           def list(
-            # Search query for cross-community tweets
+            # Numeric ID of the community to search
+            community_id:,
+            # Keyword query within the selected community
             q:,
-            # Pagination cursor for cross-community results
+            # Pagination cursor for community results
             cursor: nil,
-            # Sort order for cross-community results (Latest or Top)
+            # Maximum items requested from this page (1-100, default 20). The response can
+            # contain fewer items because the source returned fewer, filters removed items, or
+            # remaining credits cover fewer results. Keep requesting next_cursor while
+            # has_next_page is true, even when a page is empty. The deprecated limit and count
+            # aliases remain accepted.
+            page_size: nil,
+            # Sort order for community results (Latest or Top)
             query_type: nil,
             request_options: {}
           )
@@ -31,6 +42,7 @@ module XTwitterScraper
             params(
               id: String,
               cursor: String,
+              page_size: Integer,
               request_options: XTwitterScraper::RequestOptions::OrHash
             ).returns(XTwitterScraper::PaginatedTweets)
           end
@@ -39,6 +51,12 @@ module XTwitterScraper
             id,
             # Pagination cursor for community tweets
             cursor: nil,
+            # Maximum items requested from this page (1-100, default 20). The response can
+            # contain fewer items because the source returned fewer, filters removed items, or
+            # remaining credits cover fewer results. Keep requesting next_cursor while
+            # has_next_page is true, even when a page is empty. The deprecated limit and count
+            # aliases remain accepted.
+            page_size: nil,
             request_options: {}
           )
           end
