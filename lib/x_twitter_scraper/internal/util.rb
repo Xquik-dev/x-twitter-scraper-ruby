@@ -529,7 +529,7 @@ module XTwitterScraper
               write_query_param_element!(collection, "#{key}[#{name}]", value)
             end
           in Array
-            collection[key] = element.map(&:to_s).join(",")
+            collection[key] = element.join(",")
           else
             collection[key] = element.to_s
           end

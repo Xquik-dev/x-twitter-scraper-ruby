@@ -8,11 +8,6 @@ class XTwitterScraperTest < Minitest::Test
 
   TWEET_SEARCH_URL = "http://localhost/x/tweets/search?q=q"
 
-  def before_all
-    super
-    WebMock.enable!
-  end
-
   def setup
     super
     Thread.current.thread_variable_set(:mock_sleep, [])
@@ -21,11 +16,6 @@ class XTwitterScraperTest < Minitest::Test
   def teardown
     Thread.current.thread_variable_set(:mock_sleep, nil)
     WebMock.reset!
-    super
-  end
-
-  def after_all
-    WebMock.disable!
     super
   end
 
@@ -259,7 +249,11 @@ class XTwitterScraperTest < Minitest::Test
 
     assert_requested(:any, "http://localhost/redirected", times: XTwitterScraper::Client::MAX_REDIRECTS) do
       assert_equal(recorded.method, _1.method)
-      assert_equal(recorded.body, _1.body)
+      if recorded.body.nil?
+        assert_nil(_1.body)
+      else
+        assert_equal(recorded.body, _1.body)
+      end
       assert_equal(
         recorded.headers.transform_keys(&:downcase).fetch("content-type"),
         _1.headers.transform_keys(&:downcase).fetch("content-type")

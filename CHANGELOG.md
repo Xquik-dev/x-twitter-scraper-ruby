@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.2 (2026-07-14)
+
+Full Changelog: [v0.4.1...v0.4.2](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.4.1...v0.4.2)
+
+### Security
+
+* pin trusted publishing actions to immutable commits
+* build before requesting OIDC credentials and protect release tags
+* remove the legacy long-lived credential release path
+* update audited development dependencies
+
 ## 0.4.1 (2026-05-10)
 
 Full Changelog: [v0.4.0...v0.4.1](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.4.0...v0.4.1)

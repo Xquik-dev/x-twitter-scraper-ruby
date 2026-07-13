@@ -15,7 +15,7 @@ require "minitest/focus"
 require "minitest/hooks/test"
 require "minitest/proveit"
 require "minitest/rg"
-require "webmock"
+require "webmock/minitest"
 
 require_relative "../../lib/x_twitter_scraper"
 require_relative "resource_namespaces"
@@ -66,7 +66,6 @@ class Minitest::Test
   include Minitest::Hooks
 
   make_my_diffs_pretty!
-  parallelize_me!
   prove_it!
 end
 
