@@ -7,18 +7,18 @@ module XTwitterScraper
 
   AccountUpdateLocaleParams = XTwitterScraper::Models::AccountUpdateLocaleParams
 
-  APIKey = XTwitterScraper::Models::APIKey
-
-  APIKeyCreateParams = XTwitterScraper::Models::APIKeyCreateParams
-
-  APIKeyListParams = XTwitterScraper::Models::APIKeyListParams
-
-  APIKeyRevokeParams = XTwitterScraper::Models::APIKeyRevokeParams
-
   ComposeCreateParams = XTwitterScraper::Models::ComposeCreateParams
+
+  ContentDisclosure = XTwitterScraper::Models::ContentDisclosure
+
+  CreditRedirectTopupCheckoutParams =
+    XTwitterScraper::Models::CreditRedirectTopupCheckoutParams
 
   CreditRetrieveBalanceParams =
     XTwitterScraper::Models::CreditRetrieveBalanceParams
+
+  CreditRetrieveTopupStatusParams =
+    XTwitterScraper::Models::CreditRetrieveTopupStatusParams
 
   CreditTopupBalanceParams = XTwitterScraper::Models::CreditTopupBalanceParams
 
@@ -48,6 +48,8 @@ module XTwitterScraper
 
   DrawRunParams = XTwitterScraper::Models::DrawRunParams
 
+  EmbeddedTweet = XTwitterScraper::Models::EmbeddedTweet
+
   Error = XTwitterScraper::Models::Error
 
   Event = XTwitterScraper::Models::Event
@@ -74,24 +76,14 @@ module XTwitterScraper
 
   ExtractionRunParams = XTwitterScraper::Models::ExtractionRunParams
 
-  Integration = XTwitterScraper::Models::Integration
+  GuestWalletAmount = XTwitterScraper::Models::GuestWalletAmount
 
-  IntegrationCreateParams = XTwitterScraper::Models::IntegrationCreateParams
+  GuestWalletCreateParams = XTwitterScraper::Models::GuestWalletCreateParams
 
-  IntegrationDeleteParams = XTwitterScraper::Models::IntegrationDeleteParams
+  GuestWalletRetrieveStatusParams =
+    XTwitterScraper::Models::GuestWalletRetrieveStatusParams
 
-  IntegrationDelivery = XTwitterScraper::Models::IntegrationDelivery
-
-  IntegrationListDeliveriesParams =
-    XTwitterScraper::Models::IntegrationListDeliveriesParams
-
-  IntegrationListParams = XTwitterScraper::Models::IntegrationListParams
-
-  IntegrationRetrieveParams = XTwitterScraper::Models::IntegrationRetrieveParams
-
-  IntegrationSendTestParams = XTwitterScraper::Models::IntegrationSendTestParams
-
-  IntegrationUpdateParams = XTwitterScraper::Models::IntegrationUpdateParams
+  GuestWalletTopupParams = XTwitterScraper::Models::GuestWalletTopupParams
 
   Monitor = XTwitterScraper::Models::Monitor
 
@@ -103,6 +95,8 @@ module XTwitterScraper
 
   MonitorRetrieveParams = XTwitterScraper::Models::MonitorRetrieveParams
 
+  Monitors = XTwitterScraper::Models::Monitors
+
   MonitorUpdateParams = XTwitterScraper::Models::MonitorUpdateParams
 
   PaginatedTweets = XTwitterScraper::Models::PaginatedTweets
@@ -113,6 +107,8 @@ module XTwitterScraper
 
   RadarRetrieveTrendingTopicsParams =
     XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams
+
+  SearchTweet = XTwitterScraper::Models::SearchTweet
 
   StyleAnalyzeParams = XTwitterScraper::Models::StyleAnalyzeParams
 
@@ -138,6 +134,10 @@ module XTwitterScraper
 
   TrendListParams = XTwitterScraper::Models::TrendListParams
 
+  TweetMedia = XTwitterScraper::Models::TweetMedia
+
+  UserProfile = XTwitterScraper::Models::UserProfile
+
   Webhook = XTwitterScraper::Models::Webhook
 
   WebhookCreateParams = XTwitterScraper::Models::WebhookCreateParams
@@ -148,6 +148,8 @@ module XTwitterScraper
     XTwitterScraper::Models::WebhookListDeliveriesParams
 
   WebhookListParams = XTwitterScraper::Models::WebhookListParams
+
+  WebhookResumeParams = XTwitterScraper::Models::WebhookResumeParams
 
   WebhookTestParams = XTwitterScraper::Models::WebhookTestParams
 

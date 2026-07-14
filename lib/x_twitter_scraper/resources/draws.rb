@@ -8,7 +8,7 @@ module XTwitterScraper
       #
       # @overload retrieve(id, request_options: {})
       #
-      # @param id [String] Resource ID (stringified bigint)
+      # @param id [String] Draw public ID returned by create and list draw responses.
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -24,13 +24,16 @@ module XTwitterScraper
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {XTwitterScraper::Models::DrawListParams} for more details.
+      #
       # List draws
       #
-      # @overload list(after: nil, limit: nil, request_options: {})
+      # @overload list(cursor: nil, limit: nil, request_options: {})
       #
-      # @param after [String] Cursor for keyset pagination
+      # @param cursor [String] Cursor for keyset pagination from prior response next_cursor
       #
-      # @param limit [Integer] Maximum number of items to return (1-100, default 50)
+      # @param limit [Integer] Maximum number of items to return (1-100, default 50). For paid per-result endpo
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -51,9 +54,9 @@ module XTwitterScraper
 
       # Export draw data
       #
-      # @overload export(id, format_: nil, type: nil, request_options: {})
+      # @overload export(id, format_:, type: nil, request_options: {})
       #
-      # @param id [String] Resource ID (stringified bigint)
+      # @param id [String] Draw public ID returned by create and list draw responses.
       #
       # @param format_ [Symbol, XTwitterScraper::Models::DrawExportParams::Format] Export output format
       #
@@ -64,7 +67,7 @@ module XTwitterScraper
       # @return [StringIO]
       #
       # @see XTwitterScraper::Models::DrawExportParams
-      def export(id, params = {})
+      def export(id, params)
         parsed, options = XTwitterScraper::DrawExportParams.dump_request(params)
         query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
         @client.request(
@@ -77,7 +80,10 @@ module XTwitterScraper
         )
       end
 
-      # Run giveaway draw
+      # Runs a giveaway draw from a source tweet. The draw first checks the minimum
+      # credits needed to inspect the source tweet and at least one candidate. Remaining
+      # credits cap how many replies and retweeters can be inspected before filters and
+      # winner selection run.
       #
       # @overload run(tweet_url:, backup_count: nil, filter_account_age_days: nil, filter_language: nil, filter_min_followers: nil, must_follow_username: nil, must_retweet: nil, required_hashtags: nil, required_keywords: nil, required_mentions: nil, unique_authors_only: nil, winner_count: nil, request_options: {})
       #

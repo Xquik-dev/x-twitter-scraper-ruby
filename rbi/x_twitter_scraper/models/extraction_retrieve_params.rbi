@@ -17,12 +17,12 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :id
 
-      # Cursor for keyset pagination
+      # Cursor for keyset pagination from prior response next_cursor
       sig { returns(T.nilable(String)) }
-      attr_reader :after
+      attr_reader :cursor
 
-      sig { params(after: String).void }
-      attr_writer :after
+      sig { params(cursor: String).void }
+      attr_writer :cursor
 
       # Maximum number of results to return (1-1000, default 100)
       sig { returns(T.nilable(Integer)) }
@@ -34,15 +34,15 @@ module XTwitterScraper
       sig do
         params(
           id: String,
-          after: String,
+          cursor: String,
           limit: Integer,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
         id:,
-        # Cursor for keyset pagination
-        after: nil,
+        # Cursor for keyset pagination from prior response next_cursor
+        cursor: nil,
         # Maximum number of results to return (1-1000, default 100)
         limit: nil,
         request_options: {}
@@ -53,7 +53,7 @@ module XTwitterScraper
         override.returns(
           {
             id: String,
-            after: String,
+            cursor: String,
             limit: Integer,
             request_options: XTwitterScraper::RequestOptions
           }

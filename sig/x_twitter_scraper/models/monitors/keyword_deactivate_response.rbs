@@ -1,0 +1,15 @@
+module XTwitterScraper
+  module Models
+    module Monitors
+      type keyword_deactivate_response = { success: true }
+
+      class KeywordDeactivateResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor success: true
+
+        def initialize: (?success: true) -> void
+
+        def to_hash: -> { success: true }
+      end
+    end
+  end
+end

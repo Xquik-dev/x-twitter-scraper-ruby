@@ -4,7 +4,14 @@ module XTwitterScraper
   module Resources
     # Real-time X account monitoring
     class Monitors
-      # Create monitor
+      # Real-time X account monitoring
+      sig { returns(XTwitterScraper::Resources::Monitors::Keywords) }
+      attr_reader :keywords
+
+      # Creates an instant monitor. Monitors are unlimited. Active monitors check every
+      # 1 second and cost 21 credits per hour. Events and webhook deliveries are
+      # included. Creation requires available credits for the first hourly charge and
+      # username lookup.
       sig do
         params(
           event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
@@ -29,7 +36,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Monitor)
       end
       def retrieve(
-        # Resource ID (stringified bigint)
+        # Resource ID returned by the matching create or list endpoint.
         id,
         request_options: {}
       )
@@ -45,7 +52,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Monitor)
       end
       def update(
-        # Resource ID (stringified bigint)
+        # Resource ID returned by the matching create or list endpoint.
         id,
         # Array of event types to subscribe to.
         event_types: nil,
@@ -63,7 +70,7 @@ module XTwitterScraper
       def list(request_options: {})
       end
 
-      # Deactivate monitor
+      # Delete monitor
       sig do
         params(
           id: String,
@@ -71,7 +78,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::MonitorDeactivateResponse)
       end
       def deactivate(
-        # Resource ID (stringified bigint)
+        # Resource ID returned by the matching create or list endpoint.
         id,
         request_options: {}
       )

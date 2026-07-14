@@ -34,11 +34,34 @@ module XTwitterScraper
           #   @return [String, nil]
           optional :created_at, String
 
+          # @!attribute creator
+          #
+          #   @return [XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator, nil]
+          optional :creator, -> { XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator }
+
           # @!attribute description
           #   About text for the community
           #
           #   @return [String, nil]
           optional :description, String
+
+          # @!attribute invites_policy
+          #   Invitation policy
+          #
+          #   @return [String, nil]
+          optional :invites_policy, String
+
+          # @!attribute is_member
+          #   Whether the authenticated viewer is a member
+          #
+          #   @return [Boolean, nil]
+          optional :is_member, XTwitterScraper::Internal::Type::Boolean
+
+          # @!attribute is_nsfw
+          #   Whether the community is marked sensitive
+          #
+          #   @return [Boolean, nil]
+          optional :is_nsfw, XTwitterScraper::Internal::Type::Boolean
 
           # @!attribute join_policy
           #   Join policy (open or restricted)
@@ -71,6 +94,12 @@ module XTwitterScraper
           optional :primary_topic,
                    -> { XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic }
 
+          # @!attribute role
+          #   Authenticated viewer's community role
+          #
+          #   @return [String, nil]
+          optional :role, String
+
           # @!attribute rules
           #   Community rules
           #
@@ -78,7 +107,7 @@ module XTwitterScraper
           optional :rules,
                    -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule] }
 
-          # @!method initialize(id:, banner_url: nil, created_at: nil, description: nil, join_policy: nil, member_count: nil, moderator_count: nil, name: nil, primary_topic: nil, rules: nil)
+          # @!method initialize(id:, banner_url: nil, created_at: nil, creator: nil, description: nil, invites_policy: nil, is_member: nil, is_nsfw: nil, join_policy: nil, member_count: nil, moderator_count: nil, name: nil, primary_topic: nil, role: nil, rules: nil)
           #   Community info object
           #
           #   @param id [String] Unique community identifier
@@ -87,7 +116,15 @@ module XTwitterScraper
           #
           #   @param created_at [String] Community creation timestamp
           #
+          #   @param creator [XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator]
+          #
           #   @param description [String] About text for the community
+          #
+          #   @param invites_policy [String] Invitation policy
+          #
+          #   @param is_member [Boolean] Whether the authenticated viewer is a member
+          #
+          #   @param is_nsfw [Boolean] Whether the community is marked sensitive
           #
           #   @param join_policy [String] Join policy (open or restricted)
           #
@@ -99,7 +136,38 @@ module XTwitterScraper
           #
           #   @param primary_topic [XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic] Primary topic
           #
+          #   @param role [String] Authenticated viewer's community role
+          #
           #   @param rules [Array<XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule>] Community rules
+
+          # @see XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community#creator
+          class Creator < XTwitterScraper::Internal::Type::BaseModel
+            # @!attribute id
+            #
+            #   @return [String]
+            required :id, String
+
+            # @!attribute username
+            #
+            #   @return [String]
+            required :username, String
+
+            # @!attribute verified
+            #
+            #   @return [Boolean]
+            required :verified, XTwitterScraper::Internal::Type::Boolean
+
+            # @!attribute name
+            #
+            #   @return [String, nil]
+            optional :name, String
+
+            # @!method initialize(id:, username:, verified:, name: nil)
+            #   @param id [String]
+            #   @param username [String]
+            #   @param verified [Boolean]
+            #   @param name [String]
+          end
 
           # @see XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community#primary_topic
           class PrimaryTopic < XTwitterScraper::Internal::Type::BaseModel

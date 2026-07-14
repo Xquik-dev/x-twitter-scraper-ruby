@@ -25,10 +25,20 @@ module XTwitterScraper
         sig { params(cursor: String).void }
         attr_writer :cursor
 
+        # Items per page (20-200, default 20). This is an upper bound for paid
+        # authenticated calls: remaining credits can reduce the returned page size, and
+        # zero affordable results returns 402 insufficient_credits.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :page_size
+
+        sig { params(page_size: Integer).void }
+        attr_writer :page_size
+
         sig do
           params(
             id: String,
             cursor: String,
+            page_size: Integer,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -36,6 +46,10 @@ module XTwitterScraper
           id:,
           # Pagination cursor
           cursor: nil,
+          # Items per page (20-200, default 20). This is an upper bound for paid
+          # authenticated calls: remaining credits can reduce the returned page size, and
+          # zero affordable results returns 402 insufficient_credits.
+          page_size: nil,
           request_options: {}
         )
         end
@@ -45,6 +59,7 @@ module XTwitterScraper
             {
               id: String,
               cursor: String,
+              page_size: Integer,
               request_options: XTwitterScraper::RequestOptions
             }
           )

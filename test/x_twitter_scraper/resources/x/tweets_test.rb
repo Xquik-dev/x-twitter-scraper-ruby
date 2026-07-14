@@ -6,8 +6,7 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
   def test_create_required_params
     skip("Mock server tests are disabled")
 
-    response =
-      @x_twitter_scraper.x.tweets.create(account: "@elonmusk", text: "Just launched our new feature!")
+    response = @x_twitter_scraper.x.tweets.create(account: "@elonmusk")
 
     assert_pattern do
       response => XTwitterScraper::Models::X::TweetCreateResponse
@@ -15,8 +14,11 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
 
     assert_pattern do
       response => {
+        charged: XTwitterScraper::Internal::Type::Boolean,
+        charged_credits: String,
         success: true | false,
-        tweet_id: String
+        tweet_id: String,
+        write_action_id: String | nil
       }
     end
   end
@@ -51,7 +53,7 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet])
       }
     end
   end
@@ -85,7 +87,7 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile])
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile])
       }
     end
   end
@@ -103,7 +105,7 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet])
       }
     end
   end
@@ -121,7 +123,7 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet])
       }
     end
   end
@@ -139,7 +141,7 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile])
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile])
       }
     end
   end
@@ -157,7 +159,7 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet])
       }
     end
   end
@@ -175,7 +177,7 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet])
       }
     end
   end

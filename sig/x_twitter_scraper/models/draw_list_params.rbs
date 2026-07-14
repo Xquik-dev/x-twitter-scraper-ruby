@@ -1,29 +1,29 @@
 module XTwitterScraper
   module Models
     type draw_list_params =
-      { after: String, limit: Integer }
+      { cursor: String, limit: Integer }
       & XTwitterScraper::Internal::Type::request_parameters
 
     class DrawListParams < XTwitterScraper::Internal::Type::BaseModel
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      attr_reader after: String?
+      attr_reader cursor: String?
 
-      def after=: (String) -> String
+      def cursor=: (String) -> String
 
       attr_reader limit: Integer?
 
       def limit=: (Integer) -> Integer
 
       def initialize: (
-        ?after: String,
+        ?cursor: String,
         ?limit: Integer,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
       def to_hash: -> {
-        after: String,
+        cursor: String,
         limit: Integer,
         request_options: XTwitterScraper::RequestOptions
       }

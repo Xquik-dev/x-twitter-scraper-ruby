@@ -1,0 +1,125 @@
+module XTwitterScraper
+  module Models
+    type guest_wallet_create_response =
+      {
+        account_required: false,
+        amount: XTwitterScraper::GuestWalletAmount,
+        api_key: String,
+        authorization: XTwitterScraper::Models::GuestWalletCreateResponse::Authorization,
+        checkout_url: String,
+        credential_notice: :"Store api_key and the Idempotency-Key securely before sharing checkout_url. No email recovery is available.",
+        credits: String,
+        expires_at: Time,
+        instructions: :"Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending.",
+        poll_after_seconds: 2,
+        purchase_id: String,
+        requires_user_interaction: true,
+        status: XTwitterScraper::Models::GuestWalletCreateResponse::status,
+        status_url: :"https://xquik.com/api/v1/guest-wallets/status",
+        wallet_id: String
+      }
+
+    class GuestWalletCreateResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor account_required: false
+
+      attr_accessor amount: XTwitterScraper::GuestWalletAmount
+
+      attr_accessor api_key: String
+
+      attr_accessor authorization: XTwitterScraper::Models::GuestWalletCreateResponse::Authorization
+
+      attr_accessor checkout_url: String
+
+      attr_accessor credential_notice: :"Store api_key and the Idempotency-Key securely before sharing checkout_url. No email recovery is available."
+
+      attr_accessor credits: String
+
+      attr_accessor expires_at: Time
+
+      attr_accessor instructions: :"Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending."
+
+      attr_accessor poll_after_seconds: 2
+
+      attr_accessor purchase_id: String
+
+      attr_accessor requires_user_interaction: true
+
+      attr_accessor status: XTwitterScraper::Models::GuestWalletCreateResponse::status
+
+      attr_accessor status_url: :"https://xquik.com/api/v1/guest-wallets/status"
+
+      attr_accessor wallet_id: String
+
+      def initialize: (
+        amount: XTwitterScraper::GuestWalletAmount,
+        api_key: String,
+        authorization: XTwitterScraper::Models::GuestWalletCreateResponse::Authorization,
+        checkout_url: String,
+        credits: String,
+        expires_at: Time,
+        purchase_id: String,
+        status: XTwitterScraper::Models::GuestWalletCreateResponse::status,
+        wallet_id: String,
+        ?account_required: false,
+        ?credential_notice: :"Store api_key and the Idempotency-Key securely before sharing checkout_url. No email recovery is available.",
+        ?instructions: :"Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending.",
+        ?poll_after_seconds: 2,
+        ?requires_user_interaction: true,
+        ?status_url: :"https://xquik.com/api/v1/guest-wallets/status"
+      ) -> void
+
+      def to_hash: -> {
+        account_required: false,
+        amount: XTwitterScraper::GuestWalletAmount,
+        api_key: String,
+        authorization: XTwitterScraper::Models::GuestWalletCreateResponse::Authorization,
+        checkout_url: String,
+        credential_notice: :"Store api_key and the Idempotency-Key securely before sharing checkout_url. No email recovery is available.",
+        credits: String,
+        expires_at: Time,
+        instructions: :"Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending.",
+        poll_after_seconds: 2,
+        purchase_id: String,
+        requires_user_interaction: true,
+        status: XTwitterScraper::Models::GuestWalletCreateResponse::status,
+        status_url: :"https://xquik.com/api/v1/guest-wallets/status",
+        wallet_id: String
+      }
+
+      type authorization = { header: :Authorization, scheme: :Bearer }
+
+      class Authorization < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor header: :Authorization
+
+        attr_accessor scheme: :Bearer
+
+        def initialize: (?header: :Authorization, ?scheme: :Bearer) -> void
+
+        def to_hash: -> { header: :Authorization, scheme: :Bearer }
+      end
+
+      type status =
+        :creating
+        | :pending
+        | :paid
+        | :expired
+        | :failed
+        | :refunded
+        | :disputed
+
+      module Status
+        extend XTwitterScraper::Internal::Type::Enum
+
+        CREATING: :creating
+        PENDING: :pending
+        PAID: :paid
+        EXPIRED: :expired
+        FAILED: :failed
+        REFUNDED: :refunded
+        DISPUTED: :disputed
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::GuestWalletCreateResponse::status]
+      end
+    end
+  end
+end

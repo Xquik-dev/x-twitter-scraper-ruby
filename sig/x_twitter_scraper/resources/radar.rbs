@@ -2,9 +2,10 @@ module XTwitterScraper
   module Resources
     class Radar
       def retrieve_trending_topics: (
-        ?category: String,
-        ?count: Integer,
+        ?after: String,
+        ?category: XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::category,
         ?hours: Integer,
+        ?limit: Integer,
         ?region: String,
         ?source: XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::source,
         ?request_options: XTwitterScraper::request_opts

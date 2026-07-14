@@ -1,0 +1,24 @@
+module XTwitterScraper
+  module Models
+    type credit_redirect_topup_checkout_params =
+      { session_id: String }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class CreditRedirectTopupCheckoutParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor session_id: String
+
+      def initialize: (
+        session_id: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        session_id: String,
+        request_options: XTwitterScraper::RequestOptions
+      }
+    end
+  end
+end

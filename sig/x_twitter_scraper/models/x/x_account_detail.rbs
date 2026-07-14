@@ -7,11 +7,11 @@ module XTwitterScraper
         {
           id: String,
           created_at: Time,
+          health: XTwitterScraper::Models::X::XAccountDetail::health,
           status: String,
           x_user_id: String,
           x_username: String,
           cookies_obtained_at: Time,
-          proxy_country: String,
           updated_at: Time
         }
 
@@ -19,6 +19,8 @@ module XTwitterScraper
         attr_accessor id: String
 
         attr_accessor created_at: Time
+
+        attr_accessor health: XTwitterScraper::Models::X::XAccountDetail::health
 
         attr_accessor status: String
 
@@ -30,10 +32,6 @@ module XTwitterScraper
 
         def cookies_obtained_at=: (Time) -> Time
 
-        attr_reader proxy_country: String?
-
-        def proxy_country=: (String) -> String
-
         attr_reader updated_at: Time?
 
         def updated_at=: (Time) -> Time
@@ -41,24 +39,45 @@ module XTwitterScraper
         def initialize: (
           id: String,
           created_at: Time,
+          health: XTwitterScraper::Models::X::XAccountDetail::health,
           status: String,
           x_user_id: String,
           x_username: String,
           ?cookies_obtained_at: Time,
-          ?proxy_country: String,
           ?updated_at: Time
         ) -> void
 
         def to_hash: -> {
           id: String,
           created_at: Time,
+          health: XTwitterScraper::Models::X::XAccountDetail::health,
           status: String,
           x_user_id: String,
           x_username: String,
           cookies_obtained_at: Time,
-          proxy_country: String,
           updated_at: Time
         }
+
+        type health =
+          :healthy
+          | :locked
+          | :needsReauth
+          | :recovering
+          | :suspended
+          | :temporaryIssue
+
+        module Health
+          extend XTwitterScraper::Internal::Type::Enum
+
+          HEALTHY: :healthy
+          LOCKED: :locked
+          NEEDS_REAUTH: :needsReauth
+          RECOVERING: :recovering
+          SUSPENDED: :suspended
+          TEMPORARY_ISSUE: :temporaryIssue
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::XAccountDetail::health]
+        end
       end
     end
   end

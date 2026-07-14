@@ -1,6 +1,8 @@
 module XTwitterScraper
   module Resources
     class X
+      attr_reader write_actions: XTwitterScraper::Resources::X::WriteActions
+
       attr_reader tweets: XTwitterScraper::Resources::X::Tweets
 
       attr_reader users: XTwitterScraper::Resources::X::Users
@@ -16,6 +18,8 @@ module XTwitterScraper
       attr_reader communities: XTwitterScraper::Resources::X::Communities
 
       attr_reader accounts: XTwitterScraper::Resources::X::Accounts
+
+      attr_reader account_connection_challenges: XTwitterScraper::Resources::X::AccountConnectionChallenges
 
       attr_reader bookmarks: XTwitterScraper::Resources::X::Bookmarks
 
@@ -39,6 +43,8 @@ module XTwitterScraper
       ) -> XTwitterScraper::Models::XGetNotificationsResponse
 
       def get_trends: (
+        ?count: Integer,
+        ?woeid: Integer,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::XGetTrendsResponse
 

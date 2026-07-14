@@ -30,26 +30,27 @@ module XTwitterScraper
         type message =
           {
             id: String,
-            created_at: String,
             receiver_id: String,
             sender_id: String,
+            created_at: String,
+            media_url: String,
             text: String
           }
 
         class Message < XTwitterScraper::Internal::Type::BaseModel
           attr_accessor id: String
 
+          attr_accessor receiver_id: String
+
+          attr_accessor sender_id: String
+
           attr_reader created_at: String?
 
           def created_at=: (String) -> String
 
-          attr_reader receiver_id: String?
+          attr_reader media_url: String?
 
-          def receiver_id=: (String) -> String
-
-          attr_reader sender_id: String?
-
-          def sender_id=: (String) -> String
+          def media_url=: (String) -> String
 
           attr_reader text: String?
 
@@ -57,17 +58,19 @@ module XTwitterScraper
 
           def initialize: (
             id: String,
+            receiver_id: String,
+            sender_id: String,
             ?created_at: String,
-            ?receiver_id: String,
-            ?sender_id: String,
+            ?media_url: String,
             ?text: String
           ) -> void
 
           def to_hash: -> {
             id: String,
-            created_at: String,
             receiver_id: String,
             sender_id: String,
+            created_at: String,
+            media_url: String,
             text: String
           }
         end

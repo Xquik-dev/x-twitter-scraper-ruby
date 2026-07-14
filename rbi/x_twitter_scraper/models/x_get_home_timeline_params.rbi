@@ -21,7 +21,7 @@ module XTwitterScraper
       sig { params(cursor: String).void }
       attr_writer :cursor
 
-      # Comma-separated tweet IDs to exclude from results
+      # Comma-separated tweet IDs to exclude from results. Empty entries are ignored.
       sig { returns(T.nilable(String)) }
       attr_reader :seen_tweet_ids
 
@@ -38,7 +38,7 @@ module XTwitterScraper
       def self.new(
         # Pagination cursor for timeline
         cursor: nil,
-        # Comma-separated tweet IDs to exclude from results
+        # Comma-separated tweet IDs to exclude from results. Empty entries are ignored.
         seen_tweet_ids: nil,
         request_options: {}
       )

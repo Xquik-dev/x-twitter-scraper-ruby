@@ -3,9 +3,9 @@
 module XTwitterScraper
   module Resources
     class X
-      # X data lookups (subscription required)
+      # Look up, search, and explore user profiles and relationships
       class Followers
-        # Check follow relationship
+        # Check if one user follows another
         sig do
           params(
             source: String,
@@ -14,9 +14,9 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::FollowerCheckResponse)
         end
         def check(
-          # Username to check (without @)
+          # Source username, @username, or X or Twitter profile URL
           source:,
-          # Target username (without @)
+          # Target username, @username, or X or Twitter profile URL
           target:,
           request_options: {}
         )

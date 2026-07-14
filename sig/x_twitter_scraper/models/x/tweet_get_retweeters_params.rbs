@@ -2,7 +2,7 @@ module XTwitterScraper
   module Models
     module X
       type tweet_get_retweeters_params =
-        { id: String, cursor: String }
+        { id: String, cursor: String, page_size: Integer }
         & XTwitterScraper::Internal::Type::request_parameters
 
       class TweetGetRetweetersParams < XTwitterScraper::Internal::Type::BaseModel
@@ -15,15 +15,21 @@ module XTwitterScraper
 
         def cursor=: (String) -> String
 
+        attr_reader page_size: Integer?
+
+        def page_size=: (Integer) -> Integer
+
         def initialize: (
           id: String,
           ?cursor: String,
+          ?page_size: Integer,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
         def to_hash: -> {
           id: String,
           cursor: String,
+          page_size: Integer,
           request_options: XTwitterScraper::RequestOptions
         }
       end

@@ -9,21 +9,21 @@ module XTwitterScraper
         include XTwitterScraper::Internal::Type::RequestParameters
 
         # @!attribute account
-        #   X account (@username or ID) for avatar update
+        #   X account (@username or ID) receiving avatar from URL
         #
         #   @return [String]
         required :account, String
 
-        # @!attribute file
-        #   Avatar image (max 716KB)
+        # @!attribute url
+        #   HTTPS URL to the avatar image to download
         #
-        #   @return [Pathname, StringIO, IO, String, XTwitterScraper::FilePart]
-        required :file, XTwitterScraper::Internal::Type::FileInput
+        #   @return [String]
+        required :url, String
 
-        # @!method initialize(account:, file:, request_options: {})
-        #   @param account [String] X account (@username or ID) for avatar update
+        # @!method initialize(account:, url:, request_options: {})
+        #   @param account [String] X account (@username or ID) receiving avatar from URL
         #
-        #   @param file [Pathname, StringIO, IO, String, XTwitterScraper::FilePart] Avatar image (max 716KB)
+        #   @param url [String] HTTPS URL to the avatar image to download
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end

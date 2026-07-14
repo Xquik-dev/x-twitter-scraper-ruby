@@ -2,7 +2,7 @@ module XTwitterScraper
   module Models
     type extraction_list_params =
       {
-        after: String,
+        cursor: String,
         limit: Integer,
         status: XTwitterScraper::Models::ExtractionListParams::status,
         tool_type: XTwitterScraper::Models::ExtractionListParams::tool_type
@@ -13,9 +13,9 @@ module XTwitterScraper
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      attr_reader after: String?
+      attr_reader cursor: String?
 
-      def after=: (String) -> String
+      def cursor=: (String) -> String
 
       attr_reader limit: Integer?
 
@@ -34,7 +34,7 @@ module XTwitterScraper
       ) -> XTwitterScraper::Models::ExtractionListParams::tool_type
 
       def initialize: (
-        ?after: String,
+        ?cursor: String,
         ?limit: Integer,
         ?status: XTwitterScraper::Models::ExtractionListParams::status,
         ?tool_type: XTwitterScraper::Models::ExtractionListParams::tool_type,
@@ -42,7 +42,7 @@ module XTwitterScraper
       ) -> void
 
       def to_hash: -> {
-        after: String,
+        cursor: String,
         limit: Integer,
         status: XTwitterScraper::Models::ExtractionListParams::status,
         tool_type: XTwitterScraper::Models::ExtractionListParams::tool_type,
@@ -67,6 +67,7 @@ module XTwitterScraper
         | :community_moderator_explorer
         | :community_post_extractor
         | :community_search
+        | :favoriters
         | :follower_explorer
         | :following_explorer
         | :list_follower_explorer
@@ -81,6 +82,8 @@ module XTwitterScraper
         | :space_explorer
         | :thread_extractor
         | :tweet_search_extractor
+        | :user_likes
+        | :user_media
         | :verified_follower_explorer
 
       module ToolType
@@ -91,6 +94,7 @@ module XTwitterScraper
         COMMUNITY_MODERATOR_EXPLORER: :community_moderator_explorer
         COMMUNITY_POST_EXTRACTOR: :community_post_extractor
         COMMUNITY_SEARCH: :community_search
+        FAVORITERS: :favoriters
         FOLLOWER_EXPLORER: :follower_explorer
         FOLLOWING_EXPLORER: :following_explorer
         LIST_FOLLOWER_EXPLORER: :list_follower_explorer
@@ -105,6 +109,8 @@ module XTwitterScraper
         SPACE_EXPLORER: :space_explorer
         THREAD_EXTRACTOR: :thread_extractor
         TWEET_SEARCH_EXTRACTOR: :tweet_search_extractor
+        USER_LIKES: :user_likes
+        USER_MEDIA: :user_media
         VERIFIED_FOLLOWER_EXPLORER: :verified_follower_explorer
 
         def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionListParams::tool_type]

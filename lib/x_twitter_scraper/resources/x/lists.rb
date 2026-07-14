@@ -3,15 +3,20 @@
 module XTwitterScraper
   module Resources
     class X
-      # X data lookups (subscription required)
+      # X List followers, members, and tweets
       class Lists
-        # Get list followers
+        # Some parameter documentations has been truncated, see
+        # {XTwitterScraper::Models::X::ListRetrieveFollowersParams} for more details.
         #
-        # @overload retrieve_followers(id, cursor: nil, request_options: {})
+        # List followers of an X List
+        #
+        # @overload retrieve_followers(id, cursor: nil, page_size: nil, request_options: {})
         #
         # @param id [String] List ID
         #
         # @param cursor [String] Pagination cursor for list followers
+        #
+        # @param page_size [Integer] Maximum user profiles requested from this page (20-200, default 200). The respon
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -24,19 +29,21 @@ module XTwitterScraper
           @client.request(
             method: :get,
             path: ["x/lists/%1$s/followers", id],
-            query: query,
+            query: query.transform_keys(page_size: "pageSize"),
             model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end
 
-        # Get list members
+        # List members of an X List
         #
-        # @overload retrieve_members(id, cursor: nil, request_options: {})
+        # @overload retrieve_members(id, cursor: nil, page_size: nil, request_options: {})
         #
         # @param id [String] List ID for member lookup
         #
         # @param cursor [String] Pagination cursor for list members
+        #
+        # @param page_size [Integer] Members per page (20-200, default 20)
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -49,21 +56,26 @@ module XTwitterScraper
           @client.request(
             method: :get,
             path: ["x/lists/%1$s/members", id],
-            query: query,
+            query: query.transform_keys(page_size: "pageSize"),
             model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end
 
-        # Get list tweets
+        # Some parameter documentations has been truncated, see
+        # {XTwitterScraper::Models::X::ListRetrieveTweetsParams} for more details.
         #
-        # @overload retrieve_tweets(id, cursor: nil, include_replies: nil, since_time: nil, until_time: nil, request_options: {})
+        # List tweets from an X List
+        #
+        # @overload retrieve_tweets(id, cursor: nil, include_replies: nil, page_size: nil, since_time: nil, until_time: nil, request_options: {})
         #
         # @param id [String] List ID for tweet lookup
         #
         # @param cursor [String] Pagination cursor for list tweets
         #
         # @param include_replies [Boolean] Include replies (default false)
+        #
+        # @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
         #
         # @param since_time [String] Unix timestamp - filter after
         #
@@ -82,6 +94,7 @@ module XTwitterScraper
             path: ["x/lists/%1$s/tweets", id],
             query: query.transform_keys(
               include_replies: "includeReplies",
+              page_size: "pageSize",
               since_time: "sinceTime",
               until_time: "untilTime"
             ),

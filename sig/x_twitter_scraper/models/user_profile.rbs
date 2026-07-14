@@ -1,0 +1,247 @@
+module XTwitterScraper
+  module Models
+    type user_profile =
+      {
+        id: String,
+        name: String,
+        username: String,
+        automated_by: String,
+        can_dm: bool,
+        community_role: String,
+        cover_picture: String,
+        created_at: String,
+        description: String,
+        favourites_count: Integer,
+        followers: Integer,
+        following: Integer,
+        has_custom_timelines: bool,
+        is_automated: bool,
+        is_blue_verified: bool,
+        is_translator: bool,
+        is_verified: bool,
+        location: String,
+        media_count: Integer,
+        pinned_tweet_ids: ::Array[String],
+        possibly_sensitive: bool,
+        profile_bio: ::Hash[Symbol, top],
+        profile_banner_url: String,
+        profile_picture: String,
+        protected: bool,
+        statuses_count: Integer,
+        unavailable: bool,
+        unavailable_reason: String,
+        url: String,
+        verified: bool,
+        verified_type: String,
+        viewer_followed_by: bool,
+        viewer_following: bool,
+        withheld_in_countries: ::Array[String]
+      }
+
+    class UserProfile < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor name: String
+
+      attr_accessor username: String
+
+      attr_reader automated_by: String?
+
+      def automated_by=: (String) -> String
+
+      attr_reader can_dm: bool?
+
+      def can_dm=: (bool) -> bool
+
+      attr_reader community_role: String?
+
+      def community_role=: (String) -> String
+
+      attr_reader cover_picture: String?
+
+      def cover_picture=: (String) -> String
+
+      attr_reader created_at: String?
+
+      def created_at=: (String) -> String
+
+      attr_reader description: String?
+
+      def description=: (String) -> String
+
+      attr_reader favourites_count: Integer?
+
+      def favourites_count=: (Integer) -> Integer
+
+      attr_reader followers: Integer?
+
+      def followers=: (Integer) -> Integer
+
+      attr_reader following: Integer?
+
+      def following=: (Integer) -> Integer
+
+      attr_reader has_custom_timelines: bool?
+
+      def has_custom_timelines=: (bool) -> bool
+
+      attr_reader is_automated: bool?
+
+      def is_automated=: (bool) -> bool
+
+      attr_reader is_blue_verified: bool?
+
+      def is_blue_verified=: (bool) -> bool
+
+      attr_reader is_translator: bool?
+
+      def is_translator=: (bool) -> bool
+
+      attr_reader is_verified: bool?
+
+      def is_verified=: (bool) -> bool
+
+      attr_reader location: String?
+
+      def location=: (String) -> String
+
+      attr_reader media_count: Integer?
+
+      def media_count=: (Integer) -> Integer
+
+      attr_reader pinned_tweet_ids: ::Array[String]?
+
+      def pinned_tweet_ids=: (::Array[String]) -> ::Array[String]
+
+      attr_reader possibly_sensitive: bool?
+
+      def possibly_sensitive=: (bool) -> bool
+
+      attr_reader profile_bio: ::Hash[Symbol, top]?
+
+      def profile_bio=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader profile_banner_url: String?
+
+      def profile_banner_url=: (String) -> String
+
+      attr_reader profile_picture: String?
+
+      def profile_picture=: (String) -> String
+
+      attr_reader protected: bool?
+
+      def protected=: (bool) -> bool
+
+      attr_reader statuses_count: Integer?
+
+      def statuses_count=: (Integer) -> Integer
+
+      attr_reader unavailable: bool?
+
+      def unavailable=: (bool) -> bool
+
+      attr_reader unavailable_reason: String?
+
+      def unavailable_reason=: (String) -> String
+
+      attr_reader url: String?
+
+      def url=: (String) -> String
+
+      attr_reader verified: bool?
+
+      def verified=: (bool) -> bool
+
+      attr_reader verified_type: String?
+
+      def verified_type=: (String) -> String
+
+      attr_reader viewer_followed_by: bool?
+
+      def viewer_followed_by=: (bool) -> bool
+
+      attr_reader viewer_following: bool?
+
+      def viewer_following=: (bool) -> bool
+
+      attr_reader withheld_in_countries: ::Array[String]?
+
+      def withheld_in_countries=: (::Array[String]) -> ::Array[String]
+
+      def initialize: (
+        id: String,
+        name: String,
+        username: String,
+        ?automated_by: String,
+        ?can_dm: bool,
+        ?community_role: String,
+        ?cover_picture: String,
+        ?created_at: String,
+        ?description: String,
+        ?favourites_count: Integer,
+        ?followers: Integer,
+        ?following: Integer,
+        ?has_custom_timelines: bool,
+        ?is_automated: bool,
+        ?is_blue_verified: bool,
+        ?is_translator: bool,
+        ?is_verified: bool,
+        ?location: String,
+        ?media_count: Integer,
+        ?pinned_tweet_ids: ::Array[String],
+        ?possibly_sensitive: bool,
+        ?profile_bio: ::Hash[Symbol, top],
+        ?profile_banner_url: String,
+        ?profile_picture: String,
+        ?protected: bool,
+        ?statuses_count: Integer,
+        ?unavailable: bool,
+        ?unavailable_reason: String,
+        ?url: String,
+        ?verified: bool,
+        ?verified_type: String,
+        ?viewer_followed_by: bool,
+        ?viewer_following: bool,
+        ?withheld_in_countries: ::Array[String]
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        name: String,
+        username: String,
+        automated_by: String,
+        can_dm: bool,
+        community_role: String,
+        cover_picture: String,
+        created_at: String,
+        description: String,
+        favourites_count: Integer,
+        followers: Integer,
+        following: Integer,
+        has_custom_timelines: bool,
+        is_automated: bool,
+        is_blue_verified: bool,
+        is_translator: bool,
+        is_verified: bool,
+        location: String,
+        media_count: Integer,
+        pinned_tweet_ids: ::Array[String],
+        possibly_sensitive: bool,
+        profile_bio: ::Hash[Symbol, top],
+        profile_banner_url: String,
+        profile_picture: String,
+        protected: bool,
+        statuses_count: Integer,
+        unavailable: bool,
+        unavailable_reason: String,
+        url: String,
+        verified: bool,
+        verified_type: String,
+        viewer_followed_by: bool,
+        viewer_following: bool,
+        withheld_in_countries: ::Array[String]
+      }
+    end
+  end
+end

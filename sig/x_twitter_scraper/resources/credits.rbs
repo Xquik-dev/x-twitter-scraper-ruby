@@ -1,12 +1,23 @@
 module XTwitterScraper
   module Resources
     class Credits
+      def redirect_topup_checkout: (
+        session_id: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> nil
+
       def retrieve_balance: (
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::CreditRetrieveBalanceResponse
 
+      def retrieve_topup_status: (
+        session_id: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::CreditRetrieveTopupStatusResponse
+
       def topup_balance: (
-        amount: Integer,
+        dollars: Integer,
+        ?locale: String,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::CreditTopupBalanceResponse
 

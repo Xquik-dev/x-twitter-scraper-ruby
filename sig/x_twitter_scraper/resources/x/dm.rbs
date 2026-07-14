@@ -4,6 +4,7 @@ module XTwitterScraper
       class Dm
         def retrieve_history: (
           String user_id,
+          account: String,
           ?cursor: String,
           ?max_id: String,
           ?request_options: XTwitterScraper::request_opts
@@ -14,7 +15,6 @@ module XTwitterScraper
           account: String,
           text: String,
           ?media_ids: ::Array[String],
-          ?reply_to_message_id: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::DmSendResponse
 

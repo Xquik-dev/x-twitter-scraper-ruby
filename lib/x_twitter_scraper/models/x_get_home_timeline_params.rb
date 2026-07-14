@@ -14,7 +14,7 @@ module XTwitterScraper
       optional :cursor, String
 
       # @!attribute seen_tweet_ids
-      #   Comma-separated tweet IDs to exclude from results
+      #   Comma-separated tweet IDs to exclude from results. Empty entries are ignored.
       #
       #   @return [String, nil]
       optional :seen_tweet_ids, String
@@ -22,7 +22,7 @@ module XTwitterScraper
       # @!method initialize(cursor: nil, seen_tweet_ids: nil, request_options: {})
       #   @param cursor [String] Pagination cursor for timeline
       #
-      #   @param seen_tweet_ids [String] Comma-separated tweet IDs to exclude from results
+      #   @param seen_tweet_ids [String] Comma-separated tweet IDs to exclude from results. Empty entries are ignored.
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
     end

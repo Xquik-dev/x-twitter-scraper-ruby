@@ -8,7 +8,7 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
 
     response =
       @x_twitter_scraper.webhooks.create(
-        event_types: [:"tweet.new", :"follower.gained"],
+        event_types: [:"tweet.new", :"tweet.reply"],
         url: "https://example.com/webhook"
       )
 
@@ -39,8 +39,11 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
     assert_pattern do
       response => {
         id: String,
+        consecutive_failures: Integer,
         created_at: Time,
+        delivery_status: XTwitterScraper::Webhook::DeliveryStatus,
         event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
+        failure_hard_cap: Integer,
         is_active: XTwitterScraper::Internal::Type::Boolean,
         url: String
       }
@@ -91,6 +94,24 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
     assert_pattern do
       response => {
         deliveries: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Delivery])
+      }
+    end
+  end
+
+  def test_resume
+    skip("Mock server tests are disabled")
+
+    response = @x_twitter_scraper.webhooks.resume("id")
+
+    assert_pattern do
+      response => XTwitterScraper::Models::WebhookResumeResponse
+    end
+
+    assert_pattern do
+      response => {
+        status_code: Integer,
+        success: XTwitterScraper::Internal::Type::Boolean,
+        webhook: XTwitterScraper::Webhook
       }
     end
   end

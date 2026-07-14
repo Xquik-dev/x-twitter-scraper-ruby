@@ -13,15 +13,11 @@ module XTwitterScraper
 
       attr_accessor id: String
 
-      attr_reader format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_?
-
-      def format_=: (
-        XTwitterScraper::Models::ExtractionExportResultsParams::format_
-      ) -> XTwitterScraper::Models::ExtractionExportResultsParams::format_
+      attr_accessor format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_
 
       def initialize: (
         id: String,
-        ?format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_,
+        format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 

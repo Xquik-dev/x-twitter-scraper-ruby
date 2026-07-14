@@ -7,7 +7,7 @@ module XTwitterScraper
       ) -> XTwitterScraper::EventDetail
 
       def list: (
-        ?after: String,
+        ?cursor: String,
         ?event_type: XTwitterScraper::Models::event_type,
         ?limit: Integer,
         ?monitor_id: String,

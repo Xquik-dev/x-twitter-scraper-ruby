@@ -26,7 +26,7 @@ class XTwitterScraper::Test::Resources::Support::TicketsTest < XTwitterScraper::
   def test_retrieve
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.support.tickets.retrieve("messages_value")
+    response = @x_twitter_scraper.support.tickets.retrieve("tkt_a1b2c3d4e5f6a1b2c3d4e5f6")
 
     assert_pattern do
       response => XTwitterScraper::Models::Support::TicketRetrieveResponse
@@ -47,7 +47,7 @@ class XTwitterScraper::Test::Resources::Support::TicketsTest < XTwitterScraper::
   def test_update_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.support.tickets.update("id", status: :resolved)
+    response = @x_twitter_scraper.support.tickets.update("tkt_a1b2c3d4e5f6a1b2c3d4e5f6", status: :resolved)
 
     assert_pattern do
       response => XTwitterScraper::Models::Support::TicketUpdateResponse
@@ -80,7 +80,11 @@ class XTwitterScraper::Test::Resources::Support::TicketsTest < XTwitterScraper::
   def test_reply_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.support.tickets.reply("id", body: "Thank you for the update.")
+    response =
+      @x_twitter_scraper.support.tickets.reply(
+        "tkt_a1b2c3d4e5f6a1b2c3d4e5f6",
+        body: "Thank you for the update."
+      )
 
     assert_pattern do
       response => XTwitterScraper::Models::Support::TicketReplyResponse

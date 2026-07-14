@@ -1,0 +1,17 @@
+module XTwitterScraper
+  module Models
+    module X
+      module Communities
+        type join_create_response = { success: true }
+
+        class JoinCreateResponse < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor success: true
+
+          def initialize: (?success: true) -> void
+
+          def to_hash: -> { success: true }
+        end
+      end
+    end
+  end
+end

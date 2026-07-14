@@ -14,14 +14,17 @@ module XTwitterScraper
           )
         end
 
-      # Cursor for keyset pagination
+      # Cursor for keyset pagination from prior response next_cursor
       sig { returns(T.nilable(String)) }
-      attr_reader :after
+      attr_reader :cursor
 
-      sig { params(after: String).void }
-      attr_writer :after
+      sig { params(cursor: String).void }
+      attr_writer :cursor
 
-      # Maximum number of items to return (1-100, default 50)
+      # Maximum number of items to return (1-100, default 50). For paid per-result
+      # endpoints, the returned count may be lower when remaining credits cannot cover
+      # the requested page. If zero paid results are affordable, the endpoint returns
+      # 402 insufficient_credits.
       sig { returns(T.nilable(Integer)) }
       attr_reader :limit
 
@@ -30,15 +33,18 @@ module XTwitterScraper
 
       sig do
         params(
-          after: String,
+          cursor: String,
           limit: Integer,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
-        # Cursor for keyset pagination
-        after: nil,
-        # Maximum number of items to return (1-100, default 50)
+        # Cursor for keyset pagination from prior response next_cursor
+        cursor: nil,
+        # Maximum number of items to return (1-100, default 50). For paid per-result
+        # endpoints, the returned count may be lower when remaining credits cannot cover
+        # the requested page. If zero paid results are affordable, the endpoint returns
+        # 402 insufficient_credits.
         limit: nil,
         request_options: {}
       )
@@ -47,7 +53,7 @@ module XTwitterScraper
       sig do
         override.returns(
           {
-            after: String,
+            cursor: String,
             limit: Integer,
             request_options: XTwitterScraper::RequestOptions
           }

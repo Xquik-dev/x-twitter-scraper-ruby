@@ -10,6 +10,8 @@ module XTwitterScraper
       required :id, String
 
       # @!attribute total_entries
+      #   Candidate entries inspected for this draw after the credit-derived cap. This may
+      #   be lower than the source tweet's full reply count.
       #
       #   @return [Integer]
       required :total_entries, Integer, api_name: :totalEntries
@@ -20,6 +22,8 @@ module XTwitterScraper
       required :tweet_id, String, api_name: :tweetId
 
       # @!attribute valid_entries
+      #   Entries from the inspected candidate set that passed all filters. This is not
+      #   necessarily every valid reply on the source tweet when credits cap inspection.
       #
       #   @return [Integer]
       required :valid_entries, Integer, api_name: :validEntries
@@ -30,10 +34,17 @@ module XTwitterScraper
       required :winners, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Winner] }
 
       # @!method initialize(id:, total_entries:, tweet_id:, valid_entries:, winners:)
+      #   Some parameter documentations has been truncated, see
+      #   {XTwitterScraper::Models::DrawRunResponse} for more details.
+      #
       #   @param id [String]
-      #   @param total_entries [Integer]
+      #
+      #   @param total_entries [Integer] Candidate entries inspected for this draw after the credit-derived cap. This may
+      #
       #   @param tweet_id [String]
-      #   @param valid_entries [Integer]
+      #
+      #   @param valid_entries [Integer] Entries from the inspected candidate set that passed all filters. This is not ne
+      #
       #   @param winners [Array<XTwitterScraper::Models::Winner>]
     end
   end

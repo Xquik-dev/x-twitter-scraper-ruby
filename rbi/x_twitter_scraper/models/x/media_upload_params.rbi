@@ -15,34 +15,26 @@ module XTwitterScraper
             )
           end
 
-        # X account (@username or ID) uploading media
+        # X account (@username or ID) uploading media from URL
         sig { returns(String) }
         attr_accessor :account
 
-        # Media file to upload
-        sig { returns(XTwitterScraper::Internal::FileInput) }
-        attr_accessor :file
-
-        sig { returns(T.nilable(T::Boolean)) }
-        attr_reader :is_long_video
-
-        sig { params(is_long_video: T::Boolean).void }
-        attr_writer :is_long_video
+        # HTTPS URL to download and upload as media
+        sig { returns(String) }
+        attr_accessor :url
 
         sig do
           params(
             account: String,
-            file: XTwitterScraper::Internal::FileInput,
-            is_long_video: T::Boolean,
+            url: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
-          # X account (@username or ID) uploading media
+          # X account (@username or ID) uploading media from URL
           account:,
-          # Media file to upload
-          file:,
-          is_long_video: nil,
+          # HTTPS URL to download and upload as media
+          url:,
           request_options: {}
         )
         end
@@ -51,8 +43,7 @@ module XTwitterScraper
           override.returns(
             {
               account: String,
-              file: XTwitterScraper::Internal::FileInput,
-              is_long_video: T::Boolean,
+              url: String,
               request_options: XTwitterScraper::RequestOptions
             }
           )

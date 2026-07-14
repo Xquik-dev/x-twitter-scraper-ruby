@@ -17,15 +17,19 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :next_cursor
 
-      sig { returns(T::Array[XTwitterScraper::X::SearchTweet]) }
+      sig { returns(T::Array[XTwitterScraper::SearchTweet]) }
       attr_accessor :tweets
 
-      # Paginated list of tweets with cursor-based navigation.
+      # Paginated tweet results. The item count can be lower than pageSize when the
+      # source returns fewer tweets, filters remove tweets, or remaining credits cover
+      # fewer results. Follow next_cursor while has_next_page is true. An empty page can
+      # still have has_next_page true after filtering. Zero affordable results returns
+      # 402 insufficient_credits.
       sig do
         params(
           has_next_page: T::Boolean,
           next_cursor: String,
-          tweets: T::Array[XTwitterScraper::X::SearchTweet::OrHash]
+          tweets: T::Array[XTwitterScraper::SearchTweet::OrHash]
         ).returns(T.attached_class)
       end
       def self.new(has_next_page:, next_cursor:, tweets:)
@@ -36,7 +40,7 @@ module XTwitterScraper
           {
             has_next_page: T::Boolean,
             next_cursor: String,
-            tweets: T::Array[XTwitterScraper::X::SearchTweet]
+            tweets: T::Array[XTwitterScraper::SearchTweet]
           }
         )
       end

@@ -15,15 +15,19 @@ module XTwitterScraper
 
       # @!attribute tweets
       #
-      #   @return [Array<XTwitterScraper::Models::X::SearchTweet>]
-      required :tweets, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet] }
+      #   @return [Array<XTwitterScraper::Models::SearchTweet>]
+      required :tweets, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet] }
 
       # @!method initialize(has_next_page:, next_cursor:, tweets:)
-      #   Paginated list of tweets with cursor-based navigation.
+      #   Paginated tweet results. The item count can be lower than pageSize when the
+      #   source returns fewer tweets, filters remove tweets, or remaining credits cover
+      #   fewer results. Follow next_cursor while has_next_page is true. An empty page can
+      #   still have has_next_page true after filtering. Zero affordable results returns
+      #   402 insufficient_credits.
       #
       #   @param has_next_page [Boolean]
       #   @param next_cursor [String]
-      #   @param tweets [Array<XTwitterScraper::Models::X::SearchTweet>]
+      #   @param tweets [Array<XTwitterScraper::Models::SearchTweet>]
     end
   end
 end

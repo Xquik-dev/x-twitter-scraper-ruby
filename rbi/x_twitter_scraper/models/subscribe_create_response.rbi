@@ -12,49 +12,36 @@ module XTwitterScraper
         end
 
       sig { returns(String) }
-      attr_accessor :url
-
-      sig { returns(T.nilable(String)) }
-      attr_reader :message
-
-      sig { params(message: String).void }
-      attr_writer :message
+      attr_accessor :message
 
       sig do
         returns(
-          T.nilable(
-            XTwitterScraper::Models::SubscribeCreateResponse::Status::TaggedSymbol
-          )
+          XTwitterScraper::Models::SubscribeCreateResponse::Status::TaggedSymbol
         )
       end
-      attr_reader :status
+      attr_accessor :status
+
+      sig { returns(String) }
+      attr_accessor :url
 
       sig do
         params(
-          status:
-            XTwitterScraper::Models::SubscribeCreateResponse::Status::OrSymbol
-        ).void
-      end
-      attr_writer :status
-
-      sig do
-        params(
-          url: String,
           message: String,
           status:
-            XTwitterScraper::Models::SubscribeCreateResponse::Status::OrSymbol
+            XTwitterScraper::Models::SubscribeCreateResponse::Status::OrSymbol,
+          url: String
         ).returns(T.attached_class)
       end
-      def self.new(url:, message: nil, status: nil)
+      def self.new(message:, status:, url:)
       end
 
       sig do
         override.returns(
           {
-            url: String,
             message: String,
             status:
-              XTwitterScraper::Models::SubscribeCreateResponse::Status::TaggedSymbol
+              XTwitterScraper::Models::SubscribeCreateResponse::Status::TaggedSymbol,
+            url: String
           }
         )
       end

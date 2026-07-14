@@ -21,7 +21,7 @@ module XTwitterScraper
       sig { params(cursor: String).void }
       attr_writer :cursor
 
-      # Notification type filter
+      # Notification type filter. Unrecognized values fall back to All.
       sig do
         returns(
           T.nilable(XTwitterScraper::XGetNotificationsParams::Type::OrSymbol)
@@ -46,7 +46,7 @@ module XTwitterScraper
       def self.new(
         # Pagination cursor for notifications
         cursor: nil,
-        # Notification type filter
+        # Notification type filter. Unrecognized values fall back to All.
         type: nil,
         request_options: {}
       )
@@ -64,7 +64,7 @@ module XTwitterScraper
       def to_hash
       end
 
-      # Notification type filter
+      # Notification type filter. Unrecognized values fall back to All.
       module Type
         extend XTwitterScraper::Internal::Type::Enum
 

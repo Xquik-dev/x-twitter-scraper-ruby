@@ -8,7 +8,7 @@ module XTwitterScraper
         # @return [XTwitterScraper::Resources::X::Communities::Join]
         attr_reader :join
 
-        # X data lookups (subscription required)
+        # X Community info, members, and tweets
         # @return [XTwitterScraper::Resources::X::Communities::Tweets]
         attr_reader :tweets
 
@@ -42,7 +42,7 @@ module XTwitterScraper
         #
         # @overload delete(id, account:, community_name:, request_options: {})
         #
-        # @param id [String] Resource ID (stringified bigint)
+        # @param id [String] Resource ID returned by the matching create or list endpoint.
         #
         # @param account [String] X account (@username or ID) deleting the community
         #
@@ -64,7 +64,7 @@ module XTwitterScraper
           )
         end
 
-        # Get community details
+        # Get community name, description and member count
         #
         # @overload retrieve_info(id, request_options: {})
         #
@@ -84,13 +84,18 @@ module XTwitterScraper
           )
         end
 
-        # Get community members
+        # Some parameter documentations has been truncated, see
+        # {XTwitterScraper::Models::X::CommunityRetrieveMembersParams} for more details.
         #
-        # @overload retrieve_members(id, cursor: nil, request_options: {})
+        # List members of a community
+        #
+        # @overload retrieve_members(id, cursor: nil, page_size: nil, request_options: {})
         #
         # @param id [String] Community ID for member lookup
         #
         # @param cursor [String] Pagination cursor
+        #
+        # @param page_size [Integer] Items per page (20-200, default 20). This is an upper bound for paid authenticat
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -103,13 +108,13 @@ module XTwitterScraper
           @client.request(
             method: :get,
             path: ["x/communities/%1$s/members", id],
-            query: query,
+            query: query.transform_keys(page_size: "pageSize"),
             model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end
 
-        # Get community moderators
+        # List moderators of a community
         #
         # @overload retrieve_moderators(id, cursor: nil, request_options: {})
         #
@@ -134,15 +139,22 @@ module XTwitterScraper
           )
         end
 
-        # Search tweets across communities
+        # Some parameter documentations has been truncated, see
+        # {XTwitterScraper::Models::X::CommunityRetrieveSearchParams} for more details.
         #
-        # @overload retrieve_search(q:, cursor: nil, query_type: nil, request_options: {})
+        # Returns tweets, not community records. Requires a Community ID.
+        #
+        # @overload retrieve_search(community_id:, q:, cursor: nil, page_size: nil, query_type: nil, request_options: {})
+        #
+        # @param community_id [String] Numeric ID of the community whose posts to search
         #
         # @param q [String] Search query
         #
         # @param cursor [String] Pagination cursor for community search
         #
-        # @param query_type [String] Sort order (Latest or Top)
+        # @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
+        #
+        # @param query_type [Symbol, XTwitterScraper::Models::X::CommunityRetrieveSearchParams::QueryType] Sort order (Latest or Top)
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -155,7 +167,11 @@ module XTwitterScraper
           @client.request(
             method: :get,
             path: "x/communities/search",
-            query: query.transform_keys(query_type: "queryType"),
+            query: query.transform_keys(
+              community_id: "communityId",
+              page_size: "pageSize",
+              query_type: "queryType"
+            ),
             model: XTwitterScraper::PaginatedTweets,
             options: options
           )

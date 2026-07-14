@@ -6,7 +6,7 @@ class XTwitterScraper::Test::Resources::X::Communities::TweetsTest < XTwitterScr
   def test_list_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.communities.tweets.list(q: "q")
+    response = @x_twitter_scraper.x.communities.tweets.list(community_id: "321669910225", q: "q")
 
     assert_pattern do
       response => XTwitterScraper::PaginatedTweets
@@ -16,7 +16,7 @@ class XTwitterScraper::Test::Resources::X::Communities::TweetsTest < XTwitterScr
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet])
       }
     end
   end
@@ -34,7 +34,7 @@ class XTwitterScraper::Test::Resources::X::Communities::TweetsTest < XTwitterScr
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet])
       }
     end
   end

@@ -2,7 +2,7 @@
 
 module XTwitterScraper
   module Resources
-    # Webhook endpoint management & delivery
+    # Webhook endpoint management and delivery
     class Webhooks
       # Create webhook
       sig do
@@ -32,7 +32,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Webhook)
       end
       def update(
-        # Resource ID (stringified bigint)
+        # Resource ID returned by the matching create or list endpoint.
         id,
         # Array of event types to subscribe to.
         event_types: nil,
@@ -59,7 +59,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::WebhookDeactivateResponse)
       end
       def deactivate(
-        # Resource ID (stringified bigint)
+        # Resource ID returned by the matching create or list endpoint.
         id,
         request_options: {}
       )
@@ -73,7 +73,21 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::WebhookListDeliveriesResponse)
       end
       def list_deliveries(
-        # Resource ID (stringified bigint)
+        # Resource ID returned by the matching create or list endpoint.
+        id,
+        request_options: {}
+      )
+      end
+
+      # Test and resume webhook endpoint
+      sig do
+        params(
+          id: String,
+          request_options: XTwitterScraper::RequestOptions::OrHash
+        ).returns(XTwitterScraper::Models::WebhookResumeResponse)
+      end
+      def resume(
+        # Resource ID returned by the matching create or list endpoint.
         id,
         request_options: {}
       )
@@ -87,7 +101,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::WebhookTestResponse)
       end
       def test_(
-        # Resource ID (stringified bigint)
+        # Resource ID returned by the matching create or list endpoint.
         id,
         request_options: {}
       )

@@ -1,6 +1,8 @@
 module XTwitterScraper
   module Resources
     class Monitors
+      attr_reader keywords: XTwitterScraper::Resources::Monitors::Keywords
+
       def create: (
         event_types: ::Array[XTwitterScraper::Models::event_type],
         username: String,

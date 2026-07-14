@@ -3,8 +3,11 @@ module XTwitterScraper
     type webhook =
       {
         id: String,
+        consecutive_failures: Integer,
         created_at: Time,
+        delivery_status: XTwitterScraper::Models::Webhook::delivery_status,
         event_types: ::Array[XTwitterScraper::Models::event_type],
+        failure_hard_cap: Integer,
         is_active: bool,
         url: String
       }
@@ -12,9 +15,15 @@ module XTwitterScraper
     class Webhook < XTwitterScraper::Internal::Type::BaseModel
       attr_accessor id: String
 
+      attr_accessor consecutive_failures: Integer
+
       attr_accessor created_at: Time
 
+      attr_accessor delivery_status: XTwitterScraper::Models::Webhook::delivery_status
+
       attr_accessor event_types: ::Array[XTwitterScraper::Models::event_type]
+
+      attr_accessor failure_hard_cap: Integer
 
       attr_accessor is_active: bool
 
@@ -22,19 +31,37 @@ module XTwitterScraper
 
       def initialize: (
         id: String,
+        consecutive_failures: Integer,
         created_at: Time,
+        delivery_status: XTwitterScraper::Models::Webhook::delivery_status,
         event_types: ::Array[XTwitterScraper::Models::event_type],
+        failure_hard_cap: Integer,
         is_active: bool,
         url: String
       ) -> void
 
       def to_hash: -> {
         id: String,
+        consecutive_failures: Integer,
         created_at: Time,
+        delivery_status: XTwitterScraper::Models::Webhook::delivery_status,
         event_types: ::Array[XTwitterScraper::Models::event_type],
+        failure_hard_cap: Integer,
         is_active: bool,
         url: String
       }
+
+      type delivery_status = :active | :paused | :needs_attention
+
+      module DeliveryStatus
+        extend XTwitterScraper::Internal::Type::Enum
+
+        ACTIVE: :active
+        PAUSED: :paused
+        NEEDS_ATTENTION: :needs_attention
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::Webhook::delivery_status]
+      end
     end
   end
 end

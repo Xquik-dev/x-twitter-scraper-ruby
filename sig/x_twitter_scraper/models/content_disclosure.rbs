@@ -1,0 +1,78 @@
+module XTwitterScraper
+  module Models
+    type content_disclosure =
+      {
+        advertising: XTwitterScraper::ContentDisclosure::Advertising,
+        ai_generated: XTwitterScraper::ContentDisclosure::AIGenerated
+      }
+
+    class ContentDisclosure < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader advertising: XTwitterScraper::ContentDisclosure::Advertising?
+
+      def advertising=: (
+        XTwitterScraper::ContentDisclosure::Advertising
+      ) -> XTwitterScraper::ContentDisclosure::Advertising
+
+      attr_reader ai_generated: XTwitterScraper::ContentDisclosure::AIGenerated?
+
+      def ai_generated=: (
+        XTwitterScraper::ContentDisclosure::AIGenerated
+      ) -> XTwitterScraper::ContentDisclosure::AIGenerated
+
+      def initialize: (
+        ?advertising: XTwitterScraper::ContentDisclosure::Advertising,
+        ?ai_generated: XTwitterScraper::ContentDisclosure::AIGenerated
+      ) -> void
+
+      def to_hash: -> {
+        advertising: XTwitterScraper::ContentDisclosure::Advertising,
+        ai_generated: XTwitterScraper::ContentDisclosure::AIGenerated
+      }
+
+      type advertising = { is_paid_promotion: bool }
+
+      class Advertising < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader is_paid_promotion: bool?
+
+        def is_paid_promotion=: (bool) -> bool
+
+        def initialize: (?is_paid_promotion: bool) -> void
+
+        def to_hash: -> { is_paid_promotion: bool }
+      end
+
+      type ai_generated =
+        {
+          can_edit: bool,
+          detection_source: String,
+          has_ai_generated_media: bool
+        }
+
+      class AIGenerated < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader can_edit: bool?
+
+        def can_edit=: (bool) -> bool
+
+        attr_reader detection_source: String?
+
+        def detection_source=: (String) -> String
+
+        attr_reader has_ai_generated_media: bool?
+
+        def has_ai_generated_media=: (bool) -> bool
+
+        def initialize: (
+          ?can_edit: bool,
+          ?detection_source: String,
+          ?has_ai_generated_media: bool
+        ) -> void
+
+        def to_hash: -> {
+          can_edit: bool,
+          detection_source: String,
+          has_ai_generated_media: bool
+        }
+      end
+    end
+  end
+end

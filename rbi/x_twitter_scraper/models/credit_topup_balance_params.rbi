@@ -14,26 +14,40 @@ module XTwitterScraper
           )
         end
 
-      # Amount to top up in credits
+      # Amount to top up in US dollars. Minimum 10.
       sig { returns(Integer) }
-      attr_accessor :amount
+      attr_accessor :dollars
+
+      # Optional checkout locale. Defaults to en.
+      sig { returns(T.nilable(String)) }
+      attr_reader :locale
+
+      sig { params(locale: String).void }
+      attr_writer :locale
 
       sig do
         params(
-          amount: Integer,
+          dollars: Integer,
+          locale: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
-        # Amount to top up in credits
-        amount:,
+        # Amount to top up in US dollars. Minimum 10.
+        dollars:,
+        # Optional checkout locale. Defaults to en.
+        locale: nil,
         request_options: {}
       )
       end
 
       sig do
         override.returns(
-          { amount: Integer, request_options: XTwitterScraper::RequestOptions }
+          {
+            dollars: Integer,
+            locale: String,
+            request_options: XTwitterScraper::RequestOptions
+          }
         )
       end
       def to_hash

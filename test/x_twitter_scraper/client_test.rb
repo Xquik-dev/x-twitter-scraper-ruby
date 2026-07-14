@@ -6,8 +6,6 @@ class XTwitterScraperTest < Minitest::Test
   extend Minitest::Serial
   include WebMock::API
 
-  TWEET_SEARCH_URL = "http://localhost/x/tweets/search?q=q"
-
   def setup
     super
     Thread.current.thread_variable_set(:mock_sleep, [])
@@ -20,7 +18,7 @@ class XTwitterScraperTest < Minitest::Test
   end
 
   def test_client_default_request_default_retry_attempts
-    stub_request(:get, TWEET_SEARCH_URL).to_return_json(status: 500, body: {})
+    stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
 
     x_twitter_scraper =
       XTwitterScraper::Client.new(
@@ -30,14 +28,14 @@ class XTwitterScraperTest < Minitest::Test
       )
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.x.tweets.search(q: "q")
+      x_twitter_scraper.account.retrieve
     end
 
     assert_requested(:any, /./, times: 3)
   end
 
   def test_client_given_request_default_retry_attempts
-    stub_request(:get, TWEET_SEARCH_URL).to_return_json(status: 500, body: {})
+    stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
 
     x_twitter_scraper =
       XTwitterScraper::Client.new(
@@ -48,14 +46,14 @@ class XTwitterScraperTest < Minitest::Test
       )
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.x.tweets.search(q: "q")
+      x_twitter_scraper.account.retrieve
     end
 
     assert_requested(:any, /./, times: 4)
   end
 
   def test_client_default_request_given_retry_attempts
-    stub_request(:get, TWEET_SEARCH_URL).to_return_json(status: 500, body: {})
+    stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
 
     x_twitter_scraper =
       XTwitterScraper::Client.new(
@@ -65,14 +63,14 @@ class XTwitterScraperTest < Minitest::Test
       )
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.x.tweets.search(q: "q", request_options: {max_retries: 3})
+      x_twitter_scraper.account.retrieve(request_options: {max_retries: 3})
     end
 
     assert_requested(:any, /./, times: 4)
   end
 
   def test_client_given_request_given_retry_attempts
-    stub_request(:get, TWEET_SEARCH_URL).to_return_json(status: 500, body: {})
+    stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
 
     x_twitter_scraper =
       XTwitterScraper::Client.new(
@@ -83,14 +81,14 @@ class XTwitterScraperTest < Minitest::Test
       )
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.x.tweets.search(q: "q", request_options: {max_retries: 4})
+      x_twitter_scraper.account.retrieve(request_options: {max_retries: 4})
     end
 
     assert_requested(:any, /./, times: 5)
   end
 
   def test_client_retry_after_seconds
-    stub_request(:get, TWEET_SEARCH_URL).to_return_json(
+    stub_request(:get, "http://localhost/account").to_return_json(
       status: 500,
       headers: {"retry-after" => "1.3"},
       body: {}
@@ -105,7 +103,7 @@ class XTwitterScraperTest < Minitest::Test
       )
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.x.tweets.search(q: "q")
+      x_twitter_scraper.account.retrieve
     end
 
     assert_requested(:any, /./, times: 2)
@@ -115,7 +113,7 @@ class XTwitterScraperTest < Minitest::Test
   def test_client_retry_after_date
     time_now = Time.now
 
-    stub_request(:get, TWEET_SEARCH_URL).to_return_json(
+    stub_request(:get, "http://localhost/account").to_return_json(
       status: 500,
       headers: {"retry-after" => (time_now + 10).httpdate},
       body: {}
@@ -131,7 +129,7 @@ class XTwitterScraperTest < Minitest::Test
 
     Thread.current.thread_variable_set(:time_now, time_now)
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.x.tweets.search(q: "q")
+      x_twitter_scraper.account.retrieve
     end
     Thread.current.thread_variable_set(:time_now, nil)
 
@@ -140,7 +138,7 @@ class XTwitterScraperTest < Minitest::Test
   end
 
   def test_client_retry_after_ms
-    stub_request(:get, TWEET_SEARCH_URL).to_return_json(
+    stub_request(:get, "http://localhost/account").to_return_json(
       status: 500,
       headers: {"retry-after-ms" => "1300"},
       body: {}
@@ -155,7 +153,7 @@ class XTwitterScraperTest < Minitest::Test
       )
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.x.tweets.search(q: "q")
+      x_twitter_scraper.account.retrieve
     end
 
     assert_requested(:any, /./, times: 2)
@@ -163,7 +161,7 @@ class XTwitterScraperTest < Minitest::Test
   end
 
   def test_retry_count_header
-    stub_request(:get, TWEET_SEARCH_URL).to_return_json(status: 500, body: {})
+    stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
 
     x_twitter_scraper =
       XTwitterScraper::Client.new(
@@ -173,7 +171,7 @@ class XTwitterScraperTest < Minitest::Test
       )
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.x.tweets.search(q: "q")
+      x_twitter_scraper.account.retrieve
     end
 
     3.times do
@@ -182,7 +180,7 @@ class XTwitterScraperTest < Minitest::Test
   end
 
   def test_omit_retry_count_header
-    stub_request(:get, TWEET_SEARCH_URL).to_return_json(status: 500, body: {})
+    stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
 
     x_twitter_scraper =
       XTwitterScraper::Client.new(
@@ -192,10 +190,7 @@ class XTwitterScraperTest < Minitest::Test
       )
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.x.tweets.search(
-        q: "q",
-        request_options: {extra_headers: {"x-stainless-retry-count" => nil}}
-      )
+      x_twitter_scraper.account.retrieve(request_options: {extra_headers: {"x-stainless-retry-count" => nil}})
     end
 
     assert_requested(:any, /./, times: 3) do
@@ -204,7 +199,7 @@ class XTwitterScraperTest < Minitest::Test
   end
 
   def test_overwrite_retry_count_header
-    stub_request(:get, TWEET_SEARCH_URL).to_return_json(status: 500, body: {})
+    stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
 
     x_twitter_scraper =
       XTwitterScraper::Client.new(
@@ -214,17 +209,14 @@ class XTwitterScraperTest < Minitest::Test
       )
 
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.x.tweets.search(
-        q: "q",
-        request_options: {extra_headers: {"x-stainless-retry-count" => "42"}}
-      )
+      x_twitter_scraper.account.retrieve(request_options: {extra_headers: {"x-stainless-retry-count" => "42"}})
     end
 
     assert_requested(:any, /./, headers: {"x-stainless-retry-count" => "42"}, times: 3)
   end
 
   def test_client_redirect_307
-    stub_request(:get, TWEET_SEARCH_URL).to_return_json(
+    stub_request(:get, "http://localhost/account").to_return_json(
       status: 307,
       headers: {"location" => "/redirected"},
       body: {}
@@ -242,7 +234,7 @@ class XTwitterScraperTest < Minitest::Test
       )
 
     assert_raises(XTwitterScraper::Errors::APIConnectionError) do
-      x_twitter_scraper.x.tweets.search(q: "q", request_options: {extra_headers: {}})
+      x_twitter_scraper.account.retrieve(request_options: {extra_headers: {}})
     end
 
     recorded, = WebMock::RequestRegistry.instance.requested_signatures.hash.first
@@ -254,15 +246,18 @@ class XTwitterScraperTest < Minitest::Test
       else
         assert_equal(recorded.body, _1.body)
       end
-      assert_equal(
-        recorded.headers.transform_keys(&:downcase).fetch("content-type"),
-        _1.headers.transform_keys(&:downcase).fetch("content-type")
-      )
+      recorded_content_type = recorded.headers.transform_keys(&:downcase)["content-type"]
+      actual_content_type = _1.headers.transform_keys(&:downcase)["content-type"]
+      if recorded_content_type.nil?
+        assert_nil(actual_content_type)
+      else
+        assert_equal(recorded_content_type, actual_content_type)
+      end
     end
   end
 
   def test_client_redirect_303
-    stub_request(:get, TWEET_SEARCH_URL).to_return_json(
+    stub_request(:get, "http://localhost/account").to_return_json(
       status: 303,
       headers: {"location" => "/redirected"},
       body: {}
@@ -280,7 +275,7 @@ class XTwitterScraperTest < Minitest::Test
       )
 
     assert_raises(XTwitterScraper::Errors::APIConnectionError) do
-      x_twitter_scraper.x.tweets.search(q: "q", request_options: {extra_headers: {}})
+      x_twitter_scraper.account.retrieve(request_options: {extra_headers: {}})
     end
 
     assert_requested(:get, "http://localhost/redirected", times: XTwitterScraper::Client::MAX_REDIRECTS) do
@@ -291,7 +286,7 @@ class XTwitterScraperTest < Minitest::Test
   end
 
   def test_client_redirect_auth_keep_same_origin
-    stub_request(:get, TWEET_SEARCH_URL).to_return_json(
+    stub_request(:get, "http://localhost/account").to_return_json(
       status: 307,
       headers: {"location" => "/redirected"},
       body: {}
@@ -309,10 +304,7 @@ class XTwitterScraperTest < Minitest::Test
       )
 
     assert_raises(XTwitterScraper::Errors::APIConnectionError) do
-      x_twitter_scraper.x.tweets.search(
-        q: "q",
-        request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
-      )
+      x_twitter_scraper.account.retrieve(request_options: {extra_headers: {"authorization" => "Bearer xyz"}})
     end
 
     recorded, = WebMock::RequestRegistry.instance.requested_signatures.hash.first
@@ -326,7 +318,7 @@ class XTwitterScraperTest < Minitest::Test
   end
 
   def test_client_redirect_auth_strip_cross_origin
-    stub_request(:get, TWEET_SEARCH_URL).to_return_json(
+    stub_request(:get, "http://localhost/account").to_return_json(
       status: 307,
       headers: {"location" => "https://example.com/redirected"},
       body: {}
@@ -344,10 +336,7 @@ class XTwitterScraperTest < Minitest::Test
       )
 
     assert_raises(XTwitterScraper::Errors::APIConnectionError) do
-      x_twitter_scraper.x.tweets.search(
-        q: "q",
-        request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
-      )
+      x_twitter_scraper.account.retrieve(request_options: {extra_headers: {"authorization" => "Bearer xyz"}})
     end
 
     assert_requested(:any, "https://example.com/redirected", times: XTwitterScraper::Client::MAX_REDIRECTS) do
@@ -357,7 +346,7 @@ class XTwitterScraperTest < Minitest::Test
   end
 
   def test_default_headers
-    stub_request(:get, TWEET_SEARCH_URL).to_return_json(status: 200, body: {})
+    stub_request(:get, "http://localhost/account").to_return_json(status: 200, body: {})
 
     x_twitter_scraper =
       XTwitterScraper::Client.new(
@@ -366,11 +355,12 @@ class XTwitterScraperTest < Minitest::Test
         bearer_token: "My Bearer Token"
       )
 
-    x_twitter_scraper.x.tweets.search(q: "q")
+    x_twitter_scraper.account.retrieve
 
     assert_requested(:any, /./) do |req|
-      headers = req.headers.transform_keys(&:downcase).fetch_values("accept", "content-type")
-      headers.each { refute_empty(_1) }
+      headers = req.headers.transform_keys(&:downcase)
+      expected = req.body.nil? ? ["accept"] : %w[accept content-type]
+      headers.fetch_values(*expected).each { refute_empty(_1) }
     end
   end
 end

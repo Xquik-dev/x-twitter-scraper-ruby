@@ -10,15 +10,22 @@ module XTwitterScraper
       required :id, String
 
       # @!attribute data
-      #   Event payload — shape varies by event type (JSON)
+      #   Event payload - shape varies by event type (JSON)
       #
       #   @return [Hash{Symbol=>Object}]
       required :data, XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]
 
       # @!attribute monitor_id
+      #   Monitor ID associated with this detailed event payload.
       #
       #   @return [String]
       required :monitor_id, String, api_name: :monitorId
+
+      # @!attribute monitor_type
+      #   Source monitor type for this detailed event.
+      #
+      #   @return [Symbol, XTwitterScraper::Models::EventDetail::MonitorType]
+      required :monitor_type, enum: -> { XTwitterScraper::EventDetail::MonitorType }, api_name: :monitorType
 
       # @!attribute occurred_at
       #
@@ -31,32 +38,64 @@ module XTwitterScraper
       #   @return [Symbol, XTwitterScraper::Models::EventType]
       required :type, enum: -> { XTwitterScraper::EventType }
 
-      # @!attribute username
+      # @!attribute keyword_monitor_id
+      #   Keyword monitor ID included on detailed keyword events.
       #
-      #   @return [String]
-      required :username, String
+      #   @return [String, nil]
+      optional :keyword_monitor_id, String, api_name: :keywordMonitorId
+
+      # @!attribute query
+      #   Keyword query for this detailed monitor event.
+      #
+      #   @return [String, nil]
+      optional :query, String
+
+      # @!attribute username
+      #   Account username for this detailed monitor event.
+      #
+      #   @return [String, nil]
+      optional :username, String
 
       # @!attribute x_event_id
       #
       #   @return [String, nil]
       optional :x_event_id, String, api_name: :xEventId
 
-      # @!method initialize(id:, data:, monitor_id:, occurred_at:, type:, username:, x_event_id: nil)
+      # @!method initialize(id:, data:, monitor_id:, monitor_type:, occurred_at:, type:, keyword_monitor_id: nil, query: nil, username: nil, x_event_id: nil)
       #   Full monitor event including payload data and optional X event ID.
       #
       #   @param id [String]
       #
-      #   @param data [Hash{Symbol=>Object}] Event payload — shape varies by event type (JSON)
+      #   @param data [Hash{Symbol=>Object}] Event payload - shape varies by event type (JSON)
       #
-      #   @param monitor_id [String]
+      #   @param monitor_id [String] Monitor ID associated with this detailed event payload.
+      #
+      #   @param monitor_type [Symbol, XTwitterScraper::Models::EventDetail::MonitorType] Source monitor type for this detailed event.
       #
       #   @param occurred_at [Time]
       #
       #   @param type [Symbol, XTwitterScraper::Models::EventType] Type of monitor event fired when account activity occurs.
       #
-      #   @param username [String]
+      #   @param keyword_monitor_id [String] Keyword monitor ID included on detailed keyword events.
+      #
+      #   @param query [String] Keyword query for this detailed monitor event.
+      #
+      #   @param username [String] Account username for this detailed monitor event.
       #
       #   @param x_event_id [String]
+
+      # Source monitor type for this detailed event.
+      #
+      # @see XTwitterScraper::Models::EventDetail#monitor_type
+      module MonitorType
+        extend XTwitterScraper::Internal::Type::Enum
+
+        ACCOUNT = :account
+        KEYWORD = :keyword
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
     end
   end
 end

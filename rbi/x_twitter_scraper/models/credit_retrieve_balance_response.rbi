@@ -11,30 +11,54 @@ module XTwitterScraper
           )
         end
 
+      # Configured dollar amount for each automatic top-up.
+      sig { returns(Float) }
+      attr_accessor :auto_topup_amount_dollars
+
       sig { returns(T::Boolean) }
       attr_accessor :auto_topup_enabled
 
-      sig { returns(Integer) }
+      # Credit balance threshold that triggers automatic top-up when enabled,
+      # represented as a bigint string.
+      sig { returns(String) }
+      attr_accessor :auto_topup_threshold
+
+      # Current credit balance as a bigint string to preserve precision above
+      # Number.MAX_SAFE_INTEGER.
+      sig { returns(String) }
       attr_accessor :balance
 
-      sig { returns(Integer) }
+      # Lifetime purchased credits as a bigint string.
+      sig { returns(String) }
       attr_accessor :lifetime_purchased
 
-      sig { returns(Integer) }
+      # Lifetime consumed credits as a bigint string.
+      sig { returns(String) }
       attr_accessor :lifetime_used
 
       sig do
         params(
+          auto_topup_amount_dollars: Float,
           auto_topup_enabled: T::Boolean,
-          balance: Integer,
-          lifetime_purchased: Integer,
-          lifetime_used: Integer
+          auto_topup_threshold: String,
+          balance: String,
+          lifetime_purchased: String,
+          lifetime_used: String
         ).returns(T.attached_class)
       end
       def self.new(
+        # Configured dollar amount for each automatic top-up.
+        auto_topup_amount_dollars:,
         auto_topup_enabled:,
+        # Credit balance threshold that triggers automatic top-up when enabled,
+        # represented as a bigint string.
+        auto_topup_threshold:,
+        # Current credit balance as a bigint string to preserve precision above
+        # Number.MAX_SAFE_INTEGER.
         balance:,
+        # Lifetime purchased credits as a bigint string.
         lifetime_purchased:,
+        # Lifetime consumed credits as a bigint string.
         lifetime_used:
       )
       end
@@ -42,10 +66,12 @@ module XTwitterScraper
       sig do
         override.returns(
           {
+            auto_topup_amount_dollars: Float,
             auto_topup_enabled: T::Boolean,
-            balance: Integer,
-            lifetime_purchased: Integer,
-            lifetime_used: Integer
+            auto_topup_threshold: String,
+            balance: String,
+            lifetime_purchased: String,
+            lifetime_used: String
           }
         )
       end

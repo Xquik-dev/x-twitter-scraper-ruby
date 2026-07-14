@@ -3,15 +3,15 @@
 module XTwitterScraper
   module Resources
     class X
-      # X data lookups (subscription required)
+      # Look up, search, and explore user profiles and relationships
       class Followers
-        # Check follow relationship
+        # Check if one user follows another
         #
         # @overload check(source:, target:, request_options: {})
         #
-        # @param source [String] Username to check (without @)
+        # @param source [String] Source username, @username, or X or Twitter profile URL
         #
-        # @param target [String] Target username (without @)
+        # @param target [String] Target username, @username, or X or Twitter profile URL
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

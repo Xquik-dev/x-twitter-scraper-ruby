@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     "rbi/**/*.rbi",
     "sig/**/*.rbs",
     "manifest.yaml",
+    "LICENSE",
     "SECURITY.md",
     "CHANGELOG.md",
     ".ignore"

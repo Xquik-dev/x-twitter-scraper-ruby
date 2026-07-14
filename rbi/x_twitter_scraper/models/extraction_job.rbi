@@ -131,6 +131,11 @@ module XTwitterScraper
             :community_search,
             XTwitterScraper::ExtractionJob::ToolType::TaggedSymbol
           )
+        FAVORITERS =
+          T.let(
+            :favoriters,
+            XTwitterScraper::ExtractionJob::ToolType::TaggedSymbol
+          )
         FOLLOWER_EXPLORER =
           T.let(
             :follower_explorer,
@@ -199,6 +204,16 @@ module XTwitterScraper
         TWEET_SEARCH_EXTRACTOR =
           T.let(
             :tweet_search_extractor,
+            XTwitterScraper::ExtractionJob::ToolType::TaggedSymbol
+          )
+        USER_LIKES =
+          T.let(
+            :user_likes,
+            XTwitterScraper::ExtractionJob::ToolType::TaggedSymbol
+          )
+        USER_MEDIA =
+          T.let(
+            :user_media,
             XTwitterScraper::ExtractionJob::ToolType::TaggedSymbol
           )
         VERIFIED_FOLLOWER_EXPLORER =

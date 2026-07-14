@@ -1,43 +1,20 @@
 module XTwitterScraper
   module Models
     module X
-      type tweet_author =
-        {
-          id: String,
-          followers: Integer,
-          username: String,
-          verified: bool,
-          profile_picture: String
-        }
+      type tweet_author = { followers: Integer, verified: bool }
 
-      class TweetAuthor < XTwitterScraper::Internal::Type::BaseModel
-        attr_accessor id: String
+      class TweetAuthor < XTwitterScraper::Models::UserProfile
+        def followers: -> Integer
 
-        attr_accessor followers: Integer
+        def followers=: (Integer _) -> Integer
 
-        attr_accessor username: String
+        def verified: -> bool
 
-        attr_accessor verified: bool
+        def verified=: (bool _) -> bool
 
-        attr_reader profile_picture: String?
+        def initialize: (followers: Integer, verified: bool) -> void
 
-        def profile_picture=: (String) -> String
-
-        def initialize: (
-          id: String,
-          followers: Integer,
-          username: String,
-          verified: bool,
-          ?profile_picture: String
-        ) -> void
-
-        def to_hash: -> {
-          id: String,
-          followers: Integer,
-          username: String,
-          verified: bool,
-          profile_picture: String
-        }
+        def to_hash: -> { followers: Integer, verified: bool }
       end
     end
   end

@@ -6,7 +6,6 @@ module XTwitterScraper
           email: String,
           password: String,
           username: String,
-          proxy_country: String,
           totp_secret: String
         }
         & XTwitterScraper::Internal::Type::request_parameters
@@ -21,10 +20,6 @@ module XTwitterScraper
 
         attr_accessor username: String
 
-        attr_reader proxy_country: String?
-
-        def proxy_country=: (String) -> String
-
         attr_reader totp_secret: String?
 
         def totp_secret=: (String) -> String
@@ -33,7 +28,6 @@ module XTwitterScraper
           email: String,
           password: String,
           username: String,
-          ?proxy_country: String,
           ?totp_secret: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
@@ -42,7 +36,6 @@ module XTwitterScraper
           email: String,
           password: String,
           username: String,
-          proxy_country: String,
           totp_secret: String,
           request_options: XTwitterScraper::RequestOptions
         }

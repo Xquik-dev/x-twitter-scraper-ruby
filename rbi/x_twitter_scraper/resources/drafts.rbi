@@ -2,7 +2,7 @@
 
 module XTwitterScraper
   module Resources
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     class Drafts
       # Save a tweet draft
       sig do
@@ -24,7 +24,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::DraftDetail)
       end
       def retrieve(
-        # Resource ID (stringified bigint)
+        # Resource ID returned by the matching create or list endpoint.
         id,
         request_options: {}
       )
@@ -41,7 +41,10 @@ module XTwitterScraper
       def list(
         # Cursor for pagination
         after_cursor: nil,
-        # Maximum number of items to return (1-100, default 50)
+        # Maximum number of items to return (1-100, default 50). For paid per-result
+        # endpoints, the returned count may be lower when remaining credits cannot cover
+        # the requested page. If zero paid results are affordable, the endpoint returns
+        # 402 insufficient_credits.
         limit: nil,
         request_options: {}
       )
@@ -55,7 +58,7 @@ module XTwitterScraper
         ).void
       end
       def delete(
-        # Resource ID (stringified bigint)
+        # Resource ID returned by the matching create or list endpoint.
         id,
         request_options: {}
       )

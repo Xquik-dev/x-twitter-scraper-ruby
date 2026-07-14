@@ -67,7 +67,7 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile])
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile])
       }
     end
   end
@@ -85,7 +85,7 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile])
+        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile])
       }
     end
   end
@@ -93,7 +93,7 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
   def test_retrieve_search_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.communities.retrieve_search(q: "q")
+    response = @x_twitter_scraper.x.communities.retrieve_search(community_id: "321669910225", q: "q")
 
     assert_pattern do
       response => XTwitterScraper::PaginatedTweets
@@ -103,7 +103,7 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
       response => {
         has_next_page: XTwitterScraper::Internal::Type::Boolean,
         next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::SearchTweet])
+        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet])
       }
     end
   end

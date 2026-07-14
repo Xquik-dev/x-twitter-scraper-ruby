@@ -19,10 +19,25 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :cursor, String
 
-        # @!method initialize(id:, cursor: nil, request_options: {})
+        # @!attribute page_size
+        #   Maximum items requested from this page (1-100, default 20). The response can
+        #   contain fewer items because the source returned fewer, filters removed items, or
+        #   remaining credits cover fewer results. Keep requesting next_cursor while
+        #   has_next_page is true, even when a page is empty. The deprecated limit and count
+        #   aliases remain accepted.
+        #
+        #   @return [Integer, nil]
+        optional :page_size, Integer
+
+        # @!method initialize(id:, cursor: nil, page_size: nil, request_options: {})
+        #   Some parameter documentations has been truncated, see
+        #   {XTwitterScraper::Models::X::TweetGetThreadParams} for more details.
+        #
         #   @param id [String]
         #
         #   @param cursor [String] Pagination cursor for thread tweets
+        #
+        #   @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end

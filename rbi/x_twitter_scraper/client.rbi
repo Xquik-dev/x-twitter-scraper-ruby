@@ -17,31 +17,27 @@ module XTwitterScraper
     sig { returns(T.nilable(String)) }
     attr_reader :bearer_token
 
-    # Account info & settings
+    # Account info and settings
     sig { returns(XTwitterScraper::Resources::Account) }
     attr_reader :account
 
-    # API key management (session auth only)
-    sig { returns(XTwitterScraper::Resources::APIKeys) }
-    attr_reader :api_keys
-
-    # Subscription & billing
+    # Subscription, billing, and credits
     sig { returns(XTwitterScraper::Resources::Subscribe) }
     attr_reader :subscribe
 
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     sig { returns(XTwitterScraper::Resources::Compose) }
     attr_reader :compose
 
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     sig { returns(XTwitterScraper::Resources::Drafts) }
     attr_reader :drafts
 
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     sig { returns(XTwitterScraper::Resources::Styles) }
     attr_reader :styles
 
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     sig { returns(XTwitterScraper::Resources::Radar) }
     attr_reader :radar
 
@@ -53,7 +49,7 @@ module XTwitterScraper
     sig { returns(XTwitterScraper::Resources::Events) }
     attr_reader :events
 
-    # Bulk data extraction (20 tool types)
+    # Bulk data extraction (23 tool types)
     sig { returns(XTwitterScraper::Resources::Extractions) }
     attr_reader :extractions
 
@@ -61,31 +57,27 @@ module XTwitterScraper
     sig { returns(XTwitterScraper::Resources::Draws) }
     attr_reader :draws
 
-    # Webhook endpoint management & delivery
+    # Webhook endpoint management and delivery
     sig { returns(XTwitterScraper::Resources::Webhooks) }
     attr_reader :webhooks
 
-    # Push notification integrations (Telegram)
-    sig { returns(XTwitterScraper::Resources::Integrations) }
-    attr_reader :integrations
-
-    # X data lookups (subscription required)
     sig { returns(XTwitterScraper::Resources::X) }
     attr_reader :x
 
-    # Trending topics by region
+    # Trending topics and hashtags by region
     sig { returns(XTwitterScraper::Resources::Trends) }
     attr_reader :trends
-
-    sig { returns(XTwitterScraper::Resources::Bot) }
-    attr_reader :bot
 
     sig { returns(XTwitterScraper::Resources::Support) }
     attr_reader :support
 
-    # Subscription & billing
+    # Subscription, billing, and credits
     sig { returns(XTwitterScraper::Resources::Credits) }
     attr_reader :credits
+
+    # Accountless prepaid access for paid read endpoints
+    sig { returns(XTwitterScraper::Resources::GuestWallets) }
+    attr_reader :guest_wallets
 
     # @api private
     sig do

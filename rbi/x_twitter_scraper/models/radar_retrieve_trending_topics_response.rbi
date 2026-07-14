@@ -11,24 +11,41 @@ module XTwitterScraper
           )
         end
 
+      sig { returns(T::Boolean) }
+      attr_accessor :has_more
+
       sig { returns(T::Array[XTwitterScraper::RadarItem]) }
       attr_accessor :items
 
-      sig { returns(Integer) }
-      attr_accessor :total
+      # Opaque cursor for the next page (present only when hasMore is true).
+      sig { returns(T.nilable(String)) }
+      attr_reader :next_cursor
+
+      sig { params(next_cursor: String).void }
+      attr_writer :next_cursor
 
       sig do
         params(
+          has_more: T::Boolean,
           items: T::Array[XTwitterScraper::RadarItem::OrHash],
-          total: Integer
+          next_cursor: String
         ).returns(T.attached_class)
       end
-      def self.new(items:, total:)
+      def self.new(
+        has_more:,
+        items:,
+        # Opaque cursor for the next page (present only when hasMore is true).
+        next_cursor: nil
+      )
       end
 
       sig do
         override.returns(
-          { items: T::Array[XTwitterScraper::RadarItem], total: Integer }
+          {
+            has_more: T::Boolean,
+            items: T::Array[XTwitterScraper::RadarItem],
+            next_cursor: String
+          }
         )
       end
       def to_hash

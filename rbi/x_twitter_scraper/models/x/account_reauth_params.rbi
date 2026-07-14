@@ -22,6 +22,13 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :password
 
+        # Email for the X account (updates stored email)
+        sig { returns(T.nilable(String)) }
+        attr_reader :email
+
+        sig { params(email: String).void }
+        attr_writer :email
+
         # TOTP secret for 2FA re-authentication
         sig { returns(T.nilable(String)) }
         attr_reader :totp_secret
@@ -33,6 +40,7 @@ module XTwitterScraper
           params(
             id: String,
             password: String,
+            email: String,
             totp_secret: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
@@ -41,6 +49,8 @@ module XTwitterScraper
           id:,
           # Updated account password
           password:,
+          # Email for the X account (updates stored email)
+          email: nil,
           # TOTP secret for 2FA re-authentication
           totp_secret: nil,
           request_options: {}
@@ -52,6 +62,7 @@ module XTwitterScraper
             {
               id: String,
               password: String,
+              email: String,
               totp_secret: String,
               request_options: XTwitterScraper::RequestOptions
             }

@@ -15,15 +15,19 @@ module XTwitterScraper
 
       # @!attribute users
       #
-      #   @return [Array<XTwitterScraper::Models::X::UserProfile>]
-      required :users, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::UserProfile] }
+      #   @return [Array<XTwitterScraper::Models::UserProfile>]
+      required :users, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile] }
 
       # @!method initialize(has_next_page:, next_cursor:, users:)
-      #   Paginated list of user profiles with cursor-based navigation.
+      #   Paginated user profiles. The item count can be lower than pageSize when the
+      #   source returns fewer profiles or remaining credits cover fewer results. Follow
+      #   next_cursor while has_next_page is true. A relationship can naturally contain
+      #   fewer profiles than requested. Zero affordable results returns 402
+      #   insufficient_credits.
       #
       #   @param has_next_page [Boolean]
       #   @param next_cursor [String]
-      #   @param users [Array<XTwitterScraper::Models::X::UserProfile>]
+      #   @param users [Array<XTwitterScraper::Models::UserProfile>]
     end
   end
 end

@@ -18,6 +18,13 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :id
 
+        # Legacy cursor alias. Prefer cursor.
+        sig { returns(T.nilable(String)) }
+        attr_reader :after
+
+        sig { params(after: String).void }
+        attr_writer :after
+
         # Pagination cursor for following list
         sig { returns(T.nilable(String)) }
         attr_reader :cursor
@@ -25,7 +32,17 @@ module XTwitterScraper
         sig { params(cursor: String).void }
         attr_writer :cursor
 
-        # Results per page (20-200, default 200)
+        # Legacy page size alias. Prefer pageSize.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :limit
+
+        sig { params(limit: Integer).void }
+        attr_writer :limit
+
+        # Maximum user profiles requested from this page (20-200, default 200). The
+        # response can contain fewer profiles because the source returned fewer or
+        # remaining credits cover fewer results. Keep requesting next_cursor while
+        # has_next_page is true. The deprecated limit and count aliases remain accepted.
         sig { returns(T.nilable(Integer)) }
         attr_reader :page_size
 
@@ -35,16 +52,25 @@ module XTwitterScraper
         sig do
           params(
             id: String,
+            after: String,
             cursor: String,
+            limit: Integer,
             page_size: Integer,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
           id:,
+          # Legacy cursor alias. Prefer cursor.
+          after: nil,
           # Pagination cursor for following list
           cursor: nil,
-          # Results per page (20-200, default 200)
+          # Legacy page size alias. Prefer pageSize.
+          limit: nil,
+          # Maximum user profiles requested from this page (20-200, default 200). The
+          # response can contain fewer profiles because the source returned fewer or
+          # remaining credits cover fewer results. Keep requesting next_cursor while
+          # has_next_page is true. The deprecated limit and count aliases remain accepted.
           page_size: nil,
           request_options: {}
         )
@@ -54,7 +80,9 @@ module XTwitterScraper
           override.returns(
             {
               id: String,
+              after: String,
               cursor: String,
+              limit: Integer,
               page_size: Integer,
               request_options: XTwitterScraper::RequestOptions
             }

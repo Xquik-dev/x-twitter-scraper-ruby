@@ -14,16 +14,44 @@ module XTwitterScraper
           )
         end
 
+      # Number of trending topics to return (1-50, default 30)
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :count
+
+      sig { params(count: Integer).void }
+      attr_writer :count
+
+      # Region WOEID (1=Worldwide, 23424977=US, 23424975=UK, 23424969=Turkey)
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :woeid
+
+      sig { params(woeid: Integer).void }
+      attr_writer :woeid
+
       sig do
         params(
+          count: Integer,
+          woeid: Integer,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(request_options: {})
+      def self.new(
+        # Number of trending topics to return (1-50, default 30)
+        count: nil,
+        # Region WOEID (1=Worldwide, 23424977=US, 23424975=UK, 23424969=Turkey)
+        woeid: nil,
+        request_options: {}
+      )
       end
 
       sig do
-        override.returns({ request_options: XTwitterScraper::RequestOptions })
+        override.returns(
+          {
+            count: Integer,
+            woeid: Integer,
+            request_options: XTwitterScraper::RequestOptions
+          }
+        )
       end
       def to_hash
       end

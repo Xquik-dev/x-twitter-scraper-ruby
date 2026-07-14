@@ -4,17 +4,24 @@ module XTwitterScraper
   module Resources
     class X
       class Communities
-        # X data lookups (subscription required)
+        # X Community info, members, and tweets
         class Tweets
-          # Search tweets across all communities
+          # Some parameter documentations has been truncated, see
+          # {XTwitterScraper::Models::X::Communities::TweetListParams} for more details.
           #
-          # @overload list(q:, cursor: nil, query_type: nil, request_options: {})
+          # Requires a Community ID and keyword query.
           #
-          # @param q [String] Search query for cross-community tweets
+          # @overload list(community_id:, q:, cursor: nil, page_size: nil, query_type: nil, request_options: {})
           #
-          # @param cursor [String] Pagination cursor for cross-community results
+          # @param community_id [String] Numeric ID of the community to search
           #
-          # @param query_type [String] Sort order for cross-community results (Latest or Top)
+          # @param q [String] Keyword query within the selected community
+          #
+          # @param cursor [String] Pagination cursor for community results
+          #
+          # @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
+          #
+          # @param query_type [Symbol, XTwitterScraper::Models::X::Communities::TweetListParams::QueryType] Sort order for community results (Latest or Top)
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -27,19 +34,29 @@ module XTwitterScraper
             @client.request(
               method: :get,
               path: "x/communities/tweets",
-              query: query.transform_keys(query_type: "queryType"),
+              query: query.transform_keys(
+                community_id: "communityId",
+                page_size: "pageSize",
+                query_type: "queryType"
+              ),
               model: XTwitterScraper::PaginatedTweets,
               options: options
             )
           end
 
-          # Get community tweets
+          # Some parameter documentations has been truncated, see
+          # {XTwitterScraper::Models::X::Communities::TweetListByCommunityParams} for more
+          # details.
           #
-          # @overload list_by_community(id, cursor: nil, request_options: {})
+          # List tweets posted in a community
+          #
+          # @overload list_by_community(id, cursor: nil, page_size: nil, request_options: {})
           #
           # @param id [String] Community ID for tweet lookup
           #
           # @param cursor [String] Pagination cursor for community tweets
+          #
+          # @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -52,7 +69,7 @@ module XTwitterScraper
             @client.request(
               method: :get,
               path: ["x/communities/%1$s/tweets", id],
-              query: query,
+              query: query.transform_keys(page_size: "pageSize"),
               model: XTwitterScraper::PaginatedTweets,
               options: options
             )

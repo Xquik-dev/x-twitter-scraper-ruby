@@ -9,28 +9,21 @@ module XTwitterScraper
         include XTwitterScraper::Internal::Type::RequestParameters
 
         # @!attribute account
-        #   X account (@username or ID) uploading media
+        #   X account (@username or ID) uploading media from URL
         #
         #   @return [String]
         required :account, String
 
-        # @!attribute file
-        #   Media file to upload
+        # @!attribute url
+        #   HTTPS URL to download and upload as media
         #
-        #   @return [Pathname, StringIO, IO, String, XTwitterScraper::FilePart]
-        required :file, XTwitterScraper::Internal::Type::FileInput
+        #   @return [String]
+        required :url, String
 
-        # @!attribute is_long_video
+        # @!method initialize(account:, url:, request_options: {})
+        #   @param account [String] X account (@username or ID) uploading media from URL
         #
-        #   @return [Boolean, nil]
-        optional :is_long_video, XTwitterScraper::Internal::Type::Boolean
-
-        # @!method initialize(account:, file:, is_long_video: nil, request_options: {})
-        #   @param account [String] X account (@username or ID) uploading media
-        #
-        #   @param file [Pathname, StringIO, IO, String, XTwitterScraper::FilePart] Media file to upload
-        #
-        #   @param is_long_video [Boolean]
+        #   @param url [String] HTTPS URL to download and upload as media
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end

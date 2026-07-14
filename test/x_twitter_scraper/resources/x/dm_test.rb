@@ -3,10 +3,10 @@
 require_relative "../../test_helper"
 
 class XTwitterScraper::Test::Resources::X::DmTest < XTwitterScraper::Test::ResourceTest
-  def test_retrieve_history
+  def test_retrieve_history_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.dm.retrieve_history("userId")
+    response = @x_twitter_scraper.x.dm.retrieve_history("userId", account: "account")
 
     assert_pattern do
       response => XTwitterScraper::Models::X::DmRetrieveHistoryResponse

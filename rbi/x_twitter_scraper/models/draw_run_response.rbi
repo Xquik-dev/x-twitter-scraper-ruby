@@ -14,12 +14,16 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :id
 
+      # Candidate entries inspected for this draw after the credit-derived cap. This may
+      # be lower than the source tweet's full reply count.
       sig { returns(Integer) }
       attr_accessor :total_entries
 
       sig { returns(String) }
       attr_accessor :tweet_id
 
+      # Entries from the inspected candidate set that passed all filters. This is not
+      # necessarily every valid reply on the source tweet when credits cap inspection.
       sig { returns(Integer) }
       attr_accessor :valid_entries
 
@@ -35,7 +39,17 @@ module XTwitterScraper
           winners: T::Array[XTwitterScraper::Winner::OrHash]
         ).returns(T.attached_class)
       end
-      def self.new(id:, total_entries:, tweet_id:, valid_entries:, winners:)
+      def self.new(
+        id:,
+        # Candidate entries inspected for this draw after the credit-derived cap. This may
+        # be lower than the source tweet's full reply count.
+        total_entries:,
+        tweet_id:,
+        # Entries from the inspected candidate set that passed all filters. This is not
+        # necessarily every valid reply on the source tweet when credits cap inspection.
+        valid_entries:,
+        winners:
+      )
       end
 
       sig do

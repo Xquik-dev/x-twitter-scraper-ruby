@@ -4,25 +4,25 @@ module XTwitterScraper
   module Models
     # @see XTwitterScraper::Resources::Subscribe#create
     class SubscribeCreateResponse < XTwitterScraper::Internal::Type::BaseModel
+      # @!attribute message
+      #
+      #   @return [String]
+      required :message, String
+
+      # @!attribute status
+      #
+      #   @return [Symbol, XTwitterScraper::Models::SubscribeCreateResponse::Status]
+      required :status, enum: -> { XTwitterScraper::Models::SubscribeCreateResponse::Status }
+
       # @!attribute url
       #
       #   @return [String]
       required :url, String
 
-      # @!attribute message
-      #
-      #   @return [String, nil]
-      optional :message, String
-
-      # @!attribute status
-      #
-      #   @return [Symbol, XTwitterScraper::Models::SubscribeCreateResponse::Status, nil]
-      optional :status, enum: -> { XTwitterScraper::Models::SubscribeCreateResponse::Status }
-
-      # @!method initialize(url:, message: nil, status: nil)
-      #   @param url [String]
+      # @!method initialize(message:, status:, url:)
       #   @param message [String]
       #   @param status [Symbol, XTwitterScraper::Models::SubscribeCreateResponse::Status]
+      #   @param url [String]
 
       # @see XTwitterScraper::Models::SubscribeCreateResponse#status
       module Status

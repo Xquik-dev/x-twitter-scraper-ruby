@@ -22,12 +22,17 @@ module XTwitterScraper
             id: String,
             banner_url: String,
             created_at: String,
+            creator: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator,
             description: String,
+            invites_policy: String,
+            is_member: bool,
+            is_nsfw: bool,
             join_policy: String,
             member_count: Integer,
             moderator_count: Integer,
             name: String,
             primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
+            role: String,
             rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
           }
 
@@ -42,9 +47,27 @@ module XTwitterScraper
 
           def created_at=: (String) -> String
 
+          attr_reader creator: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator?
+
+          def creator=: (
+            XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator
+          ) -> XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator
+
           attr_reader description: String?
 
           def description=: (String) -> String
+
+          attr_reader invites_policy: String?
+
+          def invites_policy=: (String) -> String
+
+          attr_reader is_member: bool?
+
+          def is_member=: (bool) -> bool
+
+          attr_reader is_nsfw: bool?
+
+          def is_nsfw=: (bool) -> bool
 
           attr_reader join_policy: String?
 
@@ -68,6 +91,10 @@ module XTwitterScraper
             XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic
           ) -> XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic
 
+          attr_reader role: String?
+
+          def role=: (String) -> String
+
           attr_reader rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]?
 
           def rules=: (
@@ -78,12 +105,17 @@ module XTwitterScraper
             id: String,
             ?banner_url: String,
             ?created_at: String,
+            ?creator: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator,
             ?description: String,
+            ?invites_policy: String,
+            ?is_member: bool,
+            ?is_nsfw: bool,
             ?join_policy: String,
             ?member_count: Integer,
             ?moderator_count: Integer,
             ?name: String,
             ?primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
+            ?role: String,
             ?rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
           ) -> void
 
@@ -91,14 +123,48 @@ module XTwitterScraper
             id: String,
             banner_url: String,
             created_at: String,
+            creator: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator,
             description: String,
+            invites_policy: String,
+            is_member: bool,
+            is_nsfw: bool,
             join_policy: String,
             member_count: Integer,
             moderator_count: Integer,
             name: String,
             primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
+            role: String,
             rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
           }
+
+          type creator =
+            { id: String, username: String, verified: bool, name: String }
+
+          class Creator < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor id: String
+
+            attr_accessor username: String
+
+            attr_accessor verified: bool
+
+            attr_reader name: String?
+
+            def name=: (String) -> String
+
+            def initialize: (
+              id: String,
+              username: String,
+              verified: bool,
+              ?name: String
+            ) -> void
+
+            def to_hash: -> {
+              id: String,
+              username: String,
+              verified: bool,
+              name: String
+            }
+          end
 
           type primary_topic = { id: String, name: String }
 

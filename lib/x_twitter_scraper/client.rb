@@ -22,31 +22,27 @@ module XTwitterScraper
     # @return [String, nil]
     attr_reader :bearer_token
 
-    # Account info & settings
+    # Account info and settings
     # @return [XTwitterScraper::Resources::Account]
     attr_reader :account
 
-    # API key management (session auth only)
-    # @return [XTwitterScraper::Resources::APIKeys]
-    attr_reader :api_keys
-
-    # Subscription & billing
+    # Subscription, billing, and credits
     # @return [XTwitterScraper::Resources::Subscribe]
     attr_reader :subscribe
 
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     # @return [XTwitterScraper::Resources::Compose]
     attr_reader :compose
 
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     # @return [XTwitterScraper::Resources::Drafts]
     attr_reader :drafts
 
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     # @return [XTwitterScraper::Resources::Styles]
     attr_reader :styles
 
-    # Tweet composition, drafts, writing styles & radar
+    # AI tweet composition, drafts, writing styles, and radar
     # @return [XTwitterScraper::Resources::Radar]
     attr_reader :radar
 
@@ -58,7 +54,7 @@ module XTwitterScraper
     # @return [XTwitterScraper::Resources::Events]
     attr_reader :events
 
-    # Bulk data extraction (20 tool types)
+    # Bulk data extraction (23 tool types)
     # @return [XTwitterScraper::Resources::Extractions]
     attr_reader :extractions
 
@@ -66,31 +62,27 @@ module XTwitterScraper
     # @return [XTwitterScraper::Resources::Draws]
     attr_reader :draws
 
-    # Webhook endpoint management & delivery
+    # Webhook endpoint management and delivery
     # @return [XTwitterScraper::Resources::Webhooks]
     attr_reader :webhooks
 
-    # Push notification integrations (Telegram)
-    # @return [XTwitterScraper::Resources::Integrations]
-    attr_reader :integrations
-
-    # X data lookups (subscription required)
     # @return [XTwitterScraper::Resources::X]
     attr_reader :x
 
-    # Trending topics by region
+    # Trending topics and hashtags by region
     # @return [XTwitterScraper::Resources::Trends]
     attr_reader :trends
-
-    # @return [XTwitterScraper::Resources::Bot]
-    attr_reader :bot
 
     # @return [XTwitterScraper::Resources::Support]
     attr_reader :support
 
-    # Subscription & billing
+    # Subscription, billing, and credits
     # @return [XTwitterScraper::Resources::Credits]
     attr_reader :credits
+
+    # Accountless prepaid access for paid read endpoints
+    # @return [XTwitterScraper::Resources::GuestWallets]
+    attr_reader :guest_wallets
 
     # @api private
     #
@@ -144,6 +136,19 @@ module XTwitterScraper
     )
       base_url ||= "https://xquik.com/api/v1"
 
+      headers = {}
+      custom_headers_env = ENV["X_TWITTER_SCRAPER_CUSTOM_HEADERS"]
+      unless custom_headers_env.nil?
+        parsed = {}
+        custom_headers_env.split("\n").each do |line|
+          colon = line.index(":")
+          unless colon.nil?
+            parsed[line[0...colon].strip] = line[(colon + 1)..].strip
+          end
+        end
+        headers = parsed.merge(headers)
+      end
+
       @api_key = api_key&.to_s
       @bearer_token = bearer_token&.to_s
 
@@ -152,11 +157,11 @@ module XTwitterScraper
         timeout: timeout,
         max_retries: max_retries,
         initial_retry_delay: initial_retry_delay,
-        max_retry_delay: max_retry_delay
+        max_retry_delay: max_retry_delay,
+        headers: headers
       )
 
       @account = XTwitterScraper::Resources::Account.new(client: self)
-      @api_keys = XTwitterScraper::Resources::APIKeys.new(client: self)
       @subscribe = XTwitterScraper::Resources::Subscribe.new(client: self)
       @compose = XTwitterScraper::Resources::Compose.new(client: self)
       @drafts = XTwitterScraper::Resources::Drafts.new(client: self)
@@ -167,12 +172,11 @@ module XTwitterScraper
       @extractions = XTwitterScraper::Resources::Extractions.new(client: self)
       @draws = XTwitterScraper::Resources::Draws.new(client: self)
       @webhooks = XTwitterScraper::Resources::Webhooks.new(client: self)
-      @integrations = XTwitterScraper::Resources::Integrations.new(client: self)
       @x = XTwitterScraper::Resources::X.new(client: self)
       @trends = XTwitterScraper::Resources::Trends.new(client: self)
-      @bot = XTwitterScraper::Resources::Bot.new(client: self)
       @support = XTwitterScraper::Resources::Support.new(client: self)
       @credits = XTwitterScraper::Resources::Credits.new(client: self)
+      @guest_wallets = XTwitterScraper::Resources::GuestWallets.new(client: self)
     end
   end
 end

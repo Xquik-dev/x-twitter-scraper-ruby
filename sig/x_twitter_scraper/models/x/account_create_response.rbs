@@ -2,10 +2,21 @@ module XTwitterScraper
   module Models
     module X
       type account_create_response =
-        { id: String, status: String, x_user_id: String, x_username: String }
+        {
+          id: String,
+          created_at: Time,
+          health: XTwitterScraper::Models::X::AccountCreateResponse::health,
+          status: String,
+          x_user_id: String,
+          x_username: String
+        }
 
       class AccountCreateResponse < XTwitterScraper::Internal::Type::BaseModel
         attr_accessor id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor health: XTwitterScraper::Models::X::AccountCreateResponse::health
 
         attr_accessor status: String
 
@@ -15,6 +26,8 @@ module XTwitterScraper
 
         def initialize: (
           id: String,
+          created_at: Time,
+          health: XTwitterScraper::Models::X::AccountCreateResponse::health,
           status: String,
           x_user_id: String,
           x_username: String
@@ -22,10 +35,33 @@ module XTwitterScraper
 
         def to_hash: -> {
           id: String,
+          created_at: Time,
+          health: XTwitterScraper::Models::X::AccountCreateResponse::health,
           status: String,
           x_user_id: String,
           x_username: String
         }
+
+        type health =
+          :healthy
+          | :locked
+          | :needsReauth
+          | :recovering
+          | :suspended
+          | :temporaryIssue
+
+        module Health
+          extend XTwitterScraper::Internal::Type::Enum
+
+          HEALTHY: :healthy
+          LOCKED: :locked
+          NEEDS_REAUTH: :needsReauth
+          RECOVERING: :recovering
+          SUSPENDED: :suspended
+          TEMPORARY_ISSUE: :temporaryIssue
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::AccountCreateResponse::health]
+        end
       end
     end
   end

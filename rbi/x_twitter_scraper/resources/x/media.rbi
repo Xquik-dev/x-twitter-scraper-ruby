@@ -3,21 +3,27 @@
 module XTwitterScraper
   module Resources
     class X
-      # Media upload & download
+      # Media upload and download
       class Media
-        # Download tweet media
+        # Download images and videos from tweets
         sig do
           params(
+            tweet_id: String,
             tweet_ids: T::Array[String],
             tweet_input: String,
+            tweet_url: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::MediaDownloadResponse)
         end
         def download(
-          # Array of tweet URLs or IDs (bulk, max 50)
+          # Numeric tweet ID alias for tweetInput
+          tweet_id: nil,
+          # Array of tweet URLs or IDs (bulk, max 50 string items)
           tweet_ids: nil,
           # Tweet URL or ID (single tweet)
           tweet_input: nil,
+          # Tweet URL alias for tweetInput
+          tweet_url: nil,
           request_options: {}
         )
         end
@@ -26,17 +32,15 @@ module XTwitterScraper
         sig do
           params(
             account: String,
-            file: XTwitterScraper::Internal::FileInput,
-            is_long_video: T::Boolean,
+            url: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::MediaUploadResponse)
         end
         def upload(
-          # X account (@username or ID) uploading media
+          # X account (@username or ID) uploading media from URL
           account:,
-          # Media file to upload
-          file:,
-          is_long_video: nil,
+          # HTTPS URL to download and upload as media
+          url:,
           request_options: {}
         )
         end

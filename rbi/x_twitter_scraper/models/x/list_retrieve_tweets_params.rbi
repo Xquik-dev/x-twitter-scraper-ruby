@@ -32,6 +32,17 @@ module XTwitterScraper
         sig { params(include_replies: T::Boolean).void }
         attr_writer :include_replies
 
+        # Maximum items requested from this page (1-100, default 20). The response can
+        # contain fewer items because the source returned fewer, filters removed items, or
+        # remaining credits cover fewer results. Keep requesting next_cursor while
+        # has_next_page is true, even when a page is empty. The deprecated limit and count
+        # aliases remain accepted.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :page_size
+
+        sig { params(page_size: Integer).void }
+        attr_writer :page_size
+
         # Unix timestamp - filter after
         sig { returns(T.nilable(String)) }
         attr_reader :since_time
@@ -51,6 +62,7 @@ module XTwitterScraper
             id: String,
             cursor: String,
             include_replies: T::Boolean,
+            page_size: Integer,
             since_time: String,
             until_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
@@ -62,6 +74,12 @@ module XTwitterScraper
           cursor: nil,
           # Include replies (default false)
           include_replies: nil,
+          # Maximum items requested from this page (1-100, default 20). The response can
+          # contain fewer items because the source returned fewer, filters removed items, or
+          # remaining credits cover fewer results. Keep requesting next_cursor while
+          # has_next_page is true, even when a page is empty. The deprecated limit and count
+          # aliases remain accepted.
+          page_size: nil,
           # Unix timestamp - filter after
           since_time: nil,
           # Unix timestamp - filter before
@@ -76,6 +94,7 @@ module XTwitterScraper
               id: String,
               cursor: String,
               include_replies: T::Boolean,
+              page_size: Integer,
               since_time: String,
               until_time: String,
               request_options: XTwitterScraper::RequestOptions
