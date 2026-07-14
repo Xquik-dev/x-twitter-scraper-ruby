@@ -11,7 +11,8 @@ GIT
 PATH
   remote: .
   specs:
-    x-twitter-scraper (0.4.2)
+    x-twitter-scraper (0.4.3)
+      base64 (~> 0.3)
       cgi (~> 0.5)
       connection_pool (~> 2.5)
 
@@ -27,6 +28,7 @@ GEM
       io-event (~> 1.11)
       metrics (~> 0.12)
       traces (~> 0.18)
+    base64 (0.3.0)
     benchmark (0.5.0)
     bigdecimal (4.1.2)
     cgi (0.5.2)

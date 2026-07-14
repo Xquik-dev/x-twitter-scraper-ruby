@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name = "x-twitter-scraper"
   s.version = XTwitterScraper::VERSION
   s.summary = "Xquik Ruby SDK for tweet search, profile tweets, followers, webhooks, and automation. Not affiliated with X Corp."
-  s.authors = ["X Twitter Scraper"]
+  s.authors = ["Xquik"]
   s.email = "support@xquik.com"
   s.licenses = ["Apache-2.0"]
   s.homepage = "https://docs.xquik.com/sdks/ruby"
@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
     ".ignore"
   ]
   s.extra_rdoc_files = ["README.md"]
+  s.add_dependency "base64", "~> 0.3"
   s.add_dependency "cgi", "~> 0.5"
   s.add_dependency "connection_pool", "~> 2.5"
 end

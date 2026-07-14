@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.3 (2026-07-14)
+
+Full Changelog: [v0.4.2...v0.4.3](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.4.2...v0.4.3)
+
+### Bug Fixes
+
+* identify the gem author as Xquik in published package metadata
+* declare base64 as a runtime dependency for Ruby 4 clean installs
+
 ## 0.4.2 (2026-07-14)
 
 Full Changelog: [v0.4.1...v0.4.2](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.4.1...v0.4.2)
