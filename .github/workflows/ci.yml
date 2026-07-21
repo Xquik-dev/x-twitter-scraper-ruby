@@ -39,7 +39,9 @@ jobs:
         with:
           bundler-cache: false
       - run: |-
-          bundle install --frozen
+          bundle install
+        env:
+          BUNDLE_FROZEN: "true"
 
       - name: Run lints
         run: ./scripts/lint
@@ -59,7 +61,9 @@ jobs:
         with:
           bundler-cache: false
       - run: |-
-          bundle install --frozen
+          bundle install
+        env:
+          BUNDLE_FROZEN: "true"
 
       - name: Run tests
         run: ./scripts/test
