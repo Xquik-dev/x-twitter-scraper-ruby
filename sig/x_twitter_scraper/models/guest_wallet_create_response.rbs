@@ -86,16 +86,46 @@ module XTwitterScraper
         wallet_id: String
       }
 
-      type authorization = { header: :Authorization, scheme: :Bearer }
+      type authorization =
+        {
+          header: XTwitterScraper::Models::GuestWalletCreateResponse::Authorization::header,
+          scheme: XTwitterScraper::Models::GuestWalletCreateResponse::Authorization::scheme
+        }
 
       class Authorization < XTwitterScraper::Internal::Type::BaseModel
-        attr_accessor header: :Authorization
+        attr_accessor header: XTwitterScraper::Models::GuestWalletCreateResponse::Authorization::header
 
-        attr_accessor scheme: :Bearer
+        attr_accessor scheme: XTwitterScraper::Models::GuestWalletCreateResponse::Authorization::scheme
 
-        def initialize: (?header: :Authorization, ?scheme: :Bearer) -> void
+        def initialize: (
+          header: XTwitterScraper::Models::GuestWalletCreateResponse::Authorization::header,
+          scheme: XTwitterScraper::Models::GuestWalletCreateResponse::Authorization::scheme
+        ) -> void
 
-        def to_hash: -> { header: :Authorization, scheme: :Bearer }
+        def to_hash: -> {
+          header: XTwitterScraper::Models::GuestWalletCreateResponse::Authorization::header,
+          scheme: XTwitterScraper::Models::GuestWalletCreateResponse::Authorization::scheme
+        }
+
+        type header = :Authorization
+
+        module Header
+          extend XTwitterScraper::Internal::Type::Enum
+
+          AUTHORIZATION: :Authorization
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::GuestWalletCreateResponse::Authorization::header]
+        end
+
+        type scheme = :Bearer
+
+        module Scheme
+          extend XTwitterScraper::Internal::Type::Enum
+
+          BEARER: :Bearer
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::GuestWalletCreateResponse::Authorization::scheme]
+        end
       end
 
       type status =

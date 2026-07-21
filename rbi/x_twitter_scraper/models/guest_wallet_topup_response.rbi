@@ -245,18 +245,100 @@ module XTwitterScraper
             )
           end
 
-        sig { returns(Symbol) }
+        sig do
+          returns(
+            XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Header::TaggedSymbol
+          )
+        end
         attr_accessor :header
 
-        sig { returns(Symbol) }
+        sig do
+          returns(
+            XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Scheme::TaggedSymbol
+          )
+        end
         attr_accessor :scheme
 
-        sig { params(header: Symbol, scheme: Symbol).returns(T.attached_class) }
-        def self.new(header: :Authorization, scheme: :Bearer)
+        sig do
+          params(
+            header:
+              XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Header::OrSymbol,
+            scheme:
+              XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Scheme::OrSymbol
+          ).returns(T.attached_class)
+        end
+        def self.new(header:, scheme:)
         end
 
-        sig { override.returns({ header: Symbol, scheme: Symbol }) }
+        sig do
+          override.returns(
+            {
+              header:
+                XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Header::TaggedSymbol,
+              scheme:
+                XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Scheme::TaggedSymbol
+            }
+          )
+        end
         def to_hash
+        end
+
+        module Header
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Header
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          AUTHORIZATION =
+            T.let(
+              :Authorization,
+              XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Header::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Header::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        module Scheme
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Scheme
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          BEARER =
+            T.let(
+              :Bearer,
+              XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Scheme::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Scheme::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
 

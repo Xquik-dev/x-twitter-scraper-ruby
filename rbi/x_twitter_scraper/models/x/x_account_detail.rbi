@@ -46,7 +46,7 @@ module XTwitterScraper
         sig { params(updated_at: Time).void }
         attr_writer :updated_at
 
-        # Full X account details with status, cookies, and update timestamp.
+        # Connected X account details with health and timestamp metadata.
         sig do
           params(
             id: String,

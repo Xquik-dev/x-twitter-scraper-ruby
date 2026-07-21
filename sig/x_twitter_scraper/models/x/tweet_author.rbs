@@ -1,20 +1,12 @@
 module XTwitterScraper
   module Models
     module X
-      type tweet_author = { followers: Integer, verified: bool }
+      type tweet_author = {  }
 
       class TweetAuthor < XTwitterScraper::Models::UserProfile
-        def followers: -> Integer
+        def initialize: -> void
 
-        def followers=: (Integer _) -> Integer
-
-        def verified: -> bool
-
-        def verified=: (bool _) -> bool
-
-        def initialize: (followers: Integer, verified: bool) -> void
-
-        def to_hash: -> { followers: Integer, verified: bool }
+        def to_hash: -> {  }
       end
     end
   end

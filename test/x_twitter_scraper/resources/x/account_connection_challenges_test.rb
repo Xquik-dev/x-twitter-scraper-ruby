@@ -6,7 +6,8 @@ class XTwitterScraper::Test::Resources::X::AccountConnectionChallengesTest < XTw
   def test_submit_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.account_connection_challenges.submit("id", email_code: "123456")
+    response =
+      @x_twitter_scraper.x.account_connection_challenges.submit("id", email_code: "<EMAIL_VERIFICATION_CODE>")
 
     assert_pattern do
       response => XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse
