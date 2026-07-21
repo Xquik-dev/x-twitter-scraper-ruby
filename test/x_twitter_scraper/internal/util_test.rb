@@ -190,7 +190,8 @@ class XTwitterScraper::Test::RegexMatchTest < Minitest::Test
       "application/jsonl" => true,
       "application/x-jsonl" => true,
       "application/json" => false,
-      "application/vnd.api+json" => false
+      "application/vnd.api+json" => false,
+      "text/application/jsonl" => false
     }
     cases.each do |header, verdict|
       assert_pattern do
@@ -228,10 +229,10 @@ class XTwitterScraper::Test::UtilFormDataEncodingTest < Minitest::Test
       {"content-type" => "multipart/form-data"},
       Pathname(__FILE__)
     )
-    assert_pattern do
-      headers.fetch("content-type") => /boundary=(.+)$/
-    end
-    field, = Regexp.last_match.captures
+    content_type = headers.fetch("content-type")
+    prefix = "multipart/form-data; boundary="
+    assert(content_type.start_with?(prefix))
+    field = content_type.delete_prefix(prefix)
     assert(field.length < 70 - 6)
   end
 
