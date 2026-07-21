@@ -8,7 +8,7 @@ module XTwitterScraper
       #
       # @overload retrieve(id, request_options: {})
       #
-      # @param id [String] Resource ID (stringified bigint)
+      # @param id [String] Resource ID returned by the matching create or list endpoint.
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -24,15 +24,18 @@ module XTwitterScraper
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {XTwitterScraper::Models::EventListParams} for more details.
+      #
       # List events
       #
-      # @overload list(after: nil, event_type: nil, limit: nil, monitor_id: nil, request_options: {})
+      # @overload list(cursor: nil, event_type: nil, limit: nil, monitor_id: nil, request_options: {})
       #
-      # @param after [String] Cursor for keyset pagination
+      # @param cursor [String] Cursor for keyset pagination from prior response next_cursor
       #
       # @param event_type [Symbol, XTwitterScraper::Models::EventType] Filter events by type
       #
-      # @param limit [Integer] Maximum number of items to return (1-100, default 50)
+      # @param limit [Integer] Maximum number of items to return (1-100, default 50). For paid per-result endpo
       #
       # @param monitor_id [String] Filter events by monitor ID
       #

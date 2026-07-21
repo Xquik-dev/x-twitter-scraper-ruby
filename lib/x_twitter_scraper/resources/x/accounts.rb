@@ -7,15 +7,13 @@ module XTwitterScraper
       class Accounts
         # Connect X account
         #
-        # @overload create(email:, password:, username:, proxy_country: nil, totp_secret: nil, request_options: {})
+        # @overload create(email:, password:, username:, totp_secret: nil, request_options: {})
         #
         # @param email [String] Account email
         #
         # @param password [String] Account password
         #
         # @param username [String] X username
-        #
-        # @param proxy_country [String] Proxy country code
         #
         # @param totp_secret [String] TOTP secret for 2FA
         #
@@ -39,7 +37,7 @@ module XTwitterScraper
         #
         # @overload retrieve(id, request_options: {})
         #
-        # @param id [String] Resource ID (stringified bigint)
+        # @param id [String] Resource ID returned by the matching create or list endpoint.
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -77,7 +75,7 @@ module XTwitterScraper
         #
         # @overload delete(id, request_options: {})
         #
-        # @param id [String] Resource ID (stringified bigint)
+        # @param id [String] Resource ID returned by the matching create or list endpoint.
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -114,15 +112,13 @@ module XTwitterScraper
 
         # Re-authenticate X account
         #
-        # @overload reauth(id, password:, email: nil, proxy_country: nil, totp_secret: nil, request_options: {})
+        # @overload reauth(id, password:, email: nil, totp_secret: nil, request_options: {})
         #
-        # @param id [String] Resource ID (stringified bigint)
+        # @param id [String] Resource ID returned by the matching create or list endpoint.
         #
         # @param password [String] Updated account password
         #
         # @param email [String] Email for the X account (updates stored email)
-        #
-        # @param proxy_country [String] Two-letter country code for login proxy region
         #
         # @param totp_secret [String] TOTP secret for 2FA re-authentication
         #

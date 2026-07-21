@@ -9,14 +9,22 @@ module XTwitterScraper
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::UserProfile
 
+        def remove_follower: (
+          String id,
+          account: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::UserRemoveFollowerResponse
+
         def retrieve_batch: (
           ids: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::PaginatedUsers
+        ) -> XTwitterScraper::Models::X::UserRetrieveBatchResponse
 
         def retrieve_followers: (
           String id,
+          ?after: String,
           ?cursor: String,
+          ?limit: Integer,
           ?page_size: Integer,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::PaginatedUsers
@@ -24,33 +32,147 @@ module XTwitterScraper
         def retrieve_followers_you_know: (
           String id,
           ?cursor: String,
+          ?page_size: Integer,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::PaginatedUsers
 
         def retrieve_following: (
           String id,
+          ?after: String,
           ?cursor: String,
+          ?limit: Integer,
           ?page_size: Integer,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::PaginatedUsers
 
         def retrieve_likes: (
           String id,
+          ?any_words: String,
+          ?cashtags: String,
+          ?conversation_id: String,
           ?cursor: String,
+          ?exact_phrase: String,
+          ?exclude_words: String,
+          ?from_user: String,
+          ?hashtags: String,
+          ?in_reply_to_tweet_id: String,
+          ?language: String,
+          ?media_type: XTwitterScraper::Models::X::UserRetrieveLikesParams::media_type,
+          ?mentioning: String,
+          ?min_faves: Integer,
+          ?min_quotes: Integer,
+          ?min_replies: Integer,
+          ?min_retweets: Integer,
+          ?page_size: Integer,
+          ?quotes: XTwitterScraper::Models::X::UserRetrieveLikesParams::quotes,
+          ?quotes_of_tweet_id: String,
+          ?replies: XTwitterScraper::Models::X::UserRetrieveLikesParams::replies,
+          ?retweets: XTwitterScraper::Models::X::UserRetrieveLikesParams::retweets,
+          ?retweets_of_tweet_id: String,
+          ?since_date: Date,
+          ?to_user: String,
+          ?until_date: Date,
+          ?url: String,
+          ?verified_only: bool,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::PaginatedTweets
 
         def retrieve_media: (
           String id,
+          ?any_words: String,
+          ?cashtags: String,
+          ?conversation_id: String,
           ?cursor: String,
+          ?exact_phrase: String,
+          ?exclude_words: String,
+          ?from_user: String,
+          ?hashtags: String,
+          ?in_reply_to_tweet_id: String,
+          ?language: String,
+          ?media_type: XTwitterScraper::Models::X::UserRetrieveMediaParams::media_type,
+          ?mentioning: String,
+          ?min_faves: Integer,
+          ?min_quotes: Integer,
+          ?min_replies: Integer,
+          ?min_retweets: Integer,
+          ?page_size: Integer,
+          ?quotes: XTwitterScraper::Models::X::UserRetrieveMediaParams::quotes,
+          ?quotes_of_tweet_id: String,
+          ?replies: XTwitterScraper::Models::X::UserRetrieveMediaParams::replies,
+          ?retweets: XTwitterScraper::Models::X::UserRetrieveMediaParams::retweets,
+          ?retweets_of_tweet_id: String,
+          ?since_date: Date,
+          ?to_user: String,
+          ?until_date: Date,
+          ?url: String,
+          ?verified_only: bool,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::PaginatedTweets
 
         def retrieve_mentions: (
           String id,
+          ?any_words: String,
+          ?cashtags: String,
+          ?conversation_id: String,
           ?cursor: String,
+          ?exact_phrase: String,
+          ?exclude_words: String,
+          ?from_user: String,
+          ?hashtags: String,
+          ?in_reply_to_tweet_id: String,
+          ?language: String,
+          ?media_type: XTwitterScraper::Models::X::UserRetrieveMentionsParams::media_type,
+          ?mentioning: String,
+          ?min_faves: Integer,
+          ?min_quotes: Integer,
+          ?min_replies: Integer,
+          ?min_retweets: Integer,
+          ?page_size: Integer,
+          ?quotes: XTwitterScraper::Models::X::UserRetrieveMentionsParams::quotes,
+          ?quotes_of_tweet_id: String,
+          ?replies: XTwitterScraper::Models::X::UserRetrieveMentionsParams::replies,
+          ?retweets: XTwitterScraper::Models::X::UserRetrieveMentionsParams::retweets,
+          ?retweets_of_tweet_id: String,
+          ?since_date: Date,
           ?since_time: String,
+          ?to_user: String,
+          ?until_date: Date,
           ?until_time: String,
+          ?url: String,
+          ?verified_only: bool,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::PaginatedTweets
+
+        def retrieve_replies: (
+          String id,
+          ?any_words: String,
+          ?cashtags: String,
+          ?conversation_id: String,
+          ?cursor: String,
+          ?exact_phrase: String,
+          ?exclude_words: String,
+          ?from_user: String,
+          ?hashtags: String,
+          ?include_parent_tweet: bool,
+          ?in_reply_to_tweet_id: String,
+          ?language: String,
+          ?media_type: XTwitterScraper::Models::X::UserRetrieveRepliesParams::media_type,
+          ?mentioning: String,
+          ?min_faves: Integer,
+          ?min_quotes: Integer,
+          ?min_replies: Integer,
+          ?min_retweets: Integer,
+          ?page_size: Integer,
+          ?quotes: XTwitterScraper::Models::X::UserRetrieveRepliesParams::quotes,
+          ?quotes_of_tweet_id: String,
+          ?replies: XTwitterScraper::Models::X::UserRetrieveRepliesParams::replies,
+          ?retweets: XTwitterScraper::Models::X::UserRetrieveRepliesParams::retweets,
+          ?retweets_of_tweet_id: String,
+          ?since_date: Date,
+          ?to_user: String,
+          ?until_date: Date,
+          ?url: String,
+          ?verified_only: bool,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::PaginatedTweets
 
@@ -62,15 +184,42 @@ module XTwitterScraper
 
         def retrieve_tweets: (
           String id,
+          ?any_words: String,
+          ?cashtags: String,
+          ?conversation_id: String,
           ?cursor: String,
+          ?exact_phrase: String,
+          ?exclude_words: String,
+          ?from_user: String,
+          ?hashtags: String,
           ?include_parent_tweet: bool,
           ?include_replies: bool,
+          ?in_reply_to_tweet_id: String,
+          ?language: String,
+          ?media_type: XTwitterScraper::Models::X::UserRetrieveTweetsParams::media_type,
+          ?mentioning: String,
+          ?min_faves: Integer,
+          ?min_quotes: Integer,
+          ?min_replies: Integer,
+          ?min_retweets: Integer,
+          ?page_size: Integer,
+          ?quotes: XTwitterScraper::Models::X::UserRetrieveTweetsParams::quotes,
+          ?quotes_of_tweet_id: String,
+          ?replies: XTwitterScraper::Models::X::UserRetrieveTweetsParams::replies,
+          ?retweets: XTwitterScraper::Models::X::UserRetrieveTweetsParams::retweets,
+          ?retweets_of_tweet_id: String,
+          ?since_date: Date,
+          ?to_user: String,
+          ?until_date: Date,
+          ?url: String,
+          ?verified_only: bool,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::PaginatedTweets
 
         def retrieve_verified_followers: (
           String id,
           ?cursor: String,
+          ?page_size: Integer,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::PaginatedUsers
 

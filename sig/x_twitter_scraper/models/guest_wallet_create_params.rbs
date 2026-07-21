@@ -1,0 +1,32 @@
+module XTwitterScraper
+  module Models
+    type guest_wallet_create_params =
+      { amount_minor: Integer, currency: :usd, idempotency_key: String }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class GuestWalletCreateParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor amount_minor: Integer
+
+      attr_accessor currency: :usd
+
+      attr_accessor idempotency_key: String
+
+      def initialize: (
+        amount_minor: Integer,
+        idempotency_key: String,
+        ?currency: :usd,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        amount_minor: Integer,
+        currency: :usd,
+        idempotency_key: String,
+        request_options: XTwitterScraper::RequestOptions
+      }
+    end
+  end
+end

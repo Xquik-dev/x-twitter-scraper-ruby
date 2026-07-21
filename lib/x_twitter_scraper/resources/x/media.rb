@@ -7,11 +7,15 @@ module XTwitterScraper
       class Media
         # Download images & videos from tweets
         #
-        # @overload download(tweet_ids: nil, tweet_input: nil, request_options: {})
+        # @overload download(tweet_id: nil, tweet_ids: nil, tweet_input: nil, tweet_url: nil, request_options: {})
         #
-        # @param tweet_ids [Array<String>] Array of tweet URLs or IDs (bulk, max 50)
+        # @param tweet_id [String] Numeric tweet ID alias for tweetInput
+        #
+        # @param tweet_ids [Array<String>] Array of tweet URLs or IDs (bulk, max 50 string items)
         #
         # @param tweet_input [String] Tweet URL or ID (single tweet)
+        #
+        # @param tweet_url [String] Tweet URL alias for tweetInput
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -31,13 +35,11 @@ module XTwitterScraper
 
         # Upload media
         #
-        # @overload upload(account:, file:, is_long_video: nil, request_options: {})
+        # @overload upload(account:, url:, request_options: {})
         #
-        # @param account [String] X account (@username or ID) uploading media
+        # @param account [String] X account (@username or ID) uploading media from URL
         #
-        # @param file [Pathname, StringIO, IO, String, XTwitterScraper::FilePart] Media file to upload
-        #
-        # @param is_long_video [Boolean]
+        # @param url [String] HTTPS URL to download and upload as media
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

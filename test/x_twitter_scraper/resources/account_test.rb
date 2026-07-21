@@ -14,6 +14,7 @@ class XTwitterScraper::Test::Resources::AccountTest < XTwitterScraper::Test::Res
 
     assert_pattern do
       response => {
+        monitor_billing: XTwitterScraper::Models::AccountRetrieveResponse::MonitorBilling,
         monitors_allowed: Integer,
         monitors_used: Integer,
         plan: XTwitterScraper::Models::AccountRetrieveResponse::Plan,

@@ -21,10 +21,6 @@ module XTwitterScraper
     sig { returns(XTwitterScraper::Resources::Account) }
     attr_reader :account
 
-    # API key management (session auth only)
-    sig { returns(XTwitterScraper::Resources::APIKeys) }
-    attr_reader :api_keys
-
     # Subscription, billing, and credits
     sig { returns(XTwitterScraper::Resources::Subscribe) }
     attr_reader :subscribe
@@ -53,7 +49,7 @@ module XTwitterScraper
     sig { returns(XTwitterScraper::Resources::Events) }
     attr_reader :events
 
-    # Bulk data extraction (20 tool types)
+    # Bulk data extraction (23 tool types)
     sig { returns(XTwitterScraper::Resources::Extractions) }
     attr_reader :extractions
 
@@ -79,9 +75,22 @@ module XTwitterScraper
     sig { returns(XTwitterScraper::Resources::Credits) }
     attr_reader :credits
 
+    # Accountless prepaid access for paid read endpoints
+    sig { returns(XTwitterScraper::Resources::GuestWallets) }
+    attr_reader :guest_wallets
+
     # @api private
-    sig { override.returns(T::Hash[String, String]) }
-    private def auth_headers
+    sig do
+      override
+        .params(
+          security: {
+            auth_api_key: T::Boolean,
+            oauth_bearer: T::Boolean
+          }
+        )
+        .returns(T::Hash[String, String])
+    end
+    private def auth_headers(security:)
     end
 
     # @api private

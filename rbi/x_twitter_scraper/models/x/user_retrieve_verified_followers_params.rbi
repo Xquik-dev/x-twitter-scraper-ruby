@@ -25,10 +25,21 @@ module XTwitterScraper
         sig { params(cursor: String).void }
         attr_writer :cursor
 
+        # Maximum user profiles requested from this page (20-200, default 200). The
+        # response can contain fewer profiles because the source returned fewer or
+        # remaining credits cover fewer results. Keep requesting next_cursor while
+        # has_next_page is true. The deprecated limit and count aliases remain accepted.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :page_size
+
+        sig { params(page_size: Integer).void }
+        attr_writer :page_size
+
         sig do
           params(
             id: String,
             cursor: String,
+            page_size: Integer,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -36,6 +47,11 @@ module XTwitterScraper
           id:,
           # Pagination cursor for verified followers
           cursor: nil,
+          # Maximum user profiles requested from this page (20-200, default 200). The
+          # response can contain fewer profiles because the source returned fewer or
+          # remaining credits cover fewer results. Keep requesting next_cursor while
+          # has_next_page is true. The deprecated limit and count aliases remain accepted.
+          page_size: nil,
           request_options: {}
         )
         end
@@ -45,6 +61,7 @@ module XTwitterScraper
             {
               id: String,
               cursor: String,
+              page_size: Integer,
               request_options: XTwitterScraper::RequestOptions
             }
           )

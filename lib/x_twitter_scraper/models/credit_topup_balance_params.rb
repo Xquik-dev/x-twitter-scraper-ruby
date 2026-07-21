@@ -7,14 +7,22 @@ module XTwitterScraper
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      # @!attribute amount
-      #   Amount to top up in credits
+      # @!attribute dollars
+      #   Amount to top up in US dollars. Minimum 10.
       #
       #   @return [Integer]
-      required :amount, Integer
+      required :dollars, Integer
 
-      # @!method initialize(amount:, request_options: {})
-      #   @param amount [Integer] Amount to top up in credits
+      # @!attribute locale
+      #   Optional checkout locale. Defaults to en.
+      #
+      #   @return [String, nil]
+      optional :locale, String
+
+      # @!method initialize(dollars:, locale: nil, request_options: {})
+      #   @param dollars [Integer] Amount to top up in US dollars. Minimum 10.
+      #
+      #   @param locale [String] Optional checkout locale. Defaults to en.
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
     end

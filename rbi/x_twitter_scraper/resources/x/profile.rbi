@@ -34,15 +34,15 @@ module XTwitterScraper
         sig do
           params(
             account: String,
-            file: XTwitterScraper::Internal::FileInput,
+            url: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::ProfileUpdateAvatarResponse)
         end
         def update_avatar(
-          # X account (@username or ID) for avatar update
+          # X account (@username or ID) receiving avatar from URL
           account:,
-          # Avatar image (max 716KB)
-          file:,
+          # HTTPS URL to the avatar image to download
+          url:,
           request_options: {}
         )
         end
@@ -51,15 +51,15 @@ module XTwitterScraper
         sig do
           params(
             account: String,
-            file: XTwitterScraper::Internal::FileInput,
+            url: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::ProfileUpdateBannerResponse)
         end
         def update_banner(
-          # X account (@username or ID) for banner update
+          # X account (@username or ID) receiving banner from URL
           account:,
-          # Banner image (max 2MB)
-          file:,
+          # HTTPS URL to the banner image to download
+          url:,
           request_options: {}
         )
         end

@@ -29,6 +29,11 @@ module XTwitterScraper
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::WebhookListDeliveriesResponse
 
+      def resume: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::WebhookResumeResponse
+
       def test_: (
         String id,
         ?request_options: XTwitterScraper::request_opts

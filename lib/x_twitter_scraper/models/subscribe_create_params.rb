@@ -7,8 +7,28 @@ module XTwitterScraper
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      # @!method initialize(request_options: {})
+      # @!attribute tier
+      #   Subscription tier to pre-select.
+      #
+      #   @return [Symbol, XTwitterScraper::Models::SubscribeCreateParams::Tier, nil]
+      optional :tier, enum: -> { XTwitterScraper::SubscribeCreateParams::Tier }
+
+      # @!method initialize(tier: nil, request_options: {})
+      #   @param tier [Symbol, XTwitterScraper::Models::SubscribeCreateParams::Tier] Subscription tier to pre-select.
+      #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
+
+      # Subscription tier to pre-select.
+      module Tier
+        extend XTwitterScraper::Internal::Type::Enum
+
+        STARTER = :starter
+        PRO = :pro
+        BUSINESS = :business
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
     end
   end
 end

@@ -10,6 +10,7 @@ module XTwitterScraper
           params(
             id: String,
             cursor: String,
+            page_size: Integer,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::PaginatedUsers)
         end
@@ -18,6 +19,11 @@ module XTwitterScraper
           id,
           # Pagination cursor for list followers
           cursor: nil,
+          # Maximum user profiles requested from this page (20-200, default 200). The
+          # response can contain fewer profiles because the source returned fewer or
+          # remaining credits cover fewer results. Keep requesting next_cursor while
+          # has_next_page is true. The deprecated limit and count aliases remain accepted.
+          page_size: nil,
           request_options: {}
         )
         end
@@ -48,6 +54,7 @@ module XTwitterScraper
             id: String,
             cursor: String,
             include_replies: T::Boolean,
+            page_size: Integer,
             since_time: String,
             until_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
@@ -60,6 +67,12 @@ module XTwitterScraper
           cursor: nil,
           # Include replies (default false)
           include_replies: nil,
+          # Maximum items requested from this page (1-100, default 20). The response can
+          # contain fewer items because the source returned fewer, filters removed items, or
+          # remaining credits cover fewer results. Keep requesting next_cursor while
+          # has_next_page is true, even when a page is empty. The deprecated limit and count
+          # aliases remain accepted.
+          page_size: nil,
           # Unix timestamp - filter after
           since_time: nil,
           # Unix timestamp - filter before

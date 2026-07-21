@@ -21,6 +21,10 @@ module XTwitterScraper
       sig { returns(T::Boolean) }
       attr_accessor :is_active
 
+      # Next hourly credit charge time for this account monitor.
+      sig { returns(Time) }
+      attr_accessor :next_billing_at
+
       sig { returns(String) }
       attr_accessor :username
 
@@ -34,6 +38,7 @@ module XTwitterScraper
           created_at: Time,
           event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           is_active: T::Boolean,
+          next_billing_at: Time,
           username: String,
           x_user_id: String
         ).returns(T.attached_class)
@@ -44,6 +49,8 @@ module XTwitterScraper
         # Array of event types to subscribe to.
         event_types:,
         is_active:,
+        # Next hourly credit charge time for this account monitor.
+        next_billing_at:,
         username:,
         x_user_id:
       )
@@ -56,6 +63,7 @@ module XTwitterScraper
             created_at: Time,
             event_types: T::Array[XTwitterScraper::EventType::TaggedSymbol],
             is_active: T::Boolean,
+            next_billing_at: Time,
             username: String,
             x_user_id: String
           }

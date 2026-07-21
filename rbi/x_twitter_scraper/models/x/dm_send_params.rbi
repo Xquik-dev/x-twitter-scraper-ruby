@@ -25,17 +25,12 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :text
 
+        # Optional array containing exactly 1 uploaded media ID.
         sig { returns(T.nilable(T::Array[String])) }
         attr_reader :media_ids
 
         sig { params(media_ids: T::Array[String]).void }
         attr_writer :media_ids
-
-        sig { returns(T.nilable(String)) }
-        attr_reader :reply_to_message_id
-
-        sig { params(reply_to_message_id: String).void }
-        attr_writer :reply_to_message_id
 
         sig do
           params(
@@ -43,7 +38,6 @@ module XTwitterScraper
             account: String,
             text: String,
             media_ids: T::Array[String],
-            reply_to_message_id: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -52,8 +46,8 @@ module XTwitterScraper
           # X account (@username or ID) sending the DM
           account:,
           text:,
+          # Optional array containing exactly 1 uploaded media ID.
           media_ids: nil,
-          reply_to_message_id: nil,
           request_options: {}
         )
         end
@@ -65,7 +59,6 @@ module XTwitterScraper
               account: String,
               text: String,
               media_ids: T::Array[String],
-              reply_to_message_id: String,
               request_options: XTwitterScraper::RequestOptions
             }
           )

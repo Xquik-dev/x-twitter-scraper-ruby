@@ -1,0 +1,177 @@
+module XTwitterScraper
+  module Models
+    module X
+      type write_action_retrieve_response =
+        {
+          action: String,
+          charged: bool,
+          charged_credits: String,
+          created_at: Time,
+          media: XTwitterScraper::Models::X::WriteActionRetrieveResponse::Media,
+          retryable: false,
+          send_dispatched: bool,
+          status: XTwitterScraper::Models::X::WriteActionRetrieveResponse::status,
+          write_action_id: String,
+          confirmation_attempts: Integer,
+          confirmation_checked_at: Time,
+          confirmation_source: String?,
+          confirmed_at: Time,
+          message: String,
+          message_id: String,
+          send_dispatched_at: Time,
+          target_id: String?,
+          tweet_id: String
+        }
+
+      class WriteActionRetrieveResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor action: String
+
+        attr_accessor charged: bool
+
+        attr_accessor charged_credits: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor media: XTwitterScraper::Models::X::WriteActionRetrieveResponse::Media
+
+        attr_accessor retryable: false
+
+        attr_accessor send_dispatched: bool
+
+        attr_accessor status: XTwitterScraper::Models::X::WriteActionRetrieveResponse::status
+
+        attr_accessor write_action_id: String
+
+        attr_reader confirmation_attempts: Integer?
+
+        def confirmation_attempts=: (Integer) -> Integer
+
+        attr_reader confirmation_checked_at: Time?
+
+        def confirmation_checked_at=: (Time) -> Time
+
+        attr_accessor confirmation_source: String?
+
+        attr_reader confirmed_at: Time?
+
+        def confirmed_at=: (Time) -> Time
+
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        attr_reader message_id: String?
+
+        def message_id=: (String) -> String
+
+        attr_reader send_dispatched_at: Time?
+
+        def send_dispatched_at=: (Time) -> Time
+
+        attr_accessor target_id: String?
+
+        attr_reader tweet_id: String?
+
+        def tweet_id=: (String) -> String
+
+        def initialize: (
+          action: String,
+          charged: bool,
+          charged_credits: String,
+          created_at: Time,
+          media: XTwitterScraper::Models::X::WriteActionRetrieveResponse::Media,
+          send_dispatched: bool,
+          status: XTwitterScraper::Models::X::WriteActionRetrieveResponse::status,
+          write_action_id: String,
+          ?confirmation_attempts: Integer,
+          ?confirmation_checked_at: Time,
+          ?confirmation_source: String?,
+          ?confirmed_at: Time,
+          ?message: String,
+          ?message_id: String,
+          ?send_dispatched_at: Time,
+          ?target_id: String?,
+          ?tweet_id: String,
+          ?retryable: false
+        ) -> void
+
+        def to_hash: -> {
+          action: String,
+          charged: bool,
+          charged_credits: String,
+          created_at: Time,
+          media: XTwitterScraper::Models::X::WriteActionRetrieveResponse::Media,
+          retryable: false,
+          send_dispatched: bool,
+          status: XTwitterScraper::Models::X::WriteActionRetrieveResponse::status,
+          write_action_id: String,
+          confirmation_attempts: Integer,
+          confirmation_checked_at: Time,
+          confirmation_source: String?,
+          confirmed_at: Time,
+          message: String,
+          message_id: String,
+          send_dispatched_at: Time,
+          target_id: String?,
+          tweet_id: String
+        }
+
+        type media =
+          {
+            count: Integer,
+            credits: String,
+            kind: XTwitterScraper::Models::X::WriteActionRetrieveResponse::Media::kind,
+            total_bytes: String
+          }
+
+        class Media < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor count: Integer
+
+          attr_accessor credits: String
+
+          attr_accessor kind: XTwitterScraper::Models::X::WriteActionRetrieveResponse::Media::kind
+
+          attr_accessor total_bytes: String
+
+          def initialize: (
+            count: Integer,
+            credits: String,
+            kind: XTwitterScraper::Models::X::WriteActionRetrieveResponse::Media::kind,
+            total_bytes: String
+          ) -> void
+
+          def to_hash: -> {
+            count: Integer,
+            credits: String,
+            kind: XTwitterScraper::Models::X::WriteActionRetrieveResponse::Media::kind,
+            total_bytes: String
+          }
+
+          type kind = :none | :image | :video
+
+          module Kind
+            extend XTwitterScraper::Internal::Type::Enum
+
+            NONE: :none
+            IMAGE: :image
+            VIDEO: :video
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::WriteActionRetrieveResponse::Media::kind]
+          end
+        end
+
+        type status = :success | :failed | :pending_confirmation
+
+        module Status
+          extend XTwitterScraper::Internal::Type::Enum
+
+          SUCCESS: :success
+          FAILED: :failed
+          PENDING_CONFIRMATION: :pending_confirmation
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::WriteActionRetrieveResponse::status]
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,14 @@
+module XTwitterScraper
+  module Resources
+    class X
+      class WriteActions
+        def retrieve: (
+          String id,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::WriteActionRetrieveResponse
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

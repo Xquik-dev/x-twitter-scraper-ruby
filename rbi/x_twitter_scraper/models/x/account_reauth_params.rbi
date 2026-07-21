@@ -29,13 +29,6 @@ module XTwitterScraper
         sig { params(email: String).void }
         attr_writer :email
 
-        # Two-letter country code for login proxy region
-        sig { returns(T.nilable(String)) }
-        attr_reader :proxy_country
-
-        sig { params(proxy_country: String).void }
-        attr_writer :proxy_country
-
         # TOTP secret for 2FA re-authentication
         sig { returns(T.nilable(String)) }
         attr_reader :totp_secret
@@ -48,7 +41,6 @@ module XTwitterScraper
             id: String,
             password: String,
             email: String,
-            proxy_country: String,
             totp_secret: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
@@ -59,8 +51,6 @@ module XTwitterScraper
           password:,
           # Email for the X account (updates stored email)
           email: nil,
-          # Two-letter country code for login proxy region
-          proxy_country: nil,
           # TOTP secret for 2FA re-authentication
           totp_secret: nil,
           request_options: {}
@@ -73,7 +63,6 @@ module XTwitterScraper
               id: String,
               password: String,
               email: String,
-              proxy_country: String,
               totp_secret: String,
               request_options: XTwitterScraper::RequestOptions
             }

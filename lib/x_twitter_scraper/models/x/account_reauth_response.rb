@@ -35,37 +35,15 @@ module XTwitterScraper
         #   @return [String]
         required :x_username, String, api_name: :xUsername
 
-        # @!attribute login_country
-        #   ISO-3166-1 alpha-2 country code of the Driver consumer device used for this
-        #   login. Present only when the US fallback was triggered because Driver had no
-        #   capacity in the declared region. Omitted otherwise.
-        #
-        #   @return [String, nil]
-        optional :login_country, String, api_name: :loginCountry
-
-        # @!method initialize(id:, created_at:, health:, status:, x_user_id:, x_username:, login_country: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {XTwitterScraper::Models::X::AccountReauthResponse} for more details.
-        #
-        #   Sanitized X account summary returned by connect and reauth. Includes an optional
-        #   `loginCountry` field surfaced only when the declared proxy region had no Driver
-        #   capacity and the login fell back to a single US consumer device for this
-        #   one-time action. Future activity continues to use the selected `proxy_country`;
-        #   the field is omitted on normal logins.
+        # @!method initialize(id:, created_at:, health:, status:, x_user_id:, x_username:)
+        #   Sanitized X account summary returned by connect and reauth.
         #
         #   @param id [String]
-        #
         #   @param created_at [Time]
-        #
         #   @param health [Symbol, XTwitterScraper::Models::X::AccountReauthResponse::Health]
-        #
         #   @param status [String]
-        #
         #   @param x_user_id [String]
-        #
         #   @param x_username [String]
-        #
-        #   @param login_country [String] ISO-3166-1 alpha-2 country code of the Driver consumer device used for this logi
 
         # @see XTwitterScraper::Models::X::AccountReauthResponse#health
         module Health

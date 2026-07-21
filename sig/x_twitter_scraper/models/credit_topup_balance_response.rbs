@@ -1,13 +1,15 @@
 module XTwitterScraper
   module Models
-    type credit_topup_balance_response = { success: true }
+    type credit_topup_balance_response = { redirect_url: String, url: String }
 
     class CreditTopupBalanceResponse < XTwitterScraper::Internal::Type::BaseModel
-      attr_accessor success: true
+      attr_accessor redirect_url: String
 
-      def initialize: (?success: true) -> void
+      attr_accessor url: String
 
-      def to_hash: -> { success: true }
+      def initialize: (redirect_url: String, url: String) -> void
+
+      def to_hash: -> { redirect_url: String, url: String }
     end
   end
 end

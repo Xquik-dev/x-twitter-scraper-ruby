@@ -10,13 +10,13 @@ module XTwitterScraper
           #
           # @overload create(id, account:, request_options: {})
           #
-          # @param id [String] Resource ID (stringified bigint)
+          # @param id [String] Resource ID returned by the matching create or list endpoint.
           #
           # @param account [String] X account identifier (@username or account ID)
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [XTwitterScraper::Models::X::CommunityActionResult]
+          # @return [XTwitterScraper::Models::X::Communities::JoinCreateResponse]
           #
           # @see XTwitterScraper::Models::X::Communities::JoinCreateParams
           def create(id, params)
@@ -25,7 +25,7 @@ module XTwitterScraper
               method: :post,
               path: ["x/communities/%1$s/join", id],
               body: parsed,
-              model: XTwitterScraper::X::CommunityActionResult,
+              model: XTwitterScraper::Models::X::Communities::JoinCreateResponse,
               options: options
             )
           end
@@ -34,13 +34,13 @@ module XTwitterScraper
           #
           # @overload delete_all(id, account:, request_options: {})
           #
-          # @param id [String] Resource ID (stringified bigint)
+          # @param id [String] Resource ID returned by the matching create or list endpoint.
           #
           # @param account [String] X account identifier (@username or account ID)
           #
           # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [XTwitterScraper::Models::X::CommunityActionResult]
+          # @return [XTwitterScraper::Models::X::Communities::JoinDeleteAllResponse]
           #
           # @see XTwitterScraper::Models::X::Communities::JoinDeleteAllParams
           def delete_all(id, params)
@@ -49,7 +49,7 @@ module XTwitterScraper
               method: :delete,
               path: ["x/communities/%1$s/join", id],
               body: parsed,
-              model: XTwitterScraper::X::CommunityActionResult,
+              model: XTwitterScraper::Models::X::Communities::JoinDeleteAllResponse,
               options: options
             )
           end

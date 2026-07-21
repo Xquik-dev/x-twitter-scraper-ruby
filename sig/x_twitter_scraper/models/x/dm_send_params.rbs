@@ -6,8 +6,7 @@ module XTwitterScraper
           user_id: String,
           account: String,
           text: String,
-          media_ids: ::Array[String],
-          reply_to_message_id: String
+          media_ids: ::Array[String]
         }
         & XTwitterScraper::Internal::Type::request_parameters
 
@@ -25,16 +24,11 @@ module XTwitterScraper
 
         def media_ids=: (::Array[String]) -> ::Array[String]
 
-        attr_reader reply_to_message_id: String?
-
-        def reply_to_message_id=: (String) -> String
-
         def initialize: (
           user_id: String,
           account: String,
           text: String,
           ?media_ids: ::Array[String],
-          ?reply_to_message_id: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
@@ -43,7 +37,6 @@ module XTwitterScraper
           account: String,
           text: String,
           media_ids: ::Array[String],
-          reply_to_message_id: String,
           request_options: XTwitterScraper::RequestOptions
         }
       end

@@ -55,16 +55,16 @@ class XTwitterScraper::Test::Resources::ExtractionsTest < XTwitterScraper::Test:
         credits_available: String,
         credits_required: String,
         estimated_results: Integer,
-        source: String,
+        source: XTwitterScraper::Models::ExtractionEstimateCostResponse::Source,
         resolved_x_user_id: String | nil
       }
     end
   end
 
-  def test_export_results
+  def test_export_results_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.extractions.export_results("id")
+    response = @x_twitter_scraper.extractions.export_results("id", format_: :csv)
 
     assert_pattern do
       response => StringIO

@@ -14,7 +14,7 @@ module XTwitterScraper
       optional :cursor, String
 
       # @!attribute type
-      #   Notification type filter
+      #   Notification type filter. Unrecognized values fall back to All.
       #
       #   @return [Symbol, XTwitterScraper::Models::XGetNotificationsParams::Type, nil]
       optional :type, enum: -> { XTwitterScraper::XGetNotificationsParams::Type }
@@ -22,11 +22,11 @@ module XTwitterScraper
       # @!method initialize(cursor: nil, type: nil, request_options: {})
       #   @param cursor [String] Pagination cursor for notifications
       #
-      #   @param type [Symbol, XTwitterScraper::Models::XGetNotificationsParams::Type] Notification type filter
+      #   @param type [Symbol, XTwitterScraper::Models::XGetNotificationsParams::Type] Notification type filter. Unrecognized values fall back to All.
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
 
-      # Notification type filter
+      # Notification type filter. Unrecognized values fall back to All.
       module Type
         extend XTwitterScraper::Internal::Type::Enum
 

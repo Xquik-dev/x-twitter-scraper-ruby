@@ -2,13 +2,7 @@ module XTwitterScraper
   module Models
     module X
       type account_reauth_params =
-        {
-          id: String,
-          password: String,
-          email: String,
-          proxy_country: String,
-          totp_secret: String
-        }
+        { id: String, password: String, email: String, totp_secret: String }
         & XTwitterScraper::Internal::Type::request_parameters
 
       class AccountReauthParams < XTwitterScraper::Internal::Type::BaseModel
@@ -23,10 +17,6 @@ module XTwitterScraper
 
         def email=: (String) -> String
 
-        attr_reader proxy_country: String?
-
-        def proxy_country=: (String) -> String
-
         attr_reader totp_secret: String?
 
         def totp_secret=: (String) -> String
@@ -35,7 +25,6 @@ module XTwitterScraper
           id: String,
           password: String,
           ?email: String,
-          ?proxy_country: String,
           ?totp_secret: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
@@ -44,7 +33,6 @@ module XTwitterScraper
           id: String,
           password: String,
           email: String,
-          proxy_country: String,
           totp_secret: String,
           request_options: XTwitterScraper::RequestOptions
         }

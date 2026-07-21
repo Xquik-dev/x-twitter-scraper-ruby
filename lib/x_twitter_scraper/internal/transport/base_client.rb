@@ -31,7 +31,19 @@ module XTwitterScraper
           #
           # @raise [ArgumentError]
           def validate!(req)
-            keys = [:method, :path, :query, :headers, :body, :unwrap, :page, :stream, :model, :options]
+            keys = [
+              :method,
+              :path,
+              :query,
+              :headers,
+              :body,
+              :unwrap,
+              :page,
+              :stream,
+              :model,
+              :security,
+              :options
+            ]
             case req
             in Hash
               req.each_key do |k|
@@ -252,6 +264,8 @@ module XTwitterScraper
         #
         #   @option req [XTwitterScraper::Internal::Type::Converter, Class, nil] :model
         #
+        #   @option req [Hash{Symbol=>Boolean}, nil] :security
+        #
         # @param opts [Hash{Symbol=>Object}] .
         #
         #   @option opts [String, nil] :idempotency_key
@@ -276,7 +290,11 @@ module XTwitterScraper
 
           headers = XTwitterScraper::Internal::Util.normalized_headers(
             @headers,
-            auth_headers,
+            auth_headers(
+              security: req.fetch(
+                :security, {auth_api_key: true, oauth_bearer: true}
+              )
+            ),
             req[:headers].to_h,
             opts[:extra_headers].to_h
           )
@@ -306,7 +324,10 @@ module XTwitterScraper
               XTwitterScraper::Internal::Util.deep_merge(*[req[:body], opts[:extra_body]].compact)
             end
 
-          headers.delete("content-type") if body.nil?
+          # Generated methods always pass `req[:body]` for operations that define a
+          # request body, so only elide the content-type header when the operation
+          # has no body at all, not when an optional body param was omitted.
+          headers.delete("content-type") if body.nil? && !req.key?(:body)
 
           url = XTwitterScraper::Internal::Util.join_parsed_uri(
             @base_url_components,
@@ -445,7 +466,7 @@ module XTwitterScraper
         # Execute the request specified by `req`. This is the method that all resource
         # methods call into.
         #
-        # @overload request(method, path, query: {}, headers: {}, body: nil, unwrap: nil, page: nil, stream: nil, model: XTwitterScraper::Internal::Type::Unknown, options: {})
+        # @overload request(method, path, query: {}, headers: {}, body: nil, unwrap: nil, page: nil, stream: nil, model: XTwitterScraper::Internal::Type::Unknown, security: {auth_api_key: true, oauth_bearer: true}, options: {})
         #
         # @param method [Symbol]
         #
@@ -464,6 +485,8 @@ module XTwitterScraper
         # @param stream [Class<XTwitterScraper::Internal::Type::BaseStream>, nil]
         #
         # @param model [XTwitterScraper::Internal::Type::Converter, Class, nil]
+        #
+        # @param security [Hash{Symbol=>Boolean}, nil]
         #
         # @param options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil] .
         #
@@ -557,6 +580,7 @@ module XTwitterScraper
               page: T.nilable(T::Class[XTwitterScraper::Internal::Type::BasePage[XTwitterScraper::Internal::Type::BaseModel]]),
               stream: T.nilable(T::Class[T.anything]),
               model: T.nilable(XTwitterScraper::Internal::Type::Converter::Input),
+              security: T.nilable({auth_api_key: T::Boolean, oauth_bearer: T::Boolean}),
               options: T.nilable(XTwitterScraper::RequestOptions::OrHash)
             }
           end

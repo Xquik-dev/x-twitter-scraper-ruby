@@ -12,10 +12,12 @@ module XTwitterScraper
               id: String,
               account: String,
               request_options: XTwitterScraper::RequestOptions::OrHash
-            ).returns(XTwitterScraper::X::CommunityActionResult)
+            ).returns(
+              XTwitterScraper::Models::X::Communities::JoinCreateResponse
+            )
           end
           def create(
-            # Resource ID (stringified bigint)
+            # Resource ID returned by the matching create or list endpoint.
             id,
             # X account identifier (@username or account ID)
             account:,
@@ -29,10 +31,12 @@ module XTwitterScraper
               id: String,
               account: String,
               request_options: XTwitterScraper::RequestOptions::OrHash
-            ).returns(XTwitterScraper::X::CommunityActionResult)
+            ).returns(
+              XTwitterScraper::Models::X::Communities::JoinDeleteAllResponse
+            )
           end
           def delete_all(
-            # Resource ID (stringified bigint)
+            # Resource ID returned by the matching create or list endpoint.
             id,
             # X account identifier (@username or account ID)
             account:,

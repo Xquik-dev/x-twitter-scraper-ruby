@@ -31,21 +31,32 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :status
 
+        sig { returns(Time) }
+        attr_accessor :updated_at
+
         sig { returns(String) }
         attr_accessor :x_user_id
 
         sig { returns(String) }
         attr_accessor :x_username
 
-        # Linked X account summary with username and connection status.
+        sig { returns(T.nilable(Time)) }
+        attr_reader :cookies_obtained_at
+
+        sig { params(cookies_obtained_at: Time).void }
+        attr_writer :cookies_obtained_at
+
+        # Linked X account summary with connection status, health, and timestamp metadata.
         sig do
           params(
             id: String,
             created_at: Time,
             health: XTwitterScraper::X::XAccount::Health::OrSymbol,
             status: String,
+            updated_at: Time,
             x_user_id: String,
-            x_username: String
+            x_username: String,
+            cookies_obtained_at: Time
           ).returns(T.attached_class)
         end
         def self.new(
@@ -58,8 +69,10 @@ module XTwitterScraper
           # shortly.
           health:,
           status:,
+          updated_at:,
           x_user_id:,
-          x_username:
+          x_username:,
+          cookies_obtained_at: nil
         )
         end
 
@@ -70,8 +83,10 @@ module XTwitterScraper
               created_at: Time,
               health: XTwitterScraper::X::XAccount::Health::TaggedSymbol,
               status: String,
+              updated_at: Time,
               x_user_id: String,
-              x_username: String
+              x_username: String,
+              cookies_obtained_at: Time
             }
           )
         end

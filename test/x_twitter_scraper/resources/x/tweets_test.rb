@@ -14,8 +14,11 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
 
     assert_pattern do
       response => {
+        charged: XTwitterScraper::Internal::Type::Boolean,
+        charged_credits: String,
         success: true | false,
-        tweet_id: String
+        tweet_id: String,
+        write_action_id: String | nil
       }
     end
   end

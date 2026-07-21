@@ -26,8 +26,8 @@ module XTwitterScraper
 
       # @!attribute source
       #
-      #   @return [String]
-      required :source, String
+      #   @return [Symbol, XTwitterScraper::Models::ExtractionEstimateCostResponse::Source]
+      required :source, enum: -> { XTwitterScraper::Models::ExtractionEstimateCostResponse::Source }
 
       # @!attribute resolved_x_user_id
       #
@@ -39,8 +39,26 @@ module XTwitterScraper
       #   @param credits_available [String]
       #   @param credits_required [String]
       #   @param estimated_results [Integer]
-      #   @param source [String]
+      #   @param source [Symbol, XTwitterScraper::Models::ExtractionEstimateCostResponse::Source]
       #   @param resolved_x_user_id [String]
+
+      # @see XTwitterScraper::Models::ExtractionEstimateCostResponse#source
+      module Source
+        extend XTwitterScraper::Internal::Type::Enum
+
+        FOLLOWERS = :followers
+        FOLLOWING = :following
+        PAGINATION_CAP = :paginationCap
+        POSTS = :posts
+        QUOTE_COUNT = :quoteCount
+        REPLY_COUNT = :replyCount
+        RESULTS_LIMIT = :resultsLimit
+        RETWEET_COUNT = :retweetCount
+        UNKNOWN = :unknown
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
     end
   end
 end

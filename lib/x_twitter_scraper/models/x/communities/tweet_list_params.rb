@@ -9,32 +9,66 @@ module XTwitterScraper
           extend XTwitterScraper::Internal::Type::RequestParameters::Converter
           include XTwitterScraper::Internal::Type::RequestParameters
 
+          # @!attribute community_id
+          #   Numeric ID of the community to search
+          #
+          #   @return [String]
+          required :community_id, String
+
           # @!attribute q
-          #   Search query for cross-community tweets
+          #   Keyword query within the selected community
           #
           #   @return [String]
           required :q, String
 
           # @!attribute cursor
-          #   Pagination cursor for cross-community results
+          #   Pagination cursor for community results
           #
           #   @return [String, nil]
           optional :cursor, String
 
-          # @!attribute query_type
-          #   Sort order for cross-community results (Latest or Top)
+          # @!attribute page_size
+          #   Maximum items requested from this page (1-100, default 20). The response can
+          #   contain fewer items because the source returned fewer, filters removed items, or
+          #   remaining credits cover fewer results. Keep requesting next_cursor while
+          #   has_next_page is true, even when a page is empty. The deprecated limit and count
+          #   aliases remain accepted.
           #
-          #   @return [String, nil]
-          optional :query_type, String
+          #   @return [Integer, nil]
+          optional :page_size, Integer
 
-          # @!method initialize(q:, cursor: nil, query_type: nil, request_options: {})
-          #   @param q [String] Search query for cross-community tweets
+          # @!attribute query_type
+          #   Sort order for community results (Latest or Top)
           #
-          #   @param cursor [String] Pagination cursor for cross-community results
+          #   @return [Symbol, XTwitterScraper::Models::X::Communities::TweetListParams::QueryType, nil]
+          optional :query_type, enum: -> { XTwitterScraper::X::Communities::TweetListParams::QueryType }
+
+          # @!method initialize(community_id:, q:, cursor: nil, page_size: nil, query_type: nil, request_options: {})
+          #   Some parameter documentations has been truncated, see
+          #   {XTwitterScraper::Models::X::Communities::TweetListParams} for more details.
           #
-          #   @param query_type [String] Sort order for cross-community results (Latest or Top)
+          #   @param community_id [String] Numeric ID of the community to search
+          #
+          #   @param q [String] Keyword query within the selected community
+          #
+          #   @param cursor [String] Pagination cursor for community results
+          #
+          #   @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
+          #
+          #   @param query_type [Symbol, XTwitterScraper::Models::X::Communities::TweetListParams::QueryType] Sort order for community results (Latest or Top)
           #
           #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
+
+          # Sort order for community results (Latest or Top)
+          module QueryType
+            extend XTwitterScraper::Internal::Type::Enum
+
+            LATEST = :Latest
+            TOP = :Top
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
         end
       end
     end

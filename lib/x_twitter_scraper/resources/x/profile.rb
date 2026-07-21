@@ -37,11 +37,11 @@ module XTwitterScraper
 
         # Update profile avatar
         #
-        # @overload update_avatar(account:, file:, request_options: {})
+        # @overload update_avatar(account:, url:, request_options: {})
         #
-        # @param account [String] X account (@username or ID) for avatar update
+        # @param account [String] X account (@username or ID) receiving avatar from URL
         #
-        # @param file [Pathname, StringIO, IO, String, XTwitterScraper::FilePart] Avatar image (max 716KB)
+        # @param url [String] HTTPS URL to the avatar image to download
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -62,11 +62,11 @@ module XTwitterScraper
 
         # Update profile banner
         #
-        # @overload update_banner(account:, file:, request_options: {})
+        # @overload update_banner(account:, url:, request_options: {})
         #
-        # @param account [String] X account (@username or ID) for banner update
+        # @param account [String] X account (@username or ID) receiving banner from URL
         #
-        # @param file [Pathname, StringIO, IO, String, XTwitterScraper::FilePart] Banner image (max 2MB)
+        # @param url [String] HTTPS URL to the banner image to download
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

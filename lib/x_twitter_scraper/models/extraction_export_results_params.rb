@@ -15,10 +15,10 @@ module XTwitterScraper
       # @!attribute format_
       #   Export file format
       #
-      #   @return [Symbol, XTwitterScraper::Models::ExtractionExportResultsParams::Format, nil]
-      optional :format_, enum: -> { XTwitterScraper::ExtractionExportResultsParams::Format }
+      #   @return [Symbol, XTwitterScraper::Models::ExtractionExportResultsParams::Format]
+      required :format_, enum: -> { XTwitterScraper::ExtractionExportResultsParams::Format }
 
-      # @!method initialize(id:, format_: nil, request_options: {})
+      # @!method initialize(id:, format_:, request_options: {})
       #   @param id [String]
       #
       #   @param format_ [Symbol, XTwitterScraper::Models::ExtractionExportResultsParams::Format] Export file format

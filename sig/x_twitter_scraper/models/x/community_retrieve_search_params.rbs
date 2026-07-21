@@ -2,12 +2,20 @@ module XTwitterScraper
   module Models
     module X
       type community_retrieve_search_params =
-        { q: String, cursor: String, query_type: String }
+        {
+          community_id: String,
+          q: String,
+          cursor: String,
+          page_size: Integer,
+          query_type: XTwitterScraper::Models::X::CommunityRetrieveSearchParams::query_type
+        }
         & XTwitterScraper::Internal::Type::request_parameters
 
       class CommunityRetrieveSearchParams < XTwitterScraper::Internal::Type::BaseModel
         extend XTwitterScraper::Internal::Type::RequestParameters::Converter
         include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor community_id: String
 
         attr_accessor q: String
 
@@ -15,23 +23,44 @@ module XTwitterScraper
 
         def cursor=: (String) -> String
 
-        attr_reader query_type: String?
+        attr_reader page_size: Integer?
 
-        def query_type=: (String) -> String
+        def page_size=: (Integer) -> Integer
+
+        attr_reader query_type: XTwitterScraper::Models::X::CommunityRetrieveSearchParams::query_type?
+
+        def query_type=: (
+          XTwitterScraper::Models::X::CommunityRetrieveSearchParams::query_type
+        ) -> XTwitterScraper::Models::X::CommunityRetrieveSearchParams::query_type
 
         def initialize: (
+          community_id: String,
           q: String,
           ?cursor: String,
-          ?query_type: String,
+          ?page_size: Integer,
+          ?query_type: XTwitterScraper::Models::X::CommunityRetrieveSearchParams::query_type,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
         def to_hash: -> {
+          community_id: String,
           q: String,
           cursor: String,
-          query_type: String,
+          page_size: Integer,
+          query_type: XTwitterScraper::Models::X::CommunityRetrieveSearchParams::query_type,
           request_options: XTwitterScraper::RequestOptions
         }
+
+        type query_type = :Latest | :Top
+
+        module QueryType
+          extend XTwitterScraper::Internal::Type::Enum
+
+          LATEST: :Latest
+          TOP: :Top
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::CommunityRetrieveSearchParams::query_type]
+        end
       end
     end
   end

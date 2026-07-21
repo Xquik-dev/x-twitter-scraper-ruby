@@ -12,7 +12,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::EventDetail)
       end
       def retrieve(
-        # Resource ID (stringified bigint)
+        # Resource ID returned by the matching create or list endpoint.
         id,
         request_options: {}
       )
@@ -21,7 +21,7 @@ module XTwitterScraper
       # List events
       sig do
         params(
-          after: String,
+          cursor: String,
           event_type: XTwitterScraper::EventType::OrSymbol,
           limit: Integer,
           monitor_id: String,
@@ -29,11 +29,14 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::EventListResponse)
       end
       def list(
-        # Cursor for keyset pagination
-        after: nil,
+        # Cursor for keyset pagination from prior response next_cursor
+        cursor: nil,
         # Filter events by type
         event_type: nil,
-        # Maximum number of items to return (1-100, default 50)
+        # Maximum number of items to return (1-100, default 50). For paid per-result
+        # endpoints, the returned count may be lower when remaining credits cannot cover
+        # the requested page. If zero paid results are affordable, the endpoint returns
+        # 402 insufficient_credits.
         limit: nil,
         # Filter events by monitor ID
         monitor_id: nil,

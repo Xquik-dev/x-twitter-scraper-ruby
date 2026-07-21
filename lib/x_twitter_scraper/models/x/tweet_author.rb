@@ -3,40 +3,23 @@
 module XTwitterScraper
   module Models
     module X
-      class TweetAuthor < XTwitterScraper::Internal::Type::BaseModel
-        # @!attribute id
-        #
-        #   @return [String]
-        required :id, String
-
+      class TweetAuthor < XTwitterScraper::Models::UserProfile
         # @!attribute followers
         #
         #   @return [Integer]
         required :followers, Integer
-
-        # @!attribute username
-        #
-        #   @return [String]
-        required :username, String
 
         # @!attribute verified
         #
         #   @return [Boolean]
         required :verified, XTwitterScraper::Internal::Type::Boolean
 
-        # @!attribute profile_picture
+        # @!method initialize(followers:, verified:)
+        #   Tweet author profile. The lookup route always includes follower count and
+        #   verification state. Other profile fields appear when available.
         #
-        #   @return [String, nil]
-        optional :profile_picture, String, api_name: :profilePicture
-
-        # @!method initialize(id:, followers:, username:, verified:, profile_picture: nil)
-        #   Author of a tweet with follower count and verification status.
-        #
-        #   @param id [String]
         #   @param followers [Integer]
-        #   @param username [String]
         #   @param verified [Boolean]
-        #   @param profile_picture [String]
       end
     end
   end

@@ -31,7 +31,7 @@ module XTwitterScraper
       #
       # @overload retrieve(id, request_options: {})
       #
-      # @param id [String] Resource ID (stringified bigint)
+      # @param id [String] Resource ID returned by the matching create or list endpoint.
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -47,13 +47,16 @@ module XTwitterScraper
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {XTwitterScraper::Models::DraftListParams} for more details.
+      #
       # List saved drafts
       #
       # @overload list(after_cursor: nil, limit: nil, request_options: {})
       #
       # @param after_cursor [String] Cursor for pagination
       #
-      # @param limit [Integer] Maximum number of items to return (1-100, default 50)
+      # @param limit [Integer] Maximum number of items to return (1-100, default 50). For paid per-result endpo
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -76,7 +79,7 @@ module XTwitterScraper
       #
       # @overload delete(id, request_options: {})
       #
-      # @param id [String] Resource ID (stringified bigint)
+      # @param id [String] Resource ID returned by the matching create or list endpoint.
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #

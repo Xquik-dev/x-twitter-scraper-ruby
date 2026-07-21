@@ -1,0 +1,36 @@
+module XTwitterScraper
+  module Resources
+    class Monitors
+      class Keywords
+        def create: (
+          event_types: ::Array[XTwitterScraper::Models::event_type],
+          query: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::Monitors::KeywordCreateResponse
+
+        def retrieve: (
+          String id,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::Monitors::KeywordRetrieveResponse
+
+        def update: (
+          String id,
+          ?event_types: ::Array[XTwitterScraper::Models::event_type],
+          ?is_active: bool,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::Monitors::KeywordUpdateResponse
+
+        def list: (
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::Monitors::KeywordListResponse
+
+        def deactivate: (
+          String id,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::Monitors::KeywordDeactivateResponse
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

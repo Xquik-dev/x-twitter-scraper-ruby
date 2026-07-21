@@ -1,0 +1,187 @@
+module XTwitterScraper
+  module Models
+    type embedded_tweet =
+      {
+        id: String,
+        bookmark_count: Integer,
+        like_count: Integer,
+        quote_count: Integer,
+        reply_count: Integer,
+        retweet_count: Integer,
+        text: String,
+        view_count: Integer,
+        author: XTwitterScraper::UserProfile,
+        content_disclosure: XTwitterScraper::ContentDisclosure,
+        conversation_id: String,
+        created_at: String,
+        display_text_range: ::Array[Integer],
+        entities: ::Hash[Symbol, top],
+        in_reply_to_id: String,
+        in_reply_to_user_id: String,
+        in_reply_to_username: String,
+        is_limited_reply: bool,
+        is_note_tweet: bool,
+        is_quote_status: bool,
+        is_reply: bool,
+        lang: String,
+        media: ::Array[XTwitterScraper::TweetMedia],
+        source: String,
+        type: String,
+        url: String
+      }
+
+    class EmbeddedTweet < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor bookmark_count: Integer
+
+      attr_accessor like_count: Integer
+
+      attr_accessor quote_count: Integer
+
+      attr_accessor reply_count: Integer
+
+      attr_accessor retweet_count: Integer
+
+      attr_accessor text: String
+
+      attr_accessor view_count: Integer
+
+      attr_reader author: XTwitterScraper::UserProfile?
+
+      def author=: (
+        XTwitterScraper::UserProfile
+      ) -> XTwitterScraper::UserProfile
+
+      attr_reader content_disclosure: XTwitterScraper::ContentDisclosure?
+
+      def content_disclosure=: (
+        XTwitterScraper::ContentDisclosure
+      ) -> XTwitterScraper::ContentDisclosure
+
+      attr_reader conversation_id: String?
+
+      def conversation_id=: (String) -> String
+
+      attr_reader created_at: String?
+
+      def created_at=: (String) -> String
+
+      attr_reader display_text_range: ::Array[Integer]?
+
+      def display_text_range=: (::Array[Integer]) -> ::Array[Integer]
+
+      attr_reader entities: ::Hash[Symbol, top]?
+
+      def entities=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader in_reply_to_id: String?
+
+      def in_reply_to_id=: (String) -> String
+
+      attr_reader in_reply_to_user_id: String?
+
+      def in_reply_to_user_id=: (String) -> String
+
+      attr_reader in_reply_to_username: String?
+
+      def in_reply_to_username=: (String) -> String
+
+      attr_reader is_limited_reply: bool?
+
+      def is_limited_reply=: (bool) -> bool
+
+      attr_reader is_note_tweet: bool?
+
+      def is_note_tweet=: (bool) -> bool
+
+      attr_reader is_quote_status: bool?
+
+      def is_quote_status=: (bool) -> bool
+
+      attr_reader is_reply: bool?
+
+      def is_reply=: (bool) -> bool
+
+      attr_reader lang: String?
+
+      def lang=: (String) -> String
+
+      attr_reader media: ::Array[XTwitterScraper::TweetMedia]?
+
+      def media=: (
+        ::Array[XTwitterScraper::TweetMedia]
+      ) -> ::Array[XTwitterScraper::TweetMedia]
+
+      attr_reader source: String?
+
+      def source=: (String) -> String
+
+      attr_reader type: String?
+
+      def type=: (String) -> String
+
+      attr_reader url: String?
+
+      def url=: (String) -> String
+
+      def initialize: (
+        id: String,
+        bookmark_count: Integer,
+        like_count: Integer,
+        quote_count: Integer,
+        reply_count: Integer,
+        retweet_count: Integer,
+        text: String,
+        view_count: Integer,
+        ?author: XTwitterScraper::UserProfile,
+        ?content_disclosure: XTwitterScraper::ContentDisclosure,
+        ?conversation_id: String,
+        ?created_at: String,
+        ?display_text_range: ::Array[Integer],
+        ?entities: ::Hash[Symbol, top],
+        ?in_reply_to_id: String,
+        ?in_reply_to_user_id: String,
+        ?in_reply_to_username: String,
+        ?is_limited_reply: bool,
+        ?is_note_tweet: bool,
+        ?is_quote_status: bool,
+        ?is_reply: bool,
+        ?lang: String,
+        ?media: ::Array[XTwitterScraper::TweetMedia],
+        ?source: String,
+        ?type: String,
+        ?url: String
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        bookmark_count: Integer,
+        like_count: Integer,
+        quote_count: Integer,
+        reply_count: Integer,
+        retweet_count: Integer,
+        text: String,
+        view_count: Integer,
+        author: XTwitterScraper::UserProfile,
+        content_disclosure: XTwitterScraper::ContentDisclosure,
+        conversation_id: String,
+        created_at: String,
+        display_text_range: ::Array[Integer],
+        entities: ::Hash[Symbol, top],
+        in_reply_to_id: String,
+        in_reply_to_user_id: String,
+        in_reply_to_username: String,
+        is_limited_reply: bool,
+        is_note_tweet: bool,
+        is_quote_status: bool,
+        is_reply: bool,
+        lang: String,
+        media: ::Array[XTwitterScraper::TweetMedia],
+        source: String,
+        type: String,
+        url: String
+      }
+    end
+  end
+end

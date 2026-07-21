@@ -37,8 +37,9 @@ module XTwitterScraper
         sig { params(is_note_tweet: T::Boolean).void }
         attr_writer :is_note_tweet
 
-        # Array of public image URLs to attach (max 4). Each URL must be publicly
-        # reachable - the browser composer fetches them directly.
+        # Array of public media URLs to attach. Supports up to 4 images or exactly 1 MP4
+        # video up to 100 MB. Each URL must be publicly reachable. Attached media adds 2
+        # credits per started MB across all files.
         sig { returns(T.nilable(T::Array[String])) }
         attr_reader :media
 
@@ -76,8 +77,9 @@ module XTwitterScraper
           attachment_url: nil,
           community_id: nil,
           is_note_tweet: nil,
-          # Array of public image URLs to attach (max 4). Each URL must be publicly
-          # reachable - the browser composer fetches them directly.
+          # Array of public media URLs to attach. Supports up to 4 images or exactly 1 MP4
+          # video up to 100 MB. Each URL must be publicly reachable. Attached media adds 2
+          # credits per started MB across all files.
           media: nil,
           reply_to_tweet_id: nil,
           # Tweet text (optional when media is provided)

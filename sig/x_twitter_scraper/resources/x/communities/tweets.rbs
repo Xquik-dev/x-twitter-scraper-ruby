@@ -4,15 +4,18 @@ module XTwitterScraper
       class Communities
         class Tweets
           def list: (
+            community_id: String,
             q: String,
             ?cursor: String,
-            ?query_type: String,
+            ?page_size: Integer,
+            ?query_type: XTwitterScraper::Models::X::Communities::TweetListParams::query_type,
             ?request_options: XTwitterScraper::request_opts
           ) -> XTwitterScraper::PaginatedTweets
 
           def list_by_community: (
             String id,
             ?cursor: String,
+            ?page_size: Integer,
             ?request_options: XTwitterScraper::request_opts
           ) -> XTwitterScraper::PaginatedTweets
 

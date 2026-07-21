@@ -6,6 +6,7 @@ module XTwitterScraper
           id: String,
           cursor: String,
           include_replies: bool,
+          page_size: Integer,
           since_time: String,
           until_time: String
         }
@@ -25,6 +26,10 @@ module XTwitterScraper
 
         def include_replies=: (bool) -> bool
 
+        attr_reader page_size: Integer?
+
+        def page_size=: (Integer) -> Integer
+
         attr_reader since_time: String?
 
         def since_time=: (String) -> String
@@ -37,6 +42,7 @@ module XTwitterScraper
           id: String,
           ?cursor: String,
           ?include_replies: bool,
+          ?page_size: Integer,
           ?since_time: String,
           ?until_time: String,
           ?request_options: XTwitterScraper::request_opts
@@ -46,6 +52,7 @@ module XTwitterScraper
           id: String,
           cursor: String,
           include_replies: bool,
+          page_size: Integer,
           since_time: String,
           until_time: String,
           request_options: XTwitterScraper::RequestOptions

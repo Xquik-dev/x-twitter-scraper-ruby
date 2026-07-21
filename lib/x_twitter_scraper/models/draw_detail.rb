@@ -4,6 +4,7 @@ module XTwitterScraper
   module Models
     class DrawDetail < XTwitterScraper::Internal::Type::BaseModel
       # @!attribute id
+      #   Draw public ID.
       #
       #   @return [String]
       required :id, String
@@ -76,19 +77,32 @@ module XTwitterScraper
       # @!method initialize(id:, created_at:, status:, total_entries:, tweet_author_username:, tweet_id:, tweet_like_count:, tweet_quote_count:, tweet_reply_count:, tweet_retweet_count:, tweet_text:, tweet_url:, valid_entries:, drawn_at: nil)
       #   Full giveaway draw with tweet metrics, entries, and timing.
       #
-      #   @param id [String]
+      #   @param id [String] Draw public ID.
+      #
       #   @param created_at [Time]
+      #
       #   @param status [String]
+      #
       #   @param total_entries [Integer]
+      #
       #   @param tweet_author_username [String]
+      #
       #   @param tweet_id [String]
+      #
       #   @param tweet_like_count [Integer]
+      #
       #   @param tweet_quote_count [Integer]
+      #
       #   @param tweet_reply_count [Integer]
+      #
       #   @param tweet_retweet_count [Integer]
+      #
       #   @param tweet_text [String]
+      #
       #   @param tweet_url [String]
+      #
       #   @param valid_entries [Integer]
+      #
       #   @param drawn_at [Time]
     end
   end

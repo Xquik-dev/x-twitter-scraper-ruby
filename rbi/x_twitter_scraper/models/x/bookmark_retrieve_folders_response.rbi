@@ -21,9 +21,11 @@ module XTwitterScraper
         end
         attr_accessor :folders
 
+        # Always false for the current bookmark folder route
         sig { returns(T::Boolean) }
         attr_accessor :has_next_page
 
+        # Always empty for the current bookmark folder route
         sig { returns(String) }
         attr_accessor :next_cursor
 
@@ -37,7 +39,13 @@ module XTwitterScraper
             next_cursor: String
           ).returns(T.attached_class)
         end
-        def self.new(folders:, has_next_page:, next_cursor:)
+        def self.new(
+          folders:,
+          # Always false for the current bookmark folder route
+          has_next_page:,
+          # Always empty for the current bookmark folder route
+          next_cursor:
+        )
         end
 
         sig do

@@ -1,21 +1,28 @@
 module XTwitterScraper
   module Models
     type credit_topup_balance_params =
-      { amount: Integer } & XTwitterScraper::Internal::Type::request_parameters
+      { dollars: Integer, locale: String }
+      & XTwitterScraper::Internal::Type::request_parameters
 
     class CreditTopupBalanceParams < XTwitterScraper::Internal::Type::BaseModel
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      attr_accessor amount: Integer
+      attr_accessor dollars: Integer
+
+      attr_reader locale: String?
+
+      def locale=: (String) -> String
 
       def initialize: (
-        amount: Integer,
+        dollars: Integer,
+        ?locale: String,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
       def to_hash: -> {
-        amount: Integer,
+        dollars: Integer,
+        locale: String,
         request_options: XTwitterScraper::RequestOptions
       }
     end

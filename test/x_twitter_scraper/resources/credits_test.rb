@@ -3,6 +3,16 @@
 require_relative "../test_helper"
 
 class XTwitterScraper::Test::Resources::CreditsTest < XTwitterScraper::Test::ResourceTest
+  def test_redirect_topup_checkout_required_params
+    skip("Mock server tests are disabled")
+
+    response = @x_twitter_scraper.credits.redirect_topup_checkout(session_id: "session_id")
+
+    assert_pattern do
+      response => nil
+    end
+  end
+
   def test_retrieve_balance
     skip("Mock server tests are disabled")
 
@@ -14,10 +24,30 @@ class XTwitterScraper::Test::Resources::CreditsTest < XTwitterScraper::Test::Res
 
     assert_pattern do
       response => {
+        auto_topup_amount_dollars: Float,
         auto_topup_enabled: XTwitterScraper::Internal::Type::Boolean,
-        balance: Integer,
-        lifetime_purchased: Integer,
-        lifetime_used: Integer
+        auto_topup_threshold: String,
+        balance: String,
+        lifetime_purchased: String,
+        lifetime_used: String
+      }
+    end
+  end
+
+  def test_retrieve_topup_status_required_params
+    skip("Mock server tests are disabled")
+
+    response = @x_twitter_scraper.credits.retrieve_topup_status(session_id: "session_id")
+
+    assert_pattern do
+      response => XTwitterScraper::Models::CreditRetrieveTopupStatusResponse
+    end
+
+    assert_pattern do
+      response => {
+        status: XTwitterScraper::Models::CreditRetrieveTopupStatusResponse::Status,
+        amount_dollars: Integer | nil,
+        credits: String | nil
       }
     end
   end
@@ -25,7 +55,7 @@ class XTwitterScraper::Test::Resources::CreditsTest < XTwitterScraper::Test::Res
   def test_topup_balance_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.credits.topup_balance(amount: 10_000)
+    response = @x_twitter_scraper.credits.topup_balance(dollars: 10)
 
     assert_pattern do
       response => XTwitterScraper::Models::CreditTopupBalanceResponse
@@ -33,7 +63,8 @@ class XTwitterScraper::Test::Resources::CreditsTest < XTwitterScraper::Test::Res
 
     assert_pattern do
       response => {
-        success: true | false
+        redirect_url: String,
+        url: String
       }
     end
   end

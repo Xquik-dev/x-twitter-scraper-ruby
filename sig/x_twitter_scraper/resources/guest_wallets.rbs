@@ -1,0 +1,25 @@
+module XTwitterScraper
+  module Resources
+    class GuestWallets
+      def create: (
+        amount_minor: Integer,
+        idempotency_key: String,
+        ?currency: :usd,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::GuestWalletCreateResponse
+
+      def retrieve_status: (
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::GuestWalletRetrieveStatusResponse
+
+      def topup: (
+        amount_minor: Integer,
+        idempotency_key: String,
+        ?currency: :usd,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::GuestWalletTopupResponse
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

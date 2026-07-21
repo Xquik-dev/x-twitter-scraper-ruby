@@ -18,6 +18,11 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :user_id
 
+        # X handle (without the `@` prefix) of the connected X account used to read the
+        # conversation. The account must be a participant in the conversation.
+        sig { returns(String) }
+        attr_accessor :account
+
         # Pagination cursor for DM history
         sig { returns(T.nilable(String)) }
         attr_reader :cursor
@@ -35,6 +40,7 @@ module XTwitterScraper
         sig do
           params(
             user_id: String,
+            account: String,
             cursor: String,
             max_id: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
@@ -42,6 +48,9 @@ module XTwitterScraper
         end
         def self.new(
           user_id:,
+          # X handle (without the `@` prefix) of the connected X account used to read the
+          # conversation. The account must be a participant in the conversation.
+          account:,
           # Pagination cursor for DM history
           cursor: nil,
           # Legacy pagination cursor (backward compat)
@@ -54,6 +63,7 @@ module XTwitterScraper
           override.returns(
             {
               user_id: String,
+              account: String,
               cursor: String,
               max_id: String,
               request_options: XTwitterScraper::RequestOptions

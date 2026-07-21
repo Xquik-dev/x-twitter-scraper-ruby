@@ -1,7 +1,27 @@
 module XTwitterScraper
   module Models
     type event_type =
-      :"tweet.new" | :"tweet.reply" | :"tweet.retweet" | :"tweet.quote"
+      :"tweet.new"
+      | :"tweet.reply"
+      | :"tweet.retweet"
+      | :"tweet.quote"
+      | :"tweet.media"
+      | :"tweet.link"
+      | :"tweet.poll"
+      | :"tweet.mention"
+      | :"tweet.hashtag"
+      | :"tweet.longform"
+      | :"profile.avatar.changed"
+      | :"profile.banner.changed"
+      | :"profile.name.changed"
+      | :"profile.username.changed"
+      | :"profile.bio.changed"
+      | :"profile.location.changed"
+      | :"profile.url.changed"
+      | :"profile.verified.changed"
+      | :"profile.protected.changed"
+      | :"profile.pinned_tweet.changed"
+      | :"profile.unavailable.changed"
 
     module EventType
       extend XTwitterScraper::Internal::Type::Enum
@@ -10,6 +30,23 @@ module XTwitterScraper
       TWEET_REPLY: :"tweet.reply"
       TWEET_RETWEET: :"tweet.retweet"
       TWEET_QUOTE: :"tweet.quote"
+      TWEET_MEDIA: :"tweet.media"
+      TWEET_LINK: :"tweet.link"
+      TWEET_POLL: :"tweet.poll"
+      TWEET_MENTION: :"tweet.mention"
+      TWEET_HASHTAG: :"tweet.hashtag"
+      TWEET_LONGFORM: :"tweet.longform"
+      PROFILE_AVATAR_CHANGED: :"profile.avatar.changed"
+      PROFILE_BANNER_CHANGED: :"profile.banner.changed"
+      PROFILE_NAME_CHANGED: :"profile.name.changed"
+      PROFILE_USERNAME_CHANGED: :"profile.username.changed"
+      PROFILE_BIO_CHANGED: :"profile.bio.changed"
+      PROFILE_LOCATION_CHANGED: :"profile.location.changed"
+      PROFILE_URL_CHANGED: :"profile.url.changed"
+      PROFILE_VERIFIED_CHANGED: :"profile.verified.changed"
+      PROFILE_PROTECTED_CHANGED: :"profile.protected.changed"
+      PROFILE_PINNED_TWEET_CHANGED: :"profile.pinned_tweet.changed"
+      PROFILE_UNAVAILABLE_CHANGED: :"profile.unavailable.changed"
 
       def self?.values: -> ::Array[XTwitterScraper::Models::event_type]
     end

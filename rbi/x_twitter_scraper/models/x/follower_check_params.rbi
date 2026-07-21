@@ -15,11 +15,11 @@ module XTwitterScraper
             )
           end
 
-        # Username to check (without @)
+        # Source username, @username, or X or Twitter profile URL
         sig { returns(String) }
         attr_accessor :source
 
-        # Target username (without @)
+        # Target username, @username, or X or Twitter profile URL
         sig { returns(String) }
         attr_accessor :target
 
@@ -31,9 +31,9 @@ module XTwitterScraper
           ).returns(T.attached_class)
         end
         def self.new(
-          # Username to check (without @)
+          # Source username, @username, or X or Twitter profile URL
           source:,
-          # Target username (without @)
+          # Target username, @username, or X or Twitter profile URL
           target:,
           request_options: {}
         )

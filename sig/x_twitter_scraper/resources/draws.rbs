@@ -7,14 +7,14 @@ module XTwitterScraper
       ) -> XTwitterScraper::Models::DrawRetrieveResponse
 
       def list: (
-        ?after: String,
+        ?cursor: String,
         ?limit: Integer,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::DrawListResponse
 
       def export: (
         String id,
-        ?format_: XTwitterScraper::Models::DrawExportParams::format_,
+        format_: XTwitterScraper::Models::DrawExportParams::format_,
         ?type: XTwitterScraper::Models::DrawExportParams::type_,
         ?request_options: XTwitterScraper::request_opts
       ) -> StringIO

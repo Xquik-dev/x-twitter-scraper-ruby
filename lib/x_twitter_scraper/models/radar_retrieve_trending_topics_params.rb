@@ -20,7 +20,7 @@ module XTwitterScraper
       optional :category, enum: -> { XTwitterScraper::RadarRetrieveTrendingTopicsParams::Category }
 
       # @!attribute hours
-      #   Lookback window in hours (1-168, default 24).
+      #   Lookback window in hours (1-72, default 6).
       #
       #   @return [Integer, nil]
       optional :hours, Integer
@@ -32,7 +32,7 @@ module XTwitterScraper
       optional :limit, Integer
 
       # @!attribute region
-      #   Region filter (us, global, etc.)
+      #   Region filter. Use `global` or a region code such as `US`, `GB`, `TR`, or `ES`.
       #
       #   @return [String, nil]
       optional :region, String
@@ -52,11 +52,11 @@ module XTwitterScraper
       #
       #   @param category [Symbol, XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::Category] Filter by category.
       #
-      #   @param hours [Integer] Lookback window in hours (1-168, default 24).
+      #   @param hours [Integer] Lookback window in hours (1-72, default 6).
       #
       #   @param limit [Integer] Number of items to return (1-100, default 50).
       #
-      #   @param region [String] Region filter (us, global, etc.)
+      #   @param region [String] Region filter. Use `global` or a region code such as `US`, `GB`, `TR`, or `ES`.
       #
       #   @param source [Symbol, XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::Source] Source filter. One of: github, google_trends, hacker_news, polymarket, reddit, t
       #

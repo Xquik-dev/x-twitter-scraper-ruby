@@ -24,8 +24,7 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
         health: XTwitterScraper::Models::X::AccountCreateResponse::Health,
         status: String,
         x_user_id: String,
-        x_username: String,
-        login_country: String | nil
+        x_username: String
       }
     end
   end
@@ -48,7 +47,6 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
         x_user_id: String,
         x_username: String,
         cookies_obtained_at: Time | nil,
-        proxy_country: String | nil,
         updated_at: Time | nil
       }
     end
@@ -118,8 +116,7 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
         health: XTwitterScraper::Models::X::AccountReauthResponse::Health,
         status: String,
         x_user_id: String,
-        x_username: String,
-        login_country: String | nil
+        x_username: String
       }
     end
   end

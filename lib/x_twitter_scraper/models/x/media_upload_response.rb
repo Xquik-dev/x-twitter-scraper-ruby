@@ -10,13 +10,22 @@ module XTwitterScraper
         #   @return [String]
         required :media_id, String, api_name: :mediaId
 
+        # @!attribute media_url
+        #   Public media URL for tweet `media` arrays.
+        #
+        #   @return [String]
+        required :media_url, String, api_name: :mediaUrl
+
         # @!attribute success
         #
         #   @return [Boolean, true]
         required :success, const: true
 
-        # @!method initialize(media_id:, success: true)
+        # @!method initialize(media_id:, media_url:, success: true)
         #   @param media_id [String]
+        #
+        #   @param media_url [String] Public media URL for tweet `media` arrays.
+        #
         #   @param success [Boolean, true]
       end
     end

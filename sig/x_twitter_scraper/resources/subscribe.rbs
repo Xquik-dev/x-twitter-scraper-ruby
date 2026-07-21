@@ -2,6 +2,7 @@ module XTwitterScraper
   module Resources
     class Subscribe
       def create: (
+        ?tier: XTwitterScraper::Models::SubscribeCreateParams::tier,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::SubscribeCreateResponse
 

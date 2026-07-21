@@ -8,6 +8,7 @@ module XTwitterScraper
           T.any(XTwitterScraper::DrawDetail, XTwitterScraper::Internal::AnyHash)
         end
 
+      # Draw public ID.
       sig { returns(String) }
       attr_accessor :id
 
@@ -73,6 +74,7 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
+        # Draw public ID.
         id:,
         created_at:,
         status:,

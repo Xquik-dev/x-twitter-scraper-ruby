@@ -6,7 +6,7 @@ class XTwitterScraper::Test::Resources::DrawsTest < XTwitterScraper::Test::Resou
   def test_retrieve
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.draws.retrieve("id")
+    response = @x_twitter_scraper.draws.retrieve("f4bd00a2-7b4e-4e59-8e1b-72e2c9f12345")
 
     assert_pattern do
       response => XTwitterScraper::Models::DrawRetrieveResponse
@@ -38,10 +38,10 @@ class XTwitterScraper::Test::Resources::DrawsTest < XTwitterScraper::Test::Resou
     end
   end
 
-  def test_export
+  def test_export_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.draws.export("id")
+    response = @x_twitter_scraper.draws.export("f4bd00a2-7b4e-4e59-8e1b-72e2c9f12345", format_: :csv)
 
     assert_pattern do
       response => StringIO

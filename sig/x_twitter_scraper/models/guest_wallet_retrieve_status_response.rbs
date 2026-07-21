@@ -1,0 +1,163 @@
+module XTwitterScraper
+  module Models
+    type guest_wallet_retrieve_status_response =
+      {
+        balance: String,
+        latest_purchase: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::LatestPurchase?,
+        poll_after_seconds: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::poll_after_seconds?,
+        scope: :paid_reads,
+        status: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::status,
+        top_up: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::TopUp?,
+        usable: bool,
+        wallet_id: String
+      }
+
+    class GuestWalletRetrieveStatusResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor balance: String
+
+      attr_accessor latest_purchase: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::LatestPurchase?
+
+      attr_accessor poll_after_seconds: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::poll_after_seconds?
+
+      attr_accessor scope: :paid_reads
+
+      attr_accessor status: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::status
+
+      attr_accessor top_up: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::TopUp?
+
+      attr_accessor usable: bool
+
+      attr_accessor wallet_id: String
+
+      def initialize: (
+        balance: String,
+        latest_purchase: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::LatestPurchase?,
+        poll_after_seconds: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::poll_after_seconds?,
+        status: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::status,
+        top_up: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::TopUp?,
+        usable: bool,
+        wallet_id: String,
+        ?scope: :paid_reads
+      ) -> void
+
+      def to_hash: -> {
+        balance: String,
+        latest_purchase: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::LatestPurchase?,
+        poll_after_seconds: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::poll_after_seconds?,
+        scope: :paid_reads,
+        status: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::status,
+        top_up: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::TopUp?,
+        usable: bool,
+        wallet_id: String
+      }
+
+      type latest_purchase =
+        {
+          amount: XTwitterScraper::GuestWalletAmount,
+          checkout_url: String?,
+          credits: String,
+          expires_at: Time,
+          purchase_id: String,
+          status: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::LatestPurchase::status
+        }
+
+      class LatestPurchase < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor amount: XTwitterScraper::GuestWalletAmount
+
+        attr_accessor checkout_url: String?
+
+        attr_accessor credits: String
+
+        attr_accessor expires_at: Time
+
+        attr_accessor purchase_id: String
+
+        attr_accessor status: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::LatestPurchase::status
+
+        def initialize: (
+          amount: XTwitterScraper::GuestWalletAmount,
+          checkout_url: String?,
+          credits: String,
+          expires_at: Time,
+          purchase_id: String,
+          status: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::LatestPurchase::status
+        ) -> void
+
+        def to_hash: -> {
+          amount: XTwitterScraper::GuestWalletAmount,
+          checkout_url: String?,
+          credits: String,
+          expires_at: Time,
+          purchase_id: String,
+          status: XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::LatestPurchase::status
+        }
+
+        type status =
+          :creating
+          | :pending
+          | :paid
+          | :expired
+          | :failed
+          | :refunded
+          | :disputed
+
+        module Status
+          extend XTwitterScraper::Internal::Type::Enum
+
+          CREATING: :creating
+          PENDING: :pending
+          PAID: :paid
+          EXPIRED: :expired
+          FAILED: :failed
+          REFUNDED: :refunded
+          DISPUTED: :disputed
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::LatestPurchase::status]
+        end
+      end
+
+      type poll_after_seconds = 2
+
+      module PollAfterSeconds
+        extend XTwitterScraper::Internal::Type::Enum
+
+        POLL_AFTER_SECONDS_2: 2
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::poll_after_seconds]
+      end
+
+      type status = :active | :pending | :expired | :failed | :frozen | :closed
+
+      module Status
+        extend XTwitterScraper::Internal::Type::Enum
+
+        ACTIVE: :active
+        PENDING: :pending
+        EXPIRED: :expired
+        FAILED: :failed
+        FROZEN: :frozen
+        CLOSED: :closed
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::GuestWalletRetrieveStatusResponse::status]
+      end
+
+      type top_up = { method_: :POST, path: :"/api/v1/guest-wallets/topups" }
+
+      class TopUp < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor method_: :POST
+
+        attr_accessor path: :"/api/v1/guest-wallets/topups"
+
+        def initialize: (
+          ?method_: :POST,
+          ?path: :"/api/v1/guest-wallets/topups"
+        ) -> void
+
+        def to_hash: -> {
+          method_: :POST,
+          path: :"/api/v1/guest-wallets/topups"
+        }
+      end
+    end
+  end
+end

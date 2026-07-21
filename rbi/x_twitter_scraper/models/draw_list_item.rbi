@@ -11,6 +11,7 @@ module XTwitterScraper
           )
         end
 
+      # Draw public ID for detail responses.
       sig { returns(String) }
       attr_accessor :id
 
@@ -48,6 +49,7 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
+        # Draw public ID for detail responses.
         id:,
         created_at:,
         status:,

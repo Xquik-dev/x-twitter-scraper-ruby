@@ -23,6 +23,7 @@ module XTwitterScraper
                api_name: :eventTypes
 
       # @!attribute secret
+      #   Plaintext HMAC signing secret returned only at creation.
       #
       #   @return [String]
       required :secret, String
@@ -39,7 +40,7 @@ module XTwitterScraper
       #
       #   @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
       #
-      #   @param secret [String]
+      #   @param secret [String] Plaintext HMAC signing secret returned only at creation.
       #
       #   @param url [String]
     end

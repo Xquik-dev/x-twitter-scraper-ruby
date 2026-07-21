@@ -78,12 +78,50 @@ module XTwitterScraper
           sig { params(created_at: String).void }
           attr_writer :created_at
 
+          sig do
+            returns(
+              T.nilable(
+                XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator
+              )
+            )
+          end
+          attr_reader :creator
+
+          sig do
+            params(
+              creator:
+                XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator::OrHash
+            ).void
+          end
+          attr_writer :creator
+
           # About text for the community
           sig { returns(T.nilable(String)) }
           attr_reader :description
 
           sig { params(description: String).void }
           attr_writer :description
+
+          # Invitation policy
+          sig { returns(T.nilable(String)) }
+          attr_reader :invites_policy
+
+          sig { params(invites_policy: String).void }
+          attr_writer :invites_policy
+
+          # Whether the authenticated viewer is a member
+          sig { returns(T.nilable(T::Boolean)) }
+          attr_reader :is_member
+
+          sig { params(is_member: T::Boolean).void }
+          attr_writer :is_member
+
+          # Whether the community is marked sensitive
+          sig { returns(T.nilable(T::Boolean)) }
+          attr_reader :is_nsfw
+
+          sig { params(is_nsfw: T::Boolean).void }
+          attr_writer :is_nsfw
 
           # Join policy (open or restricted)
           sig { returns(T.nilable(String)) }
@@ -131,6 +169,13 @@ module XTwitterScraper
           end
           attr_writer :primary_topic
 
+          # Authenticated viewer's community role
+          sig { returns(T.nilable(String)) }
+          attr_reader :role
+
+          sig { params(role: String).void }
+          attr_writer :role
+
           # Community rules
           sig do
             returns(
@@ -159,13 +204,19 @@ module XTwitterScraper
               id: String,
               banner_url: String,
               created_at: String,
+              creator:
+                XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator::OrHash,
               description: String,
+              invites_policy: String,
+              is_member: T::Boolean,
+              is_nsfw: T::Boolean,
               join_policy: String,
               member_count: Integer,
               moderator_count: Integer,
               name: String,
               primary_topic:
                 XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic::OrHash,
+              role: String,
               rules:
                 T::Array[
                   XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule::OrHash
@@ -179,8 +230,15 @@ module XTwitterScraper
             banner_url: nil,
             # Community creation timestamp
             created_at: nil,
+            creator: nil,
             # About text for the community
             description: nil,
+            # Invitation policy
+            invites_policy: nil,
+            # Whether the authenticated viewer is a member
+            is_member: nil,
+            # Whether the community is marked sensitive
+            is_nsfw: nil,
             # Join policy (open or restricted)
             join_policy: nil,
             # Total member count
@@ -191,6 +249,8 @@ module XTwitterScraper
             name: nil,
             # Primary topic
             primary_topic: nil,
+            # Authenticated viewer's community role
+            role: nil,
             # Community rules
             rules: nil
           )
@@ -202,13 +262,19 @@ module XTwitterScraper
                 id: String,
                 banner_url: String,
                 created_at: String,
+                creator:
+                  XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator,
                 description: String,
+                invites_policy: String,
+                is_member: T::Boolean,
+                is_nsfw: T::Boolean,
                 join_policy: String,
                 member_count: Integer,
                 moderator_count: Integer,
                 name: String,
                 primary_topic:
                   XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
+                role: String,
                 rules:
                   T::Array[
                     XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule
@@ -217,6 +283,55 @@ module XTwitterScraper
             )
           end
           def to_hash
+          end
+
+          class Creator < XTwitterScraper::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator,
+                  XTwitterScraper::Internal::AnyHash
+                )
+              end
+
+            sig { returns(String) }
+            attr_accessor :id
+
+            sig { returns(String) }
+            attr_accessor :username
+
+            sig { returns(T::Boolean) }
+            attr_accessor :verified
+
+            sig { returns(T.nilable(String)) }
+            attr_reader :name
+
+            sig { params(name: String).void }
+            attr_writer :name
+
+            sig do
+              params(
+                id: String,
+                username: String,
+                verified: T::Boolean,
+                name: String
+              ).returns(T.attached_class)
+            end
+            def self.new(id:, username:, verified:, name: nil)
+            end
+
+            sig do
+              override.returns(
+                {
+                  id: String,
+                  username: String,
+                  verified: T::Boolean,
+                  name: String
+                }
+              )
+            end
+            def to_hash
+            end
           end
 
           class PrimaryTopic < XTwitterScraper::Internal::Type::BaseModel

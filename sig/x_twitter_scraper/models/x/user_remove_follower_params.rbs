@@ -1,0 +1,30 @@
+module XTwitterScraper
+  module Models
+    module X
+      type user_remove_follower_params =
+        { id: String, account: String }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class UserRemoveFollowerParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_accessor account: String
+
+        def initialize: (
+          id: String,
+          account: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          account: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

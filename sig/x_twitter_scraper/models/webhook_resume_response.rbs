@@ -1,0 +1,26 @@
+module XTwitterScraper
+  module Models
+    type webhook_resume_response =
+      { status_code: Integer, success: bool, webhook: XTwitterScraper::Webhook }
+
+    class WebhookResumeResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor status_code: Integer
+
+      attr_accessor success: bool
+
+      attr_accessor webhook: XTwitterScraper::Webhook
+
+      def initialize: (
+        status_code: Integer,
+        success: bool,
+        webhook: XTwitterScraper::Webhook
+      ) -> void
+
+      def to_hash: -> {
+        status_code: Integer,
+        success: bool,
+        webhook: XTwitterScraper::Webhook
+      }
+    end
+  end
+end

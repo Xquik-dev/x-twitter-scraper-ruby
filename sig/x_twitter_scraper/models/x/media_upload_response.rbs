@@ -1,16 +1,23 @@
 module XTwitterScraper
   module Models
     module X
-      type media_upload_response = { media_id: String, success: true }
+      type media_upload_response =
+        { media_id: String, media_url: String, success: true }
 
       class MediaUploadResponse < XTwitterScraper::Internal::Type::BaseModel
         attr_accessor media_id: String
 
+        attr_accessor media_url: String
+
         attr_accessor success: true
 
-        def initialize: (media_id: String, ?success: true) -> void
+        def initialize: (
+          media_id: String,
+          media_url: String,
+          ?success: true
+        ) -> void
 
-        def to_hash: -> { media_id: String, success: true }
+        def to_hash: -> { media_id: String, media_url: String, success: true }
       end
     end
   end

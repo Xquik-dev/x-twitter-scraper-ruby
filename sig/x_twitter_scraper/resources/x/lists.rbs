@@ -5,6 +5,7 @@ module XTwitterScraper
         def retrieve_followers: (
           String id,
           ?cursor: String,
+          ?page_size: Integer,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::PaginatedUsers
 
@@ -19,6 +20,7 @@ module XTwitterScraper
           String id,
           ?cursor: String,
           ?include_replies: bool,
+          ?page_size: Integer,
           ?since_time: String,
           ?until_time: String,
           ?request_options: XTwitterScraper::request_opts

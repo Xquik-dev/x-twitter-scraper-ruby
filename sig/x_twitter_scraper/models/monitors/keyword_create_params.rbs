@@ -1,0 +1,33 @@
+module XTwitterScraper
+  module Models
+    module Monitors
+      type keyword_create_params =
+        {
+          event_types: ::Array[XTwitterScraper::Models::event_type],
+          query: String
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class KeywordCreateParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor event_types: ::Array[XTwitterScraper::Models::event_type]
+
+        attr_accessor query: String
+
+        def initialize: (
+          event_types: ::Array[XTwitterScraper::Models::event_type],
+          query: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          event_types: ::Array[XTwitterScraper::Models::event_type],
+          query: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

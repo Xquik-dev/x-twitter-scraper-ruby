@@ -18,6 +18,8 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
         id: String,
         created_at: Time,
         event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
+        is_active: XTwitterScraper::Internal::Type::Boolean,
+        next_billing_at: Time,
         username: String,
         x_user_id: String
       }
@@ -39,6 +41,7 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
         created_at: Time,
         event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
         is_active: XTwitterScraper::Internal::Type::Boolean,
+        next_billing_at: Time,
         username: String,
         x_user_id: String
       }
@@ -60,6 +63,7 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
         created_at: Time,
         event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
         is_active: XTwitterScraper::Internal::Type::Boolean,
+        next_billing_at: Time,
         username: String,
         x_user_id: String
       }
