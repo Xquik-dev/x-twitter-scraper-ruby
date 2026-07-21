@@ -12,23 +12,13 @@ module XTwitterScraper
             )
           end
 
-        sig { returns(Integer) }
-        attr_accessor :followers
-
-        sig { returns(T::Boolean) }
-        attr_accessor :verified
-
         # Tweet author profile. The lookup route always includes follower count and
         # verification state. Other profile fields appear when available.
-        sig do
-          params(followers: Integer, verified: T::Boolean).returns(
-            T.attached_class
-          )
-        end
-        def self.new(followers:, verified:)
+        sig { returns(T.attached_class) }
+        def self.new
         end
 
-        sig { override.returns({ followers: Integer, verified: T::Boolean }) }
+        sig { override.returns({}) }
         def to_hash
         end
       end

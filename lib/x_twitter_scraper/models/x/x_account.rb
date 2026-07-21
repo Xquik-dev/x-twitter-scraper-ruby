@@ -15,10 +15,10 @@ module XTwitterScraper
         required :created_at, Time, api_name: :createdAt
 
         # @!attribute health
-        #   Derived login/cookie health. `healthy` = cookies valid. `needsReauth` = user
-        #   must submit fresh credentials. `locked` = X locked the account; unlock on x.com
+        #   Derived connection health. `healthy` = session active. `needsReauth` = user must
+        #   submit fresh credentials. `locked` = X locked the account; unlock on x.com
         #   first. `suspended` = X banned the account. `recovering` = past cooldown, will
-        #   auto-retry on next use. `temporaryIssue` = transient backend problem; retry
+        #   auto-retry on next use. `temporaryIssue` = temporary connection problem; retry
         #   shortly.
         #
         #   @return [Symbol, XTwitterScraper::Models::X::XAccount::Health]
@@ -59,7 +59,7 @@ module XTwitterScraper
         #
         #   @param created_at [Time]
         #
-        #   @param health [Symbol, XTwitterScraper::Models::X::XAccount::Health] Derived login/cookie health. `healthy` = cookies valid. `needsReauth` = user mus
+        #   @param health [Symbol, XTwitterScraper::Models::X::XAccount::Health] Derived connection health. `healthy` = session active. `needsReauth` = user must
         #
         #   @param status [String]
         #
@@ -71,10 +71,10 @@ module XTwitterScraper
         #
         #   @param cookies_obtained_at [Time]
 
-        # Derived login/cookie health. `healthy` = cookies valid. `needsReauth` = user
-        # must submit fresh credentials. `locked` = X locked the account; unlock on x.com
+        # Derived connection health. `healthy` = session active. `needsReauth` = user must
+        # submit fresh credentials. `locked` = X locked the account; unlock on x.com
         # first. `suspended` = X banned the account. `recovering` = past cooldown, will
-        # auto-retry on next use. `temporaryIssue` = transient backend problem; retry
+        # auto-retry on next use. `temporaryIssue` = temporary connection problem; retry
         # shortly.
         #
         # @see XTwitterScraper::Models::X::XAccount#health

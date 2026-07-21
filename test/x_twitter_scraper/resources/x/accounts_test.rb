@@ -8,9 +8,9 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
 
     response =
       @x_twitter_scraper.x.accounts.create(
-        email: "user@example.com",
-        password: "s3cur3Pa$$w0rd",
-        username: "elonmusk"
+        email: "account@example.invalid",
+        password: "<ACCOUNT_PASSWORD>",
+        username: "your_x_username"
       )
 
     assert_pattern do
@@ -103,7 +103,7 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
   def test_reauth_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.accounts.reauth("id", password: "password_value")
+    response = @x_twitter_scraper.x.accounts.reauth("id", password: "<ACCOUNT_PASSWORD>")
 
     assert_pattern do
       response => XTwitterScraper::Models::X::AccountReauthResponse
