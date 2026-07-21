@@ -20,7 +20,6 @@ module XTwitterScraper
       sig { returns(XTwitterScraper::Resources::X::Dm) }
       attr_reader :dm
 
-      # Media upload and download
       sig { returns(XTwitterScraper::Resources::X::Media) }
       attr_reader :media
 

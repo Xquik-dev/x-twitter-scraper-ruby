@@ -14,6 +14,11 @@ module XTwitterScraper
         #   @return [String]
         required :account, String
 
+        # @!attribute idempotency_key
+        #
+        #   @return [String]
+        required :idempotency_key, String
+
         # @!attribute description
         #   Bio description
         #
@@ -37,8 +42,10 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :url, String
 
-        # @!method initialize(account:, description: nil, location: nil, name: nil, url: nil, request_options: {})
+        # @!method initialize(account:, idempotency_key:, description: nil, location: nil, name: nil, url: nil, request_options: {})
         #   @param account [String] X account (@username or ID) to update profile
+        #
+        #   @param idempotency_key [String]
         #
         #   @param description [String] Bio description
         #

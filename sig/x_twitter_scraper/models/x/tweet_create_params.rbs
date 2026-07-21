@@ -4,7 +4,7 @@ module XTwitterScraper
       type tweet_create_params =
         {
           account: String,
-          attachment_url: String,
+          idempotency_key: String,
           community_id: String,
           is_note_tweet: bool,
           media: ::Array[String],
@@ -19,9 +19,7 @@ module XTwitterScraper
 
         attr_accessor account: String
 
-        attr_reader attachment_url: String?
-
-        def attachment_url=: (String) -> String
+        attr_accessor idempotency_key: String
 
         attr_reader community_id: String?
 
@@ -45,7 +43,7 @@ module XTwitterScraper
 
         def initialize: (
           account: String,
-          ?attachment_url: String,
+          idempotency_key: String,
           ?community_id: String,
           ?is_note_tweet: bool,
           ?media: ::Array[String],
@@ -56,7 +54,7 @@ module XTwitterScraper
 
         def to_hash: -> {
           account: String,
-          attachment_url: String,
+          idempotency_key: String,
           community_id: String,
           is_note_tweet: bool,
           media: ::Array[String],

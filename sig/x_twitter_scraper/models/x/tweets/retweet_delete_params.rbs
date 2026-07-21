@@ -3,7 +3,7 @@ module XTwitterScraper
     module X
       module Tweets
         type retweet_delete_params =
-          { id: String, account: String }
+          { id: String, account: String, idempotency_key: String }
           & XTwitterScraper::Internal::Type::request_parameters
 
         class RetweetDeleteParams < XTwitterScraper::Internal::Type::BaseModel
@@ -14,15 +14,19 @@ module XTwitterScraper
 
           attr_accessor account: String
 
+          attr_accessor idempotency_key: String
+
           def initialize: (
             id: String,
             account: String,
+            idempotency_key: String,
             ?request_options: XTwitterScraper::request_opts
           ) -> void
 
           def to_hash: -> {
             id: String,
             account: String,
+            idempotency_key: String,
             request_options: XTwitterScraper::RequestOptions
           }
         end

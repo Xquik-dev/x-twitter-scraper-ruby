@@ -6,12 +6,14 @@ module XTwitterScraper
           def create: (
             String id,
             account: String,
+            idempotency_key: String,
             ?request_options: XTwitterScraper::request_opts
           ) -> XTwitterScraper::Models::X::Tweets::RetweetCreateResponse
 
           def delete: (
             String id,
             account: String,
+            idempotency_key: String,
             ?request_options: XTwitterScraper::request_opts
           ) -> XTwitterScraper::Models::X::Tweets::RetweetDeleteResponse
 

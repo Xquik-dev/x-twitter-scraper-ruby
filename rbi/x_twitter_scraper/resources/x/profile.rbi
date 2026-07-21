@@ -9,6 +9,7 @@ module XTwitterScraper
         sig do
           params(
             account: String,
+            idempotency_key: String,
             description: String,
             location: String,
             name: String,
@@ -17,14 +18,20 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::ProfileUpdateResponse)
         end
         def update(
-          # X account (@username or ID) to update profile
+          # Body param: X account (@username or ID) to update profile
           account:,
-          # Bio description
+          # Header param: Generate one unique value for each intended write. Reuse it only
+          # when retrying the exact same account, action, target, and payload. A reused key
+          # returns the original action. Reusing it with different input returns 409. Replay
+          # protection remains active for at least 90 days.
+          idempotency_key:,
+          # Body param: Bio description
           description: nil,
+          # Body param
           location: nil,
-          # Display name
+          # Body param: Display name
           name: nil,
-          # Website URL
+          # Body param: Website URL
           url: nil,
           request_options: {}
         )
@@ -35,14 +42,20 @@ module XTwitterScraper
           params(
             account: String,
             url: String,
+            idempotency_key: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::ProfileUpdateAvatarResponse)
         end
         def update_avatar(
-          # X account (@username or ID) receiving avatar from URL
+          # Body param: X account (@username or ID) receiving avatar from URL
           account:,
-          # HTTPS URL to the avatar image to download
+          # Body param: HTTPS URL to the avatar image to download
           url:,
+          # Header param: Generate one unique value for each intended write. Reuse it only
+          # when retrying the exact same account, action, target, and payload. A reused key
+          # returns the original action. Reusing it with different input returns 409. Replay
+          # protection remains active for at least 90 days.
+          idempotency_key:,
           request_options: {}
         )
         end
@@ -52,14 +65,20 @@ module XTwitterScraper
           params(
             account: String,
             url: String,
+            idempotency_key: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::ProfileUpdateBannerResponse)
         end
         def update_banner(
-          # X account (@username or ID) receiving banner from URL
+          # Body param: X account (@username or ID) receiving banner from URL
           account:,
-          # HTTPS URL to the banner image to download
+          # Body param: HTTPS URL to the banner image to download
           url:,
+          # Header param: Generate one unique value for each intended write. Reuse it only
+          # when retrying the exact same account, action, target, and payload. A reused key
+          # returns the original action. Reusing it with different input returns 409. Replay
+          # protection remains active for at least 90 days.
+          idempotency_key:,
           request_options: {}
         )
         end

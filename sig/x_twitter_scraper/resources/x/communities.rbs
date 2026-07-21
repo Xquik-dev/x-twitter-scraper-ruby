@@ -9,6 +9,7 @@ module XTwitterScraper
         def create: (
           account: String,
           name: String,
+          idempotency_key: String,
           ?description: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::CommunityCreateResponse
@@ -17,6 +18,7 @@ module XTwitterScraper
           String id,
           account: String,
           community_name: String,
+          idempotency_key: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::CommunityDeleteResponse
 

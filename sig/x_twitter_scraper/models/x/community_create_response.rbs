@@ -2,28 +2,549 @@ module XTwitterScraper
   module Models
     module X
       type community_create_response =
-        { community_id: String, success: true, community_name: String }
+        {
+          id: String,
+          account: XTwitterScraper::Models::X::CommunityCreateResponse::Account?,
+          action: XTwitterScraper::Models::X::CommunityCreateResponse::action,
+          billing: XTwitterScraper::Models::X::CommunityCreateResponse::Billing,
+          charged: bool,
+          charged_credits: String,
+          next_action: XTwitterScraper::Models::X::CommunityCreateResponse::NextAction?,
+          object: :x_write_action,
+          poll_after_ms: Integer?,
+          request: XTwitterScraper::Models::X::CommunityCreateResponse::Request,
+          result: XTwitterScraper::Models::X::CommunityCreateResponse::Result?,
+          retryable: bool,
+          safe_to_retry: bool,
+          send_dispatched: bool,
+          status: XTwitterScraper::Models::X::CommunityCreateResponse::status,
+          status_url: String,
+          success: bool,
+          target: XTwitterScraper::Models::X::CommunityCreateResponse::Target?,
+          target_id: String?,
+          terminal: bool,
+          write_action_id: String,
+          community_id: String,
+          community_name: String,
+          completed_at: Time,
+          confirmation_attempts: Integer,
+          confirmation_checked_at: Time,
+          confirmed_at: Time,
+          created_at: Time,
+          details: ::Hash[Symbol, top],
+          error: String,
+          expires_at: Time,
+          idempotent: bool,
+          media: ::Hash[Symbol, top],
+          media_id: String,
+          media_url: String,
+          message: String,
+          message_id: String,
+          request_hash: String,
+          request_id: String,
+          result_id: String,
+          send_dispatched_at: Time,
+          tweet_id: String,
+          updated_at: Time
+        }
 
       class CommunityCreateResponse < XTwitterScraper::Internal::Type::BaseModel
-        attr_accessor community_id: String
+        attr_accessor id: String
 
-        attr_accessor success: true
+        attr_accessor account: XTwitterScraper::Models::X::CommunityCreateResponse::Account?
+
+        attr_accessor action: XTwitterScraper::Models::X::CommunityCreateResponse::action
+
+        attr_accessor billing: XTwitterScraper::Models::X::CommunityCreateResponse::Billing
+
+        attr_accessor charged: bool
+
+        attr_accessor charged_credits: String
+
+        attr_accessor next_action: XTwitterScraper::Models::X::CommunityCreateResponse::NextAction?
+
+        attr_accessor object: :x_write_action
+
+        attr_accessor poll_after_ms: Integer?
+
+        attr_accessor request: XTwitterScraper::Models::X::CommunityCreateResponse::Request
+
+        attr_accessor result: XTwitterScraper::Models::X::CommunityCreateResponse::Result?
+
+        attr_accessor retryable: bool
+
+        attr_accessor safe_to_retry: bool
+
+        attr_accessor send_dispatched: bool
+
+        attr_accessor status: XTwitterScraper::Models::X::CommunityCreateResponse::status
+
+        attr_accessor status_url: String
+
+        attr_accessor success: bool
+
+        attr_accessor target: XTwitterScraper::Models::X::CommunityCreateResponse::Target?
+
+        attr_accessor target_id: String?
+
+        attr_accessor terminal: bool
+
+        attr_accessor write_action_id: String
+
+        attr_reader community_id: String?
+
+        def community_id=: (String) -> String
 
         attr_reader community_name: String?
 
         def community_name=: (String) -> String
 
+        attr_reader completed_at: Time?
+
+        def completed_at=: (Time) -> Time
+
+        attr_reader confirmation_attempts: Integer?
+
+        def confirmation_attempts=: (Integer) -> Integer
+
+        attr_reader confirmation_checked_at: Time?
+
+        def confirmation_checked_at=: (Time) -> Time
+
+        attr_reader confirmed_at: Time?
+
+        def confirmed_at=: (Time) -> Time
+
+        attr_reader created_at: Time?
+
+        def created_at=: (Time) -> Time
+
+        attr_reader details: ::Hash[Symbol, top]?
+
+        def details=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader error: String?
+
+        def error=: (String) -> String
+
+        attr_reader expires_at: Time?
+
+        def expires_at=: (Time) -> Time
+
+        attr_reader idempotent: bool?
+
+        def idempotent=: (bool) -> bool
+
+        attr_reader media: ::Hash[Symbol, top]?
+
+        def media=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader media_id: String?
+
+        def media_id=: (String) -> String
+
+        attr_reader media_url: String?
+
+        def media_url=: (String) -> String
+
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        attr_reader message_id: String?
+
+        def message_id=: (String) -> String
+
+        attr_reader request_hash: String?
+
+        def request_hash=: (String) -> String
+
+        attr_reader request_id: String?
+
+        def request_id=: (String) -> String
+
+        attr_reader result_id: String?
+
+        def result_id=: (String) -> String
+
+        attr_reader send_dispatched_at: Time?
+
+        def send_dispatched_at=: (Time) -> Time
+
+        attr_reader tweet_id: String?
+
+        def tweet_id=: (String) -> String
+
+        attr_reader updated_at: Time?
+
+        def updated_at=: (Time) -> Time
+
         def initialize: (
-          community_id: String,
+          id: String,
+          account: XTwitterScraper::Models::X::CommunityCreateResponse::Account?,
+          action: XTwitterScraper::Models::X::CommunityCreateResponse::action,
+          billing: XTwitterScraper::Models::X::CommunityCreateResponse::Billing,
+          charged: bool,
+          charged_credits: String,
+          next_action: XTwitterScraper::Models::X::CommunityCreateResponse::NextAction?,
+          poll_after_ms: Integer?,
+          request: XTwitterScraper::Models::X::CommunityCreateResponse::Request,
+          result: XTwitterScraper::Models::X::CommunityCreateResponse::Result?,
+          retryable: bool,
+          safe_to_retry: bool,
+          send_dispatched: bool,
+          status: XTwitterScraper::Models::X::CommunityCreateResponse::status,
+          status_url: String,
+          success: bool,
+          target: XTwitterScraper::Models::X::CommunityCreateResponse::Target?,
+          target_id: String?,
+          terminal: bool,
+          write_action_id: String,
+          ?community_id: String,
           ?community_name: String,
-          ?success: true
+          ?completed_at: Time,
+          ?confirmation_attempts: Integer,
+          ?confirmation_checked_at: Time,
+          ?confirmed_at: Time,
+          ?created_at: Time,
+          ?details: ::Hash[Symbol, top],
+          ?error: String,
+          ?expires_at: Time,
+          ?idempotent: bool,
+          ?media: ::Hash[Symbol, top],
+          ?media_id: String,
+          ?media_url: String,
+          ?message: String,
+          ?message_id: String,
+          ?request_hash: String,
+          ?request_id: String,
+          ?result_id: String,
+          ?send_dispatched_at: Time,
+          ?tweet_id: String,
+          ?updated_at: Time,
+          ?object: :x_write_action
         ) -> void
 
         def to_hash: -> {
+          id: String,
+          account: XTwitterScraper::Models::X::CommunityCreateResponse::Account?,
+          action: XTwitterScraper::Models::X::CommunityCreateResponse::action,
+          billing: XTwitterScraper::Models::X::CommunityCreateResponse::Billing,
+          charged: bool,
+          charged_credits: String,
+          next_action: XTwitterScraper::Models::X::CommunityCreateResponse::NextAction?,
+          object: :x_write_action,
+          poll_after_ms: Integer?,
+          request: XTwitterScraper::Models::X::CommunityCreateResponse::Request,
+          result: XTwitterScraper::Models::X::CommunityCreateResponse::Result?,
+          retryable: bool,
+          safe_to_retry: bool,
+          send_dispatched: bool,
+          status: XTwitterScraper::Models::X::CommunityCreateResponse::status,
+          status_url: String,
+          success: bool,
+          target: XTwitterScraper::Models::X::CommunityCreateResponse::Target?,
+          target_id: String?,
+          terminal: bool,
+          write_action_id: String,
           community_id: String,
-          success: true,
-          community_name: String
+          community_name: String,
+          completed_at: Time,
+          confirmation_attempts: Integer,
+          confirmation_checked_at: Time,
+          confirmed_at: Time,
+          created_at: Time,
+          details: ::Hash[Symbol, top],
+          error: String,
+          expires_at: Time,
+          idempotent: bool,
+          media: ::Hash[Symbol, top],
+          media_id: String,
+          media_url: String,
+          message: String,
+          message_id: String,
+          request_hash: String,
+          request_id: String,
+          result_id: String,
+          send_dispatched_at: Time,
+          tweet_id: String,
+          updated_at: Time
         }
+
+        type account = { id: String, username: String }
+
+        class Account < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor username: String
+
+          def initialize: (id: String, username: String) -> void
+
+          def to_hash: -> { id: String, username: String }
+        end
+
+        type action =
+          :create_tweet
+          | :delete_tweet
+          | :like
+          | :unlike
+          | :retweet
+          | :unretweet
+          | :follow
+          | :unfollow
+          | :remove_follower
+          | :send_dm
+          | :upload_media
+          | :update_profile
+          | :update_avatar
+          | :update_banner
+          | :create_community
+          | :delete_community
+          | :join_community
+          | :leave_community
+
+        module Action
+          extend XTwitterScraper::Internal::Type::Enum
+
+          CREATE_TWEET: :create_tweet
+          DELETE_TWEET: :delete_tweet
+          LIKE: :like
+          UNLIKE: :unlike
+          RETWEET: :retweet
+          UNRETWEET: :unretweet
+          FOLLOW: :follow
+          UNFOLLOW: :unfollow
+          REMOVE_FOLLOWER: :remove_follower
+          SEND_DM: :send_dm
+          UPLOAD_MEDIA: :upload_media
+          UPDATE_PROFILE: :update_profile
+          UPDATE_AVATAR: :update_avatar
+          UPDATE_BANNER: :update_banner
+          CREATE_COMMUNITY: :create_community
+          DELETE_COMMUNITY: :delete_community
+          JOIN_COMMUNITY: :join_community
+          LEAVE_COMMUNITY: :leave_community
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::CommunityCreateResponse::action]
+        end
+
+        type billing =
+          {
+            charged: bool,
+            charged_credits: String,
+            planned_credits: String,
+            status: XTwitterScraper::Models::X::CommunityCreateResponse::Billing::status
+          }
+
+        class Billing < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor charged: bool
+
+          attr_accessor charged_credits: String
+
+          attr_accessor planned_credits: String
+
+          attr_accessor status: XTwitterScraper::Models::X::CommunityCreateResponse::Billing::status
+
+          def initialize: (
+            charged: bool,
+            charged_credits: String,
+            planned_credits: String,
+            status: XTwitterScraper::Models::X::CommunityCreateResponse::Billing::status
+          ) -> void
+
+          def to_hash: -> {
+            charged: bool,
+            charged_credits: String,
+            planned_credits: String,
+            status: XTwitterScraper::Models::X::CommunityCreateResponse::Billing::status
+          }
+
+          type status =
+            :not_charged | :pending | :charged | :charge_failed | :refunded
+
+          module Status
+            extend XTwitterScraper::Internal::Type::Enum
+
+            NOT_CHARGED: :not_charged
+            PENDING: :pending
+            CHARGED: :charged
+            CHARGE_FAILED: :charge_failed
+            REFUNDED: :refunded
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::CommunityCreateResponse::Billing::status]
+          end
+        end
+
+        type next_action =
+          {
+            type: XTwitterScraper::Models::X::CommunityCreateResponse::NextAction::type_,
+            after_ms: Integer,
+            requires_new_idempotency_key: bool,
+            url: String
+          }
+
+        class NextAction < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor type: XTwitterScraper::Models::X::CommunityCreateResponse::NextAction::type_
+
+          attr_reader after_ms: Integer?
+
+          def after_ms=: (Integer) -> Integer
+
+          attr_reader requires_new_idempotency_key: bool?
+
+          def requires_new_idempotency_key=: (bool) -> bool
+
+          attr_reader url: String?
+
+          def url=: (String) -> String
+
+          def initialize: (
+            type: XTwitterScraper::Models::X::CommunityCreateResponse::NextAction::type_,
+            ?after_ms: Integer,
+            ?requires_new_idempotency_key: bool,
+            ?url: String
+          ) -> void
+
+          def to_hash: -> {
+            type: XTwitterScraper::Models::X::CommunityCreateResponse::NextAction::type_,
+            after_ms: Integer,
+            requires_new_idempotency_key: bool,
+            url: String
+          }
+
+          type type_ = :poll | :retry | :verify_result | :fix_request
+
+          module Type
+            extend XTwitterScraper::Internal::Type::Enum
+
+            POLL: :poll
+            RETRY: :retry
+            VERIFY_RESULT: :verify_result
+            FIX_REQUEST: :fix_request
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::CommunityCreateResponse::NextAction::type_]
+          end
+        end
+
+        type request = { hash_: String?, payload: ::Hash[Symbol, top]? }
+
+        class Request < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor hash_: String?
+
+          attr_accessor payload: ::Hash[Symbol, top]?
+
+          def initialize: (
+            hash_: String?,
+            payload: ::Hash[Symbol, top]?
+          ) -> void
+
+          def to_hash: -> { hash_: String?, payload: ::Hash[Symbol, top]? }
+        end
+
+        type result =
+          {
+            id: String,
+            state: String,
+            type: XTwitterScraper::Models::X::CommunityCreateResponse::Result::type_
+          }
+
+        class Result < XTwitterScraper::Internal::Type::BaseModel
+          attr_reader id: String?
+
+          def id=: (String) -> String
+
+          attr_reader state: String?
+
+          def state=: (String) -> String
+
+          attr_reader type: XTwitterScraper::Models::X::CommunityCreateResponse::Result::type_?
+
+          def type=: (
+            XTwitterScraper::Models::X::CommunityCreateResponse::Result::type_
+          ) -> XTwitterScraper::Models::X::CommunityCreateResponse::Result::type_
+
+          def initialize: (
+            ?id: String,
+            ?state: String,
+            ?type: XTwitterScraper::Models::X::CommunityCreateResponse::Result::type_
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            state: String,
+            type: XTwitterScraper::Models::X::CommunityCreateResponse::Result::type_
+          }
+
+          type type_ =
+            :tweet | :direct_message | :media | :community | :state_change
+
+          module Type
+            extend XTwitterScraper::Internal::Type::Enum
+
+            TWEET: :tweet
+            DIRECT_MESSAGE: :direct_message
+            MEDIA: :media
+            COMMUNITY: :community
+            STATE_CHANGE: :state_change
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::CommunityCreateResponse::Result::type_]
+          end
+        end
+
+        type status =
+          :accepted
+          | :dispatching
+          | :pending_confirmation
+          | :success
+          | :failed
+          | :expired
+
+        module Status
+          extend XTwitterScraper::Internal::Type::Enum
+
+          ACCEPTED: :accepted
+          DISPATCHING: :dispatching
+          PENDING_CONFIRMATION: :pending_confirmation
+          SUCCESS: :success
+          FAILED: :failed
+          EXPIRED: :expired
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::CommunityCreateResponse::status]
+        end
+
+        type target =
+          {
+            id: String,
+            type: XTwitterScraper::Models::X::CommunityCreateResponse::Target::type_
+          }
+
+        class Target < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor type: XTwitterScraper::Models::X::CommunityCreateResponse::Target::type_
+
+          def initialize: (
+            id: String,
+            type: XTwitterScraper::Models::X::CommunityCreateResponse::Target::type_
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            type: XTwitterScraper::Models::X::CommunityCreateResponse::Target::type_
+          }
+
+          type type_ = :tweet | :user | :community
+
+          module Type
+            extend XTwitterScraper::Internal::Type::Enum
+
+            TWEET: :tweet
+            USER: :user
+            COMMUNITY: :community
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::CommunityCreateResponse::Target::type_]
+          end
+        end
       end
     end
   end

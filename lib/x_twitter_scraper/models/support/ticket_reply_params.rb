@@ -18,9 +18,15 @@ module XTwitterScraper
         #   @return [String]
         required :body, String
 
-        # @!method initialize(id:, body:, request_options: {})
+        # @!attribute idempotency_key
+        #
+        #   @return [String, nil]
+        optional :idempotency_key, String
+
+        # @!method initialize(id:, body:, idempotency_key: nil, request_options: {})
         #   @param id [String]
         #   @param body [String]
+        #   @param idempotency_key [String]
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end
     end

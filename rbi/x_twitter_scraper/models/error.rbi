@@ -18,6 +18,34 @@ module XTwitterScraper
       end
       attr_accessor :error
 
+      # Human-readable error guidance.
+      sig { returns(T.nilable(String)) }
+      attr_reader :message
+
+      sig { params(message: String).void }
+      attr_writer :message
+
+      # Machine-readable reason for a login cooldown.
+      sig { returns(T.nilable(String)) }
+      attr_reader :reason
+
+      sig { params(reason: String).void }
+      attr_writer :reason
+
+      # Required wait in seconds.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :retry_after
+
+      sig { params(retry_after: Integer).void }
+      attr_writer :retry_after
+
+      # Required wait in milliseconds.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :retry_after_ms
+
+      sig { params(retry_after_ms: Integer).void }
+      attr_writer :retry_after_ms
+
       # Error response. Default v1 returns a legacy string error code. Send
       # `xquik-api-contract: 2026-04-29` to receive the structured best-practice error
       # object.
@@ -27,10 +55,24 @@ module XTwitterScraper
             T.any(
               XTwitterScraper::Error::Error::LegacyErrorCode::OrSymbol,
               XTwitterScraper::Error::Error::StructuredError::OrHash
-            )
+            ),
+          message: String,
+          reason: String,
+          retry_after: Integer,
+          retry_after_ms: Integer
         ).returns(T.attached_class)
       end
-      def self.new(error:)
+      def self.new(
+        error:,
+        # Human-readable error guidance.
+        message: nil,
+        # Machine-readable reason for a login cooldown.
+        reason: nil,
+        # Required wait in seconds.
+        retry_after: nil,
+        # Required wait in milliseconds.
+        retry_after_ms: nil
+      )
       end
 
       sig do
@@ -40,7 +82,11 @@ module XTwitterScraper
               T.any(
                 XTwitterScraper::Error::Error::LegacyErrorCode::OrSymbol,
                 XTwitterScraper::Error::Error::StructuredError
-              )
+              ),
+            message: String,
+            reason: String,
+            retry_after: Integer,
+            retry_after_ms: Integer
           }
         )
       end
@@ -395,11 +441,6 @@ module XTwitterScraper
           X_WRITE_FAILED =
             T.let(
               :x_write_failed,
-              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
-            )
-          X_WRITE_UNCONFIRMED =
-            T.let(
-              :x_write_unconfirmed,
               XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
             )
 
@@ -806,11 +847,6 @@ module XTwitterScraper
             X_WRITE_FAILED =
               T.let(
                 :x_write_failed,
-                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
-              )
-            X_WRITE_UNCONFIRMED =
-              T.let(
-                :x_write_unconfirmed,
                 XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
               )
 

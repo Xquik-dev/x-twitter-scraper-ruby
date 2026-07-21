@@ -11,14 +11,20 @@ module XTwitterScraper
             params(
               id: String,
               account: String,
+              idempotency_key: String,
               request_options: XTwitterScraper::RequestOptions::OrHash
             ).returns(XTwitterScraper::Models::X::Users::FollowCreateResponse)
           end
           def create(
-            # User ID to follow
+            # Path param: User ID to follow
             id,
-            # X account identifier (@username or account ID)
+            # Body param: X account identifier (@username or account ID)
             account:,
+            # Header param: Generate one unique value for each intended write. Reuse it only
+            # when retrying the exact same account, action, target, and payload. A reused key
+            # returns the original action. Reusing it with different input returns 409. Replay
+            # protection remains active for at least 90 days.
+            idempotency_key:,
             request_options: {}
           )
           end
@@ -28,16 +34,22 @@ module XTwitterScraper
             params(
               id: String,
               account: String,
+              idempotency_key: String,
               request_options: XTwitterScraper::RequestOptions::OrHash
             ).returns(
               XTwitterScraper::Models::X::Users::FollowDeleteAllResponse
             )
           end
           def delete_all(
-            # User ID to unfollow
+            # Path param: User ID to unfollow
             id,
-            # X account identifier (@username or account ID)
+            # Body param: X account identifier (@username or account ID)
             account:,
+            # Header param: Generate one unique value for each intended write. Reuse it only
+            # when retrying the exact same account, action, target, and payload. A reused key
+            # returns the original action. Reusing it with different input returns 409. Replay
+            # protection remains active for at least 90 days.
+            idempotency_key:,
             request_options: {}
           )
           end

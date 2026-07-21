@@ -28,13 +28,18 @@ module XTwitterScraper
           )
         end
 
+        # Some parameter documentations has been truncated, see
+        # {XTwitterScraper::Models::X::UserRemoveFollowerParams} for more details.
+        #
         # Remove follower
         #
-        # @overload remove_follower(id, account:, request_options: {})
+        # @overload remove_follower(id, account:, idempotency_key:, request_options: {})
         #
-        # @param id [String] User ID to remove from your followers
+        # @param id [String] Path param: User ID to remove from your followers
         #
-        # @param account [String] X account identifier (@username or account ID)
+        # @param account [String] Body param: X account identifier (@username or account ID)
+        #
+        # @param idempotency_key [String] Header param: Generate one unique value for each intended write. Reuse it only w
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -43,10 +48,12 @@ module XTwitterScraper
         # @see XTwitterScraper::Models::X::UserRemoveFollowerParams
         def remove_follower(id, params)
           parsed, options = XTwitterScraper::X::UserRemoveFollowerParams.dump_request(params)
+          header_params = {idempotency_key: "idempotency-key"}
           @client.request(
             method: :post,
             path: ["x/users/%1$s/remove-follower", id],
-            body: parsed,
+            headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+            body: parsed.except(*header_params.keys),
             model: XTwitterScraper::Models::X::UserRemoveFollowerResponse,
             options: options
           )

@@ -6,6 +6,7 @@ module XTwitterScraper
           user_id: String,
           account: String,
           text: String,
+          idempotency_key: String,
           media_ids: ::Array[String]
         }
         & XTwitterScraper::Internal::Type::request_parameters
@@ -20,6 +21,8 @@ module XTwitterScraper
 
         attr_accessor text: String
 
+        attr_accessor idempotency_key: String
+
         attr_reader media_ids: ::Array[String]?
 
         def media_ids=: (::Array[String]) -> ::Array[String]
@@ -28,6 +31,7 @@ module XTwitterScraper
           user_id: String,
           account: String,
           text: String,
+          idempotency_key: String,
           ?media_ids: ::Array[String],
           ?request_options: XTwitterScraper::request_opts
         ) -> void
@@ -36,6 +40,7 @@ module XTwitterScraper
           user_id: String,
           account: String,
           text: String,
+          idempotency_key: String,
           media_ids: ::Array[String],
           request_options: XTwitterScraper::RequestOptions
         }

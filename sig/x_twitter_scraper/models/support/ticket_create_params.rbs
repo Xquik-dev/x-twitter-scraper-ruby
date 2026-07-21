@@ -2,7 +2,7 @@ module XTwitterScraper
   module Models
     module Support
       type ticket_create_params =
-        { body: String, subject: String }
+        { body: String, subject: String, idempotency_key: String }
         & XTwitterScraper::Internal::Type::request_parameters
 
       class TicketCreateParams < XTwitterScraper::Internal::Type::BaseModel
@@ -13,15 +13,21 @@ module XTwitterScraper
 
         attr_accessor subject: String
 
+        attr_reader idempotency_key: String?
+
+        def idempotency_key=: (String) -> String
+
         def initialize: (
           body: String,
           subject: String,
+          ?idempotency_key: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
         def to_hash: -> {
           body: String,
           subject: String,
+          idempotency_key: String,
           request_options: XTwitterScraper::RequestOptions
         }
       end

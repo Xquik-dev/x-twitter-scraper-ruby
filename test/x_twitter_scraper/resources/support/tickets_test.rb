@@ -18,6 +18,7 @@ class XTwitterScraper::Test::Resources::Support::TicketsTest < XTwitterScraper::
 
     assert_pattern do
       response => {
+        attachments: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::Support::TicketCreateResponse::Attachment]) | nil,
         public_id: String | nil
       }
     end
@@ -92,6 +93,7 @@ class XTwitterScraper::Test::Resources::Support::TicketsTest < XTwitterScraper::
 
     assert_pattern do
       response => {
+        attachments: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::Support::TicketReplyResponse::Attachment]) | nil,
         public_id: String | nil
       }
     end

@@ -3,7 +3,6 @@
 module XTwitterScraper
   module Resources
     class X
-      # Media upload and download
       class Media
         # Download images & videos from tweets
         #
@@ -33,13 +32,18 @@ module XTwitterScraper
           )
         end
 
+        # Some parameter documentations has been truncated, see
+        # {XTwitterScraper::Models::X::MediaUploadParams} for more details.
+        #
         # Upload media
         #
-        # @overload upload(account:, url:, request_options: {})
+        # @overload upload(account:, url:, idempotency_key:, request_options: {})
         #
-        # @param account [String] X account (@username or ID) uploading media from URL
+        # @param account [String] Body param: X account (@username or ID) uploading media from URL
         #
-        # @param url [String] HTTPS URL to download and upload as media
+        # @param url [String] Body param: HTTPS URL to download and upload as media
+        #
+        # @param idempotency_key [String] Header param: Generate one unique value for each intended write. Reuse it only w
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -48,11 +52,17 @@ module XTwitterScraper
         # @see XTwitterScraper::Models::X::MediaUploadParams
         def upload(params)
           parsed, options = XTwitterScraper::X::MediaUploadParams.dump_request(params)
+          header_params = {idempotency_key: "idempotency-key"}
           @client.request(
             method: :post,
             path: "x/media",
-            headers: {"content-type" => "multipart/form-data"},
-            body: parsed,
+            headers: {
+              "content-type" => "multipart/form-data",
+              **parsed.slice(*header_params.keys)
+            }.transform_keys(
+              header_params
+            ),
+            body: parsed.except(*header_params.keys),
             model: XTwitterScraper::Models::X::MediaUploadResponse,
             options: options
           )

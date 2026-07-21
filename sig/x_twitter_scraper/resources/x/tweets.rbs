@@ -8,7 +8,7 @@ module XTwitterScraper
 
         def create: (
           account: String,
-          ?attachment_url: String,
+          idempotency_key: String,
           ?community_id: String,
           ?is_note_tweet: bool,
           ?media: ::Array[String],
@@ -30,6 +30,7 @@ module XTwitterScraper
         def delete: (
           String id,
           account: String,
+          idempotency_key: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::TweetDeleteResponse
 
