@@ -20,7 +20,6 @@ module XTwitterScraper
       # @return [XTwitterScraper::Resources::X::Dm]
       attr_reader :dm
 
-      # Media upload and download
       # @return [XTwitterScraper::Resources::X::Media]
       attr_reader :media
 

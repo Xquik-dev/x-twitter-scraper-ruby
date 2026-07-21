@@ -4,6 +4,7 @@ module XTwitterScraper
       type profile_update_params =
         {
           account: String,
+          idempotency_key: String,
           description: String,
           location: String,
           name: String,
@@ -16,6 +17,8 @@ module XTwitterScraper
         include XTwitterScraper::Internal::Type::RequestParameters
 
         attr_accessor account: String
+
+        attr_accessor idempotency_key: String
 
         attr_reader description: String?
 
@@ -35,6 +38,7 @@ module XTwitterScraper
 
         def initialize: (
           account: String,
+          idempotency_key: String,
           ?description: String,
           ?location: String,
           ?name: String,
@@ -44,6 +48,7 @@ module XTwitterScraper
 
         def to_hash: -> {
           account: String,
+          idempotency_key: String,
           description: String,
           location: String,
           name: String,

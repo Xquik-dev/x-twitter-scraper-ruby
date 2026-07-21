@@ -17,21 +17,21 @@ module XTwitterScraper
         #
         # Create tweet
         #
-        # @overload create(account:, attachment_url: nil, community_id: nil, is_note_tweet: nil, media: nil, reply_to_tweet_id: nil, text: nil, request_options: {})
+        # @overload create(account:, idempotency_key:, community_id: nil, is_note_tweet: nil, media: nil, reply_to_tweet_id: nil, text: nil, request_options: {})
         #
-        # @param account [String] X account (@username or account ID)
+        # @param account [String] Body param: X account (@username or account ID)
         #
-        # @param attachment_url [String]
+        # @param idempotency_key [String] Header param: Generate one unique value for each intended write. Reuse it only w
         #
-        # @param community_id [String]
+        # @param community_id [String] Body param
         #
-        # @param is_note_tweet [Boolean]
+        # @param is_note_tweet [Boolean] Body param
         #
-        # @param media [Array<String>] Array of public media URLs to attach. Supports up to 4 images or exactly 1 MP4 v
+        # @param media [Array<String>] Body param: Array of public media URLs to attach. Supports up to 4 images or exa
         #
-        # @param reply_to_tweet_id [String]
+        # @param reply_to_tweet_id [String] Body param
         #
-        # @param text [String] Tweet text (optional when media is provided)
+        # @param text [String] Body param: Tweet text (optional when media is provided)
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -40,10 +40,12 @@ module XTwitterScraper
         # @see XTwitterScraper::Models::X::TweetCreateParams
         def create(params)
           parsed, options = XTwitterScraper::X::TweetCreateParams.dump_request(params)
+          header_params = {idempotency_key: "idempotency-key"}
           @client.request(
             method: :post,
             path: "x/tweets",
-            body: parsed,
+            headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+            body: parsed.except(*header_params.keys),
             model: XTwitterScraper::Models::X::TweetCreateResponse,
             options: options
           )
@@ -92,13 +94,18 @@ module XTwitterScraper
           )
         end
 
+        # Some parameter documentations has been truncated, see
+        # {XTwitterScraper::Models::X::TweetDeleteParams} for more details.
+        #
         # Delete tweet
         #
-        # @overload delete(id, account:, request_options: {})
+        # @overload delete(id, account:, idempotency_key:, request_options: {})
         #
-        # @param id [String] Tweet ID to delete
+        # @param id [String] Path param: Tweet ID to delete
         #
-        # @param account [String] X account identifier (@username or account ID)
+        # @param account [String] Body param: X account identifier (@username or account ID)
+        #
+        # @param idempotency_key [String] Header param: Generate one unique value for each intended write. Reuse it only w
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -107,10 +114,12 @@ module XTwitterScraper
         # @see XTwitterScraper::Models::X::TweetDeleteParams
         def delete(id, params)
           parsed, options = XTwitterScraper::X::TweetDeleteParams.dump_request(params)
+          header_params = {idempotency_key: "idempotency-key"}
           @client.request(
             method: :delete,
             path: ["x/tweets/%1$s", id],
-            body: parsed,
+            headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+            body: parsed.except(*header_params.keys),
             model: XTwitterScraper::Models::X::TweetDeleteResponse,
             options: options
           )
@@ -119,7 +128,9 @@ module XTwitterScraper
         # Some parameter documentations has been truncated, see
         # {XTwitterScraper::Models::X::TweetGetFavoritersParams} for more details.
         #
-        # List users who liked a tweet
+        # Returns liker profiles that X makes visible for the post. X can withhold liker
+        # identities even when the post reports likes. In that case this endpoint returns
+        # 424 `favoriters_unavailable` instead of a misleading empty success.
         #
         # @overload get_favoriters(id, cursor: nil, page_size: nil, request_options: {})
         #
@@ -257,7 +268,11 @@ module XTwitterScraper
         # Some parameter documentations has been truncated, see
         # {XTwitterScraper::Models::X::TweetGetRepliesParams} for more details.
         #
-        # List replies to a tweet
+        # Returns visible replies. For an unfiltered first page, Xquik compares a terminal
+        # page with the post's reported reply count. If the page is visibly incomplete,
+        # the endpoint returns 424 `replies_incomplete` instead of presenting partial
+        # coverage as complete. Use tweet search with a `conversation_id:{id}` query as
+        # the broader fallback.
         #
         # @overload get_replies(id, any_words: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, media_type: nil, mentioning: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, since_time: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, request_options: {})
         #

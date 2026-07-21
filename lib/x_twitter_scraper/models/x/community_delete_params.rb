@@ -25,12 +25,19 @@ module XTwitterScraper
         #   @return [String]
         required :community_name, String
 
-        # @!method initialize(id:, account:, community_name:, request_options: {})
+        # @!attribute idempotency_key
+        #
+        #   @return [String]
+        required :idempotency_key, String
+
+        # @!method initialize(id:, account:, community_name:, idempotency_key:, request_options: {})
         #   @param id [String]
         #
         #   @param account [String] X account (@username or ID) deleting the community
         #
         #   @param community_name [String] Community name for confirmation
+        #
+        #   @param idempotency_key [String]
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end

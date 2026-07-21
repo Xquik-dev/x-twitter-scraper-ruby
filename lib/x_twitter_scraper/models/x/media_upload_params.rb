@@ -20,10 +20,17 @@ module XTwitterScraper
         #   @return [String]
         required :url, String
 
-        # @!method initialize(account:, url:, request_options: {})
+        # @!attribute idempotency_key
+        #
+        #   @return [String]
+        required :idempotency_key, String
+
+        # @!method initialize(account:, url:, idempotency_key:, request_options: {})
         #   @param account [String] X account (@username or ID) uploading media from URL
         #
         #   @param url [String] HTTPS URL to download and upload as media
+        #
+        #   @param idempotency_key [String]
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end

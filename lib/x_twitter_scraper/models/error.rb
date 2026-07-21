@@ -8,12 +8,44 @@ module XTwitterScraper
       #   @return [Symbol, XTwitterScraper::Models::Error::Error::LegacyErrorCode, XTwitterScraper::Models::Error::Error::StructuredError]
       required :error, union: -> { XTwitterScraper::Error::Error }
 
-      # @!method initialize(error:)
+      # @!attribute message
+      #   Human-readable error guidance.
+      #
+      #   @return [String, nil]
+      optional :message, String
+
+      # @!attribute reason
+      #   Machine-readable reason for a login cooldown.
+      #
+      #   @return [String, nil]
+      optional :reason, String
+
+      # @!attribute retry_after
+      #   Required wait in seconds.
+      #
+      #   @return [Integer, nil]
+      optional :retry_after, Integer, api_name: :retryAfter
+
+      # @!attribute retry_after_ms
+      #   Required wait in milliseconds.
+      #
+      #   @return [Integer, nil]
+      optional :retry_after_ms, Integer, api_name: :retryAfterMs
+
+      # @!method initialize(error:, message: nil, reason: nil, retry_after: nil, retry_after_ms: nil)
       #   Error response. Default v1 returns a legacy string error code. Send
       #   `xquik-api-contract: 2026-04-29` to receive the structured best-practice error
       #   object.
       #
       #   @param error [Symbol, XTwitterScraper::Models::Error::Error::LegacyErrorCode, XTwitterScraper::Models::Error::Error::StructuredError]
+      #
+      #   @param message [String] Human-readable error guidance.
+      #
+      #   @param reason [String] Machine-readable reason for a login cooldown.
+      #
+      #   @param retry_after [Integer] Required wait in seconds.
+      #
+      #   @param retry_after_ms [Integer] Required wait in milliseconds.
 
       # @see XTwitterScraper::Models::Error#error
       module Error
@@ -92,7 +124,6 @@ module XTwitterScraper
           X_USER_LOOKUP_FAILED = :x_user_lookup_failed
           X_WRITE_AMBIGUOUS = :x_write_ambiguous
           X_WRITE_FAILED = :x_write_failed
-          X_WRITE_UNCONFIRMED = :x_write_unconfirmed
 
           # @!method self.values
           #   @return [Array<Symbol>]
@@ -189,7 +220,6 @@ module XTwitterScraper
             X_USER_LOOKUP_FAILED = :x_user_lookup_failed
             X_WRITE_AMBIGUOUS = :x_write_ambiguous
             X_WRITE_FAILED = :x_write_failed
-            X_WRITE_UNCONFIRMED = :x_write_unconfirmed
 
             # @!method self.values
             #   @return [Array<Symbol>]

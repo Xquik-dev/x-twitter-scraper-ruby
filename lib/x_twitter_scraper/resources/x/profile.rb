@@ -5,19 +5,24 @@ module XTwitterScraper
     class X
       # X write actions (tweets, likes, follows, DMs)
       class Profile
+        # Some parameter documentations has been truncated, see
+        # {XTwitterScraper::Models::X::ProfileUpdateParams} for more details.
+        #
         # Update X profile
         #
-        # @overload update(account:, description: nil, location: nil, name: nil, url: nil, request_options: {})
+        # @overload update(account:, idempotency_key:, description: nil, location: nil, name: nil, url: nil, request_options: {})
         #
-        # @param account [String] X account (@username or ID) to update profile
+        # @param account [String] Body param: X account (@username or ID) to update profile
         #
-        # @param description [String] Bio description
+        # @param idempotency_key [String] Header param: Generate one unique value for each intended write. Reuse it only w
         #
-        # @param location [String]
+        # @param description [String] Body param: Bio description
         #
-        # @param name [String] Display name
+        # @param location [String] Body param
         #
-        # @param url [String] Website URL
+        # @param name [String] Body param: Display name
+        #
+        # @param url [String] Body param: Website URL
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -26,22 +31,29 @@ module XTwitterScraper
         # @see XTwitterScraper::Models::X::ProfileUpdateParams
         def update(params)
           parsed, options = XTwitterScraper::X::ProfileUpdateParams.dump_request(params)
+          header_params = {idempotency_key: "idempotency-key"}
           @client.request(
             method: :patch,
             path: "x/profile",
-            body: parsed,
+            headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+            body: parsed.except(*header_params.keys),
             model: XTwitterScraper::Models::X::ProfileUpdateResponse,
             options: options
           )
         end
 
+        # Some parameter documentations has been truncated, see
+        # {XTwitterScraper::Models::X::ProfileUpdateAvatarParams} for more details.
+        #
         # Update profile avatar
         #
-        # @overload update_avatar(account:, url:, request_options: {})
+        # @overload update_avatar(account:, url:, idempotency_key:, request_options: {})
         #
-        # @param account [String] X account (@username or ID) receiving avatar from URL
+        # @param account [String] Body param: X account (@username or ID) receiving avatar from URL
         #
-        # @param url [String] HTTPS URL to the avatar image to download
+        # @param url [String] Body param: HTTPS URL to the avatar image to download
+        #
+        # @param idempotency_key [String] Header param: Generate one unique value for each intended write. Reuse it only w
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -50,23 +62,34 @@ module XTwitterScraper
         # @see XTwitterScraper::Models::X::ProfileUpdateAvatarParams
         def update_avatar(params)
           parsed, options = XTwitterScraper::X::ProfileUpdateAvatarParams.dump_request(params)
+          header_params = {idempotency_key: "idempotency-key"}
           @client.request(
             method: :patch,
             path: "x/profile/avatar",
-            headers: {"content-type" => "multipart/form-data"},
-            body: parsed,
+            headers: {
+              "content-type" => "multipart/form-data",
+              **parsed.slice(*header_params.keys)
+            }.transform_keys(
+              header_params
+            ),
+            body: parsed.except(*header_params.keys),
             model: XTwitterScraper::Models::X::ProfileUpdateAvatarResponse,
             options: options
           )
         end
 
+        # Some parameter documentations has been truncated, see
+        # {XTwitterScraper::Models::X::ProfileUpdateBannerParams} for more details.
+        #
         # Update profile banner
         #
-        # @overload update_banner(account:, url:, request_options: {})
+        # @overload update_banner(account:, url:, idempotency_key:, request_options: {})
         #
-        # @param account [String] X account (@username or ID) receiving banner from URL
+        # @param account [String] Body param: X account (@username or ID) receiving banner from URL
         #
-        # @param url [String] HTTPS URL to the banner image to download
+        # @param url [String] Body param: HTTPS URL to the banner image to download
+        #
+        # @param idempotency_key [String] Header param: Generate one unique value for each intended write. Reuse it only w
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -75,11 +98,17 @@ module XTwitterScraper
         # @see XTwitterScraper::Models::X::ProfileUpdateBannerParams
         def update_banner(params)
           parsed, options = XTwitterScraper::X::ProfileUpdateBannerParams.dump_request(params)
+          header_params = {idempotency_key: "idempotency-key"}
           @client.request(
             method: :patch,
             path: "x/profile/banner",
-            headers: {"content-type" => "multipart/form-data"},
-            body: parsed,
+            headers: {
+              "content-type" => "multipart/form-data",
+              **parsed.slice(*header_params.keys)
+            }.transform_keys(
+              header_params
+            ),
+            body: parsed.except(*header_params.keys),
             model: XTwitterScraper::Models::X::ProfileUpdateBannerResponse,
             options: options
           )

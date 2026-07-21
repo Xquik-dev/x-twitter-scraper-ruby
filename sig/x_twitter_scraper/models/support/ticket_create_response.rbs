@@ -1,16 +1,66 @@
 module XTwitterScraper
   module Models
     module Support
-      type ticket_create_response = { public_id: String }
+      type ticket_create_response =
+        {
+          attachments: ::Array[XTwitterScraper::Models::Support::TicketCreateResponse::Attachment],
+          public_id: String
+        }
 
       class TicketCreateResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader attachments: ::Array[XTwitterScraper::Models::Support::TicketCreateResponse::Attachment]?
+
+        def attachments=: (
+          ::Array[XTwitterScraper::Models::Support::TicketCreateResponse::Attachment]
+        ) -> ::Array[XTwitterScraper::Models::Support::TicketCreateResponse::Attachment]
+
         attr_reader public_id: String?
 
         def public_id=: (String) -> String
 
-        def initialize: (?public_id: String) -> void
+        def initialize: (
+          ?attachments: ::Array[XTwitterScraper::Models::Support::TicketCreateResponse::Attachment],
+          ?public_id: String
+        ) -> void
 
-        def to_hash: -> { public_id: String }
+        def to_hash: -> {
+          attachments: ::Array[XTwitterScraper::Models::Support::TicketCreateResponse::Attachment],
+          public_id: String
+        }
+
+        type attachment =
+          {
+            public_id: String,
+            status: XTwitterScraper::Models::Support::TicketCreateResponse::Attachment::status
+          }
+
+        class Attachment < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor public_id: String
+
+          attr_accessor status: XTwitterScraper::Models::Support::TicketCreateResponse::Attachment::status
+
+          def initialize: (
+            public_id: String,
+            status: XTwitterScraper::Models::Support::TicketCreateResponse::Attachment::status
+          ) -> void
+
+          def to_hash: -> {
+            public_id: String,
+            status: XTwitterScraper::Models::Support::TicketCreateResponse::Attachment::status
+          }
+
+          type status = :pending | :ready | :failed
+
+          module Status
+            extend XTwitterScraper::Internal::Type::Enum
+
+            PENDING: :pending
+            READY: :ready
+            FAILED: :failed
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::Support::TicketCreateResponse::Attachment::status]
+          end
+        end
       end
     end
   end

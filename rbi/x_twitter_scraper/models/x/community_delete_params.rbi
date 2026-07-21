@@ -26,11 +26,15 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :community_name
 
+        sig { returns(String) }
+        attr_accessor :idempotency_key
+
         sig do
           params(
             id: String,
             account: String,
             community_name: String,
+            idempotency_key: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -40,6 +44,7 @@ module XTwitterScraper
           account:,
           # Community name for confirmation
           community_name:,
+          idempotency_key:,
           request_options: {}
         )
         end
@@ -50,6 +55,7 @@ module XTwitterScraper
               id: String,
               account: String,
               community_name: String,
+              idempotency_key: String,
               request_options: XTwitterScraper::RequestOptions
             }
           )

@@ -2,7 +2,12 @@ module XTwitterScraper
   module Models
     module X
       type community_delete_params =
-        { id: String, account: String, community_name: String }
+        {
+          id: String,
+          account: String,
+          community_name: String,
+          idempotency_key: String
+        }
         & XTwitterScraper::Internal::Type::request_parameters
 
       class CommunityDeleteParams < XTwitterScraper::Internal::Type::BaseModel
@@ -15,10 +20,13 @@ module XTwitterScraper
 
         attr_accessor community_name: String
 
+        attr_accessor idempotency_key: String
+
         def initialize: (
           id: String,
           account: String,
           community_name: String,
+          idempotency_key: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
@@ -26,6 +34,7 @@ module XTwitterScraper
           id: String,
           account: String,
           community_name: String,
+          idempotency_key: String,
           request_options: XTwitterScraper::RequestOptions
         }
       end

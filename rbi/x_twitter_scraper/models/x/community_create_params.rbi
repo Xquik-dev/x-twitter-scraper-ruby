@@ -23,6 +23,9 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :name
 
+        sig { returns(String) }
+        attr_accessor :idempotency_key
+
         # Community description
         sig { returns(T.nilable(String)) }
         attr_reader :description
@@ -34,6 +37,7 @@ module XTwitterScraper
           params(
             account: String,
             name: String,
+            idempotency_key: String,
             description: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
@@ -43,6 +47,7 @@ module XTwitterScraper
           account:,
           # Community name
           name:,
+          idempotency_key:,
           # Community description
           description: nil,
           request_options: {}
@@ -54,6 +59,7 @@ module XTwitterScraper
             {
               account: String,
               name: String,
+              idempotency_key: String,
               description: String,
               request_options: XTwitterScraper::RequestOptions
             }

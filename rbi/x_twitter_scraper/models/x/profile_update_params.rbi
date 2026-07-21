@@ -19,6 +19,9 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :account
 
+        sig { returns(String) }
+        attr_accessor :idempotency_key
+
         # Bio description
         sig { returns(T.nilable(String)) }
         attr_reader :description
@@ -49,6 +52,7 @@ module XTwitterScraper
         sig do
           params(
             account: String,
+            idempotency_key: String,
             description: String,
             location: String,
             name: String,
@@ -59,6 +63,7 @@ module XTwitterScraper
         def self.new(
           # X account (@username or ID) to update profile
           account:,
+          idempotency_key:,
           # Bio description
           description: nil,
           location: nil,
@@ -74,6 +79,7 @@ module XTwitterScraper
           override.returns(
             {
               account: String,
+              idempotency_key: String,
               description: String,
               location: String,
               name: String,

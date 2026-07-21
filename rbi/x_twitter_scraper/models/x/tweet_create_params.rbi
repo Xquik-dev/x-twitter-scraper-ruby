@@ -19,11 +19,8 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :account
 
-        sig { returns(T.nilable(String)) }
-        attr_reader :attachment_url
-
-        sig { params(attachment_url: String).void }
-        attr_writer :attachment_url
+        sig { returns(String) }
+        attr_accessor :idempotency_key
 
         sig { returns(T.nilable(String)) }
         attr_reader :community_id
@@ -62,7 +59,7 @@ module XTwitterScraper
         sig do
           params(
             account: String,
-            attachment_url: String,
+            idempotency_key: String,
             community_id: String,
             is_note_tweet: T::Boolean,
             media: T::Array[String],
@@ -74,7 +71,7 @@ module XTwitterScraper
         def self.new(
           # X account (@username or account ID)
           account:,
-          attachment_url: nil,
+          idempotency_key:,
           community_id: nil,
           is_note_tweet: nil,
           # Array of public media URLs to attach. Supports up to 4 images or exactly 1 MP4
@@ -92,7 +89,7 @@ module XTwitterScraper
           override.returns(
             {
               account: String,
-              attachment_url: String,
+              idempotency_key: String,
               community_id: String,
               is_note_tweet: T::Boolean,
               media: T::Array[String],

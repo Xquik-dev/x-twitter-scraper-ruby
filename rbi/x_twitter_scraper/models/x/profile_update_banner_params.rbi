@@ -23,10 +23,14 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :url
 
+        sig { returns(String) }
+        attr_accessor :idempotency_key
+
         sig do
           params(
             account: String,
             url: String,
+            idempotency_key: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -35,6 +39,7 @@ module XTwitterScraper
           account:,
           # HTTPS URL to the banner image to download
           url:,
+          idempotency_key:,
           request_options: {}
         )
         end
@@ -44,6 +49,7 @@ module XTwitterScraper
             {
               account: String,
               url: String,
+              idempotency_key: String,
               request_options: XTwitterScraper::RequestOptions
             }
           )
