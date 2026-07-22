@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "x-twitter-scraper", "~> 0.5.1"
+gem "x-twitter-scraper", "~> 0.5.2"
 ```
 
 <!-- x-release-please-end -->
