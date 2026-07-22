@@ -74,6 +74,7 @@ module XTwitterScraper
 
           class Attachment < XTwitterScraper::Internal::Type::BaseModel
             # @!attribute content_type
+            #   Validated media type.
             #
             #   @return [Symbol, XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::ContentType]
             required :content_type,
@@ -86,6 +87,7 @@ module XTwitterScraper
             required :filename, String
 
             # @!attribute kind
+            #   Attachment media class.
             #
             #   @return [Symbol, XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::Kind]
             required :kind,
@@ -102,6 +104,7 @@ module XTwitterScraper
             required :size_bytes, Integer, api_name: :sizeBytes
 
             # @!attribute status
+            #   Storage processing state.
             #
             #   @return [Symbol, XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::Status]
             required :status,
@@ -113,14 +116,24 @@ module XTwitterScraper
             required :url, String
 
             # @!method initialize(content_type:, filename:, kind:, public_id:, size_bytes:, status:, url:)
-            #   @param content_type [Symbol, XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::ContentType]
+            #   Downloadable image or video attached to a support message.
+            #
+            #   @param content_type [Symbol, XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::ContentType] Validated media type.
+            #
             #   @param filename [String]
-            #   @param kind [Symbol, XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::Kind]
+            #
+            #   @param kind [Symbol, XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::Kind] Attachment media class.
+            #
             #   @param public_id [String]
+            #
             #   @param size_bytes [Integer]
-            #   @param status [Symbol, XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::Status]
+            #
+            #   @param status [Symbol, XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::Status] Storage processing state.
+            #
             #   @param url [String]
 
+            # Validated media type.
+            #
             # @see XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment#content_type
             module ContentType
               extend XTwitterScraper::Internal::Type::Enum
@@ -137,6 +150,8 @@ module XTwitterScraper
               #   @return [Array<Symbol>]
             end
 
+            # Attachment media class.
+            #
             # @see XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment#kind
             module Kind
               extend XTwitterScraper::Internal::Type::Enum
@@ -148,6 +163,8 @@ module XTwitterScraper
               #   @return [Array<Symbol>]
             end
 
+            # Storage processing state.
+            #
             # @see XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment#status
             module Status
               extend XTwitterScraper::Internal::Type::Enum

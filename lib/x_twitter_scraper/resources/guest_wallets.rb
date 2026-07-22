@@ -15,7 +15,7 @@ module XTwitterScraper
       #
       # @overload create(amount_minor:, idempotency_key:, currency: :usd, request_options: {})
       #
-      # @param amount_minor [Integer] Body param: Confirmed USD amount in cents.
+      # @param amount_minor [Integer] Body param: USD cents accepted for this checkout.
       #
       # @param idempotency_key [String] Header param: Generate a cryptographically random UUID v4. Reuse it only to retr
       #
@@ -72,7 +72,7 @@ module XTwitterScraper
       #
       # @overload topup(amount_minor:, idempotency_key:, currency: :usd, request_options: {})
       #
-      # @param amount_minor [Integer] Body param: Confirmed USD amount in cents.
+      # @param amount_minor [Integer] Body param: USD cents accepted for this checkout.
       #
       # @param idempotency_key [String] Header param: Generate a cryptographically random UUID v4. Reuse it only to retr
       #

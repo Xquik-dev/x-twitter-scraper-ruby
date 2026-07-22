@@ -8,7 +8,7 @@ module XTwitterScraper
       include XTwitterScraper::Internal::Type::RequestParameters
 
       # @!attribute amount_minor
-      #   Confirmed USD amount in cents.
+      #   USD cents accepted for this checkout.
       #
       #   @return [Integer]
       required :amount_minor, Integer
@@ -24,7 +24,7 @@ module XTwitterScraper
       required :idempotency_key, String
 
       # @!method initialize(amount_minor:, idempotency_key:, currency: :usd, request_options: {})
-      #   @param amount_minor [Integer] Confirmed USD amount in cents.
+      #   @param amount_minor [Integer] USD cents accepted for this checkout.
       #
       #   @param idempotency_key [String]
       #

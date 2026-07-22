@@ -14,7 +14,7 @@ module XTwitterScraper
           )
         end
 
-      # Confirmed USD amount in cents.
+      # USD cents accepted for this checkout.
       sig { returns(Integer) }
       attr_accessor :amount_minor
 
@@ -33,7 +33,7 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
-        # Confirmed USD amount in cents.
+        # USD cents accepted for this checkout.
         amount_minor:,
         idempotency_key:,
         currency: :usd,

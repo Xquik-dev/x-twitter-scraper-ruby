@@ -8,13 +8,13 @@ module XTwitterScraper
       include XTwitterScraper::Internal::Type::RequestParameters
 
       # @!attribute session_id
-      #   Billing session ID returned by the top-up billing flow.
+      #   Top-up session ID to inspect.
       #
       #   @return [String]
       required :session_id, String
 
       # @!method initialize(session_id:, request_options: {})
-      #   @param session_id [String] Billing session ID returned by the top-up billing flow.
+      #   @param session_id [String] Top-up session ID to inspect.
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
     end

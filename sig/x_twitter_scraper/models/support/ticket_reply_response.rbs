@@ -8,19 +8,13 @@ module XTwitterScraper
         }
 
       class TicketReplyResponse < XTwitterScraper::Internal::Type::BaseModel
-        attr_reader attachments: ::Array[XTwitterScraper::Models::Support::TicketReplyResponse::Attachment]?
+        attr_accessor attachments: ::Array[XTwitterScraper::Models::Support::TicketReplyResponse::Attachment]
 
-        def attachments=: (
-          ::Array[XTwitterScraper::Models::Support::TicketReplyResponse::Attachment]
-        ) -> ::Array[XTwitterScraper::Models::Support::TicketReplyResponse::Attachment]
-
-        attr_reader public_id: String?
-
-        def public_id=: (String) -> String
+        attr_accessor public_id: String
 
         def initialize: (
-          ?attachments: ::Array[XTwitterScraper::Models::Support::TicketReplyResponse::Attachment],
-          ?public_id: String
+          attachments: ::Array[XTwitterScraper::Models::Support::TicketReplyResponse::Attachment],
+          public_id: String
         ) -> void
 
         def to_hash: -> {

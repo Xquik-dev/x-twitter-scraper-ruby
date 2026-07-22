@@ -63,7 +63,7 @@ module XTwitterScraper
         optional :hashtags, String
 
         # @!attribute include_parent_tweet
-        #   Include parent tweet for replies
+        #   Include each reply's parent tweet.
         #
         #   @return [Boolean, nil]
         optional :include_parent_tweet, XTwitterScraper::Internal::Type::Boolean
@@ -208,7 +208,7 @@ module XTwitterScraper
         #
         #   @param hashtags [String] Hashtags separated by spaces, commas, or lines.
         #
-        #   @param include_parent_tweet [Boolean] Include parent tweet for replies
+        #   @param include_parent_tweet [Boolean] Include each reply's parent tweet.
         #
         #   @param in_reply_to_tweet_id [String] Only replies to this tweet ID.
         #

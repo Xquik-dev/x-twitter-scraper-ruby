@@ -92,7 +92,7 @@ module XTwitterScraper
         #
         # @overload retrieve_followers(id, after: nil, cursor: nil, limit: nil, page_size: nil, request_options: {})
         #
-        # @param id [String] User ID or username
+        # @param id [String] Target user ID or username for follower lookup.
         #
         # @param after [String] Legacy cursor alias. Prefer cursor.
         #
@@ -159,7 +159,7 @@ module XTwitterScraper
         #
         # @param id [String] User ID or username for following lookup
         #
-        # @param after [String] Legacy cursor alias. Prefer cursor.
+        # @param after [String] Deprecated following cursor alias. Prefer cursor.
         #
         # @param cursor [String] Pagination cursor for following list
         #
@@ -494,7 +494,7 @@ module XTwitterScraper
         #
         # @overload retrieve_replies(id, any_words: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, from_user: nil, hashtags: nil, include_parent_tweet: nil, in_reply_to_tweet_id: nil, language: nil, media_type: nil, mentioning: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, to_user: nil, until_date: nil, url: nil, verified_only: nil, request_options: {})
         #
-        # @param id [String] X user ID or username
+        # @param id [String] Target user ID or username for the replies timeline.
         #
         # @param any_words [String] Words or quoted phrases where any one can match. Separate with spaces, commas, o
         #
@@ -512,7 +512,7 @@ module XTwitterScraper
         #
         # @param hashtags [String] Hashtags separated by spaces, commas, or lines.
         #
-        # @param include_parent_tweet [Boolean] Include parent tweet for replies
+        # @param include_parent_tweet [Boolean] Include each reply's parent tweet.
         #
         # @param in_reply_to_tweet_id [String] Only replies to this tweet ID.
         #

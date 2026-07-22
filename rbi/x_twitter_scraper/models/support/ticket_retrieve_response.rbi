@@ -196,6 +196,7 @@ module XTwitterScraper
                 )
               end
 
+            # Validated media type.
             sig do
               returns(
                 XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::ContentType::TaggedSymbol
@@ -206,6 +207,7 @@ module XTwitterScraper
             sig { returns(String) }
             attr_accessor :filename
 
+            # Attachment media class.
             sig do
               returns(
                 XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::Kind::TaggedSymbol
@@ -219,6 +221,7 @@ module XTwitterScraper
             sig { returns(Integer) }
             attr_accessor :size_bytes
 
+            # Storage processing state.
             sig do
               returns(
                 XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::Status::TaggedSymbol
@@ -229,6 +232,7 @@ module XTwitterScraper
             sig { returns(String) }
             attr_accessor :url
 
+            # Downloadable image or video attached to a support message.
             sig do
               params(
                 content_type:
@@ -244,11 +248,14 @@ module XTwitterScraper
               ).returns(T.attached_class)
             end
             def self.new(
+              # Validated media type.
               content_type:,
               filename:,
+              # Attachment media class.
               kind:,
               public_id:,
               size_bytes:,
+              # Storage processing state.
               status:,
               url:
             )
@@ -273,6 +280,7 @@ module XTwitterScraper
             def to_hash
             end
 
+            # Validated media type.
             module ContentType
               extend XTwitterScraper::Internal::Type::Enum
 
@@ -332,6 +340,7 @@ module XTwitterScraper
               end
             end
 
+            # Attachment media class.
             module Kind
               extend XTwitterScraper::Internal::Type::Enum
 
@@ -366,6 +375,7 @@ module XTwitterScraper
               end
             end
 
+            # Storage processing state.
             module Status
               extend XTwitterScraper::Internal::Type::Enum
 

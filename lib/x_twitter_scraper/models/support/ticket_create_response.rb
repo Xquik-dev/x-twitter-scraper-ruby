@@ -7,16 +7,16 @@ module XTwitterScraper
       class TicketCreateResponse < XTwitterScraper::Internal::Type::BaseModel
         # @!attribute attachments
         #
-        #   @return [Array<XTwitterScraper::Models::Support::TicketCreateResponse::Attachment>, nil]
-        optional :attachments,
+        #   @return [Array<XTwitterScraper::Models::Support::TicketCreateResponse::Attachment>]
+        required :attachments,
                  -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::Support::TicketCreateResponse::Attachment] }
 
         # @!attribute public_id
         #
-        #   @return [String, nil]
-        optional :public_id, String, api_name: :publicId
+        #   @return [String]
+        required :public_id, String, api_name: :publicId
 
-        # @!method initialize(attachments: nil, public_id: nil)
+        # @!method initialize(attachments:, public_id:)
         #   @param attachments [Array<XTwitterScraper::Models::Support::TicketCreateResponse::Attachment>]
         #   @param public_id [String]
 
@@ -32,6 +32,8 @@ module XTwitterScraper
           required :status, enum: -> { XTwitterScraper::Models::Support::TicketCreateResponse::Attachment::Status }
 
           # @!method initialize(public_id:, status:)
+          #   Attachment identifier and initial processing state.
+          #
           #   @param public_id [String]
           #   @param status [Symbol, XTwitterScraper::Models::Support::TicketCreateResponse::Attachment::Status]
 

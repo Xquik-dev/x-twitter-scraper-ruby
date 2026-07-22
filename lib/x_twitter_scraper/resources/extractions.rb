@@ -126,15 +126,15 @@ module XTwitterScraper
       #
       # @param retweets_of_tweet_id [String] Estimate only retweets of this tweet ID (tweet_search_extractor)
       #
-      # @param search_query [String] Required for tweet_search_extractor & community_search.
+      # @param search_query [String] Query used to price tweet_search_extractor or community_search.
       #
       # @param since_date [Date] Estimate start date in YYYY-MM-DD format (tweet_search_extractor)
       #
-      # @param target_community_id [String] Required for community_post_extractor & community_search.
+      # @param target_community_id [String] Community ID used to price community_post_extractor or community_search.
       #
-      # @param target_list_id [String] Required for list_follower_explorer, list_member_extractor & list_post_extractor
+      # @param target_list_id [String] List ID used to price list_follower_explorer, list_member_extractor, or list_pos
       #
-      # @param target_space_id [String] Required for space_explorer.
+      # @param target_space_id [String] Space ID used to price space_explorer.
       #
       # @param target_tweet_id [String]
       #
