@@ -182,7 +182,7 @@ module XTwitterScraper
           optional :has_link, XTwitterScraper::Internal::Type::Boolean, api_name: :hasLink
 
           # @!attribute has_media
-          #   @deprecated
+          #   @deprecated Ignored. Remove this field. Use hasLink for a separate link card.
           #
           #   Accepted for backward compatibility. Text checks ignore this field.
           #
