@@ -13,7 +13,7 @@ Add the gem to your `Gemfile`:
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "x-twitter-scraper", "~> 0.5.2"
+gem "x-twitter-scraper", "~> 0.5.3"
 ```
 
 <!-- x-release-please-end -->

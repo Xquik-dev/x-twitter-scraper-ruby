@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.3 (2026-07-22)
+
+Full Changelog: [v0.5.2...v0.5.3](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.5.2...v0.5.3)
+
+### Bug Fixes
+
+* keep built gem for publication verification ([#13](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/13)) ([8a81835](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/8a81835e81fc4e0ff87dc060fe703172ed1e7cd7))
+
 ## 0.5.2 (2026-07-22)
 
 Full Changelog: [v0.5.1...v0.5.2](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.5.1...v0.5.2)
