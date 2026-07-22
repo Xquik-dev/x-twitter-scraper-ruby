@@ -22,11 +22,6 @@ class XTwitterScraperTest < Minitest::Test
     super
   end
 
-  def after_all
-    WebMock.disable!
-    super
-  end
-
   def test_client_default_request_default_retry_attempts
     stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
 
@@ -251,11 +246,10 @@ class XTwitterScraperTest < Minitest::Test
 
     assert_requested(:any, "http://localhost/redirected", times: XTwitterScraper::Client::MAX_REDIRECTS) do
       assert_equal(recorded.method, _1.method)
-      assert_equal(recorded.body, _1.body)
-      assert_equal(
-        recorded.headers.transform_keys(&:downcase)["content-type"],
-        _1.headers.transform_keys(&:downcase)["content-type"]
-      )
+      assert_nil(recorded.body)
+      assert_nil(_1.body)
+      assert_nil(recorded.headers.transform_keys(&:downcase)["content-type"])
+      assert_nil(_1.headers.transform_keys(&:downcase)["content-type"])
     end
   end
 

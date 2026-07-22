@@ -14,6 +14,13 @@ on:
       - 'stl-preview-head/**'
       - 'stl-preview-base/**'
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     timeout-minutes: 10
@@ -67,6 +74,8 @@ jobs:
           bundler-cache: false
       - run: |-
           bundle install
+        env:
+          BUNDLE_FROZEN: "true"
 
       - name: Run lints
         run: ./scripts/lint
@@ -83,6 +92,8 @@ jobs:
           bundler-cache: false
       - run: |-
           bundle install
+        env:
+          BUNDLE_FROZEN: "true"
 
       - name: Run tests
         run: ./scripts/test

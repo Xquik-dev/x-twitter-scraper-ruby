@@ -11,7 +11,7 @@ group :development do
   gem "sorbet"
   gem "steep"
   gem "syntax_tree"
-  gem "syntax_tree-rbs", github: "ruby-syntax-tree/syntax_tree-rbs", branch: "main"
+  gem "syntax_tree-rbs", github: "ruby-syntax-tree/syntax_tree-rbs", ref: "247832988a850b8df050cf207f652872fda49973"
   gem "tapioca"
 end
 

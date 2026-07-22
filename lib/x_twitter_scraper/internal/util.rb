@@ -501,7 +501,7 @@ module XTwitterScraper
       # @type [Regexp]
       JSON_CONTENT = %r{^application/(?:[a-zA-Z0-9.-]+\+)?json(?!l)}
       # @type [Regexp]
-      JSONL_CONTENT = %r{^application/(:?x-(?:n|l)djson)|(:?(?:x-)?jsonl)}
+      JSONL_CONTENT = %r{\Aapplication/(?:x-(?:n|l)djson|(?:x-)?jsonl)}
 
       class << self
         # @api private
@@ -529,7 +529,7 @@ module XTwitterScraper
               write_query_param_element!(collection, "#{key}[#{name}]", value)
             end
           in Array
-            collection[key] = element.map(&:to_s).join(",")
+            collection[key] = element.join(",")
           else
             collection[key] = element.to_s
           end

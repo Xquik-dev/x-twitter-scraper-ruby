@@ -1,23 +1,19 @@
-# Xquik API library
+# Xquik Ruby SDK
 
-The Xquik library provides convenient access to the X Twitter Scraper REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/Xquik-dev/x-twitter-scraper-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
-
-It is generated with [Stainless](https://www.stainless.com/).
+Use the Xquik API from Ruby 3.2+. The SDK includes Yard, RBS, and RBI types. It uses `net/http` with connection pooling.
 
 ## Documentation
 
-Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/x-twitter-scraper).
-
-The REST API documentation can be found on [xquik.com](https://xquik.com).
+Read the [Ruby SDK guide](https://docs.xquik.com/sdks/ruby), [API guide](https://docs.xquik.com/api-reference/overview), or [RubyDoc reference](https://gemdocs.org/gems/x-twitter-scraper).
 
 ## Installation
 
-To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
+Add the gem to your `Gemfile`:
 
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "x-twitter-scraper", "~> 0.4.0"
+gem "x-twitter-scraper", "~> 0.4.5"
 ```
 
 <!-- x-release-please-end -->
@@ -172,7 +168,7 @@ Unless otherwise specified, other classes in the SDK do not have locks protectin
 
 ## Sorbet
 
-This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitions, and has no dependency on sorbet-runtime.
+The SDK includes [RBI](https://sorbet.org/docs/rbi) definitions. It does not depend on `sorbet-runtime`.
 
 You can provide typesafe request parameters like so:
 
@@ -232,3 +228,5 @@ Ruby 3.2.0 or higher.
 ## Contributing
 
 See [the contributing documentation](https://github.com/Xquik-dev/x-twitter-scraper-ruby/tree/main/CONTRIBUTING.md).
+
+Xquik is an independent third-party service. Not affiliated with X Corp. "Twitter" and "X" are trademarks of X Corp.

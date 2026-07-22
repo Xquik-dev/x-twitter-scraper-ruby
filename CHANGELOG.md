@@ -1,5 +1,47 @@
 # Changelog
 
+## 0.4.4 (2026-07-14)
+
+Full Changelog: [v0.4.3...v0.4.4](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.4.3...v0.4.4)
+
+### Features
+
+* regenerate the SDK from the finalized API contract
+* add guest wallets, credit top-ups, keyword monitors, webhook resume, account challenges, and write-action status
+* refresh current read and write request and response types
+
+### Security
+
+* retain OIDC trusted publishing and immutable GitHub Actions pins
+
+## 0.4.3 (2026-07-14)
+
+Full Changelog: [v0.4.2...v0.4.3](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.4.2...v0.4.3)
+
+### Bug Fixes
+
+* identify the gem author as Xquik in published package metadata
+* declare base64 as a runtime dependency for Ruby 4 clean installs
+
+## 0.4.2 (2026-07-14)
+
+Full Changelog: [v0.4.1...v0.4.2](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.4.1...v0.4.2)
+
+### Security
+
+* pin trusted publishing actions to immutable commits
+* build before requesting OIDC credentials and protect release tags
+* remove the legacy long-lived credential release path
+* update audited development dependencies
+
+## 0.4.1 (2026-05-10)
+
+Full Changelog: [v0.4.0...v0.4.1](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.4.0...v0.4.1)
+
+### Bug Fixes
+
+* expose RubyGems license, issue tracker, changelog, and funding metadata
+
 ## 0.4.0 (2026-04-22)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.3.0...v0.4.0)
