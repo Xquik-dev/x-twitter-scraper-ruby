@@ -50,7 +50,7 @@ module XTwitterScraper
       #
       # @overload retrieve_topup_status(session_id:, request_options: {})
       #
-      # @param session_id [String] Billing session ID returned by the top-up billing flow.
+      # @param session_id [String] Top-up session ID to inspect.
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #

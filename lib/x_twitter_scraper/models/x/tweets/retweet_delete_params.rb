@@ -20,10 +20,17 @@ module XTwitterScraper
           #   @return [String]
           required :account, String
 
-          # @!method initialize(id:, account:, request_options: {})
+          # @!attribute idempotency_key
+          #
+          #   @return [String]
+          required :idempotency_key, String
+
+          # @!method initialize(id:, account:, idempotency_key:, request_options: {})
           #   @param id [String]
           #
           #   @param account [String] X account identifier (@username or account ID)
+          #
+          #   @param idempotency_key [String]
           #
           #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
         end

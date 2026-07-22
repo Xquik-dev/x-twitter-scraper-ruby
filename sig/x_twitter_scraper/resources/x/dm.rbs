@@ -14,6 +14,7 @@ module XTwitterScraper
           String user_id,
           account: String,
           text: String,
+          idempotency_key: String,
           ?media_ids: ::Array[String],
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::DmSendResponse

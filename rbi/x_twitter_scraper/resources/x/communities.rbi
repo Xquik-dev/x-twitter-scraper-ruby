@@ -17,16 +17,22 @@ module XTwitterScraper
           params(
             account: String,
             name: String,
+            idempotency_key: String,
             description: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::CommunityCreateResponse)
         end
         def create(
-          # X account (@username or ID) creating the community
+          # Body param: X account (@username or ID) creating the community
           account:,
-          # Community name
+          # Body param: Community name
           name:,
-          # Community description
+          # Header param: Generate one unique value for each intended write. Reuse it only
+          # when retrying the exact same account, action, target, and payload. A reused key
+          # returns the original action. Reusing it with different input returns 409. Replay
+          # protection remains active for at least 90 days.
+          idempotency_key:,
+          # Body param: Community description
           description: nil,
           request_options: {}
         )
@@ -38,21 +44,27 @@ module XTwitterScraper
             id: String,
             account: String,
             community_name: String,
+            idempotency_key: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::CommunityDeleteResponse)
         end
         def delete(
-          # Resource ID returned by the matching create or list endpoint.
+          # Path param: Resource ID returned by the matching create or list endpoint.
           id,
-          # X account (@username or ID) deleting the community
+          # Body param: X account (@username or ID) deleting the community
           account:,
-          # Community name for confirmation
+          # Body param: Community name for confirmation
           community_name:,
+          # Header param: Generate one unique value for each intended write. Reuse it only
+          # when retrying the exact same account, action, target, and payload. A reused key
+          # returns the original action. Reusing it with different input returns 409. Replay
+          # protection remains active for at least 90 days.
+          idempotency_key:,
           request_options: {}
         )
         end
 
-        # Get community name, description and member count
+        # Get community name, description & member count
         sig do
           params(
             id: String,

@@ -6,6 +6,11 @@ class XTwitterScraperTest < Minitest::Test
   extend Minitest::Serial
   include WebMock::API
 
+  def before_all
+    super
+    WebMock.enable!
+  end
+
   def setup
     super
     Thread.current.thread_variable_set(:mock_sleep, [])
@@ -241,18 +246,10 @@ class XTwitterScraperTest < Minitest::Test
 
     assert_requested(:any, "http://localhost/redirected", times: XTwitterScraper::Client::MAX_REDIRECTS) do
       assert_equal(recorded.method, _1.method)
-      if recorded.body.nil?
-        assert_nil(_1.body)
-      else
-        assert_equal(recorded.body, _1.body)
-      end
-      recorded_content_type = recorded.headers.transform_keys(&:downcase)["content-type"]
-      actual_content_type = _1.headers.transform_keys(&:downcase)["content-type"]
-      if recorded_content_type.nil?
-        assert_nil(actual_content_type)
-      else
-        assert_equal(recorded_content_type, actual_content_type)
-      end
+      assert_nil(recorded.body)
+      assert_nil(_1.body)
+      assert_nil(recorded.headers.transform_keys(&:downcase)["content-type"])
+      assert_nil(_1.headers.transform_keys(&:downcase)["content-type"])
     end
   end
 

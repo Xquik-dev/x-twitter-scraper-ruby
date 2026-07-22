@@ -56,9 +56,21 @@ module XTwitterScraper
           updated_at: Time
         }
 
-        type message = { body: String, created_at: Time, sender: String }
+        type message =
+          {
+            attachments: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment],
+            body: String,
+            created_at: Time,
+            sender: String
+          }
 
         class Message < XTwitterScraper::Internal::Type::BaseModel
+          attr_reader attachments: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment]?
+
+          def attachments=: (
+            ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment]
+          ) -> ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment]
+
           attr_reader body: String?
 
           def body=: (String) -> String
@@ -72,12 +84,111 @@ module XTwitterScraper
           def sender=: (String) -> String
 
           def initialize: (
+            ?attachments: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment],
             ?body: String,
             ?created_at: Time,
             ?sender: String
           ) -> void
 
-          def to_hash: -> { body: String, created_at: Time, sender: String }
+          def to_hash: -> {
+            attachments: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment],
+            body: String,
+            created_at: Time,
+            sender: String
+          }
+
+          type attachment =
+            {
+              content_type: XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::content_type,
+              filename: String,
+              kind: XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::kind,
+              public_id: String,
+              size_bytes: Integer,
+              status: XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::status,
+              url: String
+            }
+
+          class Attachment < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor content_type: XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::content_type
+
+            attr_accessor filename: String
+
+            attr_accessor kind: XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::kind
+
+            attr_accessor public_id: String
+
+            attr_accessor size_bytes: Integer
+
+            attr_accessor status: XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::status
+
+            attr_accessor url: String
+
+            def initialize: (
+              content_type: XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::content_type,
+              filename: String,
+              kind: XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::kind,
+              public_id: String,
+              size_bytes: Integer,
+              status: XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::status,
+              url: String
+            ) -> void
+
+            def to_hash: -> {
+              content_type: XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::content_type,
+              filename: String,
+              kind: XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::kind,
+              public_id: String,
+              size_bytes: Integer,
+              status: XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::status,
+              url: String
+            }
+
+            type content_type =
+              :"image/jpeg"
+              | :"image/png"
+              | :"image/gif"
+              | :"image/webp"
+              | :"video/mp4"
+              | :"video/quicktime"
+              | :"video/webm"
+
+            module ContentType
+              extend XTwitterScraper::Internal::Type::Enum
+
+              IMAGE_JPEG: :"image/jpeg"
+              IMAGE_PNG: :"image/png"
+              IMAGE_GIF: :"image/gif"
+              IMAGE_WEBP: :"image/webp"
+              VIDEO_MP4: :"video/mp4"
+              VIDEO_QUICKTIME: :"video/quicktime"
+              VIDEO_WEBM: :"video/webm"
+
+              def self?.values: -> ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::content_type]
+            end
+
+            type kind = :image | :video
+
+            module Kind
+              extend XTwitterScraper::Internal::Type::Enum
+
+              IMAGE: :image
+              VIDEO: :video
+
+              def self?.values: -> ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::kind]
+            end
+
+            type status = :pending | :ready | :failed
+
+            module Status
+              extend XTwitterScraper::Internal::Type::Enum
+
+              PENDING: :pending
+              READY: :ready
+              FAILED: :failed
+
+              def self?.values: -> ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::status]
+            end
+          end
         end
       end
     end

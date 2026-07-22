@@ -10,10 +10,20 @@ module XTwitterScraper
           params(
             body: String,
             subject: String,
+            idempotency_key: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::Support::TicketCreateResponse)
         end
-        def create(body:, subject:, request_options: {})
+        def create(
+          # Body param
+          body:,
+          # Body param
+          subject:,
+          # Header param: Generate one random value per ticket or reply. Reuse it only when
+          # retrying identical text and attachments. Never log this value.
+          idempotency_key: nil,
+          request_options: {}
+        )
         end
 
         # Get ticket with all messages
@@ -61,13 +71,18 @@ module XTwitterScraper
           params(
             id: String,
             body: String,
+            idempotency_key: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::Support::TicketReplyResponse)
         end
         def reply(
-          # Support ticket public ID for the reply
+          # Path param: Support ticket public ID for the reply
           id,
+          # Body param
           body:,
+          # Header param: Generate one random value per ticket or reply. Reuse it only when
+          # retrying identical text and attachments. Never log this value.
+          idempotency_key: nil,
           request_options: {}
         )
         end

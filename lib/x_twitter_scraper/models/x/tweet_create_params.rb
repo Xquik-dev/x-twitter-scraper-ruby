@@ -14,10 +14,10 @@ module XTwitterScraper
         #   @return [String]
         required :account, String
 
-        # @!attribute attachment_url
+        # @!attribute idempotency_key
         #
-        #   @return [String, nil]
-        optional :attachment_url, String
+        #   @return [String]
+        required :idempotency_key, String
 
         # @!attribute community_id
         #
@@ -48,13 +48,13 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :text, String
 
-        # @!method initialize(account:, attachment_url: nil, community_id: nil, is_note_tweet: nil, media: nil, reply_to_tweet_id: nil, text: nil, request_options: {})
+        # @!method initialize(account:, idempotency_key:, community_id: nil, is_note_tweet: nil, media: nil, reply_to_tweet_id: nil, text: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {XTwitterScraper::Models::X::TweetCreateParams} for more details.
         #
         #   @param account [String] X account (@username or account ID)
         #
-        #   @param attachment_url [String]
+        #   @param idempotency_key [String]
         #
         #   @param community_id [String]
         #

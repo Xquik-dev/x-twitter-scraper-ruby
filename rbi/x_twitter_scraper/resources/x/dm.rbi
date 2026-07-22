@@ -34,17 +34,24 @@ module XTwitterScraper
             user_id: String,
             account: String,
             text: String,
+            idempotency_key: String,
             media_ids: T::Array[String],
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::DmSendResponse)
         end
         def send_(
-          # Recipient user ID
+          # Path param: Recipient user ID
           user_id,
-          # X account (@username or ID) sending the DM
+          # Body param: X account (@username or ID) sending the DM
           account:,
+          # Body param
           text:,
-          # Optional array containing exactly 1 uploaded media ID.
+          # Header param: Generate one unique value for each intended write. Reuse it only
+          # when retrying the exact same account, action, target, and payload. A reused key
+          # returns the original action. Reusing it with different input returns 409. Replay
+          # protection remains active for at least 90 days.
+          idempotency_key:,
+          # Body param: Optional array containing exactly 1 uploaded media ID.
           media_ids: nil,
           request_options: {}
         )

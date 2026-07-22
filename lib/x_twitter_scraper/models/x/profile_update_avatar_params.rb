@@ -20,10 +20,17 @@ module XTwitterScraper
         #   @return [String]
         required :url, String
 
-        # @!method initialize(account:, url:, request_options: {})
+        # @!attribute idempotency_key
+        #
+        #   @return [String]
+        required :idempotency_key, String
+
+        # @!method initialize(account:, url:, idempotency_key:, request_options: {})
         #   @param account [String] X account (@username or ID) receiving avatar from URL
         #
         #   @param url [String] HTTPS URL to the avatar image to download
+        #
+        #   @param idempotency_key [String]
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end

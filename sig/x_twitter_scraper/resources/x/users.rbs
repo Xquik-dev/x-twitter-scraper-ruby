@@ -12,6 +12,7 @@ module XTwitterScraper
         def remove_follower: (
           String id,
           account: String,
+          idempotency_key: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::UserRemoveFollowerResponse
 

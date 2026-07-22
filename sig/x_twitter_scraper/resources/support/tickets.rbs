@@ -5,6 +5,7 @@ module XTwitterScraper
         def create: (
           body: String,
           subject: String,
+          ?idempotency_key: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::Support::TicketCreateResponse
 
@@ -26,6 +27,7 @@ module XTwitterScraper
         def reply: (
           String id,
           body: String,
+          ?idempotency_key: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::Support::TicketReplyResponse
 

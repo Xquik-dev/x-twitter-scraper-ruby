@@ -144,17 +144,37 @@ module XTwitterScraper
       class Authorization < XTwitterScraper::Internal::Type::BaseModel
         # @!attribute header
         #
-        #   @return [Symbol, :Authorization]
-        required :header, const: :Authorization
+        #   @return [Symbol, XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Header]
+        required :header, enum: -> { XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Header }
 
         # @!attribute scheme
         #
-        #   @return [Symbol, :Bearer]
-        required :scheme, const: :Bearer
+        #   @return [Symbol, XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Scheme]
+        required :scheme, enum: -> { XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Scheme }
 
-        # @!method initialize(header: :Authorization, scheme: :Bearer)
-        #   @param header [Symbol, :Authorization]
-        #   @param scheme [Symbol, :Bearer]
+        # @!method initialize(header:, scheme:)
+        #   @param header [Symbol, XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Header]
+        #   @param scheme [Symbol, XTwitterScraper::Models::GuestWalletTopupResponse::Authorization::Scheme]
+
+        # @see XTwitterScraper::Models::GuestWalletTopupResponse::Authorization#header
+        module Header
+          extend XTwitterScraper::Internal::Type::Enum
+
+          AUTHORIZATION = :Authorization
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # @see XTwitterScraper::Models::GuestWalletTopupResponse::Authorization#scheme
+        module Scheme
+          extend XTwitterScraper::Internal::Type::Enum
+
+          BEARER = :Bearer
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
 
       # @see XTwitterScraper::Models::GuestWalletTopupResponse#credential_notice

@@ -25,6 +25,9 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :text
 
+        sig { returns(String) }
+        attr_accessor :idempotency_key
+
         # Optional array containing exactly 1 uploaded media ID.
         sig { returns(T.nilable(T::Array[String])) }
         attr_reader :media_ids
@@ -37,6 +40,7 @@ module XTwitterScraper
             user_id: String,
             account: String,
             text: String,
+            idempotency_key: String,
             media_ids: T::Array[String],
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
@@ -46,6 +50,7 @@ module XTwitterScraper
           # X account (@username or ID) sending the DM
           account:,
           text:,
+          idempotency_key:,
           # Optional array containing exactly 1 uploaded media ID.
           media_ids: nil,
           request_options: {}
@@ -58,6 +63,7 @@ module XTwitterScraper
               user_id: String,
               account: String,
               text: String,
+              idempotency_key: String,
               media_ids: T::Array[String],
               request_options: XTwitterScraper::RequestOptions
             }

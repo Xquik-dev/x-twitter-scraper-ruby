@@ -8,7 +8,7 @@ module XTwitterScraper
         sig { returns(XTwitterScraper::Resources::X::Users::Follow) }
         attr_reader :follow
 
-        # Get user profile with follower counts and verification
+        # Get user profile with follower counts & verification
         sig do
           params(
             id: String,
@@ -27,14 +27,20 @@ module XTwitterScraper
           params(
             id: String,
             account: String,
+            idempotency_key: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::UserRemoveFollowerResponse)
         end
         def remove_follower(
-          # User ID to remove from your followers
+          # Path param: User ID to remove from your followers
           id,
-          # X account identifier (@username or account ID)
+          # Body param: X account identifier (@username or account ID)
           account:,
+          # Header param: Generate one unique value for each intended write. Reuse it only
+          # when retrying the exact same account, action, target, and payload. A reused key
+          # returns the original action. Reusing it with different input returns 409. Replay
+          # protection remains active for at least 90 days.
+          idempotency_key:,
           request_options: {}
         )
         end
@@ -66,7 +72,7 @@ module XTwitterScraper
           ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_followers(
-          # User ID or username
+          # Target user ID or username for follower lookup.
           id,
           # Legacy cursor alias. Prefer cursor.
           after: nil,
@@ -120,7 +126,7 @@ module XTwitterScraper
         def retrieve_following(
           # User ID or username for following lookup
           id,
-          # Legacy cursor alias. Prefer cursor.
+          # Deprecated following cursor alias. Prefer cursor.
           after: nil,
           # Pagination cursor for following list
           cursor: nil,
@@ -493,7 +499,7 @@ module XTwitterScraper
           ).returns(XTwitterScraper::PaginatedTweets)
         end
         def retrieve_replies(
-          # X user ID or username
+          # Target user ID or username for the replies timeline.
           id,
           # Words or quoted phrases where any one can match. Separate with spaces, commas,
           # or lines.
@@ -512,7 +518,7 @@ module XTwitterScraper
           from_user: nil,
           # Hashtags separated by spaces, commas, or lines.
           hashtags: nil,
-          # Include parent tweet for replies
+          # Include each reply's parent tweet.
           include_parent_tweet: nil,
           # Only replies to this tweet ID.
           in_reply_to_tweet_id: nil,

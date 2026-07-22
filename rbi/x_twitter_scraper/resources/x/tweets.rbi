@@ -16,7 +16,7 @@ module XTwitterScraper
         sig do
           params(
             account: String,
-            attachment_url: String,
+            idempotency_key: String,
             community_id: String,
             is_note_tweet: T::Boolean,
             media: T::Array[String],
@@ -26,23 +26,30 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::TweetCreateResponse)
         end
         def create(
-          # X account (@username or account ID)
+          # Body param: X account (@username or account ID)
           account:,
-          attachment_url: nil,
+          # Header param: Generate one unique value for each intended write. Reuse it only
+          # when retrying the exact same account, action, target, and payload. A reused key
+          # returns the original action. Reusing it with different input returns 409. Replay
+          # protection remains active for at least 90 days.
+          idempotency_key:,
+          # Body param
           community_id: nil,
+          # Body param
           is_note_tweet: nil,
-          # Array of public media URLs to attach. Supports up to 4 images or exactly 1 MP4
-          # video up to 100 MB. Each URL must be publicly reachable. Attached media adds 2
-          # credits per started MB across all files.
+          # Body param: Array of public media URLs to attach. Supports up to 4 images or
+          # exactly 1 MP4 video up to 100 MB. Each URL must be publicly reachable. Attached
+          # media adds 2 credits per started MB across all files.
           media: nil,
+          # Body param
           reply_to_tweet_id: nil,
-          # Tweet text (optional when media is provided)
+          # Body param: Tweet text (optional when media is provided)
           text: nil,
           request_options: {}
         )
         end
 
-        # Get tweet with full text, author, metrics and media
+        # Get tweet with full text, author, metrics & media
         sig do
           params(
             id: String,
@@ -75,19 +82,27 @@ module XTwitterScraper
           params(
             id: String,
             account: String,
+            idempotency_key: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::TweetDeleteResponse)
         end
         def delete(
-          # Tweet ID to delete
+          # Path param: Tweet ID to delete
           id,
-          # X account identifier (@username or account ID)
+          # Body param: X account identifier (@username or account ID)
           account:,
+          # Header param: Generate one unique value for each intended write. Reuse it only
+          # when retrying the exact same account, action, target, and payload. A reused key
+          # returns the original action. Reusing it with different input returns 409. Replay
+          # protection remains active for at least 90 days.
+          idempotency_key:,
           request_options: {}
         )
         end
 
-        # List users who liked a tweet
+        # Returns liker profiles that X makes visible for the post. X can withhold liker
+        # identities even when the post reports likes. In that case this endpoint returns
+        # 424 `favoriters_unavailable` instead of a misleading empty success.
         sig do
           params(
             id: String,
@@ -222,7 +237,11 @@ module XTwitterScraper
         )
         end
 
-        # List replies to a tweet
+        # Returns visible replies. For an unfiltered first page, Xquik compares a terminal
+        # page with the post's reported reply count. If the page is visibly incomplete,
+        # the endpoint returns 424 `replies_incomplete` instead of presenting partial
+        # coverage as complete. Use tweet search with a `conversation_id:{id}` query as
+        # the broader fallback.
         sig do
           params(
             id: String,

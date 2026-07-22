@@ -75,7 +75,7 @@ module XTwitterScraper
         sig { params(hashtags: String).void }
         attr_writer :hashtags
 
-        # Include parent tweet for replies
+        # Include each reply's parent tweet.
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :include_parent_tweet
 
@@ -320,7 +320,7 @@ module XTwitterScraper
           from_user: nil,
           # Hashtags separated by spaces, commas, or lines.
           hashtags: nil,
-          # Include parent tweet for replies
+          # Include each reply's parent tweet.
           include_parent_tweet: nil,
           # Only replies to this tweet ID.
           in_reply_to_tweet_id: nil,

@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.5.0 (2026-07-22)
+
+Full Changelog: [v0.4.5...v0.5.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.4.5...v0.5.0)
+
+### Features
+
+* **api:** propagate durable write actions ([b959adc](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/b959adc349d87f75be1dfb858c92479c637588d8))
+* **api:** propagate production write-action contract ([b433f8d](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/b433f8d824bcb1ca60592d21d9f90b8baa79878a))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([9ad8d7c](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/9ad8d7c87cdd91232cf5ba76a5f5022d43cb7348))
+
+
+### Bug Fixes
+
+* **client:** elide content type header on requests without body ([b0186db](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/b0186db54e9074f563ae6528506fbd12d607d607))
+
+
+### Chores
+
+* **deps:** support connection_pool 3 ([ad578c2](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/ad578c2453ff451f3317606f542baa491267a250))
+
 ## 0.4.4 (2026-07-14)
 
 Full Changelog: [v0.4.3...v0.4.4](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.4.3...v0.4.4)

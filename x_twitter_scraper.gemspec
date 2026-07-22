@@ -5,18 +5,14 @@ require_relative "lib/x_twitter_scraper/version"
 Gem::Specification.new do |s|
   s.name = "x-twitter-scraper"
   s.version = XTwitterScraper::VERSION
-  s.summary = "Xquik Ruby SDK for tweet search, profile tweets, followers, webhooks, and automation. Not affiliated with X Corp."
+  s.summary = "Ruby SDK for the Xquik API"
   s.authors = ["Xquik"]
   s.email = "support@xquik.com"
-  s.licenses = ["Apache-2.0"]
+  s.license = "Apache-2.0"
   s.homepage = "https://docs.xquik.com/sdks/ruby"
   s.metadata["homepage_uri"] = s.homepage
-  s.metadata["bug_tracker_uri"] = "https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues"
-  s.metadata["changelog_uri"] = "https://github.com/Xquik-dev/x-twitter-scraper-ruby/blob/main/CHANGELOG.md"
-  s.metadata["documentation_uri"] = "https://gemdocs.org/gems/x-twitter-scraper"
-  s.metadata["funding_uri"] = "https://xquik.com"
   s.metadata["source_code_uri"] = "https://github.com/Xquik-dev/x-twitter-scraper-ruby"
-  s.metadata["rubygems_mfa_required"] = true.to_s
+  s.metadata["rubygems_mfa_required"] = false.to_s
   s.required_ruby_version = ">= 3.2.0"
 
   s.files = Dir[
@@ -30,7 +26,7 @@ Gem::Specification.new do |s|
     ".ignore"
   ]
   s.extra_rdoc_files = ["README.md"]
-  s.add_dependency "base64", "~> 0.3"
-  s.add_dependency "cgi", "~> 0.5"
-  s.add_dependency "connection_pool", ">= 2.5", "< 4.0"
+  s.add_dependency "base64"
+  s.add_dependency "cgi"
+  s.add_dependency "connection_pool"
 end

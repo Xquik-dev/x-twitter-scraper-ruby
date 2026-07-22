@@ -20,7 +20,6 @@ module XTwitterScraper
       sig { returns(XTwitterScraper::Resources::X::Dm) }
       attr_reader :dm
 
-      # Media upload and download
       sig { returns(XTwitterScraper::Resources::X::Media) }
       attr_reader :media
 
@@ -99,7 +98,7 @@ module XTwitterScraper
       )
       end
 
-      # Get trending hashtags and topics from X by region
+      # Get trending hashtags & topics from X by region
       sig do
         params(
           count: Integer,

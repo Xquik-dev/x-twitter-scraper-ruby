@@ -20,7 +20,6 @@ module XTwitterScraper
       # @return [XTwitterScraper::Resources::X::Dm]
       attr_reader :dm
 
-      # Media upload and download
       # @return [XTwitterScraper::Resources::X::Media]
       attr_reader :media
 
@@ -121,7 +120,7 @@ module XTwitterScraper
         )
       end
 
-      # Get trending hashtags and topics from X by region
+      # Get trending hashtags & topics from X by region
       #
       # @overload get_trends(count: nil, woeid: nil, request_options: {})
       #

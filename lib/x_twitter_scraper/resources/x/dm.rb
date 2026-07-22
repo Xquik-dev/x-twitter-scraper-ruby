@@ -36,17 +36,22 @@ module XTwitterScraper
           )
         end
 
+        # Some parameter documentations has been truncated, see
+        # {XTwitterScraper::Models::X::DmSendParams} for more details.
+        #
         # Send direct message
         #
-        # @overload send_(user_id, account:, text:, media_ids: nil, request_options: {})
+        # @overload send_(user_id, account:, text:, idempotency_key:, media_ids: nil, request_options: {})
         #
-        # @param user_id [String] Recipient user ID
+        # @param user_id [String] Path param: Recipient user ID
         #
-        # @param account [String] X account (@username or ID) sending the DM
+        # @param account [String] Body param: X account (@username or ID) sending the DM
         #
-        # @param text [String]
+        # @param text [String] Body param
         #
-        # @param media_ids [Array<String>] Optional array containing exactly 1 uploaded media ID.
+        # @param idempotency_key [String] Header param: Generate one unique value for each intended write. Reuse it only w
+        #
+        # @param media_ids [Array<String>] Body param: Optional array containing exactly 1 uploaded media ID.
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -55,10 +60,12 @@ module XTwitterScraper
         # @see XTwitterScraper::Models::X::DmSendParams
         def send_(user_id, params)
           parsed, options = XTwitterScraper::X::DmSendParams.dump_request(params)
+          header_params = {idempotency_key: "idempotency-key"}
           @client.request(
             method: :post,
             path: ["x/dm/%1$s", user_id],
-            body: parsed,
+            headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+            body: parsed.except(*header_params.keys),
             model: XTwitterScraper::Models::X::DmSendResponse,
             options: options
           )

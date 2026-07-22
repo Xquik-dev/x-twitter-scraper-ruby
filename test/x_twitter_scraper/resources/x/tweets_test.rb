@@ -6,7 +6,7 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
   def test_create_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.tweets.create(account: "@elonmusk")
+    response = @x_twitter_scraper.x.tweets.create(account: "@elonmusk", idempotency_key: "Idempotency-Key")
 
     assert_pattern do
       response => XTwitterScraper::Models::X::TweetCreateResponse
@@ -14,11 +14,49 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
 
     assert_pattern do
       response => {
+        id: String,
+        account: XTwitterScraper::Models::X::TweetCreateResponse::Account | nil,
+        action: XTwitterScraper::Models::X::TweetCreateResponse::Action,
+        billing: XTwitterScraper::Models::X::TweetCreateResponse::Billing,
         charged: XTwitterScraper::Internal::Type::Boolean,
         charged_credits: String,
-        success: true | false,
-        tweet_id: String,
-        write_action_id: String | nil
+        next_action: XTwitterScraper::Models::X::TweetCreateResponse::NextAction | nil,
+        object: Symbol,
+        poll_after_ms: Integer | nil,
+        request: XTwitterScraper::Models::X::TweetCreateResponse::Request,
+        result: XTwitterScraper::Models::X::TweetCreateResponse::Result | nil,
+        retryable: XTwitterScraper::Internal::Type::Boolean,
+        safe_to_retry: XTwitterScraper::Internal::Type::Boolean,
+        send_dispatched: XTwitterScraper::Internal::Type::Boolean,
+        status: XTwitterScraper::Models::X::TweetCreateResponse::Status,
+        status_url: String,
+        success: XTwitterScraper::Internal::Type::Boolean,
+        target: XTwitterScraper::Models::X::TweetCreateResponse::Target | nil,
+        target_id: String | nil,
+        terminal: XTwitterScraper::Internal::Type::Boolean,
+        write_action_id: String,
+        community_id: String | nil,
+        community_name: String | nil,
+        completed_at: Time | nil,
+        confirmation_attempts: Integer | nil,
+        confirmation_checked_at: Time | nil,
+        confirmed_at: Time | nil,
+        created_at: Time | nil,
+        details: ^(XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]) | nil,
+        error: String | nil,
+        expires_at: Time | nil,
+        idempotent: XTwitterScraper::Internal::Type::Boolean | nil,
+        media: ^(XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]) | nil,
+        media_id: String | nil,
+        media_url: String | nil,
+        message: String | nil,
+        message_id: String | nil,
+        request_hash: String | nil,
+        request_id: String | nil,
+        result_id: String | nil,
+        send_dispatched_at: Time | nil,
+        tweet_id: String | nil,
+        updated_at: Time | nil
       }
     end
   end
@@ -61,7 +99,8 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
   def test_delete_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.x.tweets.delete("id", account: "@elonmusk")
+    response =
+      @x_twitter_scraper.x.tweets.delete("id", account: "@elonmusk", idempotency_key: "Idempotency-Key")
 
     assert_pattern do
       response => XTwitterScraper::Models::X::TweetDeleteResponse
@@ -69,7 +108,49 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
 
     assert_pattern do
       response => {
-        success: true | false
+        id: String,
+        account: XTwitterScraper::Models::X::TweetDeleteResponse::Account | nil,
+        action: XTwitterScraper::Models::X::TweetDeleteResponse::Action,
+        billing: XTwitterScraper::Models::X::TweetDeleteResponse::Billing,
+        charged: XTwitterScraper::Internal::Type::Boolean,
+        charged_credits: String,
+        next_action: XTwitterScraper::Models::X::TweetDeleteResponse::NextAction | nil,
+        object: Symbol,
+        poll_after_ms: Integer | nil,
+        request: XTwitterScraper::Models::X::TweetDeleteResponse::Request,
+        result: XTwitterScraper::Models::X::TweetDeleteResponse::Result | nil,
+        retryable: XTwitterScraper::Internal::Type::Boolean,
+        safe_to_retry: XTwitterScraper::Internal::Type::Boolean,
+        send_dispatched: XTwitterScraper::Internal::Type::Boolean,
+        status: XTwitterScraper::Models::X::TweetDeleteResponse::Status,
+        status_url: String,
+        success: XTwitterScraper::Internal::Type::Boolean,
+        target: XTwitterScraper::Models::X::TweetDeleteResponse::Target | nil,
+        target_id: String | nil,
+        terminal: XTwitterScraper::Internal::Type::Boolean,
+        write_action_id: String,
+        community_id: String | nil,
+        community_name: String | nil,
+        completed_at: Time | nil,
+        confirmation_attempts: Integer | nil,
+        confirmation_checked_at: Time | nil,
+        confirmed_at: Time | nil,
+        created_at: Time | nil,
+        details: ^(XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]) | nil,
+        error: String | nil,
+        expires_at: Time | nil,
+        idempotent: XTwitterScraper::Internal::Type::Boolean | nil,
+        media: ^(XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]) | nil,
+        media_id: String | nil,
+        media_url: String | nil,
+        message: String | nil,
+        message_id: String | nil,
+        request_hash: String | nil,
+        request_id: String | nil,
+        result_id: String | nil,
+        send_dispatched_at: Time | nil,
+        tweet_id: String | nil,
+        updated_at: Time | nil
       }
     end
   end

@@ -14,7 +14,7 @@ module XTwitterScraper
         required :id, String
 
         # @!attribute after
-        #   Legacy cursor alias. Prefer cursor.
+        #   Deprecated following cursor alias. Prefer cursor.
         #
         #   @return [String, nil]
         optional :after, String
@@ -46,7 +46,7 @@ module XTwitterScraper
         #
         #   @param id [String]
         #
-        #   @param after [String] Legacy cursor alias. Prefer cursor.
+        #   @param after [String] Deprecated following cursor alias. Prefer cursor.
         #
         #   @param cursor [String] Pagination cursor for following list
         #

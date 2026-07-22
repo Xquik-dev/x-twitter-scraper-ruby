@@ -46,7 +46,7 @@ module XTwitterScraper
         optional :updated_at, Time, api_name: :updatedAt
 
         # @!method initialize(id:, created_at:, health:, status:, x_user_id:, x_username:, cookies_obtained_at: nil, updated_at: nil)
-        #   Full X account details with status, cookies, and update timestamp.
+        #   Connected X account details with health and timestamp metadata.
         #
         #   @param id [String]
         #   @param created_at [Time]

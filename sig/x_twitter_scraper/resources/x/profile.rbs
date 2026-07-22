@@ -4,6 +4,7 @@ module XTwitterScraper
       class Profile
         def update: (
           account: String,
+          idempotency_key: String,
           ?description: String,
           ?location: String,
           ?name: String,
@@ -14,12 +15,14 @@ module XTwitterScraper
         def update_avatar: (
           account: String,
           url: String,
+          idempotency_key: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::ProfileUpdateAvatarResponse
 
         def update_banner: (
           account: String,
           url: String,
+          idempotency_key: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::ProfileUpdateBannerResponse
 

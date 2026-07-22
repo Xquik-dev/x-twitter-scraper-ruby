@@ -13,6 +13,7 @@ module XTwitterScraper
         def upload: (
           account: String,
           url: String,
+          idempotency_key: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::MediaUploadResponse
 

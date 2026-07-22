@@ -8,7 +8,7 @@ module XTwitterScraper
         # @return [XTwitterScraper::Resources::X::Users::Follow]
         attr_reader :follow
 
-        # Get user profile with follower counts and verification
+        # Get user profile with follower counts & verification
         #
         # @overload retrieve(id, request_options: {})
         #
@@ -28,13 +28,18 @@ module XTwitterScraper
           )
         end
 
+        # Some parameter documentations has been truncated, see
+        # {XTwitterScraper::Models::X::UserRemoveFollowerParams} for more details.
+        #
         # Remove follower
         #
-        # @overload remove_follower(id, account:, request_options: {})
+        # @overload remove_follower(id, account:, idempotency_key:, request_options: {})
         #
-        # @param id [String] User ID to remove from your followers
+        # @param id [String] Path param: User ID to remove from your followers
         #
-        # @param account [String] X account identifier (@username or account ID)
+        # @param account [String] Body param: X account identifier (@username or account ID)
+        #
+        # @param idempotency_key [String] Header param: Generate one unique value for each intended write. Reuse it only w
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -43,10 +48,12 @@ module XTwitterScraper
         # @see XTwitterScraper::Models::X::UserRemoveFollowerParams
         def remove_follower(id, params)
           parsed, options = XTwitterScraper::X::UserRemoveFollowerParams.dump_request(params)
+          header_params = {idempotency_key: "idempotency-key"}
           @client.request(
             method: :post,
             path: ["x/users/%1$s/remove-follower", id],
-            body: parsed,
+            headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+            body: parsed.except(*header_params.keys),
             model: XTwitterScraper::Models::X::UserRemoveFollowerResponse,
             options: options
           )
@@ -85,7 +92,7 @@ module XTwitterScraper
         #
         # @overload retrieve_followers(id, after: nil, cursor: nil, limit: nil, page_size: nil, request_options: {})
         #
-        # @param id [String] User ID or username
+        # @param id [String] Target user ID or username for follower lookup.
         #
         # @param after [String] Legacy cursor alias. Prefer cursor.
         #
@@ -152,7 +159,7 @@ module XTwitterScraper
         #
         # @param id [String] User ID or username for following lookup
         #
-        # @param after [String] Legacy cursor alias. Prefer cursor.
+        # @param after [String] Deprecated following cursor alias. Prefer cursor.
         #
         # @param cursor [String] Pagination cursor for following list
         #
@@ -487,7 +494,7 @@ module XTwitterScraper
         #
         # @overload retrieve_replies(id, any_words: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, from_user: nil, hashtags: nil, include_parent_tweet: nil, in_reply_to_tweet_id: nil, language: nil, media_type: nil, mentioning: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, to_user: nil, until_date: nil, url: nil, verified_only: nil, request_options: {})
         #
-        # @param id [String] X user ID or username
+        # @param id [String] Target user ID or username for the replies timeline.
         #
         # @param any_words [String] Words or quoted phrases where any one can match. Separate with spaces, commas, o
         #
@@ -505,7 +512,7 @@ module XTwitterScraper
         #
         # @param hashtags [String] Hashtags separated by spaces, commas, or lines.
         #
-        # @param include_parent_tweet [Boolean] Include parent tweet for replies
+        # @param include_parent_tweet [Boolean] Include each reply's parent tweet.
         #
         # @param in_reply_to_tweet_id [String] Only replies to this tweet ID.
         #
