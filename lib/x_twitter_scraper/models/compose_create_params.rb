@@ -7,132 +7,204 @@ module XTwitterScraper
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      # @!attribute step
-      #   Workflow step
+      # @!attribute body
       #
-      #   @return [Symbol, XTwitterScraper::Models::ComposeCreateParams::Step]
-      required :step, enum: -> { XTwitterScraper::ComposeCreateParams::Step }
+      #   @return [XTwitterScraper::Models::ComposeCreateParams::Body::ComposePrepareRequest, XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest, XTwitterScraper::Models::ComposeCreateParams::Body::ComposeScoreRequest]
+      required :body, union: -> { XTwitterScraper::ComposeCreateParams::Body }
 
-      # @!attribute additional_context
-      #   Extra context or URLs (refine)
-      #
-      #   @return [String, nil]
-      optional :additional_context, String, api_name: :additionalContext
-
-      # @!attribute call_to_action
-      #   Desired call to action (refine)
-      #
-      #   @return [String, nil]
-      optional :call_to_action, String, api_name: :callToAction
-
-      # @!attribute draft
-      #   Tweet draft text to evaluate (score)
-      #
-      #   @return [String, nil]
-      optional :draft, String
-
-      # @!attribute goal
-      #   Optimization goal
-      #
-      #   @return [Symbol, XTwitterScraper::Models::ComposeCreateParams::Goal, nil]
-      optional :goal, enum: -> { XTwitterScraper::ComposeCreateParams::Goal }
-
-      # @!attribute has_link
-      #   Whether a link is attached (score)
-      #
-      #   @return [Boolean, nil]
-      optional :has_link, XTwitterScraper::Internal::Type::Boolean, api_name: :hasLink
-
-      # @!attribute has_media
-      #   Whether media is attached (score)
-      #
-      #   @return [Boolean, nil]
-      optional :has_media, XTwitterScraper::Internal::Type::Boolean, api_name: :hasMedia
-
-      # @!attribute media_type
-      #   Media type (refine)
-      #
-      #   @return [Symbol, XTwitterScraper::Models::ComposeCreateParams::MediaType, nil]
-      optional :media_type, enum: -> { XTwitterScraper::ComposeCreateParams::MediaType }, api_name: :mediaType
-
-      # @!attribute style_username
-      #   Cached style username for voice matching (compose)
-      #
-      #   @return [String, nil]
-      optional :style_username, String, api_name: :styleUsername
-
-      # @!attribute tone
-      #   Desired tone (refine)
-      #
-      #   @return [String, nil]
-      optional :tone, String
-
-      # @!attribute topic
-      #   Tweet topic (compose, refine)
-      #
-      #   @return [String, nil]
-      optional :topic, String
-
-      # @!method initialize(step:, additional_context: nil, call_to_action: nil, draft: nil, goal: nil, has_link: nil, has_media: nil, media_type: nil, style_username: nil, tone: nil, topic: nil, request_options: {})
-      #   @param step [Symbol, XTwitterScraper::Models::ComposeCreateParams::Step] Workflow step
-      #
-      #   @param additional_context [String] Extra context or URLs (refine)
-      #
-      #   @param call_to_action [String] Desired call to action (refine)
-      #
-      #   @param draft [String] Tweet draft text to evaluate (score)
-      #
-      #   @param goal [Symbol, XTwitterScraper::Models::ComposeCreateParams::Goal] Optimization goal
-      #
-      #   @param has_link [Boolean] Whether a link is attached (score)
-      #
-      #   @param has_media [Boolean] Whether media is attached (score)
-      #
-      #   @param media_type [Symbol, XTwitterScraper::Models::ComposeCreateParams::MediaType] Media type (refine)
-      #
-      #   @param style_username [String] Cached style username for voice matching (compose)
-      #
-      #   @param tone [String] Desired tone (refine)
-      #
-      #   @param topic [String] Tweet topic (compose, refine)
-      #
+      # @!method initialize(body:, request_options: {})
+      #   @param body [XTwitterScraper::Models::ComposeCreateParams::Body::ComposePrepareRequest, XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest, XTwitterScraper::Models::ComposeCreateParams::Body::ComposeScoreRequest]
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
 
-      # Workflow step
-      module Step
-        extend XTwitterScraper::Internal::Type::Enum
+      module Body
+        extend XTwitterScraper::Internal::Type::Union
 
-        COMPOSE = :compose
-        REFINE = :refine
-        SCORE = :score
+        variant -> { XTwitterScraper::ComposeCreateParams::Body::ComposePrepareRequest }
 
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+        variant -> { XTwitterScraper::ComposeCreateParams::Body::ComposeRefineRequest }
 
-      # Optimization goal
-      module Goal
-        extend XTwitterScraper::Internal::Type::Enum
+        variant -> { XTwitterScraper::ComposeCreateParams::Body::ComposeScoreRequest }
 
-        ENGAGEMENT = :engagement
-        FOLLOWERS = :followers
-        AUTHORITY = :authority
-        CONVERSATION = :conversation
+        class ComposePrepareRequest < XTwitterScraper::Internal::Type::BaseModel
+          # @!attribute step
+          #
+          #   @return [Symbol, :compose]
+          required :step, const: :compose
 
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+          # @!attribute topic
+          #   Subject for the post.
+          #
+          #   @return [String]
+          required :topic, String
 
-      # Media type (refine)
-      module MediaType
-        extend XTwitterScraper::Internal::Type::Enum
+          # @!attribute goal
+          #   Editorial goal used to order the rules and questions.
+          #
+          #   @return [Symbol, XTwitterScraper::Models::ComposeCreateParams::Body::ComposePrepareRequest::Goal, nil]
+          optional :goal, enum: -> { XTwitterScraper::ComposeCreateParams::Body::ComposePrepareRequest::Goal }
 
-        PHOTO = :photo
-        VIDEO = :video
-        NONE = :none
+          # @!attribute style_username
+          #   Username from a style analysis saved to this account.
+          #
+          #   @return [String, nil]
+          optional :style_username, String, api_name: :styleUsername
 
-        # @!method self.values
-        #   @return [Array<Symbol>]
+          # @!method initialize(topic:, goal: nil, style_username: nil, step: :compose)
+          #   @param topic [String] Subject for the post.
+          #
+          #   @param goal [Symbol, XTwitterScraper::Models::ComposeCreateParams::Body::ComposePrepareRequest::Goal] Editorial goal used to order the rules and questions.
+          #
+          #   @param style_username [String] Username from a style analysis saved to this account.
+          #
+          #   @param step [Symbol, :compose]
+
+          # Editorial goal used to order the rules and questions.
+          #
+          # @see XTwitterScraper::Models::ComposeCreateParams::Body::ComposePrepareRequest#goal
+          module Goal
+            extend XTwitterScraper::Internal::Type::Enum
+
+            ENGAGEMENT = :engagement
+            FOLLOWERS = :followers
+            AUTHORITY = :authority
+            CONVERSATION = :conversation
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+        end
+
+        class ComposeRefineRequest < XTwitterScraper::Internal::Type::BaseModel
+          # @!attribute goal
+          #   Editorial goal for the guidance.
+          #
+          #   @return [Symbol, XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest::Goal]
+          required :goal, enum: -> { XTwitterScraper::ComposeCreateParams::Body::ComposeRefineRequest::Goal }
+
+          # @!attribute step
+          #
+          #   @return [Symbol, :refine]
+          required :step, const: :refine
+
+          # @!attribute tone
+          #   Requested writing tone.
+          #
+          #   @return [String]
+          required :tone, String
+
+          # @!attribute topic
+          #   Subject for the post.
+          #
+          #   @return [String]
+          required :topic, String
+
+          # @!attribute additional_context
+          #   Audience, constraints, sources, or other writing context.
+          #
+          #   @return [String, nil]
+          optional :additional_context, String, api_name: :additionalContext
+
+          # @!attribute call_to_action
+          #   Specific action the draft should request.
+          #
+          #   @return [String, nil]
+          optional :call_to_action, String, api_name: :callToAction
+
+          # @!attribute media_type
+          #   Planned media type.
+          #
+          #   @return [Symbol, XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest::MediaType, nil]
+          optional :media_type,
+                   enum: -> { XTwitterScraper::ComposeCreateParams::Body::ComposeRefineRequest::MediaType },
+                   api_name: :mediaType
+
+          # @!method initialize(goal:, tone:, topic:, additional_context: nil, call_to_action: nil, media_type: nil, step: :refine)
+          #   @param goal [Symbol, XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest::Goal] Editorial goal for the guidance.
+          #
+          #   @param tone [String] Requested writing tone.
+          #
+          #   @param topic [String] Subject for the post.
+          #
+          #   @param additional_context [String] Audience, constraints, sources, or other writing context.
+          #
+          #   @param call_to_action [String] Specific action the draft should request.
+          #
+          #   @param media_type [Symbol, XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest::MediaType] Planned media type.
+          #
+          #   @param step [Symbol, :refine]
+
+          # Editorial goal for the guidance.
+          #
+          # @see XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest#goal
+          module Goal
+            extend XTwitterScraper::Internal::Type::Enum
+
+            ENGAGEMENT = :engagement
+            FOLLOWERS = :followers
+            AUTHORITY = :authority
+            CONVERSATION = :conversation
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
+          # Planned media type.
+          #
+          # @see XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest#media_type
+          module MediaType
+            extend XTwitterScraper::Internal::Type::Enum
+
+            PHOTO = :photo
+            VIDEO = :video
+            NONE = :none
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+        end
+
+        class ComposeScoreRequest < XTwitterScraper::Internal::Type::BaseModel
+          # @!attribute draft
+          #   Full post text for deterministic editorial checks.
+          #
+          #   @return [String]
+          required :draft, String
+
+          # @!attribute step
+          #
+          #   @return [Symbol, :score]
+          required :step, const: :score
+
+          # @!attribute has_link
+          #   True when a separate link card is attached.
+          #
+          #   @return [Boolean, nil]
+          optional :has_link, XTwitterScraper::Internal::Type::Boolean, api_name: :hasLink
+
+          # @!attribute has_media
+          #   @deprecated
+          #
+          #   Accepted for backward compatibility. Text checks ignore this field.
+          #
+          #   @return [Boolean, nil]
+          optional :has_media, XTwitterScraper::Internal::Type::Boolean, api_name: :hasMedia
+
+          # @!method initialize(draft:, has_link: nil, has_media: nil, step: :score)
+          #   Some parameter documentations has been truncated, see
+          #   {XTwitterScraper::Models::ComposeCreateParams::Body::ComposeScoreRequest} for
+          #   more details.
+          #
+          #   @param draft [String] Full post text for deterministic editorial checks.
+          #
+          #   @param has_link [Boolean] True when a separate link card is attached.
+          #
+          #   @param has_media [Boolean] Accepted for backward compatibility. Text checks ignore this field.
+          #
+          #   @param step [Symbol, :score]
+        end
+
+        # @!method self.variants
+        #   @return [Array(XTwitterScraper::Models::ComposeCreateParams::Body::ComposePrepareRequest, XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest, XTwitterScraper::Models::ComposeCreateParams::Body::ComposeScoreRequest)]
       end
     end
   end

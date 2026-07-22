@@ -3,12 +3,11 @@
 module XTwitterScraper
   module Resources
     class Monitors
-      # Real-time X account monitoring
+      # X account monitoring with 1-second checks
       class Keywords
-        # Creates an instant keyword monitor. Keyword monitors are unlimited. Active
-        # monitors check every 1 second and cost 21 credits per hour. Events and webhook
-        # deliveries are included. Creation requires available credits for the first
-        # hourly charge.
+        # Creates a keyword monitor. Keyword monitors are unlimited. Active monitors check
+        # every 1 second and cost 21 credits per hour. Events and webhook deliveries are
+        # included. Creation requires available credits for the first hourly charge.
         sig do
           params(
             event_types: T::Array[XTwitterScraper::EventType::OrSymbol],

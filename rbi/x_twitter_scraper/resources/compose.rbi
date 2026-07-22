@@ -4,48 +4,22 @@ module XTwitterScraper
   module Resources
     # AI tweet composition, drafts, writing styles, and radar
     class Compose
-      # Compose, refine, or score a tweet
+      # Run one step of Xquik's three-step writing workflow. Compose returns questions
+      # and editorial rules. Refine returns goal-specific guidance. Score applies
+      # deterministic text checks. It does not predict reach or expose X ranking
+      # weights.
       sig do
         params(
-          step: XTwitterScraper::ComposeCreateParams::Step::OrSymbol,
-          additional_context: String,
-          call_to_action: String,
-          draft: String,
-          goal: XTwitterScraper::ComposeCreateParams::Goal::OrSymbol,
-          has_link: T::Boolean,
-          has_media: T::Boolean,
-          media_type: XTwitterScraper::ComposeCreateParams::MediaType::OrSymbol,
-          style_username: String,
-          tone: String,
-          topic: String,
+          body:
+            T.any(
+              XTwitterScraper::ComposeCreateParams::Body::ComposePrepareRequest::OrHash,
+              XTwitterScraper::ComposeCreateParams::Body::ComposeRefineRequest::OrHash,
+              XTwitterScraper::ComposeCreateParams::Body::ComposeScoreRequest::OrHash
+            ),
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::Models::ComposeCreateResponse)
+        ).returns(XTwitterScraper::Models::ComposeCreateResponse::Variants)
       end
-      def create(
-        # Workflow step
-        step:,
-        # Extra context or URLs (refine)
-        additional_context: nil,
-        # Desired call to action (refine)
-        call_to_action: nil,
-        # Tweet draft text to evaluate (score)
-        draft: nil,
-        # Optimization goal
-        goal: nil,
-        # Whether a link is attached (score)
-        has_link: nil,
-        # Whether media is attached (score)
-        has_media: nil,
-        # Media type (refine)
-        media_type: nil,
-        # Cached style username for voice matching (compose)
-        style_username: nil,
-        # Desired tone (refine)
-        tone: nil,
-        # Tweet topic (compose, refine)
-        topic: nil,
-        request_options: {}
-      )
+      def create(body:, request_options: {})
       end
 
       # @api private

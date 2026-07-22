@@ -74,13 +74,13 @@ module XTwitterScraper
         required :active_hourly_burn, String, api_name: :activeHourlyBurn
 
         # @!attribute credits_per_active_monitor_day
-        #   Estimated daily credits for 1 active instant monitor.
+        #   Rounded daily estimate for 1 active monitor.
         #
         #   @return [String]
         required :credits_per_active_monitor_day, String, api_name: :creditsPerActiveMonitorDay
 
         # @!attribute credits_per_active_monitor_hour
-        #   Hourly credits charged for 1 active instant monitor.
+        #   Hourly credits charged for 1 active monitor.
         #
         #   @return [String]
         required :credits_per_active_monitor_hour, String, api_name: :creditsPerActiveMonitorHour
@@ -108,9 +108,9 @@ module XTwitterScraper
         #
         #   @param active_hourly_burn [String] Credits charged each hour for currently active monitors.
         #
-        #   @param credits_per_active_monitor_day [String] Estimated daily credits for 1 active instant monitor.
+        #   @param credits_per_active_monitor_day [String] Rounded daily estimate for 1 active monitor.
         #
-        #   @param credits_per_active_monitor_hour [String] Hourly credits charged for 1 active instant monitor.
+        #   @param credits_per_active_monitor_hour [String] Hourly credits charged for 1 active monitor.
         #
         #   @param events_included [Boolean] Webhook and event deliveries are included in monitor billing.
         #

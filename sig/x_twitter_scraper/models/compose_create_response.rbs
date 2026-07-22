@@ -1,43 +1,265 @@
 module XTwitterScraper
   module Models
     type compose_create_response =
-      {
-        feedback: String,
-        score: Float,
-        suggestions: ::Array[String],
-        text: String
-      }
+      XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult
+      | XTwitterScraper::Models::ComposeCreateResponse::ComposeRefineResult
+      | XTwitterScraper::Models::ComposeCreateResponse::ComposeScoreResult
 
-    class ComposeCreateResponse < XTwitterScraper::Internal::Type::BaseModel
-      attr_reader feedback: String?
+    module ComposeCreateResponse
+      extend XTwitterScraper::Internal::Type::Union
 
-      def feedback=: (String) -> String
+      type compose_prepare_result =
+        {
+          content_rules: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::ContentRule],
+          engagement_multipliers: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::EngagementMultiplier],
+          engagement_velocity: String,
+          follow_up_questions: ::Array[String],
+          intent_url: String,
+          next_step: String,
+          scorer_weights: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::ScorerWeight],
+          source: String,
+          top_penalties: ::Array[String],
+          saved_styles: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::SavedStyle],
+          style_note: String,
+          style_tweets: ::Array[String]
+        }
 
-      attr_reader score: Float?
+      class ComposePrepareResult < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor content_rules: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::ContentRule]
 
-      def score=: (Float) -> Float
+        attr_accessor engagement_multipliers: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::EngagementMultiplier]
 
-      attr_reader suggestions: ::Array[String]?
+        attr_accessor engagement_velocity: String
 
-      def suggestions=: (::Array[String]) -> ::Array[String]
+        attr_accessor follow_up_questions: ::Array[String]
 
-      attr_reader text: String?
+        attr_accessor intent_url: String
 
-      def text=: (String) -> String
+        attr_accessor next_step: String
 
-      def initialize: (
-        ?feedback: String,
-        ?score: Float,
-        ?suggestions: ::Array[String],
-        ?text: String
-      ) -> void
+        attr_accessor scorer_weights: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::ScorerWeight]
 
-      def to_hash: -> {
-        feedback: String,
-        score: Float,
-        suggestions: ::Array[String],
-        text: String
-      }
+        attr_accessor source: String
+
+        attr_accessor top_penalties: ::Array[String]
+
+        attr_reader saved_styles: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::SavedStyle]?
+
+        def saved_styles=: (
+          ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::SavedStyle]
+        ) -> ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::SavedStyle]
+
+        attr_reader style_note: String?
+
+        def style_note=: (String) -> String
+
+        attr_reader style_tweets: ::Array[String]?
+
+        def style_tweets=: (::Array[String]) -> ::Array[String]
+
+        def initialize: (
+          content_rules: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::ContentRule],
+          engagement_multipliers: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::EngagementMultiplier],
+          engagement_velocity: String,
+          follow_up_questions: ::Array[String],
+          intent_url: String,
+          next_step: String,
+          scorer_weights: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::ScorerWeight],
+          source: String,
+          top_penalties: ::Array[String],
+          ?saved_styles: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::SavedStyle],
+          ?style_note: String,
+          ?style_tweets: ::Array[String]
+        ) -> void
+
+        def to_hash: -> {
+          content_rules: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::ContentRule],
+          engagement_multipliers: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::EngagementMultiplier],
+          engagement_velocity: String,
+          follow_up_questions: ::Array[String],
+          intent_url: String,
+          next_step: String,
+          scorer_weights: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::ScorerWeight],
+          source: String,
+          top_penalties: ::Array[String],
+          saved_styles: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::SavedStyle],
+          style_note: String,
+          style_tweets: ::Array[String]
+        }
+
+        type content_rule = { rule: String }
+
+        class ContentRule < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor rule: String
+
+          def initialize: (rule: String) -> void
+
+          def to_hash: -> { rule: String }
+        end
+
+        type engagement_multiplier =
+          {
+            action: String,
+            multiplier: :"Production weight not published by X"
+          }
+
+        class EngagementMultiplier < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor action: String
+
+          attr_accessor multiplier: :"Production weight not published by X"
+
+          def initialize: (
+            action: String,
+            ?multiplier: :"Production weight not published by X"
+          ) -> void
+
+          def to_hash: -> {
+            action: String,
+            multiplier: :"Production weight not published by X"
+          }
+        end
+
+        type scorer_weight = { context: String, signal: String, weight: nil }
+
+        class ScorerWeight < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor context: String
+
+          attr_accessor signal: String
+
+          attr_accessor weight: nil
+
+          def initialize: (context: String, signal: String, weight: nil) -> void
+
+          def to_hash: -> { context: String, signal: String, weight: nil }
+        end
+
+        type saved_style = { tweet_count: Integer, username: String }
+
+        class SavedStyle < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor tweet_count: Integer
+
+          attr_accessor username: String
+
+          def initialize: (tweet_count: Integer, username: String) -> void
+
+          def to_hash: -> { tweet_count: Integer, username: String }
+        end
+      end
+
+      type compose_refine_result =
+        {
+          composition_guidance: ::Array[String],
+          example_patterns: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposeRefineResult::ExamplePattern],
+          intent_url: String,
+          next_step: String
+        }
+
+      class ComposeRefineResult < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor composition_guidance: ::Array[String]
+
+        attr_accessor example_patterns: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposeRefineResult::ExamplePattern]
+
+        attr_accessor intent_url: String
+
+        attr_accessor next_step: String
+
+        def initialize: (
+          composition_guidance: ::Array[String],
+          example_patterns: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposeRefineResult::ExamplePattern],
+          intent_url: String,
+          next_step: String
+        ) -> void
+
+        def to_hash: -> {
+          composition_guidance: ::Array[String],
+          example_patterns: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposeRefineResult::ExamplePattern],
+          intent_url: String,
+          next_step: String
+        }
+
+        type example_pattern = { description: String, pattern: String }
+
+        class ExamplePattern < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor description: String
+
+          attr_accessor pattern: String
+
+          def initialize: (description: String, pattern: String) -> void
+
+          def to_hash: -> { description: String, pattern: String }
+        end
+      end
+
+      type compose_score_result =
+        {
+          checklist: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposeScoreResult::Checklist],
+          next_step: String,
+          passed: bool,
+          passed_count: Integer,
+          top_suggestion: String,
+          total_checks: 9,
+          intent_url: String
+        }
+
+      class ComposeScoreResult < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor checklist: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposeScoreResult::Checklist]
+
+        attr_accessor next_step: String
+
+        attr_accessor passed: bool
+
+        attr_accessor passed_count: Integer
+
+        attr_accessor top_suggestion: String
+
+        attr_accessor total_checks: 9
+
+        attr_reader intent_url: String?
+
+        def intent_url=: (String) -> String
+
+        def initialize: (
+          checklist: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposeScoreResult::Checklist],
+          next_step: String,
+          passed: bool,
+          passed_count: Integer,
+          top_suggestion: String,
+          ?intent_url: String,
+          ?total_checks: 9
+        ) -> void
+
+        def to_hash: -> {
+          checklist: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposeScoreResult::Checklist],
+          next_step: String,
+          passed: bool,
+          passed_count: Integer,
+          top_suggestion: String,
+          total_checks: 9,
+          intent_url: String
+        }
+
+        type checklist = { factor: String, passed: bool, suggestion: String }
+
+        class Checklist < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor factor: String
+
+          attr_accessor passed: bool
+
+          attr_reader suggestion: String?
+
+          def suggestion=: (String) -> String
+
+          def initialize: (
+            factor: String,
+            passed: bool,
+            ?suggestion: String
+          ) -> void
+
+          def to_hash: -> { factor: String, passed: bool, suggestion: String }
+        end
+      end
+
+      def self?.variants: -> ::Array[XTwitterScraper::Models::compose_create_response]
     end
   end
 end
