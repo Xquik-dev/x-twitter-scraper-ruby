@@ -1,136 +1,196 @@
 module XTwitterScraper
   module Models
     type compose_create_params =
-      {
-        step: XTwitterScraper::Models::ComposeCreateParams::step,
-        additional_context: String,
-        call_to_action: String,
-        draft: String,
-        goal: XTwitterScraper::Models::ComposeCreateParams::goal,
-        has_link: bool,
-        has_media: bool,
-        media_type: XTwitterScraper::Models::ComposeCreateParams::media_type,
-        style_username: String,
-        tone: String,
-        topic: String
-      }
+      { body: XTwitterScraper::Models::ComposeCreateParams::body }
       & XTwitterScraper::Internal::Type::request_parameters
 
     class ComposeCreateParams < XTwitterScraper::Internal::Type::BaseModel
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      attr_accessor step: XTwitterScraper::Models::ComposeCreateParams::step
-
-      attr_reader additional_context: String?
-
-      def additional_context=: (String) -> String
-
-      attr_reader call_to_action: String?
-
-      def call_to_action=: (String) -> String
-
-      attr_reader draft: String?
-
-      def draft=: (String) -> String
-
-      attr_reader goal: XTwitterScraper::Models::ComposeCreateParams::goal?
-
-      def goal=: (
-        XTwitterScraper::Models::ComposeCreateParams::goal
-      ) -> XTwitterScraper::Models::ComposeCreateParams::goal
-
-      attr_reader has_link: bool?
-
-      def has_link=: (bool) -> bool
-
-      attr_reader has_media: bool?
-
-      def has_media=: (bool) -> bool
-
-      attr_reader media_type: XTwitterScraper::Models::ComposeCreateParams::media_type?
-
-      def media_type=: (
-        XTwitterScraper::Models::ComposeCreateParams::media_type
-      ) -> XTwitterScraper::Models::ComposeCreateParams::media_type
-
-      attr_reader style_username: String?
-
-      def style_username=: (String) -> String
-
-      attr_reader tone: String?
-
-      def tone=: (String) -> String
-
-      attr_reader topic: String?
-
-      def topic=: (String) -> String
+      attr_accessor body: XTwitterScraper::Models::ComposeCreateParams::body
 
       def initialize: (
-        step: XTwitterScraper::Models::ComposeCreateParams::step,
-        ?additional_context: String,
-        ?call_to_action: String,
-        ?draft: String,
-        ?goal: XTwitterScraper::Models::ComposeCreateParams::goal,
-        ?has_link: bool,
-        ?has_media: bool,
-        ?media_type: XTwitterScraper::Models::ComposeCreateParams::media_type,
-        ?style_username: String,
-        ?tone: String,
-        ?topic: String,
+        body: XTwitterScraper::Models::ComposeCreateParams::body,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
       def to_hash: -> {
-        step: XTwitterScraper::Models::ComposeCreateParams::step,
-        additional_context: String,
-        call_to_action: String,
-        draft: String,
-        goal: XTwitterScraper::Models::ComposeCreateParams::goal,
-        has_link: bool,
-        has_media: bool,
-        media_type: XTwitterScraper::Models::ComposeCreateParams::media_type,
-        style_username: String,
-        tone: String,
-        topic: String,
+        body: XTwitterScraper::Models::ComposeCreateParams::body,
         request_options: XTwitterScraper::RequestOptions
       }
 
-      type step = :compose | :refine | :score
+      type body =
+        XTwitterScraper::ComposeCreateParams::Body::ComposePrepareRequest
+        | XTwitterScraper::ComposeCreateParams::Body::ComposeRefineRequest
+        | XTwitterScraper::ComposeCreateParams::Body::ComposeScoreRequest
 
-      module Step
-        extend XTwitterScraper::Internal::Type::Enum
+      module Body
+        extend XTwitterScraper::Internal::Type::Union
 
-        COMPOSE: :compose
-        REFINE: :refine
-        SCORE: :score
+        type compose_prepare_request =
+          {
+            step: :compose,
+            topic: String,
+            goal: XTwitterScraper::Models::ComposeCreateParams::Body::ComposePrepareRequest::goal,
+            style_username: String
+          }
 
-        def self?.values: -> ::Array[XTwitterScraper::Models::ComposeCreateParams::step]
-      end
+        class ComposePrepareRequest < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor step: :compose
 
-      type goal = :engagement | :followers | :authority | :conversation
+          attr_accessor topic: String
 
-      module Goal
-        extend XTwitterScraper::Internal::Type::Enum
+          attr_reader goal: XTwitterScraper::Models::ComposeCreateParams::Body::ComposePrepareRequest::goal?
 
-        ENGAGEMENT: :engagement
-        FOLLOWERS: :followers
-        AUTHORITY: :authority
-        CONVERSATION: :conversation
+          def goal=: (
+            XTwitterScraper::Models::ComposeCreateParams::Body::ComposePrepareRequest::goal
+          ) -> XTwitterScraper::Models::ComposeCreateParams::Body::ComposePrepareRequest::goal
 
-        def self?.values: -> ::Array[XTwitterScraper::Models::ComposeCreateParams::goal]
-      end
+          attr_reader style_username: String?
 
-      type media_type = :photo | :video | :none
+          def style_username=: (String) -> String
 
-      module MediaType
-        extend XTwitterScraper::Internal::Type::Enum
+          def initialize: (
+            topic: String,
+            ?goal: XTwitterScraper::Models::ComposeCreateParams::Body::ComposePrepareRequest::goal,
+            ?style_username: String,
+            ?step: :compose
+          ) -> void
 
-        PHOTO: :photo
-        VIDEO: :video
-        NONE: :none
+          def to_hash: -> {
+            step: :compose,
+            topic: String,
+            goal: XTwitterScraper::Models::ComposeCreateParams::Body::ComposePrepareRequest::goal,
+            style_username: String
+          }
 
-        def self?.values: -> ::Array[XTwitterScraper::Models::ComposeCreateParams::media_type]
+          type goal = :engagement | :followers | :authority | :conversation
+
+          module Goal
+            extend XTwitterScraper::Internal::Type::Enum
+
+            ENGAGEMENT: :engagement
+            FOLLOWERS: :followers
+            AUTHORITY: :authority
+            CONVERSATION: :conversation
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::ComposeCreateParams::Body::ComposePrepareRequest::goal]
+          end
+        end
+
+        type compose_refine_request =
+          {
+            goal: XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest::goal,
+            step: :refine,
+            tone: String,
+            topic: String,
+            additional_context: String,
+            call_to_action: String,
+            media_type: XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest::media_type
+          }
+
+        class ComposeRefineRequest < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor goal: XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest::goal
+
+          attr_accessor step: :refine
+
+          attr_accessor tone: String
+
+          attr_accessor topic: String
+
+          attr_reader additional_context: String?
+
+          def additional_context=: (String) -> String
+
+          attr_reader call_to_action: String?
+
+          def call_to_action=: (String) -> String
+
+          attr_reader media_type: XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest::media_type?
+
+          def media_type=: (
+            XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest::media_type
+          ) -> XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest::media_type
+
+          def initialize: (
+            goal: XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest::goal,
+            tone: String,
+            topic: String,
+            ?additional_context: String,
+            ?call_to_action: String,
+            ?media_type: XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest::media_type,
+            ?step: :refine
+          ) -> void
+
+          def to_hash: -> {
+            goal: XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest::goal,
+            step: :refine,
+            tone: String,
+            topic: String,
+            additional_context: String,
+            call_to_action: String,
+            media_type: XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest::media_type
+          }
+
+          type goal = :engagement | :followers | :authority | :conversation
+
+          module Goal
+            extend XTwitterScraper::Internal::Type::Enum
+
+            ENGAGEMENT: :engagement
+            FOLLOWERS: :followers
+            AUTHORITY: :authority
+            CONVERSATION: :conversation
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest::goal]
+          end
+
+          type media_type = :photo | :video | :none
+
+          module MediaType
+            extend XTwitterScraper::Internal::Type::Enum
+
+            PHOTO: :photo
+            VIDEO: :video
+            NONE: :none
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest::media_type]
+          end
+        end
+
+        type compose_score_request =
+          { draft: String, step: :score, has_link: bool, has_media: bool }
+
+        class ComposeScoreRequest < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor draft: String
+
+          attr_accessor step: :score
+
+          attr_reader has_link: bool?
+
+          def has_link=: (bool) -> bool
+
+          attr_reader has_media: bool?
+
+          def has_media=: (bool) -> bool
+
+          def initialize: (
+            draft: String,
+            ?has_link: bool,
+            ?has_media: bool,
+            ?step: :score
+          ) -> void
+
+          def to_hash: -> {
+            draft: String,
+            step: :score,
+            has_link: bool,
+            has_media: bool
+          }
+        end
+
+        def self?.variants: -> ::Array[XTwitterScraper::Models::ComposeCreateParams::body]
       end
     end
   end

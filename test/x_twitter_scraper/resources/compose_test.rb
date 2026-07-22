@@ -6,19 +6,18 @@ class XTwitterScraper::Test::Resources::ComposeTest < XTwitterScraper::Test::Res
   def test_create_required_params
     skip("Mock server tests are disabled")
 
-    response = @x_twitter_scraper.compose.create(step: :compose)
+    response = @x_twitter_scraper.compose.create(body: {step: :compose, topic: "PostgreSQL query planning"})
 
     assert_pattern do
       response => XTwitterScraper::Models::ComposeCreateResponse
     end
 
     assert_pattern do
-      response => {
-        feedback: String | nil,
-        score: Float | nil,
-        suggestions: ^(XTwitterScraper::Internal::Type::ArrayOf[String]) | nil,
-        text: String | nil
-      }
+      case response
+      in XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult
+      in XTwitterScraper::Models::ComposeCreateResponse::ComposeRefineResult
+      in XTwitterScraper::Models::ComposeCreateResponse::ComposeScoreResult
+      end
     end
   end
 end

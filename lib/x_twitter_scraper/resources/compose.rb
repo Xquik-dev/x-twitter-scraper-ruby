@@ -4,35 +4,17 @@ module XTwitterScraper
   module Resources
     # AI tweet composition, drafts, writing styles, and radar
     class Compose
-      # Compose, refine, or score a tweet
+      # Run one step of Xquik's three-step writing workflow. Compose returns questions
+      # and editorial rules. Refine returns goal-specific guidance. Score applies
+      # deterministic text checks. It does not predict reach or expose X ranking
+      # weights.
       #
-      # @overload create(step:, additional_context: nil, call_to_action: nil, draft: nil, goal: nil, has_link: nil, has_media: nil, media_type: nil, style_username: nil, tone: nil, topic: nil, request_options: {})
+      # @overload create(body:, request_options: {})
       #
-      # @param step [Symbol, XTwitterScraper::Models::ComposeCreateParams::Step] Workflow step
-      #
-      # @param additional_context [String] Extra context or URLs (refine)
-      #
-      # @param call_to_action [String] Desired call to action (refine)
-      #
-      # @param draft [String] Tweet draft text to evaluate (score)
-      #
-      # @param goal [Symbol, XTwitterScraper::Models::ComposeCreateParams::Goal] Optimization goal
-      #
-      # @param has_link [Boolean] Whether a link is attached (score)
-      #
-      # @param has_media [Boolean] Whether media is attached (score)
-      #
-      # @param media_type [Symbol, XTwitterScraper::Models::ComposeCreateParams::MediaType] Media type (refine)
-      #
-      # @param style_username [String] Cached style username for voice matching (compose)
-      #
-      # @param tone [String] Desired tone (refine)
-      #
-      # @param topic [String] Tweet topic (compose, refine)
-      #
+      # @param body [XTwitterScraper::Models::ComposeCreateParams::Body::ComposePrepareRequest, XTwitterScraper::Models::ComposeCreateParams::Body::ComposeRefineRequest, XTwitterScraper::Models::ComposeCreateParams::Body::ComposeScoreRequest]
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::ComposeCreateResponse]
+      # @return [XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult, XTwitterScraper::Models::ComposeCreateResponse::ComposeRefineResult, XTwitterScraper::Models::ComposeCreateResponse::ComposeScoreResult]
       #
       # @see XTwitterScraper::Models::ComposeCreateParams
       def create(params)
@@ -40,7 +22,7 @@ module XTwitterScraper
         @client.request(
           method: :post,
           path: "compose",
-          body: parsed,
+          body: parsed[:body],
           model: XTwitterScraper::Models::ComposeCreateResponse,
           options: options
         )

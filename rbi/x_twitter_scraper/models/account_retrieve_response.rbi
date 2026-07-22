@@ -126,11 +126,11 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :active_hourly_burn
 
-        # Estimated daily credits for 1 active instant monitor.
+        # Rounded daily estimate for 1 active monitor.
         sig { returns(String) }
         attr_accessor :credits_per_active_monitor_day
 
-        # Hourly credits charged for 1 active instant monitor.
+        # Hourly credits charged for 1 active monitor.
         sig { returns(String) }
         attr_accessor :credits_per_active_monitor_hour
 
@@ -162,9 +162,9 @@ module XTwitterScraper
           active_daily_estimate:,
           # Credits charged each hour for currently active monitors.
           active_hourly_burn:,
-          # Estimated daily credits for 1 active instant monitor.
+          # Rounded daily estimate for 1 active monitor.
           credits_per_active_monitor_day:,
-          # Hourly credits charged for 1 active instant monitor.
+          # Hourly credits charged for 1 active monitor.
           credits_per_active_monitor_hour:,
           # Webhook and event deliveries are included in monitor billing.
           events_included:,
