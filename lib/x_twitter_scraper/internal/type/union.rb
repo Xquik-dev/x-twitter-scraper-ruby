@@ -4,6 +4,19 @@ module XTwitterScraper
   module Internal
     module Type
       # @api private
+      #
+      # @example
+      #   # `compose_create_response` is a `XTwitterScraper::Models::ComposeCreateResponse`
+      #   case compose_create_response
+      #   when XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult
+      #     puts(compose_create_response.content_rules)
+      #   when XTwitterScraper::Models::ComposeCreateResponse::ComposeRefineResult
+      #     puts(compose_create_response.composition_guidance)
+      #   when XTwitterScraper::Models::ComposeCreateResponse::ComposeScoreResult
+      #     puts(compose_create_response.checklist)
+      #   else
+      #     puts(compose_create_response)
+      #   end
       module Union
         include XTwitterScraper::Internal::Type::Converter
         include XTwitterScraper::Internal::Util::SorbetRuntimeSupport

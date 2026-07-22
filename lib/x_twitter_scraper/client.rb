@@ -46,7 +46,7 @@ module XTwitterScraper
     # @return [XTwitterScraper::Resources::Radar]
     attr_reader :radar
 
-    # Real-time X account monitoring
+    # X account monitoring with 1-second checks
     # @return [XTwitterScraper::Resources::Monitors]
     attr_reader :monitors
 
