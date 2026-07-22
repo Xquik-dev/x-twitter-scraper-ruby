@@ -72,7 +72,7 @@ module XTwitterScraper
           ).returns(XTwitterScraper::PaginatedUsers)
         end
         def retrieve_followers(
-          # User ID or username
+          # Target user ID or username for follower lookup.
           id,
           # Legacy cursor alias. Prefer cursor.
           after: nil,
@@ -126,7 +126,7 @@ module XTwitterScraper
         def retrieve_following(
           # User ID or username for following lookup
           id,
-          # Legacy cursor alias. Prefer cursor.
+          # Deprecated following cursor alias. Prefer cursor.
           after: nil,
           # Pagination cursor for following list
           cursor: nil,
@@ -499,7 +499,7 @@ module XTwitterScraper
           ).returns(XTwitterScraper::PaginatedTweets)
         end
         def retrieve_replies(
-          # X user ID or username
+          # Target user ID or username for the replies timeline.
           id,
           # Words or quoted phrases where any one can match. Separate with spaces, commas,
           # or lines.
@@ -518,7 +518,7 @@ module XTwitterScraper
           from_user: nil,
           # Hashtags separated by spaces, commas, or lines.
           hashtags: nil,
-          # Include parent tweet for replies
+          # Include each reply's parent tweet.
           include_parent_tweet: nil,
           # Only replies to this tweet ID.
           in_reply_to_tweet_id: nil,

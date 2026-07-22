@@ -14,30 +14,15 @@ module XTwitterScraper
 
         sig do
           returns(
-            T.nilable(
-              T::Array[
-                XTwitterScraper::Models::Support::TicketCreateResponse::Attachment
-              ]
-            )
+            T::Array[
+              XTwitterScraper::Models::Support::TicketCreateResponse::Attachment
+            ]
           )
         end
-        attr_reader :attachments
+        attr_accessor :attachments
 
-        sig do
-          params(
-            attachments:
-              T::Array[
-                XTwitterScraper::Models::Support::TicketCreateResponse::Attachment::OrHash
-              ]
-          ).void
-        end
-        attr_writer :attachments
-
-        sig { returns(T.nilable(String)) }
-        attr_reader :public_id
-
-        sig { params(public_id: String).void }
-        attr_writer :public_id
+        sig { returns(String) }
+        attr_accessor :public_id
 
         sig do
           params(
@@ -48,7 +33,7 @@ module XTwitterScraper
             public_id: String
           ).returns(T.attached_class)
         end
-        def self.new(attachments: nil, public_id: nil)
+        def self.new(attachments:, public_id:)
         end
 
         sig do
@@ -84,6 +69,7 @@ module XTwitterScraper
           end
           attr_accessor :status
 
+          # Attachment identifier and initial processing state.
           sig do
             params(
               public_id: String,

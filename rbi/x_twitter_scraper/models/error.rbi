@@ -32,7 +32,7 @@ module XTwitterScraper
       sig { params(reason: String).void }
       attr_writer :reason
 
-      # Required wait in seconds.
+      # Seconds until the next permitted request.
       sig { returns(T.nilable(Integer)) }
       attr_reader :retry_after
 
@@ -68,7 +68,7 @@ module XTwitterScraper
         message: nil,
         # Machine-readable reason for a login cooldown.
         reason: nil,
-        # Required wait in seconds.
+        # Seconds until the next permitted request.
         retry_after: nil,
         # Required wait in milliseconds.
         retry_after_ms: nil
@@ -311,6 +311,171 @@ module XTwitterScraper
           USER_NOT_FOUND =
             T.let(
               :user_not_found,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          BODY_TOO_LARGE =
+            T.let(
+              :body_too_large,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          CHECKOUT_UNAVAILABLE =
+            T.let(
+              :checkout_unavailable,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          CONNECTION_CHALLENGE_EXPIRED =
+            T.let(
+              :connection_challenge_expired,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          CONNECTION_CHALLENGE_INACTIVE =
+            T.let(
+              :connection_challenge_inactive,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          DRAFT_NOT_FOUND =
+            T.let(
+              :draft_not_found,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          FAVORITERS_UNAVAILABLE =
+            T.let(
+              :favoriters_unavailable,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          FORBIDDEN =
+            T.let(
+              :forbidden,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          GUEST_WALLET_UNAVAILABLE =
+            T.let(
+              :guest_wallet_unavailable,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          GUEST_WALLETS_DISABLED =
+            T.let(
+              :guest_wallets_disabled,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          GUEST_WALLETS_UNAVAILABLE =
+            T.let(
+              :guest_wallets_unavailable,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          IDEMPOTENCY_CONFLICT =
+            T.let(
+              :idempotency_conflict,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          IDEMPOTENCY_KEY_CONFLICT =
+            T.let(
+              :idempotency_key_conflict,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          INVALID_COMMUNITY_ID =
+            T.let(
+              :invalid_community_id,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          INVALID_IDEMPOTENCY_KEY =
+            T.let(
+              :invalid_idempotency_key,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          INVALID_LIST_ID =
+            T.let(
+              :invalid_list_id,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          INVALID_PAYMENT_AMOUNT =
+            T.let(
+              :invalid_payment_amount,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          INVALID_RANGE =
+            T.let(
+              :invalid_range,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          LOGIN_RATE_LIMITED =
+            T.let(
+              :login_rate_limited,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          MISSING_IDEMPOTENCY_KEY =
+            T.let(
+              :missing_idempotency_key,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          MISSING_IDS =
+            T.let(
+              :missing_ids,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          NO_CACHED_STYLE =
+            T.let(
+              :no_cached_style,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          PASSKEY_REQUIRED =
+            T.let(
+              :passkey_required,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          RATE_LIMITED =
+            T.let(
+              :rate_limited,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          READ_REQUEST_TIMEOUT =
+            T.let(
+              :read_request_timeout,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          REPLIES_INCOMPLETE =
+            T.let(
+              :replies_incomplete,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          SUPPORT_MEDIA_RATE_LIMIT =
+            T.let(
+              :support_media_rate_limit,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          SUPPORT_REQUEST_RATE_LIMIT =
+            T.let(
+              :support_request_rate_limit,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          TOO_MANY_IDS =
+            T.let(
+              :too_many_ids,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          UNKNOWN_FIELD =
+            T.let(
+              :unknown_field,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          UNSUPPORTED_MEDIA_TYPE =
+            T.let(
+              :unsupported_media_type,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          WEBHOOK_INACTIVE =
+            T.let(
+              :webhook_inactive,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          WRITE_TRACKING_UNAVAILABLE =
+            T.let(
+              :write_tracking_unavailable,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          X_WRITE_UNCONFIRMED =
+            T.let(
+              :x_write_unconfirmed,
               XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
             )
           X_ACCOUNT_FEATURE_REQUIRED =
@@ -717,6 +882,171 @@ module XTwitterScraper
             USER_NOT_FOUND =
               T.let(
                 :user_not_found,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            BODY_TOO_LARGE =
+              T.let(
+                :body_too_large,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            CHECKOUT_UNAVAILABLE =
+              T.let(
+                :checkout_unavailable,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            CONNECTION_CHALLENGE_EXPIRED =
+              T.let(
+                :connection_challenge_expired,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            CONNECTION_CHALLENGE_INACTIVE =
+              T.let(
+                :connection_challenge_inactive,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            DRAFT_NOT_FOUND =
+              T.let(
+                :draft_not_found,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            FAVORITERS_UNAVAILABLE =
+              T.let(
+                :favoriters_unavailable,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            FORBIDDEN =
+              T.let(
+                :forbidden,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            GUEST_WALLET_UNAVAILABLE =
+              T.let(
+                :guest_wallet_unavailable,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            GUEST_WALLETS_DISABLED =
+              T.let(
+                :guest_wallets_disabled,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            GUEST_WALLETS_UNAVAILABLE =
+              T.let(
+                :guest_wallets_unavailable,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            IDEMPOTENCY_CONFLICT =
+              T.let(
+                :idempotency_conflict,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            IDEMPOTENCY_KEY_CONFLICT =
+              T.let(
+                :idempotency_key_conflict,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            INVALID_COMMUNITY_ID =
+              T.let(
+                :invalid_community_id,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            INVALID_IDEMPOTENCY_KEY =
+              T.let(
+                :invalid_idempotency_key,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            INVALID_LIST_ID =
+              T.let(
+                :invalid_list_id,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            INVALID_PAYMENT_AMOUNT =
+              T.let(
+                :invalid_payment_amount,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            INVALID_RANGE =
+              T.let(
+                :invalid_range,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            LOGIN_RATE_LIMITED =
+              T.let(
+                :login_rate_limited,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            MISSING_IDEMPOTENCY_KEY =
+              T.let(
+                :missing_idempotency_key,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            MISSING_IDS =
+              T.let(
+                :missing_ids,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            NO_CACHED_STYLE =
+              T.let(
+                :no_cached_style,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            PASSKEY_REQUIRED =
+              T.let(
+                :passkey_required,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            RATE_LIMITED =
+              T.let(
+                :rate_limited,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            READ_REQUEST_TIMEOUT =
+              T.let(
+                :read_request_timeout,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            REPLIES_INCOMPLETE =
+              T.let(
+                :replies_incomplete,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            SUPPORT_MEDIA_RATE_LIMIT =
+              T.let(
+                :support_media_rate_limit,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            SUPPORT_REQUEST_RATE_LIMIT =
+              T.let(
+                :support_request_rate_limit,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            TOO_MANY_IDS =
+              T.let(
+                :too_many_ids,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            UNKNOWN_FIELD =
+              T.let(
+                :unknown_field,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            UNSUPPORTED_MEDIA_TYPE =
+              T.let(
+                :unsupported_media_type,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            WEBHOOK_INACTIVE =
+              T.let(
+                :webhook_inactive,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            WRITE_TRACKING_UNAVAILABLE =
+              T.let(
+                :write_tracking_unavailable,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            X_WRITE_UNCONFIRMED =
+              T.let(
+                :x_write_unconfirmed,
                 XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
               )
             X_ACCOUNT_FEATURE_REQUIRED =

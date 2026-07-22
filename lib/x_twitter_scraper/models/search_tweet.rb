@@ -68,7 +68,7 @@ module XTwitterScraper
       optional :created_at, String, api_name: :createdAt
 
       # @!attribute display_text_range
-      #   Start and end offsets for rendered tweet text
+      #   Rendered text's start and end offsets.
       #
       #   @return [Array<Integer>, nil]
       optional :display_text_range,
@@ -83,19 +83,19 @@ module XTwitterScraper
       optional :entities, XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]
 
       # @!attribute in_reply_to_id
-      #   Tweet ID being replied to
+      #   ID of the tweet this result replies to.
       #
       #   @return [String, nil]
       optional :in_reply_to_id, String, api_name: :inReplyToId
 
       # @!attribute in_reply_to_user_id
-      #   User ID being replied to
+      #   ID of the user this result replies to.
       #
       #   @return [String, nil]
       optional :in_reply_to_user_id, String, api_name: :inReplyToUserId
 
       # @!attribute in_reply_to_username
-      #   Username being replied to
+      #   Username this result replies to.
       #
       #   @return [String, nil]
       optional :in_reply_to_username, String, api_name: :inReplyToUsername
@@ -125,7 +125,7 @@ module XTwitterScraper
       optional :is_reply, XTwitterScraper::Internal::Type::Boolean, api_name: :isReply
 
       # @!attribute lang
-      #   Tweet language code
+      #   Search result language code.
       #
       #   @return [String, nil]
       optional :lang, String
@@ -164,7 +164,7 @@ module XTwitterScraper
       optional :type, String
 
       # @!attribute url
-      #   Tweet permalink URL
+      #   Search result permalink.
       #
       #   @return [String, nil]
       optional :url, String
@@ -200,15 +200,15 @@ module XTwitterScraper
       #
       #   @param created_at [String]
       #
-      #   @param display_text_range [Array<Integer>] Start and end offsets for rendered tweet text
+      #   @param display_text_range [Array<Integer>] Rendered text's start and end offsets.
       #
       #   @param entities [Hash{Symbol=>Object}] Parsed search-result entities including URLs, mentions, hashtags, and media mark
       #
-      #   @param in_reply_to_id [String] Tweet ID being replied to
+      #   @param in_reply_to_id [String] ID of the tweet this result replies to.
       #
-      #   @param in_reply_to_user_id [String] User ID being replied to
+      #   @param in_reply_to_user_id [String] ID of the user this result replies to.
       #
-      #   @param in_reply_to_username [String] Username being replied to
+      #   @param in_reply_to_username [String] Username this result replies to.
       #
       #   @param is_limited_reply [Boolean] Whether the tweet has limited reply permissions
       #
@@ -218,7 +218,7 @@ module XTwitterScraper
       #
       #   @param is_reply [Boolean] True when this search result is a reply
       #
-      #   @param lang [String] Tweet language code
+      #   @param lang [String] Search result language code.
       #
       #   @param media [Array<XTwitterScraper::Models::TweetMedia>] Search-result media attachments, omitted when no media is present
       #
@@ -230,7 +230,7 @@ module XTwitterScraper
       #
       #   @param type [String]
       #
-      #   @param url [String] Tweet permalink URL
+      #   @param url [String] Search result permalink.
     end
   end
 end

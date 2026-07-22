@@ -35,7 +35,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::CreditRetrieveTopupStatusResponse)
       end
       def retrieve_topup_status(
-        # Billing session ID returned by the top-up billing flow.
+        # Top-up session ID to inspect.
         session_id:,
         request_options: {}
       )

@@ -18,7 +18,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::GuestWalletCreateResponse)
       end
       def create(
-        # Body param: Confirmed USD amount in cents.
+        # Body param: USD cents accepted for this checkout.
         amount_minor:,
         # Header param: Generate a cryptographically random UUID v4. Reuse it only to
         # retry the same wallet and amount request. Initial wallet creation can recover
@@ -55,7 +55,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::GuestWalletTopupResponse)
       end
       def topup(
-        # Body param: Confirmed USD amount in cents.
+        # Body param: USD cents accepted for this checkout.
         amount_minor:,
         # Header param: Generate a cryptographically random UUID v4. Reuse it only to
         # retry the same wallet and amount request. Initial wallet creation can recover

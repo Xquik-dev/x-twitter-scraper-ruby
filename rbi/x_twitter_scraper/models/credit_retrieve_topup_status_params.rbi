@@ -14,7 +14,7 @@ module XTwitterScraper
           )
         end
 
-      # Billing session ID returned by the top-up billing flow.
+      # Top-up session ID to inspect.
       sig { returns(String) }
       attr_accessor :session_id
 
@@ -25,7 +25,7 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
-        # Billing session ID returned by the top-up billing flow.
+        # Top-up session ID to inspect.
         session_id:,
         request_options: {}
       )

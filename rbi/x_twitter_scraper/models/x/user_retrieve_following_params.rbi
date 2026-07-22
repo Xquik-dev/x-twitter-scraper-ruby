@@ -18,7 +18,7 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :id
 
-        # Legacy cursor alias. Prefer cursor.
+        # Deprecated following cursor alias. Prefer cursor.
         sig { returns(T.nilable(String)) }
         attr_reader :after
 
@@ -61,7 +61,7 @@ module XTwitterScraper
         end
         def self.new(
           id:,
-          # Legacy cursor alias. Prefer cursor.
+          # Deprecated following cursor alias. Prefer cursor.
           after: nil,
           # Pagination cursor for following list
           cursor: nil,

@@ -67,7 +67,7 @@ module XTwitterScraper
       sig { params(created_at: String).void }
       attr_writer :created_at
 
-      # Start and end offsets for rendered tweet text
+      # Rendered text's start and end offsets.
       sig { returns(T.nilable(T::Array[Integer])) }
       attr_reader :display_text_range
 
@@ -82,21 +82,21 @@ module XTwitterScraper
       sig { params(entities: T::Hash[Symbol, T.anything]).void }
       attr_writer :entities
 
-      # Tweet ID being replied to
+      # ID of the tweet this result replies to.
       sig { returns(T.nilable(String)) }
       attr_reader :in_reply_to_id
 
       sig { params(in_reply_to_id: String).void }
       attr_writer :in_reply_to_id
 
-      # User ID being replied to
+      # ID of the user this result replies to.
       sig { returns(T.nilable(String)) }
       attr_reader :in_reply_to_user_id
 
       sig { params(in_reply_to_user_id: String).void }
       attr_writer :in_reply_to_user_id
 
-      # Username being replied to
+      # Username this result replies to.
       sig { returns(T.nilable(String)) }
       attr_reader :in_reply_to_username
 
@@ -131,7 +131,7 @@ module XTwitterScraper
       sig { params(is_reply: T::Boolean).void }
       attr_writer :is_reply
 
-      # Tweet language code
+      # Search result language code.
       sig { returns(T.nilable(String)) }
       attr_reader :lang
 
@@ -178,7 +178,7 @@ module XTwitterScraper
       sig { params(type: String).void }
       attr_writer :type
 
-      # Tweet permalink URL
+      # Search result permalink.
       sig { returns(T.nilable(String)) }
       attr_reader :url
 
@@ -236,16 +236,16 @@ module XTwitterScraper
         # Root tweet ID for the search result conversation
         conversation_id: nil,
         created_at: nil,
-        # Start and end offsets for rendered tweet text
+        # Rendered text's start and end offsets.
         display_text_range: nil,
         # Parsed search-result entities including URLs, mentions, hashtags, and media
         # markers
         entities: nil,
-        # Tweet ID being replied to
+        # ID of the tweet this result replies to.
         in_reply_to_id: nil,
-        # User ID being replied to
+        # ID of the user this result replies to.
         in_reply_to_user_id: nil,
-        # Username being replied to
+        # Username this result replies to.
         in_reply_to_username: nil,
         # Whether the tweet has limited reply permissions
         is_limited_reply: nil,
@@ -255,7 +255,7 @@ module XTwitterScraper
         is_quote_status: nil,
         # True when this search result is a reply
         is_reply: nil,
-        # Tweet language code
+        # Search result language code.
         lang: nil,
         # Search-result media attachments, omitted when no media is present
         media: nil,
@@ -270,7 +270,7 @@ module XTwitterScraper
         # Client application used to post the tweet
         source: nil,
         type: nil,
-        # Tweet permalink URL
+        # Search result permalink.
         url: nil
       )
       end
