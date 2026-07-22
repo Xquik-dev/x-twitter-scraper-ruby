@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.5.1 (2026-07-22)
+
+Full Changelog: [v0.5.0...v0.5.1](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.5.0...v0.5.1)
+
+### Chores
+
+* sync generated SDK contracts ([855299c](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/855299c5db85833679c9377a9ba90b1c349d5a44))
+* verify final public contract ([b91af35](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/b91af355fc06443c5fcacca4ad6ade560577ddf2))
+
 ## 0.5.0 (2026-07-22)
 
 Full Changelog: [v0.4.5...v0.5.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.4.5...v0.5.0)
