@@ -9,13 +9,15 @@ require "minitest/test_task"
 require "rake/clean"
 require "rubocop/rake_task"
 
+require_relative "lib/x_twitter_scraper/version"
+
 tapioca = "sorbet/tapioca"
 examples = "examples"
 ignore_file = ".ignore"
 
 FILES_ENV = "FORMAT_FILE"
 
-CLEAN.push(*%w[.idea/ .ruby-lsp/ .yardoc/ doc/], *FileList["*.gem"], ignore_file)
+CLEAN.push(*%w[.idea/ .ruby-lsp/ .yardoc/ doc/ pkg/], ignore_file)
 
 CLOBBER.push(*%w[sorbet/rbi/annotations/ sorbet/rbi/gems/], tapioca)
 
@@ -157,8 +159,10 @@ multitask(:"build:docs") do
   sh(*%w[yard])
 end
 
+directory("pkg")
+
 desc("Build ruby gem")
-multitask(:"build:gem") do
+multitask(:"build:gem" => "pkg") do
   # optimizing for grepping through the gem bundle: many tools honour `.ignore` files, including VSCode
   #
   # both `rbi` and `sig` directories are navigable by their respective tool chains and therefore can be ignored by tools such as `rg`
@@ -167,11 +171,12 @@ multitask(:"build:gem") do
     sig/*
   GLOB
 
-  sh(*%w[gem build -- x_twitter_scraper.gemspec])
+  gem_file = "pkg/x-twitter-scraper-#{XTwitterScraper::VERSION}.gem"
+  sh(*%w[gem build --output], gem_file, *%w[-- x_twitter_scraper.gemspec])
   rm_rf(ignore_file)
 end
 
 desc("Release ruby gem")
 multitask(release: [:"build:gem"]) do
-  sh(*%w[gem push], *FileList["*.gem"])
+  sh(*%w[gem push], *FileList["pkg/*.gem"])
 end
