@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.4 (2026-07-23)
+
+Full Changelog: [v0.5.3...v0.5.4](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.5.3...v0.5.4)
+
+### Documentation
+
+* map common X data tasks ([#15](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/15)) ([754411a](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/754411a6aa38dfff58a29957258d2639a2b261ed))
+
 ## 0.5.3 (2026-07-22)
 
 Full Changelog: [v0.5.2...v0.5.3](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.5.2...v0.5.3)
