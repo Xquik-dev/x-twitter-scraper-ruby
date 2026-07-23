@@ -14,10 +14,11 @@ concurrency:
 jobs:
   publish:
     name: publish
-    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    runs-on: ubuntu-24.04
     environment: rubygems
     permissions:
-      contents: write
+      contents: read
       id-token: write
 
     steps:
@@ -32,3 +33,31 @@ jobs:
 
       - name: Publish to RubyGems.org
         uses: rubygems/release-gem@052cc82692552de3ef2b81fd670e41d13cba8092 # v1.4.0
+        with:
+          await-release: "false"
+
+      - name: Verify the published version
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          release_version="${RELEASE_TAG#v}"
+          if [[ ! "$release_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Release tag is not a supported version."
+            exit 1
+          fi
+
+          for attempt in {1..30}; do
+            if curl --connect-timeout 5 --fail --max-time 10 --silent \
+              "https://rubygems.org/api/v2/rubygems/x-twitter-scraper/versions/${release_version}.json" \
+              >/dev/null; then
+              echo "RubyGems.org reports version ${release_version}."
+              exit 0
+            fi
+            if (( attempt < 30 )); then
+              sleep 5
+            fi
+          done
+
+          echo "RubyGems.org did not report version ${release_version}."
+          exit 1
