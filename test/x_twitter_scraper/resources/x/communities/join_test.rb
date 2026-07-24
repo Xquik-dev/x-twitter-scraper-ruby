@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../../../test_helper"
 
 class XTwitterScraper::Test::Resources::X::Communities::JoinTest < XTwitterScraper::Test::ResourceTest
   def test_create_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.x.communities.join.create(
         "id",
@@ -67,8 +69,6 @@ class XTwitterScraper::Test::Resources::X::Communities::JoinTest < XTwitterScrap
   end
 
   def test_delete_all_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.x.communities.join.delete_all(
         "id",

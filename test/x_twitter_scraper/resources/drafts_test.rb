@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../test_helper"
 
 class XTwitterScraper::Test::Resources::DraftsTest < XTwitterScraper::Test::ResourceTest
   def test_create_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.drafts.create(text: "AI is the future of productivity")
 
     assert_pattern do
@@ -25,8 +27,6 @@ class XTwitterScraper::Test::Resources::DraftsTest < XTwitterScraper::Test::Reso
   end
 
   def test_retrieve
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.drafts.retrieve("id")
 
     assert_pattern do
@@ -46,8 +46,6 @@ class XTwitterScraper::Test::Resources::DraftsTest < XTwitterScraper::Test::Reso
   end
 
   def test_list
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.drafts.list
 
     assert_pattern do
@@ -64,8 +62,6 @@ class XTwitterScraper::Test::Resources::DraftsTest < XTwitterScraper::Test::Reso
   end
 
   def test_delete
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.drafts.delete("id")
 
     assert_pattern do

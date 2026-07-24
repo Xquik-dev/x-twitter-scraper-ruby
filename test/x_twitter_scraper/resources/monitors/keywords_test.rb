@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../../test_helper"
 
 class XTwitterScraper::Test::Resources::Monitors::KeywordsTest < XTwitterScraper::Test::ResourceTest
   def test_create_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.monitors.keywords.create(event_types: [:"tweet.new"], query: "xquik OR \"x api\"")
 
@@ -26,8 +28,6 @@ class XTwitterScraper::Test::Resources::Monitors::KeywordsTest < XTwitterScraper
   end
 
   def test_retrieve
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.monitors.keywords.retrieve("id")
 
     assert_pattern do
@@ -47,8 +47,6 @@ class XTwitterScraper::Test::Resources::Monitors::KeywordsTest < XTwitterScraper
   end
 
   def test_update
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.monitors.keywords.update("id")
 
     assert_pattern do
@@ -68,8 +66,6 @@ class XTwitterScraper::Test::Resources::Monitors::KeywordsTest < XTwitterScraper
   end
 
   def test_list
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.monitors.keywords.list
 
     assert_pattern do
@@ -85,8 +81,6 @@ class XTwitterScraper::Test::Resources::Monitors::KeywordsTest < XTwitterScraper
   end
 
   def test_deactivate
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.monitors.keywords.deactivate("id")
 
     assert_pattern do

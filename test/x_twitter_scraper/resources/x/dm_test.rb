@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../../test_helper"
 
 class XTwitterScraper::Test::Resources::X::DmTest < XTwitterScraper::Test::ResourceTest
   def test_retrieve_history_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.dm.retrieve_history("userId", account: "account")
 
     assert_pattern do
@@ -22,8 +24,6 @@ class XTwitterScraper::Test::Resources::X::DmTest < XTwitterScraper::Test::Resou
   end
 
   def test_send__required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.x.dm.send_(
         "userId",

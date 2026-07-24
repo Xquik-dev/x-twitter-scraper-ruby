@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../test_helper"
 
 class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::ResourceTest
   def test_retrieve
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.styles.retrieve("id")
 
     assert_pattern do
@@ -24,8 +26,6 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
   end
 
   def test_update_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.styles.update(
         "id",
@@ -49,8 +49,6 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
   end
 
   def test_list
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.styles.list
 
     assert_pattern do
@@ -65,8 +63,6 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
   end
 
   def test_delete
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.styles.delete("id")
 
     assert_pattern do
@@ -75,8 +71,6 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
   end
 
   def test_analyze_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.styles.analyze(username: "elonmusk")
 
     assert_pattern do
@@ -95,8 +89,6 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
   end
 
   def test_compare_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.styles.compare(username1: "username1", username2: "username2")
 
     assert_pattern do
@@ -112,8 +104,6 @@ class XTwitterScraper::Test::Resources::StylesTest < XTwitterScraper::Test::Reso
   end
 
   def test_get_performance
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.styles.get_performance("id")
 
     assert_pattern do

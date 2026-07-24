@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../test_helper"
 
 class XTwitterScraper::Test::Resources::EventsTest < XTwitterScraper::Test::ResourceTest
   def test_retrieve
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.events.retrieve("id")
 
     assert_pattern do
@@ -29,8 +31,6 @@ class XTwitterScraper::Test::Resources::EventsTest < XTwitterScraper::Test::Reso
   end
 
   def test_list
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.events.list
 
     assert_pattern do

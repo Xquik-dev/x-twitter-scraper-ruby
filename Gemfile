@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 source "https://rubygems.org"
@@ -5,6 +9,7 @@ source "https://rubygems.org"
 gemspec
 
 group :development do
+  gem "bundler-audit", "0.9.3"
   gem "rake"
   gem "rbs"
   gem "rubocop"

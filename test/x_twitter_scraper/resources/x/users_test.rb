@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../../test_helper"
 
 class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::ResourceTest
   def test_retrieve
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.users.retrieve("id")
 
     assert_pattern do
@@ -53,8 +55,6 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
   end
 
   def test_remove_follower_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.x.users.remove_follower(
         "id",
@@ -116,8 +116,6 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
   end
 
   def test_retrieve_batch_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.users.retrieve_batch(ids: "ids")
 
     assert_pattern do
@@ -139,8 +137,6 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
   end
 
   def test_retrieve_followers
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.users.retrieve_followers("id")
 
     assert_pattern do
@@ -157,8 +153,6 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
   end
 
   def test_retrieve_followers_you_know
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.users.retrieve_followers_you_know("id")
 
     assert_pattern do
@@ -175,8 +169,6 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
   end
 
   def test_retrieve_following
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.users.retrieve_following("id")
 
     assert_pattern do
@@ -193,8 +185,6 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
   end
 
   def test_retrieve_likes
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.users.retrieve_likes("id")
 
     assert_pattern do
@@ -211,8 +201,6 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
   end
 
   def test_retrieve_media
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.users.retrieve_media("id")
 
     assert_pattern do
@@ -229,8 +217,6 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
   end
 
   def test_retrieve_mentions
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.users.retrieve_mentions("id")
 
     assert_pattern do
@@ -247,8 +233,6 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
   end
 
   def test_retrieve_replies
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.users.retrieve_replies("id")
 
     assert_pattern do
@@ -265,8 +249,6 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
   end
 
   def test_retrieve_search_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.users.retrieve_search(q: "q")
 
     assert_pattern do
@@ -283,8 +265,6 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
   end
 
   def test_retrieve_tweets
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.users.retrieve_tweets("id")
 
     assert_pattern do
@@ -301,8 +281,6 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
   end
 
   def test_retrieve_verified_followers
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.users.retrieve_verified_followers("id")
 
     assert_pattern do

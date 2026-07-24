@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../../test_helper"
 
 class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::ResourceTest
   def test_create_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.tweets.create(account: "@elonmusk", idempotency_key: "Idempotency-Key")
 
     assert_pattern do
@@ -62,8 +64,6 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
   end
 
   def test_retrieve
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.tweets.retrieve("id")
 
     assert_pattern do
@@ -79,8 +79,6 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
   end
 
   def test_list_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.tweets.list(ids: "ids")
 
     assert_pattern do
@@ -97,8 +95,6 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
   end
 
   def test_delete_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.x.tweets.delete("id", account: "@elonmusk", idempotency_key: "Idempotency-Key")
 
@@ -156,8 +152,6 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
   end
 
   def test_get_favoriters
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.tweets.get_favoriters("id")
 
     assert_pattern do
@@ -174,8 +168,6 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
   end
 
   def test_get_quotes
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.tweets.get_quotes("id")
 
     assert_pattern do
@@ -192,8 +184,6 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
   end
 
   def test_get_replies
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.tweets.get_replies("id")
 
     assert_pattern do
@@ -210,8 +200,6 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
   end
 
   def test_get_retweeters
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.tweets.get_retweeters("id")
 
     assert_pattern do
@@ -228,8 +216,6 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
   end
 
   def test_get_thread
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.tweets.get_thread("id")
 
     assert_pattern do
@@ -246,8 +232,6 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
   end
 
   def test_search_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.tweets.search(q: "q")
 
     assert_pattern do
