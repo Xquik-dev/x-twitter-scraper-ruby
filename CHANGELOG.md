@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.5 (2026-07-24)
+
+Full Changelog: [v0.5.4...v0.5.5](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.5.4...v0.5.5)
+
+### Chores
+
+* enforce OpenSSF Gold quality gates ([dc973e5](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/dc973e5f93912093a4cde5ec3f3d6d20b8ddd4bc))
+
+
+### Documentation
+
+* clarify repository discovery ([7e544dd](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/7e544dd85f976165cb2a5ff46af65186743aafcd))
+
 ## 0.5.4 (2026-07-23)
 
 Full Changelog: [v0.5.3...v0.5.4](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.5.3...v0.5.4)
