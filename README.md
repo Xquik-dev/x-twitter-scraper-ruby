@@ -8,6 +8,12 @@ Use Xquik's typed Ruby client for X data and confirmed actions.
 
 Read the [Ruby SDK guide](https://docs.xquik.com/sdks/ruby), [API guide](https://docs.xquik.com/api-reference/overview), or [RubyDoc reference](https://gemdocs.org/gems/x-twitter-scraper).
 
+## Choose the Ruby SDK
+
+Choose this gem for Ruby services using typed request objects and Sorbet.
+Reuse one client for connection pooling in threaded applications.
+Use the SDK guide for generated method names.
+
 ## Common X Data Tasks
 
 Use the linked Ruby reference for typed method names.
@@ -240,6 +246,11 @@ This package considers improvements to the (non-runtime) `*.rbi` and `*.rbs` typ
 ## Requirements
 
 Ruby 3.2.0 or higher.
+
+## Security & Support
+
+- Report vulnerabilities through the [security policy](SECURITY.md).
+- Ask usage questions through the [organization support policy](https://github.com/Xquik-dev/.github/blob/main/SUPPORT.md).
 
 ## Contributing
 
