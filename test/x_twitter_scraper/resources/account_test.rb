@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../test_helper"
 
 class XTwitterScraper::Test::Resources::AccountTest < XTwitterScraper::Test::ResourceTest
   def test_retrieve
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.account.retrieve
 
     assert_pattern do
@@ -25,8 +27,6 @@ class XTwitterScraper::Test::Resources::AccountTest < XTwitterScraper::Test::Res
   end
 
   def test_set_x_username_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.account.set_x_username(username: "elonmusk")
 
     assert_pattern do
@@ -42,8 +42,6 @@ class XTwitterScraper::Test::Resources::AccountTest < XTwitterScraper::Test::Res
   end
 
   def test_update_locale_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.account.update_locale(locale: :en)
 
     assert_pattern do

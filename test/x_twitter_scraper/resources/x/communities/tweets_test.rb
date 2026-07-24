@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../../../test_helper"
 
 class XTwitterScraper::Test::Resources::X::Communities::TweetsTest < XTwitterScraper::Test::ResourceTest
   def test_list_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.communities.tweets.list(community_id: "321669910225", q: "q")
 
     assert_pattern do
@@ -22,8 +24,6 @@ class XTwitterScraper::Test::Resources::X::Communities::TweetsTest < XTwitterScr
   end
 
   def test_list_by_community
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.communities.tweets.list_by_community("id")
 
     assert_pattern do

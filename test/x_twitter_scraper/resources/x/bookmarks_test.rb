@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../../test_helper"
 
 class XTwitterScraper::Test::Resources::X::BookmarksTest < XTwitterScraper::Test::ResourceTest
   def test_list
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.bookmarks.list
 
     assert_pattern do
@@ -22,8 +24,6 @@ class XTwitterScraper::Test::Resources::X::BookmarksTest < XTwitterScraper::Test
   end
 
   def test_retrieve_folders
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.bookmarks.retrieve_folders
 
     assert_pattern do

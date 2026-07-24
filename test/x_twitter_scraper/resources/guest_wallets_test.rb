@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../test_helper"
 
 class XTwitterScraper::Test::Resources::GuestWalletsTest < XTwitterScraper::Test::ResourceTest
   def test_create_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.guest_wallets.create(
         amount_minor: 1000,
@@ -39,8 +41,6 @@ class XTwitterScraper::Test::Resources::GuestWalletsTest < XTwitterScraper::Test
   end
 
   def test_retrieve_status
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.guest_wallets.retrieve_status
 
     assert_pattern do
@@ -62,8 +62,6 @@ class XTwitterScraper::Test::Resources::GuestWalletsTest < XTwitterScraper::Test
   end
 
   def test_topup_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.guest_wallets.topup(
         amount_minor: 1000,

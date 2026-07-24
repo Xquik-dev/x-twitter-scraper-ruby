@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../test_helper"
 
 class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::ResourceTest
   def test_create_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.webhooks.create(
         event_types: [:"tweet.new", :"tweet.reply"],
@@ -28,8 +30,6 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
   end
 
   def test_update
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.webhooks.update("id")
 
     assert_pattern do
@@ -51,8 +51,6 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
   end
 
   def test_list
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.webhooks.list
 
     assert_pattern do
@@ -67,8 +65,6 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
   end
 
   def test_deactivate
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.webhooks.deactivate("id")
 
     assert_pattern do
@@ -83,8 +79,6 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
   end
 
   def test_list_deliveries
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.webhooks.list_deliveries("id")
 
     assert_pattern do
@@ -99,8 +93,6 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
   end
 
   def test_resume
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.webhooks.resume("id")
 
     assert_pattern do
@@ -117,8 +109,6 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
   end
 
   def test_test_
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.webhooks.test_("id")
 
     assert_pattern do

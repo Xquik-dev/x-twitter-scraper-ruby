@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../../test_helper"
 
 class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Test::ResourceTest
   def test_create_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.x.communities.create(
         account: "@elonmusk",
@@ -67,8 +69,6 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
   end
 
   def test_delete_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.x.communities.delete(
         "id",
@@ -131,8 +131,6 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
   end
 
   def test_retrieve_info
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.communities.retrieve_info("id")
 
     assert_pattern do
@@ -147,8 +145,6 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
   end
 
   def test_retrieve_members
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.communities.retrieve_members("id")
 
     assert_pattern do
@@ -165,8 +161,6 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
   end
 
   def test_retrieve_moderators
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.communities.retrieve_moderators("id")
 
     assert_pattern do
@@ -183,8 +177,6 @@ class XTwitterScraper::Test::Resources::X::CommunitiesTest < XTwitterScraper::Te
   end
 
   def test_retrieve_search_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.communities.retrieve_search(community_id: "321669910225", q: "q")
 
     assert_pattern do

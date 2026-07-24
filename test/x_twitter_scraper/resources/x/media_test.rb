@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../../test_helper"
 
 class XTwitterScraper::Test::Resources::X::MediaTest < XTwitterScraper::Test::ResourceTest
   def test_download
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.media.download
 
     assert_pattern do
@@ -24,8 +26,6 @@ class XTwitterScraper::Test::Resources::X::MediaTest < XTwitterScraper::Test::Re
   end
 
   def test_upload_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.x.media.upload(
         account: "@elonmusk",

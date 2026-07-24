@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../test_helper"
 
 class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::ResourceTest
   def test_create_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.monitors.create(event_types: [:"tweet.new", :"tweet.reply"], username: "elonmusk")
 
@@ -27,8 +29,6 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
   end
 
   def test_retrieve
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.monitors.retrieve("id")
 
     assert_pattern do
@@ -49,8 +49,6 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
   end
 
   def test_update
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.monitors.update("id")
 
     assert_pattern do
@@ -71,8 +69,6 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
   end
 
   def test_list
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.monitors.list
 
     assert_pattern do
@@ -88,8 +84,6 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
   end
 
   def test_deactivate
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.monitors.deactivate("id")
 
     assert_pattern do

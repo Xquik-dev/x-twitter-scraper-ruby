@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../test_helper"
 
 class XTwitterScraper::Test::Resources::XTest < XTwitterScraper::Test::ResourceTest
   def test_get_article
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.get_article("tweetId")
 
     assert_pattern do
@@ -21,8 +23,6 @@ class XTwitterScraper::Test::Resources::XTest < XTwitterScraper::Test::ResourceT
   end
 
   def test_get_home_timeline
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.get_home_timeline
 
     assert_pattern do
@@ -39,8 +39,6 @@ class XTwitterScraper::Test::Resources::XTest < XTwitterScraper::Test::ResourceT
   end
 
   def test_get_notifications
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.get_notifications
 
     assert_pattern do
@@ -57,8 +55,6 @@ class XTwitterScraper::Test::Resources::XTest < XTwitterScraper::Test::ResourceT
   end
 
   def test_get_trends
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.get_trends
 
     assert_pattern do

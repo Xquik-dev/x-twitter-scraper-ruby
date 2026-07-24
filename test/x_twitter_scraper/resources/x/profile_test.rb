@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../../test_helper"
 
 class XTwitterScraper::Test::Resources::X::ProfileTest < XTwitterScraper::Test::ResourceTest
   def test_update_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.x.profile.update(account: "@elonmusk", idempotency_key: "Idempotency-Key")
 
     assert_pattern do
@@ -62,8 +64,6 @@ class XTwitterScraper::Test::Resources::X::ProfileTest < XTwitterScraper::Test::
   end
 
   def test_update_avatar_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.x.profile.update_avatar(
         account: "@elonmusk",
@@ -125,8 +125,6 @@ class XTwitterScraper::Test::Resources::X::ProfileTest < XTwitterScraper::Test::
   end
 
   def test_update_banner_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.x.profile.update_banner(
         account: "@elonmusk",

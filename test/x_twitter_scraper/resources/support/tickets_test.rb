@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../../test_helper"
 
 class XTwitterScraper::Test::Resources::Support::TicketsTest < XTwitterScraper::Test::ResourceTest
   def test_create_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.support.tickets.create(
         body: "I am unable to connect my X account. Please help.",
@@ -25,8 +27,6 @@ class XTwitterScraper::Test::Resources::Support::TicketsTest < XTwitterScraper::
   end
 
   def test_retrieve
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.support.tickets.retrieve("tkt_a1b2c3d4e5f6a1b2c3d4e5f6")
 
     assert_pattern do
@@ -46,8 +46,6 @@ class XTwitterScraper::Test::Resources::Support::TicketsTest < XTwitterScraper::
   end
 
   def test_update_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.support.tickets.update("tkt_a1b2c3d4e5f6a1b2c3d4e5f6", status: :resolved)
 
     assert_pattern do
@@ -63,8 +61,6 @@ class XTwitterScraper::Test::Resources::Support::TicketsTest < XTwitterScraper::
   end
 
   def test_list
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.support.tickets.list
 
     assert_pattern do
@@ -79,8 +75,6 @@ class XTwitterScraper::Test::Resources::Support::TicketsTest < XTwitterScraper::
   end
 
   def test_reply_required_params
-    skip("Mock server tests are disabled")
-
     response =
       @x_twitter_scraper.support.tickets.reply(
         "tkt_a1b2c3d4e5f6a1b2c3d4e5f6",

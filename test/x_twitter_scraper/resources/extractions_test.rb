@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../test_helper"
 
 class XTwitterScraper::Test::Resources::ExtractionsTest < XTwitterScraper::Test::ResourceTest
   def test_retrieve
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.extractions.retrieve("id")
 
     assert_pattern do
@@ -23,8 +25,6 @@ class XTwitterScraper::Test::Resources::ExtractionsTest < XTwitterScraper::Test:
   end
 
   def test_list
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.extractions.list
 
     assert_pattern do
@@ -41,8 +41,6 @@ class XTwitterScraper::Test::Resources::ExtractionsTest < XTwitterScraper::Test:
   end
 
   def test_estimate_cost_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.extractions.estimate_cost(tool_type: :follower_explorer)
 
     assert_pattern do
@@ -62,8 +60,6 @@ class XTwitterScraper::Test::Resources::ExtractionsTest < XTwitterScraper::Test:
   end
 
   def test_export_results_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.extractions.export_results("id", format_: :csv)
 
     assert_pattern do
@@ -72,8 +68,6 @@ class XTwitterScraper::Test::Resources::ExtractionsTest < XTwitterScraper::Test:
   end
 
   def test_run_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.extractions.run(tool_type: :follower_explorer)
 
     assert_pattern do

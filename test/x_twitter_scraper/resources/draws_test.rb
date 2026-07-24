@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../test_helper"
 
 class XTwitterScraper::Test::Resources::DrawsTest < XTwitterScraper::Test::ResourceTest
   def test_retrieve
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.draws.retrieve("f4bd00a2-7b4e-4e59-8e1b-72e2c9f12345")
 
     assert_pattern do
@@ -21,8 +23,6 @@ class XTwitterScraper::Test::Resources::DrawsTest < XTwitterScraper::Test::Resou
   end
 
   def test_list
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.draws.list
 
     assert_pattern do
@@ -39,8 +39,6 @@ class XTwitterScraper::Test::Resources::DrawsTest < XTwitterScraper::Test::Resou
   end
 
   def test_export_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.draws.export("f4bd00a2-7b4e-4e59-8e1b-72e2c9f12345", format_: :csv)
 
     assert_pattern do
@@ -49,8 +47,6 @@ class XTwitterScraper::Test::Resources::DrawsTest < XTwitterScraper::Test::Resou
   end
 
   def test_run_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.draws.run(tweet_url: "https://x.com/elonmusk/status/1234567890")
 
     assert_pattern do

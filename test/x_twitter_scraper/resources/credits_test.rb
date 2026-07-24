@@ -1,11 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 require_relative "../test_helper"
 
 class XTwitterScraper::Test::Resources::CreditsTest < XTwitterScraper::Test::ResourceTest
   def test_redirect_topup_checkout_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.credits.redirect_topup_checkout(session_id: "session_id")
 
     assert_pattern do
@@ -14,8 +16,6 @@ class XTwitterScraper::Test::Resources::CreditsTest < XTwitterScraper::Test::Res
   end
 
   def test_retrieve_balance
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.credits.retrieve_balance
 
     assert_pattern do
@@ -35,8 +35,6 @@ class XTwitterScraper::Test::Resources::CreditsTest < XTwitterScraper::Test::Res
   end
 
   def test_retrieve_topup_status_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.credits.retrieve_topup_status(session_id: "session_id")
 
     assert_pattern do
@@ -53,8 +51,6 @@ class XTwitterScraper::Test::Resources::CreditsTest < XTwitterScraper::Test::Res
   end
 
   def test_topup_balance_required_params
-    skip("Mock server tests are disabled")
-
     response = @x_twitter_scraper.credits.topup_balance(dollars: 10)
 
     assert_pattern do

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 module XTwitterScraper
   module Models
     type credit_retrieve_topup_status_response =

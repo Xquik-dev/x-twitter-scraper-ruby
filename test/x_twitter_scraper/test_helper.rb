@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # frozen_string_literal: true
 
 # Requiring this file from each test file ensures we always do the following, even
@@ -19,6 +23,7 @@ require "webmock/minitest"
 
 require_relative "../../lib/x_twitter_scraper"
 require_relative "resource_namespaces"
+require_relative "mock_payload"
 
 module Kernel
   alias_method :_sleep, :sleep
@@ -52,6 +57,21 @@ class XTwitterScraper::Test::SingletonClient < XTwitterScraper::Client
       base_url: XTwitterScraper::Test::SingletonClient::TEST_API_BASE_URL,
       api_key: "My API Key",
       bearer_token: "My Bearer Token"
+    )
+  end
+
+  def request(req)
+    self.class.validate!(req)
+    options = req[:options].to_h
+    XTwitterScraper::RequestOptions.validate!(options)
+    build_request(req.except(:options), options)
+
+    model = req.fetch(:model) { XTwitterScraper::Internal::Type::Unknown }
+    return StringIO.new("fixture") if model == StringIO
+
+    XTwitterScraper::Internal::Type::Converter.coerce(
+      model,
+      XTwitterScraper::Test::MockPayload.example(model)
     )
   end
 end
