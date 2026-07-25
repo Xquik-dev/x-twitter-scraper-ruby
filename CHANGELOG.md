@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.6 (2026-07-24)
+
+Full Changelog: [v0.5.5...v0.5.6](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.5.5...v0.5.6)
+
 ## 0.5.5 (2026-07-24)
 
 Full Changelog: [v0.5.4...v0.5.5](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.5.4...v0.5.5)
