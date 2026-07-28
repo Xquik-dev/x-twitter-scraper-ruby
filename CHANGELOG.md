@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.5.7 (2026-07-28)
+
+Full Changelog: [v0.5.6...v0.5.7](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.5.6...v0.5.7)
+
+### Chores
+
+* **deps:** bump actions/checkout from 6.0.2 to 7.0.1 ([#22](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/22)) ([6dac448](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/6dac44882cefffee705e4dbf465f03983ca4cdc4))
+* **deps:** bump ruby/setup-ruby from 1.306.0 to 1.319.0 ([#23](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/23)) ([d4137aa](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/d4137aadaaa8ac17c3b7bd425106b094951d9870))
+
 ## 0.5.6 (2026-07-24)
 
 Full Changelog: [v0.5.5...v0.5.6](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.5.5...v0.5.6)
