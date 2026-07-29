@@ -24,7 +24,7 @@ module XTwitterScraper
         sig { returns(Time) }
         attr_accessor :created_at
 
-        # Derived connection health. `healthy` = session active. `needsReauth` = user must
+        # Derived connection health. `healthy` = ready to use. `needsReauth` = user must
         # submit fresh credentials. `locked` = X locked the account; unlock on x.com
         # first. `suspended` = X banned the account. `recovering` = cooldown ended; the
         # account can reconnect on its next use. `temporaryIssue` = temporary connection
@@ -66,7 +66,7 @@ module XTwitterScraper
         def self.new(
           id:,
           created_at:,
-          # Derived connection health. `healthy` = session active. `needsReauth` = user must
+          # Derived connection health. `healthy` = ready to use. `needsReauth` = user must
           # submit fresh credentials. `locked` = X locked the account; unlock on x.com
           # first. `suspended` = X banned the account. `recovering` = cooldown ended; the
           # account can reconnect on its next use. `temporaryIssue` = temporary connection
@@ -97,7 +97,7 @@ module XTwitterScraper
         def to_hash
         end
 
-        # Derived connection health. `healthy` = session active. `needsReauth` = user must
+        # Derived connection health. `healthy` = ready to use. `needsReauth` = user must
         # submit fresh credentials. `locked` = X locked the account; unlock on x.com
         # first. `suspended` = X banned the account. `recovering` = cooldown ended; the
         # account can reconnect on its next use. `temporaryIssue` = temporary connection
