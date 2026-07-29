@@ -10,7 +10,7 @@ module XTwitterScraper
         category: XTwitterScraper::Models::RadarItem::category,
         created_at: Time,
         language: String,
-        metadata: ::Hash[Symbol, top],
+        metadata: XTwitterScraper::RadarItem::Metadata,
         published_at: Time,
         region: String,
         score: Float,
@@ -31,7 +31,7 @@ module XTwitterScraper
 
       attr_accessor language: String
 
-      attr_accessor metadata: ::Hash[Symbol, top]
+      attr_accessor metadata: XTwitterScraper::RadarItem::Metadata
 
       attr_accessor published_at: Time
 
@@ -62,7 +62,7 @@ module XTwitterScraper
         category: XTwitterScraper::Models::RadarItem::category,
         created_at: Time,
         language: String,
-        metadata: ::Hash[Symbol, top],
+        metadata: XTwitterScraper::RadarItem::Metadata,
         published_at: Time,
         region: String,
         score: Float,
@@ -79,7 +79,7 @@ module XTwitterScraper
         category: XTwitterScraper::Models::RadarItem::category,
         created_at: Time,
         language: String,
-        metadata: ::Hash[Symbol, top],
+        metadata: XTwitterScraper::RadarItem::Metadata,
         published_at: Time,
         region: String,
         score: Float,
@@ -114,6 +114,102 @@ module XTwitterScraper
         ENTERTAINMENT: :entertainment
 
         def self?.values: -> ::Array[XTwitterScraper::Models::RadarItem::category]
+      end
+
+      type metadata =
+        {
+          author: String,
+          content_url: String,
+          estimated_downvotes: Integer,
+          estimated_upvotes: Integer,
+          number_comments: Integer,
+          score: Integer,
+          selftext: String,
+          source_format: XTwitterScraper::Models::RadarItem::Metadata::source_format,
+          subreddit: String,
+          upvote_ratio: Float
+        }
+
+      class Metadata < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader author: String?
+
+        def author=: (String) -> String
+
+        attr_reader content_url: String?
+
+        def content_url=: (String) -> String
+
+        attr_reader estimated_downvotes: Integer?
+
+        def estimated_downvotes=: (Integer) -> Integer
+
+        attr_reader estimated_upvotes: Integer?
+
+        def estimated_upvotes=: (Integer) -> Integer
+
+        attr_reader number_comments: Integer?
+
+        def number_comments=: (Integer) -> Integer
+
+        attr_reader score: Integer?
+
+        def score=: (Integer) -> Integer
+
+        attr_reader selftext: String?
+
+        def selftext=: (String) -> String
+
+        attr_reader source_format: XTwitterScraper::Models::RadarItem::Metadata::source_format?
+
+        def source_format=: (
+          XTwitterScraper::Models::RadarItem::Metadata::source_format
+        ) -> XTwitterScraper::Models::RadarItem::Metadata::source_format
+
+        attr_reader subreddit: String?
+
+        def subreddit=: (String) -> String
+
+        attr_reader upvote_ratio: Float?
+
+        def upvote_ratio=: (Float) -> Float
+
+        def initialize: (
+          ?author: String,
+          ?content_url: String,
+          ?estimated_downvotes: Integer,
+          ?estimated_upvotes: Integer,
+          ?number_comments: Integer,
+          ?score: Integer,
+          ?selftext: String,
+          ?source_format: XTwitterScraper::Models::RadarItem::Metadata::source_format,
+          ?subreddit: String,
+          ?upvote_ratio: Float
+        ) -> void
+
+        def to_hash: -> {
+          author: String,
+          content_url: String,
+          estimated_downvotes: Integer,
+          estimated_upvotes: Integer,
+          number_comments: Integer,
+          score: Integer,
+          selftext: String,
+          source_format: XTwitterScraper::Models::RadarItem::Metadata::source_format,
+          subreddit: String,
+          upvote_ratio: Float
+        }
+
+        type source_format = :html | :json | :rss
+
+        module SourceFormat
+          extend XTwitterScraper::Internal::Type::Enum
+
+          HTML: :html
+          JSON: :json
+          RSS: :rss
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::RadarItem::Metadata::source_format]
+        end
       end
 
       type source =

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.0 (2026-07-29)
+
+Full Changelog: [v0.5.7...v0.6.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.5.7...v0.6.0)
+
+### Features
+
+* **api:** api update ([d172abc](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/d172abc0808630d97fdf92e38903f60519a34ae1))
+* **api:** api update ([7696e0c](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/7696e0cb8c594b5c71fe1813dc84012100afb3fc))
+
 ## 0.5.7 (2026-07-28)
 
 Full Changelog: [v0.5.6...v0.5.7](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.5.6...v0.5.7)

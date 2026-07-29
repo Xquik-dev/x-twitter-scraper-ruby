@@ -12,22 +12,12 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
       @x_twitter_scraper.x.accounts.create(
         email: "account@example.invalid",
         password: "<ACCOUNT_PASSWORD>",
+        totp_secret: "<TOTP_SECRET>",
         username: "your_x_username"
       )
 
     assert_pattern do
-      response => XTwitterScraper::Models::X::AccountCreateResponse
-    end
-
-    assert_pattern do
-      response => {
-        id: String,
-        created_at: Time,
-        health: XTwitterScraper::Models::X::AccountCreateResponse::Health,
-        status: String,
-        x_user_id: String,
-        x_username: String
-      }
+      response => XTwitterScraper::Internal::Type::Unknown
     end
   end
 

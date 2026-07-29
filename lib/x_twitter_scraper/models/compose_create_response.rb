@@ -57,6 +57,14 @@ module XTwitterScraper
         #   @return [String]
         required :next_step, String, api_name: :nextStep
 
+        # @!attribute radar_recommendations
+        #   Sources and guidance for researching a fresh post angle.
+        #
+        #   @return [Array<XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation>]
+        required :radar_recommendations,
+                 -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation] },
+                 api_name: :radarRecommendations
+
         # @!attribute scorer_weights
         #   Published signal names with unpublished weights as null.
         #
@@ -97,7 +105,7 @@ module XTwitterScraper
         #   @return [Array<String>, nil]
         optional :style_tweets, XTwitterScraper::Internal::Type::ArrayOf[String], api_name: :styleTweets
 
-        # @!method initialize(content_rules:, engagement_multipliers:, engagement_velocity:, follow_up_questions:, intent_url:, next_step:, scorer_weights:, source:, top_penalties:, saved_styles: nil, style_note: nil, style_tweets: nil)
+        # @!method initialize(content_rules:, engagement_multipliers:, engagement_velocity:, follow_up_questions:, intent_url:, next_step:, radar_recommendations:, scorer_weights:, source:, top_penalties:, saved_styles: nil, style_note: nil, style_tweets: nil)
         #   Some parameter documentations has been truncated, see
         #   {XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult} for more
         #   details.
@@ -113,6 +121,8 @@ module XTwitterScraper
         #   @param intent_url [String] X post intent seeded with the topic.
         #
         #   @param next_step [String]
+        #
+        #   @param radar_recommendations [Array<XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation>] Sources and guidance for researching a fresh post angle.
         #
         #   @param scorer_weights [Array<XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::ScorerWeight>] Published signal names with unpublished weights as null.
         #
@@ -152,6 +162,57 @@ module XTwitterScraper
           #   @param action [String] Human-readable published signal name.
           #
           #   @param multiplier [Symbol, :"Production weight not published by X"]
+        end
+
+        class RadarRecommendation < XTwitterScraper::Internal::Type::BaseModel
+          # @!attribute endpoint
+          #   Radar endpoint for this source.
+          #
+          #   @return [String]
+          required :endpoint, String
+
+          # @!attribute guidance
+          #   Source-specific drafting guidance.
+          #
+          #   @return [String]
+          required :guidance, String
+
+          # @!attribute source
+          #
+          #   @return [Symbol, XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::Source]
+          required :source,
+                   enum: -> { XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::Source }
+
+          # @!attribute use_for
+          #   Current-topic research this source supports.
+          #
+          #   @return [String]
+          required :use_for, String, api_name: :useFor
+
+          # @!method initialize(endpoint:, guidance:, source:, use_for:)
+          #   @param endpoint [String] Radar endpoint for this source.
+          #
+          #   @param guidance [String] Source-specific drafting guidance.
+          #
+          #   @param source [Symbol, XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::Source]
+          #
+          #   @param use_for [String] Current-topic research this source supports.
+
+          # @see XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation#source
+          module Source
+            extend XTwitterScraper::Internal::Type::Enum
+
+            REDDIT = :reddit
+            GITHUB = :github
+            TRUSTMRR = :trustmrr
+            HACKER_NEWS = :hacker_news
+            GOOGLE_TRENDS = :google_trends
+            WIKIPEDIA = :wikipedia
+            POLYMARKET = :polymarket
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
         end
 
         class ScorerWeight < XTwitterScraper::Internal::Type::BaseModel

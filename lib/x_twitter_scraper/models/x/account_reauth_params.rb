@@ -30,7 +30,7 @@ module XTwitterScraper
         optional :email, String
 
         # @!attribute totp_secret
-        #   TOTP secret for 2FA re-authentication
+        #   Replacement Authenticator App TOTP secret. Omit it to reuse the saved secret.
         #
         #   @return [String, nil]
         optional :totp_secret, String
@@ -42,7 +42,7 @@ module XTwitterScraper
         #
         #   @param email [String] Email for the X account (updates stored email)
         #
-        #   @param totp_secret [String] TOTP secret for 2FA re-authentication
+        #   @param totp_secret [String] Replacement Authenticator App TOTP secret. Omit it to reuse the saved secret.
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end
