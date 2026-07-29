@@ -15,7 +15,7 @@ module XTwitterScraper
         required :created_at, Time, api_name: :createdAt
 
         # @!attribute health
-        #   Derived connection health. `healthy` = session active. `needsReauth` = user must
+        #   Derived connection health. `healthy` = ready to use. `needsReauth` = user must
         #   submit fresh credentials. `locked` = X locked the account; unlock on x.com
         #   first. `suspended` = X banned the account. `recovering` = cooldown ended; the
         #   account can reconnect on its next use. `temporaryIssue` = temporary connection
@@ -59,7 +59,7 @@ module XTwitterScraper
         #
         #   @param created_at [Time]
         #
-        #   @param health [Symbol, XTwitterScraper::Models::X::XAccount::Health] Derived connection health. `healthy` = session active. `needsReauth` = user must
+        #   @param health [Symbol, XTwitterScraper::Models::X::XAccount::Health] Derived connection health. `healthy` = ready to use. `needsReauth` = user must s
         #
         #   @param status [String]
         #
@@ -71,7 +71,7 @@ module XTwitterScraper
         #
         #   @param cookies_obtained_at [Time]
 
-        # Derived connection health. `healthy` = session active. `needsReauth` = user must
+        # Derived connection health. `healthy` = ready to use. `needsReauth` = user must
         # submit fresh credentials. `locked` = X locked the account; unlock on x.com
         # first. `suspended` = X banned the account. `recovering` = cooldown ended; the
         # account can reconnect on its next use. `temporaryIssue` = temporary connection
