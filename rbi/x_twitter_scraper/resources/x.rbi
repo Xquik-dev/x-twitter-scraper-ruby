@@ -44,6 +44,10 @@ module XTwitterScraper
       end
       attr_reader :account_connection_challenges
 
+      # Connected X account management
+      sig { returns(XTwitterScraper::Resources::X::AccountConnectionAttempts) }
+      attr_reader :account_connection_attempts
+
       # Look up, search, and analyze individual tweets
       sig { returns(XTwitterScraper::Resources::X::Bookmarks) }
       attr_reader :bookmarks

@@ -26,9 +26,9 @@ module XTwitterScraper
 
         # Derived connection health. `healthy` = session active. `needsReauth` = user must
         # submit fresh credentials. `locked` = X locked the account; unlock on x.com
-        # first. `suspended` = X banned the account. `recovering` = past cooldown, will
-        # auto-retry on next use. `temporaryIssue` = temporary connection problem; retry
-        # shortly.
+        # first. `suspended` = X banned the account. `recovering` = cooldown ended; the
+        # account can reconnect on its next use. `temporaryIssue` = temporary connection
+        # problem; wait before the next use.
         sig { returns(XTwitterScraper::X::XAccount::Health::TaggedSymbol) }
         attr_accessor :health
 
@@ -68,9 +68,9 @@ module XTwitterScraper
           created_at:,
           # Derived connection health. `healthy` = session active. `needsReauth` = user must
           # submit fresh credentials. `locked` = X locked the account; unlock on x.com
-          # first. `suspended` = X banned the account. `recovering` = past cooldown, will
-          # auto-retry on next use. `temporaryIssue` = temporary connection problem; retry
-          # shortly.
+          # first. `suspended` = X banned the account. `recovering` = cooldown ended; the
+          # account can reconnect on its next use. `temporaryIssue` = temporary connection
+          # problem; wait before the next use.
           health:,
           status:,
           updated_at:,
@@ -99,9 +99,9 @@ module XTwitterScraper
 
         # Derived connection health. `healthy` = session active. `needsReauth` = user must
         # submit fresh credentials. `locked` = X locked the account; unlock on x.com
-        # first. `suspended` = X banned the account. `recovering` = past cooldown, will
-        # auto-retry on next use. `temporaryIssue` = temporary connection problem; retry
-        # shortly.
+        # first. `suspended` = X banned the account. `recovering` = cooldown ended; the
+        # account can reconnect on its next use. `temporaryIssue` = temporary connection
+        # problem; wait before the next use.
         module Health
           extend XTwitterScraper::Internal::Type::Enum
 

@@ -20,6 +20,7 @@ module XTwitterScraper
           follow_up_questions: ::Array[String],
           intent_url: String,
           next_step: String,
+          radar_recommendations: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation],
           scorer_weights: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::ScorerWeight],
           source: String,
           top_penalties: ::Array[String],
@@ -40,6 +41,8 @@ module XTwitterScraper
         attr_accessor intent_url: String
 
         attr_accessor next_step: String
+
+        attr_accessor radar_recommendations: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation]
 
         attr_accessor scorer_weights: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::ScorerWeight]
 
@@ -68,6 +71,7 @@ module XTwitterScraper
           follow_up_questions: ::Array[String],
           intent_url: String,
           next_step: String,
+          radar_recommendations: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation],
           scorer_weights: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::ScorerWeight],
           source: String,
           top_penalties: ::Array[String],
@@ -83,6 +87,7 @@ module XTwitterScraper
           follow_up_questions: ::Array[String],
           intent_url: String,
           next_step: String,
+          radar_recommendations: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation],
           scorer_weights: ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::ScorerWeight],
           source: String,
           top_penalties: ::Array[String],
@@ -121,6 +126,61 @@ module XTwitterScraper
             action: String,
             multiplier: :"Production weight not published by X"
           }
+        end
+
+        type radar_recommendation =
+          {
+            endpoint: String,
+            guidance: String,
+            source: XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::source,
+            use_for: String
+          }
+
+        class RadarRecommendation < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor endpoint: String
+
+          attr_accessor guidance: String
+
+          attr_accessor source: XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::source
+
+          attr_accessor use_for: String
+
+          def initialize: (
+            endpoint: String,
+            guidance: String,
+            source: XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::source,
+            use_for: String
+          ) -> void
+
+          def to_hash: -> {
+            endpoint: String,
+            guidance: String,
+            source: XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::source,
+            use_for: String
+          }
+
+          type source =
+            :reddit
+            | :github
+            | :trustmrr
+            | :hacker_news
+            | :google_trends
+            | :wikipedia
+            | :polymarket
+
+          module Source
+            extend XTwitterScraper::Internal::Type::Enum
+
+            REDDIT: :reddit
+            GITHUB: :github
+            TRUSTMRR: :trustmrr
+            HACKER_NEWS: :hacker_news
+            GOOGLE_TRENDS: :google_trends
+            WIKIPEDIA: :wikipedia
+            POLYMARKET: :polymarket
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::source]
+          end
         end
 
         type scorer_weight = { context: String, signal: String, weight: nil }

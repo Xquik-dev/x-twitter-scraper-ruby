@@ -25,6 +25,8 @@ module XTwitterScraper
 
       attr_reader account_connection_challenges: XTwitterScraper::Resources::X::AccountConnectionChallenges
 
+      attr_reader account_connection_attempts: XTwitterScraper::Resources::X::AccountConnectionAttempts
+
       attr_reader bookmarks: XTwitterScraper::Resources::X::Bookmarks
 
       attr_reader lists: XTwitterScraper::Resources::X::Lists
