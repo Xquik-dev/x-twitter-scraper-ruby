@@ -5,8 +5,8 @@ module XTwitterScraper
         {
           email: String,
           password: String,
-          username: String,
-          totp_secret: String
+          totp_secret: String,
+          username: String
         }
         & XTwitterScraper::Internal::Type::request_parameters
 
@@ -18,25 +18,23 @@ module XTwitterScraper
 
         attr_accessor password: String
 
+        attr_accessor totp_secret: String
+
         attr_accessor username: String
-
-        attr_reader totp_secret: String?
-
-        def totp_secret=: (String) -> String
 
         def initialize: (
           email: String,
           password: String,
+          totp_secret: String,
           username: String,
-          ?totp_secret: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
         def to_hash: -> {
           email: String,
           password: String,
-          username: String,
           totp_secret: String,
+          username: String,
           request_options: XTwitterScraper::RequestOptions
         }
       end

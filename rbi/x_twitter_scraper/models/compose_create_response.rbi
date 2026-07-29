@@ -57,6 +57,16 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :next_step
 
+        # Sources and guidance for researching a fresh post angle.
+        sig do
+          returns(
+            T::Array[
+              XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation
+            ]
+          )
+        end
+        attr_accessor :radar_recommendations
+
         # Published signal names with unpublished weights as null.
         sig do
           returns(
@@ -125,6 +135,10 @@ module XTwitterScraper
             follow_up_questions: T::Array[String],
             intent_url: String,
             next_step: String,
+            radar_recommendations:
+              T::Array[
+                XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::OrHash
+              ],
             scorer_weights:
               T::Array[
                 XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::ScorerWeight::OrHash
@@ -150,6 +164,8 @@ module XTwitterScraper
           # X post intent seeded with the topic.
           intent_url:,
           next_step:,
+          # Sources and guidance for researching a fresh post angle.
+          radar_recommendations:,
           # Published signal names with unpublished weights as null.
           scorer_weights:,
           # Signal source and evidence limits.
@@ -180,6 +196,10 @@ module XTwitterScraper
               follow_up_questions: T::Array[String],
               intent_url: String,
               next_step: String,
+              radar_recommendations:
+                T::Array[
+                  XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation
+                ],
               scorer_weights:
                 T::Array[
                   XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::ScorerWeight
@@ -247,6 +267,128 @@ module XTwitterScraper
 
           sig { override.returns({ action: String, multiplier: Symbol }) }
           def to_hash
+          end
+        end
+
+        class RadarRecommendation < XTwitterScraper::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation,
+                XTwitterScraper::Internal::AnyHash
+              )
+            end
+
+          # Radar endpoint for this source.
+          sig { returns(String) }
+          attr_accessor :endpoint
+
+          # Source-specific drafting guidance.
+          sig { returns(String) }
+          attr_accessor :guidance
+
+          sig do
+            returns(
+              XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::Source::TaggedSymbol
+            )
+          end
+          attr_accessor :source
+
+          # Current-topic research this source supports.
+          sig { returns(String) }
+          attr_accessor :use_for
+
+          sig do
+            params(
+              endpoint: String,
+              guidance: String,
+              source:
+                XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::Source::OrSymbol,
+              use_for: String
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            # Radar endpoint for this source.
+            endpoint:,
+            # Source-specific drafting guidance.
+            guidance:,
+            source:,
+            # Current-topic research this source supports.
+            use_for:
+          )
+          end
+
+          sig do
+            override.returns(
+              {
+                endpoint: String,
+                guidance: String,
+                source:
+                  XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::Source::TaggedSymbol,
+                use_for: String
+              }
+            )
+          end
+          def to_hash
+          end
+
+          module Source
+            extend XTwitterScraper::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::Source
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            REDDIT =
+              T.let(
+                :reddit,
+                XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::Source::TaggedSymbol
+              )
+            GITHUB =
+              T.let(
+                :github,
+                XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::Source::TaggedSymbol
+              )
+            TRUSTMRR =
+              T.let(
+                :trustmrr,
+                XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::Source::TaggedSymbol
+              )
+            HACKER_NEWS =
+              T.let(
+                :hacker_news,
+                XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::Source::TaggedSymbol
+              )
+            GOOGLE_TRENDS =
+              T.let(
+                :google_trends,
+                XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::Source::TaggedSymbol
+              )
+            WIKIPEDIA =
+              T.let(
+                :wikipedia,
+                XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::Source::TaggedSymbol
+              )
+            POLYMARKET =
+              T.let(
+                :polymarket,
+                XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::Source::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::RadarRecommendation::Source::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
           end
         end
 

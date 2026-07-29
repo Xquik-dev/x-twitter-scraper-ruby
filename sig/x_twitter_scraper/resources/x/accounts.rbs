@@ -5,10 +5,10 @@ module XTwitterScraper
         def create: (
           email: String,
           password: String,
+          totp_secret: String,
           username: String,
-          ?totp_secret: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::AccountCreateResponse
+        ) -> top
 
         def retrieve: (
           String id,

@@ -20,26 +20,26 @@ module XTwitterScraper
         #   @return [String]
         required :password, String
 
+        # @!attribute totp_secret
+        #   Authenticator App TOTP secret required for durable login
+        #
+        #   @return [String]
+        required :totp_secret, String
+
         # @!attribute username
         #   X username
         #
         #   @return [String]
         required :username, String
 
-        # @!attribute totp_secret
-        #   TOTP secret for 2FA
-        #
-        #   @return [String, nil]
-        optional :totp_secret, String
-
-        # @!method initialize(email:, password:, username:, totp_secret: nil, request_options: {})
+        # @!method initialize(email:, password:, totp_secret:, username:, request_options: {})
         #   @param email [String] Account email
         #
         #   @param password [String] Account password
         #
-        #   @param username [String] X username
+        #   @param totp_secret [String] Authenticator App TOTP secret required for durable login
         #
-        #   @param totp_secret [String] TOTP secret for 2FA
+        #   @param username [String] X username
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end

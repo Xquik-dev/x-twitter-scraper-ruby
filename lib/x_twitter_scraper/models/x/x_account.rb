@@ -17,9 +17,9 @@ module XTwitterScraper
         # @!attribute health
         #   Derived connection health. `healthy` = session active. `needsReauth` = user must
         #   submit fresh credentials. `locked` = X locked the account; unlock on x.com
-        #   first. `suspended` = X banned the account. `recovering` = past cooldown, will
-        #   auto-retry on next use. `temporaryIssue` = temporary connection problem; retry
-        #   shortly.
+        #   first. `suspended` = X banned the account. `recovering` = cooldown ended; the
+        #   account can reconnect on its next use. `temporaryIssue` = temporary connection
+        #   problem; wait before the next use.
         #
         #   @return [Symbol, XTwitterScraper::Models::X::XAccount::Health]
         required :health, enum: -> { XTwitterScraper::X::XAccount::Health }
@@ -73,9 +73,9 @@ module XTwitterScraper
 
         # Derived connection health. `healthy` = session active. `needsReauth` = user must
         # submit fresh credentials. `locked` = X locked the account; unlock on x.com
-        # first. `suspended` = X banned the account. `recovering` = past cooldown, will
-        # auto-retry on next use. `temporaryIssue` = temporary connection problem; retry
-        # shortly.
+        # first. `suspended` = X banned the account. `recovering` = cooldown ended; the
+        # account can reconnect on its next use. `temporaryIssue` = temporary connection
+        # problem; wait before the next use.
         #
         # @see XTwitterScraper::Models::X::XAccount#health
         module Health

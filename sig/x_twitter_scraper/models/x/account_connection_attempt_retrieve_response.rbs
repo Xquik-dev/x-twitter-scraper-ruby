@@ -1,0 +1,182 @@
+module XTwitterScraper
+  module Models
+    module X
+      type account_connection_attempt_retrieve_response =
+        XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptPending
+        | XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptSuccess
+        | XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptFailed
+        | XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge
+
+      module AccountConnectionAttemptRetrieveResponse
+        extend XTwitterScraper::Internal::Type::Union
+
+        type x_account_connection_attempt_pending =
+          {
+            id: String,
+            object: :x_account_connection_attempt,
+            poll_after_ms: Integer,
+            status: :pending
+          }
+
+        class XAccountConnectionAttemptPending < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor object: :x_account_connection_attempt
+
+          attr_accessor poll_after_ms: Integer
+
+          attr_accessor status: :pending
+
+          def initialize: (
+            id: String,
+            poll_after_ms: Integer,
+            ?object: :x_account_connection_attempt,
+            ?status: :pending
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            object: :x_account_connection_attempt,
+            poll_after_ms: Integer,
+            status: :pending
+          }
+        end
+
+        type x_account_connection_attempt_success =
+          {
+            id: String,
+            object: :x_account_connection_attempt,
+            status: :success
+          }
+
+        class XAccountConnectionAttemptSuccess < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor object: :x_account_connection_attempt
+
+          attr_accessor status: :success
+
+          def initialize: (
+            id: String,
+            ?object: :x_account_connection_attempt,
+            ?status: :success
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            object: :x_account_connection_attempt,
+            status: :success
+          }
+        end
+
+        type x_account_connection_attempt_failed =
+          {
+            id: String,
+            error: String,
+            object: :x_account_connection_attempt,
+            retryable: bool,
+            status: :failed,
+            reason: String
+          }
+
+        class XAccountConnectionAttemptFailed < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor error: String
+
+          attr_accessor object: :x_account_connection_attempt
+
+          attr_accessor retryable: bool
+
+          attr_accessor status: :failed
+
+          attr_reader reason: String?
+
+          def reason=: (String) -> String
+
+          def initialize: (
+            id: String,
+            error: String,
+            retryable: bool,
+            ?reason: String,
+            ?object: :x_account_connection_attempt,
+            ?status: :failed
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            error: String,
+            object: :x_account_connection_attempt,
+            retryable: bool,
+            status: :failed,
+            reason: String
+          }
+        end
+
+        type x_account_connection_challenge =
+          {
+            id: String,
+            expires_at: Time,
+            message: String,
+            object: XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::object,
+            status: XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::status,
+            username: String
+          }
+
+        class XAccountConnectionChallenge < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor expires_at: Time
+
+          attr_accessor message: String
+
+          attr_accessor object: XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::object
+
+          attr_accessor status: XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::status
+
+          attr_accessor username: String
+
+          def initialize: (
+            id: String,
+            expires_at: Time,
+            message: String,
+            object: XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::object,
+            status: XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::status,
+            username: String
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            expires_at: Time,
+            message: String,
+            object: XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::object,
+            status: XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::status,
+            username: String
+          }
+
+          type object = :x_account_connection_challenge
+
+          module Object
+            extend XTwitterScraper::Internal::Type::Enum
+
+            X_ACCOUNT_CONNECTION_CHALLENGE: :x_account_connection_challenge
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::object]
+          end
+
+          type status = :requires_email_code
+
+          module Status
+            extend XTwitterScraper::Internal::Type::Enum
+
+            REQUIRES_EMAIL_CODE: :requires_email_code
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::status]
+          end
+        end
+
+        def self?.variants: -> ::Array[XTwitterScraper::Models::X::account_connection_attempt_retrieve_response]
+      end
+    end
+  end
+end

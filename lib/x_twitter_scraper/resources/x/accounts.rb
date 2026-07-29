@@ -7,19 +7,19 @@ module XTwitterScraper
       class Accounts
         # Connect X account
         #
-        # @overload create(email:, password:, username:, totp_secret: nil, request_options: {})
+        # @overload create(email:, password:, totp_secret:, username:, request_options: {})
         #
         # @param email [String] Account email
         #
         # @param password [String] Account password
         #
-        # @param username [String] X username
+        # @param totp_secret [String] Authenticator App TOTP secret required for durable login
         #
-        # @param totp_secret [String] TOTP secret for 2FA
+        # @param username [String] X username
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::AccountCreateResponse]
+        # @return [Object]
         #
         # @see XTwitterScraper::Models::X::AccountCreateParams
         def create(params)
@@ -28,7 +28,7 @@ module XTwitterScraper
             method: :post,
             path: "x/accounts",
             body: parsed,
-            model: XTwitterScraper::Models::X::AccountCreateResponse,
+            model: XTwitterScraper::Internal::Type::Unknown,
             options: options
           )
         end
@@ -120,7 +120,7 @@ module XTwitterScraper
         #
         # @param email [String] Email for the X account (updates stored email)
         #
-        # @param totp_secret [String] TOTP secret for 2FA re-authentication
+        # @param totp_secret [String] Replacement Authenticator App TOTP secret. Omit it to reuse the saved secret.
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

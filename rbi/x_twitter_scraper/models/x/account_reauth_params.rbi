@@ -29,7 +29,7 @@ module XTwitterScraper
         sig { params(email: String).void }
         attr_writer :email
 
-        # TOTP secret for 2FA re-authentication
+        # Replacement Authenticator App TOTP secret. Omit it to reuse the saved secret.
         sig { returns(T.nilable(String)) }
         attr_reader :totp_secret
 
@@ -51,7 +51,7 @@ module XTwitterScraper
           password:,
           # Email for the X account (updates stored email)
           email: nil,
-          # TOTP secret for 2FA re-authentication
+          # Replacement Authenticator App TOTP secret. Omit it to reuse the saved secret.
           totp_secret: nil,
           request_options: {}
         )
