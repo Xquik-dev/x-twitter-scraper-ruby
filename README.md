@@ -35,7 +35,7 @@ Add the gem to your `Gemfile`:
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "x-twitter-scraper", "~> 0.6.0"
+gem "x-twitter-scraper", "~> 0.6.1"
 ```
 
 <!-- x-release-please-end -->
