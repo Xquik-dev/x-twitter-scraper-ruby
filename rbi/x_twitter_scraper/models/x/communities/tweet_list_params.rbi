@@ -31,10 +31,8 @@ module XTwitterScraper
           sig { params(cursor: String).void }
           attr_writer :cursor
 
-          # Maximum items requested from this page (1-100, default 20). The response can
-          # contain fewer items because the source returned fewer, filters removed items, or
-          # remaining credits cover fewer results. Keep requesting next_cursor while
-          # has_next_page is true, even when a page is empty. The deprecated limit and count
+          # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
+          # results. Continue while has_next_page is true. Deprecated limit and count
           # aliases remain accepted.
           sig { returns(T.nilable(Integer)) }
           attr_reader :page_size
@@ -78,10 +76,8 @@ module XTwitterScraper
             q:,
             # Pagination cursor for community results
             cursor: nil,
-            # Maximum items requested from this page (1-100, default 20). The response can
-            # contain fewer items because the source returned fewer, filters removed items, or
-            # remaining credits cover fewer results. Keep requesting next_cursor while
-            # has_next_page is true, even when a page is empty. The deprecated limit and count
+            # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
+            # results. Continue while has_next_page is true. Deprecated limit and count
             # aliases remain accepted.
             page_size: nil,
             # Sort order for community results (Latest or Top)

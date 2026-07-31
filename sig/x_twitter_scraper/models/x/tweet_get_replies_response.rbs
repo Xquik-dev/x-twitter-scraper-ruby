@@ -1,0 +1,274 @@
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_get_replies_response =
+        {
+          diagnostic: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic,
+          nested_replies: ::Array[XTwitterScraper::SearchTweet]
+        }
+
+      class TweetGetRepliesResponse < XTwitterScraper::Models::PaginatedTweets
+        def diagnostic: -> XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic?
+
+        def diagnostic=: (
+          XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic _
+        ) -> XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic
+
+        def nested_replies: -> ::Array[XTwitterScraper::SearchTweet]?
+
+        def nested_replies=: (
+          ::Array[XTwitterScraper::SearchTweet] _
+        ) -> ::Array[XTwitterScraper::SearchTweet]
+
+        def initialize: (
+          ?diagnostic: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic,
+          ?nested_replies: ::Array[XTwitterScraper::SearchTweet]
+        ) -> void
+
+        def to_hash: -> {
+          diagnostic: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic,
+          nested_replies: ::Array[XTwitterScraper::SearchTweet]
+        }
+
+        type diagnostic =
+          {
+            complete: bool,
+            coverage_percentage: Float,
+            cursor_failures: Integer,
+            duplicate_count: Integer,
+            empty_false_progress_pages: Integer,
+            malformed_count: Integer,
+            missing_response_modules_or_fields: ::Array[String],
+            nested_reply_count: Integer,
+            pages_attempted: Integer,
+            recommended_fallback: String,
+            repeated_cursor_count: Integer,
+            reported_reply_count: Integer,
+            response_truncated: bool,
+            richness: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::Richness,
+            strategies_attempted: ::Array[XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted],
+            target_direct_replies: Integer,
+            unique_direct_replies: Integer,
+            unrelated_count: Integer
+          }
+
+        class Diagnostic < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor complete: bool
+
+          attr_accessor coverage_percentage: Float
+
+          attr_accessor cursor_failures: Integer
+
+          attr_accessor duplicate_count: Integer
+
+          attr_accessor empty_false_progress_pages: Integer
+
+          attr_accessor malformed_count: Integer
+
+          attr_accessor missing_response_modules_or_fields: ::Array[String]
+
+          attr_accessor nested_reply_count: Integer
+
+          attr_accessor pages_attempted: Integer
+
+          attr_accessor recommended_fallback: String
+
+          attr_accessor repeated_cursor_count: Integer
+
+          attr_accessor reported_reply_count: Integer
+
+          attr_accessor response_truncated: bool
+
+          attr_accessor richness: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::Richness
+
+          attr_accessor strategies_attempted: ::Array[XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted]
+
+          attr_accessor target_direct_replies: Integer
+
+          attr_accessor unique_direct_replies: Integer
+
+          attr_accessor unrelated_count: Integer
+
+          def initialize: (
+            complete: bool,
+            coverage_percentage: Float,
+            cursor_failures: Integer,
+            duplicate_count: Integer,
+            empty_false_progress_pages: Integer,
+            malformed_count: Integer,
+            missing_response_modules_or_fields: ::Array[String],
+            nested_reply_count: Integer,
+            pages_attempted: Integer,
+            recommended_fallback: String,
+            repeated_cursor_count: Integer,
+            reported_reply_count: Integer,
+            response_truncated: bool,
+            richness: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::Richness,
+            strategies_attempted: ::Array[XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted],
+            target_direct_replies: Integer,
+            unique_direct_replies: Integer,
+            unrelated_count: Integer
+          ) -> void
+
+          def to_hash: -> {
+            complete: bool,
+            coverage_percentage: Float,
+            cursor_failures: Integer,
+            duplicate_count: Integer,
+            empty_false_progress_pages: Integer,
+            malformed_count: Integer,
+            missing_response_modules_or_fields: ::Array[String],
+            nested_reply_count: Integer,
+            pages_attempted: Integer,
+            recommended_fallback: String,
+            repeated_cursor_count: Integer,
+            reported_reply_count: Integer,
+            response_truncated: bool,
+            richness: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::Richness,
+            strategies_attempted: ::Array[XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted],
+            target_direct_replies: Integer,
+            unique_direct_replies: Integer,
+            unrelated_count: Integer
+          }
+
+          type richness =
+            {
+              article: Integer,
+              author: Integer,
+              card: Integer,
+              community_note: Integer,
+              created_at: Integer,
+              engagement_counts: Integer,
+              entities: Integer,
+              language: Integer,
+              media: Integer,
+              quoted_or_reposted_tweet: Integer,
+              text: Integer,
+              total_replies: Integer,
+              url: Integer
+            }
+
+          class Richness < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor article: Integer
+
+            attr_accessor author: Integer
+
+            attr_accessor card: Integer
+
+            attr_accessor community_note: Integer
+
+            attr_accessor created_at: Integer
+
+            attr_accessor engagement_counts: Integer
+
+            attr_accessor entities: Integer
+
+            attr_accessor language: Integer
+
+            attr_accessor media: Integer
+
+            attr_accessor quoted_or_reposted_tweet: Integer
+
+            attr_accessor text: Integer
+
+            attr_accessor total_replies: Integer
+
+            attr_accessor url: Integer
+
+            def initialize: (
+              article: Integer,
+              author: Integer,
+              card: Integer,
+              community_note: Integer,
+              created_at: Integer,
+              engagement_counts: Integer,
+              entities: Integer,
+              language: Integer,
+              media: Integer,
+              quoted_or_reposted_tweet: Integer,
+              text: Integer,
+              total_replies: Integer,
+              url: Integer
+            ) -> void
+
+            def to_hash: -> {
+              article: Integer,
+              author: Integer,
+              card: Integer,
+              community_note: Integer,
+              created_at: Integer,
+              engagement_counts: Integer,
+              entities: Integer,
+              language: Integer,
+              media: Integer,
+              quoted_or_reposted_tweet: Integer,
+              text: Integer,
+              total_replies: Integer,
+              url: Integer
+            }
+          end
+
+          type strategies_attempted =
+            {
+              name: String,
+              new_direct_replies: Integer,
+              new_nested_replies: Integer,
+              pages_attempted: Integer,
+              stop_reason: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::stop_reason
+            }
+
+          class StrategiesAttempted < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor name: String
+
+            attr_accessor new_direct_replies: Integer
+
+            attr_accessor new_nested_replies: Integer
+
+            attr_accessor pages_attempted: Integer
+
+            attr_accessor stop_reason: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::stop_reason
+
+            def initialize: (
+              name: String,
+              new_direct_replies: Integer,
+              new_nested_replies: Integer,
+              pages_attempted: Integer,
+              stop_reason: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::stop_reason
+            ) -> void
+
+            def to_hash: -> {
+              name: String,
+              new_direct_replies: Integer,
+              new_nested_replies: Integer,
+              pages_attempted: Integer,
+              stop_reason: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::stop_reason
+            }
+
+            type stop_reason =
+              :deadline
+              | :empty_pages
+              | :error
+              | :missing_cursor
+              | :no_next_page
+              | :page_cap
+              | :repeated_cursor
+
+            module StopReason
+              extend XTwitterScraper::Internal::Type::Enum
+
+              DEADLINE: :deadline
+              EMPTY_PAGES: :empty_pages
+              ERROR: :error
+              MISSING_CURSOR: :missing_cursor
+              NO_NEXT_PAGE: :no_next_page
+              PAGE_CAP: :page_cap
+              REPEATED_CURSOR: :repeated_cursor
+
+              def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::stop_reason]
+            end
+          end
+        end
+      end
+    end
+  end
+end

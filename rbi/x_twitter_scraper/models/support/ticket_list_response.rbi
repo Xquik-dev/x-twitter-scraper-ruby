@@ -14,24 +14,12 @@ module XTwitterScraper
 
         sig do
           returns(
-            T.nilable(
-              T::Array[
-                XTwitterScraper::Models::Support::TicketListResponse::Ticket
-              ]
-            )
+            T::Array[
+              XTwitterScraper::Models::Support::TicketListResponse::Ticket
+            ]
           )
         end
-        attr_reader :tickets
-
-        sig do
-          params(
-            tickets:
-              T::Array[
-                XTwitterScraper::Models::Support::TicketListResponse::Ticket::OrHash
-              ]
-          ).void
-        end
-        attr_writer :tickets
+        attr_accessor :tickets
 
         sig do
           params(
@@ -41,7 +29,7 @@ module XTwitterScraper
               ]
           ).returns(T.attached_class)
         end
-        def self.new(tickets: nil)
+        def self.new(tickets:)
         end
 
         sig do
@@ -66,59 +54,46 @@ module XTwitterScraper
               )
             end
 
-          sig { returns(T.nilable(Time)) }
-          attr_reader :created_at
+          sig { returns(Time) }
+          attr_accessor :created_at
 
-          sig { params(created_at: Time).void }
-          attr_writer :created_at
+          sig { returns(Integer) }
+          attr_accessor :message_count
 
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :message_count
+          sig { returns(String) }
+          attr_accessor :public_id
 
-          sig { params(message_count: Integer).void }
-          attr_writer :message_count
+          sig do
+            returns(
+              XTwitterScraper::Models::Support::TicketListResponse::Ticket::Status::TaggedSymbol
+            )
+          end
+          attr_accessor :status
 
-          sig { returns(T.nilable(String)) }
-          attr_reader :public_id
+          sig { returns(String) }
+          attr_accessor :subject
 
-          sig { params(public_id: String).void }
-          attr_writer :public_id
-
-          sig { returns(T.nilable(String)) }
-          attr_reader :status
-
-          sig { params(status: String).void }
-          attr_writer :status
-
-          sig { returns(T.nilable(String)) }
-          attr_reader :subject
-
-          sig { params(subject: String).void }
-          attr_writer :subject
-
-          sig { returns(T.nilable(Time)) }
-          attr_reader :updated_at
-
-          sig { params(updated_at: Time).void }
-          attr_writer :updated_at
+          sig { returns(Time) }
+          attr_accessor :updated_at
 
           sig do
             params(
               created_at: Time,
               message_count: Integer,
               public_id: String,
-              status: String,
+              status:
+                XTwitterScraper::Models::Support::TicketListResponse::Ticket::Status::OrSymbol,
               subject: String,
               updated_at: Time
             ).returns(T.attached_class)
           end
           def self.new(
-            created_at: nil,
-            message_count: nil,
-            public_id: nil,
-            status: nil,
-            subject: nil,
-            updated_at: nil
+            created_at:,
+            message_count:,
+            public_id:,
+            status:,
+            subject:,
+            updated_at:
           )
           end
 
@@ -128,13 +103,58 @@ module XTwitterScraper
                 created_at: Time,
                 message_count: Integer,
                 public_id: String,
-                status: String,
+                status:
+                  XTwitterScraper::Models::Support::TicketListResponse::Ticket::Status::TaggedSymbol,
                 subject: String,
                 updated_at: Time
               }
             )
           end
           def to_hash
+          end
+
+          module Status
+            extend XTwitterScraper::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  XTwitterScraper::Models::Support::TicketListResponse::Ticket::Status
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            OPEN =
+              T.let(
+                :open,
+                XTwitterScraper::Models::Support::TicketListResponse::Ticket::Status::TaggedSymbol
+              )
+            IN_PROGRESS =
+              T.let(
+                :in_progress,
+                XTwitterScraper::Models::Support::TicketListResponse::Ticket::Status::TaggedSymbol
+              )
+            RESOLVED =
+              T.let(
+                :resolved,
+                XTwitterScraper::Models::Support::TicketListResponse::Ticket::Status::TaggedSymbol
+              )
+            CLOSED =
+              T.let(
+                :closed,
+                XTwitterScraper::Models::Support::TicketListResponse::Ticket::Status::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  XTwitterScraper::Models::Support::TicketListResponse::Ticket::Status::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
           end
         end
       end

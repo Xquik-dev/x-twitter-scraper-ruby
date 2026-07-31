@@ -10,18 +10,18 @@ module XTwitterScraper
         Variants =
           T.type_alias do
             T.any(
-              XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptPending,
-              XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptSuccess,
-              XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptFailed,
-              XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge
+              XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Pending,
+              XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Success,
+              XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Failed,
+              XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::RequiresEmailCode
             )
           end
 
-        class XAccountConnectionAttemptPending < XTwitterScraper::Internal::Type::BaseModel
+        class Pending < XTwitterScraper::Internal::Type::BaseModel
           OrHash =
             T.type_alias do
               T.any(
-                XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptPending,
+                XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Pending,
                 XTwitterScraper::Internal::AnyHash
               )
             end
@@ -69,11 +69,11 @@ module XTwitterScraper
           end
         end
 
-        class XAccountConnectionAttemptSuccess < XTwitterScraper::Internal::Type::BaseModel
+        class Success < XTwitterScraper::Internal::Type::BaseModel
           OrHash =
             T.type_alias do
               T.any(
-                XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptSuccess,
+                XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Success,
                 XTwitterScraper::Internal::AnyHash
               )
             end
@@ -107,11 +107,11 @@ module XTwitterScraper
           end
         end
 
-        class XAccountConnectionAttemptFailed < XTwitterScraper::Internal::Type::BaseModel
+        class Failed < XTwitterScraper::Internal::Type::BaseModel
           OrHash =
             T.type_alias do
               T.any(
-                XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptFailed,
+                XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Failed,
                 XTwitterScraper::Internal::AnyHash
               )
             end
@@ -174,11 +174,11 @@ module XTwitterScraper
           end
         end
 
-        class XAccountConnectionChallenge < XTwitterScraper::Internal::Type::BaseModel
+        class RequiresEmailCode < XTwitterScraper::Internal::Type::BaseModel
           OrHash =
             T.type_alias do
               T.any(
-                XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge,
+                XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::RequiresEmailCode,
                 XTwitterScraper::Internal::AnyHash
               )
             end
@@ -192,18 +192,10 @@ module XTwitterScraper
           sig { returns(String) }
           attr_accessor :message
 
-          sig do
-            returns(
-              XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Object::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :object
 
-          sig do
-            returns(
-              XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Status::TaggedSymbol
-            )
-          end
+          sig { returns(Symbol) }
           attr_accessor :status
 
           sig { returns(String) }
@@ -216,14 +208,19 @@ module XTwitterScraper
               id: String,
               expires_at: Time,
               message: String,
-              object:
-                XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Object::OrSymbol,
-              status:
-                XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Status::OrSymbol,
-              username: String
+              username: String,
+              object: Symbol,
+              status: Symbol
             ).returns(T.attached_class)
           end
-          def self.new(id:, expires_at:, message:, object:, status:, username:)
+          def self.new(
+            id:,
+            expires_at:,
+            message:,
+            username:,
+            object: :x_account_connection_challenge,
+            status: :requires_email_code
+          )
           end
 
           sig do
@@ -232,73 +229,13 @@ module XTwitterScraper
                 id: String,
                 expires_at: Time,
                 message: String,
-                object:
-                  XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Object::TaggedSymbol,
-                status:
-                  XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Status::TaggedSymbol,
+                object: Symbol,
+                status: Symbol,
                 username: String
               }
             )
           end
           def to_hash
-          end
-
-          module Object
-            extend XTwitterScraper::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Object
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            X_ACCOUNT_CONNECTION_CHALLENGE =
-              T.let(
-                :x_account_connection_challenge,
-                XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Object::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Object::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
-          end
-
-          module Status
-            extend XTwitterScraper::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Status
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            REQUIRES_EMAIL_CODE =
-              T.let(
-                :requires_email_code,
-                XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Status::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Status::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
 

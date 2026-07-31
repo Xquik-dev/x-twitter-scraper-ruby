@@ -10,11 +10,15 @@ module XTwitterScraper
         retweet_count: Integer,
         text: String,
         view_count: Integer,
+        article: XTwitterScraper::SearchTweet::Article,
         author: XTwitterScraper::UserProfile,
+        card: XTwitterScraper::SearchTweet::Card,
+        community_note: XTwitterScraper::SearchTweet::CommunityNote,
         content_disclosure: XTwitterScraper::ContentDisclosure,
         conversation_id: String,
         created_at: String,
         display_text_range: ::Array[Integer],
+        edit: XTwitterScraper::SearchTweet::Edit,
         entities: ::Hash[Symbol, top],
         in_reply_to_id: String,
         in_reply_to_user_id: String,
@@ -23,13 +27,19 @@ module XTwitterScraper
         is_note_tweet: bool,
         is_quote_status: bool,
         is_reply: bool,
+        is_translatable: bool,
         lang: String,
         media: ::Array[XTwitterScraper::TweetMedia],
+        note_tweet: XTwitterScraper::SearchTweet::NoteTweet,
+        place: XTwitterScraper::SearchTweet::Place,
+        possibly_sensitive: bool,
+        previous_counts: XTwitterScraper::SearchTweet::PreviousCounts,
         quoted_tweet: XTwitterScraper::EmbeddedTweet,
         retweeted_tweet: XTwitterScraper::EmbeddedTweet,
         source: String,
         type: String,
-        url: String
+        url: String,
+        view_state: String
       }
 
     class SearchTweet < XTwitterScraper::Internal::Type::BaseModel
@@ -49,11 +59,29 @@ module XTwitterScraper
 
       attr_accessor view_count: Integer
 
+      attr_reader article: XTwitterScraper::SearchTweet::Article?
+
+      def article=: (
+        XTwitterScraper::SearchTweet::Article
+      ) -> XTwitterScraper::SearchTweet::Article
+
       attr_reader author: XTwitterScraper::UserProfile?
 
       def author=: (
         XTwitterScraper::UserProfile
       ) -> XTwitterScraper::UserProfile
+
+      attr_reader card: XTwitterScraper::SearchTweet::Card?
+
+      def card=: (
+        XTwitterScraper::SearchTweet::Card
+      ) -> XTwitterScraper::SearchTweet::Card
+
+      attr_reader community_note: XTwitterScraper::SearchTweet::CommunityNote?
+
+      def community_note=: (
+        XTwitterScraper::SearchTweet::CommunityNote
+      ) -> XTwitterScraper::SearchTweet::CommunityNote
 
       attr_reader content_disclosure: XTwitterScraper::ContentDisclosure?
 
@@ -72,6 +100,12 @@ module XTwitterScraper
       attr_reader display_text_range: ::Array[Integer]?
 
       def display_text_range=: (::Array[Integer]) -> ::Array[Integer]
+
+      attr_reader edit: XTwitterScraper::SearchTweet::Edit?
+
+      def edit=: (
+        XTwitterScraper::SearchTweet::Edit
+      ) -> XTwitterScraper::SearchTweet::Edit
 
       attr_reader entities: ::Hash[Symbol, top]?
 
@@ -105,6 +139,10 @@ module XTwitterScraper
 
       def is_reply=: (bool) -> bool
 
+      attr_reader is_translatable: bool?
+
+      def is_translatable=: (bool) -> bool
+
       attr_reader lang: String?
 
       def lang=: (String) -> String
@@ -114,6 +152,28 @@ module XTwitterScraper
       def media=: (
         ::Array[XTwitterScraper::TweetMedia]
       ) -> ::Array[XTwitterScraper::TweetMedia]
+
+      attr_reader note_tweet: XTwitterScraper::SearchTweet::NoteTweet?
+
+      def note_tweet=: (
+        XTwitterScraper::SearchTweet::NoteTweet
+      ) -> XTwitterScraper::SearchTweet::NoteTweet
+
+      attr_reader place: XTwitterScraper::SearchTweet::Place?
+
+      def place=: (
+        XTwitterScraper::SearchTweet::Place
+      ) -> XTwitterScraper::SearchTweet::Place
+
+      attr_reader possibly_sensitive: bool?
+
+      def possibly_sensitive=: (bool) -> bool
+
+      attr_reader previous_counts: XTwitterScraper::SearchTweet::PreviousCounts?
+
+      def previous_counts=: (
+        XTwitterScraper::SearchTweet::PreviousCounts
+      ) -> XTwitterScraper::SearchTweet::PreviousCounts
 
       attr_reader quoted_tweet: XTwitterScraper::EmbeddedTweet?
 
@@ -139,6 +199,10 @@ module XTwitterScraper
 
       def url=: (String) -> String
 
+      attr_reader view_state: String?
+
+      def view_state=: (String) -> String
+
       def initialize: (
         id: String,
         bookmark_count: Integer,
@@ -148,11 +212,15 @@ module XTwitterScraper
         retweet_count: Integer,
         text: String,
         view_count: Integer,
+        ?article: XTwitterScraper::SearchTweet::Article,
         ?author: XTwitterScraper::UserProfile,
+        ?card: XTwitterScraper::SearchTweet::Card,
+        ?community_note: XTwitterScraper::SearchTweet::CommunityNote,
         ?content_disclosure: XTwitterScraper::ContentDisclosure,
         ?conversation_id: String,
         ?created_at: String,
         ?display_text_range: ::Array[Integer],
+        ?edit: XTwitterScraper::SearchTweet::Edit,
         ?entities: ::Hash[Symbol, top],
         ?in_reply_to_id: String,
         ?in_reply_to_user_id: String,
@@ -161,13 +229,19 @@ module XTwitterScraper
         ?is_note_tweet: bool,
         ?is_quote_status: bool,
         ?is_reply: bool,
+        ?is_translatable: bool,
         ?lang: String,
         ?media: ::Array[XTwitterScraper::TweetMedia],
+        ?note_tweet: XTwitterScraper::SearchTweet::NoteTweet,
+        ?place: XTwitterScraper::SearchTweet::Place,
+        ?possibly_sensitive: bool,
+        ?previous_counts: XTwitterScraper::SearchTweet::PreviousCounts,
         ?quoted_tweet: XTwitterScraper::EmbeddedTweet,
         ?retweeted_tweet: XTwitterScraper::EmbeddedTweet,
         ?source: String,
         ?type: String,
-        ?url: String
+        ?url: String,
+        ?view_state: String
       ) -> void
 
       def to_hash: -> {
@@ -179,11 +253,15 @@ module XTwitterScraper
         retweet_count: Integer,
         text: String,
         view_count: Integer,
+        article: XTwitterScraper::SearchTweet::Article,
         author: XTwitterScraper::UserProfile,
+        card: XTwitterScraper::SearchTweet::Card,
+        community_note: XTwitterScraper::SearchTweet::CommunityNote,
         content_disclosure: XTwitterScraper::ContentDisclosure,
         conversation_id: String,
         created_at: String,
         display_text_range: ::Array[Integer],
+        edit: XTwitterScraper::SearchTweet::Edit,
         entities: ::Hash[Symbol, top],
         in_reply_to_id: String,
         in_reply_to_user_id: String,
@@ -192,14 +270,369 @@ module XTwitterScraper
         is_note_tweet: bool,
         is_quote_status: bool,
         is_reply: bool,
+        is_translatable: bool,
         lang: String,
         media: ::Array[XTwitterScraper::TweetMedia],
+        note_tweet: XTwitterScraper::SearchTweet::NoteTweet,
+        place: XTwitterScraper::SearchTweet::Place,
+        possibly_sensitive: bool,
+        previous_counts: XTwitterScraper::SearchTweet::PreviousCounts,
         quoted_tweet: XTwitterScraper::EmbeddedTweet,
         retweeted_tweet: XTwitterScraper::EmbeddedTweet,
         source: String,
         type: String,
-        url: String
+        url: String,
+        view_state: String
       }
+
+      type article =
+        {
+          id: String,
+          cover_media_url: String,
+          preview_text: String,
+          title: String
+        }
+
+      class Article < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_reader cover_media_url: String?
+
+        def cover_media_url=: (String) -> String
+
+        attr_reader preview_text: String?
+
+        def preview_text=: (String) -> String
+
+        attr_reader title: String?
+
+        def title=: (String) -> String
+
+        def initialize: (
+          ?id: String,
+          ?cover_media_url: String,
+          ?preview_text: String,
+          ?title: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          cover_media_url: String,
+          preview_text: String,
+          title: String
+        }
+      end
+
+      type card =
+        {
+          id: String,
+          binding_values: ::Hash[Symbol, top],
+          name: String,
+          url: String
+        }
+
+      class Card < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_reader binding_values: ::Hash[Symbol, top]?
+
+        def binding_values=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_reader url: String?
+
+        def url=: (String) -> String
+
+        def initialize: (
+          ?id: String,
+          ?binding_values: ::Hash[Symbol, top],
+          ?name: String,
+          ?url: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          binding_values: ::Hash[Symbol, top],
+          name: String,
+          url: String
+        }
+      end
+
+      type community_note =
+        {
+          id: String,
+          destination_url: String,
+          footer: String,
+          short_title: String,
+          subtitle: String,
+          title: String,
+          visual_style: String
+        }
+
+      class CommunityNote < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_reader destination_url: String?
+
+        def destination_url=: (String) -> String
+
+        attr_reader footer: String?
+
+        def footer=: (String) -> String
+
+        attr_reader short_title: String?
+
+        def short_title=: (String) -> String
+
+        attr_reader subtitle: String?
+
+        def subtitle=: (String) -> String
+
+        attr_reader title: String?
+
+        def title=: (String) -> String
+
+        attr_reader visual_style: String?
+
+        def visual_style=: (String) -> String
+
+        def initialize: (
+          ?id: String,
+          ?destination_url: String,
+          ?footer: String,
+          ?short_title: String,
+          ?subtitle: String,
+          ?title: String,
+          ?visual_style: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          destination_url: String,
+          footer: String,
+          short_title: String,
+          subtitle: String,
+          title: String,
+          visual_style: String
+        }
+      end
+
+      type edit =
+        { editable_until_msecs: String, edit_tweet_ids: ::Array[String] }
+
+      class Edit < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader editable_until_msecs: String?
+
+        def editable_until_msecs=: (String) -> String
+
+        attr_reader edit_tweet_ids: ::Array[String]?
+
+        def edit_tweet_ids=: (::Array[String]) -> ::Array[String]
+
+        def initialize: (
+          ?editable_until_msecs: String,
+          ?edit_tweet_ids: ::Array[String]
+        ) -> void
+
+        def to_hash: -> {
+          editable_until_msecs: String,
+          edit_tweet_ids: ::Array[String]
+        }
+      end
+
+      type note_tweet =
+        {
+          text: String,
+          id: String,
+          entities: ::Hash[Symbol, top],
+          is_expandable: bool,
+          richtext_tags: ::Array[XTwitterScraper::SearchTweet::NoteTweet::RichtextTag]
+        }
+
+      class NoteTweet < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor text: String
+
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_reader entities: ::Hash[Symbol, top]?
+
+        def entities=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader is_expandable: bool?
+
+        def is_expandable=: (bool) -> bool
+
+        attr_reader richtext_tags: ::Array[XTwitterScraper::SearchTweet::NoteTweet::RichtextTag]?
+
+        def richtext_tags=: (
+          ::Array[XTwitterScraper::SearchTweet::NoteTweet::RichtextTag]
+        ) -> ::Array[XTwitterScraper::SearchTweet::NoteTweet::RichtextTag]
+
+        def initialize: (
+          text: String,
+          ?id: String,
+          ?entities: ::Hash[Symbol, top],
+          ?is_expandable: bool,
+          ?richtext_tags: ::Array[XTwitterScraper::SearchTweet::NoteTweet::RichtextTag]
+        ) -> void
+
+        def to_hash: -> {
+          text: String,
+          id: String,
+          entities: ::Hash[Symbol, top],
+          is_expandable: bool,
+          richtext_tags: ::Array[XTwitterScraper::SearchTweet::NoteTweet::RichtextTag]
+        }
+
+        type richtext_tag =
+          { from_index: Integer, to_index: Integer, types: ::Array[String] }
+
+        class RichtextTag < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor from_index: Integer
+
+          attr_accessor to_index: Integer
+
+          attr_accessor types: ::Array[String]
+
+          def initialize: (
+            from_index: Integer,
+            to_index: Integer,
+            types: ::Array[String]
+          ) -> void
+
+          def to_hash: -> {
+            from_index: Integer,
+            to_index: Integer,
+            types: ::Array[String]
+          }
+        end
+      end
+
+      type place =
+        {
+          id: String,
+          bounding_box: ::Hash[Symbol, top],
+          country: String,
+          country_code: String,
+          full_name: String,
+          name: String,
+          place_type: String,
+          url: String
+        }
+
+      class Place < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_reader bounding_box: ::Hash[Symbol, top]?
+
+        def bounding_box=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader country: String?
+
+        def country=: (String) -> String
+
+        attr_reader country_code: String?
+
+        def country_code=: (String) -> String
+
+        attr_reader full_name: String?
+
+        def full_name=: (String) -> String
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_reader place_type: String?
+
+        def place_type=: (String) -> String
+
+        attr_reader url: String?
+
+        def url=: (String) -> String
+
+        def initialize: (
+          ?id: String,
+          ?bounding_box: ::Hash[Symbol, top],
+          ?country: String,
+          ?country_code: String,
+          ?full_name: String,
+          ?name: String,
+          ?place_type: String,
+          ?url: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          bounding_box: ::Hash[Symbol, top],
+          country: String,
+          country_code: String,
+          full_name: String,
+          name: String,
+          place_type: String,
+          url: String
+        }
+      end
+
+      type previous_counts =
+        {
+          bookmark_count: Integer,
+          like_count: Integer,
+          quote_count: Integer,
+          reply_count: Integer,
+          retweet_count: Integer
+        }
+
+      class PreviousCounts < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader bookmark_count: Integer?
+
+        def bookmark_count=: (Integer) -> Integer
+
+        attr_reader like_count: Integer?
+
+        def like_count=: (Integer) -> Integer
+
+        attr_reader quote_count: Integer?
+
+        def quote_count=: (Integer) -> Integer
+
+        attr_reader reply_count: Integer?
+
+        def reply_count=: (Integer) -> Integer
+
+        attr_reader retweet_count: Integer?
+
+        def retweet_count=: (Integer) -> Integer
+
+        def initialize: (
+          ?bookmark_count: Integer,
+          ?like_count: Integer,
+          ?quote_count: Integer,
+          ?reply_count: Integer,
+          ?retweet_count: Integer
+        ) -> void
+
+        def to_hash: -> {
+          bookmark_count: Integer,
+          like_count: Integer,
+          quote_count: Integer,
+          reply_count: Integer,
+          retweet_count: Integer
+        }
+      end
     end
   end
 end

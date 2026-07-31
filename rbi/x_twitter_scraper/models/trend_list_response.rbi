@@ -63,6 +63,10 @@ module XTwitterScraper
         sig { params(description: String).void }
         attr_writer :description
 
+        # Promotion identifier from X. Null for organic trends.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :promoted_content
+
         sig { returns(T.nilable(String)) }
         attr_reader :query
 
@@ -75,20 +79,53 @@ module XTwitterScraper
         sig { params(rank: Integer).void }
         attr_writer :rank
 
+        # Approximate public post volume when X supplies it.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :tweet_volume
+
+        # X search URL for the trend.
+        sig { returns(T.nilable(String)) }
+        attr_reader :url
+
+        sig { params(url: String).void }
+        attr_writer :url
+
         sig do
           params(
             name: String,
             description: String,
+            promoted_content: T.nilable(String),
             query: String,
-            rank: Integer
+            rank: Integer,
+            tweet_volume: T.nilable(Integer),
+            url: String
           ).returns(T.attached_class)
         end
-        def self.new(name:, description: nil, query: nil, rank: nil)
+        def self.new(
+          name:,
+          description: nil,
+          # Promotion identifier from X. Null for organic trends.
+          promoted_content: nil,
+          query: nil,
+          rank: nil,
+          # Approximate public post volume when X supplies it.
+          tweet_volume: nil,
+          # X search URL for the trend.
+          url: nil
+        )
         end
 
         sig do
           override.returns(
-            { name: String, description: String, query: String, rank: Integer }
+            {
+              name: String,
+              description: String,
+              promoted_content: T.nilable(String),
+              query: String,
+              rank: Integer,
+              tweet_volume: T.nilable(Integer),
+              url: String
+            }
           )
         end
         def to_hash

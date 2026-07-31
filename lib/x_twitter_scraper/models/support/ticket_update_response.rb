@@ -7,17 +7,29 @@ module XTwitterScraper
       class TicketUpdateResponse < XTwitterScraper::Internal::Type::BaseModel
         # @!attribute public_id
         #
-        #   @return [String, nil]
-        optional :public_id, String, api_name: :publicId
+        #   @return [String]
+        required :public_id, String, api_name: :publicId
 
         # @!attribute status
         #
-        #   @return [String, nil]
-        optional :status, String
+        #   @return [Symbol, XTwitterScraper::Models::Support::TicketUpdateResponse::Status]
+        required :status, enum: -> { XTwitterScraper::Models::Support::TicketUpdateResponse::Status }
 
-        # @!method initialize(public_id: nil, status: nil)
+        # @!method initialize(public_id:, status:)
         #   @param public_id [String]
-        #   @param status [String]
+        #   @param status [Symbol, XTwitterScraper::Models::Support::TicketUpdateResponse::Status]
+
+        # @see XTwitterScraper::Models::Support::TicketUpdateResponse#status
+        module Status
+          extend XTwitterScraper::Internal::Type::Enum
+
+          OPEN = :open
+          RESOLVED = :resolved
+          CLOSED = :closed
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
     end
   end

@@ -203,10 +203,8 @@ module XTwitterScraper
           min_replies: nil,
           # Minimum retweets threshold.
           min_retweets: nil,
-          # Maximum items requested from this page (1-100, default 20). The response can
-          # contain fewer items because the source returned fewer, filters removed items, or
-          # remaining credits cover fewer results. Keep requesting next_cursor while
-          # has_next_page is true, even when a page is empty. The deprecated limit and count
+          # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
+          # results. Continue while has_next_page is true. Deprecated limit and count
           # aliases remain accepted.
           page_size: nil,
           # Quote mode.
@@ -237,11 +235,10 @@ module XTwitterScraper
         )
         end
 
-        # Returns visible replies. For an unfiltered first page, Xquik compares a terminal
-        # page with the post's reported reply count. If the page is visibly incomplete,
-        # the endpoint returns 424 `replies_incomplete` instead of presenting partial
-        # coverage as complete. Use tweet search with a `conversation_id:{id}` query as
-        # the broader fallback.
+        # Returns direct replies. Complete mode merges available timeline views, supported
+        # rankings, every forward cursor module, labeled hidden-content branches,
+        # exact-parent time partitions scaled to the reported reply count, and search. It
+        # separates nested replies and returns 424 below 80% coverage.
         sig do
           params(
             id: String,
@@ -255,6 +252,7 @@ module XTwitterScraper
             hashtags: String,
             in_reply_to_tweet_id: String,
             language: String,
+            limit: Integer,
             media_type:
               XTwitterScraper::X::TweetGetRepliesParams::MediaType::OrSymbol,
             mentioning: String,
@@ -262,6 +260,7 @@ module XTwitterScraper
             min_quotes: Integer,
             min_replies: Integer,
             min_retweets: Integer,
+            mode: XTwitterScraper::X::TweetGetRepliesParams::Mode::OrSymbol,
             page_size: Integer,
             quotes: XTwitterScraper::X::TweetGetRepliesParams::Quotes::OrSymbol,
             quotes_of_tweet_id: String,
@@ -278,7 +277,7 @@ module XTwitterScraper
             url: String,
             verified_only: T::Boolean,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::PaginatedTweets)
+          ).returns(XTwitterScraper::Models::X::TweetGetRepliesResponse)
         end
         def get_replies(
           # Tweet ID to get replies
@@ -304,6 +303,10 @@ module XTwitterScraper
           in_reply_to_tweet_id: nil,
           # Language code filter, e.g. en or tr.
           language: nil,
+          # With mode=complete, maximum combined direct and nested reply rows (1-25000).
+          # Without complete mode, this is the deprecated pageSize alias and uses the normal
+          # 1-100 page range.
+          limit: nil,
           # Filter by media type.
           media_type: nil,
           # Filter tweets mentioning a username.
@@ -316,10 +319,11 @@ module XTwitterScraper
           min_replies: nil,
           # Minimum retweets threshold.
           min_retweets: nil,
-          # Maximum items requested from this page (1-100, default 20). The response can
-          # contain fewer items because the source returned fewer, filters removed items, or
-          # remaining credits cover fewer results. Keep requesting next_cursor while
-          # has_next_page is true, even when a page is empty. The deprecated limit and count
+          # Set complete for maximum-coverage collection. Complete mode accepts only limit.
+          # Remove cursor, pageSize, count, time ranges, and tweet filters.
+          mode: nil,
+          # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
+          # results. Continue while has_next_page is true. Deprecated limit and count
           # aliases remain accepted.
           page_size: nil,
           # Quote mode.
@@ -387,10 +391,8 @@ module XTwitterScraper
           id,
           # Pagination cursor for thread tweets
           cursor: nil,
-          # Maximum items requested from this page (1-100, default 20). The response can
-          # contain fewer items because the source returned fewer, filters removed items, or
-          # remaining credits cover fewer results. Keep requesting next_cursor while
-          # has_next_page is true, even when a page is empty. The deprecated limit and count
+          # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
+          # results. Continue while has_next_page is true. Deprecated limit and count
           # aliases remain accepted.
           page_size: nil,
           request_options: {}

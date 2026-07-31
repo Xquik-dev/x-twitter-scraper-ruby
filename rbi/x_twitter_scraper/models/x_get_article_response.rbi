@@ -384,12 +384,6 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :username
 
-        sig { returns(T.nilable(T::Boolean)) }
-        attr_reader :can_dm
-
-        sig { params(can_dm: T::Boolean).void }
-        attr_writer :can_dm
-
         sig { returns(T.nilable(String)) }
         attr_reader :created_at
 
@@ -486,7 +480,6 @@ module XTwitterScraper
             id: String,
             name: String,
             username: String,
-            can_dm: T::Boolean,
             created_at: String,
             description: String,
             favourites_count: Integer,
@@ -508,7 +501,6 @@ module XTwitterScraper
           id:,
           name:,
           username:,
-          can_dm: nil,
           created_at: nil,
           description: nil,
           favourites_count: nil,
@@ -533,7 +525,6 @@ module XTwitterScraper
               id: String,
               name: String,
               username: String,
-              can_dm: T::Boolean,
               created_at: String,
               description: String,
               favourites_count: Integer,

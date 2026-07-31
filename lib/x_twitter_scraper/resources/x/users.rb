@@ -225,7 +225,7 @@ module XTwitterScraper
         #
         # @param min_retweets [Integer] Minimum retweets threshold.
         #
-        # @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
+        # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
         #
         # @param quotes [Symbol, XTwitterScraper::Models::X::UserRetrieveLikesParams::Quotes] Quote mode.
         #
@@ -324,7 +324,7 @@ module XTwitterScraper
         #
         # @param min_retweets [Integer] Minimum retweets threshold.
         #
-        # @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
+        # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
         #
         # @param quotes [Symbol, XTwitterScraper::Models::X::UserRetrieveMediaParams::Quotes] Quote mode.
         #
@@ -423,7 +423,7 @@ module XTwitterScraper
         #
         # @param min_retweets [Integer] Minimum retweets threshold.
         #
-        # @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
+        # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
         #
         # @param quotes [Symbol, XTwitterScraper::Models::X::UserRetrieveMentionsParams::Quotes] Quote mode.
         #
@@ -530,7 +530,7 @@ module XTwitterScraper
         #
         # @param min_retweets [Integer] Minimum retweets threshold.
         #
-        # @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
+        # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
         #
         # @param quotes [Symbol, XTwitterScraper::Models::X::UserRetrieveRepliesParams::Quotes] Quote mode.
         #
@@ -659,7 +659,7 @@ module XTwitterScraper
         #
         # @param min_retweets [Integer] Minimum retweets threshold.
         #
-        # @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
+        # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
         #
         # @param quotes [Symbol, XTwitterScraper::Models::X::UserRetrieveTweetsParams::Quotes] Quote mode.
         #

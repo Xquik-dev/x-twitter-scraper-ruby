@@ -7,14 +7,10 @@ module XTwitterScraper
         }
 
       class TicketListResponse < XTwitterScraper::Internal::Type::BaseModel
-        attr_reader tickets: ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket]?
-
-        def tickets=: (
-          ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket]
-        ) -> ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket]
+        attr_accessor tickets: ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket]
 
         def initialize: (
-          ?tickets: ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket]
+          tickets: ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket]
         ) -> void
 
         def to_hash: -> {
@@ -26,53 +22,54 @@ module XTwitterScraper
             created_at: Time,
             message_count: Integer,
             public_id: String,
-            status: String,
+            status: XTwitterScraper::Models::Support::TicketListResponse::Ticket::status,
             subject: String,
             updated_at: Time
           }
 
         class Ticket < XTwitterScraper::Internal::Type::BaseModel
-          attr_reader created_at: Time?
+          attr_accessor created_at: Time
 
-          def created_at=: (Time) -> Time
+          attr_accessor message_count: Integer
 
-          attr_reader message_count: Integer?
+          attr_accessor public_id: String
 
-          def message_count=: (Integer) -> Integer
+          attr_accessor status: XTwitterScraper::Models::Support::TicketListResponse::Ticket::status
 
-          attr_reader public_id: String?
+          attr_accessor subject: String
 
-          def public_id=: (String) -> String
-
-          attr_reader status: String?
-
-          def status=: (String) -> String
-
-          attr_reader subject: String?
-
-          def subject=: (String) -> String
-
-          attr_reader updated_at: Time?
-
-          def updated_at=: (Time) -> Time
+          attr_accessor updated_at: Time
 
           def initialize: (
-            ?created_at: Time,
-            ?message_count: Integer,
-            ?public_id: String,
-            ?status: String,
-            ?subject: String,
-            ?updated_at: Time
+            created_at: Time,
+            message_count: Integer,
+            public_id: String,
+            status: XTwitterScraper::Models::Support::TicketListResponse::Ticket::status,
+            subject: String,
+            updated_at: Time
           ) -> void
 
           def to_hash: -> {
             created_at: Time,
             message_count: Integer,
             public_id: String,
-            status: String,
+            status: XTwitterScraper::Models::Support::TicketListResponse::Ticket::status,
             subject: String,
             updated_at: Time
           }
+
+          type status = :open | :in_progress | :resolved | :closed
+
+          module Status
+            extend XTwitterScraper::Internal::Type::Enum
+
+            OPEN: :open
+            IN_PROGRESS: :in_progress
+            RESOLVED: :resolved
+            CLOSED: :closed
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket::status]
+          end
         end
       end
     end

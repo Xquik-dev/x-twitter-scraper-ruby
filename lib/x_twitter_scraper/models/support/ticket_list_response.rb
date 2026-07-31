@@ -7,51 +7,64 @@ module XTwitterScraper
       class TicketListResponse < XTwitterScraper::Internal::Type::BaseModel
         # @!attribute tickets
         #
-        #   @return [Array<XTwitterScraper::Models::Support::TicketListResponse::Ticket>, nil]
-        optional :tickets,
+        #   @return [Array<XTwitterScraper::Models::Support::TicketListResponse::Ticket>]
+        required :tickets,
                  -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::Support::TicketListResponse::Ticket] }
 
-        # @!method initialize(tickets: nil)
+        # @!method initialize(tickets:)
         #   @param tickets [Array<XTwitterScraper::Models::Support::TicketListResponse::Ticket>]
 
         class Ticket < XTwitterScraper::Internal::Type::BaseModel
           # @!attribute created_at
           #
-          #   @return [Time, nil]
-          optional :created_at, Time, api_name: :createdAt
+          #   @return [Time]
+          required :created_at, Time, api_name: :createdAt
 
           # @!attribute message_count
           #
-          #   @return [Integer, nil]
-          optional :message_count, Integer, api_name: :messageCount
+          #   @return [Integer]
+          required :message_count, Integer, api_name: :messageCount
 
           # @!attribute public_id
           #
-          #   @return [String, nil]
-          optional :public_id, String, api_name: :publicId
+          #   @return [String]
+          required :public_id, String, api_name: :publicId
 
           # @!attribute status
           #
-          #   @return [String, nil]
-          optional :status, String
+          #   @return [Symbol, XTwitterScraper::Models::Support::TicketListResponse::Ticket::Status]
+          required :status, enum: -> { XTwitterScraper::Models::Support::TicketListResponse::Ticket::Status }
 
           # @!attribute subject
           #
-          #   @return [String, nil]
-          optional :subject, String
+          #   @return [String]
+          required :subject, String
 
           # @!attribute updated_at
           #
-          #   @return [Time, nil]
-          optional :updated_at, Time, api_name: :updatedAt
+          #   @return [Time]
+          required :updated_at, Time, api_name: :updatedAt
 
-          # @!method initialize(created_at: nil, message_count: nil, public_id: nil, status: nil, subject: nil, updated_at: nil)
+          # @!method initialize(created_at:, message_count:, public_id:, status:, subject:, updated_at:)
           #   @param created_at [Time]
           #   @param message_count [Integer]
           #   @param public_id [String]
-          #   @param status [String]
+          #   @param status [Symbol, XTwitterScraper::Models::Support::TicketListResponse::Ticket::Status]
           #   @param subject [String]
           #   @param updated_at [Time]
+
+          # @see XTwitterScraper::Models::Support::TicketListResponse::Ticket#status
+          module Status
+            extend XTwitterScraper::Internal::Type::Enum
+
+            OPEN = :open
+            IN_PROGRESS = :in_progress
+            RESOLVED = :resolved
+            CLOSED = :closed
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
         end
       end
     end

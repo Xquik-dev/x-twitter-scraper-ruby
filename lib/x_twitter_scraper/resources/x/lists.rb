@@ -75,7 +75,7 @@ module XTwitterScraper
         #
         # @param include_replies [Boolean] Include replies (default false)
         #
-        # @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
+        # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
         #
         # @param since_time [String] Unix timestamp - filter after
         #

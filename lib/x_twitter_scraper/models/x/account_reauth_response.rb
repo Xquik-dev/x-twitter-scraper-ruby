@@ -22,8 +22,8 @@ module XTwitterScraper
 
         # @!attribute status
         #
-        #   @return [String]
-        required :status, String
+        #   @return [Symbol, :active]
+        required :status, const: :active
 
         # @!attribute x_user_id
         #
@@ -35,15 +35,15 @@ module XTwitterScraper
         #   @return [String]
         required :x_username, String, api_name: :xUsername
 
-        # @!method initialize(id:, created_at:, health:, status:, x_user_id:, x_username:)
+        # @!method initialize(id:, created_at:, health:, x_user_id:, x_username:, status: :active)
         #   Sanitized X account summary returned by connect and reauth.
         #
         #   @param id [String]
         #   @param created_at [Time]
         #   @param health [Symbol, XTwitterScraper::Models::X::AccountReauthResponse::Health]
-        #   @param status [String]
         #   @param x_user_id [String]
         #   @param x_username [String]
+        #   @param status [Symbol, :active]
 
         # @see XTwitterScraper::Models::X::AccountReauthResponse#health
         module Health

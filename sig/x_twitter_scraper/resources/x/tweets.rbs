@@ -88,12 +88,14 @@ module XTwitterScraper
           ?hashtags: String,
           ?in_reply_to_tweet_id: String,
           ?language: String,
+          ?limit: Integer,
           ?media_type: XTwitterScraper::Models::X::TweetGetRepliesParams::media_type,
           ?mentioning: String,
           ?min_faves: Integer,
           ?min_quotes: Integer,
           ?min_replies: Integer,
           ?min_retweets: Integer,
+          ?mode: XTwitterScraper::Models::X::TweetGetRepliesParams::mode,
           ?page_size: Integer,
           ?quotes: XTwitterScraper::Models::X::TweetGetRepliesParams::quotes,
           ?quotes_of_tweet_id: String,
@@ -108,7 +110,7 @@ module XTwitterScraper
           ?url: String,
           ?verified_only: bool,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::PaginatedTweets
+        ) -> XTwitterScraper::Models::X::TweetGetRepliesResponse
 
         def get_retweeters: (
           String id,

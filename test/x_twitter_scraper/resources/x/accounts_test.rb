@@ -15,7 +15,15 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
       )
 
     assert_pattern do
-      response => XTwitterScraper::Internal::Type::Unknown
+      response => XTwitterScraper::Models::X::AccountCreateResponse
+    end
+
+    assert_pattern do
+      case response
+      in XTwitterScraper::Models::X::AccountCreateResponse::SanitizedXAccount
+      in XTwitterScraper::Models::X::AccountCreateResponse::XAccountConnectionAttemptPending
+      in XTwitterScraper::Models::X::AccountCreateResponse::XAccountConnectionChallenge
+      end
     end
   end
 
@@ -104,7 +112,7 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
         id: String,
         created_at: Time,
         health: XTwitterScraper::Models::X::AccountReauthResponse::Health,
-        status: String,
+        status: Symbol,
         x_user_id: String,
         x_username: String
       }

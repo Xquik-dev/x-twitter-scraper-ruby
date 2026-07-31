@@ -14,12 +14,14 @@ module XTwitterScraper
           hashtags: String,
           in_reply_to_tweet_id: String,
           language: String,
+          limit: Integer,
           media_type: XTwitterScraper::Models::X::TweetGetRepliesParams::media_type,
           mentioning: String,
           min_faves: Integer,
           min_quotes: Integer,
           min_replies: Integer,
           min_retweets: Integer,
+          mode: XTwitterScraper::Models::X::TweetGetRepliesParams::mode,
           page_size: Integer,
           quotes: XTwitterScraper::Models::X::TweetGetRepliesParams::quotes,
           quotes_of_tweet_id: String,
@@ -82,6 +84,10 @@ module XTwitterScraper
 
         def language=: (String) -> String
 
+        attr_reader limit: Integer?
+
+        def limit=: (Integer) -> Integer
+
         attr_reader media_type: XTwitterScraper::Models::X::TweetGetRepliesParams::media_type?
 
         def media_type=: (
@@ -107,6 +113,12 @@ module XTwitterScraper
         attr_reader min_retweets: Integer?
 
         def min_retweets=: (Integer) -> Integer
+
+        attr_reader mode: XTwitterScraper::Models::X::TweetGetRepliesParams::mode?
+
+        def mode=: (
+          XTwitterScraper::Models::X::TweetGetRepliesParams::mode
+        ) -> XTwitterScraper::Models::X::TweetGetRepliesParams::mode
 
         attr_reader page_size: Integer?
 
@@ -178,12 +190,14 @@ module XTwitterScraper
           ?hashtags: String,
           ?in_reply_to_tweet_id: String,
           ?language: String,
+          ?limit: Integer,
           ?media_type: XTwitterScraper::Models::X::TweetGetRepliesParams::media_type,
           ?mentioning: String,
           ?min_faves: Integer,
           ?min_quotes: Integer,
           ?min_replies: Integer,
           ?min_retweets: Integer,
+          ?mode: XTwitterScraper::Models::X::TweetGetRepliesParams::mode,
           ?page_size: Integer,
           ?quotes: XTwitterScraper::Models::X::TweetGetRepliesParams::quotes,
           ?quotes_of_tweet_id: String,
@@ -212,12 +226,14 @@ module XTwitterScraper
           hashtags: String,
           in_reply_to_tweet_id: String,
           language: String,
+          limit: Integer,
           media_type: XTwitterScraper::Models::X::TweetGetRepliesParams::media_type,
           mentioning: String,
           min_faves: Integer,
           min_quotes: Integer,
           min_replies: Integer,
           min_retweets: Integer,
+          mode: XTwitterScraper::Models::X::TweetGetRepliesParams::mode,
           page_size: Integer,
           quotes: XTwitterScraper::Models::X::TweetGetRepliesParams::quotes,
           quotes_of_tweet_id: String,
@@ -247,6 +263,16 @@ module XTwitterScraper
           NONE: :none
 
           def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetGetRepliesParams::media_type]
+        end
+
+        type mode = :complete
+
+        module Mode
+          extend XTwitterScraper::Internal::Type::Enum
+
+          COMPLETE: :complete
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetGetRepliesParams::mode]
         end
 
         type quotes = :include | :exclude | :only

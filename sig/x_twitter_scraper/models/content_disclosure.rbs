@@ -42,17 +42,9 @@ module XTwitterScraper
       end
 
       type ai_generated =
-        {
-          can_edit: bool,
-          detection_source: String,
-          has_ai_generated_media: bool
-        }
+        { detection_source: String, has_ai_generated_media: bool }
 
       class AIGenerated < XTwitterScraper::Internal::Type::BaseModel
-        attr_reader can_edit: bool?
-
-        def can_edit=: (bool) -> bool
-
         attr_reader detection_source: String?
 
         def detection_source=: (String) -> String
@@ -62,13 +54,11 @@ module XTwitterScraper
         def has_ai_generated_media=: (bool) -> bool
 
         def initialize: (
-          ?can_edit: bool,
           ?detection_source: String,
           ?has_ai_generated_media: bool
         ) -> void
 
         def to_hash: -> {
-          can_edit: bool,
           detection_source: String,
           has_ai_generated_media: bool
         }

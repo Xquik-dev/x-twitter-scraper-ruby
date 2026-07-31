@@ -5,36 +5,48 @@ module XTwitterScraper
         id: String,
         name: String,
         username: String,
+        affiliates_highlighted_label: XTwitterScraper::UserProfile::AffiliatesHighlightedLabel,
         automated_by: String,
-        can_dm: bool,
+        business_account_affiliates_count: Integer,
         community_role: String,
         cover_picture: String,
         created_at: String,
+        creator_subscriptions_count: Integer,
         description: String,
         favourites_count: Integer,
         followers: Integer,
         following: Integer,
         has_custom_timelines: bool,
+        has_graduated_access: bool,
+        has_hidden_subscriptions_on_profile: bool,
+        highlights_info: XTwitterScraper::UserProfile::HighlightsInfo,
+        identity_verification: XTwitterScraper::UserProfile::IdentityVerification,
         is_automated: bool,
         is_blue_verified: bool,
+        is_profile_translatable: bool,
         is_translator: bool,
         is_verified: bool,
         location: String,
         media_count: Integer,
+        parody_commentary_fan_label: String,
         pinned_tweet_ids: ::Array[String],
         possibly_sensitive: bool,
         profile_bio: ::Hash[Symbol, top],
         profile_banner_url: String,
+        profile_description_language: String,
+        profile_image_shape: String,
+        profile_interstitial_type: String,
         profile_picture: String,
+        profile_sort_enabled: bool,
+        profile_translator_type: String,
         protected: bool,
         statuses_count: Integer,
+        super_follow_eligible: bool,
         unavailable: bool,
         unavailable_reason: String,
         url: String,
         verified: bool,
         verified_type: String,
-        viewer_followed_by: bool,
-        viewer_following: bool,
         withheld_in_countries: ::Array[String]
       }
 
@@ -45,13 +57,19 @@ module XTwitterScraper
 
       attr_accessor username: String
 
+      attr_reader affiliates_highlighted_label: XTwitterScraper::UserProfile::AffiliatesHighlightedLabel?
+
+      def affiliates_highlighted_label=: (
+        XTwitterScraper::UserProfile::AffiliatesHighlightedLabel
+      ) -> XTwitterScraper::UserProfile::AffiliatesHighlightedLabel
+
       attr_reader automated_by: String?
 
       def automated_by=: (String) -> String
 
-      attr_reader can_dm: bool?
+      attr_reader business_account_affiliates_count: Integer?
 
-      def can_dm=: (bool) -> bool
+      def business_account_affiliates_count=: (Integer) -> Integer
 
       attr_reader community_role: String?
 
@@ -64,6 +82,10 @@ module XTwitterScraper
       attr_reader created_at: String?
 
       def created_at=: (String) -> String
+
+      attr_reader creator_subscriptions_count: Integer?
+
+      def creator_subscriptions_count=: (Integer) -> Integer
 
       attr_reader description: String?
 
@@ -85,6 +107,26 @@ module XTwitterScraper
 
       def has_custom_timelines=: (bool) -> bool
 
+      attr_reader has_graduated_access: bool?
+
+      def has_graduated_access=: (bool) -> bool
+
+      attr_reader has_hidden_subscriptions_on_profile: bool?
+
+      def has_hidden_subscriptions_on_profile=: (bool) -> bool
+
+      attr_reader highlights_info: XTwitterScraper::UserProfile::HighlightsInfo?
+
+      def highlights_info=: (
+        XTwitterScraper::UserProfile::HighlightsInfo
+      ) -> XTwitterScraper::UserProfile::HighlightsInfo
+
+      attr_reader identity_verification: XTwitterScraper::UserProfile::IdentityVerification?
+
+      def identity_verification=: (
+        XTwitterScraper::UserProfile::IdentityVerification
+      ) -> XTwitterScraper::UserProfile::IdentityVerification
+
       attr_reader is_automated: bool?
 
       def is_automated=: (bool) -> bool
@@ -92,6 +134,10 @@ module XTwitterScraper
       attr_reader is_blue_verified: bool?
 
       def is_blue_verified=: (bool) -> bool
+
+      attr_reader is_profile_translatable: bool?
+
+      def is_profile_translatable=: (bool) -> bool
 
       attr_reader is_translator: bool?
 
@@ -109,6 +155,10 @@ module XTwitterScraper
 
       def media_count=: (Integer) -> Integer
 
+      attr_reader parody_commentary_fan_label: String?
+
+      def parody_commentary_fan_label=: (String) -> String
+
       attr_reader pinned_tweet_ids: ::Array[String]?
 
       def pinned_tweet_ids=: (::Array[String]) -> ::Array[String]
@@ -125,9 +175,29 @@ module XTwitterScraper
 
       def profile_banner_url=: (String) -> String
 
+      attr_reader profile_description_language: String?
+
+      def profile_description_language=: (String) -> String
+
+      attr_reader profile_image_shape: String?
+
+      def profile_image_shape=: (String) -> String
+
+      attr_reader profile_interstitial_type: String?
+
+      def profile_interstitial_type=: (String) -> String
+
       attr_reader profile_picture: String?
 
       def profile_picture=: (String) -> String
+
+      attr_reader profile_sort_enabled: bool?
+
+      def profile_sort_enabled=: (bool) -> bool
+
+      attr_reader profile_translator_type: String?
+
+      def profile_translator_type=: (String) -> String
 
       attr_reader protected: bool?
 
@@ -136,6 +206,10 @@ module XTwitterScraper
       attr_reader statuses_count: Integer?
 
       def statuses_count=: (Integer) -> Integer
+
+      attr_reader super_follow_eligible: bool?
+
+      def super_follow_eligible=: (bool) -> bool
 
       attr_reader unavailable: bool?
 
@@ -157,14 +231,6 @@ module XTwitterScraper
 
       def verified_type=: (String) -> String
 
-      attr_reader viewer_followed_by: bool?
-
-      def viewer_followed_by=: (bool) -> bool
-
-      attr_reader viewer_following: bool?
-
-      def viewer_following=: (bool) -> bool
-
       attr_reader withheld_in_countries: ::Array[String]?
 
       def withheld_in_countries=: (::Array[String]) -> ::Array[String]
@@ -173,36 +239,48 @@ module XTwitterScraper
         id: String,
         name: String,
         username: String,
+        ?affiliates_highlighted_label: XTwitterScraper::UserProfile::AffiliatesHighlightedLabel,
         ?automated_by: String,
-        ?can_dm: bool,
+        ?business_account_affiliates_count: Integer,
         ?community_role: String,
         ?cover_picture: String,
         ?created_at: String,
+        ?creator_subscriptions_count: Integer,
         ?description: String,
         ?favourites_count: Integer,
         ?followers: Integer,
         ?following: Integer,
         ?has_custom_timelines: bool,
+        ?has_graduated_access: bool,
+        ?has_hidden_subscriptions_on_profile: bool,
+        ?highlights_info: XTwitterScraper::UserProfile::HighlightsInfo,
+        ?identity_verification: XTwitterScraper::UserProfile::IdentityVerification,
         ?is_automated: bool,
         ?is_blue_verified: bool,
+        ?is_profile_translatable: bool,
         ?is_translator: bool,
         ?is_verified: bool,
         ?location: String,
         ?media_count: Integer,
+        ?parody_commentary_fan_label: String,
         ?pinned_tweet_ids: ::Array[String],
         ?possibly_sensitive: bool,
         ?profile_bio: ::Hash[Symbol, top],
         ?profile_banner_url: String,
+        ?profile_description_language: String,
+        ?profile_image_shape: String,
+        ?profile_interstitial_type: String,
         ?profile_picture: String,
+        ?profile_sort_enabled: bool,
+        ?profile_translator_type: String,
         ?protected: bool,
         ?statuses_count: Integer,
+        ?super_follow_eligible: bool,
         ?unavailable: bool,
         ?unavailable_reason: String,
         ?url: String,
         ?verified: bool,
         ?verified_type: String,
-        ?viewer_followed_by: bool,
-        ?viewer_following: bool,
         ?withheld_in_countries: ::Array[String]
       ) -> void
 
@@ -210,38 +288,160 @@ module XTwitterScraper
         id: String,
         name: String,
         username: String,
+        affiliates_highlighted_label: XTwitterScraper::UserProfile::AffiliatesHighlightedLabel,
         automated_by: String,
-        can_dm: bool,
+        business_account_affiliates_count: Integer,
         community_role: String,
         cover_picture: String,
         created_at: String,
+        creator_subscriptions_count: Integer,
         description: String,
         favourites_count: Integer,
         followers: Integer,
         following: Integer,
         has_custom_timelines: bool,
+        has_graduated_access: bool,
+        has_hidden_subscriptions_on_profile: bool,
+        highlights_info: XTwitterScraper::UserProfile::HighlightsInfo,
+        identity_verification: XTwitterScraper::UserProfile::IdentityVerification,
         is_automated: bool,
         is_blue_verified: bool,
+        is_profile_translatable: bool,
         is_translator: bool,
         is_verified: bool,
         location: String,
         media_count: Integer,
+        parody_commentary_fan_label: String,
         pinned_tweet_ids: ::Array[String],
         possibly_sensitive: bool,
         profile_bio: ::Hash[Symbol, top],
         profile_banner_url: String,
+        profile_description_language: String,
+        profile_image_shape: String,
+        profile_interstitial_type: String,
         profile_picture: String,
+        profile_sort_enabled: bool,
+        profile_translator_type: String,
         protected: bool,
         statuses_count: Integer,
+        super_follow_eligible: bool,
         unavailable: bool,
         unavailable_reason: String,
         url: String,
         verified: bool,
         verified_type: String,
-        viewer_followed_by: bool,
-        viewer_following: bool,
         withheld_in_countries: ::Array[String]
       }
+
+      type affiliates_highlighted_label =
+        {
+          badge_url: String,
+          description: String,
+          url: String,
+          url_type: String,
+          user_label_display_type: String,
+          user_label_type: String
+        }
+
+      class AffiliatesHighlightedLabel < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader badge_url: String?
+
+        def badge_url=: (String) -> String
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        attr_reader url: String?
+
+        def url=: (String) -> String
+
+        attr_reader url_type: String?
+
+        def url_type=: (String) -> String
+
+        attr_reader user_label_display_type: String?
+
+        def user_label_display_type=: (String) -> String
+
+        attr_reader user_label_type: String?
+
+        def user_label_type=: (String) -> String
+
+        def initialize: (
+          ?badge_url: String,
+          ?description: String,
+          ?url: String,
+          ?url_type: String,
+          ?user_label_display_type: String,
+          ?user_label_type: String
+        ) -> void
+
+        def to_hash: -> {
+          badge_url: String,
+          description: String,
+          url: String,
+          url_type: String,
+          user_label_display_type: String,
+          user_label_type: String
+        }
+      end
+
+      type highlights_info =
+        { can_highlight_tweets: bool, highlighted_tweets: String }
+
+      class HighlightsInfo < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader can_highlight_tweets: bool?
+
+        def can_highlight_tweets=: (bool) -> bool
+
+        attr_reader highlighted_tweets: String?
+
+        def highlighted_tweets=: (String) -> String
+
+        def initialize: (
+          ?can_highlight_tweets: bool,
+          ?highlighted_tweets: String
+        ) -> void
+
+        def to_hash: -> {
+          can_highlight_tweets: bool,
+          highlighted_tweets: String
+        }
+      end
+
+      type identity_verification =
+        {
+          description: String,
+          is_identity_verified: bool,
+          verified_since_msec: String
+        }
+
+      class IdentityVerification < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        attr_reader is_identity_verified: bool?
+
+        def is_identity_verified=: (bool) -> bool
+
+        attr_reader verified_since_msec: String?
+
+        def verified_since_msec=: (String) -> String
+
+        def initialize: (
+          ?description: String,
+          ?is_identity_verified: bool,
+          ?verified_since_msec: String
+        ) -> void
+
+        def to_hash: -> {
+          description: String,
+          is_identity_verified: bool,
+          verified_since_msec: String
+        }
+      end
     end
   end
 end

@@ -35,12 +35,12 @@ class XTwitterScraper::Test::Resources::Support::TicketsTest < XTwitterScraper::
 
     assert_pattern do
       response => {
-        created_at: Time | nil,
-        messages: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message]) | nil,
-        public_id: String | nil,
-        status: String | nil,
-        subject: String | nil,
-        updated_at: Time | nil
+        created_at: Time,
+        messages: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message]),
+        public_id: String,
+        status: XTwitterScraper::Models::Support::TicketRetrieveResponse::Status,
+        subject: String,
+        updated_at: Time
       }
     end
   end
@@ -56,8 +56,8 @@ class XTwitterScraper::Test::Resources::Support::TicketsTest < XTwitterScraper::
 
     assert_pattern do
       response => {
-        public_id: String | nil,
-        status: String | nil
+        public_id: String,
+        status: XTwitterScraper::Models::Support::TicketUpdateResponse::Status
       }
     end
   end
@@ -73,7 +73,7 @@ class XTwitterScraper::Test::Resources::Support::TicketsTest < XTwitterScraper::
 
     assert_pattern do
       response => {
-        tickets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::Support::TicketListResponse::Ticket]) | nil
+        tickets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::Support::TicketListResponse::Ticket])
       }
     end
   end

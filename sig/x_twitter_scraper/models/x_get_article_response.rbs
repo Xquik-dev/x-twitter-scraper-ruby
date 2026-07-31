@@ -202,7 +202,6 @@ module XTwitterScraper
           id: String,
           name: String,
           username: String,
-          can_dm: bool,
           created_at: String,
           description: String,
           favourites_count: Integer,
@@ -226,10 +225,6 @@ module XTwitterScraper
         attr_accessor name: String
 
         attr_accessor username: String
-
-        attr_reader can_dm: bool?
-
-        def can_dm=: (bool) -> bool
 
         attr_reader created_at: String?
 
@@ -295,7 +290,6 @@ module XTwitterScraper
           id: String,
           name: String,
           username: String,
-          ?can_dm: bool,
           ?created_at: String,
           ?description: String,
           ?favourites_count: Integer,
@@ -317,7 +311,6 @@ module XTwitterScraper
           id: String,
           name: String,
           username: String,
-          can_dm: bool,
           created_at: String,
           description: String,
           favourites_count: Integer,

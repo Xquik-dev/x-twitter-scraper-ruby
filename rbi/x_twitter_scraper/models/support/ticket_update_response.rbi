@@ -12,26 +12,75 @@ module XTwitterScraper
             )
           end
 
-        sig { returns(T.nilable(String)) }
-        attr_reader :public_id
-
-        sig { params(public_id: String).void }
-        attr_writer :public_id
-
-        sig { returns(T.nilable(String)) }
-        attr_reader :status
-
-        sig { params(status: String).void }
-        attr_writer :status
+        sig { returns(String) }
+        attr_accessor :public_id
 
         sig do
-          params(public_id: String, status: String).returns(T.attached_class)
+          returns(
+            XTwitterScraper::Models::Support::TicketUpdateResponse::Status::TaggedSymbol
+          )
         end
-        def self.new(public_id: nil, status: nil)
+        attr_accessor :status
+
+        sig do
+          params(
+            public_id: String,
+            status:
+              XTwitterScraper::Models::Support::TicketUpdateResponse::Status::OrSymbol
+          ).returns(T.attached_class)
+        end
+        def self.new(public_id:, status:)
         end
 
-        sig { override.returns({ public_id: String, status: String }) }
+        sig do
+          override.returns(
+            {
+              public_id: String,
+              status:
+                XTwitterScraper::Models::Support::TicketUpdateResponse::Status::TaggedSymbol
+            }
+          )
+        end
         def to_hash
+        end
+
+        module Status
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                XTwitterScraper::Models::Support::TicketUpdateResponse::Status
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          OPEN =
+            T.let(
+              :open,
+              XTwitterScraper::Models::Support::TicketUpdateResponse::Status::TaggedSymbol
+            )
+          RESOLVED =
+            T.let(
+              :resolved,
+              XTwitterScraper::Models::Support::TicketUpdateResponse::Status::TaggedSymbol
+            )
+          CLOSED =
+            T.let(
+              :closed,
+              XTwitterScraper::Models::Support::TicketUpdateResponse::Status::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::Models::Support::TicketUpdateResponse::Status::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
     end

@@ -51,12 +51,6 @@ module XTwitterScraper
           #   @return [String, nil]
           optional :invites_policy, String
 
-          # @!attribute is_member
-          #   Whether the authenticated viewer is a member
-          #
-          #   @return [Boolean, nil]
-          optional :is_member, XTwitterScraper::Internal::Type::Boolean
-
           # @!attribute is_nsfw
           #   Whether the community is marked sensitive
           #
@@ -94,12 +88,6 @@ module XTwitterScraper
           optional :primary_topic,
                    -> { XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic }
 
-          # @!attribute role
-          #   Authenticated viewer's community role
-          #
-          #   @return [String, nil]
-          optional :role, String
-
           # @!attribute rules
           #   Community rules
           #
@@ -107,7 +95,7 @@ module XTwitterScraper
           optional :rules,
                    -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule] }
 
-          # @!method initialize(id:, banner_url: nil, created_at: nil, creator: nil, description: nil, invites_policy: nil, is_member: nil, is_nsfw: nil, join_policy: nil, member_count: nil, moderator_count: nil, name: nil, primary_topic: nil, role: nil, rules: nil)
+          # @!method initialize(id:, banner_url: nil, created_at: nil, creator: nil, description: nil, invites_policy: nil, is_nsfw: nil, join_policy: nil, member_count: nil, moderator_count: nil, name: nil, primary_topic: nil, rules: nil)
           #   Community info object
           #
           #   @param id [String] Unique community identifier
@@ -122,8 +110,6 @@ module XTwitterScraper
           #
           #   @param invites_policy [String] Invitation policy
           #
-          #   @param is_member [Boolean] Whether the authenticated viewer is a member
-          #
           #   @param is_nsfw [Boolean] Whether the community is marked sensitive
           #
           #   @param join_policy [String] Join policy (open or restricted)
@@ -135,8 +121,6 @@ module XTwitterScraper
           #   @param name [String] Display name of the community
           #
           #   @param primary_topic [XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic] Primary topic
-          #
-          #   @param role [String] Authenticated viewer's community role
           #
           #   @param rules [Array<XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule>] Community rules
 
