@@ -20,7 +20,7 @@ class XTwitterScraper::Test::Resources::X::AccountConnectionChallengesTest < XTw
         id: String,
         created_at: Time,
         health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Health,
-        status: String,
+        status: Symbol,
         x_user_id: String,
         x_username: String
       }

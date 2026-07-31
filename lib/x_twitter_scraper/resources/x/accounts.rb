@@ -23,7 +23,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Object]
+        # @return [XTwitterScraper::Models::X::AccountCreateResponse::SanitizedXAccount, XTwitterScraper::Models::X::AccountCreateResponse::XAccountConnectionAttemptPending, XTwitterScraper::Models::X::AccountCreateResponse::XAccountConnectionChallenge]
         #
         # @see XTwitterScraper::Models::X::AccountCreateParams
         def create(params)
@@ -32,7 +32,7 @@ module XTwitterScraper
             method: :post,
             path: "x/accounts",
             body: parsed,
-            model: XTwitterScraper::Internal::Type::Unknown,
+            model: XTwitterScraper::Models::X::AccountCreateResponse,
             options: options
           )
         end

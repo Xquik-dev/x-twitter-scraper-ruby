@@ -5,12 +5,20 @@
 module XTwitterScraper
   module Models
     module X
-      type tweet_author = {  }
+      type tweet_author = ::Hash[Symbol, top]
 
       class TweetAuthor < XTwitterScraper::Models::UserProfile
-        def initialize: -> void
+        def followers: -> Integer
 
-        def to_hash: -> {  }
+        def followers=: (Integer _) -> Integer
+
+        def verified: -> bool
+
+        def verified=: (bool _) -> bool
+
+        def initialize: (**untyped) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
       end
     end
   end

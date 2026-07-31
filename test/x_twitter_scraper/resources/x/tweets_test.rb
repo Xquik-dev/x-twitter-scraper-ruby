@@ -187,15 +187,7 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
     response = @x_twitter_scraper.x.tweets.get_replies("id")
 
     assert_pattern do
-      response => XTwitterScraper::PaginatedTweets
-    end
-
-    assert_pattern do
-      response => {
-        has_next_page: XTwitterScraper::Internal::Type::Boolean,
-        next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet])
-      }
+      response => XTwitterScraper::Models::X::TweetGetRepliesResponse
     end
   end
 

@@ -38,12 +38,6 @@ module XTwitterScraper
 
       # @see XTwitterScraper::Models::ContentDisclosure#ai_generated
       class AIGenerated < XTwitterScraper::Internal::Type::BaseModel
-        # @!attribute can_edit
-        #   Whether the disclosure can be edited on X.
-        #
-        #   @return [Boolean, nil]
-        optional :can_edit, XTwitterScraper::Internal::Type::Boolean, api_name: :canEdit
-
         # @!attribute detection_source
         #   Source of the AI-generated media disclosure.
         #
@@ -58,9 +52,7 @@ module XTwitterScraper
                  XTwitterScraper::Internal::Type::Boolean,
                  api_name: :hasAiGeneratedMedia
 
-        # @!method initialize(can_edit: nil, detection_source: nil, has_ai_generated_media: nil)
-        #   @param can_edit [Boolean] Whether the disclosure can be edited on X.
-        #
+        # @!method initialize(detection_source: nil, has_ai_generated_media: nil)
         #   @param detection_source [String] Source of the AI-generated media disclosure.
         #
         #   @param has_ai_generated_media [Boolean] True when X labels the tweet as containing AI-generated media.

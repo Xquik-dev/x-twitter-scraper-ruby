@@ -10,7 +10,7 @@ module XTwitterScraper
           id: String,
           created_at: Time,
           health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health,
-          status: String,
+          status: :active,
           x_user_id: String,
           x_username: String
         }
@@ -22,7 +22,7 @@ module XTwitterScraper
 
         attr_accessor health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health
 
-        attr_accessor status: String
+        attr_accessor status: :active
 
         attr_accessor x_user_id: String
 
@@ -32,16 +32,16 @@ module XTwitterScraper
           id: String,
           created_at: Time,
           health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health,
-          status: String,
           x_user_id: String,
-          x_username: String
+          x_username: String,
+          ?status: :active
         ) -> void
 
         def to_hash: -> {
           id: String,
           created_at: Time,
           health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health,
-          status: String,
+          status: :active,
           x_user_id: String,
           x_username: String
         }

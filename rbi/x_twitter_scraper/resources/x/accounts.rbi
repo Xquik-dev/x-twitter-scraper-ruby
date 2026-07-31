@@ -17,7 +17,7 @@ module XTwitterScraper
             totp_secret: String,
             username: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(T.anything)
+          ).returns(XTwitterScraper::Models::X::AccountCreateResponse::Variants)
         end
         def create(
           # Account email

@@ -203,11 +203,6 @@ module XTwitterScraper
         #   @return [String]
         required :username, String
 
-        # @!attribute can_dm
-        #
-        #   @return [Boolean, nil]
-        optional :can_dm, XTwitterScraper::Internal::Type::Boolean, api_name: :canDm
-
         # @!attribute created_at
         #
         #   @return [String, nil]
@@ -283,13 +278,12 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :url, String
 
-        # @!method initialize(id:, name:, username:, can_dm: nil, created_at: nil, description: nil, favourites_count: nil, followers_count: nil, following_count: nil, is_blue_verified: nil, is_translator: nil, is_verified: nil, location: nil, media_count: nil, profile_banner_url: nil, profile_picture: nil, protected: nil, statuses_count: nil, url: nil)
+        # @!method initialize(id:, name:, username:, created_at: nil, description: nil, favourites_count: nil, followers_count: nil, following_count: nil, is_blue_verified: nil, is_translator: nil, is_verified: nil, location: nil, media_count: nil, profile_banner_url: nil, profile_picture: nil, protected: nil, statuses_count: nil, url: nil)
         #   X Article author profile fields returned when available.
         #
         #   @param id [String]
         #   @param name [String]
         #   @param username [String]
-        #   @param can_dm [Boolean]
         #   @param created_at [String]
         #   @param description [String]
         #   @param favourites_count [Integer]

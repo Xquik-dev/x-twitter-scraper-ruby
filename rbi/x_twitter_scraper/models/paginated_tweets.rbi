@@ -24,11 +24,10 @@ module XTwitterScraper
       sig { returns(T::Array[XTwitterScraper::SearchTweet]) }
       attr_accessor :tweets
 
-      # Paginated tweet results. The item count can be lower than pageSize when the
-      # source returns fewer tweets, filters remove tweets, or remaining credits cover
-      # fewer results. Follow next_cursor while has_next_page is true. An empty page can
-      # still have has_next_page true after filtering. Zero affordable results returns
-      # 402 insufficient_credits.
+      # Paginated tweets. Source visibility, filters, or remaining credits can reduce
+      # results. An empty filtered page can still have has_next_page true. Follow
+      # next_cursor while has_next_page is true. Zero affordable results returns 402
+      # insufficient_credits.
       sig do
         params(
           has_next_page: T::Boolean,

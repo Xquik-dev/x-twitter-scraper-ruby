@@ -12,7 +12,7 @@ module XTwitterScraper
           totp_secret: String,
           username: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> top
+        ) -> XTwitterScraper::Models::X::account_create_response
 
         def retrieve: (
           String id,

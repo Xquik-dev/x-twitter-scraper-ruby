@@ -29,14 +29,12 @@ module XTwitterScraper
             creator: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator,
             description: String,
             invites_policy: String,
-            is_member: bool,
             is_nsfw: bool,
             join_policy: String,
             member_count: Integer,
             moderator_count: Integer,
             name: String,
             primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
-            role: String,
             rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
           }
 
@@ -65,10 +63,6 @@ module XTwitterScraper
 
           def invites_policy=: (String) -> String
 
-          attr_reader is_member: bool?
-
-          def is_member=: (bool) -> bool
-
           attr_reader is_nsfw: bool?
 
           def is_nsfw=: (bool) -> bool
@@ -95,10 +89,6 @@ module XTwitterScraper
             XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic
           ) -> XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic
 
-          attr_reader role: String?
-
-          def role=: (String) -> String
-
           attr_reader rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]?
 
           def rules=: (
@@ -112,14 +102,12 @@ module XTwitterScraper
             ?creator: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator,
             ?description: String,
             ?invites_policy: String,
-            ?is_member: bool,
             ?is_nsfw: bool,
             ?join_policy: String,
             ?member_count: Integer,
             ?moderator_count: Integer,
             ?name: String,
             ?primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
-            ?role: String,
             ?rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
           ) -> void
 
@@ -130,14 +118,12 @@ module XTwitterScraper
             creator: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator,
             description: String,
             invites_policy: String,
-            is_member: bool,
             is_nsfw: bool,
             join_policy: String,
             member_count: Integer,
             moderator_count: Integer,
             name: String,
             primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
-            role: String,
             rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
           }
 

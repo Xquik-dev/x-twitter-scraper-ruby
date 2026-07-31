@@ -4,13 +4,7 @@
 
 module XTwitterScraper
   module Models
-    type tweet_media =
-      {
-        media_url: String,
-        type: XTwitterScraper::Models::TweetMedia::type_,
-        url: String,
-        video_variants: ::Array[XTwitterScraper::TweetMedia::VideoVariant]
-      }
+    type tweet_media = ::Hash[Symbol, top]
 
     class TweetMedia < XTwitterScraper::Internal::Type::BaseModel
       attr_accessor media_url: String
@@ -19,25 +13,106 @@ module XTwitterScraper
 
       attr_accessor url: String
 
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader allow_download: bool?
+
+      def allow_download=: (bool) -> bool
+
+      attr_reader alt_text: String?
+
+      def alt_text=: (String) -> String
+
+      attr_reader aspect_ratio: ::Array[Integer]?
+
+      def aspect_ratio=: (::Array[Integer]) -> ::Array[Integer]
+
+      attr_reader availability_status: String?
+
+      def availability_status=: (String) -> String
+
+      attr_reader display_url: String?
+
+      def display_url=: (String) -> String
+
+      attr_reader duration_millis: Integer?
+
+      def duration_millis=: (Integer) -> Integer
+
+      attr_reader expanded_url: String?
+
+      def expanded_url=: (String) -> String
+
+      attr_reader face_rects: ::Hash[Symbol, ::Array[XTwitterScraper::TweetMedia::FaceRect]]?
+
+      def face_rects=: (
+        ::Hash[Symbol, ::Array[XTwitterScraper::TweetMedia::FaceRect]]
+      ) -> ::Hash[Symbol, ::Array[XTwitterScraper::TweetMedia::FaceRect]]
+
+      attr_reader focus_rects: ::Array[XTwitterScraper::TweetMedia::FocusRect]?
+
+      def focus_rects=: (
+        ::Array[XTwitterScraper::TweetMedia::FocusRect]
+      ) -> ::Array[XTwitterScraper::TweetMedia::FocusRect]
+
+      attr_reader height: Integer?
+
+      def height=: (Integer) -> Integer
+
+      attr_reader indices: ::Array[Integer]?
+
+      def indices=: (::Array[Integer]) -> ::Array[Integer]
+
+      attr_reader media_key: String?
+
+      def media_key=: (String) -> String
+
+      attr_reader monetizable: bool?
+
+      def monetizable=: (bool) -> bool
+
+      attr_reader sizes: ::Hash[Symbol, XTwitterScraper::TweetMedia::Size]?
+
+      def sizes=: (
+        ::Hash[Symbol, XTwitterScraper::TweetMedia::Size]
+      ) -> ::Hash[Symbol, XTwitterScraper::TweetMedia::Size]
+
       attr_reader video_variants: ::Array[XTwitterScraper::TweetMedia::VideoVariant]?
 
       def video_variants=: (
         ::Array[XTwitterScraper::TweetMedia::VideoVariant]
       ) -> ::Array[XTwitterScraper::TweetMedia::VideoVariant]
 
+      attr_reader width: Integer?
+
+      def width=: (Integer) -> Integer
+
       def initialize: (
         media_url: String,
         type: XTwitterScraper::Models::TweetMedia::type_,
         url: String,
-        ?video_variants: ::Array[XTwitterScraper::TweetMedia::VideoVariant]
+        ?id: String,
+        ?allow_download: bool,
+        ?alt_text: String,
+        ?aspect_ratio: ::Array[Integer],
+        ?availability_status: String,
+        ?display_url: String,
+        ?duration_millis: Integer,
+        ?expanded_url: String,
+        ?face_rects: ::Hash[Symbol, ::Array[XTwitterScraper::TweetMedia::FaceRect]],
+        ?focus_rects: ::Array[XTwitterScraper::TweetMedia::FocusRect],
+        ?height: Integer,
+        ?indices: ::Array[Integer],
+        ?media_key: String,
+        ?monetizable: bool,
+        ?sizes: ::Hash[Symbol, XTwitterScraper::TweetMedia::Size],
+        ?video_variants: ::Array[XTwitterScraper::TweetMedia::VideoVariant],
+        ?width: Integer
       ) -> void
 
-      def to_hash: -> {
-        media_url: String,
-        type: XTwitterScraper::Models::TweetMedia::type_,
-        url: String,
-        video_variants: ::Array[XTwitterScraper::TweetMedia::VideoVariant]
-      }
+      def to_hash: -> ::Hash[Symbol, top]
 
       type type_ = :photo | :video | :animated_gif
 
@@ -49,6 +124,62 @@ module XTwitterScraper
         ANIMATED_GIF: :animated_gif
 
         def self?.values: -> ::Array[XTwitterScraper::Models::TweetMedia::type_]
+      end
+
+      type face_rect = ::Hash[Symbol, top]
+
+      class FaceRect < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor h: Integer
+
+        attr_accessor w: Integer
+
+        attr_accessor x: Integer
+
+        attr_accessor y_: Integer
+
+        def initialize: (
+          h: Integer,
+          w: Integer,
+          x: Integer,
+          y_: Integer
+        ) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
+      end
+
+      type focus_rect = ::Hash[Symbol, top]
+
+      class FocusRect < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor h: Integer
+
+        attr_accessor w: Integer
+
+        attr_accessor x: Integer
+
+        attr_accessor y_: Integer
+
+        def initialize: (
+          h: Integer,
+          w: Integer,
+          x: Integer,
+          y_: Integer
+        ) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
+      end
+
+      type size = ::Hash[Symbol, top]
+
+      class Size < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor h: Integer
+
+        attr_accessor resize: String
+
+        attr_accessor w: Integer
+
+        def initialize: (h: Integer, resize: String, w: Integer) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
       end
 
       type video_variant =
@@ -69,7 +200,7 @@ module XTwitterScraper
           ?bitrate: Integer
         ) -> void
 
-        def to_hash: -> { content_type: String, url: String, bitrate: Integer }
+        def to_hash: -> ::Hash[Symbol, top]
       end
     end
   end

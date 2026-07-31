@@ -10,16 +10,32 @@ module XTwitterScraper
       # @api private
       #
       # @example
-      #   # `compose_create_response` is a `XTwitterScraper::Models::ComposeCreateResponse`
-      #   case compose_create_response
-      #   when XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult
-      #     puts(compose_create_response.content_rules)
-      #   when XTwitterScraper::Models::ComposeCreateResponse::ComposeRefineResult
-      #     puts(compose_create_response.composition_guidance)
-      #   when XTwitterScraper::Models::ComposeCreateResponse::ComposeScoreResult
-      #     puts(compose_create_response.checklist)
+      #   # `account_connection_attempt_retrieve_response` is a `XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse`
+      #   case account_connection_attempt_retrieve_response
+      #   when XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Pending
+      #     puts(account_connection_attempt_retrieve_response.id)
+      #   when XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Success
+      #     puts(account_connection_attempt_retrieve_response.object)
+      #   when XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Failed
+      #     puts(account_connection_attempt_retrieve_response.error)
+      #   when XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::RequiresEmailCode
+      #     puts(account_connection_attempt_retrieve_response.message)
       #   else
-      #     puts(compose_create_response)
+      #     puts(account_connection_attempt_retrieve_response)
+      #   end
+      #
+      # @example
+      #   case account_connection_attempt_retrieve_response
+      #   in {status: :pending, id: id, object: object, poll_after_ms: poll_after_ms}
+      #     puts(id)
+      #   in {status: :success, id: id, object: object}
+      #     puts(object)
+      #   in {status: :failed, id: id, error: error, object: object}
+      #     puts(error)
+      #   in {status: :requires_email_code, id: id, message: message}
+      #     puts(message)
+      #   else
+      #     puts(account_connection_attempt_retrieve_response)
       #   end
       module Union
         include XTwitterScraper::Internal::Type::Converter

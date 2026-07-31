@@ -10,52 +10,38 @@ module XTwitterScraper
           created_at: Time,
           messages: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message],
           public_id: String,
-          status: String,
+          status: XTwitterScraper::Models::Support::TicketRetrieveResponse::status,
           subject: String,
           updated_at: Time
         }
 
       class TicketRetrieveResponse < XTwitterScraper::Internal::Type::BaseModel
-        attr_reader created_at: Time?
+        attr_accessor created_at: Time
 
-        def created_at=: (Time) -> Time
+        attr_accessor messages: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message]
 
-        attr_reader messages: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message]?
+        attr_accessor public_id: String
 
-        def messages=: (
-          ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message]
-        ) -> ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message]
+        attr_accessor status: XTwitterScraper::Models::Support::TicketRetrieveResponse::status
 
-        attr_reader public_id: String?
+        attr_accessor subject: String
 
-        def public_id=: (String) -> String
-
-        attr_reader status: String?
-
-        def status=: (String) -> String
-
-        attr_reader subject: String?
-
-        def subject=: (String) -> String
-
-        attr_reader updated_at: Time?
-
-        def updated_at=: (Time) -> Time
+        attr_accessor updated_at: Time
 
         def initialize: (
-          ?created_at: Time,
-          ?messages: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message],
-          ?public_id: String,
-          ?status: String,
-          ?subject: String,
-          ?updated_at: Time
+          created_at: Time,
+          messages: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message],
+          public_id: String,
+          status: XTwitterScraper::Models::Support::TicketRetrieveResponse::status,
+          subject: String,
+          updated_at: Time
         ) -> void
 
         def to_hash: -> {
           created_at: Time,
           messages: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message],
           public_id: String,
-          status: String,
+          status: XTwitterScraper::Models::Support::TicketRetrieveResponse::status,
           subject: String,
           updated_at: Time
         }
@@ -65,40 +51,30 @@ module XTwitterScraper
             attachments: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment],
             body: String,
             created_at: Time,
-            sender: String
+            sender: XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::sender
           }
 
         class Message < XTwitterScraper::Internal::Type::BaseModel
-          attr_reader attachments: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment]?
+          attr_accessor attachments: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment]
 
-          def attachments=: (
-            ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment]
-          ) -> ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment]
+          attr_accessor body: String
 
-          attr_reader body: String?
+          attr_accessor created_at: Time
 
-          def body=: (String) -> String
-
-          attr_reader created_at: Time?
-
-          def created_at=: (Time) -> Time
-
-          attr_reader sender: String?
-
-          def sender=: (String) -> String
+          attr_accessor sender: XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::sender
 
           def initialize: (
-            ?attachments: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment],
-            ?body: String,
-            ?created_at: Time,
-            ?sender: String
+            attachments: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment],
+            body: String,
+            created_at: Time,
+            sender: XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::sender
           ) -> void
 
           def to_hash: -> {
             attachments: ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment],
             body: String,
             created_at: Time,
-            sender: String
+            sender: XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::sender
           }
 
           type attachment =
@@ -193,6 +169,31 @@ module XTwitterScraper
               def self?.values: -> ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment::status]
             end
           end
+
+          type sender = :user | :support | :system
+
+          module Sender
+            extend XTwitterScraper::Internal::Type::Enum
+
+            USER: :user
+            SUPPORT: :support
+            SYSTEM: :system
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::sender]
+          end
+        end
+
+        type status = :open | :in_progress | :resolved | :closed
+
+        module Status
+          extend XTwitterScraper::Internal::Type::Enum
+
+          OPEN: :open
+          IN_PROGRESS: :in_progress
+          RESOLVED: :resolved
+          CLOSED: :closed
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::Support::TicketRetrieveResponse::status]
         end
       end
     end

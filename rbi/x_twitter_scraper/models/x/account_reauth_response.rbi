@@ -29,7 +29,7 @@ module XTwitterScraper
         end
         attr_accessor :health
 
-        sig { returns(String) }
+        sig { returns(Symbol) }
         attr_accessor :status
 
         sig { returns(String) }
@@ -45,18 +45,18 @@ module XTwitterScraper
             created_at: Time,
             health:
               XTwitterScraper::Models::X::AccountReauthResponse::Health::OrSymbol,
-            status: String,
             x_user_id: String,
-            x_username: String
+            x_username: String,
+            status: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
           id:,
           created_at:,
           health:,
-          status:,
           x_user_id:,
-          x_username:
+          x_username:,
+          status: :active
         )
         end
 
@@ -67,7 +67,7 @@ module XTwitterScraper
               created_at: Time,
               health:
                 XTwitterScraper::Models::X::AccountReauthResponse::Health::TaggedSymbol,
-              status: String,
+              status: Symbol,
               x_user_id: String,
               x_username: String
             }

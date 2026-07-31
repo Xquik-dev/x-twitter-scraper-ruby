@@ -40,6 +40,12 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :description, String
 
+        # @!attribute promoted_content
+        #   Promotion identifier from X. Null for organic trends.
+        #
+        #   @return [String, nil]
+        optional :promoted_content, String, api_name: :promotedContent, nil?: true
+
         # @!attribute query
         #
         #   @return [String, nil]
@@ -50,11 +56,32 @@ module XTwitterScraper
         #   @return [Integer, nil]
         optional :rank, Integer
 
-        # @!method initialize(name:, description: nil, query: nil, rank: nil)
+        # @!attribute tweet_volume
+        #   Approximate public post volume when X supplies it.
+        #
+        #   @return [Integer, nil]
+        optional :tweet_volume, Integer, api_name: :tweetVolume, nil?: true
+
+        # @!attribute url
+        #   X search URL for the trend.
+        #
+        #   @return [String, nil]
+        optional :url, String
+
+        # @!method initialize(name:, description: nil, promoted_content: nil, query: nil, rank: nil, tweet_volume: nil, url: nil)
         #   @param name [String]
+        #
         #   @param description [String]
+        #
+        #   @param promoted_content [String, nil] Promotion identifier from X. Null for organic trends.
+        #
         #   @param query [String]
+        #
         #   @param rank [Integer]
+        #
+        #   @param tweet_volume [Integer, nil] Approximate public post volume when X supplies it.
+        #
+        #   @param url [String] X search URL for the trend.
       end
     end
   end

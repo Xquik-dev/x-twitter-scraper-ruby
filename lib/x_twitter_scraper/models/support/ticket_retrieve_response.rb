@@ -11,70 +11,70 @@ module XTwitterScraper
       class TicketRetrieveResponse < XTwitterScraper::Internal::Type::BaseModel
         # @!attribute created_at
         #
-        #   @return [Time, nil]
-        optional :created_at, Time, api_name: :createdAt
+        #   @return [Time]
+        required :created_at, Time, api_name: :createdAt
 
         # @!attribute messages
         #
-        #   @return [Array<XTwitterScraper::Models::Support::TicketRetrieveResponse::Message>, nil]
-        optional :messages,
+        #   @return [Array<XTwitterScraper::Models::Support::TicketRetrieveResponse::Message>]
+        required :messages,
                  -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message] }
 
         # @!attribute public_id
         #
-        #   @return [String, nil]
-        optional :public_id, String, api_name: :publicId
+        #   @return [String]
+        required :public_id, String, api_name: :publicId
 
         # @!attribute status
         #
-        #   @return [String, nil]
-        optional :status, String
+        #   @return [Symbol, XTwitterScraper::Models::Support::TicketRetrieveResponse::Status]
+        required :status, enum: -> { XTwitterScraper::Models::Support::TicketRetrieveResponse::Status }
 
         # @!attribute subject
         #
-        #   @return [String, nil]
-        optional :subject, String
+        #   @return [String]
+        required :subject, String
 
         # @!attribute updated_at
         #
-        #   @return [Time, nil]
-        optional :updated_at, Time, api_name: :updatedAt
+        #   @return [Time]
+        required :updated_at, Time, api_name: :updatedAt
 
-        # @!method initialize(created_at: nil, messages: nil, public_id: nil, status: nil, subject: nil, updated_at: nil)
+        # @!method initialize(created_at:, messages:, public_id:, status:, subject:, updated_at:)
         #   @param created_at [Time]
         #   @param messages [Array<XTwitterScraper::Models::Support::TicketRetrieveResponse::Message>]
         #   @param public_id [String]
-        #   @param status [String]
+        #   @param status [Symbol, XTwitterScraper::Models::Support::TicketRetrieveResponse::Status]
         #   @param subject [String]
         #   @param updated_at [Time]
 
         class Message < XTwitterScraper::Internal::Type::BaseModel
           # @!attribute attachments
           #
-          #   @return [Array<XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment>, nil]
-          optional :attachments,
+          #   @return [Array<XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment>]
+          required :attachments,
                    -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment] }
 
           # @!attribute body
           #
-          #   @return [String, nil]
-          optional :body, String
+          #   @return [String]
+          required :body, String
 
           # @!attribute created_at
           #
-          #   @return [Time, nil]
-          optional :created_at, Time, api_name: :createdAt
+          #   @return [Time]
+          required :created_at, Time, api_name: :createdAt
 
           # @!attribute sender
           #
-          #   @return [String, nil]
-          optional :sender, String
+          #   @return [Symbol, XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Sender]
+          required :sender, enum: -> { XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Sender }
 
-          # @!method initialize(attachments: nil, body: nil, created_at: nil, sender: nil)
+          # @!method initialize(attachments:, body:, created_at:, sender:)
           #   @param attachments [Array<XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Attachment>]
           #   @param body [String]
           #   @param created_at [Time]
-          #   @param sender [String]
+          #   @param sender [Symbol, XTwitterScraper::Models::Support::TicketRetrieveResponse::Message::Sender]
 
           class Attachment < XTwitterScraper::Internal::Type::BaseModel
             # @!attribute content_type
@@ -181,6 +181,31 @@ module XTwitterScraper
               #   @return [Array<Symbol>]
             end
           end
+
+          # @see XTwitterScraper::Models::Support::TicketRetrieveResponse::Message#sender
+          module Sender
+            extend XTwitterScraper::Internal::Type::Enum
+
+            USER = :user
+            SUPPORT = :support
+            SYSTEM = :system
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+        end
+
+        # @see XTwitterScraper::Models::Support::TicketRetrieveResponse#status
+        module Status
+          extend XTwitterScraper::Internal::Type::Enum
+
+          OPEN = :open
+          IN_PROGRESS = :in_progress
+          RESOLVED = :resolved
+          CLOSED = :closed
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
         end
       end
     end

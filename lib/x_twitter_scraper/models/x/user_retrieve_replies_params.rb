@@ -121,10 +121,8 @@ module XTwitterScraper
         optional :min_retweets, Integer
 
         # @!attribute page_size
-        #   Maximum items requested from this page (1-100, default 20). The response can
-        #   contain fewer items because the source returned fewer, filters removed items, or
-        #   remaining credits cover fewer results. Keep requesting next_cursor while
-        #   has_next_page is true, even when a page is empty. The deprecated limit and count
+        #   Maximum page items (1-100, default 20). Source, filters, or credits can reduce
+        #   results. Continue while has_next_page is true. Deprecated limit and count
         #   aliases remain accepted.
         #
         #   @return [Integer, nil]
@@ -230,7 +228,7 @@ module XTwitterScraper
         #
         #   @param min_retweets [Integer] Minimum retweets threshold.
         #
-        #   @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
+        #   @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
         #
         #   @param quotes [Symbol, XTwitterScraper::Models::X::UserRetrieveRepliesParams::Quotes] Quote mode.
         #

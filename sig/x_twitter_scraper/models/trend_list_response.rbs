@@ -4,12 +4,7 @@
 
 module XTwitterScraper
   module Models
-    type trend_list_response =
-      {
-        total: Integer,
-        trends: ::Array[XTwitterScraper::Models::TrendListResponse::Trend],
-        woeid: Integer
-      }
+    type trend_list_response = ::Hash[Symbol, top]
 
     class TrendListResponse < XTwitterScraper::Internal::Type::BaseModel
       attr_accessor total: Integer
@@ -24,14 +19,9 @@ module XTwitterScraper
         woeid: Integer
       ) -> void
 
-      def to_hash: -> {
-        total: Integer,
-        trends: ::Array[XTwitterScraper::Models::TrendListResponse::Trend],
-        woeid: Integer
-      }
+      def to_hash: -> ::Hash[Symbol, top]
 
-      type trend =
-        { name: String, description: String, query: String, rank: Integer }
+      type trend = ::Hash[Symbol, top]
 
       class Trend < XTwitterScraper::Internal::Type::BaseModel
         attr_accessor name: String
@@ -39,6 +29,8 @@ module XTwitterScraper
         attr_reader description: String?
 
         def description=: (String) -> String
+
+        attr_accessor promoted_content: String?
 
         attr_reader query: String?
 
@@ -48,19 +40,23 @@ module XTwitterScraper
 
         def rank=: (Integer) -> Integer
 
+        attr_accessor tweet_volume: Integer?
+
+        attr_reader url: String?
+
+        def url=: (String) -> String
+
         def initialize: (
           name: String,
           ?description: String,
+          ?promoted_content: String?,
           ?query: String,
-          ?rank: Integer
+          ?rank: Integer,
+          ?tweet_volume: Integer?,
+          ?url: String
         ) -> void
 
-        def to_hash: -> {
-          name: String,
-          description: String,
-          query: String,
-          rank: Integer
-        }
+        def to_hash: -> ::Hash[Symbol, top]
       end
     end
   end

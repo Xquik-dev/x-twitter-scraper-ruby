@@ -98,13 +98,6 @@ module XTwitterScraper
             )
           end
 
-        # Whether the disclosure can be edited on X.
-        sig { returns(T.nilable(T::Boolean)) }
-        attr_reader :can_edit
-
-        sig { params(can_edit: T::Boolean).void }
-        attr_writer :can_edit
-
         # Source of the AI-generated media disclosure.
         sig { returns(T.nilable(String)) }
         attr_reader :detection_source
@@ -121,14 +114,11 @@ module XTwitterScraper
 
         sig do
           params(
-            can_edit: T::Boolean,
             detection_source: String,
             has_ai_generated_media: T::Boolean
           ).returns(T.attached_class)
         end
         def self.new(
-          # Whether the disclosure can be edited on X.
-          can_edit: nil,
           # Source of the AI-generated media disclosure.
           detection_source: nil,
           # True when X labels the tweet as containing AI-generated media.
@@ -138,11 +128,7 @@ module XTwitterScraper
 
         sig do
           override.returns(
-            {
-              can_edit: T::Boolean,
-              detection_source: String,
-              has_ai_generated_media: T::Boolean
-            }
+            { detection_source: String, has_ai_generated_media: T::Boolean }
           )
         end
         def to_hash
