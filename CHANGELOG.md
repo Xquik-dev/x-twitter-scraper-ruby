@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.0 (2026-07-31)
+
+Full Changelog: [v0.6.1...v0.7.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.6.1...v0.7.0)
+
+### Features
+
+* **api:** add complete reply extraction, rich response contracts, and compatible typed account outcomes ([#28](https://github.com/Xquik-dev/x-twitter-scraper-ruby/pull/28)) ([f638d05](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/f638d05a1a633c223f2683a64abc1dbab233af6a))
+
 ## 0.6.1 (2026-07-30)
 
 Full Changelog: [v0.6.0...v0.6.1](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.6.0...v0.6.1)
