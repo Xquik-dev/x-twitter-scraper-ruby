@@ -93,6 +93,15 @@ module XTwitterScraper
         sig { params(language: String).void }
         attr_writer :language
 
+        # With mode=complete, maximum combined direct and nested reply rows (1-25000).
+        # Without complete mode, this is the deprecated pageSize alias and uses the normal
+        # 1-100 page range.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :limit
+
+        sig { params(limit: Integer).void }
+        attr_writer :limit
+
         # Filter by media type.
         sig do
           returns(
@@ -146,10 +155,24 @@ module XTwitterScraper
         sig { params(min_retweets: Integer).void }
         attr_writer :min_retweets
 
-        # Maximum items requested from this page (1-100, default 20). The response can
-        # contain fewer items because the source returned fewer, filters removed items, or
-        # remaining credits cover fewer results. Keep requesting next_cursor while
-        # has_next_page is true, even when a page is empty. The deprecated limit and count
+        # Set complete for maximum-coverage collection. Complete mode accepts only limit.
+        # Remove cursor, pageSize, count, time ranges, and tweet filters.
+        sig do
+          returns(
+            T.nilable(XTwitterScraper::X::TweetGetRepliesParams::Mode::OrSymbol)
+          )
+        end
+        attr_reader :mode
+
+        sig do
+          params(
+            mode: XTwitterScraper::X::TweetGetRepliesParams::Mode::OrSymbol
+          ).void
+        end
+        attr_writer :mode
+
+        # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
+        # results. Continue while has_next_page is true. Deprecated limit and count
         # aliases remain accepted.
         sig { returns(T.nilable(Integer)) }
         attr_reader :page_size
@@ -286,6 +309,7 @@ module XTwitterScraper
             hashtags: String,
             in_reply_to_tweet_id: String,
             language: String,
+            limit: Integer,
             media_type:
               XTwitterScraper::X::TweetGetRepliesParams::MediaType::OrSymbol,
             mentioning: String,
@@ -293,6 +317,7 @@ module XTwitterScraper
             min_quotes: Integer,
             min_replies: Integer,
             min_retweets: Integer,
+            mode: XTwitterScraper::X::TweetGetRepliesParams::Mode::OrSymbol,
             page_size: Integer,
             quotes: XTwitterScraper::X::TweetGetRepliesParams::Quotes::OrSymbol,
             quotes_of_tweet_id: String,
@@ -334,6 +359,10 @@ module XTwitterScraper
           in_reply_to_tweet_id: nil,
           # Language code filter, e.g. en or tr.
           language: nil,
+          # With mode=complete, maximum combined direct and nested reply rows (1-25000).
+          # Without complete mode, this is the deprecated pageSize alias and uses the normal
+          # 1-100 page range.
+          limit: nil,
           # Filter by media type.
           media_type: nil,
           # Filter tweets mentioning a username.
@@ -346,10 +375,11 @@ module XTwitterScraper
           min_replies: nil,
           # Minimum retweets threshold.
           min_retweets: nil,
-          # Maximum items requested from this page (1-100, default 20). The response can
-          # contain fewer items because the source returned fewer, filters removed items, or
-          # remaining credits cover fewer results. Keep requesting next_cursor while
-          # has_next_page is true, even when a page is empty. The deprecated limit and count
+          # Set complete for maximum-coverage collection. Complete mode accepts only limit.
+          # Remove cursor, pageSize, count, time ranges, and tweet filters.
+          mode: nil,
+          # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
+          # results. Continue while has_next_page is true. Deprecated limit and count
           # aliases remain accepted.
           page_size: nil,
           # Quote mode.
@@ -394,6 +424,7 @@ module XTwitterScraper
               hashtags: String,
               in_reply_to_tweet_id: String,
               language: String,
+              limit: Integer,
               media_type:
                 XTwitterScraper::X::TweetGetRepliesParams::MediaType::OrSymbol,
               mentioning: String,
@@ -401,6 +432,7 @@ module XTwitterScraper
               min_quotes: Integer,
               min_replies: Integer,
               min_retweets: Integer,
+              mode: XTwitterScraper::X::TweetGetRepliesParams::Mode::OrSymbol,
               page_size: Integer,
               quotes:
                 XTwitterScraper::X::TweetGetRepliesParams::Quotes::OrSymbol,
@@ -472,6 +504,34 @@ module XTwitterScraper
             override.returns(
               T::Array[
                 XTwitterScraper::X::TweetGetRepliesParams::MediaType::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        # Set complete for maximum-coverage collection. Complete mode accepts only limit.
+        # Remove cursor, pageSize, count, time ranges, and tweet filters.
+        module Mode
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, XTwitterScraper::X::TweetGetRepliesParams::Mode)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          COMPLETE =
+            T.let(
+              :complete,
+              XTwitterScraper::X::TweetGetRepliesParams::Mode::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::X::TweetGetRepliesParams::Mode::TaggedSymbol
               ]
             )
           end

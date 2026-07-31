@@ -204,7 +204,7 @@ module XTwitterScraper
         #
         # @param min_retweets [Integer] Minimum retweets threshold.
         #
-        # @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
+        # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
         #
         # @param quotes [Symbol, XTwitterScraper::Models::X::TweetGetQuotesParams::Quotes] Quote mode.
         #
@@ -272,13 +272,12 @@ module XTwitterScraper
         # Some parameter documentations has been truncated, see
         # {XTwitterScraper::Models::X::TweetGetRepliesParams} for more details.
         #
-        # Returns visible replies. For an unfiltered first page, Xquik compares a terminal
-        # page with the post's reported reply count. If the page is visibly incomplete,
-        # the endpoint returns 424 `replies_incomplete` instead of presenting partial
-        # coverage as complete. Use tweet search with a `conversation_id:{id}` query as
-        # the broader fallback.
+        # Returns direct replies. Complete mode merges available timeline views, supported
+        # rankings, every forward cursor module, labeled hidden-content branches,
+        # exact-parent time partitions scaled to the reported reply count, and search. It
+        # separates nested replies and returns 424 below 80% coverage.
         #
-        # @overload get_replies(id, any_words: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, media_type: nil, mentioning: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, since_time: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, request_options: {})
+        # @overload get_replies(id, any_words: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, limit: nil, media_type: nil, mentioning: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, mode: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, since_time: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, request_options: {})
         #
         # @param id [String] Tweet ID to get replies
         #
@@ -302,6 +301,8 @@ module XTwitterScraper
         #
         # @param language [String] Language code filter, e.g. en or tr.
         #
+        # @param limit [Integer] With mode=complete, maximum combined direct and nested reply rows (1-25000). Wit
+        #
         # @param media_type [Symbol, XTwitterScraper::Models::X::TweetGetRepliesParams::MediaType] Filter by media type.
         #
         # @param mentioning [String] Filter tweets mentioning a username.
@@ -314,7 +315,9 @@ module XTwitterScraper
         #
         # @param min_retweets [Integer] Minimum retweets threshold.
         #
-        # @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
+        # @param mode [Symbol, XTwitterScraper::Models::X::TweetGetRepliesParams::Mode] Set complete for maximum-coverage collection. Complete mode accepts only limit.
+        #
+        # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
         #
         # @param quotes [Symbol, XTwitterScraper::Models::X::TweetGetRepliesParams::Quotes] Quote mode.
         #
@@ -342,7 +345,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::PaginatedTweets]
+        # @return [XTwitterScraper::Models::X::TweetGetRepliesResponse]
         #
         # @see XTwitterScraper::Models::X::TweetGetRepliesParams
         def get_replies(id, params = {})
@@ -373,7 +376,7 @@ module XTwitterScraper
               until_time: "untilTime",
               verified_only: "verifiedOnly"
             ),
-            model: XTwitterScraper::PaginatedTweets,
+            model: XTwitterScraper::Models::X::TweetGetRepliesResponse,
             options: options
           )
         end
@@ -419,7 +422,7 @@ module XTwitterScraper
         #
         # @param cursor [String] Pagination cursor for thread tweets
         #
-        # @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
+        # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

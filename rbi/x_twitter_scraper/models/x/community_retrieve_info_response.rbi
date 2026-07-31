@@ -113,13 +113,6 @@ module XTwitterScraper
           sig { params(invites_policy: String).void }
           attr_writer :invites_policy
 
-          # Whether the authenticated viewer is a member
-          sig { returns(T.nilable(T::Boolean)) }
-          attr_reader :is_member
-
-          sig { params(is_member: T::Boolean).void }
-          attr_writer :is_member
-
           # Whether the community is marked sensitive
           sig { returns(T.nilable(T::Boolean)) }
           attr_reader :is_nsfw
@@ -173,13 +166,6 @@ module XTwitterScraper
           end
           attr_writer :primary_topic
 
-          # Authenticated viewer's community role
-          sig { returns(T.nilable(String)) }
-          attr_reader :role
-
-          sig { params(role: String).void }
-          attr_writer :role
-
           # Community rules
           sig do
             returns(
@@ -212,7 +198,6 @@ module XTwitterScraper
                 XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator::OrHash,
               description: String,
               invites_policy: String,
-              is_member: T::Boolean,
               is_nsfw: T::Boolean,
               join_policy: String,
               member_count: Integer,
@@ -220,7 +205,6 @@ module XTwitterScraper
               name: String,
               primary_topic:
                 XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic::OrHash,
-              role: String,
               rules:
                 T::Array[
                   XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule::OrHash
@@ -239,8 +223,6 @@ module XTwitterScraper
             description: nil,
             # Invitation policy
             invites_policy: nil,
-            # Whether the authenticated viewer is a member
-            is_member: nil,
             # Whether the community is marked sensitive
             is_nsfw: nil,
             # Join policy (open or restricted)
@@ -253,8 +235,6 @@ module XTwitterScraper
             name: nil,
             # Primary topic
             primary_topic: nil,
-            # Authenticated viewer's community role
-            role: nil,
             # Community rules
             rules: nil
           )
@@ -270,7 +250,6 @@ module XTwitterScraper
                   XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator,
                 description: String,
                 invites_policy: String,
-                is_member: T::Boolean,
                 is_nsfw: T::Boolean,
                 join_policy: String,
                 member_count: Integer,
@@ -278,7 +257,6 @@ module XTwitterScraper
                 name: String,
                 primary_topic:
                   XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
-                role: String,
                 rules:
                   T::Array[
                     XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule

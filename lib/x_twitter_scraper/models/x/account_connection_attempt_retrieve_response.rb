@@ -9,19 +9,22 @@ module XTwitterScraper
       module AccountConnectionAttemptRetrieveResponse
         extend XTwitterScraper::Internal::Type::Union
 
+        discriminator :status
+
         # The connection is still in progress.
-        variant -> { XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptPending }
+        variant :pending, -> { XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Pending }
 
         # The account connected successfully.
-        variant -> { XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptSuccess }
+        variant :success, -> { XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Success }
 
         # The connection reached a final failure.
-        variant -> { XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptFailed }
+        variant :failed, -> { XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Failed }
 
         # Resumable account connection challenge. Submit the email code to finish the same connection attempt.
-        variant -> { XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge }
+        variant :requires_email_code,
+                -> { XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::RequiresEmailCode }
 
-        class XAccountConnectionAttemptPending < XTwitterScraper::Internal::Type::BaseModel
+        class Pending < XTwitterScraper::Internal::Type::BaseModel
           # @!attribute id
           #
           #   @return [String]
@@ -51,7 +54,7 @@ module XTwitterScraper
           #   @param status [Symbol, :pending]
         end
 
-        class XAccountConnectionAttemptSuccess < XTwitterScraper::Internal::Type::BaseModel
+        class Success < XTwitterScraper::Internal::Type::BaseModel
           # @!attribute id
           #
           #   @return [String]
@@ -75,7 +78,7 @@ module XTwitterScraper
           #   @param status [Symbol, :success]
         end
 
-        class XAccountConnectionAttemptFailed < XTwitterScraper::Internal::Type::BaseModel
+        class Failed < XTwitterScraper::Internal::Type::BaseModel
           # @!attribute id
           #
           #   @return [String]
@@ -117,7 +120,7 @@ module XTwitterScraper
           #   @param status [Symbol, :failed]
         end
 
-        class XAccountConnectionChallenge < XTwitterScraper::Internal::Type::BaseModel
+        class RequiresEmailCode < XTwitterScraper::Internal::Type::BaseModel
           # @!attribute id
           #
           #   @return [String]
@@ -135,55 +138,33 @@ module XTwitterScraper
 
           # @!attribute object
           #
-          #   @return [Symbol, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Object]
-          required :object,
-                   enum: -> { XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Object }
+          #   @return [Symbol, :x_account_connection_challenge]
+          required :object, const: :x_account_connection_challenge
 
           # @!attribute status
           #
-          #   @return [Symbol, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Status]
-          required :status,
-                   enum: -> { XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Status }
+          #   @return [Symbol, :requires_email_code]
+          required :status, const: :requires_email_code
 
           # @!attribute username
           #
           #   @return [String]
           required :username, String
 
-          # @!method initialize(id:, expires_at:, message:, object:, status:, username:)
+          # @!method initialize(id:, expires_at:, message:, username:, object: :x_account_connection_challenge, status: :requires_email_code)
           #   Resumable account connection challenge. Submit the email code to finish the same
           #   connection attempt.
           #
           #   @param id [String]
           #   @param expires_at [Time]
           #   @param message [String]
-          #   @param object [Symbol, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Object]
-          #   @param status [Symbol, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge::Status]
           #   @param username [String]
-
-          # @see XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge#object
-          module Object
-            extend XTwitterScraper::Internal::Type::Enum
-
-            X_ACCOUNT_CONNECTION_CHALLENGE = :x_account_connection_challenge
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
-
-          # @see XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge#status
-          module Status
-            extend XTwitterScraper::Internal::Type::Enum
-
-            REQUIRES_EMAIL_CODE = :requires_email_code
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
+          #   @param object [Symbol, :x_account_connection_challenge]
+          #   @param status [Symbol, :requires_email_code]
         end
 
         # @!method self.variants
-        #   @return [Array(XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptPending, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptSuccess, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptFailed, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge)]
+        #   @return [Array(XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Pending, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Success, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Failed, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::RequiresEmailCode)]
       end
     end
   end

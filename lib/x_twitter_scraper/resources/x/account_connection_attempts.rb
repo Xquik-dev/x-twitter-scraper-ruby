@@ -13,7 +13,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptPending, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptSuccess, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionAttemptFailed, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::XAccountConnectionChallenge]
+        # @return [XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Pending, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Success, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Failed, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::RequiresEmailCode]
         #
         # @see XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveParams
         def retrieve(id, params = {})

@@ -78,6 +78,14 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :language, String
 
+        # @!attribute limit
+        #   With mode=complete, maximum combined direct and nested reply rows (1-25000).
+        #   Without complete mode, this is the deprecated pageSize alias and uses the normal
+        #   1-100 page range.
+        #
+        #   @return [Integer, nil]
+        optional :limit, Integer
+
         # @!attribute media_type
         #   Filter by media type.
         #
@@ -114,11 +122,16 @@ module XTwitterScraper
         #   @return [Integer, nil]
         optional :min_retweets, Integer
 
+        # @!attribute mode
+        #   Set complete for maximum-coverage collection. Complete mode accepts only limit.
+        #   Remove cursor, pageSize, count, time ranges, and tweet filters.
+        #
+        #   @return [Symbol, XTwitterScraper::Models::X::TweetGetRepliesParams::Mode, nil]
+        optional :mode, enum: -> { XTwitterScraper::X::TweetGetRepliesParams::Mode }
+
         # @!attribute page_size
-        #   Maximum items requested from this page (1-100, default 20). The response can
-        #   contain fewer items because the source returned fewer, filters removed items, or
-        #   remaining credits cover fewer results. Keep requesting next_cursor while
-        #   has_next_page is true, even when a page is empty. The deprecated limit and count
+        #   Maximum page items (1-100, default 20). Source, filters, or credits can reduce
+        #   results. Continue while has_next_page is true. Deprecated limit and count
         #   aliases remain accepted.
         #
         #   @return [Integer, nil]
@@ -196,7 +209,7 @@ module XTwitterScraper
         #   @return [Boolean, nil]
         optional :verified_only, XTwitterScraper::Internal::Type::Boolean
 
-        # @!method initialize(id:, any_words: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, media_type: nil, mentioning: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, since_time: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, request_options: {})
+        # @!method initialize(id:, any_words: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, limit: nil, media_type: nil, mentioning: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, mode: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, since_time: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {XTwitterScraper::Models::X::TweetGetRepliesParams} for more details.
         #
@@ -222,6 +235,8 @@ module XTwitterScraper
         #
         #   @param language [String] Language code filter, e.g. en or tr.
         #
+        #   @param limit [Integer] With mode=complete, maximum combined direct and nested reply rows (1-25000). Wit
+        #
         #   @param media_type [Symbol, XTwitterScraper::Models::X::TweetGetRepliesParams::MediaType] Filter by media type.
         #
         #   @param mentioning [String] Filter tweets mentioning a username.
@@ -234,7 +249,9 @@ module XTwitterScraper
         #
         #   @param min_retweets [Integer] Minimum retweets threshold.
         #
-        #   @param page_size [Integer] Maximum items requested from this page (1-100, default 20). The response can con
+        #   @param mode [Symbol, XTwitterScraper::Models::X::TweetGetRepliesParams::Mode] Set complete for maximum-coverage collection. Complete mode accepts only limit.
+        #
+        #   @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
         #
         #   @param quotes [Symbol, XTwitterScraper::Models::X::TweetGetRepliesParams::Quotes] Quote mode.
         #
@@ -272,6 +289,17 @@ module XTwitterScraper
           MEDIA = :media
           LINKS = :links
           NONE = :none
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # Set complete for maximum-coverage collection. Complete mode accepts only limit.
+        # Remove cursor, pageSize, count, time ranges, and tweet filters.
+        module Mode
+          extend XTwitterScraper::Internal::Type::Enum
+
+          COMPLETE = :complete
 
           # @!method self.values
           #   @return [Array<Symbol>]
