@@ -18,6 +18,8 @@ module XTwitterScraper
       #     puts(account_connection_attempt_retrieve_response.object)
       #   when XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Failed
       #     puts(account_connection_attempt_retrieve_response.error)
+      #   when XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::RequiresEmailCode
+      #     puts(account_connection_attempt_retrieve_response.message)
       #   else
       #     puts(account_connection_attempt_retrieve_response)
       #   end
@@ -30,6 +32,8 @@ module XTwitterScraper
       #     puts(object)
       #   in {status: :failed, id: id, error: error, object: object}
       #     puts(error)
+      #   in {status: :requires_email_code, id: id, message: message}
+      #     puts(message)
       #   else
       #     puts(account_connection_attempt_retrieve_response)
       #   end

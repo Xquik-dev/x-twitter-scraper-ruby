@@ -67,6 +67,15 @@ module XTwitterScraper
           end
           def to_hash
           end
+
+          module Object
+            X_ACCOUNT_CONNECTION_ATTEMPT =
+              T.let(:x_account_connection_attempt, Symbol)
+          end
+
+          module Status
+            PENDING = T.let(:pending, Symbol)
+          end
         end
 
         class Success < XTwitterScraper::Internal::Type::BaseModel
@@ -104,6 +113,15 @@ module XTwitterScraper
             override.returns({ id: String, object: Symbol, status: Symbol })
           end
           def to_hash
+          end
+
+          module Object
+            X_ACCOUNT_CONNECTION_ATTEMPT =
+              T.let(:x_account_connection_attempt, Symbol)
+          end
+
+          module Status
+            SUCCESS = T.let(:success, Symbol)
           end
         end
 
@@ -172,6 +190,15 @@ module XTwitterScraper
           end
           def to_hash
           end
+
+          module Object
+            X_ACCOUNT_CONNECTION_ATTEMPT =
+              T.let(:x_account_connection_attempt, Symbol)
+          end
+
+          module Status
+            FAILED = T.let(:failed, Symbol)
+          end
         end
 
         class RequiresEmailCode < XTwitterScraper::Internal::Type::BaseModel
@@ -237,7 +264,21 @@ module XTwitterScraper
           end
           def to_hash
           end
+
+          module Object
+            X_ACCOUNT_CONNECTION_CHALLENGE =
+              T.let(:x_account_connection_challenge, Symbol)
+          end
+
+          module Status
+            REQUIRES_EMAIL_CODE = T.let(:requires_email_code, Symbol)
+          end
         end
+
+        XAccountConnectionAttemptPending = Pending
+        XAccountConnectionAttemptSuccess = Success
+        XAccountConnectionAttemptFailed = Failed
+        XAccountConnectionChallenge = RequiresEmailCode
 
         sig do
           override.returns(

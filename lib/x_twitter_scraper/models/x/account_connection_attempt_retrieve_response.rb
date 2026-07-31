@@ -52,6 +52,18 @@ module XTwitterScraper
           #   @param poll_after_ms [Integer]
           #   @param object [Symbol, :x_account_connection_attempt]
           #   @param status [Symbol, :pending]
+
+          module Object
+            extend XTwitterScraper::Internal::Type::Enum
+
+            X_ACCOUNT_CONNECTION_ATTEMPT = :x_account_connection_attempt
+          end
+
+          module Status
+            extend XTwitterScraper::Internal::Type::Enum
+
+            PENDING = :pending
+          end
         end
 
         class Success < XTwitterScraper::Internal::Type::BaseModel
@@ -76,6 +88,18 @@ module XTwitterScraper
           #   @param id [String]
           #   @param object [Symbol, :x_account_connection_attempt]
           #   @param status [Symbol, :success]
+
+          module Object
+            extend XTwitterScraper::Internal::Type::Enum
+
+            X_ACCOUNT_CONNECTION_ATTEMPT = :x_account_connection_attempt
+          end
+
+          module Status
+            extend XTwitterScraper::Internal::Type::Enum
+
+            SUCCESS = :success
+          end
         end
 
         class Failed < XTwitterScraper::Internal::Type::BaseModel
@@ -118,6 +142,18 @@ module XTwitterScraper
           #   @param reason [String]
           #   @param object [Symbol, :x_account_connection_attempt]
           #   @param status [Symbol, :failed]
+
+          module Object
+            extend XTwitterScraper::Internal::Type::Enum
+
+            X_ACCOUNT_CONNECTION_ATTEMPT = :x_account_connection_attempt
+          end
+
+          module Status
+            extend XTwitterScraper::Internal::Type::Enum
+
+            FAILED = :failed
+          end
         end
 
         class RequiresEmailCode < XTwitterScraper::Internal::Type::BaseModel
@@ -161,7 +197,24 @@ module XTwitterScraper
           #   @param username [String]
           #   @param object [Symbol, :x_account_connection_challenge]
           #   @param status [Symbol, :requires_email_code]
+
+          module Object
+            extend XTwitterScraper::Internal::Type::Enum
+
+            X_ACCOUNT_CONNECTION_CHALLENGE = :x_account_connection_challenge
+          end
+
+          module Status
+            extend XTwitterScraper::Internal::Type::Enum
+
+            REQUIRES_EMAIL_CODE = :requires_email_code
+          end
         end
+
+        XAccountConnectionAttemptPending = Pending
+        XAccountConnectionAttemptSuccess = Success
+        XAccountConnectionAttemptFailed = Failed
+        XAccountConnectionChallenge = RequiresEmailCode
 
         # @!method self.variants
         #   @return [Array(XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Pending, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Success, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Failed, XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::RequiresEmailCode)]

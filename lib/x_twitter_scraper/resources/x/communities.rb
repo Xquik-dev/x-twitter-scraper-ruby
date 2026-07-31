@@ -170,7 +170,7 @@ module XTwitterScraper
         #
         # @param cursor [String] Pagination cursor for community search
         #
-        # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
+        # @param page_size [Integer] Maximum page items (1-100, default 20). The source, filters, or credits can reduce results.
         #
         # @param query_type [Symbol, XTwitterScraper::Models::X::CommunityRetrieveSearchParams::QueryType] Sort order (Latest or Top)
         #

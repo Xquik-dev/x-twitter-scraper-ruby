@@ -4,29 +4,7 @@
 
 module XTwitterScraper
   module Models
-    type tweet_media =
-      {
-        media_url: String,
-        type: XTwitterScraper::Models::TweetMedia::type_,
-        url: String,
-        id: String,
-        allow_download: bool,
-        alt_text: String,
-        aspect_ratio: ::Array[Integer],
-        availability_status: String,
-        display_url: String,
-        duration_millis: Integer,
-        expanded_url: String,
-        face_rects: ::Hash[Symbol, ::Array[XTwitterScraper::TweetMedia::FaceRect]],
-        focus_rects: ::Array[XTwitterScraper::TweetMedia::FocusRect],
-        height: Integer,
-        indices: ::Array[Integer],
-        media_key: String,
-        monetizable: bool,
-        sizes: ::Hash[Symbol, XTwitterScraper::TweetMedia::Size],
-        video_variants: ::Array[XTwitterScraper::TweetMedia::VideoVariant],
-        width: Integer
-      }
+    type tweet_media = ::Hash[Symbol, top]
 
     class TweetMedia < XTwitterScraper::Internal::Type::BaseModel
       attr_accessor media_url: String
@@ -134,28 +112,7 @@ module XTwitterScraper
         ?width: Integer
       ) -> void
 
-      def to_hash: -> {
-        media_url: String,
-        type: XTwitterScraper::Models::TweetMedia::type_,
-        url: String,
-        id: String,
-        allow_download: bool,
-        alt_text: String,
-        aspect_ratio: ::Array[Integer],
-        availability_status: String,
-        display_url: String,
-        duration_millis: Integer,
-        expanded_url: String,
-        face_rects: ::Hash[Symbol, ::Array[XTwitterScraper::TweetMedia::FaceRect]],
-        focus_rects: ::Array[XTwitterScraper::TweetMedia::FocusRect],
-        height: Integer,
-        indices: ::Array[Integer],
-        media_key: String,
-        monetizable: bool,
-        sizes: ::Hash[Symbol, XTwitterScraper::TweetMedia::Size],
-        video_variants: ::Array[XTwitterScraper::TweetMedia::VideoVariant],
-        width: Integer
-      }
+      def to_hash: -> ::Hash[Symbol, top]
 
       type type_ = :photo | :video | :animated_gif
 
@@ -169,7 +126,7 @@ module XTwitterScraper
         def self?.values: -> ::Array[XTwitterScraper::Models::TweetMedia::type_]
       end
 
-      type face_rect = { h: Integer, w: Integer, x: Integer, y_: Integer }
+      type face_rect = ::Hash[Symbol, top]
 
       class FaceRect < XTwitterScraper::Internal::Type::BaseModel
         attr_accessor h: Integer
@@ -187,10 +144,10 @@ module XTwitterScraper
           y_: Integer
         ) -> void
 
-        def to_hash: -> { h: Integer, w: Integer, x: Integer, y_: Integer }
+        def to_hash: -> ::Hash[Symbol, top]
       end
 
-      type focus_rect = { h: Integer, w: Integer, x: Integer, y_: Integer }
+      type focus_rect = ::Hash[Symbol, top]
 
       class FocusRect < XTwitterScraper::Internal::Type::BaseModel
         attr_accessor h: Integer
@@ -208,10 +165,10 @@ module XTwitterScraper
           y_: Integer
         ) -> void
 
-        def to_hash: -> { h: Integer, w: Integer, x: Integer, y_: Integer }
+        def to_hash: -> ::Hash[Symbol, top]
       end
 
-      type size = { h: Integer, resize: String, w: Integer }
+      type size = ::Hash[Symbol, top]
 
       class Size < XTwitterScraper::Internal::Type::BaseModel
         attr_accessor h: Integer
@@ -222,7 +179,7 @@ module XTwitterScraper
 
         def initialize: (h: Integer, resize: String, w: Integer) -> void
 
-        def to_hash: -> { h: Integer, resize: String, w: Integer }
+        def to_hash: -> ::Hash[Symbol, top]
       end
 
       type video_variant =
@@ -243,7 +200,7 @@ module XTwitterScraper
           ?bitrate: Integer
         ) -> void
 
-        def to_hash: -> { content_type: String, url: String, bitrate: Integer }
+        def to_hash: -> ::Hash[Symbol, top]
       end
     end
   end

@@ -3,6 +3,20 @@
 require_relative "../../test_helper"
 
 class XTwitterScraper::Test::Resources::X::AccountConnectionAttemptsTest < XTwitterScraper::Test::ResourceTest
+  def test_legacy_variant_constants_remain_compatible
+    response = XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse
+
+    assert_same(response::Pending, response::XAccountConnectionAttemptPending)
+    assert_same(response::Success, response::XAccountConnectionAttemptSuccess)
+    assert_same(response::Failed, response::XAccountConnectionAttemptFailed)
+    assert_same(response::RequiresEmailCode, response::XAccountConnectionChallenge)
+    assert_equal(:pending, response::XAccountConnectionAttemptPending::Status::PENDING)
+    assert_equal(
+      :x_account_connection_challenge,
+      response::XAccountConnectionChallenge::Object::X_ACCOUNT_CONNECTION_CHALLENGE
+    )
+  end
+
   def test_retrieve
     skip("Mock server tests are disabled")
 
