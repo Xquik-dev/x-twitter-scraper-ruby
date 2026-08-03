@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    x-twitter-scraper (0.7.0)
+    x-twitter-scraper (0.7.1)
       base64
       cgi
       connection_pool
