@@ -11,12 +11,12 @@ module XTwitterScraper
           )
         end
 
-      # Stable first-party Xquik redirect URL for the active Stripe Checkout session.
+      # Stable Xquik redirect URL for the active checkout.
       sig { returns(String) }
       attr_accessor :redirect_url
 
-      # Same stable first-party Xquik redirect URL as redirect_url. The response never
-      # exposes a raw Stripe Checkout URL.
+      # Same stable Xquik redirect URL as redirect_url. The response never exposes the
+      # hosted checkout URL.
       sig { returns(String) }
       attr_accessor :url
 
@@ -24,10 +24,10 @@ module XTwitterScraper
         params(redirect_url: String, url: String).returns(T.attached_class)
       end
       def self.new(
-        # Stable first-party Xquik redirect URL for the active Stripe Checkout session.
+        # Stable Xquik redirect URL for the active checkout.
         redirect_url:,
-        # Same stable first-party Xquik redirect URL as redirect_url. The response never
-        # exposes a raw Stripe Checkout URL.
+        # Same stable Xquik redirect URL as redirect_url. The response never exposes the
+        # hosted checkout URL.
         url:
       )
       end

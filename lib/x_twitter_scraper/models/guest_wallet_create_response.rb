@@ -28,7 +28,7 @@ module XTwitterScraper
       required :authorization, -> { XTwitterScraper::Models::GuestWalletCreateResponse::Authorization }
 
       # @!attribute checkout_url
-      #   Raw Stripe-hosted checkout URL for user interaction.
+      #   Hosted checkout URL for user interaction.
       #
       #   @return [String]
       required :checkout_url, String
@@ -52,10 +52,10 @@ module XTwitterScraper
       required :expires_at, Time
 
       # @!attribute instructions
+      #   Hosted checkout and status polling instructions.
       #
-      #   @return [Symbol, :"Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending."]
-      required :instructions,
-               const: :"Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending."
+      #   @return [String]
+      required :instructions, String
 
       # @!attribute poll_after_seconds
       #   Wait at least this long before polling status_url.
@@ -88,7 +88,7 @@ module XTwitterScraper
       #   @return [String]
       required :wallet_id, String
 
-      # @!method initialize(amount:, api_key:, authorization:, checkout_url:, credits:, expires_at:, purchase_id:, status:, wallet_id:, account_required: false, credential_notice: :"Store api_key and the Idempotency-Key securely before sharing checkout_url. No email recovery is available.", instructions: :"Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending.", poll_after_seconds: 2, requires_user_interaction: true, status_url: :"https://xquik.com/api/v1/guest-wallets/status")
+      # @!method initialize(amount:, api_key:, authorization:, checkout_url:, credits:, expires_at:, instructions:, purchase_id:, status:, wallet_id:, account_required: false, credential_notice: :"Store api_key and the Idempotency-Key securely before sharing checkout_url. No email recovery is available.", poll_after_seconds: 2, requires_user_interaction: true, status_url: :"https://xquik.com/api/v1/guest-wallets/status")
       #   Some parameter documentations has been truncated, see
       #   {XTwitterScraper::Models::GuestWalletCreateResponse} for more details.
       #
@@ -100,11 +100,13 @@ module XTwitterScraper
       #
       #   @param authorization [XTwitterScraper::Models::GuestWalletCreateResponse::Authorization]
       #
-      #   @param checkout_url [String] Raw Stripe-hosted checkout URL for user interaction.
+      #   @param checkout_url [String] Hosted checkout URL for user interaction.
       #
       #   @param credits [String] Credits granted after verified payment.
       #
       #   @param expires_at [Time] Time when the pending checkout expires.
+      #
+      #   @param instructions [String] Hosted checkout and status polling instructions.
       #
       #   @param purchase_id [String]
       #
@@ -115,8 +117,6 @@ module XTwitterScraper
       #   @param account_required [Boolean, false]
       #
       #   @param credential_notice [Symbol, :"Store api_key and the Idempotency-Key securely before sharing checkout_url. No email recovery is available."]
-      #
-      #   @param instructions [Symbol, :"Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending."]
       #
       #   @param poll_after_seconds [Integer, 2] Wait at least this long before polling status_url.
       #

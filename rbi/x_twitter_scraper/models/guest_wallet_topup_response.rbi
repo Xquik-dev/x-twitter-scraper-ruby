@@ -21,7 +21,7 @@ module XTwitterScraper
       sig { params(amount: XTwitterScraper::GuestWalletAmount::OrHash).void }
       attr_writer :amount
 
-      # Raw Stripe-hosted checkout URL for user interaction.
+      # Hosted checkout URL for user interaction.
       sig { returns(String) }
       attr_accessor :checkout_url
 
@@ -33,7 +33,8 @@ module XTwitterScraper
       sig { returns(Time) }
       attr_accessor :expires_at
 
-      sig { returns(Symbol) }
+      # Hosted checkout and status polling instructions.
+      sig { returns(String) }
       attr_accessor :instructions
 
       # Wait at least this long before polling status_url.
@@ -101,13 +102,14 @@ module XTwitterScraper
       end
       attr_writer :credential_notice
 
-      # Pending Stripe checkout and guest wallet purchase details.
+      # Pending hosted checkout and guest wallet purchase details.
       sig do
         params(
           amount: XTwitterScraper::GuestWalletAmount::OrHash,
           checkout_url: String,
           credits: String,
           expires_at: Time,
+          instructions: String,
           purchase_id: String,
           status:
             XTwitterScraper::Models::GuestWalletTopupResponse::Status::OrSymbol,
@@ -118,7 +120,6 @@ module XTwitterScraper
           credential_notice:
             XTwitterScraper::Models::GuestWalletTopupResponse::CredentialNotice::OrSymbol,
           account_required: T::Boolean,
-          instructions: Symbol,
           poll_after_seconds: Integer,
           requires_user_interaction: T::Boolean,
           status_url: Symbol
@@ -127,12 +128,14 @@ module XTwitterScraper
       def self.new(
         # Confirmed USD amount for a guest wallet purchase.
         amount:,
-        # Raw Stripe-hosted checkout URL for user interaction.
+        # Hosted checkout URL for user interaction.
         checkout_url:,
         # Credits granted after verified payment.
         credits:,
         # Time when the pending checkout expires.
         expires_at:,
+        # Hosted checkout and status polling instructions.
+        instructions:,
         purchase_id:,
         status:,
         wallet_id:,
@@ -142,7 +145,6 @@ module XTwitterScraper
         authorization: nil,
         credential_notice: nil,
         account_required: false,
-        instructions: :"Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending.",
         # Wait at least this long before polling status_url.
         poll_after_seconds: 2,
         requires_user_interaction: true,
@@ -158,7 +160,7 @@ module XTwitterScraper
             checkout_url: String,
             credits: String,
             expires_at: Time,
-            instructions: Symbol,
+            instructions: String,
             poll_after_seconds: Integer,
             purchase_id: String,
             requires_user_interaction: T::Boolean,
