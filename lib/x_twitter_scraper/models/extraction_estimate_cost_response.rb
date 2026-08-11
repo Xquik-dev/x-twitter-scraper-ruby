@@ -48,6 +48,7 @@ module XTwitterScraper
 
         FOLLOWERS = :followers
         FOLLOWING = :following
+        COLLECTION = :collection
         PAGINATION_CAP = :paginationCap
         POSTS = :posts
         QUOTE_COUNT = :quoteCount

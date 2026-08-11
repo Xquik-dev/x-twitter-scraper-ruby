@@ -14,7 +14,7 @@ module XTwitterScraper
           )
         end
 
-      # Cursor for keyset pagination from prior response next_cursor
+      # Previous nextCursor.
       sig { returns(T.nilable(String)) }
       attr_reader :cursor
 
@@ -28,6 +28,13 @@ module XTwitterScraper
       sig { params(event_type: XTwitterScraper::EventType::OrSymbol).void }
       attr_writer :event_type
 
+      # Keyword monitor ID.
+      sig { returns(T.nilable(String)) }
+      attr_reader :keyword_monitor_id
+
+      sig { params(keyword_monitor_id: String).void }
+      attr_writer :keyword_monitor_id
+
       # Maximum number of items to return (1-100, default 50). For paid per-result
       # endpoints, the returned count may be lower when remaining credits cannot cover
       # the requested page. If zero paid results are affordable, the endpoint returns
@@ -38,7 +45,7 @@ module XTwitterScraper
       sig { params(limit: Integer).void }
       attr_writer :limit
 
-      # Filter events by monitor ID
+      # Account monitor ID.
       sig { returns(T.nilable(String)) }
       attr_reader :monitor_id
 
@@ -49,22 +56,25 @@ module XTwitterScraper
         params(
           cursor: String,
           event_type: XTwitterScraper::EventType::OrSymbol,
+          keyword_monitor_id: String,
           limit: Integer,
           monitor_id: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
-        # Cursor for keyset pagination from prior response next_cursor
+        # Previous nextCursor.
         cursor: nil,
         # Filter events by type
         event_type: nil,
+        # Keyword monitor ID.
+        keyword_monitor_id: nil,
         # Maximum number of items to return (1-100, default 50). For paid per-result
         # endpoints, the returned count may be lower when remaining credits cannot cover
         # the requested page. If zero paid results are affordable, the endpoint returns
         # 402 insufficient_credits.
         limit: nil,
-        # Filter events by monitor ID
+        # Account monitor ID.
         monitor_id: nil,
         request_options: {}
       )
@@ -75,6 +85,7 @@ module XTwitterScraper
           {
             cursor: String,
             event_type: XTwitterScraper::EventType::OrSymbol,
+            keyword_monitor_id: String,
             limit: Integer,
             monitor_id: String,
             request_options: XTwitterScraper::RequestOptions

@@ -1,7 +1,15 @@
 module XTwitterScraper
   module Models
     type extraction_retrieve_params =
-      { id: String, cursor: String, limit: Integer }
+      {
+        id: String,
+        cursor: String,
+        field_style: XTwitterScraper::Models::ExtractionRetrieveParams::field_style,
+        include_raw: bool,
+        limit: Integer,
+        output_mode: XTwitterScraper::Models::ExtractionRetrieveParams::output_mode,
+        output_preset: XTwitterScraper::Models::ExtractionRetrieveParams::output_preset
+      }
       & XTwitterScraper::Internal::Type::request_parameters
 
     class ExtractionRetrieveParams < XTwitterScraper::Internal::Type::BaseModel
@@ -14,23 +22,88 @@ module XTwitterScraper
 
       def cursor=: (String) -> String
 
+      attr_reader field_style: XTwitterScraper::Models::ExtractionRetrieveParams::field_style?
+
+      def field_style=: (
+        XTwitterScraper::Models::ExtractionRetrieveParams::field_style
+      ) -> XTwitterScraper::Models::ExtractionRetrieveParams::field_style
+
+      attr_reader include_raw: bool?
+
+      def include_raw=: (bool) -> bool
+
       attr_reader limit: Integer?
 
       def limit=: (Integer) -> Integer
 
+      attr_reader output_mode: XTwitterScraper::Models::ExtractionRetrieveParams::output_mode?
+
+      def output_mode=: (
+        XTwitterScraper::Models::ExtractionRetrieveParams::output_mode
+      ) -> XTwitterScraper::Models::ExtractionRetrieveParams::output_mode
+
+      attr_reader output_preset: XTwitterScraper::Models::ExtractionRetrieveParams::output_preset?
+
+      def output_preset=: (
+        XTwitterScraper::Models::ExtractionRetrieveParams::output_preset
+      ) -> XTwitterScraper::Models::ExtractionRetrieveParams::output_preset
+
       def initialize: (
         id: String,
         ?cursor: String,
+        ?field_style: XTwitterScraper::Models::ExtractionRetrieveParams::field_style,
+        ?include_raw: bool,
         ?limit: Integer,
+        ?output_mode: XTwitterScraper::Models::ExtractionRetrieveParams::output_mode,
+        ?output_preset: XTwitterScraper::Models::ExtractionRetrieveParams::output_preset,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
       def to_hash: -> {
         id: String,
         cursor: String,
+        field_style: XTwitterScraper::Models::ExtractionRetrieveParams::field_style,
+        include_raw: bool,
         limit: Integer,
+        output_mode: XTwitterScraper::Models::ExtractionRetrieveParams::output_mode,
+        output_preset: XTwitterScraper::Models::ExtractionRetrieveParams::output_preset,
         request_options: XTwitterScraper::RequestOptions
       }
+
+      type field_style = :source | :camelCase | :snake_case
+
+      module FieldStyle
+        extend XTwitterScraper::Internal::Type::Enum
+
+        SOURCE: :source
+        CAMEL_CASE: :camelCase
+        SNAKE_CASE: :snake_case
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionRetrieveParams::field_style]
+      end
+
+      type output_mode = :compact | :full | :raw
+
+      module OutputMode
+        extend XTwitterScraper::Internal::Type::Enum
+
+        COMPACT: :compact
+        FULL: :full
+        RAW: :raw
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionRetrieveParams::output_mode]
+      end
+
+      type output_preset = :nested | :flat
+
+      module OutputPreset
+        extend XTwitterScraper::Internal::Type::Enum
+
+        NESTED: :nested
+        FLAT: :flat
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionRetrieveParams::output_preset]
+      end
     end
   end
 end

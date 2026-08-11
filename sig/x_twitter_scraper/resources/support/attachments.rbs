@@ -1,0 +1,15 @@
+module XTwitterScraper
+  module Resources
+    class Support
+      class Attachments
+        def download: (
+          String id,
+          ?range: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> StringIO
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

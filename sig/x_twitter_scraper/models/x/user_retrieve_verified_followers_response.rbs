@@ -1,0 +1,216 @@
+module XTwitterScraper
+  module Models
+    module X
+      type user_retrieve_verified_followers_response =
+        XTwitterScraper::PaginatedUsers
+        | XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse
+
+      module UserRetrieveVerifiedFollowersResponse
+        extend XTwitterScraper::Internal::Type::Union
+
+        type user_list_coverage_response =
+          {
+            diagnostic: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic,
+            has_next_page: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::has_next_page,
+            next_cursor: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::next_cursor
+          }
+
+        class UserListCoverageResponse < XTwitterScraper::Models::PaginatedUsers
+          def diagnostic: -> XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic
+
+          def diagnostic=: (
+            XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic _
+          ) -> XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic
+
+          def has_next_page: -> XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::has_next_page?
+
+          def has_next_page=: (
+            XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::has_next_page _
+          ) -> XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::has_next_page
+
+          def next_cursor: -> XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::next_cursor?
+
+          def next_cursor=: (
+            XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::next_cursor _
+          ) -> XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::next_cursor
+
+          def initialize: (
+            diagnostic: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic,
+            ?has_next_page: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::has_next_page,
+            ?next_cursor: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::next_cursor
+          ) -> void
+
+          def to_hash: -> {
+            diagnostic: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic,
+            has_next_page: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::has_next_page,
+            next_cursor: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::next_cursor
+          }
+
+          type diagnostic =
+            {
+              complete: bool,
+              cursor_failure_count: Integer,
+              deadline_reached: bool,
+              duplicate_count: Integer,
+              failed_strategy_count: Integer,
+              malformed_count: Integer,
+              pages_fetched: Integer,
+              response_truncated: bool,
+              result_limit_reached: bool,
+              returned_users: Integer,
+              stalled_strategy_count: Integer,
+              strategies: ::Array[XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic::Strategy],
+              strategy_count: Integer,
+              unique_users: Integer
+            }
+
+          class Diagnostic < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor complete: bool
+
+            attr_accessor cursor_failure_count: Integer
+
+            attr_accessor deadline_reached: bool
+
+            attr_accessor duplicate_count: Integer
+
+            attr_accessor failed_strategy_count: Integer
+
+            attr_accessor malformed_count: Integer
+
+            attr_accessor pages_fetched: Integer
+
+            attr_accessor response_truncated: bool
+
+            attr_accessor result_limit_reached: bool
+
+            attr_accessor returned_users: Integer
+
+            attr_accessor stalled_strategy_count: Integer
+
+            attr_accessor strategies: ::Array[XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic::Strategy]
+
+            attr_accessor strategy_count: Integer
+
+            attr_accessor unique_users: Integer
+
+            def initialize: (
+              complete: bool,
+              cursor_failure_count: Integer,
+              deadline_reached: bool,
+              duplicate_count: Integer,
+              failed_strategy_count: Integer,
+              malformed_count: Integer,
+              pages_fetched: Integer,
+              response_truncated: bool,
+              result_limit_reached: bool,
+              returned_users: Integer,
+              stalled_strategy_count: Integer,
+              strategies: ::Array[XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic::Strategy],
+              strategy_count: Integer,
+              unique_users: Integer
+            ) -> void
+
+            def to_hash: -> {
+              complete: bool,
+              cursor_failure_count: Integer,
+              deadline_reached: bool,
+              duplicate_count: Integer,
+              failed_strategy_count: Integer,
+              malformed_count: Integer,
+              pages_fetched: Integer,
+              response_truncated: bool,
+              result_limit_reached: bool,
+              returned_users: Integer,
+              stalled_strategy_count: Integer,
+              strategies: ::Array[XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic::Strategy],
+              strategy_count: Integer,
+              unique_users: Integer
+            }
+
+            type strategy =
+              {
+                duplicate_count: Integer,
+                pages_fetched: Integer,
+                stop_reason: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic::Strategy::stop_reason,
+                strategy: Integer,
+                unique_added: Integer
+              }
+
+            class Strategy < XTwitterScraper::Internal::Type::BaseModel
+              attr_accessor duplicate_count: Integer
+
+              attr_accessor pages_fetched: Integer
+
+              attr_accessor stop_reason: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic::Strategy::stop_reason
+
+              attr_accessor strategy: Integer
+
+              attr_accessor unique_added: Integer
+
+              def initialize: (
+                duplicate_count: Integer,
+                pages_fetched: Integer,
+                stop_reason: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic::Strategy::stop_reason,
+                strategy: Integer,
+                unique_added: Integer
+              ) -> void
+
+              def to_hash: -> {
+                duplicate_count: Integer,
+                pages_fetched: Integer,
+                stop_reason: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic::Strategy::stop_reason,
+                strategy: Integer,
+                unique_added: Integer
+              }
+
+              type stop_reason =
+                :cursor_failure
+                | :deadline
+                | :exhausted
+                | :failed
+                | :page_limit
+                | :result_limit
+                | :stalled
+
+              module StopReason
+                extend XTwitterScraper::Internal::Type::Enum
+
+                CURSOR_FAILURE: :cursor_failure
+                DEADLINE: :deadline
+                EXHAUSTED: :exhausted
+                FAILED: :failed
+                PAGE_LIMIT: :page_limit
+                RESULT_LIMIT: :result_limit
+                STALLED: :stalled
+
+                def self?.values: -> ::Array[XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic::Strategy::stop_reason]
+              end
+            end
+          end
+
+          type has_next_page = false
+
+          module HasNextPage
+            extend XTwitterScraper::Internal::Type::Enum
+
+            FALSE: false
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::has_next_page]
+          end
+
+          type next_cursor = :""
+
+          module NextCursor
+            extend XTwitterScraper::Internal::Type::Enum
+
+            EMPTY: :""
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::next_cursor]
+          end
+        end
+
+        def self?.variants: -> ::Array[XTwitterScraper::Models::X::user_retrieve_verified_followers_response]
+      end
+    end
+  end
+end

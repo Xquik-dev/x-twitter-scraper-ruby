@@ -23,22 +23,25 @@ module XTwitterScraper
         params(
           cursor: String,
           event_type: XTwitterScraper::EventType::OrSymbol,
+          keyword_monitor_id: String,
           limit: Integer,
           monitor_id: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Models::EventListResponse)
       end
       def list(
-        # Cursor for keyset pagination from prior response next_cursor
+        # Previous nextCursor.
         cursor: nil,
         # Filter events by type
         event_type: nil,
+        # Keyword monitor ID.
+        keyword_monitor_id: nil,
         # Maximum number of items to return (1-100, default 50). For paid per-result
         # endpoints, the returned count may be lower when remaining credits cannot cover
         # the requested page. If zero paid results are affordable, the endpoint returns
         # 402 insufficient_credits.
         limit: nil,
-        # Filter events by monitor ID
+        # Account monitor ID.
         monitor_id: nil,
         request_options: {}
       )

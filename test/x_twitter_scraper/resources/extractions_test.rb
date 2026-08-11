@@ -82,9 +82,12 @@ class XTwitterScraper::Test::Resources::ExtractionsTest < XTwitterScraper::Test:
 
     assert_pattern do
       response => {
-        id: String,
-        status: Symbol,
-        tool_type: XTwitterScraper::Models::ExtractionRunResponse::ToolType
+        allowed: XTwitterScraper::Internal::Type::Boolean,
+        credits_available: String,
+        credits_required: String,
+        estimated_results: Integer,
+        source: String,
+        resolved_x_user_id: String | nil
       }
     end
   end

@@ -243,15 +243,14 @@ class XTwitterScraper::Test::Resources::X::TweetsTest < XTwitterScraper::Test::R
     response = @x_twitter_scraper.x.tweets.search(q: "q")
 
     assert_pattern do
-      response => XTwitterScraper::PaginatedTweets
+      response => XTwitterScraper::Models::X::TweetSearchResponse
     end
 
     assert_pattern do
-      response => {
-        has_next_page: XTwitterScraper::Internal::Type::Boolean,
-        next_cursor: String,
-        tweets: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet])
-      }
+      case response
+      in XTwitterScraper::PaginatedTweets
+      in XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse
+      end
     end
   end
 end

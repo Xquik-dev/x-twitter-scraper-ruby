@@ -18,8 +18,9 @@ module XTwitterScraper
         optional :nested_replies, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet] }
 
         # @!method initialize(diagnostic: nil, nested_replies: nil)
-        #   Reply rows. Complete mode also returns nested replies and coverage diagnostics.
-        #   Keep nested replies separate from direct coverage.
+        #   Direct reply rows. No-mode requests use resumable automatic coverage. Complete
+        #   mode also returns nested replies and coverage diagnostics. Keep nested replies
+        #   separate from direct coverage.
         #
         #   @param diagnostic [XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic] Evidence for direct-reply coverage and collector behavior.
         #

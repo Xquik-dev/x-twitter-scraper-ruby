@@ -1,0 +1,32 @@
+module XTwitterScraper
+  module Models
+    module Support
+      type attachment_download_params =
+        { id: String, range: String }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class AttachmentDownloadParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_reader range: String?
+
+        def range=: (String) -> String
+
+        def initialize: (
+          id: String,
+          ?range: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          range: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

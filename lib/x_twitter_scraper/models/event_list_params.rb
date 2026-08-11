@@ -8,7 +8,7 @@ module XTwitterScraper
       include XTwitterScraper::Internal::Type::RequestParameters
 
       # @!attribute cursor
-      #   Cursor for keyset pagination from prior response next_cursor
+      #   Previous nextCursor.
       #
       #   @return [String, nil]
       optional :cursor, String
@@ -18,6 +18,12 @@ module XTwitterScraper
       #
       #   @return [Symbol, XTwitterScraper::Models::EventType, nil]
       optional :event_type, enum: -> { XTwitterScraper::EventType }
+
+      # @!attribute keyword_monitor_id
+      #   Keyword monitor ID.
+      #
+      #   @return [String, nil]
+      optional :keyword_monitor_id, String
 
       # @!attribute limit
       #   Maximum number of items to return (1-100, default 50). For paid per-result
@@ -29,22 +35,24 @@ module XTwitterScraper
       optional :limit, Integer
 
       # @!attribute monitor_id
-      #   Filter events by monitor ID
+      #   Account monitor ID.
       #
       #   @return [String, nil]
       optional :monitor_id, String
 
-      # @!method initialize(cursor: nil, event_type: nil, limit: nil, monitor_id: nil, request_options: {})
+      # @!method initialize(cursor: nil, event_type: nil, keyword_monitor_id: nil, limit: nil, monitor_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {XTwitterScraper::Models::EventListParams} for more details.
       #
-      #   @param cursor [String] Cursor for keyset pagination from prior response next_cursor
+      #   @param cursor [String] Previous nextCursor.
       #
       #   @param event_type [Symbol, XTwitterScraper::Models::EventType] Filter events by type
       #
+      #   @param keyword_monitor_id [String] Keyword monitor ID.
+      #
       #   @param limit [Integer] Maximum number of items to return (1-100, default 50). For paid per-result endpo
       #
-      #   @param monitor_id [String] Filter events by monitor ID
+      #   @param monitor_id [String] Account monitor ID.
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
     end

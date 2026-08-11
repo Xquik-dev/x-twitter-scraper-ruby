@@ -95,6 +95,11 @@ module XTwitterScraper
             :following,
             XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
           )
+        COLLECTION =
+          T.let(
+            :collection,
+            XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
+          )
         PAGINATION_CAP =
           T.let(
             :paginationCap,

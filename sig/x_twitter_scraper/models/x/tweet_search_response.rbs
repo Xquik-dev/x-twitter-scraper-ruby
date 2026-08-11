@@ -1,0 +1,258 @@
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_search_response =
+        XTwitterScraper::PaginatedTweets
+        | XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse
+
+      module TweetSearchResponse
+        extend XTwitterScraper::Internal::Type::Union
+
+        type tweet_search_coverage_response =
+          {
+            diagnostic: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic,
+            has_next_page: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::has_next_page,
+            next_cursor: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::next_cursor
+          }
+
+        class TweetSearchCoverageResponse < XTwitterScraper::Models::PaginatedTweets
+          def diagnostic: -> XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic
+
+          def diagnostic=: (
+            XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic _
+          ) -> XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic
+
+          def has_next_page: -> XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::has_next_page?
+
+          def has_next_page=: (
+            XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::has_next_page _
+          ) -> XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::has_next_page
+
+          def next_cursor: -> XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::next_cursor?
+
+          def next_cursor=: (
+            XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::next_cursor _
+          ) -> XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::next_cursor
+
+          def initialize: (
+            diagnostic: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic,
+            ?has_next_page: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::has_next_page,
+            ?next_cursor: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::next_cursor
+          ) -> void
+
+          def to_hash: -> {
+            diagnostic: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic,
+            has_next_page: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::has_next_page,
+            next_cursor: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::next_cursor
+          }
+
+          type diagnostic =
+            {
+              complete: bool,
+              cursor_failure_count: Integer,
+              deadline_reached: bool,
+              duplicate_count: Integer,
+              failed_strategy_count: Integer,
+              malformed_count: Integer,
+              pages_fetched: Integer,
+              partitioned: bool,
+              response_truncated: bool,
+              result_limit_reached: bool,
+              returned_tweets: Integer,
+              stalled_strategy_count: Integer,
+              strategies: ::Array[XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy],
+              strategy_count: Integer,
+              unique_tweets: Integer
+            }
+
+          class Diagnostic < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor complete: bool
+
+            attr_accessor cursor_failure_count: Integer
+
+            attr_accessor deadline_reached: bool
+
+            attr_accessor duplicate_count: Integer
+
+            attr_accessor failed_strategy_count: Integer
+
+            attr_accessor malformed_count: Integer
+
+            attr_accessor pages_fetched: Integer
+
+            attr_accessor partitioned: bool
+
+            attr_accessor response_truncated: bool
+
+            attr_accessor result_limit_reached: bool
+
+            attr_accessor returned_tweets: Integer
+
+            attr_accessor stalled_strategy_count: Integer
+
+            attr_accessor strategies: ::Array[XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy]
+
+            attr_accessor strategy_count: Integer
+
+            attr_accessor unique_tweets: Integer
+
+            def initialize: (
+              complete: bool,
+              cursor_failure_count: Integer,
+              deadline_reached: bool,
+              duplicate_count: Integer,
+              failed_strategy_count: Integer,
+              malformed_count: Integer,
+              pages_fetched: Integer,
+              partitioned: bool,
+              response_truncated: bool,
+              result_limit_reached: bool,
+              returned_tweets: Integer,
+              stalled_strategy_count: Integer,
+              strategies: ::Array[XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy],
+              strategy_count: Integer,
+              unique_tweets: Integer
+            ) -> void
+
+            def to_hash: -> {
+              complete: bool,
+              cursor_failure_count: Integer,
+              deadline_reached: bool,
+              duplicate_count: Integer,
+              failed_strategy_count: Integer,
+              malformed_count: Integer,
+              pages_fetched: Integer,
+              partitioned: bool,
+              response_truncated: bool,
+              result_limit_reached: bool,
+              returned_tweets: Integer,
+              stalled_strategy_count: Integer,
+              strategies: ::Array[XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy],
+              strategy_count: Integer,
+              unique_tweets: Integer
+            }
+
+            type strategy =
+              {
+                duplicate_count: Integer,
+                pages_fetched: Integer,
+                query_type: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy::query_type,
+                stop_reason: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy::stop_reason,
+                strategy: Integer,
+                unique_added: Integer,
+                window: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy::Window
+              }
+
+            class Strategy < XTwitterScraper::Internal::Type::BaseModel
+              attr_accessor duplicate_count: Integer
+
+              attr_accessor pages_fetched: Integer
+
+              attr_accessor query_type: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy::query_type
+
+              attr_accessor stop_reason: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy::stop_reason
+
+              attr_accessor strategy: Integer
+
+              attr_accessor unique_added: Integer
+
+              attr_reader window: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy::Window?
+
+              def window=: (
+                XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy::Window
+              ) -> XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy::Window
+
+              def initialize: (
+                duplicate_count: Integer,
+                pages_fetched: Integer,
+                query_type: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy::query_type,
+                stop_reason: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy::stop_reason,
+                strategy: Integer,
+                unique_added: Integer,
+                ?window: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy::Window
+              ) -> void
+
+              def to_hash: -> {
+                duplicate_count: Integer,
+                pages_fetched: Integer,
+                query_type: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy::query_type,
+                stop_reason: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy::stop_reason,
+                strategy: Integer,
+                unique_added: Integer,
+                window: XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy::Window
+              }
+
+              type query_type = :Latest | :Top
+
+              module QueryType
+                extend XTwitterScraper::Internal::Type::Enum
+
+                LATEST: :Latest
+                TOP: :Top
+
+                def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy::query_type]
+              end
+
+              type stop_reason =
+                :cursor_failure
+                | :deadline
+                | :exhausted
+                | :failed
+                | :page_limit
+                | :result_limit
+                | :stalled
+
+              module StopReason
+                extend XTwitterScraper::Internal::Type::Enum
+
+                CURSOR_FAILURE: :cursor_failure
+                DEADLINE: :deadline
+                EXHAUSTED: :exhausted
+                FAILED: :failed
+                PAGE_LIMIT: :page_limit
+                RESULT_LIMIT: :result_limit
+                STALLED: :stalled
+
+                def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::Diagnostic::Strategy::stop_reason]
+              end
+
+              type window = { since_time: Time, until_time: Time }
+
+              class Window < XTwitterScraper::Internal::Type::BaseModel
+                attr_accessor since_time: Time
+
+                attr_accessor until_time: Time
+
+                def initialize: (since_time: Time, until_time: Time) -> void
+
+                def to_hash: -> { since_time: Time, until_time: Time }
+              end
+            end
+          end
+
+          type has_next_page = false
+
+          module HasNextPage
+            extend XTwitterScraper::Internal::Type::Enum
+
+            FALSE: false
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::has_next_page]
+          end
+
+          type next_cursor = :""
+
+          module NextCursor
+            extend XTwitterScraper::Internal::Type::Enum
+
+            EMPTY: :""
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::next_cursor]
+          end
+        end
+
+        def self?.variants: -> ::Array[XTwitterScraper::Models::X::tweet_search_response]
+      end
+    end
+  end
+end

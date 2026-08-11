@@ -19,10 +19,10 @@ module XTwitterScraper
       required :tweets, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet] }
 
       # @!method initialize(has_next_page:, next_cursor:, tweets:)
-      #   Paginated tweets. Source visibility, filters, or remaining credits can reduce
-      #   results. An empty filtered page can still have has_next_page true. Follow
-      #   next_cursor while has_next_page is true. Zero affordable results returns 402
-      #   insufficient_credits.
+      #   No-mode search, user Tweet, user reply, and direct reply reads use automatic
+      #   coverage. Shape, filters, aliases, and billing stay compatible. Unprefixed
+      #   cursors remain legacy. Follow next_cursor while has_next_page is true. An empty
+      #   filtered page can still have has_next_page true.
       #
       #   @param has_next_page [Boolean]
       #   @param next_cursor [String]

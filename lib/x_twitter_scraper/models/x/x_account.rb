@@ -15,11 +15,9 @@ module XTwitterScraper
         required :created_at, Time, api_name: :createdAt
 
         # @!attribute health
-        #   Derived connection health. `healthy` = ready to use. `needsReauth` = user must
-        #   submit fresh credentials. `locked` = X locked the account; unlock on x.com
-        #   first. `suspended` = X banned the account. `recovering` = cooldown ended; the
-        #   account can reconnect on its next use. `temporaryIssue` = temporary connection
-        #   problem; wait before the next use.
+        #   Derived health. `healthy` is ready. `needsReauth` needs credentials. `locked`
+        #   must be unlocked on X. `suspended` is banned. `recovering` can reconnect. Wait
+        #   before using `temporaryIssue`.
         #
         #   @return [Symbol, XTwitterScraper::Models::X::XAccount::Health]
         required :health, enum: -> { XTwitterScraper::X::XAccount::Health }
@@ -59,7 +57,7 @@ module XTwitterScraper
         #
         #   @param created_at [Time]
         #
-        #   @param health [Symbol, XTwitterScraper::Models::X::XAccount::Health] Derived connection health. `healthy` = ready to use. `needsReauth` = user must s
+        #   @param health [Symbol, XTwitterScraper::Models::X::XAccount::Health] Derived health. `healthy` is ready. `needsReauth` needs credentials. `locked` mu
         #
         #   @param status [String]
         #
@@ -71,11 +69,9 @@ module XTwitterScraper
         #
         #   @param cookies_obtained_at [Time]
 
-        # Derived connection health. `healthy` = ready to use. `needsReauth` = user must
-        # submit fresh credentials. `locked` = X locked the account; unlock on x.com
-        # first. `suspended` = X banned the account. `recovering` = cooldown ended; the
-        # account can reconnect on its next use. `temporaryIssue` = temporary connection
-        # problem; wait before the next use.
+        # Derived health. `healthy` is ready. `needsReauth` needs credentials. `locked`
+        # must be unlocked on X. `suspended` is banned. `recovering` can reconnect. Wait
+        # before using `temporaryIssue`.
         #
         # @see XTwitterScraper::Models::X::XAccount#health
         module Health

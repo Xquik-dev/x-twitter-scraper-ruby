@@ -11,187 +11,60 @@ module XTwitterScraper
           )
         end
 
+      sig { returns(T::Boolean) }
+      attr_accessor :allowed
+
       sig { returns(String) }
-      attr_accessor :id
+      attr_accessor :credits_available
 
-      sig { returns(Symbol) }
-      attr_accessor :status
+      sig { returns(String) }
+      attr_accessor :credits_required
 
-      # Identifier for the extraction tool used to run a job.
-      sig do
-        returns(
-          XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-        )
-      end
-      attr_accessor :tool_type
+      sig { returns(Integer) }
+      attr_accessor :estimated_results
+
+      sig { returns(String) }
+      attr_accessor :source
+
+      sig { returns(T.nilable(String)) }
+      attr_reader :resolved_x_user_id
+
+      sig { params(resolved_x_user_id: String).void }
+      attr_writer :resolved_x_user_id
 
       sig do
         params(
-          id: String,
-          tool_type:
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::OrSymbol,
-          status: Symbol
+          allowed: T::Boolean,
+          credits_available: String,
+          credits_required: String,
+          estimated_results: Integer,
+          source: String,
+          resolved_x_user_id: String
         ).returns(T.attached_class)
       end
       def self.new(
-        id:,
-        # Identifier for the extraction tool used to run a job.
-        tool_type:,
-        status: :running
+        allowed:,
+        credits_available:,
+        credits_required:,
+        estimated_results:,
+        source:,
+        resolved_x_user_id: nil
       )
       end
 
       sig do
         override.returns(
           {
-            id: String,
-            status: Symbol,
-            tool_type:
-              XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
+            allowed: T::Boolean,
+            credits_available: String,
+            credits_required: String,
+            estimated_results: Integer,
+            source: String,
+            resolved_x_user_id: String
           }
         )
       end
       def to_hash
-      end
-
-      # Identifier for the extraction tool used to run a job.
-      module ToolType
-        extend XTwitterScraper::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(
-              Symbol,
-              XTwitterScraper::Models::ExtractionRunResponse::ToolType
-            )
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        ARTICLE_EXTRACTOR =
-          T.let(
-            :article_extractor,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        COMMUNITY_EXTRACTOR =
-          T.let(
-            :community_extractor,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        COMMUNITY_MODERATOR_EXPLORER =
-          T.let(
-            :community_moderator_explorer,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        COMMUNITY_POST_EXTRACTOR =
-          T.let(
-            :community_post_extractor,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        COMMUNITY_SEARCH =
-          T.let(
-            :community_search,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        FAVORITERS =
-          T.let(
-            :favoriters,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        FOLLOWER_EXPLORER =
-          T.let(
-            :follower_explorer,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        FOLLOWING_EXPLORER =
-          T.let(
-            :following_explorer,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        LIST_FOLLOWER_EXPLORER =
-          T.let(
-            :list_follower_explorer,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        LIST_MEMBER_EXTRACTOR =
-          T.let(
-            :list_member_extractor,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        LIST_POST_EXTRACTOR =
-          T.let(
-            :list_post_extractor,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        MENTION_EXTRACTOR =
-          T.let(
-            :mention_extractor,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        PEOPLE_SEARCH =
-          T.let(
-            :people_search,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        POST_EXTRACTOR =
-          T.let(
-            :post_extractor,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        QUOTE_EXTRACTOR =
-          T.let(
-            :quote_extractor,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        REPLY_EXTRACTOR =
-          T.let(
-            :reply_extractor,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        REPOST_EXTRACTOR =
-          T.let(
-            :repost_extractor,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        SPACE_EXPLORER =
-          T.let(
-            :space_explorer,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        THREAD_EXTRACTOR =
-          T.let(
-            :thread_extractor,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        TWEET_SEARCH_EXTRACTOR =
-          T.let(
-            :tweet_search_extractor,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        USER_LIKES =
-          T.let(
-            :user_likes,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        USER_MEDIA =
-          T.let(
-            :user_media,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-        VERIFIED_FOLLOWER_EXPLORER =
-          T.let(
-            :verified_follower_explorer,
-            XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              XTwitterScraper::Models::ExtractionRunResponse::ToolType::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
       end
     end
   end

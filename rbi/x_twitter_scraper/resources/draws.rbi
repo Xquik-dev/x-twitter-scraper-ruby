@@ -27,7 +27,7 @@ module XTwitterScraper
         ).returns(XTwitterScraper::Models::DrawListResponse)
       end
       def list(
-        # Cursor for keyset pagination from prior response next_cursor
+        # Previous nextCursor.
         cursor: nil,
         # Maximum number of items to return (1-100, default 50). For paid per-result
         # endpoints, the returned count may be lower when remaining credits cannot cover
@@ -50,7 +50,8 @@ module XTwitterScraper
       def export(
         # Draw public ID returned by create and list draw responses.
         id,
-        # Export output format
+        # Export output format. PDF entry exports include up to 10,000 rows. Other entry
+        # formats include up to 100,000 rows.
         format_:,
         # Export winners or all entries
         type: nil,

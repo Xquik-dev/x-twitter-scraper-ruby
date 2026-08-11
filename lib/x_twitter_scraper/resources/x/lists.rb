@@ -10,13 +10,41 @@ module XTwitterScraper
         #
         # List followers of an X List
         #
-        # @overload retrieve_followers(id, cursor: nil, page_size: nil, request_options: {})
+        # @overload retrieve_followers(id, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
         #
         # @param id [String] List ID
         #
+        # @param bio_contains [String] Match any comma-separated or line-separated bio term, ignoring case.
+        #
         # @param cursor [String] Pagination cursor for list followers
         #
-        # @param page_size [Integer] Maximum user profiles requested from this page (20-200, default 200). The respon
+        # @param has_location [Boolean] Only return profiles with a location.
+        #
+        # @param has_website [Boolean] Only return profiles with a website.
+        #
+        # @param location_contains [String] Match a location substring, ignoring case.
+        #
+        # @param max_followers [Integer] Maximum follower count. Missing counts pass this maximum.
+        #
+        # @param max_following [Integer] Maximum following count.
+        #
+        # @param max_statuses [Integer] Maximum post count. maxPosts is also accepted.
+        #
+        # @param min_account_age_days [Integer] Minimum account age in whole days.
+        #
+        # @param min_followers [Integer] Minimum follower count. Filtering happens before billing.
+        #
+        # @param min_following [Integer] Minimum following count.
+        #
+        # @param min_statuses [Integer] Minimum post count. minPosts is also accepted.
+        #
+        # @param page_size [Integer] Maximum user profiles requested from this page (20-200, default 200). Source, fi
+        #
+        # @param username_contains [String] Match a username substring, ignoring case.
+        #
+        # @param verified_only [Boolean] Only return verified profiles.
+        #
+        # @param verified_type [String] Match the verification type exactly, ignoring case.
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -29,21 +57,68 @@ module XTwitterScraper
           @client.request(
             method: :get,
             path: ["x/lists/%1$s/followers", id],
-            query: query.transform_keys(page_size: "pageSize"),
+            query: query.transform_keys(
+              bio_contains: "bioContains",
+              has_location: "hasLocation",
+              has_website: "hasWebsite",
+              location_contains: "locationContains",
+              max_followers: "maxFollowers",
+              max_following: "maxFollowing",
+              max_statuses: "maxStatuses",
+              min_account_age_days: "minAccountAgeDays",
+              min_followers: "minFollowers",
+              min_following: "minFollowing",
+              min_statuses: "minStatuses",
+              page_size: "pageSize",
+              username_contains: "usernameContains",
+              verified_only: "verifiedOnly",
+              verified_type: "verifiedType"
+            ),
             model: XTwitterScraper::PaginatedUsers,
             options: options
           )
         end
 
+        # Some parameter documentations has been truncated, see
+        # {XTwitterScraper::Models::X::ListRetrieveMembersParams} for more details.
+        #
         # List members of an X List
         #
-        # @overload retrieve_members(id, cursor: nil, page_size: nil, request_options: {})
+        # @overload retrieve_members(id, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
         #
         # @param id [String] List ID for member lookup
         #
+        # @param bio_contains [String] Match any comma-separated or line-separated bio term, ignoring case.
+        #
         # @param cursor [String] Pagination cursor for list members
         #
+        # @param has_location [Boolean] Only return profiles with a location.
+        #
+        # @param has_website [Boolean] Only return profiles with a website.
+        #
+        # @param location_contains [String] Match a location substring, ignoring case.
+        #
+        # @param max_followers [Integer] Maximum follower count. Missing counts pass this maximum.
+        #
+        # @param max_following [Integer] Maximum following count.
+        #
+        # @param max_statuses [Integer] Maximum post count. maxPosts is also accepted.
+        #
+        # @param min_account_age_days [Integer] Minimum account age in whole days.
+        #
+        # @param min_followers [Integer] Minimum follower count. Filtering happens before billing.
+        #
+        # @param min_following [Integer] Minimum following count.
+        #
+        # @param min_statuses [Integer] Minimum post count. minPosts is also accepted.
+        #
         # @param page_size [Integer] Members per page (20-200, default 20)
+        #
+        # @param username_contains [String] Match a username substring, ignoring case.
+        #
+        # @param verified_only [Boolean] Only return verified profiles.
+        #
+        # @param verified_type [String] Match the verification type exactly, ignoring case.
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -56,7 +131,23 @@ module XTwitterScraper
           @client.request(
             method: :get,
             path: ["x/lists/%1$s/members", id],
-            query: query.transform_keys(page_size: "pageSize"),
+            query: query.transform_keys(
+              bio_contains: "bioContains",
+              has_location: "hasLocation",
+              has_website: "hasWebsite",
+              location_contains: "locationContains",
+              max_followers: "maxFollowers",
+              max_following: "maxFollowing",
+              max_statuses: "maxStatuses",
+              min_account_age_days: "minAccountAgeDays",
+              min_followers: "minFollowers",
+              min_following: "minFollowing",
+              min_statuses: "minStatuses",
+              page_size: "pageSize",
+              username_contains: "usernameContains",
+              verified_only: "verifiedOnly",
+              verified_type: "verifiedType"
+            ),
             model: XTwitterScraper::PaginatedUsers,
             options: options
           )

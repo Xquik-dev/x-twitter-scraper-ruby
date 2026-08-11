@@ -3,7 +3,25 @@ module XTwitterScraper
     type extraction_export_results_params =
       {
         id: String,
-        format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_
+        format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_,
+        has_description: bool,
+        has_location: bool,
+        has_media: bool,
+        lang: String,
+        max_followers: Integer,
+        max_following: Integer,
+        max_posts: Integer,
+        min_followers: Integer,
+        min_following: Integer,
+        min_likes: Integer,
+        min_posts: Integer,
+        min_replies: Integer,
+        min_retweets: Integer,
+        min_views: Integer,
+        search: String,
+        since_date: Date,
+        until_date: Date,
+        verified: bool
       }
       & XTwitterScraper::Internal::Type::request_parameters
 
@@ -15,15 +33,123 @@ module XTwitterScraper
 
       attr_accessor format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_
 
+      attr_reader has_description: bool?
+
+      def has_description=: (bool) -> bool
+
+      attr_reader has_location: bool?
+
+      def has_location=: (bool) -> bool
+
+      attr_reader has_media: bool?
+
+      def has_media=: (bool) -> bool
+
+      attr_reader lang: String?
+
+      def lang=: (String) -> String
+
+      attr_reader max_followers: Integer?
+
+      def max_followers=: (Integer) -> Integer
+
+      attr_reader max_following: Integer?
+
+      def max_following=: (Integer) -> Integer
+
+      attr_reader max_posts: Integer?
+
+      def max_posts=: (Integer) -> Integer
+
+      attr_reader min_followers: Integer?
+
+      def min_followers=: (Integer) -> Integer
+
+      attr_reader min_following: Integer?
+
+      def min_following=: (Integer) -> Integer
+
+      attr_reader min_likes: Integer?
+
+      def min_likes=: (Integer) -> Integer
+
+      attr_reader min_posts: Integer?
+
+      def min_posts=: (Integer) -> Integer
+
+      attr_reader min_replies: Integer?
+
+      def min_replies=: (Integer) -> Integer
+
+      attr_reader min_retweets: Integer?
+
+      def min_retweets=: (Integer) -> Integer
+
+      attr_reader min_views: Integer?
+
+      def min_views=: (Integer) -> Integer
+
+      attr_reader search: String?
+
+      def search=: (String) -> String
+
+      attr_reader since_date: Date?
+
+      def since_date=: (Date) -> Date
+
+      attr_reader until_date: Date?
+
+      def until_date=: (Date) -> Date
+
+      attr_reader verified: bool?
+
+      def verified=: (bool) -> bool
+
       def initialize: (
         id: String,
         format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_,
+        ?has_description: bool,
+        ?has_location: bool,
+        ?has_media: bool,
+        ?lang: String,
+        ?max_followers: Integer,
+        ?max_following: Integer,
+        ?max_posts: Integer,
+        ?min_followers: Integer,
+        ?min_following: Integer,
+        ?min_likes: Integer,
+        ?min_posts: Integer,
+        ?min_replies: Integer,
+        ?min_retweets: Integer,
+        ?min_views: Integer,
+        ?search: String,
+        ?since_date: Date,
+        ?until_date: Date,
+        ?verified: bool,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
       def to_hash: -> {
         id: String,
         format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_,
+        has_description: bool,
+        has_location: bool,
+        has_media: bool,
+        lang: String,
+        max_followers: Integer,
+        max_following: Integer,
+        max_posts: Integer,
+        min_followers: Integer,
+        min_following: Integer,
+        min_likes: Integer,
+        min_posts: Integer,
+        min_replies: Integer,
+        min_retweets: Integer,
+        min_views: Integer,
+        search: String,
+        since_date: Date,
+        until_date: Date,
+        verified: bool,
         request_options: XTwitterScraper::RequestOptions
       }
 

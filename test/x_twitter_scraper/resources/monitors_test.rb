@@ -43,7 +43,9 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
         is_active: XTwitterScraper::Internal::Type::Boolean,
         next_billing_at: Time,
         username: String,
-        x_user_id: String
+        x_user_id: String,
+        paused_at: Time | nil,
+        paused_reason: XTwitterScraper::Monitor::PausedReason | nil
       }
     end
   end
@@ -65,7 +67,9 @@ class XTwitterScraper::Test::Resources::MonitorsTest < XTwitterScraper::Test::Re
         is_active: XTwitterScraper::Internal::Type::Boolean,
         next_billing_at: Time,
         username: String,
-        x_user_id: String
+        x_user_id: String,
+        paused_at: Time | nil,
+        paused_reason: XTwitterScraper::Monitor::PausedReason | nil
       }
     end
   end

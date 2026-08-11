@@ -46,6 +46,7 @@ module XTwitterScraper
       type source =
         :followers
         | :following
+        | :collection
         | :paginationCap
         | :posts
         | :quoteCount
@@ -59,6 +60,7 @@ module XTwitterScraper
 
         FOLLOWERS: :followers
         FOLLOWING: :following
+        COLLECTION: :collection
         PAGINATION_CAP: :paginationCap
         POSTS: :posts
         QUOTE_COUNT: :quoteCount

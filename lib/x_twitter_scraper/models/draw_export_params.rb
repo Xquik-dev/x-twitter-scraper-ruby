@@ -13,7 +13,8 @@ module XTwitterScraper
       required :id, String
 
       # @!attribute format_
-      #   Export output format
+      #   Export output format. PDF entry exports include up to 10,000 rows. Other entry
+      #   formats include up to 100,000 rows.
       #
       #   @return [Symbol, XTwitterScraper::Models::DrawExportParams::Format]
       required :format_, enum: -> { XTwitterScraper::DrawExportParams::Format }
@@ -25,15 +26,19 @@ module XTwitterScraper
       optional :type, enum: -> { XTwitterScraper::DrawExportParams::Type }
 
       # @!method initialize(id:, format_:, type: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {XTwitterScraper::Models::DrawExportParams} for more details.
+      #
       #   @param id [String]
       #
-      #   @param format_ [Symbol, XTwitterScraper::Models::DrawExportParams::Format] Export output format
+      #   @param format_ [Symbol, XTwitterScraper::Models::DrawExportParams::Format] Export output format. PDF entry exports include up to 10,000 rows. Other entry f
       #
       #   @param type [Symbol, XTwitterScraper::Models::DrawExportParams::Type] Export winners or all entries
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
 
-      # Export output format
+      # Export output format. PDF entry exports include up to 10,000 rows. Other entry
+      # formats include up to 100,000 rows.
       module Format
         extend XTwitterScraper::Internal::Type::Enum
 

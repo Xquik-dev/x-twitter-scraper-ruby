@@ -4,6 +4,7 @@ module XTwitterScraper
       {
         cursor: String,
         event_type: XTwitterScraper::Models::event_type,
+        keyword_monitor_id: String,
         limit: Integer,
         monitor_id: String
       }
@@ -23,6 +24,10 @@ module XTwitterScraper
         XTwitterScraper::Models::event_type
       ) -> XTwitterScraper::Models::event_type
 
+      attr_reader keyword_monitor_id: String?
+
+      def keyword_monitor_id=: (String) -> String
+
       attr_reader limit: Integer?
 
       def limit=: (Integer) -> Integer
@@ -34,6 +39,7 @@ module XTwitterScraper
       def initialize: (
         ?cursor: String,
         ?event_type: XTwitterScraper::Models::event_type,
+        ?keyword_monitor_id: String,
         ?limit: Integer,
         ?monitor_id: String,
         ?request_options: XTwitterScraper::request_opts
@@ -42,6 +48,7 @@ module XTwitterScraper
       def to_hash: -> {
         cursor: String,
         event_type: XTwitterScraper::Models::event_type,
+        keyword_monitor_id: String,
         limit: Integer,
         monitor_id: String,
         request_options: XTwitterScraper::RequestOptions
