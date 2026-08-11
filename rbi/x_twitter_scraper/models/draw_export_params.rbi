@@ -21,7 +21,8 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :id
 
-      # Export output format
+      # Export output format. PDF entry exports include up to 10,000 rows. Other entry
+      # formats include up to 100,000 rows.
       sig { returns(XTwitterScraper::DrawExportParams::Format::OrSymbol) }
       attr_accessor :format_
 
@@ -46,7 +47,8 @@ module XTwitterScraper
       end
       def self.new(
         id:,
-        # Export output format
+        # Export output format. PDF entry exports include up to 10,000 rows. Other entry
+        # formats include up to 100,000 rows.
         format_:,
         # Export winners or all entries
         type: nil,
@@ -67,7 +69,8 @@ module XTwitterScraper
       def to_hash
       end
 
-      # Export output format
+      # Export output format. PDF entry exports include up to 10,000 rows. Other entry
+      # formats include up to 100,000 rows.
       module Format
         extend XTwitterScraper::Internal::Type::Enum
 

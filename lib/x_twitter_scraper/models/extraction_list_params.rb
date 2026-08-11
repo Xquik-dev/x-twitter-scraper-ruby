@@ -12,7 +12,7 @@ module XTwitterScraper
       include XTwitterScraper::Internal::Type::RequestParameters
 
       # @!attribute cursor
-      #   Cursor for keyset pagination from prior response next_cursor
+      #   Previous nextCursor.
       #
       #   @return [String, nil]
       optional :cursor, String
@@ -42,7 +42,7 @@ module XTwitterScraper
       #   Some parameter documentations has been truncated, see
       #   {XTwitterScraper::Models::ExtractionListParams} for more details.
       #
-      #   @param cursor [String] Cursor for keyset pagination from prior response next_cursor
+      #   @param cursor [String] Previous nextCursor.
       #
       #   @param limit [Integer] Maximum number of items to return (1-100, default 50). For paid per-result endpo
       #

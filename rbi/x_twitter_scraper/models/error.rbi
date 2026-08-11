@@ -252,6 +252,11 @@ module XTwitterScraper
               :monitor_already_exists,
               XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
             )
+          MONITOR_PROFILE_UNAVAILABLE =
+            T.let(
+              :monitor_profile_unavailable,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
           NO_MEDIA =
             T.let(
               :no_media,
@@ -337,6 +342,16 @@ module XTwitterScraper
               :connection_challenge_inactive,
               XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
             )
+          COVERAGE_CURSOR_GONE =
+            T.let(
+              :coverage_cursor_gone,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          COVERAGE_CURSOR_UNAVAILABLE =
+            T.let(
+              :coverage_cursor_unavailable,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
           DRAFT_NOT_FOUND =
             T.let(
               :draft_not_found,
@@ -380,6 +395,11 @@ module XTwitterScraper
           INVALID_COMMUNITY_ID =
             T.let(
               :invalid_community_id,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          INVALID_COVERAGE_CURSOR =
+            T.let(
+              :invalid_coverage_cursor,
               XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
             )
           INVALID_IDEMPOTENCY_KEY =
@@ -823,6 +843,11 @@ module XTwitterScraper
                 :monitor_already_exists,
                 XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
               )
+            MONITOR_PROFILE_UNAVAILABLE =
+              T.let(
+                :monitor_profile_unavailable,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
             NO_MEDIA =
               T.let(
                 :no_media,
@@ -908,6 +933,16 @@ module XTwitterScraper
                 :connection_challenge_inactive,
                 XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
               )
+            COVERAGE_CURSOR_GONE =
+              T.let(
+                :coverage_cursor_gone,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            COVERAGE_CURSOR_UNAVAILABLE =
+              T.let(
+                :coverage_cursor_unavailable,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
             DRAFT_NOT_FOUND =
               T.let(
                 :draft_not_found,
@@ -951,6 +986,11 @@ module XTwitterScraper
             INVALID_COMMUNITY_ID =
               T.let(
                 :invalid_community_id,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            INVALID_COVERAGE_CURSOR =
+              T.let(
+                :invalid_coverage_cursor,
                 XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
               )
             INVALID_IDEMPOTENCY_KEY =

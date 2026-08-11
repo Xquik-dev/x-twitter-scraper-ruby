@@ -35,7 +35,7 @@ Add the gem to your `Gemfile`:
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "x-twitter-scraper", "~> 0.7.3"
+gem "x-twitter-scraper", "~> 0.8.0"
 ```
 
 <!-- x-release-please-end -->
@@ -50,9 +50,9 @@ x_twitter_scraper = XTwitterScraper::Client.new(
   api_key: ENV["X_TWITTER_SCRAPER_API_KEY"] # This is the default and can be omitted
 )
 
-paginated_tweets = x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
+response = x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
 
-puts(paginated_tweets.has_next_page)
+puts(response)
 ```
 
 ### Handling errors

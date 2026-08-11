@@ -30,6 +30,20 @@ module XTwitterScraper
         sig { params(any_words: String).void }
         attr_writer :any_words
 
+        # Only return tweets from Blue-verified authors.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :blue_verified_only
+
+        sig { params(blue_verified_only: T::Boolean).void }
+        attr_writer :blue_verified_only
+
+        # Match the Tweet card name.
+        sig { returns(T.nilable(String)) }
+        attr_reader :card_name
+
+        sig { params(card_name: String).void }
+        attr_writer :card_name
+
         # Cashtags separated by spaces, commas, or lines.
         sig { returns(T.nilable(String)) }
         attr_reader :cashtags
@@ -58,6 +72,13 @@ module XTwitterScraper
         sig { params(exact_phrase: String).void }
         attr_writer :exact_phrase
 
+        # Exclude a source application.
+        sig { returns(T.nilable(String)) }
+        attr_reader :exclude_source
+
+        sig { params(exclude_source: String).void }
+        attr_writer :exclude_source
+
         # Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
         sig { returns(T.nilable(String)) }
         attr_reader :exclude_words
@@ -71,6 +92,13 @@ module XTwitterScraper
 
         sig { params(from_user: String).void }
         attr_writer :from_user
+
+        # Match latitude, longitude, and radius.
+        sig { returns(T.nilable(String)) }
+        attr_reader :geocode
+
+        sig { params(geocode: String).void }
+        attr_writer :geocode
 
         # Hashtags separated by spaces, commas, or lines.
         sig { returns(T.nilable(String)) }
@@ -100,6 +128,41 @@ module XTwitterScraper
         sig { params(language: String).void }
         attr_writer :language
 
+        # Maximum likes threshold. maxLikes is also accepted.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :max_faves
+
+        sig { params(max_faves: Integer).void }
+        attr_writer :max_faves
+
+        # Return Tweets older than this Tweet ID.
+        sig { returns(T.nilable(String)) }
+        attr_reader :max_id
+
+        sig { params(max_id: String).void }
+        attr_writer :max_id
+
+        # Maximum quotes threshold.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :max_quotes
+
+        sig { params(max_quotes: Integer).void }
+        attr_writer :max_quotes
+
+        # Maximum replies threshold.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :max_replies
+
+        sig { params(max_replies: Integer).void }
+        attr_writer :max_replies
+
+        # Maximum retweets threshold.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :max_retweets
+
+        sig { params(max_retweets: Integer).void }
+        attr_writer :max_retweets
+
         # Filter by media type.
         sig do
           returns(
@@ -124,6 +187,13 @@ module XTwitterScraper
 
         sig { params(mentioning: String).void }
         attr_writer :mentioning
+
+        # Minimum bookmark count threshold.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :min_bookmarks
+
+        sig { params(min_bookmarks: Integer).void }
+        attr_writer :min_bookmarks
 
         # Minimum likes threshold.
         sig { returns(T.nilable(Integer)) }
@@ -152,6 +222,34 @@ module XTwitterScraper
 
         sig { params(min_retweets: Integer).void }
         attr_writer :min_retweets
+
+        # Minimum view count threshold.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :min_views
+
+        sig { params(min_views: Integer).void }
+        attr_writer :min_views
+
+        # Only return native reposts.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :native_retweets
+
+        sig { params(native_retweets: T::Boolean).void }
+        attr_writer :native_retweets
+
+        # Match a place name.
+        sig { returns(T.nilable(String)) }
+        attr_reader :near
+
+        sig { params(near: String).void }
+        attr_writer :near
+
+        # Only return news results.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :news
+
+        sig { params(news: T::Boolean).void }
+        attr_writer :news
 
         # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
         # results. Continue while has_next_page is true. Deprecated limit and count
@@ -228,6 +326,13 @@ module XTwitterScraper
         sig { params(retweets_of_tweet_id: String).void }
         attr_writer :retweets_of_tweet_id
 
+        # Enable the safe-search filter.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :safe
+
+        sig { params(safe: T::Boolean).void }
+        attr_writer :safe
+
         # Start date in YYYY-MM-DD format.
         sig { returns(T.nilable(Date)) }
         attr_reader :since_date
@@ -235,12 +340,26 @@ module XTwitterScraper
         sig { params(since_date: Date).void }
         attr_writer :since_date
 
+        # Return Tweets newer than this Tweet ID.
+        sig { returns(T.nilable(String)) }
+        attr_reader :since_id
+
+        sig { params(since_id: String).void }
+        attr_writer :since_id
+
         # Unix timestamp - return quotes posted after this time
         sig { returns(T.nilable(String)) }
         attr_reader :since_time
 
         sig { params(since_time: String).void }
         attr_writer :since_time
+
+        # Match the source application.
+        sig { returns(T.nilable(String)) }
+        attr_reader :source
+
+        sig { params(source: String).void }
+        attr_writer :source
 
         # Filter replies sent to a username.
         sig { returns(T.nilable(String)) }
@@ -277,27 +396,55 @@ module XTwitterScraper
         sig { params(verified_only: T::Boolean).void }
         attr_writer :verified_only
 
+        # Set the radius for the near filter.
+        sig { returns(T.nilable(String)) }
+        attr_reader :within
+
+        sig { params(within: String).void }
+        attr_writer :within
+
+        # Match Tweets inside a recent time window.
+        sig { returns(T.nilable(String)) }
+        attr_reader :within_time
+
+        sig { params(within_time: String).void }
+        attr_writer :within_time
+
         sig do
           params(
             id: String,
             any_words: String,
+            blue_verified_only: T::Boolean,
+            card_name: String,
             cashtags: String,
             conversation_id: String,
             cursor: String,
             exact_phrase: String,
+            exclude_source: String,
             exclude_words: String,
             from_user: String,
+            geocode: String,
             hashtags: String,
             include_replies: T::Boolean,
             in_reply_to_tweet_id: String,
             language: String,
+            max_faves: Integer,
+            max_id: String,
+            max_quotes: Integer,
+            max_replies: Integer,
+            max_retweets: Integer,
             media_type:
               XTwitterScraper::X::TweetGetQuotesParams::MediaType::OrSymbol,
             mentioning: String,
+            min_bookmarks: Integer,
             min_faves: Integer,
             min_quotes: Integer,
             min_replies: Integer,
             min_retweets: Integer,
+            min_views: Integer,
+            native_retweets: T::Boolean,
+            near: String,
+            news: T::Boolean,
             page_size: Integer,
             quotes: XTwitterScraper::X::TweetGetQuotesParams::Quotes::OrSymbol,
             quotes_of_tweet_id: String,
@@ -306,13 +453,18 @@ module XTwitterScraper
             retweets:
               XTwitterScraper::X::TweetGetQuotesParams::Retweets::OrSymbol,
             retweets_of_tweet_id: String,
+            safe: T::Boolean,
             since_date: Date,
+            since_id: String,
             since_time: String,
+            source: String,
             to_user: String,
             until_date: Date,
             until_time: String,
             url: String,
             verified_only: T::Boolean,
+            within: String,
+            within_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -321,6 +473,10 @@ module XTwitterScraper
           # Words or quoted phrases where any one can match. Separate with spaces, commas,
           # or lines.
           any_words: nil,
+          # Only return tweets from Blue-verified authors.
+          blue_verified_only: nil,
+          # Match the Tweet card name.
+          card_name: nil,
           # Cashtags separated by spaces, commas, or lines.
           cashtags: nil,
           # Conversation ID filter.
@@ -329,10 +485,14 @@ module XTwitterScraper
           cursor: nil,
           # Exact phrase to match.
           exact_phrase: nil,
+          # Exclude a source application.
+          exclude_source: nil,
           # Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
           exclude_words: nil,
           # Filter by author username.
           from_user: nil,
+          # Match latitude, longitude, and radius.
+          geocode: nil,
           # Hashtags separated by spaces, commas, or lines.
           hashtags: nil,
           # Include reply quotes (default false)
@@ -341,10 +501,22 @@ module XTwitterScraper
           in_reply_to_tweet_id: nil,
           # Language code filter, e.g. en or tr.
           language: nil,
+          # Maximum likes threshold. maxLikes is also accepted.
+          max_faves: nil,
+          # Return Tweets older than this Tweet ID.
+          max_id: nil,
+          # Maximum quotes threshold.
+          max_quotes: nil,
+          # Maximum replies threshold.
+          max_replies: nil,
+          # Maximum retweets threshold.
+          max_retweets: nil,
           # Filter by media type.
           media_type: nil,
           # Filter tweets mentioning a username.
           mentioning: nil,
+          # Minimum bookmark count threshold.
+          min_bookmarks: nil,
           # Minimum likes threshold.
           min_faves: nil,
           # Minimum quote count threshold.
@@ -353,6 +525,14 @@ module XTwitterScraper
           min_replies: nil,
           # Minimum retweets threshold.
           min_retweets: nil,
+          # Minimum view count threshold.
+          min_views: nil,
+          # Only return native reposts.
+          native_retweets: nil,
+          # Match a place name.
+          near: nil,
+          # Only return news results.
+          news: nil,
           # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
           # results. Continue while has_next_page is true. Deprecated limit and count
           # aliases remain accepted.
@@ -367,10 +547,16 @@ module XTwitterScraper
           retweets: nil,
           # Only retweets of this tweet ID.
           retweets_of_tweet_id: nil,
+          # Enable the safe-search filter.
+          safe: nil,
           # Start date in YYYY-MM-DD format.
           since_date: nil,
+          # Return Tweets newer than this Tweet ID.
+          since_id: nil,
           # Unix timestamp - return quotes posted after this time
           since_time: nil,
+          # Match the source application.
+          source: nil,
           # Filter replies sent to a username.
           to_user: nil,
           # End date in YYYY-MM-DD format.
@@ -381,6 +567,10 @@ module XTwitterScraper
           url: nil,
           # Only return tweets from verified authors.
           verified_only: nil,
+          # Set the radius for the near filter.
+          within: nil,
+          # Match Tweets inside a recent time window.
+          within_time: nil,
           request_options: {}
         )
         end
@@ -390,23 +580,37 @@ module XTwitterScraper
             {
               id: String,
               any_words: String,
+              blue_verified_only: T::Boolean,
+              card_name: String,
               cashtags: String,
               conversation_id: String,
               cursor: String,
               exact_phrase: String,
+              exclude_source: String,
               exclude_words: String,
               from_user: String,
+              geocode: String,
               hashtags: String,
               include_replies: T::Boolean,
               in_reply_to_tweet_id: String,
               language: String,
+              max_faves: Integer,
+              max_id: String,
+              max_quotes: Integer,
+              max_replies: Integer,
+              max_retweets: Integer,
               media_type:
                 XTwitterScraper::X::TweetGetQuotesParams::MediaType::OrSymbol,
               mentioning: String,
+              min_bookmarks: Integer,
               min_faves: Integer,
               min_quotes: Integer,
               min_replies: Integer,
               min_retweets: Integer,
+              min_views: Integer,
+              native_retweets: T::Boolean,
+              near: String,
+              news: T::Boolean,
               page_size: Integer,
               quotes:
                 XTwitterScraper::X::TweetGetQuotesParams::Quotes::OrSymbol,
@@ -416,13 +620,18 @@ module XTwitterScraper
               retweets:
                 XTwitterScraper::X::TweetGetQuotesParams::Retweets::OrSymbol,
               retweets_of_tweet_id: String,
+              safe: T::Boolean,
               since_date: Date,
+              since_id: String,
               since_time: String,
+              source: String,
               to_user: String,
               until_date: Date,
               until_time: String,
               url: String,
               verified_only: T::Boolean,
+              within: String,
+              within_time: String,
               request_options: XTwitterScraper::RequestOptions
             }
           )

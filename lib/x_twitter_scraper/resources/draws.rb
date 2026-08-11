@@ -35,7 +35,7 @@ module XTwitterScraper
       #
       # @overload list(cursor: nil, limit: nil, request_options: {})
       #
-      # @param cursor [String] Cursor for keyset pagination from prior response next_cursor
+      # @param cursor [String] Previous nextCursor.
       #
       # @param limit [Integer] Maximum number of items to return (1-100, default 50). For paid per-result endpo
       #
@@ -56,13 +56,16 @@ module XTwitterScraper
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {XTwitterScraper::Models::DrawExportParams} for more details.
+      #
       # Export draw data
       #
       # @overload export(id, format_:, type: nil, request_options: {})
       #
       # @param id [String] Draw public ID returned by create and list draw responses.
       #
-      # @param format_ [Symbol, XTwitterScraper::Models::DrawExportParams::Format] Export output format
+      # @param format_ [Symbol, XTwitterScraper::Models::DrawExportParams::Format] Export output format. PDF entry exports include up to 10,000 rows. Other entry f
       #
       # @param type [Symbol, XTwitterScraper::Models::DrawExportParams::Type] Export winners or all entries
       #

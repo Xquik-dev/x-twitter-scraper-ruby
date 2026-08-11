@@ -8,64 +8,43 @@ module XTwitterScraper
   module Models
     # @see XTwitterScraper::Resources::Extractions#run
     class ExtractionRunResponse < XTwitterScraper::Internal::Type::BaseModel
-      # @!attribute id
+      # @!attribute allowed
+      #
+      #   @return [Boolean]
+      required :allowed, XTwitterScraper::Internal::Type::Boolean
+
+      # @!attribute credits_available
       #
       #   @return [String]
-      required :id, String
+      required :credits_available, String, api_name: :creditsAvailable
 
-      # @!attribute status
+      # @!attribute credits_required
       #
-      #   @return [Symbol, :running]
-      required :status, const: :running
+      #   @return [String]
+      required :credits_required, String, api_name: :creditsRequired
 
-      # @!attribute tool_type
-      #   Identifier for the extraction tool used to run a job.
+      # @!attribute estimated_results
       #
-      #   @return [Symbol, XTwitterScraper::Models::ExtractionRunResponse::ToolType]
-      required :tool_type,
-               enum: -> { XTwitterScraper::Models::ExtractionRunResponse::ToolType },
-               api_name: :toolType
+      #   @return [Integer]
+      required :estimated_results, Integer, api_name: :estimatedResults
 
-      # @!method initialize(id:, tool_type:, status: :running)
-      #   @param id [String]
+      # @!attribute source
       #
-      #   @param tool_type [Symbol, XTwitterScraper::Models::ExtractionRunResponse::ToolType] Identifier for the extraction tool used to run a job.
+      #   @return [String]
+      required :source, String
+
+      # @!attribute resolved_x_user_id
       #
-      #   @param status [Symbol, :running]
+      #   @return [String, nil]
+      optional :resolved_x_user_id, String, api_name: :resolvedXUserId
 
-      # Identifier for the extraction tool used to run a job.
-      #
-      # @see XTwitterScraper::Models::ExtractionRunResponse#tool_type
-      module ToolType
-        extend XTwitterScraper::Internal::Type::Enum
-
-        ARTICLE_EXTRACTOR = :article_extractor
-        COMMUNITY_EXTRACTOR = :community_extractor
-        COMMUNITY_MODERATOR_EXPLORER = :community_moderator_explorer
-        COMMUNITY_POST_EXTRACTOR = :community_post_extractor
-        COMMUNITY_SEARCH = :community_search
-        FAVORITERS = :favoriters
-        FOLLOWER_EXPLORER = :follower_explorer
-        FOLLOWING_EXPLORER = :following_explorer
-        LIST_FOLLOWER_EXPLORER = :list_follower_explorer
-        LIST_MEMBER_EXTRACTOR = :list_member_extractor
-        LIST_POST_EXTRACTOR = :list_post_extractor
-        MENTION_EXTRACTOR = :mention_extractor
-        PEOPLE_SEARCH = :people_search
-        POST_EXTRACTOR = :post_extractor
-        QUOTE_EXTRACTOR = :quote_extractor
-        REPLY_EXTRACTOR = :reply_extractor
-        REPOST_EXTRACTOR = :repost_extractor
-        SPACE_EXPLORER = :space_explorer
-        THREAD_EXTRACTOR = :thread_extractor
-        TWEET_SEARCH_EXTRACTOR = :tweet_search_extractor
-        USER_LIKES = :user_likes
-        USER_MEDIA = :user_media
-        VERIFIED_FOLLOWER_EXPLORER = :verified_follower_explorer
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
+      # @!method initialize(allowed:, credits_available:, credits_required:, estimated_results:, source:, resolved_x_user_id: nil)
+      #   @param allowed [Boolean]
+      #   @param credits_available [String]
+      #   @param credits_required [String]
+      #   @param estimated_results [Integer]
+      #   @param source [String]
+      #   @param resolved_x_user_id [String]
     end
   end
 end

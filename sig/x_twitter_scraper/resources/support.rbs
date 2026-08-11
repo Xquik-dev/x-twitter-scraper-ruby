@@ -5,6 +5,8 @@
 module XTwitterScraper
   module Resources
     class Support
+      attr_reader attachments: XTwitterScraper::Resources::Support::Attachments
+
       attr_reader tickets: XTwitterScraper::Resources::Support::Tickets
 
       def initialize: (client: XTwitterScraper::Client) -> void

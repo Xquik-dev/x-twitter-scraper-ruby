@@ -89,6 +89,7 @@ module XTwitterScraper
           MISSING_PARAMS = :missing_params
           MISSING_QUERY = :missing_query
           MONITOR_ALREADY_EXISTS = :monitor_already_exists
+          MONITOR_PROFILE_UNAVAILABLE = :monitor_profile_unavailable
           NO_MEDIA = :no_media
           NO_CREDITS = :no_credits
           NO_SUBSCRIPTION = :no_subscription
@@ -106,6 +107,8 @@ module XTwitterScraper
           CHECKOUT_UNAVAILABLE = :checkout_unavailable
           CONNECTION_CHALLENGE_EXPIRED = :connection_challenge_expired
           CONNECTION_CHALLENGE_INACTIVE = :connection_challenge_inactive
+          COVERAGE_CURSOR_GONE = :coverage_cursor_gone
+          COVERAGE_CURSOR_UNAVAILABLE = :coverage_cursor_unavailable
           DRAFT_NOT_FOUND = :draft_not_found
           FAVORITERS_UNAVAILABLE = :favoriters_unavailable
           FORBIDDEN = :forbidden
@@ -115,6 +118,7 @@ module XTwitterScraper
           IDEMPOTENCY_CONFLICT = :idempotency_conflict
           IDEMPOTENCY_KEY_CONFLICT = :idempotency_key_conflict
           INVALID_COMMUNITY_ID = :invalid_community_id
+          INVALID_COVERAGE_CURSOR = :invalid_coverage_cursor
           INVALID_IDEMPOTENCY_KEY = :invalid_idempotency_key
           INVALID_LIST_ID = :invalid_list_id
           INVALID_PAYMENT_AMOUNT = :invalid_payment_amount
@@ -218,6 +222,7 @@ module XTwitterScraper
             MISSING_PARAMS = :missing_params
             MISSING_QUERY = :missing_query
             MONITOR_ALREADY_EXISTS = :monitor_already_exists
+            MONITOR_PROFILE_UNAVAILABLE = :monitor_profile_unavailable
             NO_MEDIA = :no_media
             NO_CREDITS = :no_credits
             NO_SUBSCRIPTION = :no_subscription
@@ -235,6 +240,8 @@ module XTwitterScraper
             CHECKOUT_UNAVAILABLE = :checkout_unavailable
             CONNECTION_CHALLENGE_EXPIRED = :connection_challenge_expired
             CONNECTION_CHALLENGE_INACTIVE = :connection_challenge_inactive
+            COVERAGE_CURSOR_GONE = :coverage_cursor_gone
+            COVERAGE_CURSOR_UNAVAILABLE = :coverage_cursor_unavailable
             DRAFT_NOT_FOUND = :draft_not_found
             FAVORITERS_UNAVAILABLE = :favoriters_unavailable
             FORBIDDEN = :forbidden
@@ -244,6 +251,7 @@ module XTwitterScraper
             IDEMPOTENCY_CONFLICT = :idempotency_conflict
             IDEMPOTENCY_KEY_CONFLICT = :idempotency_key_conflict
             INVALID_COMMUNITY_ID = :invalid_community_id
+            INVALID_COVERAGE_CURSOR = :invalid_coverage_cursor
             INVALID_IDEMPOTENCY_KEY = :invalid_idempotency_key
             INVALID_LIST_ID = :invalid_list_id
             INVALID_PAYMENT_AMOUNT = :invalid_payment_amount

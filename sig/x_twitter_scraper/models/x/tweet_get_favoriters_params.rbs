@@ -6,7 +6,25 @@ module XTwitterScraper
   module Models
     module X
       type tweet_get_favoriters_params =
-        { id: String, cursor: String, page_size: Integer }
+        {
+          id: String,
+          bio_contains: String,
+          cursor: String,
+          has_location: bool,
+          has_website: bool,
+          location_contains: String,
+          max_followers: Integer,
+          max_following: Integer,
+          max_statuses: Integer,
+          min_account_age_days: Integer,
+          min_followers: Integer,
+          min_following: Integer,
+          min_statuses: Integer,
+          page_size: Integer,
+          username_contains: String,
+          verified_only: bool,
+          verified_type: String
+        }
         & XTwitterScraper::Internal::Type::request_parameters
 
       class TweetGetFavoritersParams < XTwitterScraper::Internal::Type::BaseModel
@@ -15,25 +33,109 @@ module XTwitterScraper
 
         attr_accessor id: String
 
+        attr_reader bio_contains: String?
+
+        def bio_contains=: (String) -> String
+
         attr_reader cursor: String?
 
         def cursor=: (String) -> String
+
+        attr_reader has_location: bool?
+
+        def has_location=: (bool) -> bool
+
+        attr_reader has_website: bool?
+
+        def has_website=: (bool) -> bool
+
+        attr_reader location_contains: String?
+
+        def location_contains=: (String) -> String
+
+        attr_reader max_followers: Integer?
+
+        def max_followers=: (Integer) -> Integer
+
+        attr_reader max_following: Integer?
+
+        def max_following=: (Integer) -> Integer
+
+        attr_reader max_statuses: Integer?
+
+        def max_statuses=: (Integer) -> Integer
+
+        attr_reader min_account_age_days: Integer?
+
+        def min_account_age_days=: (Integer) -> Integer
+
+        attr_reader min_followers: Integer?
+
+        def min_followers=: (Integer) -> Integer
+
+        attr_reader min_following: Integer?
+
+        def min_following=: (Integer) -> Integer
+
+        attr_reader min_statuses: Integer?
+
+        def min_statuses=: (Integer) -> Integer
 
         attr_reader page_size: Integer?
 
         def page_size=: (Integer) -> Integer
 
+        attr_reader username_contains: String?
+
+        def username_contains=: (String) -> String
+
+        attr_reader verified_only: bool?
+
+        def verified_only=: (bool) -> bool
+
+        attr_reader verified_type: String?
+
+        def verified_type=: (String) -> String
+
         def initialize: (
           id: String,
+          ?bio_contains: String,
           ?cursor: String,
+          ?has_location: bool,
+          ?has_website: bool,
+          ?location_contains: String,
+          ?max_followers: Integer,
+          ?max_following: Integer,
+          ?max_statuses: Integer,
+          ?min_account_age_days: Integer,
+          ?min_followers: Integer,
+          ?min_following: Integer,
+          ?min_statuses: Integer,
           ?page_size: Integer,
+          ?username_contains: String,
+          ?verified_only: bool,
+          ?verified_type: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
         def to_hash: -> {
           id: String,
+          bio_contains: String,
           cursor: String,
+          has_location: bool,
+          has_website: bool,
+          location_contains: String,
+          max_followers: Integer,
+          max_following: Integer,
+          max_statuses: Integer,
+          min_account_age_days: Integer,
+          min_followers: Integer,
+          min_following: Integer,
+          min_statuses: Integer,
           page_size: Integer,
+          username_contains: String,
+          verified_only: bool,
+          verified_type: String,
           request_options: XTwitterScraper::RequestOptions
         }
       end
