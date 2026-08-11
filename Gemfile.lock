@@ -97,7 +97,7 @@ GEM
     rbi (0.3.10)
       prism (~> 1.0)
       rbs (>= 4.0.1)
-    rbs (4.0.3)
+    rbs (4.1.2)
       logger
       prism (>= 1.6.0)
       tsort
