@@ -9,14 +9,14 @@ module XTwitterScraper
     # @see XTwitterScraper::Resources::Credits#topup_balance
     class CreditTopupBalanceResponse < XTwitterScraper::Internal::Type::BaseModel
       # @!attribute redirect_url
-      #   Stable first-party Xquik redirect URL for the active Stripe Checkout session.
+      #   Stable Xquik redirect URL for the active checkout.
       #
       #   @return [String]
       required :redirect_url, String
 
       # @!attribute url
-      #   Same stable first-party Xquik redirect URL as redirect_url. The response never
-      #   exposes a raw Stripe Checkout URL.
+      #   Same stable Xquik redirect URL as redirect_url. The response never exposes the
+      #   hosted checkout URL.
       #
       #   @return [String]
       required :url, String
@@ -25,9 +25,9 @@ module XTwitterScraper
       #   Some parameter documentations has been truncated, see
       #   {XTwitterScraper::Models::CreditTopupBalanceResponse} for more details.
       #
-      #   @param redirect_url [String] Stable first-party Xquik redirect URL for the active Stripe Checkout session.
+      #   @param redirect_url [String] Stable Xquik redirect URL for the active checkout.
       #
-      #   @param url [String] Same stable first-party Xquik redirect URL as redirect_url. The response never e
+      #   @param url [String] Same stable Xquik redirect URL as redirect_url. The response never exposes the h
     end
   end
 end

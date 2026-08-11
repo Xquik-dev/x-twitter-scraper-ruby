@@ -11,7 +11,7 @@ module XTwitterScraper
         checkout_url: String,
         credits: String,
         expires_at: Time,
-        instructions: :"Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending.",
+        instructions: String,
         poll_after_seconds: 2,
         purchase_id: String,
         requires_user_interaction: true,
@@ -34,7 +34,7 @@ module XTwitterScraper
 
       attr_accessor expires_at: Time
 
-      attr_accessor instructions: :"Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending."
+      attr_accessor instructions: String
 
       attr_accessor poll_after_seconds: 2
 
@@ -69,6 +69,7 @@ module XTwitterScraper
         checkout_url: String,
         credits: String,
         expires_at: Time,
+        instructions: String,
         purchase_id: String,
         status: XTwitterScraper::Models::GuestWalletTopupResponse::status,
         wallet_id: String,
@@ -76,7 +77,6 @@ module XTwitterScraper
         ?authorization: XTwitterScraper::Models::GuestWalletTopupResponse::Authorization,
         ?credential_notice: XTwitterScraper::Models::GuestWalletTopupResponse::credential_notice,
         ?account_required: false,
-        ?instructions: :"Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending.",
         ?poll_after_seconds: 2,
         ?requires_user_interaction: true,
         ?status_url: :"https://xquik.com/api/v1/guest-wallets/status"
@@ -88,7 +88,7 @@ module XTwitterScraper
         checkout_url: String,
         credits: String,
         expires_at: Time,
-        instructions: :"Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending.",
+        instructions: String,
         poll_after_seconds: 2,
         purchase_id: String,
         requires_user_interaction: true,
