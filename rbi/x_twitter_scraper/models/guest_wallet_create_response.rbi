@@ -45,7 +45,7 @@ module XTwitterScraper
       end
       attr_writer :authorization
 
-      # Raw Stripe-hosted checkout URL for user interaction.
+      # Hosted checkout URL for user interaction.
       sig { returns(String) }
       attr_accessor :checkout_url
 
@@ -60,7 +60,8 @@ module XTwitterScraper
       sig { returns(Time) }
       attr_accessor :expires_at
 
-      sig { returns(Symbol) }
+      # Hosted checkout and status polling instructions.
+      sig { returns(String) }
       attr_accessor :instructions
 
       # Wait at least this long before polling status_url.
@@ -96,13 +97,13 @@ module XTwitterScraper
           checkout_url: String,
           credits: String,
           expires_at: Time,
+          instructions: String,
           purchase_id: String,
           status:
             XTwitterScraper::Models::GuestWalletCreateResponse::Status::OrSymbol,
           wallet_id: String,
           account_required: T::Boolean,
           credential_notice: Symbol,
-          instructions: Symbol,
           poll_after_seconds: Integer,
           requires_user_interaction: T::Boolean,
           status_url: Symbol
@@ -115,18 +116,19 @@ module XTwitterScraper
         # secret. Never place it in a URL or log.
         api_key:,
         authorization:,
-        # Raw Stripe-hosted checkout URL for user interaction.
+        # Hosted checkout URL for user interaction.
         checkout_url:,
         # Credits granted after verified payment.
         credits:,
         # Time when the pending checkout expires.
         expires_at:,
+        # Hosted checkout and status polling instructions.
+        instructions:,
         purchase_id:,
         status:,
         wallet_id:,
         account_required: false,
         credential_notice: :"Store api_key and the Idempotency-Key securely before sharing checkout_url. No email recovery is available.",
-        instructions: :"Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending.",
         # Wait at least this long before polling status_url.
         poll_after_seconds: 2,
         requires_user_interaction: true,
@@ -146,7 +148,7 @@ module XTwitterScraper
             credential_notice: Symbol,
             credits: String,
             expires_at: Time,
-            instructions: Symbol,
+            instructions: String,
             poll_after_seconds: Integer,
             purchase_id: String,
             requires_user_interaction: T::Boolean,
