@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.2 (2026-08-11)
+
+Full Changelog: [v0.7.1...v0.7.2](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.7.1...v0.7.2)
+
+### Chores
+
+* **deps:** bump github/codeql-action/upload-sarif from 4.37.1 to 4.37.3 ([#33](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/33)) ([c0a1466](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/c0a1466169e6ee705fc47cdfafed0937ce33a910))
+
 ## 0.7.1 (2026-08-03)
 
 Full Changelog: [v0.7.0...v0.7.1](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.7.0...v0.7.1)
