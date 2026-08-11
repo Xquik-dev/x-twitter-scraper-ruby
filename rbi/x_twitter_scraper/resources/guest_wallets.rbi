@@ -6,7 +6,7 @@ module XTwitterScraper
     class GuestWallets
       # Create a one-use hosted checkout after the user confirms $10-$250 USD. The
       # request creates no charge. It returns a paid-read API key without an Xquik
-      # account. Replays return the same key.
+      # account. Idempotent replays return the same key.
       sig do
         params(
           amount_minor: Integer,
