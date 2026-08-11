@@ -10,24 +10,39 @@ module XTwitterScraper
           q: String,
           advanced_query: String,
           any_words: String,
+          blue_verified_only: bool,
           bounding_box: String,
+          card_name: String,
           cashtags: String,
           conversation_id: String,
           cursor: String,
           exact_phrase: String,
+          exclude_source: String,
           exclude_words: String,
           from_user: String,
+          geocode: String,
           hashtags: String,
           in_reply_to_tweet_id: String,
           language: String,
           limit: Integer,
           list_id: String,
+          max_faves: Integer,
+          max_id: String,
+          max_quotes: Integer,
+          max_replies: Integer,
+          max_retweets: Integer,
           media_type: XTwitterScraper::Models::X::TweetSearchParams::media_type,
           mentioning: String,
+          min_bookmarks: Integer,
           min_faves: Integer,
           min_quotes: Integer,
           min_replies: Integer,
           min_retweets: Integer,
+          min_views: Integer,
+          mode: XTwitterScraper::Models::X::TweetSearchParams::mode,
+          native_retweets: bool,
+          near: String,
+          news: bool,
           place: String,
           place_country: String,
           point_radius: String,
@@ -37,13 +52,18 @@ module XTwitterScraper
           replies: XTwitterScraper::Models::X::TweetSearchParams::replies,
           retweets: XTwitterScraper::Models::X::TweetSearchParams::retweets,
           retweets_of_tweet_id: String,
+          safe: bool,
           since_date: Date,
+          since_id: String,
           since_time: String,
+          source: String,
           to_user: String,
           until_date: Date,
           until_time: String,
           url: String,
-          verified_only: bool
+          verified_only: bool,
+          within: String,
+          within_time: String
         }
         & XTwitterScraper::Internal::Type::request_parameters
 
@@ -61,9 +81,17 @@ module XTwitterScraper
 
         def any_words=: (String) -> String
 
+        attr_reader blue_verified_only: bool?
+
+        def blue_verified_only=: (bool) -> bool
+
         attr_reader bounding_box: String?
 
         def bounding_box=: (String) -> String
+
+        attr_reader card_name: String?
+
+        def card_name=: (String) -> String
 
         attr_reader cashtags: String?
 
@@ -81,6 +109,10 @@ module XTwitterScraper
 
         def exact_phrase=: (String) -> String
 
+        attr_reader exclude_source: String?
+
+        def exclude_source=: (String) -> String
+
         attr_reader exclude_words: String?
 
         def exclude_words=: (String) -> String
@@ -88,6 +120,10 @@ module XTwitterScraper
         attr_reader from_user: String?
 
         def from_user=: (String) -> String
+
+        attr_reader geocode: String?
+
+        def geocode=: (String) -> String
 
         attr_reader hashtags: String?
 
@@ -109,6 +145,26 @@ module XTwitterScraper
 
         def list_id=: (String) -> String
 
+        attr_reader max_faves: Integer?
+
+        def max_faves=: (Integer) -> Integer
+
+        attr_reader max_id: String?
+
+        def max_id=: (String) -> String
+
+        attr_reader max_quotes: Integer?
+
+        def max_quotes=: (Integer) -> Integer
+
+        attr_reader max_replies: Integer?
+
+        def max_replies=: (Integer) -> Integer
+
+        attr_reader max_retweets: Integer?
+
+        def max_retweets=: (Integer) -> Integer
+
         attr_reader media_type: XTwitterScraper::Models::X::TweetSearchParams::media_type?
 
         def media_type=: (
@@ -118,6 +174,10 @@ module XTwitterScraper
         attr_reader mentioning: String?
 
         def mentioning=: (String) -> String
+
+        attr_reader min_bookmarks: Integer?
+
+        def min_bookmarks=: (Integer) -> Integer
 
         attr_reader min_faves: Integer?
 
@@ -134,6 +194,28 @@ module XTwitterScraper
         attr_reader min_retweets: Integer?
 
         def min_retweets=: (Integer) -> Integer
+
+        attr_reader min_views: Integer?
+
+        def min_views=: (Integer) -> Integer
+
+        attr_reader mode: XTwitterScraper::Models::X::TweetSearchParams::mode?
+
+        def mode=: (
+          XTwitterScraper::Models::X::TweetSearchParams::mode
+        ) -> XTwitterScraper::Models::X::TweetSearchParams::mode
+
+        attr_reader native_retweets: bool?
+
+        def native_retweets=: (bool) -> bool
+
+        attr_reader near: String?
+
+        def near=: (String) -> String
+
+        attr_reader news: bool?
+
+        def news=: (bool) -> bool
 
         attr_reader place: String?
 
@@ -179,13 +261,25 @@ module XTwitterScraper
 
         def retweets_of_tweet_id=: (String) -> String
 
+        attr_reader safe: bool?
+
+        def safe=: (bool) -> bool
+
         attr_reader since_date: Date?
 
         def since_date=: (Date) -> Date
 
+        attr_reader since_id: String?
+
+        def since_id=: (String) -> String
+
         attr_reader since_time: String?
 
         def since_time=: (String) -> String
+
+        attr_reader source: String?
+
+        def source=: (String) -> String
 
         attr_reader to_user: String?
 
@@ -207,28 +301,51 @@ module XTwitterScraper
 
         def verified_only=: (bool) -> bool
 
+        attr_reader within: String?
+
+        def within=: (String) -> String
+
+        attr_reader within_time: String?
+
+        def within_time=: (String) -> String
+
         def initialize: (
           q: String,
           ?advanced_query: String,
           ?any_words: String,
+          ?blue_verified_only: bool,
           ?bounding_box: String,
+          ?card_name: String,
           ?cashtags: String,
           ?conversation_id: String,
           ?cursor: String,
           ?exact_phrase: String,
+          ?exclude_source: String,
           ?exclude_words: String,
           ?from_user: String,
+          ?geocode: String,
           ?hashtags: String,
           ?in_reply_to_tweet_id: String,
           ?language: String,
           ?limit: Integer,
           ?list_id: String,
+          ?max_faves: Integer,
+          ?max_id: String,
+          ?max_quotes: Integer,
+          ?max_replies: Integer,
+          ?max_retweets: Integer,
           ?media_type: XTwitterScraper::Models::X::TweetSearchParams::media_type,
           ?mentioning: String,
+          ?min_bookmarks: Integer,
           ?min_faves: Integer,
           ?min_quotes: Integer,
           ?min_replies: Integer,
           ?min_retweets: Integer,
+          ?min_views: Integer,
+          ?mode: XTwitterScraper::Models::X::TweetSearchParams::mode,
+          ?native_retweets: bool,
+          ?near: String,
+          ?news: bool,
           ?place: String,
           ?place_country: String,
           ?point_radius: String,
@@ -238,13 +355,18 @@ module XTwitterScraper
           ?replies: XTwitterScraper::Models::X::TweetSearchParams::replies,
           ?retweets: XTwitterScraper::Models::X::TweetSearchParams::retweets,
           ?retweets_of_tweet_id: String,
+          ?safe: bool,
           ?since_date: Date,
+          ?since_id: String,
           ?since_time: String,
+          ?source: String,
           ?to_user: String,
           ?until_date: Date,
           ?until_time: String,
           ?url: String,
           ?verified_only: bool,
+          ?within: String,
+          ?within_time: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
@@ -252,24 +374,39 @@ module XTwitterScraper
           q: String,
           advanced_query: String,
           any_words: String,
+          blue_verified_only: bool,
           bounding_box: String,
+          card_name: String,
           cashtags: String,
           conversation_id: String,
           cursor: String,
           exact_phrase: String,
+          exclude_source: String,
           exclude_words: String,
           from_user: String,
+          geocode: String,
           hashtags: String,
           in_reply_to_tweet_id: String,
           language: String,
           limit: Integer,
           list_id: String,
+          max_faves: Integer,
+          max_id: String,
+          max_quotes: Integer,
+          max_replies: Integer,
+          max_retweets: Integer,
           media_type: XTwitterScraper::Models::X::TweetSearchParams::media_type,
           mentioning: String,
+          min_bookmarks: Integer,
           min_faves: Integer,
           min_quotes: Integer,
           min_replies: Integer,
           min_retweets: Integer,
+          min_views: Integer,
+          mode: XTwitterScraper::Models::X::TweetSearchParams::mode,
+          native_retweets: bool,
+          near: String,
+          news: bool,
           place: String,
           place_country: String,
           point_radius: String,
@@ -279,13 +416,18 @@ module XTwitterScraper
           replies: XTwitterScraper::Models::X::TweetSearchParams::replies,
           retweets: XTwitterScraper::Models::X::TweetSearchParams::retweets,
           retweets_of_tweet_id: String,
+          safe: bool,
           since_date: Date,
+          since_id: String,
           since_time: String,
+          source: String,
           to_user: String,
           until_date: Date,
           until_time: String,
           url: String,
           verified_only: bool,
+          within: String,
+          within_time: String,
           request_options: XTwitterScraper::RequestOptions
         }
 
@@ -302,6 +444,17 @@ module XTwitterScraper
           NONE: :none
 
           def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetSearchParams::media_type]
+        end
+
+        type mode = :standard | :coverage
+
+        module Mode
+          extend XTwitterScraper::Internal::Type::Enum
+
+          STANDARD: :standard
+          COVERAGE: :coverage
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetSearchParams::mode]
         end
 
         type query_type = :Latest | :Top

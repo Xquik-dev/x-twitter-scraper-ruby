@@ -152,15 +152,14 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_followers("id")
 
     assert_pattern do
-      response => XTwitterScraper::PaginatedUsers
+      response => XTwitterScraper::Models::X::UserRetrieveFollowersResponse
     end
 
     assert_pattern do
-      response => {
-        has_next_page: XTwitterScraper::Internal::Type::Boolean,
-        next_cursor: String,
-        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile])
-      }
+      case response
+      in XTwitterScraper::PaginatedUsers
+      in XTwitterScraper::Models::X::UserRetrieveFollowersResponse::UserListCoverageResponse
+      end
     end
   end
 
@@ -184,15 +183,14 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_following("id")
 
     assert_pattern do
-      response => XTwitterScraper::PaginatedUsers
+      response => XTwitterScraper::Models::X::UserRetrieveFollowingResponse
     end
 
     assert_pattern do
-      response => {
-        has_next_page: XTwitterScraper::Internal::Type::Boolean,
-        next_cursor: String,
-        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile])
-      }
+      case response
+      in XTwitterScraper::PaginatedUsers
+      in XTwitterScraper::Models::X::UserRetrieveFollowingResponse::UserListCoverageResponse
+      end
     end
   end
 
@@ -296,15 +294,14 @@ class XTwitterScraper::Test::Resources::X::UsersTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.users.retrieve_verified_followers("id")
 
     assert_pattern do
-      response => XTwitterScraper::PaginatedUsers
+      response => XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse
     end
 
     assert_pattern do
-      response => {
-        has_next_page: XTwitterScraper::Internal::Type::Boolean,
-        next_cursor: String,
-        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile])
-      }
+      case response
+      in XTwitterScraper::PaginatedUsers
+      in XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse
+      end
     end
   end
 end

@@ -9,36 +9,61 @@ module XTwitterScraper
         {
           id: String,
           any_words: String,
+          blue_verified_only: bool,
+          card_name: String,
           cashtags: String,
           conversation_id: String,
           cursor: String,
           exact_phrase: String,
+          exclude_original_author: bool,
+          exclude_source: String,
           exclude_words: String,
           from_user: String,
+          geocode: String,
           hashtags: String,
+          has_media_only: bool,
+          include_original_post: bool,
           in_reply_to_tweet_id: String,
           language: String,
           limit: Integer,
+          max_depth: Integer,
+          max_faves: Integer,
+          max_id: String,
+          max_quotes: Integer,
+          max_replies: Integer,
+          max_retweets: Integer,
           media_type: XTwitterScraper::Models::X::TweetGetRepliesParams::media_type,
           mentioning: String,
+          min_bookmarks: Integer,
           min_faves: Integer,
           min_quotes: Integer,
           min_replies: Integer,
           min_retweets: Integer,
+          min_views: Integer,
           mode: XTwitterScraper::Models::X::TweetGetRepliesParams::mode,
+          native_retweets: bool,
+          near: String,
+          news: bool,
           page_size: Integer,
           quotes: XTwitterScraper::Models::X::TweetGetRepliesParams::quotes,
           quotes_of_tweet_id: String,
           replies: XTwitterScraper::Models::X::TweetGetRepliesParams::replies,
           retweets: XTwitterScraper::Models::X::TweetGetRepliesParams::retweets,
           retweets_of_tweet_id: String,
+          safe: bool,
+          scope: XTwitterScraper::Models::X::TweetGetRepliesParams::scope,
           since_date: Date,
+          since_id: String,
           since_time: String,
+          sort: XTwitterScraper::Models::X::TweetGetRepliesParams::sort,
+          source: String,
           to_user: String,
           until_date: Date,
           until_time: String,
           url: String,
-          verified_only: bool
+          verified_only: bool,
+          within: String,
+          within_time: String
         }
         & XTwitterScraper::Internal::Type::request_parameters
 
@@ -51,6 +76,14 @@ module XTwitterScraper
         attr_reader any_words: String?
 
         def any_words=: (String) -> String
+
+        attr_reader blue_verified_only: bool?
+
+        def blue_verified_only=: (bool) -> bool
+
+        attr_reader card_name: String?
+
+        def card_name=: (String) -> String
 
         attr_reader cashtags: String?
 
@@ -68,6 +101,14 @@ module XTwitterScraper
 
         def exact_phrase=: (String) -> String
 
+        attr_reader exclude_original_author: bool?
+
+        def exclude_original_author=: (bool) -> bool
+
+        attr_reader exclude_source: String?
+
+        def exclude_source=: (String) -> String
+
         attr_reader exclude_words: String?
 
         def exclude_words=: (String) -> String
@@ -76,9 +117,21 @@ module XTwitterScraper
 
         def from_user=: (String) -> String
 
+        attr_reader geocode: String?
+
+        def geocode=: (String) -> String
+
         attr_reader hashtags: String?
 
         def hashtags=: (String) -> String
+
+        attr_reader has_media_only: bool?
+
+        def has_media_only=: (bool) -> bool
+
+        attr_reader include_original_post: bool?
+
+        def include_original_post=: (bool) -> bool
 
         attr_reader in_reply_to_tweet_id: String?
 
@@ -92,6 +145,30 @@ module XTwitterScraper
 
         def limit=: (Integer) -> Integer
 
+        attr_reader max_depth: Integer?
+
+        def max_depth=: (Integer) -> Integer
+
+        attr_reader max_faves: Integer?
+
+        def max_faves=: (Integer) -> Integer
+
+        attr_reader max_id: String?
+
+        def max_id=: (String) -> String
+
+        attr_reader max_quotes: Integer?
+
+        def max_quotes=: (Integer) -> Integer
+
+        attr_reader max_replies: Integer?
+
+        def max_replies=: (Integer) -> Integer
+
+        attr_reader max_retweets: Integer?
+
+        def max_retweets=: (Integer) -> Integer
+
         attr_reader media_type: XTwitterScraper::Models::X::TweetGetRepliesParams::media_type?
 
         def media_type=: (
@@ -101,6 +178,10 @@ module XTwitterScraper
         attr_reader mentioning: String?
 
         def mentioning=: (String) -> String
+
+        attr_reader min_bookmarks: Integer?
+
+        def min_bookmarks=: (Integer) -> Integer
 
         attr_reader min_faves: Integer?
 
@@ -118,11 +199,27 @@ module XTwitterScraper
 
         def min_retweets=: (Integer) -> Integer
 
+        attr_reader min_views: Integer?
+
+        def min_views=: (Integer) -> Integer
+
         attr_reader mode: XTwitterScraper::Models::X::TweetGetRepliesParams::mode?
 
         def mode=: (
           XTwitterScraper::Models::X::TweetGetRepliesParams::mode
         ) -> XTwitterScraper::Models::X::TweetGetRepliesParams::mode
+
+        attr_reader native_retweets: bool?
+
+        def native_retweets=: (bool) -> bool
+
+        attr_reader near: String?
+
+        def near=: (String) -> String
+
+        attr_reader news: bool?
+
+        def news=: (bool) -> bool
 
         attr_reader page_size: Integer?
 
@@ -154,13 +251,37 @@ module XTwitterScraper
 
         def retweets_of_tweet_id=: (String) -> String
 
+        attr_reader safe: bool?
+
+        def safe=: (bool) -> bool
+
+        attr_reader scope: XTwitterScraper::Models::X::TweetGetRepliesParams::scope?
+
+        def scope=: (
+          XTwitterScraper::Models::X::TweetGetRepliesParams::scope
+        ) -> XTwitterScraper::Models::X::TweetGetRepliesParams::scope
+
         attr_reader since_date: Date?
 
         def since_date=: (Date) -> Date
 
+        attr_reader since_id: String?
+
+        def since_id=: (String) -> String
+
         attr_reader since_time: String?
 
         def since_time=: (String) -> String
+
+        attr_reader sort: XTwitterScraper::Models::X::TweetGetRepliesParams::sort?
+
+        def sort=: (
+          XTwitterScraper::Models::X::TweetGetRepliesParams::sort
+        ) -> XTwitterScraper::Models::X::TweetGetRepliesParams::sort
+
+        attr_reader source: String?
+
+        def source=: (String) -> String
 
         attr_reader to_user: String?
 
@@ -182,75 +303,133 @@ module XTwitterScraper
 
         def verified_only=: (bool) -> bool
 
+        attr_reader within: String?
+
+        def within=: (String) -> String
+
+        attr_reader within_time: String?
+
+        def within_time=: (String) -> String
+
         def initialize: (
           id: String,
           ?any_words: String,
+          ?blue_verified_only: bool,
+          ?card_name: String,
           ?cashtags: String,
           ?conversation_id: String,
           ?cursor: String,
           ?exact_phrase: String,
+          ?exclude_original_author: bool,
+          ?exclude_source: String,
           ?exclude_words: String,
           ?from_user: String,
+          ?geocode: String,
           ?hashtags: String,
+          ?has_media_only: bool,
+          ?include_original_post: bool,
           ?in_reply_to_tweet_id: String,
           ?language: String,
           ?limit: Integer,
+          ?max_depth: Integer,
+          ?max_faves: Integer,
+          ?max_id: String,
+          ?max_quotes: Integer,
+          ?max_replies: Integer,
+          ?max_retweets: Integer,
           ?media_type: XTwitterScraper::Models::X::TweetGetRepliesParams::media_type,
           ?mentioning: String,
+          ?min_bookmarks: Integer,
           ?min_faves: Integer,
           ?min_quotes: Integer,
           ?min_replies: Integer,
           ?min_retweets: Integer,
+          ?min_views: Integer,
           ?mode: XTwitterScraper::Models::X::TweetGetRepliesParams::mode,
+          ?native_retweets: bool,
+          ?near: String,
+          ?news: bool,
           ?page_size: Integer,
           ?quotes: XTwitterScraper::Models::X::TweetGetRepliesParams::quotes,
           ?quotes_of_tweet_id: String,
           ?replies: XTwitterScraper::Models::X::TweetGetRepliesParams::replies,
           ?retweets: XTwitterScraper::Models::X::TweetGetRepliesParams::retweets,
           ?retweets_of_tweet_id: String,
+          ?safe: bool,
+          ?scope: XTwitterScraper::Models::X::TweetGetRepliesParams::scope,
           ?since_date: Date,
+          ?since_id: String,
           ?since_time: String,
+          ?sort: XTwitterScraper::Models::X::TweetGetRepliesParams::sort,
+          ?source: String,
           ?to_user: String,
           ?until_date: Date,
           ?until_time: String,
           ?url: String,
           ?verified_only: bool,
+          ?within: String,
+          ?within_time: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
         def to_hash: -> {
           id: String,
           any_words: String,
+          blue_verified_only: bool,
+          card_name: String,
           cashtags: String,
           conversation_id: String,
           cursor: String,
           exact_phrase: String,
+          exclude_original_author: bool,
+          exclude_source: String,
           exclude_words: String,
           from_user: String,
+          geocode: String,
           hashtags: String,
+          has_media_only: bool,
+          include_original_post: bool,
           in_reply_to_tweet_id: String,
           language: String,
           limit: Integer,
+          max_depth: Integer,
+          max_faves: Integer,
+          max_id: String,
+          max_quotes: Integer,
+          max_replies: Integer,
+          max_retweets: Integer,
           media_type: XTwitterScraper::Models::X::TweetGetRepliesParams::media_type,
           mentioning: String,
+          min_bookmarks: Integer,
           min_faves: Integer,
           min_quotes: Integer,
           min_replies: Integer,
           min_retweets: Integer,
+          min_views: Integer,
           mode: XTwitterScraper::Models::X::TweetGetRepliesParams::mode,
+          native_retweets: bool,
+          near: String,
+          news: bool,
           page_size: Integer,
           quotes: XTwitterScraper::Models::X::TweetGetRepliesParams::quotes,
           quotes_of_tweet_id: String,
           replies: XTwitterScraper::Models::X::TweetGetRepliesParams::replies,
           retweets: XTwitterScraper::Models::X::TweetGetRepliesParams::retweets,
           retweets_of_tweet_id: String,
+          safe: bool,
+          scope: XTwitterScraper::Models::X::TweetGetRepliesParams::scope,
           since_date: Date,
+          since_id: String,
           since_time: String,
+          sort: XTwitterScraper::Models::X::TweetGetRepliesParams::sort,
+          source: String,
           to_user: String,
           until_date: Date,
           until_time: String,
           url: String,
           verified_only: bool,
+          within: String,
+          within_time: String,
           request_options: XTwitterScraper::RequestOptions
         }
 
@@ -269,11 +448,12 @@ module XTwitterScraper
           def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetGetRepliesParams::media_type]
         end
 
-        type mode = :complete
+        type mode = :standard | :complete
 
         module Mode
           extend XTwitterScraper::Internal::Type::Enum
 
+          STANDARD: :standard
           COMPLETE: :complete
 
           def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetGetRepliesParams::mode]
@@ -313,6 +493,31 @@ module XTwitterScraper
           ONLY: :only
 
           def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetGetRepliesParams::retweets]
+        end
+
+        type scope = :all | :direct | :nested
+
+        module Scope
+          extend XTwitterScraper::Internal::Type::Enum
+
+          ALL: :all
+          DIRECT: :direct
+          NESTED: :nested
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetGetRepliesParams::scope]
+        end
+
+        type sort = :relevance | :latest | :oldest | :likes
+
+        module Sort
+          extend XTwitterScraper::Internal::Type::Enum
+
+          RELEVANCE: :relevance
+          LATEST: :latest
+          OLDEST: :oldest
+          LIKES: :likes
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetGetRepliesParams::sort]
         end
       end
     end

@@ -12,7 +12,9 @@ module XTwitterScraper
         is_active: bool,
         next_billing_at: Time,
         username: String,
-        x_user_id: String
+        x_user_id: String,
+        paused_at: Time,
+        paused_reason: XTwitterScraper::Models::Monitor::paused_reason
       }
 
     class Monitor < XTwitterScraper::Internal::Type::BaseModel
@@ -30,6 +32,16 @@ module XTwitterScraper
 
       attr_accessor x_user_id: String
 
+      attr_reader paused_at: Time?
+
+      def paused_at=: (Time) -> Time
+
+      attr_reader paused_reason: XTwitterScraper::Models::Monitor::paused_reason?
+
+      def paused_reason=: (
+        XTwitterScraper::Models::Monitor::paused_reason
+      ) -> XTwitterScraper::Models::Monitor::paused_reason
+
       def initialize: (
         id: String,
         created_at: Time,
@@ -37,7 +49,9 @@ module XTwitterScraper
         is_active: bool,
         next_billing_at: Time,
         username: String,
-        x_user_id: String
+        x_user_id: String,
+        ?paused_at: Time,
+        ?paused_reason: XTwitterScraper::Models::Monitor::paused_reason
       ) -> void
 
       def to_hash: -> {
@@ -47,8 +61,20 @@ module XTwitterScraper
         is_active: bool,
         next_billing_at: Time,
         username: String,
-        x_user_id: String
+        x_user_id: String,
+        paused_at: Time,
+        paused_reason: XTwitterScraper::Models::Monitor::paused_reason
       }
+
+      type paused_reason = :x_user_not_found
+
+      module PausedReason
+        extend XTwitterScraper::Internal::Type::Enum
+
+        X_USER_NOT_FOUND: :x_user_not_found
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::Monitor::paused_reason]
+      end
     end
   end
 end

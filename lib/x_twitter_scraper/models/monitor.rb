@@ -47,7 +47,19 @@ module XTwitterScraper
       #   @return [String]
       required :x_user_id, String, api_name: :xUserId
 
-      # @!method initialize(id:, created_at:, event_types:, is_active:, next_billing_at:, username:, x_user_id:)
+      # @!attribute paused_at
+      #   When Xquik automatically paused this monitor.
+      #
+      #   @return [Time, nil]
+      optional :paused_at, Time, api_name: :pausedAt
+
+      # @!attribute paused_reason
+      #   Why Xquik automatically paused this monitor.
+      #
+      #   @return [Symbol, XTwitterScraper::Models::Monitor::PausedReason, nil]
+      optional :paused_reason, enum: -> { XTwitterScraper::Monitor::PausedReason }, api_name: :pausedReason
+
+      # @!method initialize(id:, created_at:, event_types:, is_active:, next_billing_at:, username:, x_user_id:, paused_at: nil, paused_reason: nil)
       #   Account monitor that tracks activity for a given X user.
       #
       #   @param id [String]
@@ -63,6 +75,22 @@ module XTwitterScraper
       #   @param username [String]
       #
       #   @param x_user_id [String]
+      #
+      #   @param paused_at [Time] When Xquik automatically paused this monitor.
+      #
+      #   @param paused_reason [Symbol, XTwitterScraper::Models::Monitor::PausedReason] Why Xquik automatically paused this monitor.
+
+      # Why Xquik automatically paused this monitor.
+      #
+      # @see XTwitterScraper::Models::Monitor#paused_reason
+      module PausedReason
+        extend XTwitterScraper::Internal::Type::Enum
+
+        X_USER_NOT_FOUND = :x_user_not_found
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
     end
   end
 end

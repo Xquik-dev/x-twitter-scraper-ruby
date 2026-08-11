@@ -8,6 +8,10 @@ module XTwitterScraper
   module Resources
     class Support
       # Support ticket management
+      sig { returns(XTwitterScraper::Resources::Support::Attachments) }
+      attr_reader :attachments
+
+      # Support ticket management
       sig { returns(XTwitterScraper::Resources::Support::Tickets) }
       attr_reader :tickets
 

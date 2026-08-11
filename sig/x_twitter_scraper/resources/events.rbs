@@ -13,6 +13,7 @@ module XTwitterScraper
       def list: (
         ?cursor: String,
         ?event_type: XTwitterScraper::Models::event_type,
+        ?keyword_monitor_id: String,
         ?limit: Integer,
         ?monitor_id: String,
         ?request_options: XTwitterScraper::request_opts

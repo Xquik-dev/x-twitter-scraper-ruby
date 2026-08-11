@@ -8,15 +8,43 @@ module XTwitterScraper
       class Lists
         def retrieve_followers: (
           String id,
+          ?bio_contains: String,
           ?cursor: String,
+          ?has_location: bool,
+          ?has_website: bool,
+          ?location_contains: String,
+          ?max_followers: Integer,
+          ?max_following: Integer,
+          ?max_statuses: Integer,
+          ?min_account_age_days: Integer,
+          ?min_followers: Integer,
+          ?min_following: Integer,
+          ?min_statuses: Integer,
           ?page_size: Integer,
+          ?username_contains: String,
+          ?verified_only: bool,
+          ?verified_type: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::PaginatedUsers
 
         def retrieve_members: (
           String id,
+          ?bio_contains: String,
           ?cursor: String,
+          ?has_location: bool,
+          ?has_website: bool,
+          ?location_contains: String,
+          ?max_followers: Integer,
+          ?max_following: Integer,
+          ?max_statuses: Integer,
+          ?min_account_age_days: Integer,
+          ?min_followers: Integer,
+          ?min_following: Integer,
+          ?min_statuses: Integer,
           ?page_size: Integer,
+          ?username_contains: String,
+          ?verified_only: bool,
+          ?verified_type: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::PaginatedUsers
 

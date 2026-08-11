@@ -18,7 +18,7 @@ module XTwitterScraper
           )
         end
 
-      # Cursor for keyset pagination from prior response next_cursor
+      # Previous nextCursor.
       sig { returns(T.nilable(String)) }
       attr_reader :cursor
 
@@ -43,7 +43,7 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
-        # Cursor for keyset pagination from prior response next_cursor
+        # Previous nextCursor.
         cursor: nil,
         # Maximum number of items to return (1-100, default 50). For paid per-result
         # endpoints, the returned count may be lower when remaining credits cannot cover
