@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.3 (2026-08-11)
+
+Full Changelog: [v0.7.2...v0.7.3](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.7.2...v0.7.3)
+
+### Chores
+
+* **deps-dev:** bump rubocop from 1.88.2 to 1.89.0 ([#41](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/41)) ([9b7fa8f](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/9b7fa8fd6415bd088cd3cf0ca3af3c8c6f1ff5bb))
+
 ## 0.7.2 (2026-08-11)
 
 Full Changelog: [v0.7.1...v0.7.2](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.7.1...v0.7.2)
