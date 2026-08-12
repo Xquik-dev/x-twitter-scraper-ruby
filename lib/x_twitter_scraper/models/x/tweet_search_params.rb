@@ -179,7 +179,7 @@ module XTwitterScraper
         optional :min_bookmarks, Integer
 
         # @!attribute min_faves
-        #   Minimum likes threshold.
+        #   Minimum likes threshold. minLikes is also accepted.
         #
         #   @return [Integer, nil]
         optional :min_faves, Integer
@@ -417,7 +417,7 @@ module XTwitterScraper
         #
         #   @param min_bookmarks [Integer] Minimum bookmark count threshold.
         #
-        #   @param min_faves [Integer] Minimum likes threshold.
+        #   @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
         #
         #   @param min_quotes [Integer] Minimum quote count threshold.
         #
