@@ -393,9 +393,19 @@ module XTwitterScraper
               :invalid_community_id,
               XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
             )
+          INVALID_COMPLETE_REPLIES_REQUEST =
+            T.let(
+              :invalid_complete_replies_request,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
           INVALID_COVERAGE_CURSOR =
             T.let(
               :invalid_coverage_cursor,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          INVALID_COVERAGE_REQUEST =
+            T.let(
+              :invalid_coverage_request,
               XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
             )
           INVALID_IDEMPOTENCY_KEY =
@@ -408,6 +418,11 @@ module XTwitterScraper
               :invalid_list_id,
               XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
             )
+          INVALID_OUTPUT_OPTIONS =
+            T.let(
+              :invalid_output_options,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
           INVALID_PAYMENT_AMOUNT =
             T.let(
               :invalid_payment_amount,
@@ -418,9 +433,19 @@ module XTwitterScraper
               :invalid_range,
               XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
             )
+          INVALID_REPLY_OPTIONS =
+            T.let(
+              :invalid_reply_options,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
           LOGIN_RATE_LIMITED =
             T.let(
               :login_rate_limited,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          LOGIN_SERVICE_UNAVAILABLE =
+            T.let(
+              :login_service_unavailable,
               XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
             )
           MISSING_IDEMPOTENCY_KEY =
@@ -471,6 +496,11 @@ module XTwitterScraper
           TOO_MANY_IDS =
             T.let(
               :too_many_ids,
+              XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
+            )
+          TOO_MANY_TWEETS =
+            T.let(
+              :too_many_tweets,
               XTwitterScraper::Error::Error::LegacyErrorCode::TaggedSymbol
             )
           UNKNOWN_FIELD =
@@ -984,9 +1014,19 @@ module XTwitterScraper
                 :invalid_community_id,
                 XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
               )
+            INVALID_COMPLETE_REPLIES_REQUEST =
+              T.let(
+                :invalid_complete_replies_request,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
             INVALID_COVERAGE_CURSOR =
               T.let(
                 :invalid_coverage_cursor,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            INVALID_COVERAGE_REQUEST =
+              T.let(
+                :invalid_coverage_request,
                 XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
               )
             INVALID_IDEMPOTENCY_KEY =
@@ -999,6 +1039,11 @@ module XTwitterScraper
                 :invalid_list_id,
                 XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
               )
+            INVALID_OUTPUT_OPTIONS =
+              T.let(
+                :invalid_output_options,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
             INVALID_PAYMENT_AMOUNT =
               T.let(
                 :invalid_payment_amount,
@@ -1009,9 +1054,19 @@ module XTwitterScraper
                 :invalid_range,
                 XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
               )
+            INVALID_REPLY_OPTIONS =
+              T.let(
+                :invalid_reply_options,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
             LOGIN_RATE_LIMITED =
               T.let(
                 :login_rate_limited,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            LOGIN_SERVICE_UNAVAILABLE =
+              T.let(
+                :login_service_unavailable,
                 XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
               )
             MISSING_IDEMPOTENCY_KEY =
@@ -1062,6 +1117,11 @@ module XTwitterScraper
             TOO_MANY_IDS =
               T.let(
                 :too_many_ids,
+                XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
+              )
+            TOO_MANY_TWEETS =
+              T.let(
+                :too_many_tweets,
                 XTwitterScraper::Error::Error::StructuredError::Code::TaggedSymbol
               )
             UNKNOWN_FIELD =

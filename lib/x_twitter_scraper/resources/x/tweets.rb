@@ -256,7 +256,7 @@ module XTwitterScraper
         #
         # @param min_bookmarks [Integer] Minimum bookmark count threshold.
         #
-        # @param min_faves [Integer] Minimum likes threshold.
+        # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
         #
         # @param min_quotes [Integer] Minimum quote count threshold.
         #
@@ -425,7 +425,7 @@ module XTwitterScraper
         #
         # @param min_bookmarks [Integer] Minimum bookmark count threshold.
         #
-        # @param min_faves [Integer] Minimum likes threshold.
+        # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
         #
         # @param min_quotes [Integer] Minimum quote count threshold.
         #
@@ -617,13 +617,77 @@ module XTwitterScraper
         #
         # Get full conversation thread for a tweet
         #
-        # @overload get_thread(id, cursor: nil, page_size: nil, request_options: {})
+        # @overload get_thread(id, any_words: nil, blue_verified_only: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, to_user: nil, until_date: nil, url: nil, verified_only: nil, request_options: {})
         #
         # @param id [String] Tweet ID to get thread context
         #
+        # @param any_words [String] Words or quoted phrases where any one can match. Separate with spaces, commas, o
+        #
+        # @param blue_verified_only [Boolean] Only return tweets from Blue-verified authors.
+        #
+        # @param cashtags [String] Cashtags separated by spaces, commas, or lines.
+        #
+        # @param conversation_id [String] Conversation ID filter.
+        #
         # @param cursor [String] Pagination cursor for thread tweets
         #
+        # @param exact_phrase [String] Exact phrase to match.
+        #
+        # @param exclude_words [String] Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
+        #
+        # @param from_user [String] Filter by author username.
+        #
+        # @param hashtags [String] Hashtags separated by spaces, commas, or lines.
+        #
+        # @param in_reply_to_tweet_id [String] Only replies to this tweet ID.
+        #
+        # @param language [String] Language code filter, e.g. en or tr.
+        #
+        # @param max_faves [Integer] Maximum likes threshold. maxLikes is also accepted.
+        #
+        # @param max_quotes [Integer] Maximum quotes threshold.
+        #
+        # @param max_replies [Integer] Maximum replies threshold.
+        #
+        # @param max_retweets [Integer] Maximum retweets threshold.
+        #
+        # @param media_type [Symbol, XTwitterScraper::Models::X::TweetGetThreadParams::MediaType] Filter by media type.
+        #
+        # @param mentioning [String] Filter tweets mentioning a username.
+        #
+        # @param min_bookmarks [Integer] Minimum bookmark count threshold.
+        #
+        # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
+        #
+        # @param min_quotes [Integer] Minimum quote count threshold.
+        #
+        # @param min_replies [Integer] Minimum replies threshold.
+        #
+        # @param min_retweets [Integer] Minimum retweets threshold.
+        #
+        # @param min_views [Integer] Minimum view count threshold.
+        #
         # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
+        #
+        # @param quotes [Symbol, XTwitterScraper::Models::X::TweetGetThreadParams::Quotes] Quote mode.
+        #
+        # @param quotes_of_tweet_id [String] Only quotes of this tweet ID.
+        #
+        # @param replies [Symbol, XTwitterScraper::Models::X::TweetGetThreadParams::Replies] Reply mode.
+        #
+        # @param retweets [Symbol, XTwitterScraper::Models::X::TweetGetThreadParams::Retweets] Retweet mode.
+        #
+        # @param retweets_of_tweet_id [String] Only retweets of this tweet ID.
+        #
+        # @param since_date [Date] Start date in YYYY-MM-DD format.
+        #
+        # @param to_user [String] Filter replies sent to a username.
+        #
+        # @param until_date [Date] End date in YYYY-MM-DD format.
+        #
+        # @param url [String] URL substring or domain filter.
+        #
+        # @param verified_only [Boolean] Only return tweets from verified authors.
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -636,7 +700,33 @@ module XTwitterScraper
           @client.request(
             method: :get,
             path: ["x/tweets/%1$s/thread", id],
-            query: query.transform_keys(page_size: "pageSize"),
+            query: query.transform_keys(
+              any_words: "anyWords",
+              blue_verified_only: "blueVerifiedOnly",
+              conversation_id: "conversationId",
+              exact_phrase: "exactPhrase",
+              exclude_words: "excludeWords",
+              from_user: "fromUser",
+              in_reply_to_tweet_id: "inReplyToTweetId",
+              max_faves: "maxFaves",
+              max_quotes: "maxQuotes",
+              max_replies: "maxReplies",
+              max_retweets: "maxRetweets",
+              media_type: "mediaType",
+              min_bookmarks: "minBookmarks",
+              min_faves: "minFaves",
+              min_quotes: "minQuotes",
+              min_replies: "minReplies",
+              min_retweets: "minRetweets",
+              min_views: "minViews",
+              page_size: "pageSize",
+              quotes_of_tweet_id: "quotesOfTweetId",
+              retweets_of_tweet_id: "retweetsOfTweetId",
+              since_date: "sinceDate",
+              to_user: "toUser",
+              until_date: "untilDate",
+              verified_only: "verifiedOnly"
+            ),
             model: XTwitterScraper::PaginatedTweets,
             options: options
           )
@@ -645,7 +735,9 @@ module XTwitterScraper
         # Some parameter documentations has been truncated, see
         # {XTwitterScraper::Models::X::TweetSearchParams} for more details.
         #
-        # No-mode search maximizes coverage.
+        # No-mode search maximizes coverage. New cursorless `Latest` sessions return rows
+        # newest-first across cursor pages. Existing cursors preserve their established
+        # ordering.
         #
         # @overload search(q:, advanced_query: nil, any_words: nil, blue_verified_only: nil, bounding_box: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, from_user: nil, geocode: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, limit: nil, list_id: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, mode: nil, native_retweets: nil, near: nil, news: nil, place: nil, place_country: nil, point_radius: nil, query_type: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, since_time: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
         #
@@ -703,7 +795,7 @@ module XTwitterScraper
         #
         # @param min_bookmarks [Integer] Minimum bookmark count threshold.
         #
-        # @param min_faves [Integer] Minimum likes threshold.
+        # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
         #
         # @param min_quotes [Integer] Minimum quote count threshold.
         #

@@ -275,7 +275,7 @@ module XTwitterScraper
           mentioning: nil,
           # Minimum bookmark count threshold.
           min_bookmarks: nil,
-          # Minimum likes threshold.
+          # Minimum likes threshold. minLikes is also accepted.
           min_faves: nil,
           # Minimum quote count threshold.
           min_quotes: nil,
@@ -462,7 +462,7 @@ module XTwitterScraper
           mentioning: nil,
           # Minimum bookmark count threshold.
           min_bookmarks: nil,
-          # Minimum likes threshold.
+          # Minimum likes threshold. minLikes is also accepted.
           min_faves: nil,
           # Minimum quote count threshold.
           min_quotes: nil,
@@ -596,25 +596,127 @@ module XTwitterScraper
         sig do
           params(
             id: String,
+            any_words: String,
+            blue_verified_only: T::Boolean,
+            cashtags: String,
+            conversation_id: String,
             cursor: String,
+            exact_phrase: String,
+            exclude_words: String,
+            from_user: String,
+            hashtags: String,
+            in_reply_to_tweet_id: String,
+            language: String,
+            max_faves: Integer,
+            max_quotes: Integer,
+            max_replies: Integer,
+            max_retweets: Integer,
+            media_type:
+              XTwitterScraper::X::TweetGetThreadParams::MediaType::OrSymbol,
+            mentioning: String,
+            min_bookmarks: Integer,
+            min_faves: Integer,
+            min_quotes: Integer,
+            min_replies: Integer,
+            min_retweets: Integer,
+            min_views: Integer,
             page_size: Integer,
+            quotes: XTwitterScraper::X::TweetGetThreadParams::Quotes::OrSymbol,
+            quotes_of_tweet_id: String,
+            replies:
+              XTwitterScraper::X::TweetGetThreadParams::Replies::OrSymbol,
+            retweets:
+              XTwitterScraper::X::TweetGetThreadParams::Retweets::OrSymbol,
+            retweets_of_tweet_id: String,
+            since_date: Date,
+            to_user: String,
+            until_date: Date,
+            url: String,
+            verified_only: T::Boolean,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::PaginatedTweets)
         end
         def get_thread(
           # Tweet ID to get thread context
           id,
+          # Words or quoted phrases where any one can match. Separate with spaces, commas,
+          # or lines.
+          any_words: nil,
+          # Only return tweets from Blue-verified authors.
+          blue_verified_only: nil,
+          # Cashtags separated by spaces, commas, or lines.
+          cashtags: nil,
+          # Conversation ID filter.
+          conversation_id: nil,
           # Pagination cursor for thread tweets
           cursor: nil,
+          # Exact phrase to match.
+          exact_phrase: nil,
+          # Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
+          exclude_words: nil,
+          # Filter by author username.
+          from_user: nil,
+          # Hashtags separated by spaces, commas, or lines.
+          hashtags: nil,
+          # Only replies to this tweet ID.
+          in_reply_to_tweet_id: nil,
+          # Language code filter, e.g. en or tr.
+          language: nil,
+          # Maximum likes threshold. maxLikes is also accepted.
+          max_faves: nil,
+          # Maximum quotes threshold.
+          max_quotes: nil,
+          # Maximum replies threshold.
+          max_replies: nil,
+          # Maximum retweets threshold.
+          max_retweets: nil,
+          # Filter by media type.
+          media_type: nil,
+          # Filter tweets mentioning a username.
+          mentioning: nil,
+          # Minimum bookmark count threshold.
+          min_bookmarks: nil,
+          # Minimum likes threshold. minLikes is also accepted.
+          min_faves: nil,
+          # Minimum quote count threshold.
+          min_quotes: nil,
+          # Minimum replies threshold.
+          min_replies: nil,
+          # Minimum retweets threshold.
+          min_retweets: nil,
+          # Minimum view count threshold.
+          min_views: nil,
           # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
           # results. Continue while has_next_page is true. Deprecated limit and count
           # aliases remain accepted.
           page_size: nil,
+          # Quote mode.
+          quotes: nil,
+          # Only quotes of this tweet ID.
+          quotes_of_tweet_id: nil,
+          # Reply mode.
+          replies: nil,
+          # Retweet mode.
+          retweets: nil,
+          # Only retweets of this tweet ID.
+          retweets_of_tweet_id: nil,
+          # Start date in YYYY-MM-DD format.
+          since_date: nil,
+          # Filter replies sent to a username.
+          to_user: nil,
+          # End date in YYYY-MM-DD format.
+          until_date: nil,
+          # URL substring or domain filter.
+          url: nil,
+          # Only return tweets from verified authors.
+          verified_only: nil,
           request_options: {}
         )
         end
 
-        # No-mode search maximizes coverage.
+        # No-mode search maximizes coverage. New cursorless `Latest` sessions return rows
+        # newest-first across cursor pages. Existing cursors preserve their established
+        # ordering.
         sig do
           params(
             q: String,
@@ -738,7 +840,7 @@ module XTwitterScraper
           mentioning: nil,
           # Minimum bookmark count threshold.
           min_bookmarks: nil,
-          # Minimum likes threshold.
+          # Minimum likes threshold. minLikes is also accepted.
           min_faves: nil,
           # Minimum quote count threshold.
           min_quotes: nil,

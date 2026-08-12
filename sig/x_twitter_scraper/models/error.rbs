@@ -108,12 +108,17 @@ module XTwitterScraper
           | :idempotency_conflict
           | :idempotency_key_conflict
           | :invalid_community_id
+          | :invalid_complete_replies_request
           | :invalid_coverage_cursor
+          | :invalid_coverage_request
           | :invalid_idempotency_key
           | :invalid_list_id
+          | :invalid_output_options
           | :invalid_payment_amount
           | :invalid_range
+          | :invalid_reply_options
           | :login_rate_limited
+          | :login_service_unavailable
           | :missing_idempotency_key
           | :missing_ids
           | :no_cached_style
@@ -124,6 +129,7 @@ module XTwitterScraper
           | :support_media_rate_limit
           | :support_request_rate_limit
           | :too_many_ids
+          | :too_many_tweets
           | :unknown_field
           | :unsupported_media_type
           | :webhook_inactive
@@ -215,12 +221,17 @@ module XTwitterScraper
           IDEMPOTENCY_CONFLICT: :idempotency_conflict
           IDEMPOTENCY_KEY_CONFLICT: :idempotency_key_conflict
           INVALID_COMMUNITY_ID: :invalid_community_id
+          INVALID_COMPLETE_REPLIES_REQUEST: :invalid_complete_replies_request
           INVALID_COVERAGE_CURSOR: :invalid_coverage_cursor
+          INVALID_COVERAGE_REQUEST: :invalid_coverage_request
           INVALID_IDEMPOTENCY_KEY: :invalid_idempotency_key
           INVALID_LIST_ID: :invalid_list_id
+          INVALID_OUTPUT_OPTIONS: :invalid_output_options
           INVALID_PAYMENT_AMOUNT: :invalid_payment_amount
           INVALID_RANGE: :invalid_range
+          INVALID_REPLY_OPTIONS: :invalid_reply_options
           LOGIN_RATE_LIMITED: :login_rate_limited
+          LOGIN_SERVICE_UNAVAILABLE: :login_service_unavailable
           MISSING_IDEMPOTENCY_KEY: :missing_idempotency_key
           MISSING_IDS: :missing_ids
           NO_CACHED_STYLE: :no_cached_style
@@ -231,6 +242,7 @@ module XTwitterScraper
           SUPPORT_MEDIA_RATE_LIMIT: :support_media_rate_limit
           SUPPORT_REQUEST_RATE_LIMIT: :support_request_rate_limit
           TOO_MANY_IDS: :too_many_ids
+          TOO_MANY_TWEETS: :too_many_tweets
           UNKNOWN_FIELD: :unknown_field
           UNSUPPORTED_MEDIA_TYPE: :unsupported_media_type
           WEBHOOK_INACTIVE: :webhook_inactive
@@ -349,12 +361,17 @@ module XTwitterScraper
             | :idempotency_conflict
             | :idempotency_key_conflict
             | :invalid_community_id
+            | :invalid_complete_replies_request
             | :invalid_coverage_cursor
+            | :invalid_coverage_request
             | :invalid_idempotency_key
             | :invalid_list_id
+            | :invalid_output_options
             | :invalid_payment_amount
             | :invalid_range
+            | :invalid_reply_options
             | :login_rate_limited
+            | :login_service_unavailable
             | :missing_idempotency_key
             | :missing_ids
             | :no_cached_style
@@ -365,6 +382,7 @@ module XTwitterScraper
             | :support_media_rate_limit
             | :support_request_rate_limit
             | :too_many_ids
+            | :too_many_tweets
             | :unknown_field
             | :unsupported_media_type
             | :webhook_inactive
@@ -456,12 +474,17 @@ module XTwitterScraper
             IDEMPOTENCY_CONFLICT: :idempotency_conflict
             IDEMPOTENCY_KEY_CONFLICT: :idempotency_key_conflict
             INVALID_COMMUNITY_ID: :invalid_community_id
+            INVALID_COMPLETE_REPLIES_REQUEST: :invalid_complete_replies_request
             INVALID_COVERAGE_CURSOR: :invalid_coverage_cursor
+            INVALID_COVERAGE_REQUEST: :invalid_coverage_request
             INVALID_IDEMPOTENCY_KEY: :invalid_idempotency_key
             INVALID_LIST_ID: :invalid_list_id
+            INVALID_OUTPUT_OPTIONS: :invalid_output_options
             INVALID_PAYMENT_AMOUNT: :invalid_payment_amount
             INVALID_RANGE: :invalid_range
+            INVALID_REPLY_OPTIONS: :invalid_reply_options
             LOGIN_RATE_LIMITED: :login_rate_limited
+            LOGIN_SERVICE_UNAVAILABLE: :login_service_unavailable
             MISSING_IDEMPOTENCY_KEY: :missing_idempotency_key
             MISSING_IDS: :missing_ids
             NO_CACHED_STYLE: :no_cached_style
@@ -472,6 +495,7 @@ module XTwitterScraper
             SUPPORT_MEDIA_RATE_LIMIT: :support_media_rate_limit
             SUPPORT_REQUEST_RATE_LIMIT: :support_request_rate_limit
             TOO_MANY_IDS: :too_many_ids
+            TOO_MANY_TWEETS: :too_many_tweets
             UNKNOWN_FIELD: :unknown_field
             UNSUPPORTED_MEDIA_TYPE: :unsupported_media_type
             WEBHOOK_INACTIVE: :webhook_inactive

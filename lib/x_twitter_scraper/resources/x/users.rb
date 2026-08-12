@@ -373,7 +373,7 @@ module XTwitterScraper
         #
         # @param min_bookmarks [Integer] Minimum bookmark count threshold.
         #
-        # @param min_faves [Integer] Minimum likes threshold.
+        # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
         #
         # @param min_quotes [Integer] Minimum quote count threshold.
         #
@@ -523,7 +523,7 @@ module XTwitterScraper
         #
         # @param min_bookmarks [Integer] Minimum bookmark count threshold.
         #
-        # @param min_faves [Integer] Minimum likes threshold.
+        # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
         #
         # @param min_quotes [Integer] Minimum quote count threshold.
         #
@@ -673,7 +673,7 @@ module XTwitterScraper
         #
         # @param min_bookmarks [Integer] Minimum bookmark count threshold.
         #
-        # @param min_faves [Integer] Minimum likes threshold.
+        # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
         #
         # @param min_quotes [Integer] Minimum quote count threshold.
         #
@@ -833,7 +833,7 @@ module XTwitterScraper
         #
         # @param min_bookmarks [Integer] Minimum bookmark count threshold.
         #
-        # @param min_faves [Integer] Minimum likes threshold.
+        # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
         #
         # @param min_quotes [Integer] Minimum quote count threshold.
         #
@@ -1060,7 +1060,7 @@ module XTwitterScraper
         #
         # @param min_bookmarks [Integer] Minimum bookmark count threshold.
         #
-        # @param min_faves [Integer] Minimum likes threshold.
+        # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
         #
         # @param min_quotes [Integer] Minimum quote count threshold.
         #
