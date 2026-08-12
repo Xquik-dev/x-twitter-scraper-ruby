@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.0 (2026-08-12)
+
+Full Changelog: [v0.9.1...v0.10.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.9.1...v0.10.0)
+
+### Features
+
+* **api:** sync public contracts ([b7fafe0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/b7fafe0efcf6b27464565ca4c54159c2276cb58a))
+
 ## 0.9.1 (2026-08-11)
 
 Full Changelog: [v0.9.0...v0.9.1](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.9.0...v0.9.1)
