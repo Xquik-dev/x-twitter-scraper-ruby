@@ -188,7 +188,7 @@ module XTwitterScraper
         sig { params(min_bookmarks: Integer).void }
         attr_writer :min_bookmarks
 
-        # Minimum likes threshold.
+        # Minimum likes threshold. minLikes is also accepted.
         sig { returns(T.nilable(Integer)) }
         attr_reader :min_faves
 
@@ -510,7 +510,7 @@ module XTwitterScraper
           mentioning: nil,
           # Minimum bookmark count threshold.
           min_bookmarks: nil,
-          # Minimum likes threshold.
+          # Minimum likes threshold. minLikes is also accepted.
           min_faves: nil,
           # Minimum quote count threshold.
           min_quotes: nil,
