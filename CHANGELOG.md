@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.1 (2026-08-18)
+
+Full Changelog: [v0.10.0...v0.10.1](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.0...v0.10.1)
+
+### Chores
+
+* update all dependencies ([#47](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/47)) ([ddbf4fb](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/ddbf4fba03e5bb673dce27baee0ab2f52ac384b8))
+
 ## 0.10.0 (2026-08-12)
 
 Full Changelog: [v0.9.1...v0.10.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.9.1...v0.10.0)
