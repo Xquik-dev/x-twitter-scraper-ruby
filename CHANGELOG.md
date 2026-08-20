@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.10.3 (2026-08-21)
+
+Full Changelog: [v0.10.2...v0.10.3](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.2...v0.10.3)
+
+### Documentation
+
+* tighten SDK and contribution guidance
+
+### Chores
+
+* simplify repository comments and formatter output
+
 ## 0.10.2 (2026-08-20)
 
 Full Changelog: [v0.10.1...v0.10.2](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.1...v0.10.2)

@@ -44,10 +44,8 @@ multitask(:test) do
   ruby(*%w[-w -e], rb, verbose: false) { fail unless _1 }
 end
 
-# Cap parallelism at the CPU count. `--max-procs=0` spawns one process per
-# 300-file batch with no upper bound; on large SDKs (thousands of files) that
-# oversubscribes CPUs and stacks up rubocop processes, exhausting memory and
-# slowing CI to the point of timing out.
+# Cap RuboCop parallelism at the CPU count.
+# Unbounded 300-file batches can exhaust memory on generated SDKs.
 xargs = %W[xargs --no-run-if-empty --null --max-procs=#{Etc.nprocessors} --max-args=300 --]
 ruby_opt = {"RUBYOPT" => [ENV["RUBYOPT"], "--encoding=UTF-8"].compact.join(" ")}
 
@@ -66,7 +64,7 @@ multitask(:"lint:rubocop") do
   rubocop = %w[rubocop]
   rubocop += %w[--format github] if ENV.key?("CI")
 
-  # some lines cannot be shortened
+  # Preserve generated lines that cannot be shortened.
   rubocop += %w[--except Lint/RedundantCopDisableDirective,Layout/LineLength]
 
   lint = xargs + rubocop
@@ -77,7 +75,7 @@ norm_lines = %w[tr -- \n \0].shelljoin
 
 desc("Format `*.rb`")
 multitask(:"format:rb") do
-  # while `syntax_tree` is much faster than `rubocop`, `rubocop` is the only formatter with full syntax support
+  # RuboCop supports syntax that Syntax Tree cannot format.
   files = filtered["rb", %w[./lib ./test ./examples]]
   fmt = xargs + %w[rubocop --fail-level F --autocorrect --format simple --]
   sh("#{files.shelljoin} | #{norm_lines} | #{fmt.shelljoin}")
@@ -96,14 +94,14 @@ multitask(:"format:rbs") do
   inplace = /darwin|bsd/ =~ RUBY_PLATFORM ? ["-i", ""] : %w[-i]
   uuid = SecureRandom.uuid
 
-  # `syntax_tree` has trouble with `rbs`'s class & module aliases
+  # Syntax Tree cannot parse RBS class or module aliases.
 
   sed_bin = /darwin/ =~ RUBY_PLATFORM ? "/usr/bin/sed" : "sed"
   sed = xargs + [sed_bin, "-E", *inplace, "-e"]
-  # annotate unprocessable aliases with a unique comment
+  # Mark aliases with a unique comment before formatting.
   pre = sed + ["s/(class|module) ([^ ]+) = (.+$)/# \\1 #{uuid}\\n\\2: \\3/", "--"]
   fmt = xargs + %w[stree write --plugin=rbs --]
-  # remove the unique comment and unprocessable aliases to type aliases
+  # Restore the marked aliases after formatting.
   subst = <<~SED
     s/# (class|module) #{uuid}/\\1/
     t l1
@@ -113,23 +111,21 @@ multitask(:"format:rbs") do
     N
     s/\\n *([^:]+): (.+)$/ \\1 = \\2/
   SED
-  # for each line:
-  #   1. try transform the unique comment into `class | module`, if successful, branch to label `l1`.
-  #   2. at label `l1`, join previously annotated line with `class | module` information.
+  # Restore each marker, then join it with the following alias.
   pst = sed + [subst, "--"]
 
   success = false
 
-  # transform class aliases to type aliases, which syntax tree has no trouble with
+  # Convert class aliases to parseable type aliases.
   sh("#{files.shelljoin} | #{norm_lines} | #{pre.shelljoin}")
-  # run syntax tree to format `*.rbs` files
+  # Format the temporary type aliases.
   sh(ruby_opt, "#{files.shelljoin} | #{norm_lines} | #{fmt.shelljoin}") do
     success = _1
   end
-  # transform type aliases back to class aliases
+  # Convert type aliases back to class aliases.
   sh("#{files.shelljoin} | #{norm_lines} | #{pst.shelljoin}")
 
-  # always run post-processing to remove comment marker
+  # Always remove temporary markers.
   fail unless success
 end
 
@@ -167,9 +163,8 @@ directory("pkg")
 
 desc("Build ruby gem")
 multitask(:"build:gem" => "pkg") do
-  # optimizing for grepping through the gem bundle: many tools honour `.ignore` files, including VSCode
-  #
-  # both `rbi` and `sig` directories are navigable by their respective tool chains and therefore can be ignored by tools such as `rg`
+  # Hide type manifests from generic search tools inside the gem.
+  # Sorbet and RBS tools still index their respective directories.
   Pathname(ignore_file).write(<<~GLOB)
     rbi/*
     sig/*

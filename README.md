@@ -2,17 +2,13 @@
 
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13739/badge)](https://www.bestpractices.dev/projects/13739)
 
-Use the Xquik Ruby SDK for Twitter search, timelines, profiles & followers. Manage media, webhooks & X automation with typed request objects. It provides a Twitter API alternative through documented Xquik REST routes.
+Use the Xquik Ruby SDK for Twitter search, timelines, profiles & followers.
+Manage media, webhooks & X automation with typed requests.
+Use documented Xquik REST routes as a Twitter API alternative.
 
 [Ruby SDK Guide](https://docs.xquik.com/sdks/ruby) | [REST API](https://docs.xquik.com/api-reference/overview) | [RubyDoc](https://gemdocs.org/gems/x-twitter-scraper) | [Webhooks](https://docs.xquik.com/api-reference/webhooks/create)
 
-## Choose the Ruby SDK
-
-Choose this gem for Ruby services that use Sorbet or RBS. Reuse one client for pooled connections.
-
 ## Common Twitter & X Tasks
-
-Map each task to its REST route.
 
 | Task | REST Route | Usage |
 | --- | --- | --- |
@@ -33,7 +29,7 @@ Add the gem to your `Gemfile`:
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "x-twitter-scraper", "~> 0.10.2"
+gem "x-twitter-scraper", "~> 0.10.3"
 ```
 
 <!-- x-release-please-end -->
@@ -66,7 +62,7 @@ rescue XTwitterScraper::Errors::APIConnectionError => e
 rescue XTwitterScraper::Errors::RateLimitError => e
   puts("Rate limited. Retry later.")
 rescue XTwitterScraper::Errors::APIStatusError => e
-  puts("The server returned another non-2xx status.")
+  puts("Request failed. Inspect the returned HTTP status.")
   puts(e.status)
 end
 ```
@@ -89,8 +85,8 @@ The SDK uses these error classes:
 
 ### Retries
 
-The SDK retries connection errors, timeouts, and HTTP 408, 409, 429, and 5xx responses.
-It uses exponential backoff and attempts 2 retries by default.
+The SDK retries connection errors, timeouts & HTTP 408, 409, 429, and 5xx responses.
+It uses exponential backoff with 2 retries by default.
 Set `max_retries` to change or disable retries:
 
 ```ruby
@@ -117,9 +113,7 @@ x_twitter_scraper = XTwitterScraper::Client.new(
 x_twitter_scraper.account.retrieve(request_options: {timeout: 5})
 ```
 
-On timeout, `XTwitterScraper::Errors::APITimeoutError` is raised.
-
-Timed-out requests follow the default retry policy.
+Timeouts raise `XTwitterScraper::Errors::APITimeoutError` and follow the retry policy.
 
 ## Advanced Concepts
 
@@ -134,13 +128,10 @@ The base model provides these operations:
 4. Print classes and instances in a readable format.
 5. Convert values with `#to_h`, `#deep_to_h`, `#to_json`, or `#to_yaml`.
 
-### Making Custom or Undocumented Requests
+### Custom Requests
 
-#### Undocumented Properties
-
-Send undocumented parameters and read undocumented response properties:
-
-A matching `extra_` option overrides its documented parameter.
+Use `extra_query`, `extra_body`, or `extra_headers` under `request_options`.
+Matching `extra_` values override documented parameters.
 
 ```ruby
 account =
@@ -154,12 +145,6 @@ account =
 
 puts(account[:my_undocumented_property])
 ```
-
-#### Undocumented Request Parameters
-
-Pass extra values through `extra_query`, `extra_body`, or `extra_headers` under `request_options:`.
-
-#### Undocumented Endpoints
 
 Use `client.request` for undocumented endpoints while retaining authentication and retries:
 
@@ -183,7 +168,7 @@ Other SDK classes do not lock their data.
 
 ## Sorbet
 
-The SDK includes [RBI](https://sorbet.org/docs/rbi) definitions. It does not depend on `sorbet-runtime`.
+The gem ships [RBI](https://sorbet.org/docs/rbi) definitions without `sorbet-runtime`.
 
 Pass request hashes or typed parameter objects:
 
@@ -198,8 +183,7 @@ x_twitter_scraper.x.tweets.search(**params)
 
 ### Enums
 
-The SDK does not depend on `sorbet-runtime` or provide [`T::Enum`](https://sorbet.org/docs/tenum) instances.
-It uses tagged symbols, which remain primitives at runtime:
+Tagged symbols replace [`T::Enum`](https://sorbet.org/docs/tenum) and remain runtime primitives:
 
 ```ruby
 # :en
@@ -242,6 +226,6 @@ Ruby 3.2.0 or higher.
 
 ## Contributing
 
-See [the contributing documentation](https://github.com/Xquik-dev/x-twitter-scraper-ruby/tree/main/CONTRIBUTING.md).
+Read the [contribution guide](CONTRIBUTING.md).
 
 Xquik is an independent third-party service. Not affiliated with X Corp. "Twitter" and "X" are trademarks of X Corp.
