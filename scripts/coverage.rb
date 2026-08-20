@@ -51,7 +51,7 @@ at_exit do
   next if statement_percentage >= STATEMENT_MINIMUM && branch_percentage >= BRANCH_MINIMUM
 
   warn format(
-    "Coverage below required thresholds: statements %.2f%%, branches %.2f%%.",
+    "Coverage is below required thresholds: statements %.2f%%, branches %.2f%%. Add tests.",
     STATEMENT_MINIMUM,
     BRANCH_MINIMUM
   )

@@ -9,7 +9,7 @@ require_relative "lib/x_twitter_scraper/version"
 Gem::Specification.new do |s|
   s.name = "x-twitter-scraper"
   s.version = XTwitterScraper::VERSION
-  s.summary = "Ruby SDK for the Xquik API"
+  s.summary = "Ruby SDK for Twitter search, followers, webhooks & X automation. Not affiliated with X Corp."
   s.authors = ["Xquik"]
   s.email = "support@xquik.com"
   s.license = "Apache-2.0"

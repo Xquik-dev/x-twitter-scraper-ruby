@@ -1,32 +1,30 @@
-# X (Twitter) Scraper Ruby SDK: Tweet Search, Timelines, Followers & Posting
+# Xquik Ruby SDK: Twitter Search, Followers & X Automation
 
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13739/badge)](https://www.bestpractices.dev/projects/13739)
 
-Use Xquik's typed Ruby client for X data and confirmed actions.
+Use the Xquik Ruby SDK for Twitter search, timelines, profiles & followers. Manage media, webhooks & X automation with typed request objects. It provides a Twitter API alternative through documented Xquik REST routes.
 
-## Documentation
-
-Read the [Ruby SDK guide](https://docs.xquik.com/sdks/ruby), [API guide](https://docs.xquik.com/api-reference/overview), or [RubyDoc reference](https://gemdocs.org/gems/x-twitter-scraper).
+[Ruby SDK Guide](https://docs.xquik.com/sdks/ruby) | [REST API](https://docs.xquik.com/api-reference/overview) | [RubyDoc](https://gemdocs.org/gems/x-twitter-scraper) | [Webhooks](https://docs.xquik.com/api-reference/webhooks/create)
 
 ## Choose the Ruby SDK
 
-Choose this gem for Ruby services using typed request objects and Sorbet.
-Reuse one client for connection pooling in threaded applications.
-Use the SDK guide for generated method names.
+Choose this gem for Ruby services using Sorbet or RBS types. Reuse one client for pooled connections.
 
-## Common X Data Tasks
+## Common Twitter & X Tasks
 
-Use the linked Ruby reference for typed method names.
+Map each task to its REST route.
 
-| Customer Question | REST Route | Workflow Note |
+| Task | REST Route | Usage |
 | --- | --- | --- |
-| How do I search tweets? | `GET /x/tweets/search` | Use keyword or advanced operator queries. |
-| How do I read a profile timeline? | `GET /x/users/{id}/tweets` | Paginate bounded results. |
-| How do I scrape followers? | `GET /x/users/{id}/followers` | Use an extraction for complete datasets. |
-| How do I scrape following accounts? | `GET /x/users/{id}/following` | Use an extraction for complete datasets. |
-| How do I read my home timeline? | `GET /x/timeline` | Approve this private read. |
-| How do I monitor an account? | `POST /monitors` | Deliver events through HMAC webhooks. |
-| How do I post or reply? | `POST /x/tweets` | Confirm the account and payload. |
+| Search tweets without the X API | `GET /x/tweets/search` | Use keyword or advanced operator queries. |
+| Read an X profile timeline | `GET /x/users/{id}/tweets` | Paginate bounded results. |
+| Scrape Twitter followers | `GET /x/users/{id}/followers` | Use an extraction for complete datasets. |
+| Scrape following accounts | `GET /x/users/{id}/following` | Use an extraction for complete datasets. |
+| Read a home timeline | `GET /x/timeline` | Approve this private read. |
+| Export large X datasets | `POST /extractions` | Poll status, then download results. |
+| Download or upload media | `/x/media/*` | Use typed file helpers. |
+| Monitor an account | `POST /monitors` | Deliver events through HMAC webhooks. |
+| Post or reply | `POST /x/tweets` | Confirm the account and payload. |
 
 ## Installation
 
