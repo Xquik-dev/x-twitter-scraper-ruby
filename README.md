@@ -8,7 +8,7 @@ Use the Xquik Ruby SDK for Twitter search, timelines, profiles & followers. Mana
 
 ## Choose the Ruby SDK
 
-Choose this gem for Ruby services using Sorbet or RBS types. Reuse one client for pooled connections.
+Choose this gem for Ruby services that use Sorbet or RBS. Reuse one client for pooled connections.
 
 ## Common Twitter & X Tasks
 
@@ -33,7 +33,7 @@ Add the gem to your `Gemfile`:
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "x-twitter-scraper", "~> 0.10.1"
+gem "x-twitter-scraper", "~> 0.10.2"
 ```
 
 <!-- x-release-please-end -->
@@ -53,25 +53,25 @@ response = x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
 puts(response)
 ```
 
-### Handling errors
+### Handling Errors
 
-When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `XTwitterScraper::Errors::APIError` will be thrown:
+The SDK raises an `APIError` subclass for connection failures and non-2xx responses:
 
 ```ruby
 begin
   account = x_twitter_scraper.account.retrieve
 rescue XTwitterScraper::Errors::APIConnectionError => e
-  puts("The server could not be reached")
-  puts(e.cause)  # an underlying Exception, likely raised within `net/http`
+  puts("Could not reach the server. Check the connection.")
+  puts(e.cause)  # Underlying net/http exception.
 rescue XTwitterScraper::Errors::RateLimitError => e
-  puts("A 429 status code was received; we should back off a bit.")
+  puts("Rate limited. Retry later.")
 rescue XTwitterScraper::Errors::APIStatusError => e
-  puts("Another non-200-range status code was received")
+  puts("The server returned another non-2xx status.")
   puts(e.status)
 end
 ```
 
-Error codes are as follows:
+The SDK uses these error classes:
 
 | Cause            | Error Type                 |
 | ---------------- | -------------------------- |
@@ -89,61 +89,58 @@ Error codes are as follows:
 
 ### Retries
 
-Certain errors will be automatically retried 2 times by default, with a short exponential backoff.
-
-Connection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, >=500 Internal errors, and timeouts will all be retried by default.
-
-You can use the `max_retries` option to configure or disable this:
+The SDK retries connection errors, timeouts, and HTTP 408, 409, 429, and 5xx responses.
+It uses exponential backoff and attempts 2 retries by default.
+Set `max_retries` to change or disable retries:
 
 ```ruby
-# Configure the default for all requests:
+# Set the client default:
 x_twitter_scraper = XTwitterScraper::Client.new(
   max_retries: 0 # default is 2
 )
 
-# Or, configure per-request:
+# Override one request:
 x_twitter_scraper.account.retrieve(request_options: {max_retries: 5})
 ```
 
 ### Timeouts
 
-By default, requests will time out after 60 seconds. You can use the timeout option to configure or disable this:
+Requests time out after 60 seconds. Set `timeout` to change or disable this limit:
 
 ```ruby
-# Configure the default for all requests:
+# Set the client default:
 x_twitter_scraper = XTwitterScraper::Client.new(
   timeout: nil # default is 60
 )
 
-# Or, configure per-request:
+# Override one request:
 x_twitter_scraper.account.retrieve(request_options: {timeout: 5})
 ```
 
 On timeout, `XTwitterScraper::Errors::APITimeoutError` is raised.
 
-Note that requests that time out are retried by default.
+Timed-out requests follow the default retry policy.
 
-## Advanced concepts
+## Advanced Concepts
 
 ### BaseModel
 
-All parameter and response objects inherit from `XTwitterScraper::Internal::Type::BaseModel`, which provides several conveniences, including:
+All parameter and response objects inherit from `XTwitterScraper::Internal::Type::BaseModel`.
+The base model provides these operations:
 
-1. All fields, including unknown ones, are accessible with `obj[:prop]` syntax, and can be destructured with `obj => {prop: prop}` or pattern-matching syntax.
+1. Access known and unknown fields with `obj[:prop]`.
+2. Destructure fields with `obj => {prop: prop}` or pattern matching.
+3. Compare objects by their field values with `==`.
+4. Print classes and instances in a readable format.
+5. Convert values with `#to_h`, `#deep_to_h`, `#to_json`, or `#to_yaml`.
 
-2. Structural equivalence for equality; if two API calls return the same values, comparing the responses with == will return true.
+### Making Custom or Undocumented Requests
 
-3. Both instances and the classes themselves can be pretty-printed.
+#### Undocumented Properties
 
-4. Helpers such as `#to_h`, `#deep_to_h`, `#to_json`, and `#to_yaml`.
+Send undocumented parameters and read undocumented response properties:
 
-### Making custom or undocumented requests
-
-#### Undocumented properties
-
-You can send undocumented parameters to any endpoint, and read undocumented response properties, like so:
-
-Note: the `extra_` parameters of the same name overrides the documented parameters.
+A matching `extra_` option overrides its documented parameter.
 
 ```ruby
 account =
@@ -158,13 +155,13 @@ account =
 puts(account[:my_undocumented_property])
 ```
 
-#### Undocumented request params
+#### Undocumented Request Parameters
 
-If you want to explicitly send an extra param, you can do so with the `extra_query`, `extra_body`, and `extra_headers` under the `request_options:` parameter when making a request, as seen in the examples above.
+Pass extra values through `extra_query`, `extra_body`, or `extra_headers` under `request_options:`.
 
-#### Undocumented endpoints
+#### Undocumented Endpoints
 
-To make requests to undocumented endpoints while retaining the benefit of auth, retries, and so on, you can make requests using `client.request`, like so:
+Use `client.request` for undocumented endpoints while retaining authentication and retries:
 
 ```ruby
 response = client.request(
@@ -176,40 +173,33 @@ response = client.request(
 )
 ```
 
-### Concurrency & connection pooling
+### Concurrency & Connection Pooling
 
-The `XTwitterScraper::Client` instances are threadsafe, but are only are fork-safe when there are no in-flight HTTP requests.
-
-Each instance of `XTwitterScraper::Client` has its own HTTP connection pool with a default size of 99. As such, we recommend instantiating the client once per application in most settings.
-
-When all available connections from the pool are checked out, requests wait for a new connection to become available, with queue time counting towards the request timeout.
-
-Unless otherwise specified, other classes in the SDK do not have locks protecting their underlying data structure.
+Clients are thread-safe. Fork them only when no HTTP requests are in flight.
+Each client has an HTTP connection pool with a default size of 99.
+Reuse one client per application in most cases.
+Requests wait when every connection is busy. This wait counts toward the request timeout.
+Other SDK classes do not lock their data.
 
 ## Sorbet
 
 The SDK includes [RBI](https://sorbet.org/docs/rbi) definitions. It does not depend on `sorbet-runtime`.
 
-You can provide typesafe request parameters like so:
+Pass request hashes or typed parameter objects:
 
 ```ruby
-x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
-```
-
-Or, equivalently:
-
-```ruby
-# Hashes work, but are not typesafe:
+# Hashes work without type safety:
 x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
 
-# You can also splat a full Params class:
+# Splat a complete Params object:
 params = XTwitterScraper::X::TweetSearchParams.new(q: "from:elonmusk", limit: 10)
 x_twitter_scraper.x.tweets.search(**params)
 ```
 
 ### Enums
 
-Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
+The SDK does not depend on `sorbet-runtime` or provide [`T::Enum`](https://sorbet.org/docs/tenum) instances.
+It uses tagged symbols, which remain primitives at runtime:
 
 ```ruby
 # :en
@@ -219,16 +209,16 @@ puts(XTwitterScraper::AccountUpdateLocaleParams::Locale::EN)
 T.reveal_type(XTwitterScraper::AccountUpdateLocaleParams::Locale::EN)
 ```
 
-Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
+Enum parameters accept constants or literal values:
 
 ```ruby
-# Using the enum constants preserves the tagged type information:
+# Enum constants preserve tagged type information:
 x_twitter_scraper.account.update_locale(
   locale: XTwitterScraper::AccountUpdateLocaleParams::Locale::EN,
   # …
 )
 
-# Literal values are also permissible:
+# Literal values also work:
 x_twitter_scraper.account.update_locale(
   locale: :en,
   # …
@@ -237,9 +227,9 @@ x_twitter_scraper.account.update_locale(
 
 ## Versioning
 
-This package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions. As the library is in initial development and has a major version of `0`, APIs may change at any time.
+This package follows [SemVer](https://semver.org/spec/v2.0.0.html). Version `0` releases may change APIs.
 
-This package considers improvements to the (non-runtime) `*.rbi` and `*.rbs` type definitions to be non-breaking changes.
+Changes to non-runtime `*.rbi` and `*.rbs` definitions remain non-breaking.
 
 ## Requirements
 
