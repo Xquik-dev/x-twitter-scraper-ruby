@@ -1,119 +1,73 @@
-## Setting up the environment
+# Contributing
 
-This repository contains a `.ruby-version` file, which should work with either [rbenv](https://github.com/rbenv/rbenv) or [asdf](https://github.com/asdf-vm/asdf) with the [ruby plugin](https://github.com/asdf-vm/asdf-ruby).
+## Set Up
 
-Please follow the instructions for your preferred version manager to install the Ruby version specified in the `.ruby-version` file.
-
-To set up the repository, run:
+The `.ruby-version` file works with rbenv and asdf's Ruby plugin.
+Install that Ruby version, then run:
 
 ```bash
-$ ./scripts/bootstrap
+./scripts/bootstrap
 ```
 
-This will install all the required dependencies.
+Run `bundle exec rake` to list every task.
 
-## Modifying/Adding code
+## Generated Code
 
-Most of the SDK is generated code. Modifications to code will be persisted between generations, but may result in merge conflicts between manual patches and changes from the generator. The generator will never modify the contents of `lib/x_twitter_scraper/helpers/` and `examples/` directory.
+Most SDK files come from the API generator.
+Direct edits survive regeneration but can create conflicts.
+The generator never changes `lib/x_twitter_scraper/helpers/` or `examples/`.
 
-## Adding and running examples
+## Add Examples
 
-All files in the `examples/` directory are not modified by the generator and can be freely edited or added to.
+Files under `examples/` remain handwritten.
 
 ```ruby
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
 require_relative "../lib/x_twitter_scraper"
-
-# ...
 ```
+
+Make the example executable, then run it:
 
 ```bash
-$ chmod +x './examples/<your-example>.rb'
-
-# run the example against your api
-$ ruby './examples/<your-example>.rb'
+chmod +x examples/<name>.rb
+ruby examples/<name>.rb
 ```
 
-## Using the repository from source
+## Use a Source Checkout
 
-If you’d like to use the repository from source, you can either install from git or reference a cloned repository:
-
-To install via git in your `Gemfile`:
+Reference GitHub in your `Gemfile`:
 
 ```ruby
 gem "x-twitter-scraper", git: "https://github.com/Xquik-dev/x-twitter-scraper-ruby"
 ```
 
-Alternatively, reference local copy of the repo:
-
-```bash
-$ git clone -- 'https://github.com/Xquik-dev/x-twitter-scraper-ruby' '<path-to-repo>'
-```
+Reference a local clone instead:
 
 ```ruby
 gem "x-twitter-scraper", path: "<path-to-repo>"
 ```
 
-## Running commands
-
-Running `rake` by itself will show all runnable commands.
+## Run Checks
 
 ```bash
-$ bundle exec rake
+bundle exec rake test
+bundle exec rake lint
+bundle exec rake format
+bundle exec rake docs:preview PORT=8808
 ```
 
-## Running tests
-
-```bash
-$ bundle exec rake test
-```
-
-## Linting and formatting
-
-This repository uses [rubocop](https://github.com/rubocop/rubocop) for linting and formatting of `*.rb` files; And [syntax_tree](https://github.com/ruby-syntax-tree/syntax_tree) is used for formatting of both `*.rbi` and `*.rbs` files.
-
-There are two separate type checkers supported by this library: [sorbet](https://github.com/sorbet/sorbet) and [steep](https://github.com/soutaro/steep) are used for verifying `*.rbi` and `*.rbs` files respectively.
-
-To lint and typecheck:
-
-```bash
-$ bundle exec rake lint
-```
-
-To format and fix all lint issues automatically:
-
-```bash
-$ bundle exec rake format
-```
+`format` rewrites files. `docs:preview` starts a local server.
 
 ## Editor Support
 
-### Ruby LSP
+Ruby LSP supports definition lookup. Solargraph supports completion.
+Install both to use both features.
 
-[Ruby LSP](https://github.com/Shopify/ruby-lsp) has quite good support for go to definition, but not auto-completion.
+Sorbet works here with 2 known caveats:
 
-This can be installed along side Solargraph.
+- Definition lookup can select the wrong declaration.
+- Generic RBI types can report duplicate type members.
 
-### Solargraph
-
-[Solargraph](https://solargraph.org) has quite good support for auto-completion, but not go to definition.
-
-This can be installed along side Ruby LSP.
-
-### Sorbet
-
-[Sorbet](https://sorbet.org) should mostly work out of the box when editing this library directly. However, there are a some caveats due to the colocation of `*.rb` and `*.rbi` files in the same project. These issues should not otherwise manifest when this library is used as a dependency.
-
-1. For go to definition usages, sorbet might get confused and may not always navigate to the correct location.
-
-2. For each generic type in `*.rbi` files, a spurious "Duplicate type member" error is present.
-
-## Documentation Preview
-
-To preview the documentation, run:
-
-```bash
-$ bundle exec rake docs:preview [PORT=8808]
-```
+These warnings do not affect downstream gem users.

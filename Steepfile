@@ -8,7 +8,7 @@ target(:lib) do
   signature("sig")
 
   YAML.safe_load_file("./manifest.yaml", symbolize_names: true) => {dependencies:}
-  # currently these libraries lack the `*.rbs` annotations required by `steep`
+  # Exclude standard libraries without the RBS annotations Steep needs.
   stdlibs = dependencies - %w[English etc net/http rbconfig set stringio]
 
   stdlibs.each { library(_1) }

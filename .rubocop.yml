@@ -1,9 +1,6 @@
 # yaml-language-server: $schema=https://www.rubyschema.org/rubocop.json
 ---
-# Explicitly disable pending cops for now. This is the default behaviour but
-# this avoids a large warning every time we run it.
-# Stop RuboCop nagging about rubocop-rake.
-# Ensure that RuboCop validates according to the lowest version of Ruby that we support.
+# Lint against the oldest supported Ruby without extension suggestions.
 AllCops:
   Exclude:
     - "bin/*"
@@ -11,15 +8,14 @@ AllCops:
   SuggestExtensions: false
   TargetRubyVersion: 3.2
 
-# Whether MFA is required or not should be left to the token configuration.
+# RubyGems credentials enforce MFA outside the gemspec.
 Gemspec/RequireMFA:
   Enabled: false
 
-# Don't require this extra line break, it can be excessive.
+# Keep related guard clauses together.
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
 
-# Don't leave complex assignment values hanging off to the right.
 Layout/EndAlignment:
   EnforcedStyleAlignWith: variable
 
@@ -35,7 +31,7 @@ Layout/FirstMethodArgumentLineBreak:
 Layout/FirstMethodParameterLineBreak:
   Enabled: true
 
-# Set a reasonable line length; rely on other cops to correct long lines.
+# Other cops handle long code. Comments and generated constants may exceed 110.
 Layout/LineLength:
   AllowedPatterns:
     - "^\\s*#.*$"
@@ -48,7 +44,6 @@ Layout/LineLength:
 Layout/MultilineArrayLineBreaks:
   Enabled: true
 
-# Start the assignment on the same line variable is mentioned.
 Layout/MultilineAssignmentLayout:
   EnforcedStyle: same_line
 
@@ -61,7 +56,6 @@ Layout/MultilineMethodArgumentLineBreaks:
 Layout/MultilineMethodParameterLineBreaks:
   Enabled: true
 
-# Prefer compact hash literals.
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
   Exclude:
@@ -70,17 +64,17 @@ Layout/SpaceInsideHashLiteralBraces:
 Lint/BooleanSymbol:
   Enabled: false
 
-# This option occasionally mangles identifier names
+# Preserve generated RBI identifiers.
 Lint/DeprecatedConstants:
   Exclude:
     - "**/*.rbi"
 
-# We use pattern assertion in tests to ensure correctness.
+# Tests use pattern assertions for behavioral checks.
 Lint/DuplicateMatchPattern:
   Exclude:
     - "test/**/*"
 
-# Fairly useful in tests for pattern assertions.
+# Allow empty pattern branches in those assertions.
 Lint/EmptyInPattern:
   Exclude:
     - "test/**/*"
@@ -97,11 +91,11 @@ Lint/SymbolConversion:
   Exclude:
     - "**/*.rbi"
 
-# Disabled for safety reasons, this option changes code semantics.
+# Autocorrection can change behavior.
 Lint/UnusedMethodArgument:
   AutoCorrect: false
 
-# This option is prone to causing accidental bugs.
+# Autocorrection can remove intentional assignments.
 Lint/UselessAssignment:
   AutoCorrect: false
   Exclude:
@@ -143,11 +137,11 @@ Metrics/PerceivedComplexity:
 Naming/AccessorMethodName:
   Enabled: false
 
-# Need to preserve block identifier for documentation.
+# Preserve block names in generated documentation.
 Naming/BlockForwarding:
   Enabled: false
 
-# Underscores are generally useful for disambiguation.
+# Keep underscores that disambiguate generated names.
 Naming/ClassAndModuleCamelCase:
   Enabled: false
 
@@ -161,7 +155,6 @@ Naming/PredicatePrefix:
 Naming/VariableNumber:
   Enabled: false
 
-# Nothing wrong with inline private methods.
 Style/AccessModifierDeclarations:
   Enabled: false
 
@@ -169,11 +162,11 @@ Style/AccessorGrouping:
   Exclude:
     - "**/*.rbi"
 
-# Behaviour of alias_method is more predictable.
+# Keep alias behavior predictable across scopes.
 Style/Alias:
   EnforcedStyle: prefer_alias_method
 
-# And/or have confusing precedence, avoid them.
+# Avoid the ambiguous precedence of `and` and `or`.
 Style/AndOr:
   EnforcedStyle: always
 
@@ -184,7 +177,7 @@ Style/BisectedAttrAccessor:
   Exclude:
     - "**/*.rbi"
 
-# We prefer nested modules in lib/, but are currently using compact style for tests.
+# Library code nests modules. Tests use compact names.
 Style/ClassAndModuleChildren:
   Exclude:
     - "test/**/*"
@@ -192,11 +185,11 @@ Style/ClassAndModuleChildren:
 Style/CommentAnnotation:
   Enabled: false
 
-# We should go back and add these docs, but ignore for now.
+# API references supply generated class documentation.
 Style/Documentation:
   Enabled: false
 
-# Allow explicit empty elses, for clarity.
+# Preserve explicit empty branches when they clarify control flow.
 Style/EmptyElse:
   Enabled: false
 
@@ -204,21 +197,21 @@ Style/EmptyMethod:
   Exclude:
     - "**/*.rbi"
 
-# We commonly use ENV['KEY'], it's OK.
+# Allow direct environment access in generated client code.
 Style/FetchEnvVar:
   Enabled: false
 
-# Just to be safe, ensure nobody is mutating our internal strings.
+# Prevent mutation of internal strings.
 Style/FrozenStringLiteralComment:
   EnforcedStyle: always
   Exclude:
     - "**/*.rbi"
 
-# Nothing wrong with clear if statements.
+# Keep imperative branches expanded.
 Style/IfUnlessModifier:
   Enabled: false
 
-# Rubocop is pretty bad about mangling single line lambdas.
+# Preserve generated single-line lambdas.
 Style/Lambda:
   Enabled: false
 
@@ -233,7 +226,6 @@ Style/MethodCallWithArgsParentheses:
 Style/MultilineBlockChain:
   Enabled: false
 
-# Perfectly fine.
 Style/MultipleComparison:
   Enabled: false
 
@@ -241,18 +233,17 @@ Style/MutableConstant:
   Exclude:
     - "**/*.rbi"
 
-# Not all parameters should be named.
 Style/NumberedParameters:
   Enabled: false
 
 Style/NumberedParametersLimit:
   Max: 2
 
-# Reasonable to use brackets for errors with long messages.
+# Allow brackets around long error messages.
 Style/RaiseArgs:
   Enabled: false
 
-# Be explicit about `RuntimeError`s.
+# Keep explicit `RuntimeError` names.
 Style/RedundantException:
   Enabled: false
 
@@ -268,7 +259,7 @@ Style/RedundantParentheses:
 Style/RegexpLiteral:
   EnforcedStyle: slashes
 
-# Allow explicit ifs, especially for imperative use.
+# Keep imperative conditionals explicit.
 Style/SafeNavigation:
   Enabled: false
 
@@ -277,20 +268,18 @@ Style/SignalException:
     - Rakefile
     - "**/*.rake"
 
-# We use these sparingly, where we anticipate future branches for the
-# inner conditional.
+# Preserve nested conditions that may gain branches.
 Style/SoleNestedConditional:
   Enabled: false
 
-# Prefer double quotes so that interpolation can be easily added.
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
-# Prefer explicit symbols for clarity; you can search for `:the_symbol`.
+# Keep symbol arrays searchable.
 Style/SymbolArray:
   EnforcedStyle: brackets
 
-# This option makes examples harder to read for ruby novices.
+# Keep examples readable for new Ruby users.
 Style/SymbolProc:
   Exclude:
     - "examples/**/*.rb"
