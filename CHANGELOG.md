@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.2 (2026-08-20)
+
+Full Changelog: [v0.10.1...v0.10.2](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.1...v0.10.2)
+
+### Documentation
+
+* refine public Ruby SDK text ([#49](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/49)) ([3d79615](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/3d79615cf4c1acc0ec8a6272d684302fe43e60dc))
+
 ## 0.10.1 (2026-08-18)
 
 Full Changelog: [v0.10.0...v0.10.1](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.0...v0.10.1)
