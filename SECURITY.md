@@ -12,8 +12,8 @@ Report vulnerabilities privately through
 Do not open public issues for secrets, credential handling defects, private
 data exposure, or package supply-chain concerns.
 
-We aim to acknowledge reports within 3 business days. We will coordinate a
-disclosure timeline after confirming the issue.
+Maintainers acknowledge reports within 3 business days.
+We coordinate disclosure after confirming the issue.
 
 ## Scope
 
