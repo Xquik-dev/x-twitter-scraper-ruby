@@ -403,8 +403,8 @@ module XTwitterScraper
         # Returns the raw value associated with the given key, if found. Otherwise, nil is
         # returned.
         #
-        # It is valid to lookup keys that are not in the API spec, for example to access
-        # undocumented features. This method does not parse response data into
+        # You may look up keys absent from the API spec, such as undocumented response fields.
+        # This method does not parse response data into
         # higher-level types. Lookup by anything other than a Symbol is an ArgumentError.
         #
         # @param key [Symbol]
