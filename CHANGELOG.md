@@ -1,5 +1,51 @@
 # Changelog
 
+## 0.11.0 (2026-08-21)
+
+Full Changelog: [v0.10.4...v0.11.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.4...v0.11.0)
+
+### Features
+
+* **api:** api update ([443d4ed](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/443d4edf5e3a420e7ebb302529f50201a8be452f))
+* **api:** api update ([8c33272](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/8c33272813c4e9305f62e5c9bdc3206268e1af29))
+* **api:** api update ([772ffdd](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/772ffdd682ee96f94334441b9fc5b1e109559993))
+* **api:** api update ([bce31f2](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/bce31f2f5ed3a264a7047afc6ca7a64db6ab89ca))
+* **api:** api update ([5447472](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/5447472f851835b211ec00905aad03e1400a0992))
+
+
+### Bug Fixes
+
+* **ci:** pin rubygems/configure-rubygems-credentials to v1.0.0 ([7d2cde5](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/7d2cde520114bba9680b2c98fbe699f75f9b5c04))
+* keep built gem for publication verification ([#13](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/13)) ([8a81835](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/8a81835e81fc4e0ff87dc060fe703172ed1e7cd7))
+* set homepage to docs.xquik.com, add documentation_uri to gemdocs ([0f8e806](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/0f8e806ff20df4700054a7df0e17aa89e2da4859))
+
+
+### Chores
+
+* add FUNDING.yml pointing to xquik.com ([d3d1aa3](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/d3d1aa31d475daeffcf5404622807d54d903e740))
+* add Ruby gem license metadata ([c8f4f22](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/c8f4f22d6991a9f4a3784c9cfaf9bb193cf476a8))
+* bound Ruby runtime dependencies ([efd14bb](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/efd14bb5e1659b37ad5ba84c3ccd176cae90dbf9))
+* **deps-dev:** bump rubocop from 1.88.2 to 1.89.0 ([#41](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/41)) ([9b7fa8f](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/9b7fa8fd6415bd088cd3cf0ca3af3c8c6f1ff5bb))
+* **deps:** bump actions/checkout from 6.0.2 to 7.0.1 ([#22](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/22)) ([6dac448](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/6dac44882cefffee705e4dbf465f03983ca4cdc4))
+* **deps:** bump github/codeql-action/upload-sarif from 4.37.1 to 4.37.3 ([#33](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/33)) ([c0a1466](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/c0a1466169e6ee705fc47cdfafed0937ce33a910))
+* **deps:** bump ruby/setup-ruby from 1.306.0 to 1.319.0 ([#23](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/23)) ([d4137aa](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/d4137aadaaa8ac17c3b7bd425106b094951d9870))
+* **deps:** support connection_pool 3 ([ad578c2](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/ad578c2453ff451f3317606f542baa491267a250))
+* enforce OpenSSF Gold quality gates ([dc973e5](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/dc973e5f93912093a4cde5ec3f3d6d20b8ddd4bc))
+* improve Ruby gem metadata ([163704e](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/163704efe4f31c50de445a26356fa2c37e56e952))
+* prepare 0.7.0 ([#29](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/29)) ([b7bce9f](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/b7bce9f47d4e6692b482988761199fe0bd98744d))
+* prepare v0.4.5 ([d2f5175](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/d2f51758d6c1a4dc04a18cc84b3b7d67761c067e))
+* update all dependencies ([#47](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/47)) ([ddbf4fb](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/ddbf4fba03e5bb673dce27baee0ab2f52ac384b8))
+
+
+### Documentation
+
+* add Contributor Covenant 2.1 Code of Conduct ([#2192](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/2192)) ([5b4ae3b](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/5b4ae3b58be2b73daa612d4fcf612418d9d65b07))
+* add DeepWiki badge ([f330302](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/f3303021da383a75fbb0bd1a7aecf2519bb68ddc))
+* clarify repository discovery ([7e544dd](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/7e544dd85f976165cb2a5ff46af65186743aafcd))
+* map common X data tasks ([#15](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/15)) ([754411a](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/754411a6aa38dfff58a29957258d2639a2b261ed))
+* refine public Ruby SDK text ([#49](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/49)) ([3d79615](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/3d79615cf4c1acc0ec8a6272d684302fe43e60dc))
+* refine Ruby SDK copy ([#51](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/51)) ([23b242e](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/23b242ecba301c86c006a0dca88a85bc45af8244))
+
 ## 0.10.4 (2026-08-21)
 
 Full Changelog: [v0.10.3...v0.10.4](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.3...v0.10.4)
