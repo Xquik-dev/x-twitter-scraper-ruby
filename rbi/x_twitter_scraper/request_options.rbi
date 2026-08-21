@@ -29,8 +29,7 @@ module XTwitterScraper
     sig { returns(T.nilable(String)) }
     attr_accessor :idempotency_key
 
-    # Extra query params to send with the request. These are `.merge`’d into any
-    # `query` given at the client level.
+    # Extra query params merge into any `query` given at the client level.
     sig do
       returns(
         T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))])
@@ -38,8 +37,7 @@ module XTwitterScraper
     end
     attr_accessor :extra_query
 
-    # Extra headers to send with the request. These are `.merged`’d into any
-    # `extra_headers` given at the client level.
+    # Extra headers merge into any `extra_headers` given at the client level.
     sig { returns(T.nilable(T::Hash[String, T.nilable(String)])) }
     attr_accessor :extra_headers
 

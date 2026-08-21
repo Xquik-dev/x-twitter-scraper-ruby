@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.4 (2026-08-21)
+
+Full Changelog: [v0.10.3...v0.10.4](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.3...v0.10.4)
+
+### Documentation
+
+* Remove repeated SDK copy and repair public links.
+
 ## 0.10.3 (2026-08-21)
 
 Full Changelog: [v0.10.2...v0.10.3](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.2...v0.10.3)
@@ -272,8 +280,6 @@ Full Changelog: [v0.1.0...v0.2.0](https://github.com/Xquik-dev/x-twitter-scraper
 * update SDK settings ([323c79a](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/323c79ae37c1a89db3bcafdb703da447e8c3f9e1))
 
 ## 0.1.0 (2026-03-30)
-
-Full Changelog: [v0.0.1...v0.1.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.0.1...v0.1.0)
 
 ### Features
 

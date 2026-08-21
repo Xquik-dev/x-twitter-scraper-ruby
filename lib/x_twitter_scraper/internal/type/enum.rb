@@ -78,8 +78,7 @@ module XTwitterScraper
 
         # @api private
         #
-        # Unlike with primitives, `Enum` additionally validates that the value is a member
-        # of the enum.
+        # Unlike primitives, `Enum` validates membership.
         #
         # @param value [String, Symbol, Object]
         #

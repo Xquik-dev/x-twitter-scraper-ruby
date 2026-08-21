@@ -1,6 +1,6 @@
 # Contributing
 
-## Set Up
+## Set up
 
 The `.ruby-version` file works with rbenv and asdf's Ruby plugin.
 Install that Ruby version, then run:
@@ -11,13 +11,13 @@ Install that Ruby version, then run:
 
 Run `bundle exec rake` to list every task.
 
-## Generated Code
+## Generated code
 
 Most SDK files come from the API generator.
 Direct edits survive regeneration but can create conflicts.
 The generator never changes `lib/x_twitter_scraper/helpers/` or `examples/`.
 
-## Add Examples
+## Add examples
 
 Files under `examples/` remain handwritten.
 
@@ -35,7 +35,7 @@ chmod +x examples/<name>.rb
 ruby examples/<name>.rb
 ```
 
-## Use a Source Checkout
+## Use a source checkout
 
 Reference GitHub in your `Gemfile`:
 
@@ -49,7 +49,7 @@ Reference a local clone instead:
 gem "x-twitter-scraper", path: "<path-to-repo>"
 ```
 
-## Run Checks
+## Run checks
 
 ```bash
 bundle exec rake test
@@ -60,10 +60,9 @@ bundle exec rake docs:preview PORT=8808
 
 `format` rewrites files. `docs:preview` starts a local server.
 
-## Editor Support
+## Editor support
 
-Ruby LSP supports definition lookup. Solargraph supports completion.
-Install both to use both features.
+Install Ruby LSP for definition lookup and Solargraph for completion.
 
 Sorbet works here with 2 known caveats:
 

@@ -1,4 +1,4 @@
-# Xquik Ruby SDK: Twitter Search, Followers & X Automation
+# Xquik Ruby SDK: Twitter search, followers & X automation
 
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13739/badge)](https://www.bestpractices.dev/projects/13739)
 
@@ -8,7 +8,7 @@ Use documented Xquik REST routes as a Twitter API alternative.
 
 [Ruby SDK Guide](https://docs.xquik.com/sdks/ruby) | [REST API](https://docs.xquik.com/api-reference/overview) | [RubyDoc](https://gemdocs.org/gems/x-twitter-scraper) | [Webhooks](https://docs.xquik.com/api-reference/webhooks/create)
 
-## Common Twitter & X Tasks
+## Common Twitter & X tasks
 
 | Task | REST Route | Usage |
 | --- | --- | --- |
@@ -24,12 +24,14 @@ Use documented Xquik REST routes as a Twitter API alternative.
 
 ## Installation
 
+Requires Ruby 3.2.0 or higher.
+
 Add the gem to your `Gemfile`:
 
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "x-twitter-scraper", "~> 0.10.3"
+gem "x-twitter-scraper", "~> 0.10.4"
 ```
 
 <!-- x-release-please-end -->
@@ -41,7 +43,7 @@ require "bundler/setup"
 require "x_twitter_scraper"
 
 x_twitter_scraper = XTwitterScraper::Client.new(
-  api_key: ENV["X_TWITTER_SCRAPER_API_KEY"] # This is the default and can be omitted
+  api_key: ENV["X_TWITTER_SCRAPER_API_KEY"] # Optional; the client reads this variable.
 )
 
 response = x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
@@ -49,7 +51,7 @@ response = x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
 puts(response)
 ```
 
-### Handling Errors
+### Handling errors
 
 The SDK raises an `APIError` subclass for connection failures and non-2xx responses:
 
@@ -66,8 +68,6 @@ rescue XTwitterScraper::Errors::APIStatusError => e
   puts(e.status)
 end
 ```
-
-The SDK uses these error classes:
 
 | Cause            | Error Type                 |
 | ---------------- | -------------------------- |
@@ -90,12 +90,12 @@ It uses exponential backoff with 2 retries by default.
 Set `max_retries` to change or disable retries:
 
 ```ruby
-# Set the client default:
+# Change the client default.
 x_twitter_scraper = XTwitterScraper::Client.new(
-  max_retries: 0 # default is 2
+  max_retries: 0
 )
 
-# Override one request:
+# Override one request.
 x_twitter_scraper.account.retrieve(request_options: {max_retries: 5})
 ```
 
@@ -104,23 +104,20 @@ x_twitter_scraper.account.retrieve(request_options: {max_retries: 5})
 Requests time out after 60 seconds. Set `timeout` to change or disable this limit:
 
 ```ruby
-# Set the client default:
+# Change the client default.
 x_twitter_scraper = XTwitterScraper::Client.new(
-  timeout: nil # default is 60
+  timeout: nil
 )
 
-# Override one request:
+# Override one request.
 x_twitter_scraper.account.retrieve(request_options: {timeout: 5})
 ```
 
 Timeouts raise `XTwitterScraper::Errors::APITimeoutError` and follow the retry policy.
 
-## Advanced Concepts
+## BaseModel
 
-### BaseModel
-
-All parameter and response objects inherit from `XTwitterScraper::Internal::Type::BaseModel`.
-The base model provides these operations:
+All parameter and response objects inherit from `XTwitterScraper::Internal::Type::BaseModel` and support:
 
 1. Access known and unknown fields with `obj[:prop]`.
 2. Destructure fields with `obj => {prop: prop}` or pattern matching.
@@ -128,7 +125,7 @@ The base model provides these operations:
 4. Print classes and instances in a readable format.
 5. Convert values with `#to_h`, `#deep_to_h`, `#to_json`, or `#to_yaml`.
 
-### Custom Requests
+## Custom requests
 
 Use `extra_query`, `extra_body`, or `extra_headers` under `request_options`.
 Matching `extra_` values override documented parameters.
@@ -158,7 +155,7 @@ response = client.request(
 )
 ```
 
-### Concurrency & Connection Pooling
+## Concurrency & connection pooling
 
 Clients are thread-safe. Fork them only when no HTTP requests are in flight.
 Each client has an HTTP connection pool with a default size of 99.
@@ -215,17 +212,10 @@ This package follows [SemVer](https://semver.org/spec/v2.0.0.html). Version `0` 
 
 Changes to non-runtime `*.rbi` and `*.rbs` definitions remain non-breaking.
 
-## Requirements
-
-Ruby 3.2.0 or higher.
-
-## Security & Support
+## Help & contributing
 
 - Report vulnerabilities through the [security policy](SECURITY.md).
 - Ask usage questions through the [organization support policy](https://github.com/Xquik-dev/.github/blob/main/SUPPORT.md).
-
-## Contributing
-
-Read the [contribution guide](CONTRIBUTING.md).
+- Read the [contribution guide](CONTRIBUTING.md).
 
 Xquik is an independent third-party service. Not affiliated with X Corp. "Twitter" and "X" are trademarks of X Corp.

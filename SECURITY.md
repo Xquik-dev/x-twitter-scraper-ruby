@@ -1,10 +1,10 @@
-# Security Policy
+# Security policy
 
-## Supported Versions
+## Supported versions
 
 Security fixes target the latest published release.
 
-## Reporting A Vulnerability
+## Reporting a vulnerability
 
 Report vulnerabilities privately through
 [support@xquik.com](mailto:support@xquik.com).

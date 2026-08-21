@@ -37,16 +37,14 @@ module XTwitterScraper
     optional :idempotency_key, String
 
     # @!attribute extra_query
-    #   Extra query params to send with the request. These are `.merge`’d into any
-    #   `query` given at the client level.
+    #   Extra query params merge into any `query` given at the client level.
     #
     #   @return [Hash{String=>Array<String>, String, nil}, nil]
     optional :extra_query,
              XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::ArrayOf[String]]
 
     # @!attribute extra_headers
-    #   Extra headers to send with the request. These are `.merged`’d into any
-    #   `extra_headers` given at the client level.
+    #   Extra headers merge into any `extra_headers` given at the client level.
     #
     #   @return [Hash{String=>String, nil}, nil]
     optional :extra_headers, XTwitterScraper::Internal::Type::HashOf[String, nil?: true]
