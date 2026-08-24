@@ -1,9 +1,10 @@
 # Contributing
 
+Follow the shared [Xquik contribution policy][contribution-policy].
+
 ## Set up
 
-The `.ruby-version` file works with rbenv and asdf's Ruby plugin.
-Install that Ruby version, then run:
+Install `.ruby-version` through rbenv or asdf, then run:
 
 ```bash
 ./scripts/bootstrap
@@ -13,8 +14,7 @@ Run `bundle exec rake` to list every task.
 
 ## Generated code
 
-Most SDK files come from the API generator.
-Direct edits survive regeneration but can create conflicts.
+The API generator owns most SDK files. Direct edits can conflict later.
 The generator never changes `lib/x_twitter_scraper/helpers/` or `examples/`.
 
 ## Add examples
@@ -37,15 +37,12 @@ ruby examples/<name>.rb
 
 ## Use a source checkout
 
-Reference GitHub in your `Gemfile`:
+Reference GitHub or a local clone in your `Gemfile`:
 
 ```ruby
+# GitHub
 gem "x-twitter-scraper", git: "https://github.com/Xquik-dev/x-twitter-scraper-ruby"
-```
-
-Reference a local clone instead:
-
-```ruby
+# Local clone
 gem "x-twitter-scraper", path: "<path-to-repo>"
 ```
 
@@ -62,11 +59,8 @@ bundle exec rake docs:preview PORT=8808
 
 ## Editor support
 
-Install Ruby LSP for definition lookup and Solargraph for completion.
+Use Ruby LSP for definitions and Solargraph for completion. Sorbet may select
+the wrong declaration or report duplicate generic RBI members. Neither warning
+affects downstream gem users.
 
-Sorbet works here with 2 known caveats:
-
-- Definition lookup can select the wrong declaration.
-- Generic RBI types can report duplicate type members.
-
-These warnings do not affect downstream gem users.
+[contribution-policy]: https://github.com/Xquik-dev/.github/blob/main/CONTRIBUTING.md
