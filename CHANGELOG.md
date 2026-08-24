@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.5 (2026-08-24)
+
+Full Changelog: [v0.10.4...v0.10.5](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.4...v0.10.5)
+
+### Documentation
+
+* enforce source LOC reduction ([#56](https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues/56)) ([cb523a7](https://github.com/Xquik-dev/x-twitter-scraper-ruby/commit/cb523a773b5f78273a673082ce75a51f9f0ad05b))
+
 ## 0.10.4 (2026-08-21)
 
 Full Changelog: [v0.10.3...v0.10.4](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.3...v0.10.4)
