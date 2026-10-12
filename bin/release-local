@@ -1,0 +1,142 @@
+#!/usr/bin/env bash
+
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Publishes the gem to RubyGems.org from this machine, then tags and releases it on GitHub.
+
+set -euo pipefail
+
+cd -- "$(dirname -- "$0")/.."
+
+readonly gem_name="x-twitter-scraper"
+readonly gemspec_file="x_twitter_scraper.gemspec"
+readonly keychain_service="xquik-rubygems-api-key"
+
+export BUNDLE_FROZEN=true
+
+step() {
+  echo "==> $1"
+}
+
+stop() {
+  echo "Release stopped: $1" >&2
+  exit 1
+}
+
+notes_file="$(mktemp)"
+cleanup() {
+  if [[ -n "${notes_file:-}" ]]; then
+    rm -f -- "$notes_file"
+  fi
+}
+trap cleanup EXIT
+
+step "Checking that the working tree is clean"
+if [[ -n "$(git status --porcelain)" ]]; then
+  stop "the working tree has changes. Commit or remove them first."
+fi
+
+step "Checking that main is checked out"
+if [[ "$(git symbolic-ref --quiet --short HEAD || true)" != "main" ]]; then
+  stop "releases run from main. Run git switch main first."
+fi
+
+step "Checking that main matches origin/main"
+git fetch --quiet origin main || stop "could not fetch origin. Check the network and GitHub access."
+if [[ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]]; then
+  stop "main differs from origin/main. Pull or push until they match."
+fi
+
+step "Reading the version from ${gemspec_file}"
+version="$(ruby -e 'print Gem::Specification.load(ARGV.fetch(0)).version' "$gemspec_file")" ||
+  stop "could not load ${gemspec_file}. Fix the error above first."
+if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]]; then
+  stop "version ${version} is not a semantic version. Fix lib/x_twitter_scraper/version.rb."
+fi
+readonly version
+readonly tag="v${version}"
+readonly gem_file="pkg/${gem_name}-${version}.gem"
+
+step "Checking that tag ${tag} is new"
+remote_tag="$(git ls-remote --tags origin "refs/tags/${tag}")" ||
+  stop "could not read tags from origin. Check the network and GitHub access."
+if [[ -n "$remote_tag" ]]; then
+  stop "tag ${tag} already exists on origin. Bump the version first."
+fi
+if git rev-parse --quiet --verify "refs/tags/${tag}" >/dev/null; then
+  stop "tag ${tag} exists only in this clone. Delete it with git tag -d ${tag}, then retry."
+fi
+
+step "Reading the ${version} notes from CHANGELOG.md"
+awk -v version="$version" '
+  /^## / {
+    if (found) exit
+    if ($2 == version) { found = 1; next }
+  }
+  found { print }
+' CHANGELOG.md >"$notes_file"
+if ! grep -q '[^[:space:]]' "$notes_file"; then
+  stop "CHANGELOG.md has no notes for ${version}. Add a ## ${version} section first."
+fi
+
+step "Checking GitHub CLI access"
+gh auth status >/dev/null 2>&1 || stop "the GitHub CLI is not signed in. Run gh auth login first."
+
+step "Running bin/check-local"
+bin/check-local || stop "a local check failed. Fix it, then retry."
+
+step "Auditing gems for known vulnerabilities"
+bundle exec bundle-audit check --update ||
+  stop "bundle-audit found a vulnerable gem or an insecure source. Update Gemfile.lock first."
+
+step "Building ${gem_file}"
+source_date_epoch="$(git log -1 --format=%ct)"
+SOURCE_DATE_EPOCH="$source_date_epoch" bundle exec rake clobber build:gem ||
+  stop "the gem build failed. Fix the error above first."
+if [[ ! -f "$gem_file" ]]; then
+  stop "the build did not produce ${gem_file}. Check the build output."
+fi
+
+step "Checking whether RubyGems.org already has ${gem_name} ${version}"
+registry_status="$(
+  curl --connect-timeout 10 --max-time 30 --proto '=https' --silent --show-error \
+    --output /dev/null --write-out '%{http_code}' \
+    "https://rubygems.org/api/v2/rubygems/${gem_name}/versions/${version}.json"
+)" || stop "could not reach RubyGems.org. Check the network, then retry."
+
+case "$registry_status" in
+  200)
+    echo "RubyGems.org already has ${gem_name} ${version}. Skipping the upload."
+    ;;
+  404)
+    step "Reading the RubyGems API key from Keychain service ${keychain_service}"
+    if ! api_key="$(security find-generic-password -s "$keychain_service" -w 2>/dev/null)"; then
+      stop "Keychain service ${keychain_service} is missing. The owner must add the RubyGems API key there."
+    fi
+
+    step "Uploading ${gem_file} to RubyGems.org"
+    if ! GEM_HOST_API_KEY="$api_key" gem push "$gem_file"; then
+      unset api_key
+      stop "gem push failed. Read the RubyGems output above, then retry."
+    fi
+    unset api_key
+    ;;
+  *)
+    stop "RubyGems.org answered HTTP ${registry_status}. Retry later."
+    ;;
+esac
+
+step "Creating the annotated tag ${tag}"
+git tag --annotate "$tag" --message "Release ${version}"
+
+step "Pushing tag ${tag} to origin"
+git push origin "refs/tags/${tag}" ||
+  stop "the tag push failed. Run git push origin ${tag}, then create the GitHub release."
+
+step "Creating the GitHub release ${tag}"
+gh release create "$tag" --title "$tag" --notes-file "$notes_file" --verify-tag ||
+  stop "the GitHub release failed. Run gh release create ${tag} with the CHANGELOG.md notes."
+
+echo "Released ${gem_name} ${version}."

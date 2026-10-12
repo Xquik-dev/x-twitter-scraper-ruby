@@ -48,6 +48,19 @@ gem "x-twitter-scraper", path: "<path-to-repo>"
 
 ## Run checks
 
+Run every check before you open a pull request:
+
+```bash
+bin/check-local
+```
+
+It verifies a reproducible gem build, runs RuboCop, Steep and Sorbet, audits
+gems with bundle-audit, runs the tests and enforces coverage. It also runs
+`reuse lint` when [REUSE](https://reuse.software) is installed. It stops at the
+first failure and names the failed check.
+
+Run single tasks while you work:
+
 ```bash
 bundle exec rake test
 bundle exec rake lint
@@ -56,6 +69,23 @@ bundle exec rake docs:preview PORT=8808
 ```
 
 `format` rewrites files. `docs:preview` starts a local server.
+
+## Release
+
+A maintainer releases from a local machine with:
+
+```bash
+bin/release-local
+```
+
+The script runs on a clean `main` that matches `origin/main`. It reads the
+version from the gemspec and stops if tag `v<version>` already exists. It runs
+`bin/check-local` and `bundle-audit`, then builds the gem. It pushes the gem to
+RubyGems.org unless that version is already there. It then pushes the annotated
+tag and creates a GitHub release from the version's `CHANGELOG.md` section.
+
+The RubyGems API key stays in the macOS Keychain under the service name
+`xquik-rubygems-api-key`. The script reads it only for `gem push`.
 
 ## Editor support
 

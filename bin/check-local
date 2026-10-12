@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Runs every repository check on this machine and stops at the first failure.
+
+set -euo pipefail
+
+cd -- "$(dirname -- "$0")/.."
+
+export BUNDLE_FROZEN=true
+
+run_check() {
+  local name="$1"
+  local next_step="$2"
+  shift 2
+
+  echo "==> ${name}"
+  if ! "$@"; then
+    echo "Check failed: ${name}. ${next_step}" >&2
+    exit 1
+  fi
+}
+
+run_check "Installed gems" \
+  "Run ./scripts/bootstrap to install the locked gems." \
+  bundle check
+
+run_check "Reproducible gem build" \
+  "Remove nondeterministic build inputs, then rerun bin/check-local." \
+  bundle exec ruby scripts/check_reproducible.rb
+
+run_check "Lint and type checks" \
+  "Fix the reported offenses. Run ./scripts/format for style issues." \
+  ./scripts/lint
+
+run_check "Dependency audit" \
+  "Update the vulnerable gems in Gemfile.lock, then rerun bin/check-local." \
+  bundle exec bundle-audit check --update
+
+run_check "Tests" \
+  "Fix the failing tests, then rerun bin/check-local." \
+  ./scripts/test
+
+run_check "Coverage" \
+  "Add tests until coverage meets the thresholds." \
+  bundle exec ruby scripts/coverage.rb
+
+if command -v reuse >/dev/null 2>&1; then
+  run_check "REUSE license compliance" \
+    "Add SPDX license data for the reported files." \
+    reuse lint
+else
+  echo "==> Skipping REUSE license compliance: reuse is not installed. Install it with pipx install reuse."
+fi
+
+echo "All checks passed."
