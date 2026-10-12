@@ -59,6 +59,10 @@ gems with bundle-audit, runs the tests and enforces coverage. It also runs
 `reuse lint` when [REUSE](https://reuse.software) is installed. It stops at the
 first failure and names the failed check.
 
+On a clean tree whose commit is on GitHub, it posts the result as the
+`xquik-local-checks` commit status. Pull requests need that status to merge.
+Pass `--no-status` to skip it.
+
 Run single tasks while you work:
 
 ```bash

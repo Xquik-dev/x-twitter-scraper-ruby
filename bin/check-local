@@ -5,23 +5,97 @@
 # SPDX-License-Identifier: Apache-2.0
 
 # Runs every repository check on this machine and stops at the first failure.
+# It posts the result as the xquik-local-checks commit status on GitHub.
+# Pass --no-status to skip the commit status.
 
 set -euo pipefail
 
 cd -- "$(dirname -- "$0")/.."
 
+readonly status_repo="Xquik-dev/x-twitter-scraper-ruby"
+readonly status_context="xquik-local-checks"
+
 export BUNDLE_FROZEN=true
+
+post_enabled=true
+for arg in "$@"; do
+  case "$arg" in
+    --no-status) post_enabled=false ;;
+    *)
+      echo "Unknown option ${arg}. The only option is --no-status." >&2
+      exit 2
+      ;;
+  esac
+done
+
+status_sha=""
+if [[ "$post_enabled" == false ]]; then
+  echo "Commit status not posted: --no-status was passed."
+elif ! command -v gh >/dev/null 2>&1; then
+  echo "Commit status not posted: the GitHub CLI is not installed."
+elif [[ -n "$(git status --porcelain)" ]]; then
+  echo "Commit status not posted: the working tree has uncommitted changes."
+else
+  head_sha="$(git rev-parse HEAD)"
+  if gh api "repos/${status_repo}/commits/${head_sha}" --silent >/dev/null 2>&1; then
+    status_sha="$head_sha"
+  else
+    echo "Commit status not posted: commit ${head_sha:0:7} is not on GitHub. Push it first."
+  fi
+fi
+
+post_status() {
+  local state="$1"
+  local description="$2"
+
+  if [[ -z "$status_sha" ]]; then
+    return 0
+  fi
+  if ! gh api "repos/${status_repo}/statuses/${status_sha}" --silent \
+    -f state="$state" -f context="$status_context" -f description="$description" >/dev/null 2>&1; then
+    echo "Commit status ${state} not posted: GitHub rejected it. Run gh auth status to check access." >&2
+  fi
+}
+
+current_check=""
+success_summary=""
+test_log="$(mktemp)"
+
+finish() {
+  local exit_code=$?
+
+  if [[ "$exit_code" -eq 0 ]]; then
+    post_status success "$success_summary"
+  elif [[ -n "$current_check" ]]; then
+    post_status failure "${current_check} failed. Run bin/check-local for details."
+  else
+    post_status failure "Local checks stopped early. Run bin/check-local for details."
+  fi
+  if [[ -n "${test_log:-}" ]]; then
+    rm -f -- "$test_log"
+  fi
+}
+trap finish EXIT
+
+post_status pending "Local checks are running."
 
 run_check() {
   local name="$1"
   local next_step="$2"
   shift 2
 
+  current_check="$name"
   echo "==> ${name}"
   if ! "$@"; then
     echo "Check failed: ${name}. ${next_step}" >&2
     exit 1
   fi
+  current_check=""
+}
+
+run_tests() {
+  local test_script="./scripts/test"
+  "$test_script" | tee "$test_log"
 }
 
 run_check "Installed gems" \
@@ -42,18 +116,28 @@ run_check "Dependency audit" \
 
 run_check "Tests" \
   "Fix the failing tests, then rerun bin/check-local." \
-  ./scripts/test
+  run_tests
 
 run_check "Coverage" \
   "Add tests until coverage meets the thresholds." \
   bundle exec ruby scripts/coverage.rb
 
+test_counts="$(sed -n -E 's/^([0-9]+) runs, .*, ([0-9]+) skips$/\1 \2/p' "$test_log" | tail -n 1)"
+if [[ -n "$test_counts" ]]; then
+  read -r test_runs test_skips <<<"$test_counts"
+  tests_label="tests ($((test_runs - test_skips)) passed)"
+else
+  tests_label="tests"
+fi
+
 if command -v reuse >/dev/null 2>&1; then
   run_check "REUSE license compliance" \
     "Add SPDX license data for the reported files." \
     reuse lint
+  success_summary="Reproducible build, lint, types, audit, ${tests_label}, coverage & REUSE passed."
 else
   echo "==> Skipping REUSE license compliance: reuse is not installed. Install it with pipx install reuse."
+  success_summary="Reproducible build, lint, types, audit, ${tests_label} & coverage passed. REUSE skipped."
 fi
 
 echo "All checks passed."
