@@ -16,15 +16,19 @@ require_relative "script_support"
 class ReleaseLocalScriptTest < Minitest::Test
   include ScriptSupport
 
-  # Answers as RubyGems.org does for an account that uses one-time codes and has no security device.
+  # Answers as RubyGems.org does for an account that uses one-time codes. With a security device, it
+  # hands out a verification link and reports the approval as done on the first poll.
   class FakeGemHost
     MFA_REFUSAL = "You have enabled multifactor authentication but your request doesn't have the " \
                   "correct OTP code. Please check it and retry."
+    SECURITY_DEVICE_LINK = "https://rubygems.org/webauthn_verification/fixture-token"
 
     attr_reader :requests
+    attr_writer :security_device
 
     def initialize(valid_code)
       @valid_code = valid_code
+      @security_device = false
       @requests = []
       @server = TCPServer.new("127.0.0.1", 0)
       @thread = Thread.new { serve }
@@ -65,6 +69,12 @@ class ReleaseLocalScriptTest < Minitest::Test
     end
 
     def response(path, code)
+      if @security_device
+        return ["200 OK", SECURITY_DEVICE_LINK] if path == "/api/v1/webauthn_verification"
+        if path == "/api/v1/webauthn_verification/fixture-token/status.json"
+          return ["200 OK", %({"status":"success","code":"#{@valid_code}"})]
+        end
+      end
       return ["404 Not Found", "This account has no security device."] unless path == "/api/v1/gems"
       return ["401 Unauthorized", MFA_REFUSAL] unless code == @valid_code
 
@@ -130,6 +140,18 @@ class ReleaseLocalScriptTest < Minitest::Test
         done
         printf '%s\\n' "${line# }" >>"$FAKE_LOGS/gh"
       fi
+    SH
+    "open" => <<~SH,
+      #!/bin/sh
+      # Shadows macOS open on PATH, so no test can open a browser. The script must use
+      # RELEASE_LINK_OPENER instead, so a call here is a failure the tests report.
+      printf '%s\\n' "$*" >>"$FAKE_LOGS/open-from-path"
+      exit 1
+    SH
+    "link-opener" => <<~SH,
+      #!/bin/sh
+      # Stands in for the browser. RELEASE_LINK_OPENER names it in every test.
+      printf '%s\\n' "$*" >>"$FAKE_LOGS/open"
     SH
     "security" => <<~SH
       #!/bin/sh
@@ -221,6 +243,7 @@ class ReleaseLocalScriptTest < Minitest::Test
       "NO_PROXY" => "127.0.0.1",
       "REAL_GEM" => ScriptSupport.which("gem"),
       "FAKE_GEM_HOST" => @host.url,
+      "RELEASE_LINK_OPENER" => File.join(@root, "bin", "link-opener"),
       "FAKE_LOGS" => @logs,
       "FAKE_REGISTRY_STATUS" => registry_status
     )
@@ -254,6 +277,22 @@ class ReleaseLocalScriptTest < Minitest::Test
       prompt = reader.expect("Code:", 30)
       output << prompt.to_a.join
       writer.puts(code) if prompt
+      begin
+        loop { output << reader.readpartial(4096) }
+      rescue EOFError, Errno::EIO
+        nil
+      end
+      status = Process.wait2(pid).last
+    end
+    [status.exitstatus, output]
+  end
+
+  # Runs the release in a terminal and types nothing, as with a security device.
+  def release_in_terminal_without_typing(variables)
+    pairs = environment(variables).map { |name, value| "#{name}=#{value}" }
+    output = +""
+    status = nil
+    PTY.spawn("/usr/bin/env", "-i", *pairs, @script) do |reader, _writer, pid|
       begin
         loop { output << reader.readpartial(4096) }
       rescue EOFError, Errno::EIO
@@ -340,6 +379,42 @@ class ReleaseLocalScriptTest < Minitest::Test
       ],
       published
     )
+  end
+
+  def test_opens_the_security_device_link_once_the_moment_gem_push_prints_it
+    @host.security_device = true
+
+    status, output = release_in_terminal_without_typing(KEYCHAIN)
+
+    assert_equal(0, status, output)
+    assert_equal(1, log("open").size, output)
+    assert_match(%r{\Ahttps://rubygems\.org/webauthn_verification/fixture-token\?port=\d+\z}, log("open").first)
+    assert_includes(output, log("open").first)
+    assert_includes(output, "==> Opening the security device link in the browser. Approve the release there.")
+    assert_equal(
+      [
+        [
+          "#{PUSH} code=",
+          "POST /api/v1/webauthn_verification key=not-a-real-api-key code=",
+          "GET /api/v1/webauthn_verification/fixture-token/status.json key=not-a-real-api-key code=",
+          "#{PUSH} code=123456"
+        ],
+        ["v9.9.9"],
+        [RELEASE]
+      ],
+      published
+    )
+    refute_includes(output, "not-a-real-api-key")
+    assert_empty(log("open-from-path"))
+  end
+
+  # The real open would show the owner a browser window, so it must never be the one that runs.
+  def test_no_test_can_reach_the_real_open
+    path = environment.fetch("PATH").split(File::PATH_SEPARATOR)
+    first_open = path.map { |folder| File.join(folder, "open") }.find { |file| File.executable?(file) }
+
+    assert_equal(File.join(@root, "bin", "open"), first_open)
+    assert_equal(File.join(@root, "bin", "link-opener"), environment.fetch("RELEASE_LINK_OPENER"))
   end
 
   def test_stops_without_a_tag_when_rubygems_refuses_the_code
