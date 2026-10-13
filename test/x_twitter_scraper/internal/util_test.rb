@@ -210,9 +210,8 @@ class XTwitterScraper::Test::UtilFormDataEncodingTest < Minitest::Test
     def initialize(headers, io)
       encoded = io.to_a
       @ctype = headers["content-type"]
-      # rubocop:disable Lint/EmptyBlock
+      # rubocop:disable-next Lint/EmptyBlock
       @io = XTwitterScraper::Internal::Util::ReadIOAdapter.new(encoded.to_enum) {}
-      # rubocop:enable Lint/EmptyBlock
       @c_len = encoded.join.bytesize.to_s
       super()
     end
@@ -305,9 +304,8 @@ class XTwitterScraper::Test::UtilIOAdapterTest < Minitest::Test
     }
     cases.each do |input, expected|
       io = StringIO.new
-      # rubocop:disable Lint/EmptyBlock
+      # rubocop:disable-next Lint/EmptyBlock
       adapter = XTwitterScraper::Internal::Util::ReadIOAdapter.new(input) {}
-      # rubocop:enable Lint/EmptyBlock
       IO.copy_stream(adapter, io)
       assert_equal(expected, io.string)
     end

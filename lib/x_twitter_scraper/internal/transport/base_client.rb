@@ -16,7 +16,7 @@ module XTwitterScraper
         # from whatwg fetch spec
         MAX_REDIRECTS = 20
 
-        # rubocop:disable Style/MutableConstant
+        # rubocop:disable-next Style/MutableConstant
         PLATFORM_HEADERS =
           {
             "x-stainless-arch" => XTwitterScraper::Internal::Util.arch,
@@ -26,7 +26,6 @@ module XTwitterScraper
             "x-stainless-runtime" => ::RUBY_ENGINE,
             "x-stainless-runtime-version" => ::RUBY_ENGINE_VERSION
           }
-        # rubocop:enable Style/MutableConstant
 
         class << self
           # @api private
@@ -551,9 +550,8 @@ module XTwitterScraper
         #
         # @return [String]
         def inspect
-          # rubocop:disable Layout/LineLength
+          # rubocop:disable-next Layout/LineLength
           "#<#{self.class.name}:0x#{object_id.to_s(16)} base_url=#{@base_url} max_retries=#{@max_retries} timeout=#{@timeout}>"
-          # rubocop:enable Layout/LineLength
         end
 
         define_sorbet_constant!(:RequestComponents) do

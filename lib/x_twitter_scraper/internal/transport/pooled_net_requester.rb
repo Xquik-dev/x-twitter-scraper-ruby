@@ -137,7 +137,7 @@ module XTwitterScraper
           req = nil
           finished = false
 
-          # rubocop:disable Metrics/BlockLength
+          # rubocop:disable-next Metrics/BlockLength
           enum = Enumerator.new do |y|
             next if finished
 
@@ -185,7 +185,6 @@ module XTwitterScraper
           rescue StandardError
             raise XTwitterScraper::Errors::APIConnectionError.new(url: url, request: req)
           end
-          # rubocop:enable Metrics/BlockLength
 
           _, response = enum.next
           body = XTwitterScraper::Internal::Util.fused_enum(enum, external: true) do

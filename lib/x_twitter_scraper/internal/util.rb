@@ -774,9 +774,8 @@ module XTwitterScraper
         def close_fused!(enum)
           return unless enum.is_a?(Enumerator)
 
-          # rubocop:disable Lint/UnreachableLoop
+          # rubocop:disable-next Lint/UnreachableLoop
           enum.rewind.each { break }
-          # rubocop:enable Lint/UnreachableLoop
         end
 
         # @api private
