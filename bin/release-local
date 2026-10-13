@@ -15,7 +15,9 @@
 #
 # RubyGems asks for a one-time code when the account uses MFA. In a terminal,
 # gem push asks for it at push time. Without a terminal, set GEM_HOST_OTP_CODE
-# to a current code. RubyGems reads that variable itself.
+# to a current code. RubyGems reads that variable itself. An account with a
+# security device gets a link instead, and this script opens it in the
+# default browser the moment gem push prints it.
 
 set -euo pipefail
 
@@ -45,6 +47,49 @@ step() {
 stop() {
   echo "$1" >&2
   exit 1
+}
+
+# Runs a command on a new pseudo-terminal. Ruby holds back what gem push prints
+# when its output is a pipe, so gem push keeps a terminal. The script tool
+# takes its command in 2 ways. BSD and macOS read it as arguments, and
+# util-linux reads it as 1 string.
+on_terminal() {
+  if script -q /dev/null true >/dev/null 2>&1 </dev/null; then
+    script -q /dev/null "$@"
+  else
+    script -qec "$(printf '%q ' "$@")" /dev/null
+  fi
+}
+
+# Passes gem push's output through byte by byte, so a Code prompt shows at
+# once. It opens the first RubyGems security device link in the default
+# browser, once, because RubyGems waits only 5 minutes for the approval.
+# RELEASE_LINK_OPENER names the command that opens it, open by default, so
+# the script tests can put a stand-in there.
+open_security_device_link() {
+  ruby -e '
+    STDOUT.sync = true
+    line = +""
+    opened = false
+    begin
+      loop do
+        chunk = STDIN.readpartial(4096)
+        STDOUT.write(chunk)
+        line << chunk
+        while (newline = line.index("\n"))
+          text = line.slice!(0..newline)
+          link = text[%r{https://rubygems\.org/webauthn_verification/\S+}]
+          next if opened || link.nil?
+
+          opened = true
+          STDERR.puts("==> Opening the security device link in the browser. Approve the release there.")
+          system(ARGV.fetch(0), link, out: File::NULL, err: File::NULL)
+        end
+      end
+    rescue EOFError
+      nil
+    end
+  ' "${RELEASE_LINK_OPENER:-open}"
 }
 
 if [[ "$dry_run" == false && -z "${RUBYGEMS_KEYCHAIN_SERVICE:-}" ]]; then
@@ -189,7 +234,7 @@ if [[ "$upload" == true ]]; then
   if [[ -z "${GEM_HOST_OTP_CODE:-}" ]]; then
     echo "If RubyGems asks for a one-time code, type it at the Code prompt."
   fi
-  if ! GEM_HOST_API_KEY="$api_key" gem push "$gem_file" --host "$registry"; then
+  if ! GEM_HOST_API_KEY="$api_key" on_terminal gem push "$gem_file" --host "$registry" | open_security_device_link; then
     unset api_key
     stop "gem push failed. Read the RubyGems output above. If it refused the one-time code, run bin/release-local again with a current code."
   fi
