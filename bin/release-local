@@ -1,0 +1,212 @@
+#!/usr/bin/env bash
+
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Publishes the gem version from the gemspec to RubyGems.org, then tags and
+# releases it on GitHub. Run it from a clean main that matches origin/main.
+# Pass --dry-run to run every check, build the gem and print what a release
+# would publish, without publishing, tagging or releasing.
+#
+# The RubyGems API key comes from the macOS Keychain item whose service name
+# the RUBYGEMS_KEYCHAIN_SERVICE environment variable holds. Set it on the
+# release machine. A dry run does not need it.
+#
+# RubyGems asks for a one-time code when the account uses MFA. In a terminal,
+# gem push asks for it at push time. Without a terminal, set GEM_HOST_OTP_CODE
+# to a current code. RubyGems reads that variable itself.
+
+set -euo pipefail
+
+cd -- "$(dirname -- "$0")/.."
+
+readonly gem_name="x-twitter-scraper"
+readonly gemspec_file="x_twitter_scraper.gemspec"
+readonly registry="https://rubygems.org"
+
+export BUNDLE_FROZEN=true
+
+dry_run=false
+for arg in "$@"; do
+  case "$arg" in
+    --dry-run) dry_run=true ;;
+    *)
+      echo "Unknown option ${arg}. Run bin/release-local or bin/release-local --dry-run." >&2
+      exit 2
+      ;;
+  esac
+done
+
+step() {
+  echo "==> $1"
+}
+
+stop() {
+  echo "$1" >&2
+  exit 1
+}
+
+if [[ "$dry_run" == false && -z "${RUBYGEMS_KEYCHAIN_SERVICE:-}" ]]; then
+  stop "RUBYGEMS_KEYCHAIN_SERVICE is unset or empty. Set it to the Keychain service that holds the RubyGems API key, then run bin/release-local again."
+fi
+
+notes_file="$(mktemp)"
+cleanup() {
+  if [[ -n "${notes_file:-}" ]]; then
+    rm -f -- "$notes_file"
+  fi
+}
+trap cleanup EXIT
+
+step "Checking that the working tree is clean"
+if [[ -n "$(git status --porcelain)" ]]; then
+  stop "The working tree has changes. Commit or remove them first."
+fi
+
+step "Checking that main is checked out"
+if [[ "$(git symbolic-ref --quiet --short HEAD || true)" != "main" ]]; then
+  stop "Releases run from main. Run git switch main first."
+fi
+
+step "Checking that main matches origin/main"
+git fetch --quiet origin main || stop "Could not fetch origin. Check the network and GitHub access."
+if [[ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]]; then
+  stop "main differs from origin/main. Pull or push until they match."
+fi
+
+step "Reading the version from ${gemspec_file}"
+version="$(ruby -e 'print Gem::Specification.load(ARGV.fetch(0)).version' "$gemspec_file")" ||
+  stop "Could not load ${gemspec_file}. Fix the error above first."
+if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]]; then
+  stop "Version ${version} is not a semantic version. Fix lib/x_twitter_scraper/version.rb."
+fi
+readonly version
+readonly tag="v${version}"
+readonly gem_file="pkg/${gem_name}-${version}.gem"
+
+step "Checking that tag ${tag} is new"
+remote_tag="$(git ls-remote --tags origin "refs/tags/${tag}")" ||
+  stop "Could not read tags from origin. Check the network and GitHub access."
+if [[ -n "$remote_tag" ]]; then
+  stop "Tag ${tag} already exists on origin. Bump the version first."
+fi
+if git rev-parse --quiet --verify "refs/tags/${tag}" >/dev/null; then
+  stop "Tag ${tag} exists only in this clone. Delete it with git tag -d ${tag}, then retry."
+fi
+
+step "Reading the ${version} notes from CHANGELOG.md"
+awk -v version="$version" '
+  /^## / {
+    if (found) exit
+    if ($2 == version) { found = 1; next }
+  }
+  found { print }
+' CHANGELOG.md >"$notes_file"
+if ! grep -q '[^[:space:]]' "$notes_file"; then
+  stop "CHANGELOG.md has no notes for ${version}. Add a ## ${version} section first."
+fi
+
+step "Checking GitHub CLI access"
+gh auth status >/dev/null 2>&1 || stop "The GitHub CLI is not signed in. Run gh auth login first."
+
+step "Checking whether RubyGems.org already has ${gem_name} ${version}"
+registry_status="$(
+  curl --connect-timeout 10 --max-time 30 --proto '=https' --silent --show-error \
+    --output /dev/null --write-out '%{http_code}' \
+    "${registry}/api/v2/rubygems/${gem_name}/versions/${version}.json"
+)" || stop "Could not reach RubyGems.org. Check the network, then retry."
+
+case "$registry_status" in
+  200)
+    upload=false
+    echo "RubyGems.org already has ${gem_name} ${version}. A release skips the upload."
+    ;;
+  404)
+    upload=true
+    echo "RubyGems.org does not have ${gem_name} ${version} yet. A release uploads it."
+    ;;
+  *)
+    stop "RubyGems.org answered HTTP ${registry_status}. Retry later."
+    ;;
+esac
+
+if [[ "$dry_run" == false && "$upload" == true && -z "${GEM_HOST_OTP_CODE:-}" && ! -t 0 ]]; then
+  stop "GEM_HOST_OTP_CODE is unset or empty, and this run has no terminal. Run bin/release-local in a terminal and type the code when RubyGems asks, or set GEM_HOST_OTP_CODE to a current one-time code."
+fi
+
+step "Running bin/check-local"
+bin/check-local || stop "A local check failed. Fix it, then retry."
+
+step "Auditing gems for known vulnerabilities"
+bundle exec ruby scripts/audit.rb ||
+  stop "The dependency audit found blocking advisories. Fix them in Gemfile.lock first."
+
+step "Building ${gem_file}"
+source_date_epoch="$(git log -1 --format=%ct)"
+SOURCE_DATE_EPOCH="$source_date_epoch" bundle exec rake clobber build:gem ||
+  stop "The gem build failed. Fix the error above first."
+if [[ ! -f "$gem_file" ]]; then
+  stop "The build did not produce ${gem_file}. Check the build output."
+fi
+
+if [[ "$dry_run" == true ]]; then
+  step "Listing what ${gem_name} ${version} would publish"
+  ruby -rrubygems/package -e '
+    path = ARGV.fetch(0)
+    package = Gem::Package.new(path)
+    package.verify
+    spec = package.spec
+    fields = {
+      "name" => spec.name,
+      "version" => spec.version,
+      "summary" => spec.summary,
+      "description" => spec.description,
+      "homepage" => spec.homepage,
+      **spec.metadata.sort.to_h { |key, value| ["metadata #{key}", value] },
+      "license" => spec.licenses.join(", "),
+      "required Ruby version" => spec.required_ruby_version
+    }
+    width = fields.keys.map(&:length).max
+    fields.each do |label, value|
+      puts("#{label.ljust(width)}  #{value.to_s.strip.empty? ? "(not set)" : value}")
+    end
+    puts("#{File.basename(path)} holds #{package.contents.length} files.")
+    puts(package.contents.sort)
+    puts("RubyGems verified #{File.basename(path)}.")
+  ' "$gem_file" || stop "RubyGems could not read ${gem_file}. Fix the error above first."
+  echo "Dry run finished. Nothing was published, tagged or released."
+  exit 0
+fi
+
+if [[ "$upload" == true ]]; then
+  step "Reading the RubyGems API key from the Keychain"
+  if ! api_key="$(security find-generic-password -s "$RUBYGEMS_KEYCHAIN_SERVICE" -w 2>/dev/null)"; then
+    stop "The Keychain has no item under the service that RUBYGEMS_KEYCHAIN_SERVICE names. The owner must add the RubyGems API key there."
+  fi
+
+  step "Uploading ${gem_file} to RubyGems.org"
+  if [[ -z "${GEM_HOST_OTP_CODE:-}" ]]; then
+    echo "If RubyGems asks for a one-time code, type it at the Code prompt."
+  fi
+  if ! GEM_HOST_API_KEY="$api_key" gem push "$gem_file" --host "$registry"; then
+    unset api_key
+    stop "gem push failed. Read the RubyGems output above. If it refused the one-time code, run bin/release-local again with a current code."
+  fi
+  unset api_key
+else
+  step "Skipping the upload, because RubyGems.org already has ${gem_name} ${version}"
+fi
+
+step "Creating the annotated tag ${tag}"
+git tag --annotate "$tag" --message "Release ${version}"
+
+step "Pushing tag ${tag} to origin"
+git push origin "refs/tags/${tag}" ||
+  stop "The tag push failed. Run git push origin ${tag}, then create the GitHub release."
+
+step "Creating the GitHub release ${tag}"
+gh release create "$tag" --title "$tag" --notes-file "$notes_file" --verify-tag ||
+  stop "The GitHub release failed. Run gh release create ${tag} with the CHANGELOG.md notes."
+
+echo "Released ${gem_name} ${version}."
