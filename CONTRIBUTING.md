@@ -4,7 +4,7 @@ Follow the shared [Xquik contribution policy][contribution-policy].
 
 ## Set up
 
-Install `.ruby-version` through rbenv or asdf, then run:
+Install `.ruby-version` through rbenv or asdf, then run the bootstrap script.
 
 ```bash
 ./scripts/bootstrap
@@ -28,7 +28,7 @@ Files under `examples/` remain handwritten.
 require_relative "../lib/x_twitter_scraper"
 ```
 
-Make the example executable, then run it:
+Make the example executable, then run it.
 
 ```bash
 chmod +x examples/<name>.rb
@@ -37,7 +37,7 @@ ruby examples/<name>.rb
 
 ## Use a source checkout
 
-Reference GitHub or a local clone in your `Gemfile`:
+Reference GitHub or a local clone in your `Gemfile`.
 
 ```ruby
 # GitHub

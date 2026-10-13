@@ -1,6 +1,12 @@
-# Xquik Ruby SDK for Twitter search, followers & X automation
+# X API & Twitter API Ruby SDK by Xquik
 
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13739/badge)](https://www.bestpractices.dev/projects/13739)
+
+Xquik is the world's fastest and cheapest X Twitter scraper service with the most complete X data.
+Xquik charges only for delivered, unique, filter-matching results and never pads rows.
+
+> Xquik is an independent third-party service. Not affiliated with X Corp.
+> "Twitter" and "X" are trademarks of X Corp.
 
 Use the Xquik Ruby SDK for Twitter search, timelines, profiles & followers.
 Manage media, webhooks & X automation with typed requests.
@@ -26,7 +32,7 @@ Use documented Xquik REST routes as a Twitter API alternative.
 
 Requires Ruby 3.2.0 or higher.
 
-Add the gem to your `Gemfile`:
+Add the gem to your `Gemfile`.
 
 <!-- x-release-please-start-version -->
 
@@ -53,7 +59,7 @@ puts(response)
 
 ### Handling errors
 
-The SDK raises an `APIError` subclass for connection failures and non-2xx responses:
+The SDK raises an `APIError` subclass for connection failures and non-2xx responses.
 
 ```ruby
 begin
@@ -87,7 +93,7 @@ end
 
 The SDK retries connection errors, timeouts & HTTP 408, 409, 429, and 5xx responses.
 It uses exponential backoff with 2 retries by default.
-Set `max_retries` to change or disable retries:
+Set `max_retries` to change or disable retries.
 
 ```ruby
 # Change the client default.
@@ -101,7 +107,7 @@ x_twitter_scraper.account.retrieve(request_options: {max_retries: 5})
 
 ### Timeouts
 
-Requests time out after 60 seconds. Set `timeout` to change or disable this limit:
+Requests time out after 60 seconds. Set `timeout` to change or disable this limit.
 
 ```ruby
 # Change the client default.
@@ -117,7 +123,7 @@ Timeouts raise `XTwitterScraper::Errors::APITimeoutError` and follow the retry p
 
 ## BaseModel
 
-All parameter and response objects inherit from `XTwitterScraper::Internal::Type::BaseModel` and support:
+All parameter and response objects inherit from `XTwitterScraper::Internal::Type::BaseModel` and support these operations.
 
 1. Access known and unknown fields with `obj[:prop]`.
 2. Destructure fields with `obj => {prop: prop}` or pattern matching.
@@ -143,7 +149,7 @@ account =
 puts(account[:my_undocumented_property])
 ```
 
-Use `client.request` for undocumented endpoints while retaining authentication and retries:
+Use `client.request` for undocumented endpoints while retaining authentication and retries.
 
 ```ruby
 response = client.request(
@@ -167,7 +173,7 @@ Other SDK classes do not lock their data.
 
 The gem ships [RBI](https://sorbet.org/docs/rbi) definitions without `sorbet-runtime`.
 
-Pass request hashes or typed parameter objects:
+Pass request hashes or typed parameter objects.
 
 ```ruby
 # Hashes work without type safety:
@@ -180,7 +186,7 @@ x_twitter_scraper.x.tweets.search(**params)
 
 ### Enums
 
-Tagged symbols replace [`T::Enum`](https://sorbet.org/docs/tenum) and remain runtime primitives:
+Tagged symbols replace [`T::Enum`](https://sorbet.org/docs/tenum) and remain runtime primitives.
 
 ```ruby
 # :en
@@ -190,7 +196,7 @@ puts(XTwitterScraper::AccountUpdateLocaleParams::Locale::EN)
 T.reveal_type(XTwitterScraper::AccountUpdateLocaleParams::Locale::EN)
 ```
 
-Enum parameters accept constants or literal values:
+Enum parameters accept constants or literal values.
 
 ```ruby
 # Enum constants preserve tagged type information:
