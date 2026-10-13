@@ -5,7 +5,9 @@
 # SPDX-License-Identifier: Apache-2.0
 
 # Runs every repository check on this machine and stops at the first failure.
-# CodeQL is mandatory, so install the CLI first: brew install --cask codeql.
+# CodeQL and REUSE are mandatory. Install the tools first with
+# brew install --cask codeql and brew install uv. REUSE runs at a pinned
+# version through uv, so it needs no install of its own.
 #
 # It posts the result as the xquik-local-checks commit status with the gh login
 # of the person running it, which is the owner's login on the release machine.
@@ -19,6 +21,7 @@ cd -- "$(dirname -- "$0")/.."
 readonly status_repo="Xquik-dev/x-twitter-scraper-ruby"
 readonly status_context="xquik-local-checks"
 readonly codeql_suite="codeql/ruby-queries:codeql-suites/ruby-security-extended.qls"
+readonly reuse_version="6.2.0"
 
 export BUNDLE_FROZEN=true
 
@@ -35,17 +38,17 @@ done
 
 status_sha=""
 if [[ "$post_enabled" == false ]]; then
-  echo "Commit status not posted: --no-status was passed."
+  echo "Commit status not posted, because --no-status was passed."
 elif ! command -v gh >/dev/null 2>&1; then
-  echo "Commit status not posted: the GitHub CLI is not installed."
+  echo "Commit status not posted, because the GitHub CLI is not installed."
 elif [[ -n "$(git status --porcelain)" ]]; then
-  echo "Commit status not posted: the working tree has uncommitted changes."
+  echo "Commit status not posted, because the working tree has uncommitted changes."
 else
   head_sha="$(git rev-parse HEAD)"
   if gh api "repos/${status_repo}/commits/${head_sha}" --silent >/dev/null 2>&1; then
     status_sha="$head_sha"
   else
-    echo "Commit status not posted: commit ${head_sha:0:7} is not on GitHub. Push it first."
+    echo "Commit status not posted, because commit ${head_sha:0:7} is not on GitHub. Push it first."
   fi
 fi
 
@@ -58,7 +61,7 @@ post_status() {
   fi
   if ! gh api "repos/${status_repo}/statuses/${status_sha}" --silent \
     -f state="$state" -f context="$status_context" -f description="$description" >/dev/null 2>&1; then
-    echo "Commit status ${state} not posted: GitHub rejected it. Run gh auth status to check access." >&2
+    echo "Commit status ${state} not posted, because GitHub rejected it. Run gh auth status to check access." >&2
   fi
 }
 
@@ -66,8 +69,11 @@ current_check=""
 current_next_step=""
 success_summary=""
 passed_checks=()
-test_log="$(mktemp)"
-codeql_dir="$(mktemp -d)"
+work_dir="$(mktemp -d)"
+readonly audit_log="${work_dir}/audit.log"
+readonly test_log="${work_dir}/test.log"
+readonly codeql_dir="${work_dir}/codeql"
+mkdir -- "$codeql_dir"
 
 finish() {
   local exit_code=$?
@@ -75,16 +81,11 @@ finish() {
   if [[ "$exit_code" -eq 0 && -n "$success_summary" ]]; then
     post_status success "$success_summary"
   elif [[ -n "$current_check" ]]; then
-    post_status failure "${current_check} check failed. ${current_next_step}"
+    post_status failure "Check failed for ${current_check}. ${current_next_step}"
   else
     post_status failure "Local checks stopped early. Run bin/check-local for details."
   fi
-  if [[ -n "${test_log:-}" ]]; then
-    rm -f -- "$test_log"
-  fi
-  if [[ -n "${codeql_dir:-}" && -d "$codeql_dir" ]]; then
-    rm -rf -- "$codeql_dir"
-  fi
+  rm -rf -- "${work_dir:?}"
 }
 trap finish EXIT
 
@@ -101,7 +102,7 @@ run_check() {
   current_next_step="$next_step"
   echo "==> ${name}"
   if ! "$@"; then
-    echo "Check failed: ${name}. ${next_step}" >&2
+    echo "Check failed for ${name}. ${next_step}" >&2
     exit 1
   fi
   current_check=""
@@ -110,8 +111,17 @@ run_check() {
   fi
 }
 
-has_codeql() {
-  command -v codeql >/dev/null 2>&1
+has_tool() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+# Replaces the status label of the check that just passed.
+relabel_last() {
+  passed_checks[${#passed_checks[@]} - 1]="$1"
+}
+
+run_audit() {
+  bundle exec ruby scripts/audit.rb 2>&1 | tee "$audit_log"
 }
 
 run_tests() {
@@ -130,20 +140,24 @@ run_codeql() {
       location = result.dig("locations", 0, "physicalLocation") || {}
       file = location.dig("artifactLocation", "uri")
       line = location.dig("region", "startLine")
-      puts("#{result["ruleId"]} at #{file}:#{line}: #{result.dig("message", "text")}")
+      puts("#{result["ruleId"]} at #{file}:#{line}. #{result.dig("message", "text")}")
     end
     abort("CodeQL reported #{results.length} finding(s).") unless results.empty?
     puts("CodeQL reported no findings.")
   ' "${codeql_dir}/results.sarif"
 }
 
+run_check "CodeQL CLI" "" \
+  "Install it with brew install --cask codeql." \
+  has_tool codeql
+
+run_check "uv" "" \
+  "Install it with brew install uv." \
+  has_tool uvx
+
 run_check "Installed gems" "" \
   "Run ./scripts/bootstrap to install the locked gems." \
   bundle check
-
-run_check "CodeQL CLI" "" \
-  "Install it with brew install --cask codeql." \
-  has_codeql
 
 run_check "Reproducible gem build" "reproducible build" \
   "Remove nondeterministic build inputs, then rerun bin/check-local." \
@@ -155,7 +169,12 @@ run_check "Lint and type checks" "lint & types" \
 
 run_check "Dependency audit" "audit" \
   "Fix the blocking advisories listed above, then rerun bin/check-local." \
-  bundle exec ruby scripts/audit.rb
+  run_audit
+
+audit_exceptions="$(sed -n -E 's/^Audit passed with ([0-9]+ reviewed exceptions?)\.$/\1/p' "$audit_log" | tail -n 1)"
+if [[ -n "$audit_exceptions" ]]; then
+  relabel_last "audit (${audit_exceptions})"
+fi
 
 run_check "Tests" "tests" \
   "Fix the failing tests, then rerun bin/check-local." \
@@ -164,7 +183,7 @@ run_check "Tests" "tests" \
 test_counts="$(sed -n -E 's/^([0-9]+) runs, .*, ([0-9]+) skips$/\1 \2/p' "$test_log" | tail -n 1)"
 if [[ -n "$test_counts" ]]; then
   read -r test_runs test_skips <<<"$test_counts"
-  passed_checks[${#passed_checks[@]} - 1]="tests ($((test_runs - test_skips)) passed)"
+  relabel_last "tests ($((test_runs - test_skips)) passed)"
 fi
 
 run_check "Coverage" "coverage" \
@@ -175,20 +194,15 @@ run_check "CodeQL security-extended scan" "CodeQL" \
   "Fix the CodeQL findings listed above, then rerun bin/check-local." \
   run_codeql
 
-skipped_note=""
-if command -v reuse >/dev/null 2>&1; then
-  run_check "REUSE license compliance" "REUSE" \
-    "Add SPDX license data for the reported files." \
-    reuse lint
-else
-  echo "==> Skipping REUSE license compliance: reuse is not installed. Install it with pipx install reuse."
-  skipped_note=" REUSE skipped."
-fi
+run_check "REUSE license compliance" "REUSE" \
+  "Add the missing license notice or REUSE.toml entry." \
+  uvx --from "reuse==${reuse_version}" reuse lint
 
+last_index=$((${#passed_checks[@]} - 1))
 passed_list="${passed_checks[0]}"
-for label in "${passed_checks[@]:1}"; do
+for label in "${passed_checks[@]:1:last_index-1}"; do
   passed_list+=", ${label}"
 done
-success_summary="Passed: ${passed_list}.${skipped_note}"
+success_summary="Passed ${passed_list} and ${passed_checks[last_index]}."
 
-echo "All checks passed. ${success_summary}"
+echo "$success_summary"

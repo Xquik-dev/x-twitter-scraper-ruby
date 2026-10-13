@@ -1,4 +1,4 @@
-# Xquik Ruby SDK: Twitter search, followers & X automation
+# Xquik Ruby SDK for Twitter search, followers & X automation
 
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13739/badge)](https://www.bestpractices.dev/projects/13739)
 

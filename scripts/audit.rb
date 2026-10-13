@@ -8,20 +8,25 @@
 #
 # It blocks on an insecure gem source, on any advisory for a gem the published
 # gem loads at runtime, and on any development advisory that has a patched
-# version. An unpatched development-only advisory passes only while
+# version. Severity never excuses a finding, and a .bundler-audit.yml ignore
+# list is refused. An unpatched development-only advisory passes only while
 # audit-exceptions.json lists it. Each entry holds advisory, path, reason and
-# recheck. The reason is "build-time only" or "peer dependency provided by the
-# host". The recheck date must fall within the next 30 days.
+# recheck. The path is the dependency path the audit prints. The reason is
+# "build-time only" or "peer dependency provided by the host". The recheck date
+# must fall within the next 30 days.
+#
+# Pass a directory to audit it instead of this repository.
 
 require "bundler"
 require "date"
 require "json"
 require "tempfile"
 
-ROOT = File.expand_path("..", __dir__)
+ROOT = File.expand_path(ARGV.fetch(0, File.join(__dir__, "..")))
 EXCEPTIONS_PATH = File.join(ROOT, "audit-exceptions.json")
 GEMSPEC_PATH = File.join(ROOT, "x_twitter_scraper.gemspec")
 LOCKFILE_PATH = File.join(ROOT, "Gemfile.lock")
+IGNORE_LIST_PATH = File.join(ROOT, ".bundler-audit.yml")
 EXCEPTION_KEYS = %w[advisory path reason recheck].freeze
 REASONS = ["build-time only", "peer dependency provided by the host"].freeze
 MAX_RECHECK_DAYS = 30
@@ -102,8 +107,8 @@ def entry_problem(entry, today)
   recheck_problem(label, entry["recheck"], today)
 end
 
-def matching_exception(exceptions, ids, gem_name)
-  exceptions.find { |entry| ids.include?(entry["advisory"]) && entry["path"].split(" > ").last == gem_name }
+def matching_exception(exceptions, ids, path)
+  exceptions.find { |entry| ids.include?(entry["advisory"]) && entry["path"] == path }
 end
 
 def advisory_ids(advisory)
@@ -121,12 +126,19 @@ abort("audit-exceptions.json needs an \"exceptions\" array. Fix the file.") unle
 
 lockfile = Bundler::LockfileParser.new(File.read(LOCKFILE_PATH))
 graph = dependency_graph(lockfile)
-runtime_gems = reachable(graph, Gem::Specification.load(GEMSPEC_PATH).runtime_dependencies.map(&:name))
+runtime_roots = Gem::Specification.load(GEMSPEC_PATH).runtime_dependencies.map(&:name)
+runtime_gems = reachable(graph, runtime_roots)
 top_level_gems = lockfile.dependencies.keys
 
 blocking = exceptions.filter_map { |entry| entry_problem(entry, today) }
 valid_exceptions = exceptions.select { |entry| entry_problem(entry, today).nil? }
 used_exceptions = []
+allowed = 0
+
+if File.exist?(IGNORE_LIST_PATH)
+  blocking << ".bundler-audit.yml can hide advisories. Remove it, and list reviewed exceptions in " \
+              "audit-exceptions.json."
+end
 
 audit_results.each do |result|
   if result["type"] == "insecure_source"
@@ -137,20 +149,25 @@ audit_results.each do |result|
   gem_name = result.dig("gem", "name")
   advisory = result.fetch("advisory")
   ids = advisory_ids(advisory)
-  path = dependency_path(graph, top_level_gems, gem_name)
-  finding = "#{ids.first} in #{gem_name} #{result.dig('gem', 'version')} (#{path})"
+  runtime = runtime_gems.include?(gem_name)
+  path = dependency_path(graph, runtime ? runtime_roots : top_level_gems, gem_name)
+  severity = advisory["criticality"] || "unrated"
+  finding = "#{ids.first} in #{gem_name} #{result.dig('gem', 'version')} (#{severity}, #{path})"
   patched = Array(advisory["patched_versions"])
-  entry = matching_exception(valid_exceptions, ids, gem_name)
+  entry = matching_exception(valid_exceptions, ids, path)
 
-  if runtime_gems.include?(gem_name)
+  if runtime
     blocking << "#{finding} ships at runtime. Update the gem in Gemfile.lock."
   elsif !patched.empty?
-    blocking << "#{finding} has a fix (#{patched.join(', ')}). Update the gem in Gemfile.lock."
+    used_exceptions << entry if entry
+    cleanup = entry ? ", then remove its audit-exceptions.json entry" : ""
+    blocking << "#{finding} has a fix (#{patched.join(', ')}). Update the gem in Gemfile.lock#{cleanup}."
   elsif entry
     used_exceptions << entry
-    puts("Allowed #{finding}: #{entry['reason']}, recheck by #{entry['recheck']}.")
+    allowed += 1
+    puts("Allowed #{finding} as #{entry['reason']}. Recheck it by #{entry['recheck']}.")
   else
-    blocking << "#{finding} has no fix or reviewed exception. List it in audit-exceptions.json first."
+    blocking << "#{finding} has no fix or reviewed exception. Review it, then list it in audit-exceptions.json."
   end
 end
 
@@ -163,4 +180,8 @@ unless blocking.empty?
   abort("Dependency audit failed with #{blocking.length} blocking item(s).")
 end
 
-puts("No blocking advisories.")
+case allowed
+when 0 then puts("Audit passed.")
+when 1 then puts("Audit passed with 1 reviewed exception.")
+else puts("Audit passed with #{allowed} reviewed exceptions.")
+end
