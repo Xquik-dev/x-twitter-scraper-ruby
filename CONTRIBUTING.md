@@ -55,13 +55,22 @@ bin/check-local
 ```
 
 It verifies a reproducible gem build, runs RuboCop, Steep and Sorbet, audits
-gems with bundle-audit, runs the tests and enforces coverage. It also runs
+gems, runs the tests and enforces coverage. It then runs the CodeQL
+`security-extended` queries, and any finding fails the run. It also runs
 `reuse lint` when [REUSE](https://reuse.software) is installed. It stops at the
 first failure and names the failed check.
 
+CodeQL is required. Install it with `brew install --cask codeql`.
+
+The audit uses bundler-audit and blocks on any advisory for a runtime gem. It
+also blocks on any development advisory that has a fix. An unfixable
+development-only advisory passes only while `audit-exceptions.json` lists it
+with its advisory ID, dependency path, reason and a recheck date within 30
+days.
+
 On a clean tree whose commit is on GitHub, it posts the result as the
-`xquik-local-checks` commit status. Pull requests need that status to merge.
-Pass `--no-status` to skip it.
+`xquik-local-checks` commit status with your `gh` login. Pull requests need
+that status to merge. Pass `--no-status` to skip it.
 
 Run single tasks while you work:
 
@@ -84,9 +93,10 @@ bin/release-local
 
 The script runs on a clean `main` that matches `origin/main`. It reads the
 version from the gemspec and stops if tag `v<version>` already exists. It runs
-`bin/check-local` and `bundle-audit`, then builds the gem. It pushes the gem to
-RubyGems.org unless that version is already there. It then pushes the annotated
-tag and creates a GitHub release from the version's `CHANGELOG.md` section.
+`bin/check-local` and the dependency audit, then builds the gem. It pushes the
+gem to RubyGems.org unless that version is already there. It then pushes the
+annotated tag and creates a GitHub release from the version's `CHANGELOG.md`
+section.
 
 The RubyGems API key stays in the macOS Keychain under the service name
 `xquik-rubygems-api-key`. The script reads it only for `gem push`.

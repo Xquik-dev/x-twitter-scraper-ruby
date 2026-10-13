@@ -5,8 +5,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 # Runs every repository check on this machine and stops at the first failure.
-# It posts the result as the xquik-local-checks commit status on GitHub.
-# Pass --no-status to skip the commit status.
+# CodeQL is mandatory, so install the CLI first: brew install --cask codeql.
+#
+# It posts the result as the xquik-local-checks commit status with the gh login
+# of the person running it, which is the owner's login on the release machine.
+# It posts success only after every mandatory check passed, and the status text
+# lists only the checks that ran. Pass --no-status to skip the commit status.
 
 set -euo pipefail
 
@@ -14,6 +18,7 @@ cd -- "$(dirname -- "$0")/.."
 
 readonly status_repo="Xquik-dev/x-twitter-scraper-ruby"
 readonly status_context="xquik-local-checks"
+readonly codeql_suite="codeql/ruby-queries:codeql-suites/ruby-security-extended.qls"
 
 export BUNDLE_FROZEN=true
 
@@ -46,7 +51,7 @@ fi
 
 post_status() {
   local state="$1"
-  local description="$2"
+  local description="${2:0:139}"
 
   if [[ -z "$status_sha" ]]; then
     return 0
@@ -58,39 +63,55 @@ post_status() {
 }
 
 current_check=""
+current_next_step=""
 success_summary=""
+passed_checks=()
 test_log="$(mktemp)"
+codeql_dir="$(mktemp -d)"
 
 finish() {
   local exit_code=$?
 
-  if [[ "$exit_code" -eq 0 ]]; then
+  if [[ "$exit_code" -eq 0 && -n "$success_summary" ]]; then
     post_status success "$success_summary"
   elif [[ -n "$current_check" ]]; then
-    post_status failure "${current_check} failed. Run bin/check-local for details."
+    post_status failure "${current_check} check failed. ${current_next_step}"
   else
     post_status failure "Local checks stopped early. Run bin/check-local for details."
   fi
   if [[ -n "${test_log:-}" ]]; then
     rm -f -- "$test_log"
   fi
+  if [[ -n "${codeql_dir:-}" && -d "$codeql_dir" ]]; then
+    rm -rf -- "$codeql_dir"
+  fi
 }
 trap finish EXIT
 
 post_status pending "Local checks are running."
 
+# run_check <name> <status label, empty for setup steps> <next step> <command...>
 run_check() {
   local name="$1"
-  local next_step="$2"
-  shift 2
+  local label="$2"
+  local next_step="$3"
+  shift 3
 
   current_check="$name"
+  current_next_step="$next_step"
   echo "==> ${name}"
   if ! "$@"; then
     echo "Check failed: ${name}. ${next_step}" >&2
     exit 1
   fi
   current_check=""
+  if [[ -n "$label" ]]; then
+    passed_checks+=("$label")
+  fi
+}
+
+has_codeql() {
+  command -v codeql >/dev/null 2>&1
 }
 
 run_tests() {
@@ -98,46 +119,76 @@ run_tests() {
   "$test_script" | tee "$test_log"
 }
 
-run_check "Installed gems" \
+run_codeql() {
+  codeql database create "${codeql_dir}/database" --language=ruby --build-mode=none \
+    --source-root=. --overwrite --quiet
+  codeql database analyze "${codeql_dir}/database" "$codeql_suite" --download \
+    --format=sarif-latest --output="${codeql_dir}/results.sarif" --quiet
+  ruby -rjson -e '
+    results = JSON.parse(File.read(ARGV.fetch(0))).fetch("runs").flat_map { |run| run.fetch("results", []) }
+    results.each do |result|
+      location = result.dig("locations", 0, "physicalLocation") || {}
+      file = location.dig("artifactLocation", "uri")
+      line = location.dig("region", "startLine")
+      puts("#{result["ruleId"]} at #{file}:#{line}: #{result.dig("message", "text")}")
+    end
+    abort("CodeQL reported #{results.length} finding(s).") unless results.empty?
+    puts("CodeQL reported no findings.")
+  ' "${codeql_dir}/results.sarif"
+}
+
+run_check "Installed gems" "" \
   "Run ./scripts/bootstrap to install the locked gems." \
   bundle check
 
-run_check "Reproducible gem build" \
+run_check "CodeQL CLI" "" \
+  "Install it with brew install --cask codeql." \
+  has_codeql
+
+run_check "Reproducible gem build" "reproducible build" \
   "Remove nondeterministic build inputs, then rerun bin/check-local." \
   bundle exec ruby scripts/check_reproducible.rb
 
-run_check "Lint and type checks" \
+run_check "Lint and type checks" "lint & types" \
   "Fix the reported offenses. Run ./scripts/format for style issues." \
   ./scripts/lint
 
-run_check "Dependency audit" \
-  "Update the vulnerable gems in Gemfile.lock, then rerun bin/check-local." \
-  bundle exec bundle-audit check --update
+run_check "Dependency audit" "audit" \
+  "Fix the blocking advisories listed above, then rerun bin/check-local." \
+  bundle exec ruby scripts/audit.rb
 
-run_check "Tests" \
+run_check "Tests" "tests" \
   "Fix the failing tests, then rerun bin/check-local." \
   run_tests
-
-run_check "Coverage" \
-  "Add tests until coverage meets the thresholds." \
-  bundle exec ruby scripts/coverage.rb
 
 test_counts="$(sed -n -E 's/^([0-9]+) runs, .*, ([0-9]+) skips$/\1 \2/p' "$test_log" | tail -n 1)"
 if [[ -n "$test_counts" ]]; then
   read -r test_runs test_skips <<<"$test_counts"
-  tests_label="tests ($((test_runs - test_skips)) passed)"
-else
-  tests_label="tests"
+  passed_checks[${#passed_checks[@]} - 1]="tests ($((test_runs - test_skips)) passed)"
 fi
 
+run_check "Coverage" "coverage" \
+  "Add tests until coverage meets the thresholds." \
+  bundle exec ruby scripts/coverage.rb
+
+run_check "CodeQL security-extended scan" "CodeQL" \
+  "Fix the CodeQL findings listed above, then rerun bin/check-local." \
+  run_codeql
+
+skipped_note=""
 if command -v reuse >/dev/null 2>&1; then
-  run_check "REUSE license compliance" \
+  run_check "REUSE license compliance" "REUSE" \
     "Add SPDX license data for the reported files." \
     reuse lint
-  success_summary="Reproducible build, lint, types, audit, ${tests_label}, coverage & REUSE passed."
 else
   echo "==> Skipping REUSE license compliance: reuse is not installed. Install it with pipx install reuse."
-  success_summary="Reproducible build, lint, types, audit, ${tests_label} & coverage passed. REUSE skipped."
+  skipped_note=" REUSE skipped."
 fi
 
-echo "All checks passed."
+passed_list="${passed_checks[0]}"
+for label in "${passed_checks[@]:1}"; do
+  passed_list+=", ${label}"
+done
+success_summary="Passed: ${passed_list}.${skipped_note}"
+
+echo "All checks passed. ${success_summary}"

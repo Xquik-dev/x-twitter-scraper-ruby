@@ -88,8 +88,8 @@ step "Running bin/check-local"
 bin/check-local || stop "a local check failed. Fix it, then retry."
 
 step "Auditing gems for known vulnerabilities"
-bundle exec bundle-audit check --update ||
-  stop "bundle-audit found a vulnerable gem or an insecure source. Update Gemfile.lock first."
+bundle exec ruby scripts/audit.rb ||
+  stop "the dependency audit found blocking advisories. Fix them in Gemfile.lock first."
 
 step "Building ${gem_file}"
 source_date_epoch="$(git log -1 --format=%ct)"
