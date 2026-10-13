@@ -4,6 +4,8 @@
 
 # frozen_string_literal: true
 
+require "json"
+
 require_relative "script_support"
 
 # Runs bin/check-local in a throwaway repository. Fake commands stand in for Bundler, CodeQL, uv and
@@ -21,10 +23,10 @@ class CheckLocalScriptTest < Minitest::Test
     SH
     "codeql" => <<~SH,
       #!/bin/sh
-      # Stands in for the CodeQL CLI. The analysis writes a SARIF file without results.
+      # Stands in for the CodeQL CLI. The analysis writes the SARIF file that the test names.
       for argument in "$@"; do
         case "$argument" in
-          --output=*) printf '{"runs":[{"results":[]}]}' >"${argument#--output=}" ;;
+          --output=*) cp "$FAKE_CODEQL_SARIF" "${argument#--output=}" ;;
         esac
       done
     SH
@@ -81,9 +83,38 @@ class CheckLocalScriptTest < Minitest::Test
     super
   end
 
+  EXTRACTION_DIAGNOSTICS = %w[rb/diagnostics/extraction-errors rb/diagnostics/extraction-warnings].freeze
+
+  # A SARIF file in the shape CodeQL 2.27 writes for a scan without findings. "unread" maps each file
+  # that CodeQL could not parse to the line of the error, and "diagnostics" names the diagnostic
+  # queries that ran.
+  def sarif(unread: {}, diagnostics: EXTRACTION_DIAGNOSTICS)
+    notifications = unread.map do |file, line|
+      {
+        "locations" => [
+          {
+            "physicalLocation" => {
+              "artifactLocation" => {"uri" => file, "uriBaseId" => "%SRCROOT%"},
+              "region" => {"startLine" => line}
+            }
+          }
+        ],
+        "message" => {"text" => "Extraction warning in #{file} with message A parse error occurred."},
+        "descriptor" => {"id" => "rb/diagnostics/extraction-warnings"}
+      }
+    end
+    run = {
+      "tool" => {"driver" => {"name" => "CodeQL", "notifications" => diagnostics.map { |id| {"id" => id} }}},
+      "invocations" => [{"toolExecutionNotifications" => notifications, "executionSuccessful" => true}],
+      "results" => []
+    }
+    JSON.generate({"runs" => [run]})
+  end
+
   def environment(path, audit_summary, reuse_exit)
     ScriptSupport.environment.merge(GIT_IDENTITY).merge(
       "PATH" => [File.join(@root, "bin"), path].join(File::PATH_SEPARATOR),
+      "FAKE_CODEQL_SARIF" => File.join(@root, "codeql.sarif"),
       "FAKE_AUDIT_SUMMARY" => audit_summary,
       "FAKE_REUSE_EXIT" => reuse_exit.to_s,
       "FAKE_UVX_LOG" => File.join(@root, "uvx.log"),
@@ -91,12 +122,20 @@ class CheckLocalScriptTest < Minitest::Test
     )
   end
 
-  # Runs bin/check-local on a clean, committed tree. "without" names fake commands to leave out, and
-  # "system_path_only" hides the tools installed on this machine.
-  def check_local(audit_summary: "Audit passed.", reuse_exit: 0, without: [], system_path_only: false)
+  # Runs bin/check-local on a clean, committed tree. "codeql_sarif" is the file the fake CodeQL
+  # writes, "without" names fake commands to leave out, and "system_path_only" hides the tools
+  # installed on this machine.
+  def check_local(
+    audit_summary: "Audit passed.",
+    reuse_exit: 0,
+    codeql_sarif: sarif,
+    without: [],
+    system_path_only: false
+  )
     FAKE_COMMANDS.except(*without).each do |name, source|
       write_command(File.join(@root, "bin", name), source)
     end
+    write_file(File.join(@root, "codeql.sarif"), codeql_sarif)
     path = system_path_only ? "/usr/bin:/bin" : ScriptSupport.environment.fetch("PATH")
     env = environment(path, audit_summary, reuse_exit)
     [%w[init --quiet], %w[add --all], %w[commit --quiet --message Fixture]].each do |arguments|
@@ -165,6 +204,37 @@ class CheckLocalScriptTest < Minitest::Test
       ],
       run.fetch(:statuses)
     )
+  end
+
+  CODEQL_FAILURE_STATUS = [
+    "failure",
+    "Check failed for CodeQL security-extended scan. Fix what CodeQL reported above, then rerun bin/check-local."
+  ].freeze
+
+  def test_fails_and_names_each_file_that_codeql_could_not_parse
+    run = check_local(codeql_sarif: sarif(unread: {"lib/client.rb" => 921, "lib/errors.rb" => 7}))
+
+    assert_equal(1, run.fetch(:result).status)
+    assert_includes(
+      run.fetch(:result).stderr,
+      "CodeQL could not parse lib/client.rb at line 921 and lib/errors.rb at line 7, so the scan did not " \
+      "cover all code. Rewrite that syntax so CodeQL parses it, then rerun bin/check-local.\n"
+    )
+    refute_includes(run.fetch(:result).stdout, "CodeQL reported no findings.")
+    assert_equal([["pending", "Local checks are running."], CODEQL_FAILURE_STATUS], run.fetch(:statuses))
+  end
+
+  def test_fails_when_the_scan_ran_no_extraction_diagnostic
+    run = check_local(codeql_sarif: sarif(diagnostics: ["rb/diagnostics/successfully-extracted-files"]))
+
+    assert_equal(1, run.fetch(:result).status)
+    assert_includes(
+      run.fetch(:result).stderr,
+      "The CodeQL scan lacks rb/diagnostics/extraction-errors and rb/diagnostics/extraction-warnings, so " \
+      "it cannot show that it read every file. Make the suite in bin/check-local run each missing " \
+      "diagnostic query.\n"
+    )
+    assert_equal(CODEQL_FAILURE_STATUS, run.fetch(:statuses).last)
   end
 
   def test_names_reviewed_audit_exceptions_in_the_success_status

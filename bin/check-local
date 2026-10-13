@@ -135,12 +135,34 @@ run_codeql() {
   codeql database analyze "${codeql_dir}/database" "$codeql_suite" --download \
     --format=sarif-latest --output="${codeql_dir}/results.sarif" --quiet
   ruby -rjson -e '
-    results = JSON.parse(File.read(ARGV.fetch(0))).fetch("runs").flat_map { |run| run.fetch("results", []) }
+    runs = JSON.parse(File.read(ARGV.fetch(0))).fetch("runs")
+    place = lambda do |entry|
+      location = entry.dig("locations", 0, "physicalLocation") || {}
+      [location.dig("artifactLocation", "uri"), location.dig("region", "startLine")]
+    end
+
+    # CodeQL goes on after it fails to parse a file and scans only the code it could parse. The
+    # extraction diagnostics of the suite name each such file. The report lists every diagnostic
+    # that ran, so a suite without them cannot pass.
+    unread_notes = %w[rb/diagnostics/extraction-errors rb/diagnostics/extraction-warnings]
+    ran = runs.flat_map { |run| run.dig("tool", "driver", "notifications") || [] }.map { |note| note["id"] }
+    missing = unread_notes - ran
+    unless missing.empty?
+      abort("The CodeQL scan lacks #{missing.join(" and ")}, so it cannot show that it read every file. " \
+            "Make the suite in bin/check-local run each missing diagnostic query.")
+    end
+    unread = runs.flat_map { |run| run.fetch("invocations", []) }
+      .flat_map { |invocation| invocation.fetch("toolExecutionNotifications", []) }
+      .select { |note| unread_notes.include?(note.dig("descriptor", "id")) }
+      .map { |note| place.call(note).compact.join(" at line ") }.uniq
+    unless unread.empty?
+      abort("CodeQL could not parse #{unread.join(" and ")}, so the scan did not cover all code. " \
+            "Rewrite that syntax so CodeQL parses it, then rerun bin/check-local.")
+    end
+
+    results = runs.flat_map { |run| run.fetch("results", []) }
     results.each do |result|
-      location = result.dig("locations", 0, "physicalLocation") || {}
-      file = location.dig("artifactLocation", "uri")
-      line = location.dig("region", "startLine")
-      puts("#{result["ruleId"]} at #{file}:#{line}. #{result.dig("message", "text")}")
+      puts("#{result["ruleId"]} at #{place.call(result).join(":")}. #{result.dig("message", "text")}")
     end
     abort("CodeQL reported #{results.length} finding(s).") unless results.empty?
     puts("CodeQL reported no findings.")
@@ -191,7 +213,7 @@ run_check "Coverage" "coverage" \
   bundle exec ruby scripts/coverage.rb
 
 run_check "CodeQL security-extended scan" "CodeQL" \
-  "Fix the CodeQL findings listed above, then rerun bin/check-local." \
+  "Fix what CodeQL reported above, then rerun bin/check-local." \
   run_codeql
 
 run_check "REUSE license compliance" "REUSE" \

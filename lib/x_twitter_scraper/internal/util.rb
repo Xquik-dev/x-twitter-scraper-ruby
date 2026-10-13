@@ -918,7 +918,7 @@ module XTwitterScraper
         # @api private
         #
         # @return [Object]
-        def to_sorbet_type = raise NotImplementedError
+        def to_sorbet_type = raise(NotImplementedError)
 
         class << self
           # @api private

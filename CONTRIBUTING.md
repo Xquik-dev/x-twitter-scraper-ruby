@@ -56,9 +56,9 @@ bin/check-local
 
 It verifies a reproducible gem build, runs RuboCop, Steep and Sorbet, audits
 gems, runs the tests and enforces coverage. It then runs the CodeQL
-`security-extended` queries, and any finding fails the run. Last, it runs
-[REUSE](https://reuse.software) 6.2.0 through `uvx`. It stops at the first
-failure and names the failed check.
+`security-extended` queries. Any finding fails the run, and so does any file
+that CodeQL cannot parse. Last, it runs [REUSE](https://reuse.software) 6.2.0
+through `uvx`. It stops at the first failure and names the failed check.
 
 CodeQL and uv are required. Install them with `brew install --cask codeql` and
 `brew install uv`. REUSE needs no install, because uv runs the pinned version.

@@ -246,6 +246,7 @@ class XTwitterScraper::Test::InternalEdgeCasesTest < Minitest::Test
     namespace = Module.new
     namespace.extend(support)
     assert_raises(NameError) { namespace.const_get(:Missing) }
+    assert_raises(NotImplementedError) { namespace.to_sorbet_type }
   end
 
   def test_transport_validation_and_retry_policy
