@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.10.5 (2026-10-13)
+
+[Full changelog from v0.10.4 to v0.10.5](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.4...v0.10.5)
+
+### Documentation
+
+* The README title is now "X API & Twitter API Ruby SDK by Xquik".
+* The README says near the top what Xquik is, how it bills and that it is not affiliated with X Corp.
+* Doc comments use the current price. An active monitor costs 30 credits per hour.
+* The gem page gains a description and links to the docs, the changelog and the issue tracker.
+
 ## 0.10.4 (2026-08-21)
 
 Full Changelog: [v0.10.3...v0.10.4](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.3...v0.10.4)

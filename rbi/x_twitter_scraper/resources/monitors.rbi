@@ -13,7 +13,7 @@ module XTwitterScraper
       attr_reader :keywords
 
       # Creates an account monitor. Monitors are unlimited. Active monitors check every
-      # 1 second and cost 21 credits per hour. Events and webhook deliveries are
+      # 1 second and cost 30 credits per hour. Events and webhook deliveries are
       # included. Creation requires available credits for the first hourly charge and
       # username lookup.
       sig do
