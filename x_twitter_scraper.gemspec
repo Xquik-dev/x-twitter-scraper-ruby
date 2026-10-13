@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.homepage = "https://docs.xquik.com/sdks/ruby"
   s.metadata["homepage_uri"] = s.homepage
   s.metadata["source_code_uri"] = "https://github.com/Xquik-dev/x-twitter-scraper-ruby"
-  s.metadata["documentation_uri"] = "https://docs.xquik.com/sdks/ruby"
+  s.metadata["documentation_uri"] = "https://docs.xquik.com/api-reference/overview"
   s.metadata["changelog_uri"] = "https://github.com/Xquik-dev/x-twitter-scraper-ruby/blob/main/CHANGELOG.md"
   s.metadata["bug_tracker_uri"] = "https://github.com/Xquik-dev/x-twitter-scraper-ruby/issues"
   s.metadata["rubygems_mfa_required"] = false.to_s
