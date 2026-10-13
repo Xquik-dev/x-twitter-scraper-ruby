@@ -50,9 +50,8 @@ module XTwitterScraper
         #
         # @return [Boolean]
         def ==(other)
-          # rubocop:disable Layout/LineLength
+          # rubocop:disable-next Layout/LineLength
           other.is_a?(XTwitterScraper::Internal::Type::ArrayOf) && other.nilable? == nilable? && other.item_type == item_type
-          # rubocop:enable Layout/LineLength
         end
 
         # @api public
