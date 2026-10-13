@@ -2,15 +2,17 @@
 
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13739/badge)](https://www.bestpractices.dev/projects/13739)
 
+Use this X API & Twitter API SDK to work with X from Ruby.
+It works as a Twitter scraper & tweet scraper for search, profiles & followers.
+Scrape Twitter timelines, lists, communities & trends into typed results.
+Manage media, webhooks, monitors & X automation with typed requests.
+It provides a Twitter API alternative through documented Xquik REST routes.
+
 Xquik is the world's fastest and cheapest X Twitter scraper service with the most complete X data.
 Xquik charges only for delivered, unique, filter-matching results and never pads rows.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
-
-Use the Xquik Ruby SDK for Twitter search, timelines, profiles & followers.
-Manage media, webhooks & X automation with typed requests.
-Use documented Xquik REST routes as a Twitter API alternative.
 
 [Ruby SDK Guide](https://docs.xquik.com/sdks/ruby) | [REST API](https://docs.xquik.com/api-reference/overview) | [RubyDoc](https://gemdocs.org/gems/x-twitter-scraper) | [Webhooks](https://docs.xquik.com/api-reference/webhooks/create)
 
@@ -37,7 +39,7 @@ Add the gem to your `Gemfile`.
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "x-twitter-scraper", "~> 0.10.4"
+gem "x-twitter-scraper", "~> 0.10.5"
 ```
 
 <!-- x-release-please-end -->
