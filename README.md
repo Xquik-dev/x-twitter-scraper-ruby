@@ -14,11 +14,11 @@ Xquik charges only for delivered, unique, filter-matching results and never pads
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-[Ruby SDK Guide](https://docs.xquik.com/sdks/ruby) | [REST API](https://docs.xquik.com/api-reference/overview) | [RubyDoc](https://gemdocs.org/gems/x-twitter-scraper) | [Webhooks](https://docs.xquik.com/api-reference/webhooks/create)
+[Ruby SDK guide](https://docs.xquik.com/sdks/ruby) | [REST API](https://docs.xquik.com/api-reference/overview) | [RubyDoc](https://gemdocs.org/gems/x-twitter-scraper) | [Webhooks](https://docs.xquik.com/api-reference/webhooks/create)
 
 ## Common Twitter & X tasks
 
-| Task | REST Route | Usage |
+| Task | REST route | Usage |
 | --- | --- | --- |
 | Search tweets without the X API | `GET /x/tweets/search` | Use keyword or advanced operator queries. |
 | Read an X profile timeline | `GET /x/users/{id}/tweets` | Paginate bounded results. |
@@ -32,7 +32,7 @@ Xquik charges only for delivered, unique, filter-matching results and never pads
 
 ## Installation
 
-Requires Ruby 3.2.0 or higher.
+The SDK requires Ruby 3.2.0 or later.
 
 Add the gem to your `Gemfile`.
 
@@ -51,7 +51,7 @@ require "bundler/setup"
 require "x_twitter_scraper"
 
 x_twitter_scraper = XTwitterScraper::Client.new(
-  api_key: ENV["X_TWITTER_SCRAPER_API_KEY"] # Optional; the client reads this variable.
+  api_key: ENV["X_TWITTER_SCRAPER_API_KEY"] # Optional. The client reads this variable.
 )
 
 response = x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
@@ -77,7 +77,7 @@ rescue XTwitterScraper::Errors::APIStatusError => e
 end
 ```
 
-| Cause            | Error Type                 |
+| Cause            | Error type                 |
 | ---------------- | -------------------------- |
 | HTTP 400         | `BadRequestError`          |
 | HTTP 401         | `AuthenticationError`      |
@@ -151,7 +151,7 @@ account =
 puts(account[:my_undocumented_property])
 ```
 
-Use `client.request` for undocumented endpoints while retaining authentication and retries.
+Use `client.request` for undocumented endpoints. It keeps authentication and retries.
 
 ```ruby
 response = client.request(
@@ -167,7 +167,7 @@ response = client.request(
 
 Clients are thread-safe. Fork them only when no HTTP requests are in flight.
 Each client has an HTTP connection pool with a default size of 99.
-Reuse one client per application in most cases.
+Reuse 1 client per application in most cases.
 Requests wait when every connection is busy. This wait counts toward the request timeout.
 Other SDK classes do not lock their data.
 
@@ -178,10 +178,8 @@ The gem ships [RBI](https://sorbet.org/docs/rbi) definitions without `sorbet-run
 Pass request hashes or typed parameter objects.
 
 ```ruby
-# Hashes work without type safety:
 x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
 
-# Splat a complete Params object:
 params = XTwitterScraper::X::TweetSearchParams.new(q: "from:elonmusk", limit: 10)
 x_twitter_scraper.x.tweets.search(**params)
 ```
@@ -201,13 +199,11 @@ T.reveal_type(XTwitterScraper::AccountUpdateLocaleParams::Locale::EN)
 Enum parameters accept constants or literal values.
 
 ```ruby
-# Enum constants preserve tagged type information:
 x_twitter_scraper.account.update_locale(
   locale: XTwitterScraper::AccountUpdateLocaleParams::Locale::EN,
   # …
 )
 
-# Literal values also work:
 x_twitter_scraper.account.update_locale(
   locale: :en,
   # …
@@ -218,7 +214,7 @@ x_twitter_scraper.account.update_locale(
 
 This package follows [SemVer](https://semver.org/spec/v2.0.0.html). Version `0` releases may change APIs.
 
-Changes to non-runtime `*.rbi` and `*.rbs` definitions remain non-breaking.
+Changes to non-runtime `*.rbi` and `*.rbs` definitions are non-breaking.
 
 ## Help & contributing
 
