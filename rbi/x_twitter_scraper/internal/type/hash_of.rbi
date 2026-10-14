@@ -7,9 +7,6 @@
 module XTwitterScraper
   module Internal
     module Type
-      # @api private
-      #
-      # Hash of items of a given type.
       class HashOf
         include XTwitterScraper::Internal::Type::Converter
         include XTwitterScraper::Internal::Util::SorbetRuntimeSupport
@@ -46,7 +43,6 @@ module XTwitterScraper
         def hash
         end
 
-        # @api private
         sig do
           override
             .params(
@@ -58,7 +54,6 @@ module XTwitterScraper
         def coerce(value, state:)
         end
 
-        # @api private
         sig do
           override
             .params(
@@ -70,22 +65,18 @@ module XTwitterScraper
         def dump(value, state:)
         end
 
-        # @api private
         sig { returns(T.anything) }
         def to_sorbet_type
         end
 
-        # @api private
         sig { returns(Elem) }
         protected def item_type
         end
 
-        # @api private
         sig { returns(T::Boolean) }
         protected def nilable?
         end
 
-        # @api private
         sig do
           params(
             type_info:
@@ -102,7 +93,6 @@ module XTwitterScraper
         def initialize(type_info, spec = {})
         end
 
-        # @api private
         sig { params(depth: Integer).returns(String) }
         def inspect(depth: 0)
         end

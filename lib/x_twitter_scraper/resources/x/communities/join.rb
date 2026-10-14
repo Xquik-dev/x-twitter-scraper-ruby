@@ -10,9 +10,6 @@ module XTwitterScraper
       class Communities
         # X write actions (tweets, likes, follows, DMs)
         class Join
-          # Some parameter documentations has been truncated, see
-          # {XTwitterScraper::Models::X::Communities::JoinCreateParams} for more details.
-          #
           # Join community
           #
           # @overload create(id, account:, idempotency_key:, request_options: {})
@@ -41,9 +38,6 @@ module XTwitterScraper
             )
           end
 
-          # Some parameter documentations has been truncated, see
-          # {XTwitterScraper::Models::X::Communities::JoinDeleteAllParams} for more details.
-          #
           # Leave community
           #
           # @overload delete_all(id, account:, idempotency_key:, request_options: {})

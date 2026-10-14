@@ -360,9 +360,6 @@ module XTwitterScraper
         optional :within_time, String
 
         # @!method initialize(q:, advanced_query: nil, any_words: nil, blue_verified_only: nil, bounding_box: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, from_user: nil, geocode: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, limit: nil, list_id: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, mode: nil, native_retweets: nil, near: nil, news: nil, place: nil, place_country: nil, point_radius: nil, query_type: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, since_time: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
-        #   Some parameter documentations has been truncated, see
-        #   {XTwitterScraper::Models::X::TweetSearchParams} for more details.
-        #
         #   @param q [String] Query, Tweet ID, or status URL. Valid inline bounds apply per page.
         #
         #   @param advanced_query [String] Raw advanced search query appended as-is.

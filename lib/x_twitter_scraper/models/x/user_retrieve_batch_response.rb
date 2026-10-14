@@ -58,9 +58,6 @@ module XTwitterScraper
         required :users, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile] }
 
         # @!method initialize(next_cursor:, processed_count:, requested_count:, returned_count:, unavailable_ids:, unprocessed_ids:, users:, has_next_page: false)
-        #   Some parameter documentations has been truncated, see
-        #   {XTwitterScraper::Models::X::UserRetrieveBatchResponse} for more details.
-        #
         #   Batch user lookup results. Duplicate requested IDs are ignored while preserving
         #   first-seen order. unavailable_ids identifies processed IDs with no returned
         #   profile. unprocessed_ids identifies IDs skipped when available credits limit

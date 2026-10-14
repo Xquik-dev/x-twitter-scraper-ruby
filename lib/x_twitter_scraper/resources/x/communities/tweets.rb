@@ -10,9 +10,6 @@ module XTwitterScraper
       class Communities
         # X Community info, members, and tweets
         class Tweets
-          # Some parameter documentations has been truncated, see
-          # {XTwitterScraper::Models::X::Communities::TweetListParams} for more details.
-          #
           # Requires a Community ID and keyword query.
           #
           # @overload list(community_id:, q:, cursor: nil, page_size: nil, query_type: nil, request_options: {})
@@ -48,10 +45,6 @@ module XTwitterScraper
             )
           end
 
-          # Some parameter documentations has been truncated, see
-          # {XTwitterScraper::Models::X::Communities::TweetListByCommunityParams} for more
-          # details.
-          #
           # List tweets posted in a community
           #
           # @overload list_by_community(id, cursor: nil, page_size: nil, request_options: {})

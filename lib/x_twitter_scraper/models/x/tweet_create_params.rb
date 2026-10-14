@@ -53,9 +53,6 @@ module XTwitterScraper
         optional :text, String
 
         # @!method initialize(account:, idempotency_key:, community_id: nil, is_note_tweet: nil, media: nil, reply_to_tweet_id: nil, text: nil, request_options: {})
-        #   Some parameter documentations has been truncated, see
-        #   {XTwitterScraper::Models::X::TweetCreateParams} for more details.
-        #
         #   @param account [String] X account (@username or account ID)
         #
         #   @param idempotency_key [String]

@@ -7,17 +7,11 @@
 module XTwitterScraper
   module Internal
     module Type
-      # @api private
-      #
-      # @abstract
-      #
-      # When we don't know what to expect for the value.
       class Unknown
         extend XTwitterScraper::Internal::Type::Converter
         extend XTwitterScraper::Internal::Util::SorbetRuntimeSupport
 
         # rubocop:disable Lint/UnusedMethodArgument
-
         private_class_method :new
 
         # @api public
@@ -35,49 +29,15 @@ module XTwitterScraper
         def self.==(other) = other.is_a?(Class) && other <= XTwitterScraper::Internal::Type::Unknown
 
         class << self
-          # @api private
-          #
-          # No coercion needed for Unknown type.
-          #
-          # @param value [Object]
-          #
-          # @param state [Hash{Symbol=>Object}] .
-          #
-          #   @option state [Boolean] :translate_names
-          #
-          #   @option state [Boolean] :strictness
-          #
-          #   @option state [Hash{Symbol=>Object}] :exactness
-          #
-          #   @option state [Class<StandardError>] :error
-          #
-          #   @option state [Integer] :branched
-          #
-          # @return [Object]
           def coerce(value, state:)
             state.fetch(:exactness)[:yes] += 1
             value
           end
 
-          # @!method dump(value, state:)
-          #   @api private
-          #
-          #   @param value [Object]
-          #
-          #   @param state [Hash{Symbol=>Object}] .
-          #
-          #     @option state [Boolean] :can_retry
-          #
-          #   @return [Object]
-
-          # @api private
-          #
-          # @return [Object]
           def to_sorbet_type
             T.anything
           end
         end
-
         # rubocop:enable Lint/UnusedMethodArgument
       end
     end

@@ -8,9 +8,6 @@ module XTwitterScraper
   module Resources
     class X
       class Dm
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::DmRetrieveHistoryParams} for more details.
-        #
         # Get DM conversation history
         #
         # @overload retrieve_history(user_id, account:, cursor: nil, max_id: nil, request_options: {})
@@ -40,9 +37,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::DmSendParams} for more details.
-        #
         # Send direct message
         #
         # @overload send_(user_id, account:, text:, idempotency_key:, media_ids: nil, request_options: {})

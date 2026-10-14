@@ -45,9 +45,6 @@ module XTwitterScraper
         optional :query_type, enum: -> { XTwitterScraper::X::CommunityRetrieveSearchParams::QueryType }
 
         # @!method initialize(community_id:, q:, cursor: nil, page_size: nil, query_type: nil, request_options: {})
-        #   Some parameter documentations has been truncated, see
-        #   {XTwitterScraper::Models::X::CommunityRetrieveSearchParams} for more details.
-        #
         #   @param community_id [String] Numeric ID of the community whose posts to search
         #
         #   @param q [String] Search query

@@ -144,10 +144,6 @@ module XTwitterScraper
           optional :width, Integer
 
           # @!method initialize(height: nil, inline_style_ranges: nil, preview_url: nil, text: nil, type: nil, url: nil, width: nil)
-          #   Some parameter documentations has been truncated, see
-          #   {XTwitterScraper::Models::XGetArticleResponse::Article::Content} for more
-          #   details.
-          #
           #   @param height [Integer]
           #
           #   @param inline_style_ranges [Array<XTwitterScraper::Models::XGetArticleResponse::Article::Content::InlineStyleRange>] Inline text formatting ranges

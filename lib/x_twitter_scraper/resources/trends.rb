@@ -8,9 +8,6 @@ module XTwitterScraper
   module Resources
     # Trending topics and hashtags by region
     class Trends
-      # Some parameter documentations has been truncated, see
-      # {XTwitterScraper::Models::TrendListParams} for more details.
-      #
       # Get trending hashtags & topics by region (alias)
       #
       # @overload list(count: nil, woeid: nil, request_options: {})

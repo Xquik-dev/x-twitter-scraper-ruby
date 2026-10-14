@@ -48,9 +48,6 @@ module XTwitterScraper
       optional :x_username, String, api_name: :xUsername
 
       # @!method initialize(monitor_billing:, monitors_allowed:, monitors_used:, plan:, credit_info: nil, x_username: nil)
-      #   Some parameter documentations has been truncated, see
-      #   {XTwitterScraper::Models::AccountRetrieveResponse} for more details.
-      #
       #   @param monitor_billing [XTwitterScraper::Models::AccountRetrieveResponse::MonitorBilling]
       #
       #   @param monitors_allowed [Integer] Deprecated. Monitor slots are unlimited, so this is always Number.MAX_SAFE_INTEG

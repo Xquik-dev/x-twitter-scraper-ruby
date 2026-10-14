@@ -7,9 +7,6 @@
 module XTwitterScraper
   module Internal
     module Type
-      # @api private
-      #
-      # This module provides a base implementation for paginated responses in the SDK.
       module BasePage
         Elem = type_member(:out)
 
@@ -29,7 +26,6 @@ module XTwitterScraper
         def to_enum
         end
 
-        # @api private
         sig do
           params(
             client: XTwitterScraper::Internal::Transport::BaseClient,

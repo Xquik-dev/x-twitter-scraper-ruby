@@ -28,9 +28,6 @@ module XTwitterScraper
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {XTwitterScraper::Models::EventListParams} for more details.
-      #
       # List events
       #
       # @overload list(cursor: nil, event_type: nil, keyword_monitor_id: nil, limit: nil, monitor_id: nil, request_options: {})

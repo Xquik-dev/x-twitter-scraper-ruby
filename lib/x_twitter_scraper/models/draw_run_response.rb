@@ -38,9 +38,6 @@ module XTwitterScraper
       required :winners, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Winner] }
 
       # @!method initialize(id:, total_entries:, tweet_id:, valid_entries:, winners:)
-      #   Some parameter documentations has been truncated, see
-      #   {XTwitterScraper::Models::DrawRunResponse} for more details.
-      #
       #   @param id [String]
       #
       #   @param total_entries [Integer] Candidate entries inspected for this draw after the credit-derived cap. This may

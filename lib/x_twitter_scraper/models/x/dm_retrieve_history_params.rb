@@ -37,9 +37,6 @@ module XTwitterScraper
         optional :max_id, String
 
         # @!method initialize(user_id:, account:, cursor: nil, max_id: nil, request_options: {})
-        #   Some parameter documentations has been truncated, see
-        #   {XTwitterScraper::Models::X::DmRetrieveHistoryParams} for more details.
-        #
         #   @param user_id [String]
         #
         #   @param account [String] X handle (without the `@` prefix) of the connected X account used to read the co

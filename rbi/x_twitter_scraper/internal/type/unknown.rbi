@@ -7,9 +7,6 @@
 module XTwitterScraper
   module Internal
     module Type
-      # @api private
-      #
-      # When we don't know what to expect for the value.
       class Unknown
         extend XTwitterScraper::Internal::Type::Converter
         extend XTwitterScraper::Internal::Util::SorbetRuntimeSupport
@@ -25,9 +22,6 @@ module XTwitterScraper
         end
 
         class << self
-          # @api private
-          #
-          # No coercion needed for Unknown type.
           sig do
             override
               .params(
@@ -39,7 +33,6 @@ module XTwitterScraper
           def coerce(value, state:)
           end
 
-          # @api private
           sig do
             override
               .params(
@@ -51,7 +44,6 @@ module XTwitterScraper
           def dump(value, state:)
           end
 
-          # @api private
           sig { returns(T.anything) }
           def to_sorbet_type
           end

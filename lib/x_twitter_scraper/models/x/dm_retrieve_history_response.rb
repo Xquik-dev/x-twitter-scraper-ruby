@@ -64,10 +64,6 @@ module XTwitterScraper
           optional :text, String
 
           # @!method initialize(id:, receiver_id:, sender_id:, created_at: nil, media_url: nil, text: nil)
-          #   Some parameter documentations has been truncated, see
-          #   {XTwitterScraper::Models::X::DmRetrieveHistoryResponse::Message} for more
-          #   details.
-          #
           #   @param id [String]
           #
           #   @param receiver_id [String]

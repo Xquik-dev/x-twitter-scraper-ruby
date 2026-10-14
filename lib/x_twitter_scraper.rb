@@ -4,7 +4,6 @@
 
 # frozen_string_literal: true
 
-# Standard libraries.
 # rubocop:disable Lint/RedundantRequireStatement
 require "English"
 require "base64"
@@ -24,18 +23,14 @@ require "time"
 require "uri"
 # rubocop:enable Lint/RedundantRequireStatement
 
-# We already ship the preferred sorbet manifests in the package itself.
-# `tapioca` currently does not offer us a way to opt out of unnecessary compilation.
 if Object.const_defined?(:Tapioca) &&
    caller.chain([$PROGRAM_NAME]).chain(ARGV).any?(/tapioca/) &&
    ARGV.none?(/dsl/)
   return
 end
 
-# Gems.
 require "connection_pool"
 
-# Package files.
 require_relative "x_twitter_scraper/version"
 require_relative "x_twitter_scraper/internal/util"
 require_relative "x_twitter_scraper/internal/type/converter"

@@ -7,62 +7,18 @@
 module XTwitterScraper
   module Internal
     module Type
-      # @api private
-      #
-      # @example
-      #   # `account_connection_attempt_retrieve_response` is a `XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse`
-      #   case account_connection_attempt_retrieve_response
-      #   when XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Pending
-      #     puts(account_connection_attempt_retrieve_response.id)
-      #   when XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Success
-      #     puts(account_connection_attempt_retrieve_response.object)
-      #   when XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::Failed
-      #     puts(account_connection_attempt_retrieve_response.error)
-      #   when XTwitterScraper::Models::X::AccountConnectionAttemptRetrieveResponse::RequiresEmailCode
-      #     puts(account_connection_attempt_retrieve_response.message)
-      #   else
-      #     puts(account_connection_attempt_retrieve_response)
-      #   end
-      #
-      # @example
-      #   case account_connection_attempt_retrieve_response
-      #   in {status: :pending, id: id, object: object, poll_after_ms: poll_after_ms}
-      #     puts(id)
-      #   in {status: :success, id: id, object: object}
-      #     puts(object)
-      #   in {status: :failed, id: id, error: error, object: object}
-      #     puts(error)
-      #   in {status: :requires_email_code, id: id, message: message}
-      #     puts(message)
-      #   else
-      #     puts(account_connection_attempt_retrieve_response)
-      #   end
       module Union
         include XTwitterScraper::Internal::Type::Converter
         include XTwitterScraper::Internal::Util::SorbetRuntimeSupport
 
-        # @api private
-        #
-        # All of the specified variant info for this union.
-        #
-        # @return [Array<Array(Symbol, Proc, Hash{Symbol=>Object})>]
         private def known_variants = (@known_variants ||= [])
 
-        # @api private
-        #
-        # @return [Array<Array(Symbol, Object, Hash{Symbol=>Object})>]
         protected def derefed_variants
           known_variants.map { |key, variant_fn, meta| [key, variant_fn.call, meta] }
         end
 
-        # All of the specified variants for this union.
-        #
-        # @return [Array<Object>]
         def variants = derefed_variants.map { _2 }
 
-        # @api private
-        #
-        # @param property [Symbol]
         private def discriminator(property)
           case property
           in Symbol
@@ -70,19 +26,6 @@ module XTwitterScraper
           end
         end
 
-        # @api private
-        #
-        # @param key [Symbol, Hash{Symbol=>Object}, Proc, XTwitterScraper::Internal::Type::Converter, Class]
-        #
-        # @param spec [Hash{Symbol=>Object}, Proc, XTwitterScraper::Internal::Type::Converter, Class] .
-        #
-        #   @option spec [NilClass, TrueClass, FalseClass, Integer, Float, Symbol] :const
-        #
-        #   @option spec [Proc] :enum
-        #
-        #   @option spec [Proc] :union
-        #
-        #   @option spec [Boolean] :"nil?"
         private def variant(key, spec = nil)
           meta = XTwitterScraper::Internal::Type::Converter.meta_info(nil, spec)
           variant_info =
@@ -96,11 +39,6 @@ module XTwitterScraper
           known_variants << variant_info
         end
 
-        # @api private
-        #
-        # @param value [Object]
-        #
-        # @return [XTwitterScraper::Internal::Type::Converter, Class, nil]
         private def resolve_variant(value)
           case [@discriminator, value]
           in [_, XTwitterScraper::Internal::Type::BaseModel]
@@ -148,28 +86,6 @@ module XTwitterScraper
         # @return [Integer]
         def hash = variants.hash
 
-        # @api private
-        #
-        # Tries to efficiently coerce the given value to one of the known variants.
-        #
-        # If the value cannot match any of the known variants, the coercion is considered
-        # non-viable and returns the original value.
-        #
-        # @param value [Object]
-        #
-        # @param state [Hash{Symbol=>Object}] .
-        #
-        #   @option state [Boolean] :translate_names
-        #
-        #   @option state [Boolean] :strictness
-        #
-        #   @option state [Hash{Symbol=>Object}] :exactness
-        #
-        #   @option state [Class<StandardError>] :error
-        #
-        #   @option state [Integer] :branched
-        #
-        # @return [Object]
         def coerce(value, state:)
           if (target = resolve_variant(value))
             return XTwitterScraper::Internal::Type::Converter.coerce(target, value, state: state)
@@ -209,15 +125,6 @@ module XTwitterScraper
           state[:strictness] = strictness
         end
 
-        # @api private
-        #
-        # @param value [Object]
-        #
-        # @param state [Hash{Symbol=>Object}] .
-        #
-        #   @option state [Boolean] :can_retry
-        #
-        # @return [Object]
         def dump(value, state:)
           if (target = resolve_variant(value))
             return XTwitterScraper::Internal::Type::Converter.dump(target, value, state: state)
@@ -237,9 +144,6 @@ module XTwitterScraper
           super
         end
 
-        # @api private
-        #
-        # @return [Object]
         def to_sorbet_type
           types = variants.map do
             XTwitterScraper::Internal::Util::SorbetRuntimeSupport.to_sorbet_type(_1)
@@ -257,11 +161,6 @@ module XTwitterScraper
         # rubocop:enable Style/CaseEquality
         # rubocop:enable Style/HashEachMethods
 
-        # @api private
-        #
-        # @param depth [Integer]
-        #
-        # @return [String]
         def inspect(depth: 0)
           if depth.positive?
             return is_a?(Module) ? super() : self.class.name

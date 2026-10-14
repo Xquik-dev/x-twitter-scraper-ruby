@@ -54,7 +54,6 @@ module XTwitterScraper
     sig { returns(T.nilable(Float)) }
     attr_accessor :timeout
 
-    # Returns a new instance of RequestOptions.
     sig do
       params(values: XTwitterScraper::Internal::AnyHash).returns(
         T.attached_class

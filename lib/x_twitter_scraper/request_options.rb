@@ -69,8 +69,6 @@ module XTwitterScraper
     optional :timeout, Float
 
     # @!method initialize(values = {})
-    #   Returns a new instance of RequestOptions.
-    #
     #   @param values [Hash{Symbol=>Object}]
 
     define_sorbet_constant!(:OrHash) do

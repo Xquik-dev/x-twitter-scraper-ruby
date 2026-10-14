@@ -7,54 +7,24 @@
 module XTwitterScraper
   module Internal
     module Type
-      # @abstract
       class BaseModel
         extend XTwitterScraper::Internal::Type::Converter
         extend XTwitterScraper::Internal::Util::SorbetRuntimeSupport
 
         class << self
-          # @api private
-          #
-          # Assumes superclass fields are totally defined before fields are accessed /
-          # defined on subclasses.
-          #
-          # @param child [Class<XTwitterScraper::Internal::Type::BaseModel>]
           def inherited(child)
             super
             child.known_fields.replace(known_fields.dup)
           end
 
-          # @api private
-          #
-          # @return [Hash{Symbol=>Hash{Symbol=>Object}}]
           def known_fields = @known_fields ||= {}
 
-          # @api private
-          #
-          # @return [Hash{Symbol=>Hash{Symbol=>Object}}]
           def fields
             known_fields.transform_values do |field|
               {**field.except(:type_fn), type: field.fetch(:type_fn).call}
             end
           end
 
-          # @api private
-          #
-          # @param name_sym [Symbol]
-          #
-          # @param required [Boolean]
-          #
-          # @param type_info [Hash{Symbol=>Object}, Proc, XTwitterScraper::Internal::Type::Converter, Class]
-          #
-          # @param spec [Hash{Symbol=>Object}] .
-          #
-          #   @option spec [NilClass, TrueClass, FalseClass, Integer, Float, Symbol] :const
-          #
-          #   @option spec [Proc] :enum
-          #
-          #   @option spec [Proc] :union
-          #
-          #   @option spec [Boolean] :"nil?"
           private def add_field(name_sym, required:, type_info:, spec:)
             meta = XTwitterScraper::Internal::Type::Converter.meta_info(type_info, spec)
             type_fn, info =
@@ -139,50 +109,14 @@ module XTwitterScraper
             # rubocop:enable Style/CaseEquality
           end
 
-          # @api private
-          #
-          # @param name_sym [Symbol]
-          #
-          # @param type_info [Hash{Symbol=>Object}, Proc, XTwitterScraper::Internal::Type::Converter, Class]
-          #
-          # @param spec [Hash{Symbol=>Object}] .
-          #
-          #   @option spec [NilClass, TrueClass, FalseClass, Integer, Float, Symbol] :const
-          #
-          #   @option spec [Proc] :enum
-          #
-          #   @option spec [Proc] :union
-          #
-          #   @option spec [Boolean] :"nil?"
           def required(name_sym, type_info, spec = {})
             add_field(name_sym, required: true, type_info: type_info, spec: spec)
           end
 
-          # @api private
-          #
-          # @param name_sym [Symbol]
-          #
-          # @param type_info [Hash{Symbol=>Object}, Proc, XTwitterScraper::Internal::Type::Converter, Class]
-          #
-          # @param spec [Hash{Symbol=>Object}] .
-          #
-          #   @option spec [NilClass, TrueClass, FalseClass, Integer, Float, Symbol] :const
-          #
-          #   @option spec [Proc] :enum
-          #
-          #   @option spec [Proc] :union
-          #
-          #   @option spec [Boolean] :"nil?"
           def optional(name_sym, type_info, spec = {})
             add_field(name_sym, required: false, type_info: type_info, spec: spec)
           end
 
-          # @api private
-          #
-          # `request_only` attributes not excluded from `.#coerce` when receiving responses
-          # even if well behaved servers should not send them
-          #
-          # @param blk [Proc]
           private def request_only(&blk)
             @mode = :dump
             blk.call
@@ -190,11 +124,6 @@ module XTwitterScraper
             @mode = nil
           end
 
-          # @api private
-          #
-          # `response_only` attributes are omitted from `.#dump` when making requests
-          #
-          # @param blk [Proc]
           private def response_only(&blk)
             @mode = :coerce
             blk.call
@@ -231,23 +160,6 @@ module XTwitterScraper
         def hash = [self.class, @data].hash
 
         class << self
-          # @api private
-          #
-          # @param value [XTwitterScraper::Internal::Type::BaseModel, Hash{Object=>Object}, Object]
-          #
-          # @param state [Hash{Symbol=>Object}] .
-          #
-          #   @option state [Boolean] :translate_names
-          #
-          #   @option state [Boolean] :strictness
-          #
-          #   @option state [Hash{Symbol=>Object}] :exactness
-          #
-          #   @option state [Class<StandardError>] :error
-          #
-          #   @option state [Integer] :branched
-          #
-          # @return [self, Object]
           def coerce(value, state:)
             exactness = state.fetch(:exactness)
 
@@ -309,15 +221,6 @@ module XTwitterScraper
             instance
           end
 
-          # @api private
-          #
-          # @param value [self, Object]
-          #
-          # @param state [Hash{Symbol=>Object}] .
-          #
-          #   @option state [Boolean] :can_retry
-          #
-          # @return [Hash{Object=>Object}, Object]
           def dump(value, state:)
             unless (coerced = XTwitterScraper::Internal::Util.coerce_hash(value)).is_a?(Hash)
               return super
@@ -354,21 +257,12 @@ module XTwitterScraper
             acc
           end
 
-          # @api private
-          #
-          # @return [Object]
           def to_sorbet_type
             self
           end
         end
 
         class << self
-          # @api private
-          #
-          # @param model [XTwitterScraper::Internal::Type::BaseModel]
-          # @param convert [Boolean]
-          #
-          # @return [Hash{Symbol=>Object}]
           def recursively_to_h(model, convert:)
             rec = ->(x) do
               case x
@@ -439,16 +333,6 @@ module XTwitterScraper
         # @return [Hash{Symbol=>Object}]
         def deep_to_h = self.class.recursively_to_h(@data, convert: false)
 
-        # @param keys [Array<Symbol>, nil]
-        #
-        # @return [Hash{Symbol=>Object}]
-        #
-        # @example
-        #   # `content_disclosure` is a `XTwitterScraper::ContentDisclosure`
-        #   content_disclosure => {
-        #     advertising: advertising,
-        #     ai_generated: ai_generated
-        #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)
             .filter_map do |k|
@@ -475,9 +359,6 @@ module XTwitterScraper
         # @return [String]
         def to_yaml(*a) = XTwitterScraper::Internal::Type::Converter.dump(self.class, self).to_yaml(*a)
 
-        # Create a new instance of a model.
-        #
-        # @param data [Hash{Symbol=>Object}, self]
         def initialize(data = {})
           @data = {}
           @coerced = {}
@@ -492,11 +373,6 @@ module XTwitterScraper
         end
 
         class << self
-          # @api private
-          #
-          # @param depth [Integer]
-          #
-          # @return [String]
           def inspect(depth: 0)
             return super() if depth.positive?
 
@@ -519,9 +395,6 @@ module XTwitterScraper
         # @return [String]
         def to_s = deep_to_h.to_s
 
-        # @api private
-        #
-        # @return [String]
         def inspect
           converted = self.class.recursively_to_h(self, convert: true)
           "#<#{self.class}:0x#{object_id.to_s(16)} #{converted}>"

@@ -30,9 +30,6 @@ module XTwitterScraper
       optional :type, enum: -> { XTwitterScraper::DrawExportParams::Type }
 
       # @!method initialize(id:, format_:, type: nil, request_options: {})
-      #   Some parameter documentations has been truncated, see
-      #   {XTwitterScraper::Models::DrawExportParams} for more details.
-      #
       #   @param id [String]
       #
       #   @param format_ [Symbol, XTwitterScraper::Models::DrawExportParams::Format] Export output format. PDF entry exports include up to 10,000 rows. Other entry f

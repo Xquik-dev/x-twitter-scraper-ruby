@@ -10,9 +10,6 @@ module XTwitterScraper
       class Tweets
         # X write actions (tweets, likes, follows, DMs)
         class Like
-          # Some parameter documentations has been truncated, see
-          # {XTwitterScraper::Models::X::Tweets::LikeCreateParams} for more details.
-          #
           # Like tweet
           #
           # @overload create(id, account:, idempotency_key:, request_options: {})
@@ -41,9 +38,6 @@ module XTwitterScraper
             )
           end
 
-          # Some parameter documentations has been truncated, see
-          # {XTwitterScraper::Models::X::Tweets::LikeDeleteParams} for more details.
-          #
           # Unlike tweet
           #
           # @overload delete(id, account:, idempotency_key:, request_options: {})

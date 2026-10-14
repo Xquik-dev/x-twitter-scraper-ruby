@@ -249,9 +249,6 @@ module XTwitterScraper
         optional :updated_at, Time, api_name: :updatedAt
 
         # @!method initialize(id:, account:, action:, billing:, charged:, charged_credits:, next_action:, poll_after_ms:, request:, result:, retryable:, safe_to_retry:, send_dispatched:, status:, status_url:, success:, target:, target_id:, terminal:, write_action_id:, community_id: nil, community_name: nil, completed_at: nil, confirmation_attempts: nil, confirmation_checked_at: nil, confirmed_at: nil, created_at: nil, details: nil, error: nil, expires_at: nil, idempotent: nil, media: nil, media_id: nil, media_url: nil, message: nil, message_id: nil, request_hash: nil, request_id: nil, result_id: nil, send_dispatched_at: nil, tweet_id: nil, updated_at: nil, object: :x_write_action)
-        #   Some parameter documentations has been truncated, see
-        #   {XTwitterScraper::Models::X::TweetDeleteResponse} for more details.
-        #
         #   Durable write lifecycle record. Poll statusUrl until terminal is true. Reusing
         #   the original Idempotency-Key returns this same record. Submit a new write only
         #   when safeToRetry is true, using a new key.

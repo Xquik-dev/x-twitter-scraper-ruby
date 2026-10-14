@@ -93,9 +93,6 @@ module XTwitterScraper
       required :wallet_id, String
 
       # @!method initialize(amount:, api_key:, authorization:, checkout_url:, credits:, expires_at:, instructions:, purchase_id:, status:, wallet_id:, account_required: false, credential_notice: :"Store api_key and the Idempotency-Key securely before sharing checkout_url. No email recovery is available.", poll_after_seconds: 2, requires_user_interaction: true, status_url: :"https://xquik.com/api/v1/guest-wallets/status")
-      #   Some parameter documentations has been truncated, see
-      #   {XTwitterScraper::Models::GuestWalletCreateResponse} for more details.
-      #
       #   Initial guest wallet response containing the one-time key.
       #
       #   @param amount [XTwitterScraper::Models::GuestWalletAmount] Confirmed USD amount for a guest wallet purchase.

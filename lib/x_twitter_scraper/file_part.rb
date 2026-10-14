@@ -15,9 +15,6 @@ module XTwitterScraper
     # @return [String, nil]
     attr_reader :filename
 
-    # @api private
-    #
-    # @return [String]
     private def read
       case content
       in Pathname

@@ -194,10 +194,6 @@ module XTwitterScraper
           optional :has_media, XTwitterScraper::Internal::Type::Boolean, api_name: :hasMedia
 
           # @!method initialize(draft:, has_link: nil, has_media: nil, step: :score)
-          #   Some parameter documentations has been truncated, see
-          #   {XTwitterScraper::Models::ComposeCreateParams::Body::ComposeScoreRequest} for
-          #   more details.
-          #
           #   @param draft [String] Full post text for deterministic editorial checks.
           #
           #   @param has_link [Boolean] True when a separate link card is attached.

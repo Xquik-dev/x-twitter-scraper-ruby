@@ -7,40 +7,12 @@
 module XTwitterScraper
   module Internal
     module Type
-      # @api private
       module Converter
         extend XTwitterScraper::Internal::Util::SorbetRuntimeSupport
 
         # rubocop:disable Lint/UnusedMethodArgument
-
-        # @api private
-        #
-        # @param value [Object]
-        #
-        # @param state [Hash{Symbol=>Object}] .
-        #
-        #   @option state [Boolean] :translate_names
-        #
-        #   @option state [Boolean] :strictness
-        #
-        #   @option state [Hash{Symbol=>Object}] :exactness
-        #
-        #   @option state [Class<StandardError>] :error
-        #
-        #   @option state [Integer] :branched
-        #
-        # @return [Object]
         def coerce(value, state:) = (raise NotImplementedError)
 
-        # @api private
-        #
-        # @param value [Object]
-        #
-        # @param state [Hash{Symbol=>Object}] .
-        #
-        #   @option state [Boolean] :can_retry
-        #
-        # @return [Object]
         def dump(value, state:)
           case value
           in Array
@@ -62,31 +34,12 @@ module XTwitterScraper
           end
         end
 
-        # @api private
-        #
-        # @param depth [Integer]
-        #
-        # @return [String]
         def inspect(depth: 0)
           super()
         end
 
         # rubocop:enable Lint/UnusedMethodArgument
-
         class << self
-          # @api private
-          #
-          # @param spec [Hash{Symbol=>Object}, Proc, XTwitterScraper::Internal::Type::Converter, Class] .
-          #
-          #   @option spec [NilClass, TrueClass, FalseClass, Integer, Float, Symbol] :const
-          #
-          #   @option spec [Proc] :enum
-          #
-          #   @option spec [Proc] :union
-          #
-          #   @option spec [Boolean] :"nil?"
-          #
-          # @return [Proc]
           def type_info(spec)
             case spec
             in Proc
@@ -102,38 +55,10 @@ module XTwitterScraper
             end
           end
 
-          # @api private
-          #
-          # @param type_info [Hash{Symbol=>Object}, Proc, XTwitterScraper::Internal::Type::Converter, Class] .
-          #
-          #   @option type_info [NilClass, TrueClass, FalseClass, Integer, Float, Symbol] :const
-          #
-          #   @option type_info [Proc] :enum
-          #
-          #   @option type_info [Proc] :union
-          #
-          #   @option type_info [Boolean] :"nil?"
-          #
-          # @param spec [Hash{Symbol=>Object}, Proc, XTwitterScraper::Internal::Type::Converter, Class] .
-          #
-          #   @option spec [NilClass, TrueClass, FalseClass, Integer, Float, Symbol] :const
-          #
-          #   @option spec [Proc] :enum
-          #
-          #   @option spec [Proc] :union
-          #
-          #   @option spec [Boolean] :"nil?"
-          #
-          # @return [Hash{Symbol=>Object}]
           def meta_info(type_info, spec)
             [spec, type_info].grep(Hash).first.to_h.except(:const, :enum, :union, :nil?)
           end
 
-          # @api private
-          #
-          # @param translate_names [Boolean]
-          #
-          # @return [Hash{Symbol=>Object}]
           def new_coerce_state(translate_names: true)
             {
               translate_names: translate_names,
@@ -144,50 +69,6 @@ module XTwitterScraper
             }
           end
 
-          # @api private
-          #
-          # Based on `target`, transform `value` into `target`, to the extent possible:
-          #
-          # 1. if the given `value` conforms to `target` already, return the given `value`
-          # 2. if it's possible and safe to convert the given `value` to `target`, then the
-          #    converted value
-          # 3. otherwise, the given `value` unaltered
-          #
-          # The coercion process is subject to improvement between minor release versions.
-          # See https://docs.pydantic.dev/latest/concepts/unions/#smart-mode
-          #
-          # @param target [XTwitterScraper::Internal::Type::Converter, Class]
-          #
-          # @param value [Object]
-          #
-          # @param state [Hash{Symbol=>Object}] The `strictness` is one of `true`, `false`. This informs the coercion strategy
-          # when we have to decide between multiple possible conversion targets:
-          #
-          # - `true`: the conversion must be exact, with minimum coercion.
-          # - `false`: the conversion can be approximate, with some coercion.
-          #
-          # The `exactness` is `Hash` with keys being one of `yes`, `no`, or `maybe`. For
-          # any given conversion attempt, the exactness will be updated based on how closely
-          # the value recursively matches the target type:
-          #
-          # - `yes`: the value can be converted to the target type with minimum coercion.
-          # - `maybe`: the value can be converted to the target type with some reasonable
-          #   coercion.
-          # - `no`: the value cannot be converted to the target type.
-          #
-          # See implementation below for more details.
-          #
-          #   @option state [Boolean] :translate_names
-          #
-          #   @option state [Boolean] :strictness
-          #
-          #   @option state [Hash{Symbol=>Object}] :exactness
-          #
-          #   @option state [Class<StandardError>] :error
-          #
-          #   @option state [Integer] :branched
-          #
-          # @return [Object]
           def coerce(target, value, state: XTwitterScraper::Internal::Type::Converter.new_coerce_state)
             # rubocop:disable Metrics/BlockNesting
             exactness = state.fetch(:exactness)
@@ -272,17 +153,6 @@ module XTwitterScraper
             # rubocop:enable Metrics/BlockNesting
           end
 
-          # @api private
-          #
-          # @param target [XTwitterScraper::Internal::Type::Converter, Class]
-          #
-          # @param value [Object]
-          #
-          # @param state [Hash{Symbol=>Object}] .
-          #
-          #   @option state [Boolean] :can_retry
-          #
-          # @return [Object]
           def dump(target, value, state: {can_retry: true})
             case target
             in XTwitterScraper::Internal::Type::Converter
@@ -292,12 +162,6 @@ module XTwitterScraper
             end
           end
 
-          # @api private
-          #
-          # @param target [Object]
-          # @param depth [Integer]
-          #
-          # @return [String]
           def inspect(target, depth:)
             case target
             in XTwitterScraper::Internal::Type::Converter

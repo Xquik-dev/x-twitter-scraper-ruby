@@ -362,9 +362,6 @@ module XTwitterScraper
         optional :within_time, String
 
         # @!method initialize(id:, any_words: nil, blue_verified_only: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_original_author: nil, exclude_source: nil, exclude_words: nil, from_user: nil, geocode: nil, hashtags: nil, has_media_only: nil, include_original_post: nil, in_reply_to_tweet_id: nil, language: nil, limit: nil, max_depth: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, mode: nil, native_retweets: nil, near: nil, news: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, scope: nil, since_date: nil, since_id: nil, since_time: nil, sort: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
-        #   Some parameter documentations has been truncated, see
-        #   {XTwitterScraper::Models::X::TweetGetRepliesParams} for more details.
-        #
         #   @param id [String]
         #
         #   @param any_words [String] Words or quoted phrases where any one can match. Separate with spaces, commas, o

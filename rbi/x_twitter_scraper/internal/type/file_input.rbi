@@ -7,13 +7,6 @@
 module XTwitterScraper
   module Internal
     module Type
-      # @api private
-      #
-      # Either `Pathname` or `StringIO`, or `IO`, or
-      # `XTwitterScraper::Internal::Type::FileInput`.
-      #
-      # Note: when `IO` is used, all retries are disabled, since many IO` streams are
-      # not rewindable.
       class FileInput
         extend XTwitterScraper::Internal::Type::Converter
 
@@ -28,7 +21,6 @@ module XTwitterScraper
         end
 
         class << self
-          # @api private
           sig do
             override
               .params(
@@ -40,7 +32,6 @@ module XTwitterScraper
           def coerce(value, state:)
           end
 
-          # @api private
           sig do
             override
               .params(
@@ -52,7 +43,6 @@ module XTwitterScraper
           def dump(value, state:)
           end
 
-          # @api private
           sig { returns(T.anything) }
           def to_sorbet_type
           end

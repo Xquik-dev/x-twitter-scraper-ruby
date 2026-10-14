@@ -7,14 +7,10 @@
 module XTwitterScraper
   module Internal
     module Type
-      # @api private
       module Union
         include XTwitterScraper::Internal::Type::Converter
         include XTwitterScraper::Internal::Util::SorbetRuntimeSupport
 
-        # @api private
-        #
-        # All of the specified variant info for this union.
         sig do
           returns(
             T::Array[
@@ -31,7 +27,6 @@ module XTwitterScraper
         private def known_variants
         end
 
-        # @api private
         sig do
           returns(
             T::Array[
@@ -46,17 +41,14 @@ module XTwitterScraper
         protected def derefed_variants
         end
 
-        # All of the specified variants for this union.
         sig { overridable.returns(T::Array[T.anything]) }
         def variants
         end
 
-        # @api private
         sig { params(property: Symbol).void }
         private def discriminator(property)
         end
 
-        # @api private
         sig do
           params(
             key:
@@ -77,7 +69,6 @@ module XTwitterScraper
         private def variant(key, spec = nil)
         end
 
-        # @api private
         sig { params(value: T.anything).returns(T.nilable(T.anything)) }
         private def resolve_variant(value)
         end
@@ -94,12 +85,6 @@ module XTwitterScraper
         def hash
         end
 
-        # @api private
-        #
-        # Tries to efficiently coerce the given value to one of the known variants.
-        #
-        # If the value cannot match any of the known variants, the coercion is considered
-        # non-viable and returns the original value.
         sig do
           override
             .params(
@@ -111,7 +96,6 @@ module XTwitterScraper
         def coerce(value, state:)
         end
 
-        # @api private
         sig do
           override
             .params(
@@ -123,12 +107,10 @@ module XTwitterScraper
         def dump(value, state:)
         end
 
-        # @api private
         sig { returns(T.anything) }
         def to_sorbet_type
         end
 
-        # @api private
         sig { params(depth: Integer).returns(String) }
         def inspect(depth: 0)
         end

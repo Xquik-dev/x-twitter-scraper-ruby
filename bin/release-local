@@ -4,21 +4,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-# Publishes the gem version from the gemspec to RubyGems.org, then tags and
-# releases it on GitHub. Run it from a clean main that matches origin/main.
-# Pass --dry-run to run every check, build the gem and print what a release
-# would publish, without publishing, tagging or releasing.
-#
-# The RubyGems API key comes from the macOS Keychain item whose service name
-# the RUBYGEMS_KEYCHAIN_SERVICE environment variable holds. Set it on the
-# release machine. A dry run does not need it.
-#
-# RubyGems asks for a one-time code when the account uses MFA. In a terminal,
-# gem push asks for it at push time. Without a terminal, set GEM_HOST_OTP_CODE
-# to a current code. RubyGems reads that variable itself. An account with a
-# security device gets a link instead, and this script opens it in the
-# default browser the moment gem push prints it.
-
 set -euo pipefail
 
 cd -- "$(dirname -- "$0")/.."
@@ -49,10 +34,6 @@ stop() {
   exit 1
 }
 
-# Runs a command on a new pseudo-terminal. Ruby holds back what gem push prints
-# when its output is a pipe, so gem push keeps a terminal. The script tool
-# takes its command in 2 ways. BSD and macOS read it as arguments, and
-# util-linux reads it as 1 string.
 on_terminal() {
   if script -q /dev/null true >/dev/null 2>&1 </dev/null; then
     script -q /dev/null "$@"
@@ -61,11 +42,6 @@ on_terminal() {
   fi
 }
 
-# Passes gem push's output through byte by byte, so a Code prompt shows at
-# once. It opens the first RubyGems security device link in the default
-# browser, once, because RubyGems waits only 5 minutes for the approval.
-# RELEASE_LINK_OPENER names the command that opens it, open by default, so
-# the script tests can put a stand-in there.
 open_security_device_link() {
   ruby -e '
     STDOUT.sync = true

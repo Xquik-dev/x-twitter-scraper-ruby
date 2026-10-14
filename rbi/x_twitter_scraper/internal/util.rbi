@@ -6,16 +6,13 @@
 
 module XTwitterScraper
   module Internal
-    # @api private
     module Util
       extend XTwitterScraper::Internal::Util::SorbetRuntimeSupport
 
-      # @api private
       sig { returns(Float) }
       def self.monotonic_secs
       end
 
-      # @api private
       sig do
         params(ns: T.any(T::Module[T.anything], T::Class[T.anything])).returns(
           T::Enumerable[T.any(T::Module[T.anything], T::Class[T.anything])]
@@ -25,24 +22,20 @@ module XTwitterScraper
       end
 
       class << self
-        # @api private
         sig { returns(String) }
         def arch
         end
 
-        # @api private
         sig { returns(String) }
         def os
         end
       end
 
       class << self
-        # @api private
         sig { params(input: T.anything).returns(T::Boolean) }
         def primitive?(input)
         end
 
-        # @api private
         sig do
           params(input: T.any(String, T::Boolean)).returns(
             T.any(T::Boolean, T.anything)
@@ -51,7 +44,6 @@ module XTwitterScraper
         def coerce_boolean(input)
         end
 
-        # @api private
         sig do
           params(input: T.any(String, T::Boolean)).returns(
             T.nilable(T::Boolean)
@@ -60,7 +52,6 @@ module XTwitterScraper
         def coerce_boolean!(input)
         end
 
-        # @api private
         sig do
           params(input: T.any(String, Integer)).returns(
             T.any(Integer, T.anything)
@@ -69,7 +60,6 @@ module XTwitterScraper
         def coerce_integer(input)
         end
 
-        # @api private
         sig do
           params(input: T.any(String, Integer, Float)).returns(
             T.any(Float, T.anything)
@@ -78,7 +68,6 @@ module XTwitterScraper
         def coerce_float(input)
         end
 
-        # @api private
         sig do
           params(input: T.anything).returns(
             T.any(T::Hash[T.anything, T.anything], T.anything)
@@ -87,7 +76,6 @@ module XTwitterScraper
         def coerce_hash(input)
         end
 
-        # @api private
         sig do
           params(input: T.anything).returns(
             T.nilable(T::Hash[T.anything, T.anything])
@@ -98,7 +86,6 @@ module XTwitterScraper
       end
 
       class << self
-        # @api private
         sig do
           params(lhs: T.anything, rhs: T.anything, concat: T::Boolean).returns(
             T.anything
@@ -107,10 +94,6 @@ module XTwitterScraper
         private def deep_merge_lr(lhs, rhs, concat: false)
         end
 
-        # @api private
-        #
-        # Recursively merge one hash with another. If the values at a given key are not
-        # both hashes, just take the new value.
         sig do
           params(
             values: T::Array[T.anything],
@@ -120,14 +103,11 @@ module XTwitterScraper
         end
         def deep_merge(
           *values,
-          # the value to return if no values are provided.
           sentinel: nil,
-          # whether to merge sequences by concatenation.
           concat: false
         )
         end
 
-        # @api private
         sig do
           params(
             data:
@@ -152,28 +132,23 @@ module XTwitterScraper
         end
       end
 
-      # https://www.rfc-editor.org/rfc/rfc3986.html#section-3.3
       RFC_3986_NOT_PCHARS = T.let(/[^A-Za-z0-9\-._~!$&'()*+,;=:@]+/, Regexp)
 
       class << self
-        # @api private
         sig { params(uri: URI::Generic).returns(String) }
         def uri_origin(uri)
         end
 
-        # @api private
         sig { params(path: T.any(String, Integer)).returns(String) }
         def encode_path(path)
         end
 
-        # @api private
         sig { params(path: T.any(String, T::Array[String])).returns(String) }
         def interpolate_path(path)
         end
       end
 
       class << self
-        # @api private
         sig do
           params(query: T.nilable(String)).returns(
             T::Hash[String, T::Array[String]]
@@ -182,7 +157,6 @@ module XTwitterScraper
         def decode_query(query)
         end
 
-        # @api private
         sig do
           params(
             query:
@@ -207,7 +181,6 @@ module XTwitterScraper
         end
 
       class << self
-        # @api private
         sig do
           params(url: T.any(URI::Generic, String)).returns(
             XTwitterScraper::Internal::Util::ParsedUri
@@ -216,7 +189,6 @@ module XTwitterScraper
         def parse_uri(url)
         end
 
-        # @api private
         sig do
           params(parsed: XTwitterScraper::Internal::Util::ParsedUri).returns(
             URI::Generic
@@ -225,7 +197,6 @@ module XTwitterScraper
         def unparse_uri(parsed)
         end
 
-        # @api private
         sig do
           params(
             lhs: XTwitterScraper::Internal::Util::ParsedUri,
@@ -237,7 +208,6 @@ module XTwitterScraper
       end
 
       class << self
-        # @api private
         sig do
           params(
             headers:
@@ -257,26 +227,19 @@ module XTwitterScraper
         end
       end
 
-      # @api private
-      #
-      # An adapter that satisfies the IO interface required by `::IO.copy_stream`
       class ReadIOAdapter
-        # @api private
         sig { returns(T.nilable(T::Boolean)) }
         def close?
         end
 
-        # @api private
         sig { void }
         def close
         end
 
-        # @api private
         sig { params(max_len: T.nilable(Integer)).returns(String) }
         private def read_enum(max_len)
         end
 
-        # @api private
         sig do
           params(
             max_len: T.nilable(Integer),
@@ -286,7 +249,6 @@ module XTwitterScraper
         def read(max_len = nil, out_string = nil)
         end
 
-        # @api private
         sig do
           params(
             src: T.any(String, Pathname, StringIO, T::Enumerable[String]),
@@ -313,7 +275,6 @@ module XTwitterScraper
         T.let(%r{^application/(:?x-(?:n|l)djson)|(:?(?:x-)?jsonl)}, Regexp)
 
       class << self
-        # @api private
         sig do
           params(query: XTwitterScraper::Internal::AnyHash).returns(
             XTwitterScraper::Internal::AnyHash
@@ -322,7 +283,6 @@ module XTwitterScraper
         def encode_query_params(query)
         end
 
-        # @api private
         sig do
           params(
             collection: XTwitterScraper::Internal::AnyHash,
@@ -333,7 +293,6 @@ module XTwitterScraper
         private def write_query_param_element!(collection, key, element)
         end
 
-        # @api private
         sig do
           params(
             y: Enumerator::Yielder,
@@ -350,7 +309,6 @@ module XTwitterScraper
         )
         end
 
-        # @api private
         sig do
           params(
             y: Enumerator::Yielder,
@@ -363,16 +321,12 @@ module XTwitterScraper
         private def write_multipart_chunk(y, boundary:, key:, val:, closing:)
         end
 
-        # @api private
-        #
-        # https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.1.md#special-considerations-for-multipart-content
         sig do
           params(body: T.anything).returns([String, T::Enumerable[String]])
         end
         private def encode_multipart_streaming(body)
         end
 
-        # @api private
         sig do
           params(headers: T::Hash[String, String], body: T.anything).returns(
             T.anything
@@ -381,16 +335,10 @@ module XTwitterScraper
         def encode_content(headers, body)
         end
 
-        # @api private
-        #
-        # https://www.iana.org/assignments/character-sets/character-sets.xhtml
         sig { params(content_type: String, text: String).void }
         def force_charset!(content_type, text:)
         end
 
-        # @api private
-        #
-        # Assumes each chunk in stream has `Encoding::BINARY`.
         sig do
           params(
             headers: T::Hash[String, String],
@@ -403,9 +351,6 @@ module XTwitterScraper
       end
 
       class << self
-        # @api private
-        #
-        # https://doc.rust-lang.org/std/iter/trait.FusedIterator.html
         sig do
           params(
             enum: T::Enumerable[T.anything],
@@ -416,12 +361,10 @@ module XTwitterScraper
         def fused_enum(enum, external: false, &close)
         end
 
-        # @api private
         sig { params(enum: T.nilable(T::Enumerable[T.anything])).void }
         def close_fused!(enum)
         end
 
-        # @api private
         sig do
           params(
             enum: T.nilable(T::Enumerable[T.anything]),
@@ -443,23 +386,12 @@ module XTwitterScraper
         end
 
       class << self
-        # @api private
-        #
-        # Assumes Strings have been forced into having `Encoding::BINARY`.
-        #
-        # This decoder is responsible for reassembling lines split across multiple
-        # fragments.
         sig do
           params(enum: T::Enumerable[String]).returns(T::Enumerable[String])
         end
         def decode_lines(enum)
         end
 
-        # @api private
-        #
-        # https://html.spec.whatwg.org/multipage/server-sent-events.html#parsing-an-event-stream
-        #
-        # Assumes that `lines` has been decoded with `#decode_lines`.
         sig do
           params(lines: T::Enumerable[String]).returns(
             T::Enumerable[XTwitterScraper::Internal::Util::ServerSentEvent]
@@ -469,38 +401,31 @@ module XTwitterScraper
         end
       end
 
-      # @api private
       module SorbetRuntimeSupport
         class MissingSorbetRuntimeError < ::RuntimeError
         end
 
-        # @api private
         sig { returns(T::Hash[Symbol, T.anything]) }
         private def sorbet_runtime_constants
         end
 
-        # @api private
         sig { params(name: Symbol).void }
         def const_missing(name)
         end
 
-        # @api private
         sig { params(name: Symbol).returns(T::Boolean) }
         def sorbet_constant_defined?(name)
         end
 
-        # @api private
         sig { params(name: Symbol, blk: T.proc.returns(T.anything)).void }
         def define_sorbet_constant!(name, &blk)
         end
 
-        # @api private
         sig { returns(T.anything) }
         def to_sorbet_type
         end
 
         class << self
-          # @api private
           sig do
             params(
               type:

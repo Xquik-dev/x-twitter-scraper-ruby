@@ -88,33 +88,20 @@ module XTwitterScraper
     # @return [XTwitterScraper::Resources::GuestWallets]
     attr_reader :guest_wallets
 
-    # @api private
-    #
-    # @param security [Hash{Symbol=>Boolean}]
-    #
-    # @return [Hash{String=>String}]
     private def auth_headers(security:)
       {auth_api_key:, oauth_bearer:}.slice(*security.keys).values.reduce({}, :merge)
     end
 
-    # @api private
-    #
-    # @return [Hash{String=>String}]
     private def auth_api_key
       {"x-api-key" => @api_key}
     end
 
-    # @api private
-    #
-    # @return [Hash{String=>String}]
     private def oauth_bearer
       return {} if @bearer_token.nil?
 
       {"authorization" => "Bearer #{@bearer_token}"}
     end
 
-    # Creates and returns a new client for interacting with the API.
-    #
     # @param api_key [String, nil] Defaults to `ENV["X_TWITTER_SCRAPER_API_KEY"]`
     #
     # @param bearer_token [String, nil] OAuth 2.1 access token Defaults to `ENV["X_TWITTER_SCRAPER_BEARER_TOKEN"]`

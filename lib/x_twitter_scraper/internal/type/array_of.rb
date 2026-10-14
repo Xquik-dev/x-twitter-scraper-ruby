@@ -7,34 +7,12 @@
 module XTwitterScraper
   module Internal
     module Type
-      # @api private
-      #
-      # @abstract
-      #
-      # @generic Elem
-      #
-      # Array of items of a given type.
       class ArrayOf
         include XTwitterScraper::Internal::Type::Converter
         include XTwitterScraper::Internal::Util::SorbetRuntimeSupport
 
         private_class_method :new
 
-        # @overload [](type_info, spec = {})
-        #
-        # @param type_info [Hash{Symbol=>Object}, Proc, XTwitterScraper::Internal::Type::Converter, Class]
-        #
-        # @param spec [Hash{Symbol=>Object}] .
-        #
-        #   @option spec [NilClass, TrueClass, FalseClass, Integer, Float, Symbol] :const
-        #
-        #   @option spec [Proc] :enum
-        #
-        #   @option spec [Proc] :union
-        #
-        #   @option spec [Boolean] :"nil?"
-        #
-        # @return [self]
         def self.[](...) = new(...)
 
         # @api public
@@ -59,23 +37,6 @@ module XTwitterScraper
         # @return [Integer]
         def hash = [self.class, item_type].hash
 
-        # @api private
-        #
-        # @param value [Array<Object>, Object]
-        #
-        # @param state [Hash{Symbol=>Object}] .
-        #
-        #   @option state [Boolean] :translate_names
-        #
-        #   @option state [Boolean] :strictness
-        #
-        #   @option state [Hash{Symbol=>Object}] :exactness
-        #
-        #   @option state [Class<StandardError>] :error
-        #
-        #   @option state [Integer] :branched
-        #
-        # @return [Array<Object>, Object]
         def coerce(value, state:)
           exactness = state.fetch(:exactness)
 
@@ -99,15 +60,6 @@ module XTwitterScraper
             end
         end
 
-        # @api private
-        #
-        # @param value [Array<Object>, Object]
-        #
-        # @param state [Hash{Symbol=>Object}] .
-        #
-        #   @option state [Boolean] :can_retry
-        #
-        # @return [Array<Object>, Object]
         def dump(value, state:)
           target = item_type
           if value.is_a?(Array)
@@ -119,47 +71,20 @@ module XTwitterScraper
           end
         end
 
-        # @api private
-        #
-        # @return [Object]
         def to_sorbet_type
           T::Array[XTwitterScraper::Internal::Util::SorbetRuntimeSupport.to_sorbet_type(item_type)]
         end
 
-        # @api private
-        #
-        # @return [generic<Elem>]
         protected def item_type = @item_type_fn.call
 
-        # @api private
-        #
-        # @return [Boolean]
         protected def nilable? = @nilable
 
-        # @api private
-        #
-        # @param type_info [Hash{Symbol=>Object}, Proc, XTwitterScraper::Internal::Type::Converter, Class]
-        #
-        # @param spec [Hash{Symbol=>Object}] .
-        #
-        #   @option spec [NilClass, TrueClass, FalseClass, Integer, Float, Symbol] :const
-        #
-        #   @option spec [Proc] :enum
-        #
-        #   @option spec [Proc] :union
-        #
-        #   @option spec [Boolean] :"nil?"
         def initialize(type_info, spec = {})
           @item_type_fn = XTwitterScraper::Internal::Type::Converter.type_info(type_info || spec)
           @meta = XTwitterScraper::Internal::Type::Converter.meta_info(type_info, spec)
           @nilable = spec.fetch(:nil?, false)
         end
 
-        # @api private
-        #
-        # @param depth [Integer]
-        #
-        # @return [String]
         def inspect(depth: 0)
           items = XTwitterScraper::Internal::Type::Converter.inspect(item_type, depth: depth.succ)
 

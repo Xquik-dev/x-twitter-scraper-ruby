@@ -45,9 +45,6 @@ module XTwitterScraper
       optional :monitor_id, String
 
       # @!method initialize(cursor: nil, event_type: nil, keyword_monitor_id: nil, limit: nil, monitor_id: nil, request_options: {})
-      #   Some parameter documentations has been truncated, see
-      #   {XTwitterScraper::Models::EventListParams} for more details.
-      #
       #   @param cursor [String] Previous nextCursor.
       #
       #   @param event_type [Symbol, XTwitterScraper::Models::EventType] Filter events by type

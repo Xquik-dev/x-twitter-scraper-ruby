@@ -54,9 +54,6 @@ module XTwitterScraper
       # @return [XTwitterScraper::Resources::X::Lists]
       attr_reader :lists
 
-      # Some parameter documentations has been truncated, see
-      # {XTwitterScraper::Models::XGetArticleParams} for more details.
-      #
       # Retrieve the full content of an X Article (long-form post) by numeric tweet ID.
       # Returns article_not_found when the tweet is valid but is not an X Article.
       #

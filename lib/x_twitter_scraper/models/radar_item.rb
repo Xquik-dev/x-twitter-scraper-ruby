@@ -109,9 +109,6 @@ module XTwitterScraper
       optional :url, String
 
       # @!method initialize(id:, category:, created_at:, language:, metadata:, published_at:, region:, score:, source:, source_id:, title:, description: nil, image_url: nil, url: nil)
-      #   Some parameter documentations has been truncated, see
-      #   {XTwitterScraper::Models::RadarItem} for more details.
-      #
       #   Trending topic with score, category, source, region, language, and
       #   source-specific metadata.
       #

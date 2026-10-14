@@ -108,10 +108,6 @@ module XTwitterScraper
         optional :verified_type, String
 
         # @!method initialize(id:, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
-        #   Some parameter documentations has been truncated, see
-        #   {XTwitterScraper::Models::X::CommunityRetrieveModeratorsParams} for more
-        #   details.
-        #
         #   @param id [String]
         #
         #   @param bio_contains [String] Match any comma-separated or line-separated bio term, ignoring case.

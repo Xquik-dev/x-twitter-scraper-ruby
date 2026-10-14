@@ -106,10 +106,6 @@ module XTwitterScraper
         optional :style_tweets, XTwitterScraper::Internal::Type::ArrayOf[String], api_name: :styleTweets
 
         # @!method initialize(content_rules:, engagement_multipliers:, engagement_velocity:, follow_up_questions:, intent_url:, next_step:, radar_recommendations:, scorer_weights:, source:, top_penalties:, saved_styles: nil, style_note: nil, style_tweets: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult} for more
-        #   details.
-        #
         #   @param content_rules [Array<XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::ContentRule>] Xquik editorial heuristics, ordered for the goal.
         #
         #   @param engagement_multipliers [Array<XTwitterScraper::Models::ComposeCreateResponse::ComposePrepareResult::EngagementMultiplier>] Published engagement signal names. Production multipliers are not published.

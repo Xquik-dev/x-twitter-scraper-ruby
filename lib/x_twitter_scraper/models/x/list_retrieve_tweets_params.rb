@@ -50,9 +50,6 @@ module XTwitterScraper
         optional :until_time, String
 
         # @!method initialize(id:, cursor: nil, include_replies: nil, page_size: nil, since_time: nil, until_time: nil, request_options: {})
-        #   Some parameter documentations has been truncated, see
-        #   {XTwitterScraper::Models::X::ListRetrieveTweetsParams} for more details.
-        #
         #   @param id [String]
         #
         #   @param cursor [String] Pagination cursor for list tweets

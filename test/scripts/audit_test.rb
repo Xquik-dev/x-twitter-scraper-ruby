@@ -10,8 +10,6 @@ require "rbconfig"
 
 require_relative "script_support"
 
-# Runs scripts/audit.rb against a throwaway project. A fake bundle command stands in for
-# bundler-audit and its advisory database, and writes the report that the test names.
 class AuditScriptTest < Minitest::Test
   include ScriptSupport
 
@@ -53,8 +51,6 @@ class AuditScriptTest < Minitest::Test
     (Time.now.utc.to_date + offset).iso8601
   end
 
-  # A lockfile where the published gem needs "shipped", and "rake" is a development gem. The named
-  # parents depend on the vulnerable gem "leftpad".
   def lockfile(parents)
     gems = %w[rake shipped].flat_map do |name|
       ["    #{name} (1.0.0)", *("      leftpad" if parents.include?(name))]
@@ -82,7 +78,6 @@ class AuditScriptTest < Minitest::Test
     ].join("\n")
   end
 
-  # A finding in the shape bundler-audit 0.9.3 writes with --format json.
   def finding(criticality: "low", patched: [])
     {
       type: "unpatched_gem",
@@ -141,7 +136,6 @@ class AuditScriptTest < Minitest::Test
     assert_equal("exec bundle-audit check --update --quiet --format json ", command)
   end
 
-  # Defines 1 test per severity that bundler-audit can report, since no severity excuses a finding.
   def self.test_each_severity(name, &block)
     SEVERITIES.each do |criticality, label|
       define_method(:"test_#{format(name, label)}") { instance_exec(criticality, label, &block) }

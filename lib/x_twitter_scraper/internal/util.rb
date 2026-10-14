@@ -6,18 +6,9 @@
 
 module XTwitterScraper
   module Internal
-    # @api private
     module Util
-      # @api private
-      #
-      # @return [Float]
       def self.monotonic_secs = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 
-      # @api private
-      #
-      # @param ns [Module, Class]
-      #
-      # @return [Enumerable<Module, Class>]
       def self.walk_namespaces(ns)
         ns.constants(false).lazy.flat_map do
           case (c = ns.const_get(_1, false))
@@ -31,9 +22,6 @@ module XTwitterScraper
       end
 
       class << self
-        # @api private
-        #
-        # @return [String]
         def arch
           case (arch = RbConfig::CONFIG["arch"])&.downcase
           in nil
@@ -49,9 +37,6 @@ module XTwitterScraper
           end
         end
 
-        # @api private
-        #
-        # @return [String]
         def os
           case (host = RbConfig::CONFIG["host_os"])&.downcase
           in nil
@@ -73,11 +58,6 @@ module XTwitterScraper
       end
 
       class << self
-        # @api private
-        #
-        # @param input [Object]
-        #
-        # @return [Boolean]
         def primitive?(input)
           case input
           in true | false | Numeric | Symbol | String
@@ -87,11 +67,6 @@ module XTwitterScraper
           end
         end
 
-        # @api private
-        #
-        # @param input [String, Boolean]
-        #
-        # @return [Boolean, Object]
         def coerce_boolean(input)
           case input.is_a?(String) ? input.downcase : input
           in "true"
@@ -103,12 +78,6 @@ module XTwitterScraper
           end
         end
 
-        # @api private
-        #
-        # @param input [String, Boolean]
-        #
-        # @raise [ArgumentError]
-        # @return [Boolean, nil]
         def coerce_boolean!(input)
           case coerce_boolean(input)
           in true | false | nil => coerced
@@ -118,29 +87,14 @@ module XTwitterScraper
           end
         end
 
-        # @api private
-        #
-        # @param input [String, Integer]
-        #
-        # @return [Integer, Object]
         def coerce_integer(input)
           Integer(input, exception: false) || input
         end
 
-        # @api private
-        #
-        # @param input [String, Integer, Float]
-        #
-        # @return [Float, Object]
         def coerce_float(input)
           Float(input, exception: false) || input
         end
 
-        # @api private
-        #
-        # @param input [Object]
-        #
-        # @return [Hash{Object=>Object}, Object]
         def coerce_hash(input)
           case input
           in NilClass | Array | Set | Enumerator | StringIO | IO
@@ -150,12 +104,6 @@ module XTwitterScraper
           end
         end
 
-        # @api private
-        #
-        # @param input [Object]
-        #
-        # @raise [ArgumentError]
-        # @return [Hash{Object=>Object}, nil]
         def coerce_hash!(input)
           case coerce_hash(input)
           in Hash | nil => coerced
@@ -168,13 +116,6 @@ module XTwitterScraper
       end
 
       class << self
-        # @api private
-        #
-        # @param lhs [Object]
-        # @param rhs [Object]
-        # @param concat [Boolean]
-        #
-        # @return [Object]
         private def deep_merge_lr(lhs, rhs, concat: false)
           case [lhs, rhs, concat]
           in [Hash, Hash, _]
@@ -186,18 +127,6 @@ module XTwitterScraper
           end
         end
 
-        # @api private
-        #
-        # Recursively merge one hash with another. If the values at a given key are not
-        # both hashes, just take the new value.
-        #
-        # @param values [Array<Object>]
-        #
-        # @param sentinel [Object, nil] the value to return if no values are provided.
-        #
-        # @param concat [Boolean] whether to merge sequences by concatenation.
-        #
-        # @return [Object]
         def deep_merge(*values, sentinel: nil, concat: false)
           case values
           in [value, *values]
@@ -209,13 +138,6 @@ module XTwitterScraper
           end
         end
 
-        # @api private
-        #
-        # @param data [Hash{Symbol=>Object}, Array<Object>, Object]
-        # @param pick [Symbol, Integer, Array<Symbol, Integer>, Proc, nil]
-        # @param blk [Proc, nil]
-        #
-        # @return [Object, nil]
         def dig(data, pick, &blk)
           case [data, pick]
           in [_, nil]
@@ -241,35 +163,17 @@ module XTwitterScraper
         end
       end
 
-      # @type [Regexp]
-      #
-      # https://www.rfc-editor.org/rfc/rfc3986.html#section-3.3
       RFC_3986_NOT_PCHARS = /[^A-Za-z0-9\-._~!$&'()*+,;=:@]+/
 
       class << self
-        # @api private
-        #
-        # @param uri [URI::Generic]
-        #
-        # @return [String]
         def uri_origin(uri)
           "#{uri.scheme}://#{uri.host}#{":#{uri.port}" unless uri.port == uri.default_port}"
         end
 
-        # @api private
-        #
-        # @param path [String, Integer]
-        #
-        # @return [String]
         def encode_path(path)
           path.to_s.gsub(XTwitterScraper::Internal::Util::RFC_3986_NOT_PCHARS) { ERB::Util.url_encode(_1) }
         end
 
-        # @api private
-        #
-        # @param path [String, Array<String>]
-        #
-        # @return [String]
         def interpolate_path(path)
           case path
           in String
@@ -284,82 +188,25 @@ module XTwitterScraper
       end
 
       class << self
-        # @api private
-        #
-        # @param query [String, nil]
-        #
-        # @return [Hash{String=>Array<String>}]
         def decode_query(query)
           CGI.parse(query.to_s)
         end
 
-        # @api private
-        #
-        # @param query [Hash{String=>Array<String>, String, nil}, nil]
-        #
-        # @return [String, nil]
         def encode_query(query)
           query.to_h.empty? ? nil : URI.encode_www_form(query)
         end
       end
 
       class << self
-        # @api private
-        #
-        # @param url [URI::Generic, String]
-        #
-        # @return [Hash{Symbol=>String, Integer, nil}]
         def parse_uri(url)
           parsed = URI::Generic.component.zip(URI.split(url)).to_h
           {**parsed, query: decode_query(parsed.fetch(:query))}
         end
 
-        # @api private
-        #
-        # @param parsed [Hash{Symbol=>String, Integer, nil}] .
-        #
-        #   @option parsed [String, nil] :scheme
-        #
-        #   @option parsed [String, nil] :host
-        #
-        #   @option parsed [Integer, nil] :port
-        #
-        #   @option parsed [String, nil] :path
-        #
-        #   @option parsed [Hash{String=>Array<String>}] :query
-        #
-        # @return [URI::Generic]
         def unparse_uri(parsed)
           URI::Generic.build(**parsed, query: encode_query(parsed.fetch(:query)))
         end
 
-        # @api private
-        #
-        # @param lhs [Hash{Symbol=>String, Integer, nil}] .
-        #
-        #   @option lhs [String, nil] :scheme
-        #
-        #   @option lhs [String, nil] :host
-        #
-        #   @option lhs [Integer, nil] :port
-        #
-        #   @option lhs [String, nil] :path
-        #
-        #   @option lhs [Hash{String=>Array<String>}] :query
-        #
-        # @param rhs [Hash{Symbol=>String, Integer, nil}] .
-        #
-        #   @option rhs [String, nil] :scheme
-        #
-        #   @option rhs [String, nil] :host
-        #
-        #   @option rhs [Integer, nil] :port
-        #
-        #   @option rhs [String, nil] :path
-        #
-        #   @option rhs [Hash{String=>Array<String>}] :query
-        #
-        # @return [URI::Generic]
         def join_parsed_uri(lhs, rhs)
           base_path, base_query = lhs.fetch_values(:path, :query)
           slashed = base_path.end_with?("/") ? base_path : "#{base_path}/"
@@ -382,11 +229,6 @@ module XTwitterScraper
       end
 
       class << self
-        # @api private
-        #
-        # @param headers [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}]
-        #
-        # @return [Hash{String=>String}]
         def normalized_headers(*headers)
           {}.merge(*headers.compact).to_h do |key, val|
             value =
@@ -401,16 +243,9 @@ module XTwitterScraper
         end
       end
 
-      # @api private
-      #
-      # An adapter that satisfies the IO interface required by `::IO.copy_stream`
       class ReadIOAdapter
-        # @api private
-        #
-        # @return [Boolean, nil]
         def close? = @closing
 
-        # @api private
         def close
           case @stream
           in Enumerator
@@ -421,11 +256,6 @@ module XTwitterScraper
           end
         end
 
-        # @api private
-        #
-        # @param max_len [Integer, nil]
-        #
-        # @return [String]
         private def read_enum(max_len)
           case max_len
           in nil
@@ -439,12 +269,6 @@ module XTwitterScraper
           @buf.slice!(0..)
         end
 
-        # @api private
-        #
-        # @param max_len [Integer, nil]
-        # @param out_string [String, nil]
-        #
-        # @return [String, nil]
         def read(max_len = nil, out_string = nil)
           case @stream
           in nil
@@ -463,12 +287,6 @@ module XTwitterScraper
             .tap(&@blk)
         end
 
-        # @api private
-        #
-        # @param src [String, Pathname, StringIO, Enumerable<String>]
-        # @param blk [Proc]
-        #
-        # @yieldparam [String]
         def initialize(src, &blk)
           @stream =
             case src
@@ -486,10 +304,6 @@ module XTwitterScraper
       end
 
       class << self
-        # @param blk [Proc]
-        #
-        # @yieldparam [Enumerator::Yielder]
-        # @return [Enumerable<String>]
         def writable_enum(&blk)
           Enumerator.new do |y|
             y.define_singleton_method(:write) do
@@ -502,30 +316,16 @@ module XTwitterScraper
         end
       end
 
-      # @type [Regexp]
       JSON_CONTENT = %r{^application/(?:[a-zA-Z0-9.-]+\+)?json(?!l)}
-      # @type [Regexp]
       JSONL_CONTENT = %r{\Aapplication/(?:x-(?:n|l)djson|(?:x-)?jsonl)}
 
       class << self
-        # @api private
-        #
-        # @param query [Hash{Symbol=>Object}]
-        #
-        # @return [Hash{Symbol=>Object}]
         def encode_query_params(query)
           out = {}
           query.each { write_query_param_element!(out, _1, _2) }
           out
         end
 
-        # @api private
-        #
-        # @param collection [Hash{Symbol=>Object}]
-        # @param key [String]
-        # @param element [Object]
-        #
-        # @return [nil]
         private def write_query_param_element!(collection, key, element)
           case element
           in Hash
@@ -539,12 +339,6 @@ module XTwitterScraper
           end
         end
 
-        # @api private
-        #
-        # @param y [Enumerator::Yielder]
-        # @param val [Object]
-        # @param closing [Array<Proc>]
-        # @param content_type [String, nil]
         private def write_multipart_content(y, val:, closing:, content_type: nil)
           content_line = "Content-Type: %s\r\n\r\n"
 
@@ -577,13 +371,6 @@ module XTwitterScraper
           y << "\r\n"
         end
 
-        # @api private
-        #
-        # @param y [Enumerator::Yielder]
-        # @param boundary [String]
-        # @param key [Symbol, String]
-        # @param val [Object]
-        # @param closing [Array<Proc>]
         private def write_multipart_chunk(y, boundary:, key:, val:, closing:)
           y << "--#{boundary}\r\n"
           y << "Content-Disposition: form-data"
@@ -606,16 +393,9 @@ module XTwitterScraper
           write_multipart_content(y, val: val, closing: closing)
         end
 
-        # @api private
-        #
         # https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.1.md#special-considerations-for-multipart-content
-        #
-        # @param body [Object]
-        #
-        # @return [Array(String, Enumerable<String>)]
         private def encode_multipart_streaming(body)
           # rubocop:disable Style/CaseEquality
-          # RFC 1521 Section 7.2.1 says we should have 70 char maximum for boundary length
           boundary = SecureRandom.urlsafe_base64(46)
 
           closing = []
@@ -643,12 +423,6 @@ module XTwitterScraper
           # rubocop:enable Style/CaseEquality
         end
 
-        # @api private
-        #
-        # @param headers [Hash{String=>String}]
-        # @param body [Object]
-        #
-        # @return [Object]
         def encode_content(headers, body)
           # rubocop:disable Style/CaseEquality
           # rubocop:disable Layout/LineLength
@@ -675,12 +449,6 @@ module XTwitterScraper
           # rubocop:enable Style/CaseEquality
         end
 
-        # @api private
-        #
-        # https://www.iana.org/assignments/character-sets/character-sets.xhtml
-        #
-        # @param content_type [String]
-        # @param text [String]
         def force_charset!(content_type, text:)
           charset = /charset=([^;\s]+)/.match(content_type)&.captures&.first
 
@@ -694,16 +462,6 @@ module XTwitterScraper
           end
         end
 
-        # @api private
-        #
-        # Assumes each chunk in stream has `Encoding::BINARY`.
-        #
-        # @param headers [Hash{String=>String}]
-        # @param stream [Enumerable<String>]
-        # @param suppress_error [Boolean]
-        #
-        # @raise [JSON::ParserError]
-        # @return [Object]
         def decode_content(headers, stream:, suppress_error: false)
           case (content_type = headers["content-type"])
           in XTwitterScraper::Internal::Util::JSON_CONTENT
@@ -736,15 +494,6 @@ module XTwitterScraper
       end
 
       class << self
-        # @api private
-        #
-        # https://doc.rust-lang.org/std/iter/trait.FusedIterator.html
-        #
-        # @param enum [Enumerable<Object>]
-        # @param external [Boolean]
-        # @param close [Proc]
-        #
-        # @return [Enumerable<Object>]
         def fused_enum(enum, external: false, &close)
           fused = false
           iter = Enumerator.new do |y|
@@ -768,9 +517,6 @@ module XTwitterScraper
           iter
         end
 
-        # @api private
-        #
-        # @param enum [Enumerable<Object>, nil]
         def close_fused!(enum)
           return unless enum.is_a?(Enumerator)
 
@@ -778,13 +524,6 @@ module XTwitterScraper
           enum.rewind.each { break }
         end
 
-        # @api private
-        #
-        # @param enum [Enumerable<Object>, nil]
-        # @param blk [Proc]
-        #
-        # @yieldparam [Enumerator::Yielder]
-        # @return [Enumerable<Object>]
         def chain_fused(enum, &blk)
           iter = Enumerator.new { blk.call(_1) }
           fused_enum(iter) { close_fused!(enum) }
@@ -792,16 +531,6 @@ module XTwitterScraper
       end
 
       class << self
-        # @api private
-        #
-        # Assumes Strings have been forced into having `Encoding::BINARY`.
-        #
-        # This decoder is responsible for reassembling lines split across multiple
-        # fragments.
-        #
-        # @param enum [Enumerable<String>]
-        #
-        # @return [Enumerable<String>]
         def decode_lines(enum)
           re = /(\r\n|\r|\n)/
           buffer = String.new
@@ -831,15 +560,6 @@ module XTwitterScraper
           end
         end
 
-        # @api private
-        #
-        # https://html.spec.whatwg.org/multipage/server-sent-events.html#parsing-an-event-stream
-        #
-        # Assumes that `lines` has been decoded with `#decode_lines`.
-        #
-        # @param lines [Enumerable<String>]
-        #
-        # @return [Enumerable<Hash{Symbol=>Object}>]
         def decode_sse(lines)
           # rubocop:disable Metrics/BlockLength
           chain_fused(lines) do |y|
@@ -877,19 +597,12 @@ module XTwitterScraper
         end
       end
 
-      # @api private
       module SorbetRuntimeSupport
         class MissingSorbetRuntimeError < ::RuntimeError
         end
 
-        # @api private
-        #
-        # @return [Hash{Symbol=>Object}]
         private def sorbet_runtime_constants = @sorbet_runtime_constants ||= {}
 
-        # @api private
-        #
-        # @param name [Symbol]
         def const_missing(name)
           super unless sorbet_runtime_constants.key?(name)
 
@@ -901,30 +614,13 @@ module XTwitterScraper
           sorbet_runtime_constants.fetch(name).call
         end
 
-        # @api private
-        #
-        # @param name [Symbol]
-        #
-        # @return [Boolean]
         def sorbet_constant_defined?(name) = sorbet_runtime_constants.key?(name)
 
-        # @api private
-        #
-        # @param name [Symbol]
-        # @param blk [Proc]
         def define_sorbet_constant!(name, &blk) = sorbet_runtime_constants.store(name, blk)
 
-        # @api private
-        #
-        # @return [Object]
         def to_sorbet_type = raise(NotImplementedError)
 
         class << self
-          # @api private
-          #
-          # @param type [XTwitterScraper::Internal::Util::SorbetRuntimeSupport, Object]
-          #
-          # @return [Object]
           def to_sorbet_type(type)
             case type
             in XTwitterScraper::Internal::Util::SorbetRuntimeSupport

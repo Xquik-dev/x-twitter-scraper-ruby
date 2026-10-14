@@ -7,27 +7,14 @@
 module XTwitterScraper
   module Internal
     module Type
-      # @api private
       module RequestParameters
-        # @!attribute request_options
-        # Options to specify HTTP behaviour for this request.
-        #
-        #   @return [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
-
-        # @param mod [Module]
         def self.included(mod)
           raise ArgumentError.new(mod) unless mod <= XTwitterScraper::Internal::Type::BaseModel
 
           mod.optional(:request_options, XTwitterScraper::RequestOptions)
         end
 
-        # @api private
         module Converter
-          # @api private
-          #
-          # @param params [Object]
-          #
-          # @return [Array(Object, Hash{Symbol=>Object})]
           def dump_request(params)
             state = {can_retry: true}
             case (dumped = dump(params, state: state))
