@@ -20,9 +20,6 @@ module XTwitterScraper
         required :ids, String
 
         # @!method initialize(ids:, request_options: {})
-        #   Some parameter documentations has been truncated, see
-        #   {XTwitterScraper::Models::X::UserRetrieveBatchParams} for more details.
-        #
         #   @param ids [String] Comma-separated numeric user IDs (1-100 values). Duplicate IDs are ignored while
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]

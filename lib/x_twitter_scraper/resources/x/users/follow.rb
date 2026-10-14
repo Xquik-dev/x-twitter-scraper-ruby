@@ -10,9 +10,6 @@ module XTwitterScraper
       class Users
         # X write actions (tweets, likes, follows, DMs)
         class Follow
-          # Some parameter documentations has been truncated, see
-          # {XTwitterScraper::Models::X::Users::FollowCreateParams} for more details.
-          #
           # Follow user
           #
           # @overload create(id, account:, idempotency_key:, request_options: {})
@@ -41,9 +38,6 @@ module XTwitterScraper
             )
           end
 
-          # Some parameter documentations has been truncated, see
-          # {XTwitterScraper::Models::X::Users::FollowDeleteAllParams} for more details.
-          #
           # Unfollow user
           #
           # @overload delete_all(id, account:, idempotency_key:, request_options: {})

@@ -9,9 +9,6 @@ module XTwitterScraper
     class Support
       # Support ticket management
       class Tickets
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::Support::TicketCreateParams} for more details.
-        #
         # Create a support ticket
         #
         # @overload create(body:, subject:, idempotency_key: nil, request_options: {})
@@ -102,9 +99,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::Support::TicketReplyParams} for more details.
-        #
         # Reply to a support ticket
         #
         # @overload reply(id, body:, idempotency_key: nil, request_options: {})

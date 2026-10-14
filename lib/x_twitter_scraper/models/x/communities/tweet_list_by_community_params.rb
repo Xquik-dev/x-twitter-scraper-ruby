@@ -33,10 +33,6 @@ module XTwitterScraper
           optional :page_size, Integer
 
           # @!method initialize(id:, cursor: nil, page_size: nil, request_options: {})
-          #   Some parameter documentations has been truncated, see
-          #   {XTwitterScraper::Models::X::Communities::TweetListByCommunityParams} for more
-          #   details.
-          #
           #   @param id [String]
           #
           #   @param cursor [String] Pagination cursor for community tweets

@@ -7,9 +7,6 @@
 module XTwitterScraper
   module Internal
     module Type
-      # @api private
-      #
-      # Ruby has no Boolean class; this is something for models to refer to.
       class Boolean
         extend XTwitterScraper::Internal::Type::Converter
         extend XTwitterScraper::Internal::Util::SorbetRuntimeSupport
@@ -25,9 +22,6 @@ module XTwitterScraper
         end
 
         class << self
-          # @api private
-          #
-          # Coerce value to Boolean if possible, otherwise return the original value.
           sig do
             override
               .params(
@@ -39,7 +33,6 @@ module XTwitterScraper
           def coerce(value, state:)
           end
 
-          # @api private
           sig do
             override
               .params(
@@ -51,7 +44,6 @@ module XTwitterScraper
           def dump(value, state:)
           end
 
-          # @api private
           sig { returns(T.anything) }
           def to_sorbet_type
           end

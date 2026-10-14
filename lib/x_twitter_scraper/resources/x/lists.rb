@@ -9,9 +9,6 @@ module XTwitterScraper
     class X
       # X List followers, members, and tweets
       class Lists
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::ListRetrieveFollowersParams} for more details.
-        #
         # List followers of an X List
         #
         # @overload retrieve_followers(id, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
@@ -83,9 +80,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::ListRetrieveMembersParams} for more details.
-        #
         # List members of an X List
         #
         # @overload retrieve_members(id, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
@@ -157,9 +151,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::ListRetrieveTweetsParams} for more details.
-        #
         # List tweets from an X List
         #
         # @overload retrieve_tweets(id, cursor: nil, include_replies: nil, page_size: nil, since_time: nil, until_time: nil, request_options: {})

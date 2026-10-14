@@ -10,9 +10,6 @@ module XTwitterScraper
       class Tweets
         # X write actions (tweets, likes, follows, DMs)
         class Retweet
-          # Some parameter documentations has been truncated, see
-          # {XTwitterScraper::Models::X::Tweets::RetweetCreateParams} for more details.
-          #
           # Retweet
           #
           # @overload create(id, account:, idempotency_key:, request_options: {})
@@ -41,9 +38,6 @@ module XTwitterScraper
             )
           end
 
-          # Some parameter documentations has been truncated, see
-          # {XTwitterScraper::Models::X::Tweets::RetweetDeleteParams} for more details.
-          #
           # Unretweet
           #
           # @overload delete(id, account:, idempotency_key:, request_options: {})

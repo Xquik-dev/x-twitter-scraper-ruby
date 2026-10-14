@@ -59,9 +59,6 @@ module XTwitterScraper
       required :wallet_id, String
 
       # @!method initialize(balance:, latest_purchase:, poll_after_seconds:, status:, top_up:, usable:, wallet_id:, scope: :paid_reads)
-      #   Some parameter documentations has been truncated, see
-      #   {XTwitterScraper::Models::GuestWalletRetrieveStatusResponse} for more details.
-      #
       #   Current balance, usability, and latest guest purchase state.
       #
       #   @param balance [String]

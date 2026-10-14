@@ -7,7 +7,6 @@
 module XTwitterScraper
   module Internal
     module Transport
-      # @api private
       class PooledNetRequester
         extend XTwitterScraper::Internal::Util::SorbetRuntimeSupport
 
@@ -22,14 +21,11 @@ module XTwitterScraper
             }
           end
 
-        # from the golang stdlib
-        # https://github.com/golang/go/blob/c8eced8580028328fde7c03cbfcb720ce15b2358/src/net/http/transport.go#L49
         KEEP_ALIVE_TIMEOUT = 30
 
         DEFAULT_MAX_CONNECTIONS = T.let(T.unsafe(nil), Integer)
 
         class << self
-          # @api private
           sig do
             params(cert_store: OpenSSL::X509::Store, url: URI::Generic).returns(
               Net::HTTP
@@ -38,12 +34,10 @@ module XTwitterScraper
           def connect(cert_store:, url:)
           end
 
-          # @api private
           sig { params(conn: Net::HTTP, deadline: Float).void }
           def calibrate_socket_timeout(conn, deadline)
           end
 
-          # @api private
           sig do
             params(
               request:
@@ -55,7 +49,6 @@ module XTwitterScraper
           end
         end
 
-        # @api private
         sig do
           params(
             url: URI::Generic,
@@ -66,7 +59,6 @@ module XTwitterScraper
         private def with_pool(url, deadline:, &blk)
         end
 
-        # @api private
         sig do
           params(
             request:
@@ -76,7 +68,6 @@ module XTwitterScraper
         def execute(request)
         end
 
-        # @api private
         sig { params(size: Integer).returns(T.attached_class) }
         def self.new(
           size: XTwitterScraper::Internal::Transport::PooledNetRequester::DEFAULT_MAX_CONNECTIONS

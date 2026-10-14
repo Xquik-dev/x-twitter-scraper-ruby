@@ -27,9 +27,6 @@ module XTwitterScraper
       optional :limit, Integer
 
       # @!method initialize(after_cursor: nil, limit: nil, request_options: {})
-      #   Some parameter documentations has been truncated, see
-      #   {XTwitterScraper::Models::DraftListParams} for more details.
-      #
       #   @param after_cursor [String] Cursor for pagination
       #
       #   @param limit [Integer] Maximum number of items to return (1-100, default 50). For paid per-result endpo

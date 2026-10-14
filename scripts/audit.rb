@@ -4,19 +4,6 @@
 
 # frozen_string_literal: true
 
-# Audits Gemfile.lock with bundler-audit and applies reviewed exceptions.
-#
-# It blocks on an insecure gem source, on any advisory for a gem the published
-# gem loads at runtime, and on any development advisory that has a patched
-# version. Severity never excuses a finding, and a .bundler-audit.yml ignore
-# list is refused. An unpatched development-only advisory passes only while
-# audit-exceptions.json lists it. Each entry holds advisory, path, reason and
-# recheck. The path is the dependency path the audit prints. The reason is
-# "build-time only" or "peer dependency provided by the host". The recheck date
-# must fall within the next 30 days.
-#
-# Pass a directory to audit it instead of this repository.
-
 require "bundler"
 require "date"
 require "json"

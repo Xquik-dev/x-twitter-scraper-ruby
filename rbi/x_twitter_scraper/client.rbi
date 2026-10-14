@@ -83,7 +83,6 @@ module XTwitterScraper
     sig { returns(XTwitterScraper::Resources::GuestWallets) }
     attr_reader :guest_wallets
 
-    # @api private
     sig do
       override
         .params(
@@ -97,17 +96,14 @@ module XTwitterScraper
     private def auth_headers(security:)
     end
 
-    # @api private
     sig { returns(T::Hash[String, String]) }
     private def auth_api_key
     end
 
-    # @api private
     sig { returns(T::Hash[String, String]) }
     private def oauth_bearer
     end
 
-    # Creates and returns a new client for interacting with the API.
     sig do
       params(
         api_key: T.nilable(String),

@@ -36,9 +36,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::MediaUploadParams} for more details.
-        #
         # Upload media
         #
         # @overload upload(account:, url:, idempotency_key:, request_options: {})

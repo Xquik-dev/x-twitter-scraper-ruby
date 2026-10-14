@@ -7,7 +7,6 @@
 module XTwitterScraper
   module Internal
     module Transport
-      # @api private
       class BaseClient
         extend XTwitterScraper::Internal::Util::SorbetRuntimeSupport
 
@@ -76,13 +75,11 @@ module XTwitterScraper
             }
           end
 
-        # from whatwg fetch spec
         MAX_REDIRECTS = 20
 
         PLATFORM_HEADERS = T::Hash[String, String]
 
         class << self
-          # @api private
           sig do
             params(
               req:
@@ -92,7 +89,6 @@ module XTwitterScraper
           def validate!(req)
           end
 
-          # @api private
           sig do
             params(status: Integer, headers: T::Hash[String, String]).returns(
               T::Boolean
@@ -101,7 +97,6 @@ module XTwitterScraper
           def should_retry?(status, headers:)
           end
 
-          # @api private
           sig do
             params(
               request:
@@ -115,7 +110,6 @@ module XTwitterScraper
           def follow_redirect(request, status:, response_headers:)
           end
 
-          # @api private
           sig do
             params(
               status:
@@ -148,13 +142,11 @@ module XTwitterScraper
         sig { returns(T.nilable(String)) }
         attr_reader :idempotency_header
 
-        # @api private
         sig do
           returns(XTwitterScraper::Internal::Transport::PooledNetRequester)
         end
         attr_reader :requester
 
-        # @api private
         sig do
           params(
             base_url: String,
@@ -187,22 +179,18 @@ module XTwitterScraper
         )
         end
 
-        # @api private
         sig { overridable.returns(T::Hash[String, String]) }
         private def auth_headers
         end
 
-        # @api private
         sig { returns(String) }
         private def user_agent
         end
 
-        # @api private
         sig { returns(String) }
         private def generate_idempotency_key
         end
 
-        # @api private
         sig do
           overridable
             .params(
@@ -217,7 +205,6 @@ module XTwitterScraper
         private def build_request(req, opts)
         end
 
-        # @api private
         sig do
           params(
             headers: T::Hash[String, String],
@@ -227,7 +214,6 @@ module XTwitterScraper
         private def retry_delay(headers, retry_count:)
         end
 
-        # @api private
         sig do
           params(
             request:
@@ -245,10 +231,6 @@ module XTwitterScraper
         )
         end
 
-        # Execute the request specified by `req`. This is the method that all resource
-        # methods call into.
-        #
-        # @overload request(method, path, query: {}, headers: {}, body: nil, unwrap: nil, page: nil, stream: nil, model: XTwitterScraper::Internal::Type::Unknown, security: {auth_api_key: true, oauth_bearer: true}, options: {})
         sig do
           params(
             method: Symbol,
@@ -310,7 +292,6 @@ module XTwitterScraper
         )
         end
 
-        # @api private
         sig { returns(String) }
         def inspect
         end

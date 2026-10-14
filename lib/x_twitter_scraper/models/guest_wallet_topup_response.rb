@@ -93,9 +93,6 @@ module XTwitterScraper
                enum: -> { XTwitterScraper::Models::GuestWalletTopupResponse::CredentialNotice }
 
       # @!method initialize(amount:, checkout_url:, credits:, expires_at:, instructions:, purchase_id:, status:, wallet_id:, api_key: nil, authorization: nil, credential_notice: nil, account_required: false, poll_after_seconds: 2, requires_user_interaction: true, status_url: :"https://xquik.com/api/v1/guest-wallets/status")
-      #   Some parameter documentations has been truncated, see
-      #   {XTwitterScraper::Models::GuestWalletTopupResponse} for more details.
-      #
       #   Pending hosted checkout and guest wallet purchase details.
       #
       #   @param amount [XTwitterScraper::Models::GuestWalletAmount] Confirmed USD amount for a guest wallet purchase.

@@ -28,9 +28,6 @@ module XTwitterScraper
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {XTwitterScraper::Models::DrawListParams} for more details.
-      #
       # List draws
       #
       # @overload list(cursor: nil, limit: nil, request_options: {})
@@ -56,9 +53,6 @@ module XTwitterScraper
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {XTwitterScraper::Models::DrawExportParams} for more details.
-      #
       # Export draw data
       #
       # @overload export(id, format_:, type: nil, request_options: {})

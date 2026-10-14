@@ -58,9 +58,6 @@ module XTwitterScraper
       required :url, String
 
       # @!method initialize(id:, consecutive_failures:, created_at:, delivery_status:, event_types:, failure_hard_cap:, is_active:, url:)
-      #   Some parameter documentations has been truncated, see
-      #   {XTwitterScraper::Models::Webhook} for more details.
-      #
       #   Webhook endpoint registered to receive event deliveries.
       #
       #   @param id [String]

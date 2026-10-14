@@ -16,9 +16,6 @@ module XTwitterScraper
         # @return [XTwitterScraper::Resources::X::Communities::Tweets]
         attr_reader :tweets
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::CommunityCreateParams} for more details.
-        #
         # Create community
         #
         # @overload create(account:, name:, idempotency_key:, description: nil, request_options: {})
@@ -49,9 +46,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::CommunityDeleteParams} for more details.
-        #
         # Delete community
         #
         # @overload delete(id, account:, community_name:, idempotency_key:, request_options: {})
@@ -102,9 +96,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::CommunityRetrieveMembersParams} for more details.
-        #
         # List members of a community
         #
         # @overload retrieve_members(id, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
@@ -176,10 +167,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::CommunityRetrieveModeratorsParams} for more
-        # details.
-        #
         # List moderators of a community
         #
         # @overload retrieve_moderators(id, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
@@ -248,9 +235,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::CommunityRetrieveSearchParams} for more details.
-        #
         # Returns tweets, not community records. Requires a Community ID.
         #
         # @overload retrieve_search(community_id:, q:, cursor: nil, page_size: nil, query_type: nil, request_options: {})

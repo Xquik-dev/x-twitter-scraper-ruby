@@ -4,8 +4,6 @@
 
 # frozen_string_literal: true
 
-# Load production entry points and shared helpers for every test file.
-
 require "digest"
 require "singleton"
 

@@ -218,9 +218,6 @@ module XTwitterScraper
       optional :view_state, String, api_name: :viewState
 
       # @!method initialize(id:, bookmark_count:, like_count:, quote_count:, reply_count:, retweet_count:, text:, view_count:, article: nil, author: nil, card: nil, community_note: nil, content_disclosure: nil, conversation_id: nil, created_at: nil, display_text_range: nil, edit: nil, entities: nil, in_reply_to_id: nil, in_reply_to_user_id: nil, in_reply_to_username: nil, is_limited_reply: nil, is_note_tweet: nil, is_quote_status: nil, is_reply: nil, is_translatable: nil, lang: nil, media: nil, note_tweet: nil, place: nil, possibly_sensitive: nil, previous_counts: nil, quoted_tweet: nil, retweeted_tweet: nil, source: nil, type: nil, url: nil, view_state: nil)
-      #   Some parameter documentations has been truncated, see
-      #   {XTwitterScraper::Models::EmbeddedTweet} for more details.
-      #
       #   Quoted or retweeted tweet context. Every object includes id, text, and
       #   engagement metrics. A zero metric can mean X did not report the count. Author,
       #   media, and conversation fields appear when available.

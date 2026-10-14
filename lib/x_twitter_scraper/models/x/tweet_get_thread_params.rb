@@ -225,9 +225,6 @@ module XTwitterScraper
         optional :verified_only, XTwitterScraper::Internal::Type::Boolean
 
         # @!method initialize(id:, any_words: nil, blue_verified_only: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, to_user: nil, until_date: nil, url: nil, verified_only: nil, request_options: {})
-        #   Some parameter documentations has been truncated, see
-        #   {XTwitterScraper::Models::X::TweetGetThreadParams} for more details.
-        #
         #   @param id [String]
         #
         #   @param any_words [String] Words or quoted phrases where any one can match. Separate with spaces, commas, o

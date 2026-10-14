@@ -7,7 +7,6 @@
 module XTwitterScraper
   module Internal
     module Type
-      # @api private
       module Converter
         extend XTwitterScraper::Internal::Util::SorbetRuntimeSupport
 
@@ -36,7 +35,6 @@ module XTwitterScraper
 
         DumpState = T.type_alias { { can_retry: T::Boolean } }
 
-        # @api private
         sig do
           overridable
             .params(
@@ -48,7 +46,6 @@ module XTwitterScraper
         def coerce(value, state:)
         end
 
-        # @api private
         sig do
           overridable
             .params(
@@ -60,13 +57,11 @@ module XTwitterScraper
         def dump(value, state:)
         end
 
-        # @api private
         sig { params(depth: Integer).returns(String) }
         def inspect(depth: 0)
         end
 
         class << self
-          # @api private
           sig do
             params(
               spec:
@@ -99,7 +94,6 @@ module XTwitterScraper
           def self.type_info(spec)
           end
 
-          # @api private
           sig do
             params(
               type_info:
@@ -157,7 +151,6 @@ module XTwitterScraper
           def self.meta_info(type_info, spec)
           end
 
-          # @api private
           sig do
             params(translate_names: T::Boolean).returns(
               XTwitterScraper::Internal::Type::Converter::CoerceState
@@ -166,17 +159,6 @@ module XTwitterScraper
           def self.new_coerce_state(translate_names: true)
           end
 
-          # @api private
-          #
-          # Based on `target`, transform `value` into `target`, to the extent possible:
-          #
-          # 1. if the given `value` conforms to `target` already, return the given `value`
-          # 2. if it's possible and safe to convert the given `value` to `target`, then the
-          #    converted value
-          # 3. otherwise, the given `value` unaltered
-          #
-          # The coercion process is subject to improvement between minor release versions.
-          # See https://docs.pydantic.dev/latest/concepts/unions/#smart-mode
           sig do
             params(
               target: XTwitterScraper::Internal::Type::Converter::Input,
@@ -187,27 +169,10 @@ module XTwitterScraper
           def self.coerce(
             target,
             value,
-            # The `strictness` is one of `true`, `false`. This informs the coercion strategy
-            # when we have to decide between multiple possible conversion targets:
-            #
-            # - `true`: the conversion must be exact, with minimum coercion.
-            # - `false`: the conversion can be approximate, with some coercion.
-            #
-            # The `exactness` is `Hash` with keys being one of `yes`, `no`, or `maybe`. For
-            # any given conversion attempt, the exactness will be updated based on how closely
-            # the value recursively matches the target type:
-            #
-            # - `yes`: the value can be converted to the target type with minimum coercion.
-            # - `maybe`: the value can be converted to the target type with some reasonable
-            #   coercion.
-            # - `no`: the value cannot be converted to the target type.
-            #
-            # See implementation below for more details.
             state: XTwitterScraper::Internal::Type::Converter.new_coerce_state
           )
           end
 
-          # @api private
           sig do
             params(
               target: XTwitterScraper::Internal::Type::Converter::Input,
@@ -218,7 +183,6 @@ module XTwitterScraper
           def self.dump(target, value, state: { can_retry: true })
           end
 
-          # @api private
           sig { params(target: T.anything, depth: Integer).returns(String) }
           def self.inspect(target, depth:)
           end

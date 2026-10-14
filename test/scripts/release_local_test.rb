@@ -10,14 +10,9 @@ require "socket"
 
 require_relative "script_support"
 
-# Runs bin/release-local in a throwaway repository whose origin is a local bare repository. Fake
-# commands stand in for Bundler, curl, the GitHub CLI and the macOS Keychain. The real gem command
-# pushes to a fake gem host on 127.0.0.1, so no test can reach RubyGems.org or GitHub.
 class ReleaseLocalScriptTest < Minitest::Test
   include ScriptSupport
 
-  # Answers as RubyGems.org does for an account that uses one-time codes. With a security device, it
-  # hands out a verification link and reports the approval as done on the first poll.
   class FakeGemHost
     MFA_REFUSAL = "You have enabled multifactor authentication but your request doesn't have the " \
                   "correct OTP code. Please check it and retry."
@@ -62,7 +57,6 @@ class ReleaseLocalScriptTest < Minitest::Test
       head = ["HTTP/1.1 #{status}", "Content-Length: #{body.bytesize}", "Connection: close"]
       client.write("#{head.join("\r\n")}\r\n\r\n#{body}")
     rescue SystemCallError
-      # The client went away. The host keeps answering later requests.
       nil
     ensure
       client.close
@@ -268,7 +262,6 @@ class ReleaseLocalScriptTest < Minitest::Test
     run_command(@script, *arguments, env: environment(variables, registry_status: registry_status))
   end
 
-  # Runs the release in a terminal and types the code when RubyGems asks for it.
   def release_in_terminal(variables, code)
     pairs = environment(variables).map { |name, value| "#{name}=#{value}" }
     output = +""
@@ -287,7 +280,6 @@ class ReleaseLocalScriptTest < Minitest::Test
     [status.exitstatus, output]
   end
 
-  # Runs the release in a terminal and types nothing, as with a security device.
   def release_in_terminal_without_typing(variables)
     pairs = environment(variables).map { |name, value| "#{name}=#{value}" }
     output = +""
@@ -311,7 +303,6 @@ class ReleaseLocalScriptTest < Minitest::Test
 
   def origin_tags = origin_git("tag", "--list").split
 
-  # The gem host requests, origin tags and GitHub releases that a release leaves behind.
   def published = [@host.requests, origin_tags, log("gh")]
 
   [["unset", {}], ["empty", {"RUBYGEMS_KEYCHAIN_SERVICE" => ""}]].each do |state, variables|
@@ -408,7 +399,6 @@ class ReleaseLocalScriptTest < Minitest::Test
     assert_empty(log("open-from-path"))
   end
 
-  # The real open would show the owner a browser window, so it must never be the one that runs.
   def test_no_test_can_reach_the_real_open
     path = environment.fetch("PATH").split(File::PATH_SEPARATOR)
     first_open = path.map { |folder| File.join(folder, "open") }.find { |file| File.executable?(file) }

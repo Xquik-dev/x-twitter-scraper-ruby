@@ -4,16 +4,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-# Runs every repository check on this machine and stops at the first failure.
-# CodeQL and REUSE are mandatory. Install the tools first with
-# brew install --cask codeql and brew install uv. REUSE runs at a pinned
-# version through uv, so it needs no install of its own.
-#
-# It posts the result as the xquik-local-checks commit status with the gh login
-# of the person running it, which is the owner's login on the release machine.
-# It posts success only after every mandatory check passed, and the status text
-# lists only the checks that ran. Pass --no-status to skip the commit status.
-
 set -euo pipefail
 
 cd -- "$(dirname -- "$0")/.."
@@ -91,7 +81,6 @@ trap finish EXIT
 
 post_status pending "Local checks are running."
 
-# run_check <name> <status label, empty for setup steps> <next step> <command...>
 run_check() {
   local name="$1"
   local label="$2"
@@ -115,7 +104,6 @@ has_tool() {
   command -v "$1" >/dev/null 2>&1
 }
 
-# Replaces the status label of the check that just passed.
 relabel_last() {
   passed_checks[${#passed_checks[@]} - 1]="$1"
 }
@@ -141,9 +129,6 @@ run_codeql() {
       [location.dig("artifactLocation", "uri"), location.dig("region", "startLine")]
     end
 
-    # CodeQL goes on after it fails to parse a file and scans only the code it could parse. The
-    # extraction diagnostics of the suite name each such file. The report lists every diagnostic
-    # that ran, so a suite without them cannot pass.
     unread_notes = %w[rb/diagnostics/extraction-errors rb/diagnostics/extraction-warnings]
     ran = runs.flat_map { |run| run.dig("tool", "driver", "notifications") || [] }.map { |note| note["id"] }
     missing = unread_notes - ran

@@ -49,9 +49,6 @@ module XTwitterScraper
       optional :source, enum: -> { XTwitterScraper::RadarRetrieveTrendingTopicsParams::Source }
 
       # @!method initialize(after: nil, category: nil, hours: nil, limit: nil, region: nil, source: nil, request_options: {})
-      #   Some parameter documentations has been truncated, see
-      #   {XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams} for more details.
-      #
       #   @param after [String] Cursor for pagination (from prior response nextCursor).
       #
       #   @param category [Symbol, XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams::Category] Filter by category.

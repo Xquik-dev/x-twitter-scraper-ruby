@@ -8,8 +8,6 @@ require "json"
 
 require_relative "script_support"
 
-# Runs bin/check-local in a throwaway repository. Fake commands stand in for Bundler, CodeQL, uv and
-# the GitHub CLI, so the test sees which checks ran and which commit statuses the script posted.
 class CheckLocalScriptTest < Minitest::Test
   include ScriptSupport
 
@@ -85,9 +83,6 @@ class CheckLocalScriptTest < Minitest::Test
 
   EXTRACTION_DIAGNOSTICS = %w[rb/diagnostics/extraction-errors rb/diagnostics/extraction-warnings].freeze
 
-  # A SARIF file in the shape CodeQL 2.27 writes for a scan without findings. "unread" maps each file
-  # that CodeQL could not parse to the line of the error, and "diagnostics" names the diagnostic
-  # queries that ran.
   def sarif(unread: {}, diagnostics: EXTRACTION_DIAGNOSTICS)
     notifications = unread.map do |file, line|
       {
@@ -122,9 +117,6 @@ class CheckLocalScriptTest < Minitest::Test
     )
   end
 
-  # Runs bin/check-local on a clean, committed tree. "codeql_sarif" is the file the fake CodeQL
-  # writes, "without" names fake commands to leave out, and "system_path_only" hides the tools
-  # installed on this machine.
   def check_local(
     audit_summary: "Audit passed.",
     reuse_exit: 0,

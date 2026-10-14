@@ -44,8 +44,6 @@ multitask(:test) do
   ruby(*%w[-w -e], rb, verbose: false) { fail unless _1 }
 end
 
-# Cap RuboCop parallelism at the CPU count.
-# Unbounded 300-file batches can exhaust memory on generated SDKs.
 xargs = %W[xargs --no-run-if-empty --null --max-procs=#{Etc.nprocessors} --max-args=300 --]
 ruby_opt = {"RUBYOPT" => [ENV["RUBYOPT"], "--encoding=UTF-8"].compact.join(" ")}
 
@@ -64,7 +62,6 @@ multitask(:"lint:rubocop") do
   rubocop = %w[rubocop]
   rubocop += %w[--format github] if ENV.key?("CI")
 
-  # Preserve generated lines that cannot be shortened.
   rubocop += %w[--except Lint/RedundantCopDisableDirective,Layout/LineLength]
 
   lint = xargs + rubocop
@@ -75,7 +72,6 @@ norm_lines = %w[tr -- \n \0].shelljoin
 
 desc("Format `*.rb`")
 multitask(:"format:rb") do
-  # RuboCop supports syntax that Syntax Tree cannot format.
   files = filtered["rb", %w[./lib ./test ./examples]]
   fmt = xargs + %w[rubocop --fail-level F --autocorrect --format simple --]
   sh("#{files.shelljoin} | #{norm_lines} | #{fmt.shelljoin}")
@@ -94,14 +90,10 @@ multitask(:"format:rbs") do
   inplace = /darwin|bsd/ =~ RUBY_PLATFORM ? ["-i", ""] : %w[-i]
   uuid = SecureRandom.uuid
 
-  # Syntax Tree cannot parse RBS class or module aliases.
-
   sed_bin = /darwin/ =~ RUBY_PLATFORM ? "/usr/bin/sed" : "sed"
   sed = xargs + [sed_bin, "-E", *inplace, "-e"]
-  # Mark aliases with a unique comment before formatting.
   pre = sed + ["s/(class|module) ([^ ]+) = (.+$)/# \\1 #{uuid}\\n\\2: \\3/", "--"]
   fmt = xargs + %w[stree write --plugin=rbs --]
-  # Restore the marked aliases after formatting.
   subst = <<~SED
     s/# (class|module) #{uuid}/\\1/
     t l1
@@ -111,21 +103,16 @@ multitask(:"format:rbs") do
     N
     s/\\n *([^:]+): (.+)$/ \\1 = \\2/
   SED
-  # Restore each marker, then join it with the following alias.
   pst = sed + [subst, "--"]
 
   success = false
 
-  # Convert class aliases to parseable type aliases.
   sh("#{files.shelljoin} | #{norm_lines} | #{pre.shelljoin}")
-  # Format the temporary type aliases.
   sh(ruby_opt, "#{files.shelljoin} | #{norm_lines} | #{fmt.shelljoin}") do
     success = _1
   end
-  # Convert type aliases back to class aliases.
   sh("#{files.shelljoin} | #{norm_lines} | #{pst.shelljoin}")
 
-  # Always remove temporary markers.
   fail unless success
 end
 
@@ -163,8 +150,6 @@ directory("pkg")
 
 desc("Build ruby gem")
 multitask(:"build:gem" => "pkg") do
-  # Hide type manifests from generic search tools inside the gem.
-  # Sorbet and RBS tools still index their respective directories.
   Pathname(ignore_file).write(<<~GLOB)
     rbi/*
     sig/*

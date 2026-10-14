@@ -75,7 +75,6 @@ module XTwitterScraper
 
         attr_reader idempotency_header: String?
 
-        # @api private
         attr_reader requester: XTwitterScraper::Internal::Transport::PooledNetRequester
 
         def initialize: (

@@ -7,23 +7,14 @@
 module XTwitterScraper
   module Internal
     module Transport
-      # @api private
       class PooledNetRequester
         extend XTwitterScraper::Internal::Util::SorbetRuntimeSupport
 
-        # from the golang stdlib
-        # https://github.com/golang/go/blob/c8eced8580028328fde7c03cbfcb720ce15b2358/src/net/http/transport.go#L49
         KEEP_ALIVE_TIMEOUT = 30
 
         DEFAULT_MAX_CONNECTIONS = [Etc.nprocessors, 99].max
 
         class << self
-          # @api private
-          #
-          # @param cert_store [OpenSSL::X509::Store]
-          # @param url [URI::Generic]
-          #
-          # @return [Net::HTTP]
           def connect(cert_store:, url:)
             port =
               case [url.port, url.scheme]
@@ -43,36 +34,18 @@ module XTwitterScraper
             end
           end
 
-          # @api private
-          #
-          # @param conn [Net::HTTP]
-          # @param deadline [Float]
           def calibrate_socket_timeout(conn, deadline)
             timeout = deadline - XTwitterScraper::Internal::Util.monotonic_secs
             conn.open_timeout = conn.read_timeout = conn.write_timeout = conn.continue_timeout = timeout
           end
 
-          # @api private
-          #
-          # @param request [Hash{Symbol=>Object}] .
-          #
-          #   @option request [Symbol] :method
-          #
-          #   @option request [URI::Generic] :url
-          #
-          #   @option request [Hash{String=>String}] :headers
-          #
-          # @param blk [Proc]
-          #
-          # @yieldparam [String]
-          # @return [Array(Net::HTTPGenericRequest, Proc)]
           def build_request(request, &blk)
             method, url, headers, body = request.fetch_values(:method, :url, :headers, :body)
             req = Net::HTTPGenericRequest.new(
               method.to_s.upcase,
               !body.nil?,
               method != :head,
-              URI(url.to_s) # ensure we construct a URI class of the right scheme
+              URI(url.to_s)
             )
 
             headers.each { req[_1] = _2 }
@@ -95,14 +68,6 @@ module XTwitterScraper
           end
         end
 
-        # @api private
-        #
-        # @param url [URI::Generic]
-        # @param deadline [Float]
-        # @param blk [Proc]
-        #
-        # @raise [Timeout::Error]
-        # @yieldparam [Net::HTTP]
         private def with_pool(url, deadline:, &blk)
           origin = XTwitterScraper::Internal::Util.uri_origin(url)
           timeout = deadline - XTwitterScraper::Internal::Util.monotonic_secs
@@ -116,21 +81,6 @@ module XTwitterScraper
           pool.with(timeout: timeout, &blk)
         end
 
-        # @api private
-        #
-        # @param request [Hash{Symbol=>Object}] .
-        #
-        #   @option request [Symbol] :method
-        #
-        #   @option request [URI::Generic] :url
-        #
-        #   @option request [Hash{String=>String}] :headers
-        #
-        #   @option request [Object] :body
-        #
-        #   @option request [Float] :deadline
-        #
-        # @return [Array(Integer, Net::HTTPResponse, Enumerable<String>)]
         def execute(request)
           url, deadline = request.fetch_values(:url, :deadline)
 
@@ -194,9 +144,6 @@ module XTwitterScraper
           [Integer(response.code), response, body]
         end
 
-        # @api private
-        #
-        # @param size [Integer]
         def initialize(size: self.class::DEFAULT_MAX_CONNECTIONS)
           @mutex = Mutex.new
           @size = size

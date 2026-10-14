@@ -8,9 +8,6 @@ module XTwitterScraper
   module Resources
     # Accountless prepaid access for paid read endpoints
     class GuestWallets
-      # Some parameter documentations has been truncated, see
-      # {XTwitterScraper::Models::GuestWalletCreateParams} for more details.
-      #
       # Create a one-use hosted checkout after the user confirms $10-$250 USD. The
       # request creates no charge. It returns a paid-read API key without an Xquik
       # account. Idempotent replays return the same key.
@@ -63,9 +60,6 @@ module XTwitterScraper
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {XTwitterScraper::Models::GuestWalletTopupParams} for more details.
-      #
       # Create a one-use hosted checkout after the user confirms a $10-$250 USD amount
       # for an existing paid-read guest key. The key remains the same. This request
       # creates no charge and never redirects through Xquik.

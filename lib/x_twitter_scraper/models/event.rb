@@ -59,9 +59,6 @@ module XTwitterScraper
       optional :username, String
 
       # @!method initialize(id:, data:, monitor_id:, monitor_type:, occurred_at:, type:, keyword_monitor_id: nil, query: nil, username: nil)
-      #   Some parameter documentations has been truncated, see
-      #   {XTwitterScraper::Models::Event} for more details.
-      #
       #   Monitor event summary with source metadata and occurrence time.
       #
       #   @param id [String]

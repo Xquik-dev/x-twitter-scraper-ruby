@@ -46,9 +46,6 @@ module XTwitterScraper
       required :lifetime_used, String
 
       # @!method initialize(auto_topup_amount_dollars:, auto_topup_enabled:, auto_topup_threshold:, balance:, lifetime_purchased:, lifetime_used:)
-      #   Some parameter documentations has been truncated, see
-      #   {XTwitterScraper::Models::CreditRetrieveBalanceResponse} for more details.
-      #
       #   @param auto_topup_amount_dollars [Float] Configured dollar amount for each automatic top-up.
       #
       #   @param auto_topup_enabled [Boolean]

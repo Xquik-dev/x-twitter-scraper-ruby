@@ -9,9 +9,6 @@ module XTwitterScraper
     class X
       # X write actions (tweets, likes, follows, DMs)
       class Profile
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::ProfileUpdateParams} for more details.
-        #
         # Update X profile
         #
         # @overload update(account:, idempotency_key:, description: nil, location: nil, name: nil, url: nil, request_options: {})
@@ -46,9 +43,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::ProfileUpdateAvatarParams} for more details.
-        #
         # Update profile avatar
         #
         # @overload update_avatar(account:, url:, idempotency_key:, request_options: {})
@@ -82,9 +76,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::ProfileUpdateBannerParams} for more details.
-        #
         # Update profile banner
         #
         # @overload update_banner(account:, url:, idempotency_key:, request_options: {})

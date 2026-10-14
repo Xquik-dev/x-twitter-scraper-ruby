@@ -22,9 +22,6 @@ module XTwitterScraper
       required :url, String
 
       # @!method initialize(redirect_url:, url:)
-      #   Some parameter documentations has been truncated, see
-      #   {XTwitterScraper::Models::CreditTopupBalanceResponse} for more details.
-      #
       #   @param redirect_url [String] Stable Xquik redirect URL for the active checkout.
       #
       #   @param url [String] Same stable Xquik redirect URL as redirect_url. The response never exposes the h

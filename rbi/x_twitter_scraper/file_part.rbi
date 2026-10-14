@@ -15,7 +15,6 @@ module XTwitterScraper
     sig { returns(T.nilable(String)) }
     attr_reader :filename
 
-    # @api private
     sig { returns(String) }
     private def read
     end

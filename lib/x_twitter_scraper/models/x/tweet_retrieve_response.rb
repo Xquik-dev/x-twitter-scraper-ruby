@@ -24,9 +24,6 @@ module XTwitterScraper
         optional :author, -> { XTwitterScraper::X::TweetAuthor }
 
         # @!method initialize(tweet:, author: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {XTwitterScraper::Models::X::TweetRetrieveResponse} for more details.
-        #
         #   @param tweet [XTwitterScraper::Models::X::TweetDetail] Full tweet with text, engagement metrics, media, and metadata. A zero metric can
         #
         #   @param author [XTwitterScraper::Models::X::TweetAuthor] Tweet author profile. The lookup route always includes follower count and verifi

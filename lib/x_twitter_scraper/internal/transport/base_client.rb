@@ -7,13 +7,9 @@
 module XTwitterScraper
   module Internal
     module Transport
-      # @api private
-      #
-      # @abstract
       class BaseClient
         extend XTwitterScraper::Internal::Util::SorbetRuntimeSupport
 
-        # from whatwg fetch spec
         MAX_REDIRECTS = 20
 
         # rubocop:disable-next Style/MutableConstant
@@ -28,11 +24,6 @@ module XTwitterScraper
           }
 
         class << self
-          # @api private
-          #
-          # @param req [Hash{Symbol=>Object}]
-          #
-          # @raise [ArgumentError]
           def validate!(req)
             keys = [
               :method,
@@ -59,50 +50,18 @@ module XTwitterScraper
             end
           end
 
-          # @api private
-          #
-          # @param status [Integer]
-          # @param headers [Hash{String=>String}]
-          #
-          # @return [Boolean]
           def should_retry?(status, headers:)
             coerced = XTwitterScraper::Internal::Util.coerce_boolean(headers["x-should-retry"])
             case [coerced, status]
             in [true | false, _]
               coerced
             in [_, 408 | 409 | 429 | (500..)]
-              # retry on:
-              # 408: timeouts
-              # 409: locks
-              # 429: rate limits
-              # 500+: unknown errors
               true
             else
               false
             end
           end
 
-          # @api private
-          #
-          # @param request [Hash{Symbol=>Object}] .
-          #
-          #   @option request [Symbol] :method
-          #
-          #   @option request [URI::Generic] :url
-          #
-          #   @option request [Hash{String=>String}] :headers
-          #
-          #   @option request [Object] :body
-          #
-          #   @option request [Integer] :max_retries
-          #
-          #   @option request [Float] :timeout
-          #
-          # @param status [Integer]
-          #
-          # @param response_headers [Hash{String=>String}]
-          #
-          # @return [Hash{Symbol=>Object}]
           def follow_redirect(request, status:, response_headers:)
             method, url, headers = request.fetch_values(:method, :url, :headers)
             location =
@@ -131,7 +90,6 @@ module XTwitterScraper
               nil
             end
 
-            # from whatwg fetch spec
             case [status, method]
             in [301 | 302, :post] | [303, _]
               drop = %w[content-encoding content-language content-length content-location content-type]
@@ -144,7 +102,6 @@ module XTwitterScraper
             else
             end
 
-            # from undici
             if XTwitterScraper::Internal::Util.uri_origin(url) != XTwitterScraper::Internal::Util.uri_origin(location)
               drop = %w[authorization cookie host proxy-authorization]
               request = {**request, headers: request.fetch(:headers).except(*drop)}
@@ -153,10 +110,6 @@ module XTwitterScraper
             request
           end
 
-          # @api private
-          #
-          # @param status [Integer, XTwitterScraper::Errors::APIConnectionError]
-          # @param stream [Enumerable<String>, nil]
           def reap_connection!(status, stream:)
             case status
             in (..199) | (300..499)
@@ -168,40 +121,8 @@ module XTwitterScraper
           end
         end
 
-        # @return [URI::Generic]
-        attr_reader :base_url
+        attr_reader :base_url, :timeout, :max_retries, :initial_retry_delay, :max_retry_delay, :headers, :idempotency_header, :requester
 
-        # @return [Float]
-        attr_reader :timeout
-
-        # @return [Integer]
-        attr_reader :max_retries
-
-        # @return [Float]
-        attr_reader :initial_retry_delay
-
-        # @return [Float]
-        attr_reader :max_retry_delay
-
-        # @return [Hash{String=>String}]
-        attr_reader :headers
-
-        # @return [String, nil]
-        attr_reader :idempotency_header
-
-        # @api private
-        # @return [XTwitterScraper::Internal::Transport::PooledNetRequester]
-        attr_reader :requester
-
-        # @api private
-        #
-        # @param base_url [String]
-        # @param timeout [Float]
-        # @param max_retries [Integer]
-        # @param initial_retry_delay [Float]
-        # @param max_retry_delay [Float]
-        # @param headers [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}]
-        # @param idempotency_header [String, nil]
         def initialize(
           base_url:,
           timeout: 0.0,
@@ -230,60 +151,12 @@ module XTwitterScraper
           @max_retry_delay = max_retry_delay
         end
 
-        # @api private
-        #
-        # @return [Hash{String=>String}]
         private def auth_headers = {}
 
-        # @api private
-        #
-        # @return [String]
         private def user_agent = "#{self.class.name}/Ruby #{XTwitterScraper::VERSION}"
 
-        # @api private
-        #
-        # @return [String]
         private def generate_idempotency_key = "stainless-ruby-retry-#{SecureRandom.uuid}"
 
-        # @api private
-        #
-        # @param req [Hash{Symbol=>Object}] .
-        #
-        #   @option req [Symbol] :method
-        #
-        #   @option req [String, Array<String>] :path
-        #
-        #   @option req [Hash{String=>Array<String>, String, nil}, nil] :query
-        #
-        #   @option req [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}, nil] :headers
-        #
-        #   @option req [Object, nil] :body
-        #
-        #   @option req [Symbol, Integer, Array<Symbol, Integer>, Proc, nil] :unwrap
-        #
-        #   @option req [Class<XTwitterScraper::Internal::Type::BasePage>, nil] :page
-        #
-        #   @option req [Class<XTwitterScraper::Internal::Type::BaseStream>, nil] :stream
-        #
-        #   @option req [XTwitterScraper::Internal::Type::Converter, Class, nil] :model
-        #
-        #   @option req [Hash{Symbol=>Boolean}, nil] :security
-        #
-        # @param opts [Hash{Symbol=>Object}] .
-        #
-        #   @option opts [String, nil] :idempotency_key
-        #
-        #   @option opts [Hash{String=>Array<String>, String, nil}, nil] :extra_query
-        #
-        #   @option opts [Hash{String=>String, nil}, nil] :extra_headers
-        #
-        #   @option opts [Object, nil] :extra_body
-        #
-        #   @option opts [Integer, nil] :max_retries
-        #
-        #   @option opts [Float, nil] :timeout
-        #
-        # @return [Hash{Symbol=>Object}]
         private def build_request(req, opts)
           method, uninterpolated_path = req.fetch_values(:method, :path)
 
@@ -327,9 +200,6 @@ module XTwitterScraper
               XTwitterScraper::Internal::Util.deep_merge(*[req[:body], opts[:extra_body]].compact)
             end
 
-          # Generated methods always pass `req[:body]` for operations that define a
-          # request body, so only elide the content-type header when the operation
-          # has no body at all, not when an optional body param was omitted.
           headers.delete("content-type") if body.nil? && !req.key?(:body)
 
           url = XTwitterScraper::Internal::Util.join_parsed_uri(
@@ -347,14 +217,7 @@ module XTwitterScraper
           }
         end
 
-        # @api private
-        #
-        # @param headers [Hash{String=>String}]
-        # @param retry_count [Integer]
-        #
-        # @return [Float]
         private def retry_delay(headers, retry_count:)
-          # Non-standard extension
           span = Float(headers["retry-after-ms"], exception: false)&.then { _1 / 1000 }
           return span if span
 
@@ -373,30 +236,6 @@ module XTwitterScraper
           (@initial_retry_delay * scale * jitter).clamp(0, @max_retry_delay)
         end
 
-        # @api private
-        #
-        # @param request [Hash{Symbol=>Object}] .
-        #
-        #   @option request [Symbol] :method
-        #
-        #   @option request [URI::Generic] :url
-        #
-        #   @option request [Hash{String=>String}] :headers
-        #
-        #   @option request [Object] :body
-        #
-        #   @option request [Integer] :max_retries
-        #
-        #   @option request [Float] :timeout
-        #
-        # @param redirect_count [Integer]
-        #
-        # @param retry_count [Integer]
-        #
-        # @param send_retry_header [Boolean]
-        #
-        # @raise [XTwitterScraper::Errors::APIError]
-        # @return [Array(Integer, Net::HTTPResponse, Enumerable<String>)]
         def send_request(request, redirect_count:, retry_count:, send_retry_header:)
           url, headers, max_retries, timeout = request.fetch_values(:url, :headers, :max_retries, :timeout)
           input = {**request.except(:timeout), deadline: XTwitterScraper::Internal::Util.monotonic_secs + timeout}
@@ -466,47 +305,6 @@ module XTwitterScraper
           end
         end
 
-        # Execute the request specified by `req`. This is the method that all resource
-        # methods call into.
-        #
-        # @overload request(method, path, query: {}, headers: {}, body: nil, unwrap: nil, page: nil, stream: nil, model: XTwitterScraper::Internal::Type::Unknown, security: {auth_api_key: true, oauth_bearer: true}, options: {})
-        #
-        # @param method [Symbol]
-        #
-        # @param path [String, Array<String>]
-        #
-        # @param query [Hash{String=>Array<String>, String, nil}, nil]
-        #
-        # @param headers [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}, nil]
-        #
-        # @param body [Object, nil]
-        #
-        # @param unwrap [Symbol, Integer, Array<Symbol, Integer>, Proc, nil]
-        #
-        # @param page [Class<XTwitterScraper::Internal::Type::BasePage>, nil]
-        #
-        # @param stream [Class<XTwitterScraper::Internal::Type::BaseStream>, nil]
-        #
-        # @param model [XTwitterScraper::Internal::Type::Converter, Class, nil]
-        #
-        # @param security [Hash{Symbol=>Boolean}, nil]
-        #
-        # @param options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil] .
-        #
-        #   @option options [String, nil] :idempotency_key
-        #
-        #   @option options [Hash{String=>Array<String>, String, nil}, nil] :extra_query
-        #
-        #   @option options [Hash{String=>String, nil}, nil] :extra_headers
-        #
-        #   @option options [Object, nil] :extra_body
-        #
-        #   @option options [Integer, nil] :max_retries
-        #
-        #   @option options [Float, nil] :timeout
-        #
-        # @raise [XTwitterScraper::Errors::APIError]
-        # @return [Object]
         def request(req)
           self.class.validate!(req)
           model = req.fetch(:model) { XTwitterScraper::Internal::Type::Unknown }
@@ -516,7 +314,6 @@ module XTwitterScraper
           request = build_request(req.except(:options), opts)
           url = request.fetch(:url)
 
-          # Don't send the current retry count in the headers if the caller modified the header defaults.
           send_retry_header = request.fetch(:headers)["x-stainless-retry-count"] == "0"
           status, response, stream = send_request(
             request,
@@ -546,9 +343,6 @@ module XTwitterScraper
           end
         end
 
-        # @api private
-        #
-        # @return [String]
         def inspect
           # rubocop:disable-next Layout/LineLength
           "#<#{self.class.name}:0x#{object_id.to_s(16)} base_url=#{@base_url} max_retries=#{@max_retries} timeout=#{@timeout}>"

@@ -51,9 +51,6 @@ module XTwitterScraper
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {XTwitterScraper::Models::DraftListParams} for more details.
-      #
       # List saved drafts
       #
       # @overload list(after_cursor: nil, limit: nil, request_options: {})

@@ -16,9 +16,6 @@ module XTwitterScraper
         # @return [XTwitterScraper::Resources::X::Tweets::Retweet]
         attr_reader :retweet
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::TweetCreateParams} for more details.
-        #
         # Create tweet
         #
         # @overload create(account:, idempotency_key:, community_id: nil, is_note_tweet: nil, media: nil, reply_to_tweet_id: nil, text: nil, request_options: {})
@@ -98,9 +95,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::TweetDeleteParams} for more details.
-        #
         # Delete tweet
         #
         # @overload delete(id, account:, idempotency_key:, request_options: {})
@@ -129,9 +123,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::TweetGetFavoritersParams} for more details.
-        #
         # Returns liker profiles that X makes visible for the post. X can withhold liker
         # identities even when the post reports likes. In that case this endpoint returns
         # 424 `favoriters_unavailable` instead of a misleading empty success.
@@ -205,9 +196,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::TweetGetQuotesParams} for more details.
-        #
         # List quote tweets of a tweet
         #
         # @overload get_quotes(id, any_words: nil, blue_verified_only: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, from_user: nil, geocode: nil, hashtags: nil, include_replies: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, near: nil, news: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, since_time: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
@@ -364,9 +352,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::TweetGetRepliesParams} for more details.
-        #
         # Returns direct replies. Omit mode for automatic maximum coverage with resumable
         # pagination. Complete mode returns nested replies, diagnostics, and 424 when
         # direct coverage stays below 80%.
@@ -542,9 +527,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::TweetGetRetweetersParams} for more details.
-        #
         # List users who retweeted a tweet
         #
         # @overload get_retweeters(id, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
@@ -616,9 +598,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::TweetGetThreadParams} for more details.
-        #
         # Get full conversation thread for a tweet
         #
         # @overload get_thread(id, any_words: nil, blue_verified_only: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, to_user: nil, until_date: nil, url: nil, verified_only: nil, request_options: {})
@@ -736,9 +715,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::TweetSearchParams} for more details.
-        #
         # No-mode search maximizes coverage. New cursorless `Latest` sessions return rows
         # newest-first across cursor pages. Existing cursors preserve their established
         # ordering.

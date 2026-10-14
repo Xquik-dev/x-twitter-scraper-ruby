@@ -8,9 +8,6 @@ module XTwitterScraper
   module Resources
     # AI tweet composition, drafts, writing styles, and radar
     class Radar
-      # Some parameter documentations has been truncated, see
-      # {XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams} for more details.
-      #
       # Get trending topics from curated sources
       #
       # @overload retrieve_trending_topics(after: nil, category: nil, hours: nil, limit: nil, region: nil, source: nil, request_options: {})

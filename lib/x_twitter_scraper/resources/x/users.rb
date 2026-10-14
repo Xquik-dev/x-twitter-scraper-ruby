@@ -32,9 +32,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::UserRemoveFollowerParams} for more details.
-        #
         # Remove follower
         #
         # @overload remove_follower(id, account:, idempotency_key:, request_options: {})
@@ -63,9 +60,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::UserRetrieveBatchParams} for more details.
-        #
         # Look up multiple users by IDs in one call
         #
         # @overload retrieve_batch(ids:, request_options: {})
@@ -89,9 +83,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::UserRetrieveFollowersParams} for more details.
-        #
         # List followers of a user
         #
         # @overload retrieve_followers(id, after: nil, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, limit: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, mode: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
@@ -169,10 +160,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::UserRetrieveFollowersYouKnowParams} for more
-        # details.
-        #
         # List mutual followers between you and a user
         #
         # @overload retrieve_followers_you_know(id, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
@@ -244,9 +231,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::UserRetrieveFollowingParams} for more details.
-        #
         # List accounts a user follows
         #
         # @overload retrieve_following(id, after: nil, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, limit: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, mode: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
@@ -324,9 +308,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::UserRetrieveLikesParams} for more details.
-        #
         # List tweets liked by a user
         #
         # @overload retrieve_likes(id, any_words: nil, blue_verified_only: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, from_user: nil, geocode: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, near: nil, news: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, source: nil, to_user: nil, until_date: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
@@ -474,9 +455,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::UserRetrieveMediaParams} for more details.
-        #
         # List media tweets posted by a user
         #
         # @overload retrieve_media(id, any_words: nil, blue_verified_only: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, from_user: nil, geocode: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, near: nil, news: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, source: nil, to_user: nil, until_date: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
@@ -624,9 +602,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::UserRetrieveMentionsParams} for more details.
-        #
         # List tweets mentioning a user
         #
         # @overload retrieve_mentions(id, any_words: nil, blue_verified_only: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, from_user: nil, geocode: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, near: nil, news: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, since_time: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
@@ -780,9 +755,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::UserRetrieveRepliesParams} for more details.
-        #
         # Returns target-authored posts and replies. Omit mode for automatic maximum
         # coverage. Pass next_cursor unchanged. Unprefixed cursors stay legacy. Excludes
         # other-author context.
@@ -935,9 +907,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::UserRetrieveSearchParams} for more details.
-        #
         # Search users by name or username
         #
         # @overload retrieve_search(q:, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
@@ -1006,9 +975,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::UserRetrieveTweetsParams} for more details.
-        #
         # Omit mode for automatic maximum coverage. Pass next_cursor unchanged. Unprefixed
         # cursors use legacy pagination. Shape and billing stay the same.
         #
@@ -1163,10 +1129,6 @@ module XTwitterScraper
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersParams} for more
-        # details.
-        #
         # List verified followers of a user
         #
         # @overload retrieve_verified_followers(id, after: nil, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, limit: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, mode: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
