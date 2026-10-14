@@ -9,9 +9,7 @@ require "pathname"
 require "securerandom"
 require "shellwords"
 
-require "minitest/test_task"
 require "rake/clean"
-require "rubocop/rake_task"
 
 require_relative "lib/x_twitter_scraper/version"
 
@@ -162,7 +160,7 @@ end
 directory("pkg")
 
 desc("Build ruby gem")
-multitask(:"build:gem" => "pkg") do
+multitask("build:gem": "pkg") do
   # Hide type manifests from generic search tools inside the gem.
   # Sorbet and RBS tools still index their respective directories.
   Pathname(ignore_file).write(<<~GLOB)

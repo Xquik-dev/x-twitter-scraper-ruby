@@ -26,97 +26,33 @@ class XTwitterScraperTest < Minitest::Test
     super
   end
 
-  def test_client_default_request_default_retry_attempts
-    stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
-
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
-
-    assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.account.retrieve
+  [
+    ["default_request_default", {}, {}, 3],
+    ["given_request_default", {max_retries: 3}, {}, 4],
+    ["default_request_given", {}, {request_options: {max_retries: 3}}, 4],
+    ["given_request_given", {max_retries: 3}, {request_options: {max_retries: 4}}, 5]
+  ].each do |name, client_options, request_arguments, attempts|
+    define_method("test_client_#{name}_retry_attempts") do
+      stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
+      client = sdk_client(**client_options)
+      assert_raises(XTwitterScraper::Errors::InternalServerError) do
+        client.account.retrieve(**request_arguments)
+      end
+      assert_requested(:get, "http://localhost/account", times: attempts)
     end
-
-    assert_requested(:any, /./, times: 3)
   end
 
-  def test_client_given_request_default_retry_attempts
-    stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
-
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token",
-        max_retries: 3
-      )
-
-    assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.account.retrieve
+  [
+    ["seconds", {"retry-after" => "1.3"}],
+    ["ms", {"retry-after-ms" => "1300"}]
+  ].each do |name, headers|
+    define_method("test_client_retry_after_#{name}") do
+      stub_request(:get, "http://localhost/account").to_return_json(status: 500, headers: headers, body: {})
+      client = sdk_client(max_retries: 1)
+      assert_raises(XTwitterScraper::Errors::InternalServerError) { client.account.retrieve }
+      assert_requested(:get, "http://localhost/account", times: 2)
+      assert_equal(1.3, Thread.current.thread_variable_get(:mock_sleep).last)
     end
-
-    assert_requested(:any, /./, times: 4)
-  end
-
-  def test_client_default_request_given_retry_attempts
-    stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
-
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
-
-    assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.account.retrieve(request_options: {max_retries: 3})
-    end
-
-    assert_requested(:any, /./, times: 4)
-  end
-
-  def test_client_given_request_given_retry_attempts
-    stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
-
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token",
-        max_retries: 3
-      )
-
-    assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.account.retrieve(request_options: {max_retries: 4})
-    end
-
-    assert_requested(:any, /./, times: 5)
-  end
-
-  def test_client_retry_after_seconds
-    stub_request(:get, "http://localhost/account").to_return_json(
-      status: 500,
-      headers: {"retry-after" => "1.3"},
-      body: {}
-    )
-
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token",
-        max_retries: 1
-      )
-
-    assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.account.retrieve
-    end
-
-    assert_requested(:any, /./, times: 2)
-    assert_equal(1.3, Thread.current.thread_variable_get(:mock_sleep).last)
   end
 
   def test_client_retry_after_date
@@ -128,13 +64,7 @@ class XTwitterScraperTest < Minitest::Test
       body: {}
     )
 
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token",
-        max_retries: 1
-      )
+    x_twitter_scraper = sdk_client(max_retries: 1)
 
     Thread.current.thread_variable_set(:time_now, time_now)
     assert_raises(XTwitterScraper::Errors::InternalServerError) do
@@ -146,82 +76,31 @@ class XTwitterScraperTest < Minitest::Test
     assert_in_delta(10, Thread.current.thread_variable_get(:mock_sleep).last, 1.0)
   end
 
-  def test_client_retry_after_ms
-    stub_request(:get, "http://localhost/account").to_return_json(
-      status: 500,
-      headers: {"retry-after-ms" => "1300"},
-      body: {}
-    )
-
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token",
-        max_retries: 1
-      )
-
-    assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.account.retrieve
+  [
+    ["retry_count_header", {}, %w[0 1 2]],
+    [
+      "omit_retry_count_header",
+      {request_options: {extra_headers: {"x-stainless-retry-count" => nil}}},
+      [:absent, :absent, :absent]
+    ],
+    [
+      "overwrite_retry_count_header",
+      {request_options: {extra_headers: {"x-stainless-retry-count" => "42"}}},
+      %w[42 42 42]
+    ]
+  ].each do |name, request_arguments, expected|
+    define_method("test_#{name}") do
+      received = []
+      stub_request(:get, "http://localhost/account").to_return do |request|
+        received << request.headers.transform_keys(&:downcase).fetch("x-stainless-retry-count", :absent)
+        {status: 500, body: "{}", headers: {"content-type" => "application/json"}}
+      end
+      client = sdk_client
+      assert_raises(XTwitterScraper::Errors::InternalServerError) do
+        client.account.retrieve(**request_arguments)
+      end
+      assert_equal(expected, received)
     end
-
-    assert_requested(:any, /./, times: 2)
-    assert_equal(1.3, Thread.current.thread_variable_get(:mock_sleep).last)
-  end
-
-  def test_retry_count_header
-    stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
-
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
-
-    assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.account.retrieve
-    end
-
-    3.times do
-      assert_requested(:any, /./, headers: {"x-stainless-retry-count" => _1})
-    end
-  end
-
-  def test_omit_retry_count_header
-    stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
-
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
-
-    assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.account.retrieve(request_options: {extra_headers: {"x-stainless-retry-count" => nil}})
-    end
-
-    assert_requested(:any, /./, times: 3) do
-      refute_includes(_1.headers.keys.map(&:downcase), "x-stainless-retry-count")
-    end
-  end
-
-  def test_overwrite_retry_count_header
-    stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
-
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
-
-    assert_raises(XTwitterScraper::Errors::InternalServerError) do
-      x_twitter_scraper.account.retrieve(request_options: {extra_headers: {"x-stainless-retry-count" => "42"}})
-    end
-
-    assert_requested(:any, /./, headers: {"x-stainless-retry-count" => "42"}, times: 3)
   end
 
   def test_client_redirect_307
@@ -235,12 +114,7 @@ class XTwitterScraperTest < Minitest::Test
       headers: {"location" => "/redirected"}
     )
 
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
+    x_twitter_scraper = sdk_client
 
     assert_raises(XTwitterScraper::Errors::APIConnectionError) do
       x_twitter_scraper.account.retrieve(request_options: {extra_headers: {}})
@@ -248,7 +122,7 @@ class XTwitterScraperTest < Minitest::Test
 
     recorded, = WebMock::RequestRegistry.instance.requested_signatures.hash.first
 
-    assert_requested(:any, "http://localhost/redirected", times: XTwitterScraper::Client::MAX_REDIRECTS) do
+    assert_requested(:any, "http://localhost/redirected", times: 20) do
       assert_equal(recorded.method, _1.method)
       assert_nil(recorded.body)
       assert_nil(_1.body)
@@ -268,18 +142,13 @@ class XTwitterScraperTest < Minitest::Test
       headers: {"location" => "/redirected"}
     )
 
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
+    x_twitter_scraper = sdk_client
 
     assert_raises(XTwitterScraper::Errors::APIConnectionError) do
       x_twitter_scraper.account.retrieve(request_options: {extra_headers: {}})
     end
 
-    assert_requested(:get, "http://localhost/redirected", times: XTwitterScraper::Client::MAX_REDIRECTS) do
+    assert_requested(:get, "http://localhost/redirected", times: 20) do
       headers = _1.headers.keys.map(&:downcase)
       refute_includes(headers, "content-type")
       assert_nil(_1.body)
@@ -297,12 +166,7 @@ class XTwitterScraperTest < Minitest::Test
       headers: {"location" => "/redirected"}
     )
 
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
+    x_twitter_scraper = sdk_client
 
     assert_raises(XTwitterScraper::Errors::APIConnectionError) do
       x_twitter_scraper.account.retrieve(request_options: {extra_headers: {"authorization" => "Bearer xyz"}})
@@ -312,7 +176,7 @@ class XTwitterScraperTest < Minitest::Test
     auth_header = recorded.headers.transform_keys(&:downcase).fetch("authorization")
 
     assert_equal("Bearer xyz", auth_header)
-    assert_requested(:any, "http://localhost/redirected", times: XTwitterScraper::Client::MAX_REDIRECTS) do
+    assert_requested(:any, "http://localhost/redirected", times: 20) do
       auth_header = _1.headers.transform_keys(&:downcase).fetch("authorization")
       assert_equal("Bearer xyz", auth_header)
     end
@@ -329,18 +193,13 @@ class XTwitterScraperTest < Minitest::Test
       headers: {"location" => "https://example.com/redirected"}
     )
 
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
+    x_twitter_scraper = sdk_client
 
     assert_raises(XTwitterScraper::Errors::APIConnectionError) do
       x_twitter_scraper.account.retrieve(request_options: {extra_headers: {"authorization" => "Bearer xyz"}})
     end
 
-    assert_requested(:any, "https://example.com/redirected", times: XTwitterScraper::Client::MAX_REDIRECTS) do
+    assert_requested(:any, "https://example.com/redirected", times: 20) do
       headers = _1.headers.keys.map(&:downcase)
       refute_includes(headers, "authorization")
     end
@@ -349,12 +208,7 @@ class XTwitterScraperTest < Minitest::Test
   def test_default_headers
     stub_request(:get, "http://localhost/account").to_return_json(status: 200, body: {})
 
-    x_twitter_scraper =
-      XTwitterScraper::Client.new(
-        base_url: "http://localhost",
-        api_key: "My API Key",
-        bearer_token: "My Bearer Token"
-      )
+    x_twitter_scraper = sdk_client
 
     x_twitter_scraper.account.retrieve
 
@@ -363,5 +217,16 @@ class XTwitterScraperTest < Minitest::Test
       expected = req.body.nil? ? ["accept"] : %w[accept content-type]
       headers.fetch_values(*expected).each { refute_empty(_1) }
     end
+  end
+
+  private
+
+  def sdk_client(**options)
+    XTwitterScraper::Client.new(
+      base_url: "http://localhost",
+      api_key: "My API Key",
+      bearer_token: "My Bearer Token",
+      **options
+    )
   end
 end
