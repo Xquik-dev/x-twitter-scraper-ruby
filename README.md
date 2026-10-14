@@ -178,10 +178,8 @@ The gem ships [RBI](https://sorbet.org/docs/rbi) definitions without `sorbet-run
 Pass request hashes or typed parameter objects.
 
 ```ruby
-# Hashes work without type safety.
 x_twitter_scraper.x.tweets.search(q: "from:elonmusk", limit: 10)
 
-# Splat a complete Params object.
 params = XTwitterScraper::X::TweetSearchParams.new(q: "from:elonmusk", limit: 10)
 x_twitter_scraper.x.tweets.search(**params)
 ```
@@ -201,13 +199,11 @@ T.reveal_type(XTwitterScraper::AccountUpdateLocaleParams::Locale::EN)
 Enum parameters accept constants or literal values.
 
 ```ruby
-# Enum constants preserve tagged type information.
 x_twitter_scraper.account.update_locale(
   locale: XTwitterScraper::AccountUpdateLocaleParams::Locale::EN,
   # …
 )
 
-# Literal values also work.
 x_twitter_scraper.account.update_locale(
   locale: :en,
   # …
