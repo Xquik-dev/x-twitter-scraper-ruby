@@ -1,5 +1,19 @@
 # yaml-language-server: $schema=https://www.rubyschema.org/rubocop.json
 ---
+require:
+  - ./rubocop/cop/xquik/no_code_comments
+
+Xquik/NoCodeComments:
+  Enabled: true
+  PublicApiDocs:
+    - lib/**/*.rb
+    - rbi/**/*.rbi
+  PrivateApi:
+    - lib/x_twitter_scraper/internal/**/*
+    - lib/x_twitter_scraper/internal.rb
+    - rbi/x_twitter_scraper/internal/**/*
+    - rbi/x_twitter_scraper/internal.rbi
+
 # Lint against the oldest supported Ruby without extension suggestions.
 AllCops:
   Exclude:

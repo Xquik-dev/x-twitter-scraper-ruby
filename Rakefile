@@ -59,7 +59,7 @@ end
 
 desc("Lint `*.rb(i)`")
 multitask(:"lint:rubocop") do
-  find = %w[find ./lib ./test ./rbi ./examples -type f -and ( -name *.rb -or -name *.rbi ) -print0]
+  find = %w[find ./lib ./test ./rbi ./examples ./rubocop -type f -and ( -name *.rb -or -name *.rbi ) -print0]
 
   rubocop = %w[rubocop]
   rubocop += %w[--format github] if ENV.key?("CI")
