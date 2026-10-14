@@ -14,13 +14,14 @@ module RuboCop
         PROOF = %r{https://|SPDX-|REUSE-Ignore}
         DIRECTIVE = /\A#(?:!|\s*(?:rubocop:|:nocov:|steep:|(?:frozen_string_literal|typed|encoding|shareable_constant_value|warn_indent):))/
         YARD_DIRECTIVE = /\A#\s*@!/
+        YARD_PUBLIC_API = /\A#\s*@api public\b/
         BODIES = [:def, :defs].freeze
         PARAMETERS = [:arg, :optarg, :restarg, :kwarg, :kwoptarg, :kwrestarg, :blockarg].freeze
 
         def on_new_investigation
           public_file = public_api_file?
           blocks(processed_source.comments).each do |block|
-            documented = public_file && documents_public_api?(block)
+            documented = block.any? { YARD_PUBLIC_API.match?(_1.text) } || (public_file && documents_public_api?(block))
             block.each_with_index do |comment, index|
               next if documented || DIRECTIVE.match?(comment.text) || block.drop(index).any? { PROOF.match?(_1.text) }
 

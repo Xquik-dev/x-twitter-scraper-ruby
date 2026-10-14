@@ -81,6 +81,20 @@ class NoCodeCommentsTest < Minitest::Test
     assert_equal([4, 6, 11, 12, 14], offense_lines(source, "lib/x_twitter_scraper/models/search.rb"))
   end
 
+  def test_keeps_yard_public_api_docs_in_internal_code
+    source = <<~RUBY
+      module XTwitterScraper
+        class BaseModel
+          # @api public
+          #
+          # Returns the raw data.
+          def to_h = @data
+        end
+      end
+    RUBY
+    assert_equal([], offense_lines(source, "lib/x_twitter_scraper/internal/type/base_model.rb"))
+  end
+
   def test_rejects_docs_outside_the_public_api
     source = <<~RUBY
       module XTwitterScraper
