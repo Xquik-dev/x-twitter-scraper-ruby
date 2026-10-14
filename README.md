@@ -36,13 +36,9 @@ The SDK requires Ruby 3.2.0 or later.
 
 Add the gem to your `Gemfile`.
 
-<!-- x-release-please-start-version -->
-
 ```ruby
-gem "x-twitter-scraper", "~> 0.10.5"
+gem "x-twitter-scraper", "~> 0.10.6"
 ```
-
-<!-- x-release-please-end -->
 
 ## Usage
 

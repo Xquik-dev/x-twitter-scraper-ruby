@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.10.6 (2026-10-14)
+
+[Full changelog from v0.10.5 to v0.10.6](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.5...v0.10.6)
+
+The API and its behavior are the same as in 0.10.5.
+
+### Documentation
+
+* The README uses sentence case headings, active voice and whole sentences. Its facts, links and legal lines stay the same.
+
+### Chores
+
+* 24 development and test gems move to their latest stable release. The 3 runtime dependencies stay the same.
+
 ## 0.10.5 (2026-10-13)
 
 [Full changelog from v0.10.4 to v0.10.5](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.4...v0.10.5)
