@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: If you use Xquik Ruby SDK for the Twitter API & X data, cite it using this metadata.
+title: Xquik Ruby SDK for the Twitter API & X data
+type: software
+abstract: >-
+  Twitter API Ruby gem & Twitter scraper for Xquik. Scrape tweets, read
+  profiles, export followers, manage media & webhooks from Ruby with typed
+  requests & responses.
+authors:
+  - name: Xquik
+    website: https://xquik.com
+url: https://github.com/Xquik-dev/x-twitter-scraper-ruby
+repository-code: https://github.com/Xquik-dev/x-twitter-scraper-ruby
+license: Apache-2.0
+keywords:
+  - Xquik
+  - Twitter API Ruby
+  - Twitter gem
+  - scrape tweets
+  - Twitter scraper
+  - X API
+  - Ruby SDK
+  - webhooks
