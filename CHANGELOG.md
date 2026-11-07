@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Features
+
+* Extraction tool types gain `:user_affiliates`.
+
 ## 0.10.6 (2026-10-14)
 
 [Full changelog from v0.10.5 to v0.10.6](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.5...v0.10.6)
