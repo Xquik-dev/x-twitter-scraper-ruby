@@ -15,7 +15,7 @@ module XTwitterScraper
           status: String,
           x_user_id: String,
           x_username: String,
-          cookies_obtained_at: Time,
+          connected_at: Time,
           updated_at: Time
         }
 
@@ -32,9 +32,9 @@ module XTwitterScraper
 
         attr_accessor x_username: String
 
-        attr_reader cookies_obtained_at: Time?
+        attr_reader connected_at: Time?
 
-        def cookies_obtained_at=: (Time) -> Time
+        def connected_at=: (Time) -> Time
 
         attr_reader updated_at: Time?
 
@@ -47,7 +47,7 @@ module XTwitterScraper
           status: String,
           x_user_id: String,
           x_username: String,
-          ?cookies_obtained_at: Time,
+          ?connected_at: Time,
           ?updated_at: Time
         ) -> void
 
@@ -58,7 +58,7 @@ module XTwitterScraper
           status: String,
           x_user_id: String,
           x_username: String,
-          cookies_obtained_at: Time,
+          connected_at: Time,
           updated_at: Time
         }
 

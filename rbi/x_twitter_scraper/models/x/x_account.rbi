@@ -43,10 +43,10 @@ module XTwitterScraper
         attr_accessor :x_username
 
         sig { returns(T.nilable(Time)) }
-        attr_reader :cookies_obtained_at
+        attr_reader :connected_at
 
-        sig { params(cookies_obtained_at: Time).void }
-        attr_writer :cookies_obtained_at
+        sig { params(connected_at: Time).void }
+        attr_writer :connected_at
 
         # Linked X account summary with connection status, health, and timestamp metadata.
         sig do
@@ -58,7 +58,7 @@ module XTwitterScraper
             updated_at: Time,
             x_user_id: String,
             x_username: String,
-            cookies_obtained_at: Time
+            connected_at: Time
           ).returns(T.attached_class)
         end
         def self.new(
@@ -72,7 +72,7 @@ module XTwitterScraper
           updated_at:,
           x_user_id:,
           x_username:,
-          cookies_obtained_at: nil
+          connected_at: nil
         )
         end
 
@@ -86,7 +86,7 @@ module XTwitterScraper
               updated_at: Time,
               x_user_id: String,
               x_username: String,
-              cookies_obtained_at: Time
+              connected_at: Time
             }
           )
         end

@@ -39,10 +39,10 @@ module XTwitterScraper
         attr_accessor :x_username
 
         sig { returns(T.nilable(Time)) }
-        attr_reader :cookies_obtained_at
+        attr_reader :connected_at
 
-        sig { params(cookies_obtained_at: Time).void }
-        attr_writer :cookies_obtained_at
+        sig { params(connected_at: Time).void }
+        attr_writer :connected_at
 
         sig { returns(T.nilable(Time)) }
         attr_reader :updated_at
@@ -59,7 +59,7 @@ module XTwitterScraper
             status: String,
             x_user_id: String,
             x_username: String,
-            cookies_obtained_at: Time,
+            connected_at: Time,
             updated_at: Time
           ).returns(T.attached_class)
         end
@@ -70,7 +70,7 @@ module XTwitterScraper
           status:,
           x_user_id:,
           x_username:,
-          cookies_obtained_at: nil,
+          connected_at: nil,
           updated_at: nil
         )
         end
@@ -84,7 +84,7 @@ module XTwitterScraper
               status: String,
               x_user_id: String,
               x_username: String,
-              cookies_obtained_at: Time,
+              connected_at: Time,
               updated_at: Time
             }
           )

@@ -39,17 +39,17 @@ module XTwitterScraper
         #   @return [String]
         required :x_username, String, api_name: :xUsername
 
-        # @!attribute cookies_obtained_at
+        # @!attribute connected_at
         #
         #   @return [Time, nil]
-        optional :cookies_obtained_at, Time, api_name: :cookiesObtainedAt
+        optional :connected_at, Time, api_name: :connectedAt
 
         # @!attribute updated_at
         #
         #   @return [Time, nil]
         optional :updated_at, Time, api_name: :updatedAt
 
-        # @!method initialize(id:, created_at:, health:, status:, x_user_id:, x_username:, cookies_obtained_at: nil, updated_at: nil)
+        # @!method initialize(id:, created_at:, health:, status:, x_user_id:, x_username:, connected_at: nil, updated_at: nil)
         #   Connected X account details with health and timestamp metadata.
         #
         #   @param id [String]
@@ -58,7 +58,7 @@ module XTwitterScraper
         #   @param status [String]
         #   @param x_user_id [String]
         #   @param x_username [String]
-        #   @param cookies_obtained_at [Time]
+        #   @param connected_at [Time]
         #   @param updated_at [Time]
 
         # @see XTwitterScraper::Models::X::XAccountDetail#health

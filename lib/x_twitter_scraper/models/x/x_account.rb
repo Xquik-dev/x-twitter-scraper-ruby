@@ -46,12 +46,12 @@ module XTwitterScraper
         #   @return [String]
         required :x_username, String, api_name: :xUsername
 
-        # @!attribute cookies_obtained_at
+        # @!attribute connected_at
         #
         #   @return [Time, nil]
-        optional :cookies_obtained_at, Time, api_name: :cookiesObtainedAt
+        optional :connected_at, Time, api_name: :connectedAt
 
-        # @!method initialize(id:, created_at:, health:, status:, updated_at:, x_user_id:, x_username:, cookies_obtained_at: nil)
+        # @!method initialize(id:, created_at:, health:, status:, updated_at:, x_user_id:, x_username:, connected_at: nil)
         #   Linked X account summary with connection status, health, and timestamp metadata.
         #
         #   @param id [String]
@@ -68,7 +68,7 @@ module XTwitterScraper
         #
         #   @param x_username [String]
         #
-        #   @param cookies_obtained_at [Time]
+        #   @param connected_at [Time]
 
         # Derived health. `healthy` is ready. `needsReauth` needs credentials. `locked`
         # must be unlocked on X. `suspended` is banned. `recovering` can reconnect. Wait

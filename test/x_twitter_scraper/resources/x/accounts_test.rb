@@ -44,7 +44,7 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
         status: String,
         x_user_id: String,
         x_username: String,
-        cookies_obtained_at: Time | nil,
+        connected_at: Time | nil,
         updated_at: Time | nil
       }
     end
