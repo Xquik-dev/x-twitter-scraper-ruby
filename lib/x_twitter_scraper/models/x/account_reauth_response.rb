@@ -7,62 +7,156 @@
 module XTwitterScraper
   module Models
     module X
+      # Sanitized X account summary returned by connect and reauth.
+      #
       # @see XTwitterScraper::Resources::X::Accounts#reauth
-      class AccountReauthResponse < XTwitterScraper::Internal::Type::BaseModel
-        # @!attribute id
-        #
-        #   @return [String]
-        required :id, String
+      module AccountReauthResponse
+        extend XTwitterScraper::Internal::Type::Union
 
-        # @!attribute created_at
-        #
-        #   @return [Time]
-        required :created_at, Time, api_name: :createdAt
+        # Sanitized X account summary returned by connect and reauth.
+        variant -> { XTwitterScraper::Models::X::AccountReauthResponse::SanitizedXAccount }
 
-        # @!attribute health
-        #
-        #   @return [Symbol, XTwitterScraper::Models::X::AccountReauthResponse::Health]
-        required :health, enum: -> { XTwitterScraper::Models::X::AccountReauthResponse::Health }
+        # The connection is still in progress.
+        variant -> { XTwitterScraper::Models::X::AccountReauthResponse::XAccountConnectionAttemptPending }
 
-        # @!attribute status
-        #
-        #   @return [Symbol, :active]
-        required :status, const: :active
+        # Resumable account connection challenge. Submit the email code to finish the same connection attempt.
+        variant -> { XTwitterScraper::Models::X::AccountReauthResponse::XAccountConnectionChallenge }
 
-        # @!attribute x_user_id
-        #
-        #   @return [String]
-        required :x_user_id, String, api_name: :xUserId
+        class SanitizedXAccount < XTwitterScraper::Internal::Type::BaseModel
+          # @!attribute id
+          #
+          #   @return [String]
+          required :id, String
 
-        # @!attribute x_username
-        #
-        #   @return [String]
-        required :x_username, String, api_name: :xUsername
+          # @!attribute created_at
+          #
+          #   @return [Time]
+          required :created_at, Time, api_name: :createdAt
 
-        # @!method initialize(id:, created_at:, health:, x_user_id:, x_username:, status: :active)
-        #   Sanitized X account summary returned by connect and reauth.
-        #
-        #   @param id [String]
-        #   @param created_at [Time]
-        #   @param health [Symbol, XTwitterScraper::Models::X::AccountReauthResponse::Health]
-        #   @param x_user_id [String]
-        #   @param x_username [String]
-        #   @param status [Symbol, :active]
+          # @!attribute health
+          #
+          #   @return [Symbol, XTwitterScraper::Models::X::AccountReauthResponse::SanitizedXAccount::Health]
+          required :health,
+                   enum: -> { XTwitterScraper::Models::X::AccountReauthResponse::SanitizedXAccount::Health }
 
-        # @see XTwitterScraper::Models::X::AccountReauthResponse#health
-        module Health
-          extend XTwitterScraper::Internal::Type::Enum
+          # @!attribute status
+          #
+          #   @return [Symbol, :active]
+          required :status, const: :active
 
-          HEALTHY = :healthy
-          LOCKED = :locked
-          NEEDS_REAUTH = :needsReauth
-          RECOVERING = :recovering
-          SUSPENDED = :suspended
-          TEMPORARY_ISSUE = :temporaryIssue
+          # @!attribute x_user_id
+          #
+          #   @return [String]
+          required :x_user_id, String, api_name: :xUserId
 
-          # @!method self.values
-          #   @return [Array<Symbol>]
+          # @!attribute x_username
+          #
+          #   @return [String]
+          required :x_username, String, api_name: :xUsername
+
+          # @!method initialize(id:, created_at:, health:, x_user_id:, x_username:, status: :active)
+          #   Sanitized X account summary returned by connect and reauth.
+          #
+          #   @param id [String]
+          #   @param created_at [Time]
+          #   @param health [Symbol, XTwitterScraper::Models::X::AccountReauthResponse::SanitizedXAccount::Health]
+          #   @param x_user_id [String]
+          #   @param x_username [String]
+          #   @param status [Symbol, :active]
+
+          # @see XTwitterScraper::Models::X::AccountReauthResponse::SanitizedXAccount#health
+          module Health
+            extend XTwitterScraper::Internal::Type::Enum
+
+            HEALTHY = :healthy
+            LOCKED = :locked
+            NEEDS_REAUTH = :needsReauth
+            RECOVERING = :recovering
+            SUSPENDED = :suspended
+            TEMPORARY_ISSUE = :temporaryIssue
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
         end
+
+        class XAccountConnectionAttemptPending < XTwitterScraper::Internal::Type::BaseModel
+          # @!attribute id
+          #
+          #   @return [String]
+          required :id, String
+
+          # @!attribute object
+          #
+          #   @return [Symbol, :x_account_connection_attempt]
+          required :object, const: :x_account_connection_attempt
+
+          # @!attribute poll_after_ms
+          #
+          #   @return [Integer]
+          required :poll_after_ms, Integer, api_name: :pollAfterMs
+
+          # @!attribute status
+          #
+          #   @return [Symbol, :pending]
+          required :status, const: :pending
+
+          # @!method initialize(id:, poll_after_ms:, object: :x_account_connection_attempt, status: :pending)
+          #   The connection is still in progress.
+          #
+          #   @param id [String]
+          #   @param poll_after_ms [Integer]
+          #   @param object [Symbol, :x_account_connection_attempt]
+          #   @param status [Symbol, :pending]
+        end
+
+        class XAccountConnectionChallenge < XTwitterScraper::Internal::Type::BaseModel
+          # @!attribute id
+          #
+          #   @return [String]
+          required :id, String
+
+          # @!attribute expires_at
+          #
+          #   @return [Time]
+          required :expires_at, Time, api_name: :expiresAt
+
+          # @!attribute message
+          #
+          #   @return [String]
+          required :message, String
+
+          # @!attribute object
+          #
+          #   @return [Symbol, :x_account_connection_challenge]
+          required :object, const: :x_account_connection_challenge
+
+          # @!attribute status
+          #
+          #   @return [Symbol, :requires_email_code]
+          required :status, const: :requires_email_code
+
+          # @!attribute username
+          #
+          #   @return [String]
+          required :username, String
+
+          # @!method initialize(id:, expires_at:, message:, username:, object: :x_account_connection_challenge, status: :requires_email_code)
+          #   Resumable account connection challenge. Submit the email code to finish the same
+          #   connection attempt.
+          #
+          #   @param id [String]
+          #   @param expires_at [Time]
+          #   @param message [String]
+          #   @param username [String]
+          #   @param object [Symbol, :x_account_connection_challenge]
+          #   @param status [Symbol, :requires_email_code]
+        end
+
+        Health = SanitizedXAccount::Health
+
+        # @!method self.variants
+        #   @return [Array(XTwitterScraper::Models::X::AccountReauthResponse::SanitizedXAccount, XTwitterScraper::Models::X::AccountReauthResponse::XAccountConnectionAttemptPending, XTwitterScraper::Models::X::AccountReauthResponse::XAccountConnectionChallenge)]
       end
     end
   end

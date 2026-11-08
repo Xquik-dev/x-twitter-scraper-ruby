@@ -10,7 +10,8 @@ module XTwitterScraper
           email: String,
           password: String,
           totp_secret: String,
-          username: String
+          username: String,
+          connection_attempt_id: String
         }
         & XTwitterScraper::Internal::Type::request_parameters
 
@@ -26,11 +27,16 @@ module XTwitterScraper
 
         attr_accessor username: String
 
+        attr_reader connection_attempt_id: String?
+
+        def connection_attempt_id=: (String) -> String
+
         def initialize: (
           email: String,
           password: String,
           totp_secret: String,
           username: String,
+          ?connection_attempt_id: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
@@ -39,6 +45,7 @@ module XTwitterScraper
           password: String,
           totp_secret: String,
           username: String,
+          connection_attempt_id: String,
           request_options: XTwitterScraper::RequestOptions
         }
       end

@@ -82,10 +82,17 @@ module XTwitterScraper
           #   @return [Symbol, :success]
           required :status, const: :success
 
-          # @!method initialize(id:, object: :x_account_connection_attempt, status: :success)
+          # @!attribute account_id
+          #   The connected account's ID.
+          #
+          #   @return [String, nil]
+          optional :account_id, String, api_name: :accountId
+
+          # @!method initialize(id:, account_id: nil, object: :x_account_connection_attempt, status: :success)
           #   The account connected successfully.
           #
           #   @param id [String]
+          #   @param account_id [String] The connected account's ID.
           #   @param object [Symbol, :x_account_connection_attempt]
           #   @param status [Symbol, :success]
 

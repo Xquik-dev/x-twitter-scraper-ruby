@@ -26,6 +26,13 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :password
 
+        # An ID you generate to read this reconnect's status, even if the response never reaches you. Leave it out to get one in a pending response.
+        sig { returns(T.nilable(String)) }
+        attr_reader :connection_attempt_id
+
+        sig { params(connection_attempt_id: String).void }
+        attr_writer :connection_attempt_id
+
         # Email for the X account (updates stored email)
         sig { returns(T.nilable(String)) }
         attr_reader :email
@@ -44,6 +51,7 @@ module XTwitterScraper
           params(
             id: String,
             password: String,
+            connection_attempt_id: String,
             email: String,
             totp_secret: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
@@ -53,6 +61,8 @@ module XTwitterScraper
           id:,
           # Updated account password
           password:,
+          # An ID you generate to read this reconnect's status, even if the response never reaches you. Leave it out to get one in a pending response.
+          connection_attempt_id: nil,
           # Email for the X account (updates stored email)
           email: nil,
           # Replacement Authenticator App TOTP secret. Omit it to reuse the saved secret.
@@ -66,6 +76,7 @@ module XTwitterScraper
             {
               id: String,
               password: String,
+              connection_attempt_id: String,
               email: String,
               totp_secret: String,
               request_options: XTwitterScraper::RequestOptions

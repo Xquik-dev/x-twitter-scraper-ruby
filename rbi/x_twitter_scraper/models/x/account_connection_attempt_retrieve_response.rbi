@@ -96,21 +96,35 @@ module XTwitterScraper
           sig { returns(Symbol) }
           attr_accessor :status
 
+          # The connected account's ID.
+          sig { returns(T.nilable(String)) }
+          attr_reader :account_id
+
+          sig { params(account_id: String).void }
+          attr_writer :account_id
+
           # The account connected successfully.
           sig do
-            params(id: String, object: Symbol, status: Symbol).returns(
-              T.attached_class
-            )
+            params(
+              id: String,
+              account_id: String,
+              object: Symbol,
+              status: Symbol
+            ).returns(T.attached_class)
           end
           def self.new(
             id:,
+            # The connected account's ID.
+            account_id: nil,
             object: :x_account_connection_attempt,
             status: :success
           )
           end
 
           sig do
-            override.returns({ id: String, object: Symbol, status: Symbol })
+            override.returns(
+              { id: String, account_id: String, object: Symbol, status: Symbol }
+            )
           end
           def to_hash
           end

@@ -35,12 +35,20 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :username
 
+        # An ID you generate to read this attempt's status, even if the response never reaches you. Leave it out to get one in a pending response.
+        sig { returns(T.nilable(String)) }
+        attr_reader :connection_attempt_id
+
+        sig { params(connection_attempt_id: String).void }
+        attr_writer :connection_attempt_id
+
         sig do
           params(
             email: String,
             password: String,
             totp_secret: String,
             username: String,
+            connection_attempt_id: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -53,6 +61,8 @@ module XTwitterScraper
           totp_secret:,
           # X username
           username:,
+          # An ID you generate to read this attempt's status, even if the response never reaches you. Leave it out to get one in a pending response.
+          connection_attempt_id: nil,
           request_options: {}
         )
         end
@@ -64,6 +74,7 @@ module XTwitterScraper
               password: String,
               totp_secret: String,
               username: String,
+              connection_attempt_id: String,
               request_options: XTwitterScraper::RequestOptions
             }
           )
