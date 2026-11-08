@@ -85,6 +85,7 @@ module XTwitterScraper
         SPACE_EXPLORER = :space_explorer
         THREAD_EXTRACTOR = :thread_extractor
         TWEET_SEARCH_EXTRACTOR = :tweet_search_extractor
+        USER_AFFILIATES = :user_affiliates
         USER_LIKES = :user_likes
         USER_MEDIA = :user_media
         VERIFIED_FOLLOWER_EXPLORER = :verified_follower_explorer

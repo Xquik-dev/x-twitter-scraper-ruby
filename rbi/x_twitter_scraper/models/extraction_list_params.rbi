@@ -252,6 +252,11 @@ module XTwitterScraper
             :tweet_search_extractor,
             XTwitterScraper::ExtractionListParams::ToolType::TaggedSymbol
           )
+        USER_AFFILIATES =
+          T.let(
+            :user_affiliates,
+            XTwitterScraper::ExtractionListParams::ToolType::TaggedSymbol
+          )
         USER_LIKES =
           T.let(
             :user_likes,
