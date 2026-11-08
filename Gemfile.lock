@@ -203,6 +203,7 @@ DEPENDENCIES
   minitest-hooks
   minitest-proveit
   minitest-rg
+  prism
   rake
   rbs
   redcarpet

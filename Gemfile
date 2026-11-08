@@ -10,6 +10,7 @@ gemspec
 
 group :development do
   gem "bundler-audit", "0.9.3"
+  gem "prism"
   gem "rake"
   gem "rbs"
   gem "rubocop"
