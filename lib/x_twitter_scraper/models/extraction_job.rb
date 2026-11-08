@@ -60,6 +60,8 @@ module XTwitterScraper
         RUNNING = :running
         COMPLETED = :completed
         FAILED = :failed
+        PENDING = :pending
+        CANCELED = :canceled
 
         # @!method self.values
         #   @return [Array<Symbol>]

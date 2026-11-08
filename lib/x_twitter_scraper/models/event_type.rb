@@ -31,6 +31,15 @@ module XTwitterScraper
       PROFILE_PROTECTED_CHANGED = :"profile.protected.changed"
       PROFILE_PINNED_TWEET_CHANGED = :"profile.pinned_tweet.changed"
       PROFILE_UNAVAILABLE_CHANGED = :"profile.unavailable.changed"
+      TWEET_DELETED = :"tweet.deleted"
+      BROADCAST_STARTED = :"broadcast.started"
+      SPACE_STARTED = :"space.started"
+      FOLLOWING_ADDED = :"following.added"
+      FOLLOWING_REMOVED = :"following.removed"
+      FOLLOWER_ADDED = :"follower.added"
+      FOLLOWER_REMOVED = :"follower.removed"
+      PROFILE_FOLLOWERS_CHANGED = :"profile.followers.changed"
+      PROFILE_FOLLOWING_CHANGED = :"profile.following.changed"
 
       # @!method self.values
       #   @return [Array<Symbol>]

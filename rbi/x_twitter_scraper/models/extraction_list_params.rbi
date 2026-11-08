@@ -130,6 +130,16 @@ module XTwitterScraper
             :failed,
             XTwitterScraper::ExtractionListParams::Status::TaggedSymbol
           )
+        PENDING =
+          T.let(
+            :pending,
+            XTwitterScraper::ExtractionListParams::Status::TaggedSymbol
+          )
+        CANCELED =
+          T.let(
+            :canceled,
+            XTwitterScraper::ExtractionListParams::Status::TaggedSymbol
+          )
 
         sig do
           override.returns(

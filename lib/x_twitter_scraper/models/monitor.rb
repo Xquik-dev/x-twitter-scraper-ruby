@@ -87,6 +87,8 @@ module XTwitterScraper
         extend XTwitterScraper::Internal::Type::Enum
 
         X_USER_NOT_FOUND = :x_user_not_found
+        X_ACCOUNT_PROTECTED = :x_account_protected
+        INSUFFICIENT_CREDITS = :insufficient_credits
 
         # @!method self.values
         #   @return [Array<Symbol>]

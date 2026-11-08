@@ -66,12 +66,17 @@ module XTwitterScraper
         paused_reason: XTwitterScraper::Models::Monitor::paused_reason
       }
 
-      type paused_reason = :x_user_not_found
+      type paused_reason =
+        :x_user_not_found
+        | :x_account_protected
+        | :insufficient_credits
 
       module PausedReason
         extend XTwitterScraper::Internal::Type::Enum
 
         X_USER_NOT_FOUND: :x_user_not_found
+        X_ACCOUNT_PROTECTED: :x_account_protected
+        INSUFFICIENT_CREDITS: :insufficient_credits
 
         def self?.values: -> ::Array[XTwitterScraper::Models::Monitor::paused_reason]
       end

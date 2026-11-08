@@ -26,6 +26,9 @@ module XTwitterScraper
         EN = :en
         TR = :tr
         ES = :es
+        ZH = :zh
+        JA = :ja
+        KO = :ko
 
         # @!method self.values
         #   @return [Array<Symbol>]

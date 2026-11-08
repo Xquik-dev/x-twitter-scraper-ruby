@@ -660,6 +660,41 @@ module XTwitterScraper
                 :leave_community,
                 XTwitterScraper::Models::X::Users::FollowCreateResponse::Action::TaggedSymbol
               )
+            BLOCK =
+              T.let(
+                :block,
+                XTwitterScraper::Models::X::Users::FollowCreateResponse::Action::TaggedSymbol
+              )
+            BOOKMARK =
+              T.let(
+                :bookmark,
+                XTwitterScraper::Models::X::Users::FollowCreateResponse::Action::TaggedSymbol
+              )
+            DELETE_DM =
+              T.let(
+                :delete_dm,
+                XTwitterScraper::Models::X::Users::FollowCreateResponse::Action::TaggedSymbol
+              )
+            MUTE =
+              T.let(
+                :mute,
+                XTwitterScraper::Models::X::Users::FollowCreateResponse::Action::TaggedSymbol
+              )
+            UNBLOCK =
+              T.let(
+                :unblock,
+                XTwitterScraper::Models::X::Users::FollowCreateResponse::Action::TaggedSymbol
+              )
+            UNBOOKMARK =
+              T.let(
+                :unbookmark,
+                XTwitterScraper::Models::X::Users::FollowCreateResponse::Action::TaggedSymbol
+              )
+            UNMUTE =
+              T.let(
+                :unmute,
+                XTwitterScraper::Models::X::Users::FollowCreateResponse::Action::TaggedSymbol
+              )
 
             sig do
               override.returns(

@@ -24,7 +24,7 @@ module XTwitterScraper
         request_options: XTwitterScraper::RequestOptions
       }
 
-      type locale = :en | :tr | :es
+      type locale = :en | :tr | :es | :zh | :ja | :ko
 
       module Locale
         extend XTwitterScraper::Internal::Type::Enum
@@ -32,6 +32,9 @@ module XTwitterScraper
         EN: :en
         TR: :tr
         ES: :es
+        ZH: :zh
+        JA: :ja
+        KO: :ko
 
         def self?.values: -> ::Array[XTwitterScraper::Models::AccountUpdateLocaleParams::locale]
       end

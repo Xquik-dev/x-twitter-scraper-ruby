@@ -334,6 +334,9 @@ module XTwitterScraper
               NO_NEXT_PAGE = :no_next_page
               PAGE_CAP = :page_cap
               REPEATED_CURSOR = :repeated_cursor
+              PARTIAL_VIEW = :partial_view
+              WINDOW_COVERED = :window_covered
+              WINDOW_PASSED = :window_passed
 
               # @!method self.values
               #   @return [Array<Symbol>]

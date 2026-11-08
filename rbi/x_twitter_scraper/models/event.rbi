@@ -117,6 +117,7 @@ module XTwitterScraper
           T.let(:account, XTwitterScraper::Event::MonitorType::TaggedSymbol)
         KEYWORD =
           T.let(:keyword, XTwitterScraper::Event::MonitorType::TaggedSymbol)
+        POST = T.let(:post, XTwitterScraper::Event::MonitorType::TaggedSymbol)
 
         sig do
           override.returns(

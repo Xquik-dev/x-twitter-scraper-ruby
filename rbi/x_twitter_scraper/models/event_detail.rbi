@@ -140,6 +140,8 @@ module XTwitterScraper
             :keyword,
             XTwitterScraper::EventDetail::MonitorType::TaggedSymbol
           )
+        POST =
+          T.let(:post, XTwitterScraper::EventDetail::MonitorType::TaggedSymbol)
 
         sig do
           override.returns(

@@ -90,6 +90,10 @@ module XTwitterScraper
           )
         FAILED =
           T.let(:failed, XTwitterScraper::ExtractionJob::Status::TaggedSymbol)
+        PENDING =
+          T.let(:pending, XTwitterScraper::ExtractionJob::Status::TaggedSymbol)
+        CANCELED =
+          T.let(:canceled, XTwitterScraper::ExtractionJob::Status::TaggedSymbol)
 
         sig do
           override.returns(
