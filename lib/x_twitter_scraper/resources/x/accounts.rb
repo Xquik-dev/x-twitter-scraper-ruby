@@ -11,7 +11,7 @@ module XTwitterScraper
       class Accounts
         # Connect X account
         #
-        # @overload create(email:, password:, totp_secret:, username:, request_options: {})
+        # @overload create(email:, password:, totp_secret:, username:, connection_attempt_id: nil, request_options: {})
         #
         # @param email [String] Account email
         #
@@ -20,6 +20,8 @@ module XTwitterScraper
         # @param totp_secret [String] Authenticator App TOTP secret required for durable login
         #
         # @param username [String] X username
+        #
+        # @param connection_attempt_id [String] An ID you generate to read this attempt's status, even if the response never reaches you. Leave it out to get one in a pending response.
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -116,11 +118,13 @@ module XTwitterScraper
 
         # Re-authenticate X account
         #
-        # @overload reauth(id, password:, email: nil, totp_secret: nil, request_options: {})
+        # @overload reauth(id, password:, connection_attempt_id: nil, email: nil, totp_secret: nil, request_options: {})
         #
         # @param id [String] Resource ID returned by the matching create or list endpoint.
         #
         # @param password [String] Updated account password
+        #
+        # @param connection_attempt_id [String] An ID you generate to read this reconnect's status, even if the response never reaches you. Leave it out to get one in a pending response.
         #
         # @param email [String] Email for the X account (updates stored email)
         #
@@ -128,7 +132,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::X::AccountReauthResponse]
+        # @return [XTwitterScraper::Models::X::AccountReauthResponse::SanitizedXAccount, XTwitterScraper::Models::X::AccountReauthResponse::XAccountConnectionAttemptPending, XTwitterScraper::Models::X::AccountReauthResponse::XAccountConnectionChallenge]
         #
         # @see XTwitterScraper::Models::X::AccountReauthParams
         def reauth(id, params)

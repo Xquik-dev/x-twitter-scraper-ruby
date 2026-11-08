@@ -16,6 +16,7 @@ module XTwitterScraper
             password: String,
             totp_secret: String,
             username: String,
+            connection_attempt_id: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::AccountCreateResponse::Variants)
         end
@@ -28,6 +29,8 @@ module XTwitterScraper
           totp_secret:,
           # X username
           username:,
+          # An ID you generate to read this attempt's status, even if the response never reaches you. Leave it out to get one in a pending response.
+          connection_attempt_id: nil,
           request_options: {}
         )
         end
@@ -84,16 +87,19 @@ module XTwitterScraper
           params(
             id: String,
             password: String,
+            connection_attempt_id: String,
             email: String,
             totp_secret: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::Models::X::AccountReauthResponse)
+          ).returns(XTwitterScraper::Models::X::AccountReauthResponse::Variants)
         end
         def reauth(
           # Resource ID returned by the matching create or list endpoint.
           id,
           # Updated account password
           password:,
+          # An ID you generate to read this reconnect's status, even if the response never reaches you. Leave it out to get one in a pending response.
+          connection_attempt_id: nil,
           # Email for the X account (updates stored email)
           email: nil,
           # Replacement Authenticator App TOTP secret. Omit it to reuse the saved secret.

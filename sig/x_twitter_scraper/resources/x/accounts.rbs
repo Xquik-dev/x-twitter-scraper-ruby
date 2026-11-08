@@ -11,6 +11,7 @@ module XTwitterScraper
           password: String,
           totp_secret: String,
           username: String,
+          ?connection_attempt_id: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::account_create_response
 
@@ -35,10 +36,11 @@ module XTwitterScraper
         def reauth: (
           String id,
           password: String,
+          ?connection_attempt_id: String,
           ?email: String,
           ?totp_secret: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::Models::X::AccountReauthResponse
+        ) -> XTwitterScraper::Models::X::account_reauth_response
 
         def initialize: (client: XTwitterScraper::Client) -> void
       end

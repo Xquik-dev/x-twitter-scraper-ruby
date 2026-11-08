@@ -23,6 +23,12 @@ module XTwitterScraper
         #   @return [String]
         required :password, String
 
+        # @!attribute connection_attempt_id
+        #   An ID you generate to read this reconnect's status, even if the response never reaches you. Leave it out to get one in a pending response.
+        #
+        #   @return [String, nil]
+        optional :connection_attempt_id, String
+
         # @!attribute email
         #   Email for the X account (updates stored email)
         #
@@ -35,10 +41,12 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :totp_secret, String
 
-        # @!method initialize(id:, password:, email: nil, totp_secret: nil, request_options: {})
+        # @!method initialize(id:, password:, connection_attempt_id: nil, email: nil, totp_secret: nil, request_options: {})
         #   @param id [String]
         #
         #   @param password [String] Updated account password
+        #
+        #   @param connection_attempt_id [String] An ID you generate to read this reconnect's status, even if the response never reaches you. Leave it out to get one in a pending response.
         #
         #   @param email [String] Email for the X account (updates stored email)
         #

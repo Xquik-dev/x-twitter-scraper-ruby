@@ -5,10 +5,13 @@
 ### Breaking changes
 
 * `XAccount` and `XAccountDetail` name `connected_at`, the connection time the API documents, in place of the earlier timestamp attribute. The Python, Go, TypeScript, Java and Kotlin SDKs already name it. Read `connected_at` instead.
+* `x.accounts.reauth` returns the same 3 shapes as `x.accounts.create`. You get a `SanitizedXAccount` once sign-in ends, an `XAccountConnectionAttemptPending` while it runs, or an `XAccountConnectionChallenge` when X asks for an email code. `AccountReauthResponse::Health` still names the health values. Code that checked `is_a?(AccountReauthResponse)` should match on the 3 variants.
 
 ### Features
 
 * Extraction tool types gain `:user_affiliates`.
+* `x.accounts.create` and `x.accounts.reauth` take a `connection_attempt_id` you generate. Read the attempt's status with it, even if the response never reaches you.
+* A successful connection attempt names the connected account's `account_id`.
 * Enums gain the values the API now serves. Write actions gain `:block`, `:bookmark`, `:delete_dm`, `:mute`, `:unblock`, `:unbookmark` and `:unmute`. `EventType` gains the deleted post, live video, Space, following, follower and count events. `Locale` gains `:zh`, `:ja` and `:ko`. Event monitor types gain `:post`. Extraction query types gain `:relevance`, and extraction statuses gain `:pending` and `:canceled`. Monitor pause reasons gain `:x_account_protected` and `:insufficient_credits`. Reply stop reasons gain `:partial_view`, `:window_covered` and `:window_passed`.
 
 ## 0.10.6 (2026-10-14)
