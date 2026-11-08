@@ -100,14 +100,11 @@ class XTwitterScraper::Test::Resources::X::AccountsTest < XTwitterScraper::Test:
     end
 
     assert_pattern do
-      response => {
-        id: String,
-        created_at: Time,
-        health: XTwitterScraper::Models::X::AccountReauthResponse::Health,
-        status: Symbol,
-        x_user_id: String,
-        x_username: String
-      }
+      case response
+      in XTwitterScraper::Models::X::AccountReauthResponse::SanitizedXAccount
+      in XTwitterScraper::Models::X::AccountReauthResponse::XAccountConnectionAttemptPending
+      in XTwitterScraper::Models::X::AccountReauthResponse::XAccountConnectionChallenge
+      end
     end
   end
 end
