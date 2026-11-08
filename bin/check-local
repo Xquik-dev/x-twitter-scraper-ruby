@@ -166,6 +166,10 @@ run_check "Installed gems" "" \
   "Run ./scripts/bootstrap to install the locked gems." \
   bundle check
 
+run_check "API fields" "API fields" \
+  "Fix each field it lists in the SDK, or list it in accepted-field-differences.json with a reason." \
+  bundle exec ruby scripts/check_api_fields.rb
+
 run_check "Reproducible gem build" "reproducible build" \
   "Remove nondeterministic build inputs, then rerun bin/check-local." \
   bundle exec ruby scripts/check_reproducible.rb

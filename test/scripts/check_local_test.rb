@@ -14,8 +14,10 @@ class CheckLocalScriptTest < Minitest::Test
   FAKE_COMMANDS = {
     "bundle" => <<~SH,
       #!/bin/sh
-      # Stands in for Bundler. Every command passes, and the audit prints the summary the test names.
+      # Stands in for Bundler. The API fields check exits as the test names, the audit prints the summary the test names, and everything else passes.
+      printf '%s\\n' "$*" >>"$FAKE_BUNDLE_LOG"
       case "$*" in
+        *scripts/check_api_fields.rb*) exit "$FAKE_API_FIELDS_EXIT" ;;
         *scripts/audit.rb*) printf '%s\\n' "$FAKE_AUDIT_SUMMARY" ;;
       esac
     SH
@@ -81,6 +83,8 @@ class CheckLocalScriptTest < Minitest::Test
     super
   end
 
+  API_FIELDS_NEXT_STEP = "Fix each field it lists in the SDK, " \
+                         "or list it in accepted-field-differences.json with a reason."
   EXTRACTION_DIAGNOSTICS = %w[rb/diagnostics/extraction-errors rb/diagnostics/extraction-warnings].freeze
 
   def sarif(unread: {}, diagnostics: EXTRACTION_DIAGNOSTICS)
@@ -106,11 +110,13 @@ class CheckLocalScriptTest < Minitest::Test
     JSON.generate({"runs" => [run]})
   end
 
-  def environment(path, audit_summary, reuse_exit)
+  def environment(path, audit_summary, reuse_exit, api_fields_exit)
     ScriptSupport.environment.merge(GIT_IDENTITY).merge(
       "PATH" => [File.join(@root, "bin"), path].join(File::PATH_SEPARATOR),
       "FAKE_CODEQL_SARIF" => File.join(@root, "codeql.sarif"),
       "FAKE_AUDIT_SUMMARY" => audit_summary,
+      "FAKE_API_FIELDS_EXIT" => api_fields_exit.to_s,
+      "FAKE_BUNDLE_LOG" => File.join(@root, "bundle.log"),
       "FAKE_REUSE_EXIT" => reuse_exit.to_s,
       "FAKE_UVX_LOG" => File.join(@root, "uvx.log"),
       "FAKE_GH_LOG" => File.join(@root, "gh.log")
@@ -120,6 +126,7 @@ class CheckLocalScriptTest < Minitest::Test
   def check_local(
     audit_summary: "Audit passed.",
     reuse_exit: 0,
+    api_fields_exit: 0,
     codeql_sarif: sarif,
     without: [],
     system_path_only: false
@@ -129,7 +136,7 @@ class CheckLocalScriptTest < Minitest::Test
     end
     write_file(File.join(@root, "codeql.sarif"), codeql_sarif)
     path = system_path_only ? "/usr/bin:/bin" : ScriptSupport.environment.fetch("PATH")
-    env = environment(path, audit_summary, reuse_exit)
+    env = environment(path, audit_summary, reuse_exit, api_fields_exit)
     [%w[init --quiet], %w[add --all], %w[commit --quiet --message Fixture]].each do |arguments|
       run_command("git", *arguments, env: env, chdir: @project)
     end
@@ -142,7 +149,8 @@ class CheckLocalScriptTest < Minitest::Test
       status_paths: posts.map(&:first).uniq,
       expected_status_path: "repos/Xquik-dev/x-twitter-scraper-ruby/statuses/#{head}",
       statuses: posts.map { |post| post.drop(1) },
-      uvx: read_lines(File.join(@root, "uvx.log"))
+      uvx: read_lines(File.join(@root, "uvx.log")),
+      bundle: read_lines(File.join(@root, "bundle.log"))
     }
   end
 
@@ -157,8 +165,34 @@ class CheckLocalScriptTest < Minitest::Test
         ["pending", "Local checks are running."],
         [
           "success",
-          "Passed reproducible build, lint & types, audit, tests (2 passed), coverage, CodeQL and REUSE."
+          "Passed API fields, reproducible build, lint & types, audit, tests (2 passed), " \
+          "coverage, CodeQL and REUSE."
         ]
+      ],
+      run.fetch(:statuses)
+    )
+  end
+
+  def test_runs_the_api_fields_check_right_after_the_gem_check
+    run = check_local
+
+    assert_equal(0, run.fetch(:result).status, run.fetch(:result).output)
+    assert_equal(["check", "exec ruby scripts/check_api_fields.rb"], run.fetch(:bundle).first(2))
+    assert_includes(run.fetch(:result).stdout, "==> API fields\n")
+  end
+
+  def test_a_field_difference_stops_the_run_before_the_longer_checks
+    run = check_local(api_fields_exit: 1)
+
+    assert_equal(1, run.fetch(:result).status)
+    assert_includes(run.fetch(:result).stdout, "==> API fields\n")
+    refute_includes(run.fetch(:result).stdout, "==> Reproducible gem build\n")
+    assert_equal(2, run.fetch(:bundle).length)
+    assert_includes(run.fetch(:result).stderr, "Check failed for API fields. #{API_FIELDS_NEXT_STEP}\n")
+    assert_equal(
+      [
+        ["pending", "Local checks are running."],
+        ["failure", "Check failed for API fields. #{API_FIELDS_NEXT_STEP}"]
       ],
       run.fetch(:statuses)
     )
@@ -235,8 +269,8 @@ class CheckLocalScriptTest < Minitest::Test
     assert_equal(
       [
         "success",
-        "Passed reproducible build, lint & types, audit (1 reviewed exception), tests (2 passed), " \
-        "coverage, CodeQL and REUSE."
+        "Passed API fields, reproducible build, lint & types, audit (1 reviewed exception), " \
+        "tests (2 passed), coverage, CodeQL and REUSE."
       ],
       run.fetch(:statuses).last
     )

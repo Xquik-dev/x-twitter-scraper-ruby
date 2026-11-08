@@ -54,8 +54,9 @@ Run every check before you open a pull request.
 bin/check-local
 ```
 
-It verifies a reproducible gem build, runs RuboCop, Steep and Sorbet, audits
-gems, runs the tests and enforces coverage. It then runs the CodeQL
+It first compares the SDK with the API spec, as [API fields](#api-fields)
+describes. It verifies a reproducible gem build, runs RuboCop, Steep and Sorbet,
+audits gems, runs the tests and enforces coverage. It then runs the CodeQL
 `security-extended` queries. Any finding fails the run, and so does any file
 that CodeQL cannot parse. Last, it runs [REUSE](https://reuse.software) 6.2.0
 through `uvx`. It stops at the first failure and names the failed check.
@@ -83,6 +84,62 @@ bundle exec rake docs:preview PORT=8808
 ```
 
 `format` rewrites files. `docs:preview` starts a local server.
+
+## API fields
+
+The check right after the gem check fails when the SDK's fields differ from the
+API spec. A change the API serves therefore fails `bin/check-local` before the
+longer checks start.
+
+For each operation both the API spec and the SDK have, it compares the query
+parameters and JSON or multipart body fields of the request, and the JSON body
+of each 2xx response, at every depth. It reads the spec's fields through `$ref`,
+`allOf`, `oneOf` and `anyOf`. It reads the SDK's fields from the params and
+response models each `@client.request` call in
+`lib/x_twitter_scraper/resources` names. Path and header parameters, free-form
+objects and fields under an object that allows extra properties stay out. A
+field missing on 1 side counts once, at its top position.
+
+Each difference prints as 1 line with the method, the full path, `request` or
+`response`, a kind and the field's JSON path.
+
+```text
+GET /api/v1/monitors response enum monitors[].pausedReason
+```
+
+- `missing` means the spec has the field and the SDK does not. Add it to its
+  model in `lib/x_twitter_scraper/models`, `rbi/x_twitter_scraper/models` and
+  `sig/x_twitter_scraper/models`.
+- `extra` means the SDK has a field the spec does not list. Keep it when callers
+  may use it, and accept it.
+- `enum` means both sides list values and the values differ. Add the missing
+  values, and accept values the SDK keeps.
+- `required` and `nullable` mean the flags differ. Fix them only when the change
+  keeps old calls and old responses working.
+
+Fixes stay additive. Never remove or rename a public field or parameter to
+satisfy the check. Accept it instead.
+
+`accepted-field-differences.json` holds the reviewed differences the SDK keeps
+for now, in groups with a non-empty `reason`. A difference appears at most once.
+An accepted difference the check no longer finds fails as stale, so remove it
+from the file. The list can therefore only fall as the SDK catches up.
+
+```json
+[
+  {
+    "reason": "Filters the current spec no longer lists on these routes. The SDK keeps them, so code written for earlier versions keeps working.",
+    "differences": ["GET /api/v1/x/users/{id}/mentions request extra near"]
+  }
+]
+```
+
+The check reads `XQUIK_OPENAPI_SPEC` as a local JSON file, or else downloads
+`https://xquik.com/openapi.json`.
+
+```bash
+XQUIK_OPENAPI_SPEC=/path/to/openapi.json bundle exec ruby scripts/check_api_fields.rb
+```
 
 ## Release
 
