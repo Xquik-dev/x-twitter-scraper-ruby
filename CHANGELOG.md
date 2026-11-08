@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Breaking changes
+
+* `XAccount` and `XAccountDetail` name `connected_at`, the connection time the API documents, in place of the earlier timestamp attribute. The Python, Go, TypeScript, Java and Kotlin SDKs already name it. Read `connected_at` instead.
+
 ### Features
 
 * Extraction tool types gain `:user_affiliates`.

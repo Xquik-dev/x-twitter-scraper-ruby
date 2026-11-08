@@ -16,7 +16,7 @@ module XTwitterScraper
           updated_at: Time,
           x_user_id: String,
           x_username: String,
-          cookies_obtained_at: Time
+          connected_at: Time
         }
 
       class XAccount < XTwitterScraper::Internal::Type::BaseModel
@@ -34,9 +34,9 @@ module XTwitterScraper
 
         attr_accessor x_username: String
 
-        attr_reader cookies_obtained_at: Time?
+        attr_reader connected_at: Time?
 
-        def cookies_obtained_at=: (Time) -> Time
+        def connected_at=: (Time) -> Time
 
         def initialize: (
           id: String,
@@ -46,7 +46,7 @@ module XTwitterScraper
           updated_at: Time,
           x_user_id: String,
           x_username: String,
-          ?cookies_obtained_at: Time
+          ?connected_at: Time
         ) -> void
 
         def to_hash: -> {
@@ -57,7 +57,7 @@ module XTwitterScraper
           updated_at: Time,
           x_user_id: String,
           x_username: String,
-          cookies_obtained_at: Time
+          connected_at: Time
         }
 
         type health =
