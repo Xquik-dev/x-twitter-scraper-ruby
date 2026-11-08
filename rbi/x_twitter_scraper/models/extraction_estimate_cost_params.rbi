@@ -1611,6 +1611,11 @@ module XTwitterScraper
             :Both,
             XTwitterScraper::ExtractionEstimateCostParams::QueryType::TaggedSymbol
           )
+        RELEVANCE =
+          T.let(
+            :relevance,
+            XTwitterScraper::ExtractionEstimateCostParams::QueryType::TaggedSymbol
+          )
 
         sig do
           override.returns(

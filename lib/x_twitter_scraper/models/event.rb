@@ -87,6 +87,7 @@ module XTwitterScraper
 
         ACCOUNT = :account
         KEYWORD = :keyword
+        POST = :post
 
         # @!method self.values
         #   @return [Array<Symbol>]

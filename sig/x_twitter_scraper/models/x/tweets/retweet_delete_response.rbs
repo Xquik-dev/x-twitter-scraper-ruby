@@ -307,6 +307,13 @@ module XTwitterScraper
             | :delete_community
             | :join_community
             | :leave_community
+            | :block
+            | :bookmark
+            | :delete_dm
+            | :mute
+            | :unblock
+            | :unbookmark
+            | :unmute
 
           module Action
             extend XTwitterScraper::Internal::Type::Enum
@@ -329,6 +336,13 @@ module XTwitterScraper
             DELETE_COMMUNITY: :delete_community
             JOIN_COMMUNITY: :join_community
             LEAVE_COMMUNITY: :leave_community
+            BLOCK: :block
+            BOOKMARK: :bookmark
+            DELETE_DM: :delete_dm
+            MUTE: :mute
+            UNBLOCK: :unblock
+            UNBOOKMARK: :unbookmark
+            UNMUTE: :unmute
 
             def self?.values: -> ::Array[XTwitterScraper::Models::X::Tweets::RetweetDeleteResponse::action]
           end

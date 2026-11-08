@@ -822,7 +822,7 @@ module XTwitterScraper
         def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionRunParams::media_type]
       end
 
-      type query_type = :Latest | :Top | :Both
+      type query_type = :Latest | :Top | :Both | :relevance
 
       module QueryType
         extend XTwitterScraper::Internal::Type::Enum
@@ -830,6 +830,7 @@ module XTwitterScraper
         LATEST: :Latest
         TOP: :Top
         BOTH: :Both
+        RELEVANCE: :relevance
 
         def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionRunParams::query_type]
       end

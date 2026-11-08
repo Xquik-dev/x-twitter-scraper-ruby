@@ -381,6 +381,13 @@ module XTwitterScraper
             DELETE_COMMUNITY = :delete_community
             JOIN_COMMUNITY = :join_community
             LEAVE_COMMUNITY = :leave_community
+            BLOCK = :block
+            BOOKMARK = :bookmark
+            DELETE_DM = :delete_dm
+            MUTE = :mute
+            UNBLOCK = :unblock
+            UNBOOKMARK = :unbookmark
+            UNMUTE = :unmute
 
             # @!method self.values
             #   @return [Array<Symbol>]

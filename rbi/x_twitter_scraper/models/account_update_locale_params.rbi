@@ -68,6 +68,21 @@ module XTwitterScraper
             :es,
             XTwitterScraper::AccountUpdateLocaleParams::Locale::TaggedSymbol
           )
+        ZH =
+          T.let(
+            :zh,
+            XTwitterScraper::AccountUpdateLocaleParams::Locale::TaggedSymbol
+          )
+        JA =
+          T.let(
+            :ja,
+            XTwitterScraper::AccountUpdateLocaleParams::Locale::TaggedSymbol
+          )
+        KO =
+          T.let(
+            :ko,
+            XTwitterScraper::AccountUpdateLocaleParams::Locale::TaggedSymbol
+          )
 
         sig do
           override.returns(

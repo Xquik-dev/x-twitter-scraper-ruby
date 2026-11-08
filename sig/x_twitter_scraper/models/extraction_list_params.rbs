@@ -53,7 +53,7 @@ module XTwitterScraper
         request_options: XTwitterScraper::RequestOptions
       }
 
-      type status = :running | :completed | :failed
+      type status = :running | :completed | :failed | :pending | :canceled
 
       module Status
         extend XTwitterScraper::Internal::Type::Enum
@@ -61,6 +61,8 @@ module XTwitterScraper
         RUNNING: :running
         COMPLETED: :completed
         FAILED: :failed
+        PENDING: :pending
+        CANCELED: :canceled
 
         def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionListParams::status]
       end

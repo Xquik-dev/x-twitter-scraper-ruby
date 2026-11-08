@@ -252,6 +252,9 @@ module XTwitterScraper
               | :no_next_page
               | :page_cap
               | :repeated_cursor
+              | :partial_view
+              | :window_covered
+              | :window_passed
 
             module StopReason
               extend XTwitterScraper::Internal::Type::Enum
@@ -263,6 +266,9 @@ module XTwitterScraper
               NO_NEXT_PAGE: :no_next_page
               PAGE_CAP: :page_cap
               REPEATED_CURSOR: :repeated_cursor
+              PARTIAL_VIEW: :partial_view
+              WINDOW_COVERED: :window_covered
+              WINDOW_PASSED: :window_passed
 
               def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::stop_reason]
             end

@@ -900,6 +900,7 @@ module XTwitterScraper
         LATEST = :Latest
         TOP = :Top
         BOTH = :Both
+        RELEVANCE = :relevance
 
         # @!method self.values
         #   @return [Array<Symbol>]

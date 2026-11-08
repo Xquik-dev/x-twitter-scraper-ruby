@@ -117,6 +117,16 @@ module XTwitterScraper
             :x_user_not_found,
             XTwitterScraper::Monitor::PausedReason::TaggedSymbol
           )
+        X_ACCOUNT_PROTECTED =
+          T.let(
+            :x_account_protected,
+            XTwitterScraper::Monitor::PausedReason::TaggedSymbol
+          )
+        INSUFFICIENT_CREDITS =
+          T.let(
+            :insufficient_credits,
+            XTwitterScraper::Monitor::PausedReason::TaggedSymbol
+          )
 
         sig do
           override.returns(

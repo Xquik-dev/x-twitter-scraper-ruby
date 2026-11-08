@@ -509,6 +509,21 @@ module XTwitterScraper
                   :repeated_cursor,
                   XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::StopReason::TaggedSymbol
                 )
+              PARTIAL_VIEW =
+                T.let(
+                  :partial_view,
+                  XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::StopReason::TaggedSymbol
+                )
+              WINDOW_COVERED =
+                T.let(
+                  :window_covered,
+                  XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::StopReason::TaggedSymbol
+                )
+              WINDOW_PASSED =
+                T.let(
+                  :window_passed,
+                  XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::StopReason::TaggedSymbol
+                )
 
               sig do
                 override.returns(

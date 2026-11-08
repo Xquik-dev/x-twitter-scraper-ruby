@@ -5,6 +5,7 @@
 ### Features
 
 * Extraction tool types gain `:user_affiliates`.
+* Enums gain the values the API now serves. Write actions gain `:block`, `:bookmark`, `:delete_dm`, `:mute`, `:unblock`, `:unbookmark` and `:unmute`. `EventType` gains the deleted post, live video, Space, following, follower and count events. `Locale` gains `:zh`, `:ja` and `:ko`. Event monitor types gain `:post`. Extraction query types gain `:relevance`, and extraction statuses gain `:pending` and `:canceled`. Monitor pause reasons gain `:x_account_protected` and `:insufficient_credits`. Reply stop reasons gain `:partial_view`, `:window_covered` and `:window_passed`.
 
 ## 0.10.6 (2026-10-14)
 

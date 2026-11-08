@@ -78,6 +78,30 @@ module XTwitterScraper
           :"profile.unavailable.changed",
           XTwitterScraper::EventType::TaggedSymbol
         )
+      TWEET_DELETED =
+        T.let(:"tweet.deleted", XTwitterScraper::EventType::TaggedSymbol)
+      BROADCAST_STARTED =
+        T.let(:"broadcast.started", XTwitterScraper::EventType::TaggedSymbol)
+      SPACE_STARTED =
+        T.let(:"space.started", XTwitterScraper::EventType::TaggedSymbol)
+      FOLLOWING_ADDED =
+        T.let(:"following.added", XTwitterScraper::EventType::TaggedSymbol)
+      FOLLOWING_REMOVED =
+        T.let(:"following.removed", XTwitterScraper::EventType::TaggedSymbol)
+      FOLLOWER_ADDED =
+        T.let(:"follower.added", XTwitterScraper::EventType::TaggedSymbol)
+      FOLLOWER_REMOVED =
+        T.let(:"follower.removed", XTwitterScraper::EventType::TaggedSymbol)
+      PROFILE_FOLLOWERS_CHANGED =
+        T.let(
+          :"profile.followers.changed",
+          XTwitterScraper::EventType::TaggedSymbol
+        )
+      PROFILE_FOLLOWING_CHANGED =
+        T.let(
+          :"profile.following.changed",
+          XTwitterScraper::EventType::TaggedSymbol
+        )
 
       sig do
         override.returns(T::Array[XTwitterScraper::EventType::TaggedSymbol])

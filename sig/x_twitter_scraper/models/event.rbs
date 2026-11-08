@@ -66,13 +66,14 @@ module XTwitterScraper
         username: String
       }
 
-      type monitor_type = :account | :keyword
+      type monitor_type = :account | :keyword | :post
 
       module MonitorType
         extend XTwitterScraper::Internal::Type::Enum
 
         ACCOUNT: :account
         KEYWORD: :keyword
+        POST: :post
 
         def self?.values: -> ::Array[XTwitterScraper::Models::Event::monitor_type]
       end
