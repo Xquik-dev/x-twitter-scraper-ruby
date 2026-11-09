@@ -15,18 +15,37 @@ module XTwitterScraper
           )
         end
 
+      sig { returns(T::Boolean) }
+      attr_accessor :has_more
+
       sig { returns(T::Array[XTwitterScraper::Webhook]) }
       attr_accessor :webhooks
 
+      sig { returns(T.nilable(String)) }
+      attr_reader :next_cursor
+
+      sig { params(next_cursor: String).void }
+      attr_writer :next_cursor
+
       sig do
-        params(webhooks: T::Array[XTwitterScraper::Webhook::OrHash]).returns(
-          T.attached_class
-        )
+        params(
+          has_more: T::Boolean,
+          webhooks: T::Array[XTwitterScraper::Webhook::OrHash],
+          next_cursor: String
+        ).returns(T.attached_class)
       end
-      def self.new(webhooks:)
+      def self.new(has_more:, webhooks:, next_cursor: nil)
       end
 
-      sig { override.returns({ webhooks: T::Array[XTwitterScraper::Webhook] }) }
+      sig do
+        override.returns(
+          {
+            has_more: T::Boolean,
+            webhooks: T::Array[XTwitterScraper::Webhook],
+            next_cursor: String
+          }
+        )
+      end
       def to_hash
       end
     end
