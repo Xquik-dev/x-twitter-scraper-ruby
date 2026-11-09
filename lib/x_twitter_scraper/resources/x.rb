@@ -57,9 +57,13 @@ module XTwitterScraper
       # Retrieve the full content of an X Article (long-form post) by numeric tweet ID.
       # Returns article_not_found when the tweet is valid but is not an X Article.
       #
-      # @overload get_article(tweet_id, request_options: {})
+      # @overload get_article(tweet_id, fields: nil, omit: nil, request_options: {})
       #
       # @param tweet_id [String] Numeric tweet ID of the article, 15-20 digits. If you have a tweet URL, use the
+      #
+      # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+      #
+      # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #

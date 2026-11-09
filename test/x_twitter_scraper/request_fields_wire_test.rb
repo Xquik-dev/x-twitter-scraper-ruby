@@ -50,12 +50,93 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
       }
     },
     {
+      op: "GET /api/v1/monitors",
+      call: "monitors.list",
+      params: XTwitterScraper::MonitorListParams,
+      required: {},
+      fields: {
+        "cursor" => String, "limit" => Integer
+      }
+    },
+    {
+      op: "GET /api/v1/monitors/keywords",
+      call: "monitors.keywords.list",
+      params: XTwitterScraper::Monitors::KeywordListParams,
+      required: {},
+      fields: {
+        "cursor" => String, "limit" => Integer
+      }
+    },
+    {
+      op: "GET /api/v1/styles",
+      call: "styles.list",
+      params: XTwitterScraper::StyleListParams,
+      required: {},
+      fields: {
+        "cursor" => String, "limit" => Integer
+      }
+    },
+    {
+      op: "GET /api/v1/support/tickets",
+      call: "support.tickets.list",
+      params: XTwitterScraper::Support::TicketListParams,
+      required: {},
+      fields: {
+        "cursor" => String, "limit" => Integer
+      }
+    },
+    {
       op: "GET /api/v1/trends",
       call: "trends.list",
       params: XTwitterScraper::TrendListParams,
       required: {},
       fields: {
         "fields" => String, "omit" => String
+      }
+    },
+    {
+      op: "GET /api/v1/webhooks",
+      call: "webhooks.list",
+      params: XTwitterScraper::WebhookListParams,
+      required: {},
+      fields: {
+        "cursor" => String, "limit" => Integer
+      }
+    },
+    {
+      op: "GET /api/v1/webhooks/{id}/deliveries",
+      call: "webhooks.list_deliveries",
+      params: XTwitterScraper::WebhookListDeliveriesParams,
+      required: {},
+      fields: {
+        "cursor" => String, "limit" => Integer
+      }
+    },
+    {
+      op: "GET /api/v1/x/accounts",
+      call: "x.accounts.list",
+      params: XTwitterScraper::X::AccountListParams,
+      required: {},
+      fields: {
+        "cursor" => String, "limit" => Integer
+      }
+    },
+    {
+      op: "GET /api/v1/x/articles/{tweetId}",
+      call: "x.get_article",
+      params: XTwitterScraper::XGetArticleParams,
+      required: {},
+      fields: {
+        "fields" => String, "omit" => String
+      }
+    },
+    {
+      op: "GET /api/v1/x/bookmarks/folders",
+      call: "x.bookmarks.retrieve_folders",
+      params: XTwitterScraper::X::BookmarkRetrieveFoldersParams,
+      required: {},
+      fields: {
+        "cursor" => String
       }
     },
     {
@@ -140,6 +221,15 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
         "url" => String,
         "verifiedOnly" => BOOLEAN,
         "withinTime" => String
+      }
+    },
+    {
+      op: "GET /api/v1/x/communities/{id}/info",
+      call: "x.communities.retrieve_info",
+      params: XTwitterScraper::X::CommunityRetrieveInfoParams,
+      required: {},
+      fields: {
+        "fields" => String, "omit" => String
       }
     },
     {
@@ -348,6 +438,15 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
       }
     },
     {
+      op: "GET /api/v1/x/tweets/{id}",
+      call: "x.tweets.retrieve",
+      params: XTwitterScraper::X::TweetRetrieveParams,
+      required: {},
+      fields: {
+        "fields" => String, "omit" => String
+      }
+    },
+    {
       op: "GET /api/v1/x/tweets/{id}/favoriters",
       call: "x.tweets.get_favoriters",
       params: XTwitterScraper::X::TweetGetFavoritersParams,
@@ -466,6 +565,15 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
         "hasEmail" => BOOLEAN,
         "omit" => String,
         "pageSize" => Integer
+      }
+    },
+    {
+      op: "GET /api/v1/x/users/{id}",
+      call: "x.users.retrieve",
+      params: XTwitterScraper::X::UserRetrieveParams,
+      required: {},
+      fields: {
+        "fields" => String, "omit" => String
       }
     },
     {

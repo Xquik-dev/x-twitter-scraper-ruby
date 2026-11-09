@@ -25,6 +25,8 @@ module XTwitterScraper
         ) -> XTwitterScraper::Models::Support::TicketUpdateResponse
 
         def list: (
+          ?cursor: String,
+          ?limit: Integer,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::Support::TicketListResponse
 

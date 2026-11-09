@@ -6,7 +6,8 @@ module XTwitterScraper
   module Models
     module X
       type tweet_retrieve_params =
-        { id: String } & XTwitterScraper::Internal::Type::request_parameters
+        { id: String, fields: String, omit: String }
+        & XTwitterScraper::Internal::Type::request_parameters
 
       class TweetRetrieveParams < XTwitterScraper::Internal::Type::BaseModel
         extend XTwitterScraper::Internal::Type::RequestParameters::Converter
@@ -14,13 +15,25 @@ module XTwitterScraper
 
         attr_accessor id: String
 
+        attr_reader fields: String?
+
+        def fields=: (String) -> String
+
+        attr_reader omit: String?
+
+        def omit=: (String) -> String
+
         def initialize: (
           id: String,
+          ?fields: String,
+          ?omit: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
         def to_hash: -> {
           id: String,
+          fields: String,
+          omit: String,
           request_options: XTwitterScraper::RequestOptions
         }
       end

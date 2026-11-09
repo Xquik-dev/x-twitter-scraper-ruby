@@ -12,7 +12,16 @@ module XTwitterScraper
         extend XTwitterScraper::Internal::Type::RequestParameters::Converter
         include XTwitterScraper::Internal::Type::RequestParameters
 
-        # @!method initialize(request_options: {})
+        # @!attribute cursor
+        #   Pagination cursor for collection results. Also read as next_cursor, next_token,
+        #   pagination_token or continuation_token.
+        #
+        #   @return [String, nil]
+        optional :cursor, String
+
+        # @!method initialize(cursor: nil, request_options: {})
+        #   @param cursor [String] Pagination cursor for collection results. Also read as next_cursor, next_token,
+        #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end
     end

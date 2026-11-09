@@ -13,6 +13,7 @@ module XTwitterScraper
         ) -> XTwitterScraper::PaginatedTweets
 
         def retrieve_folders: (
+          ?cursor: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse
 

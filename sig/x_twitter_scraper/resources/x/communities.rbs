@@ -28,6 +28,8 @@ module XTwitterScraper
 
         def retrieve_info: (
           String id,
+          ?fields: String,
+          ?omit: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::CommunityRetrieveInfoResponse
 
