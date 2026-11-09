@@ -8,7 +8,9 @@ module XTwitterScraper
       {
         has_more: bool,
         job: ::Hash[Symbol, top],
+        poll_after_ms: Integer,
         results: ::Array[::Hash[Symbol, top]],
+        wait_url: String,
         next_cursor: String
       }
 
@@ -17,7 +19,11 @@ module XTwitterScraper
 
       attr_accessor job: ::Hash[Symbol, top]
 
+      attr_accessor poll_after_ms: Integer
+
       attr_accessor results: ::Array[::Hash[Symbol, top]]
+
+      attr_accessor wait_url: String
 
       attr_reader next_cursor: String?
 
@@ -26,14 +32,18 @@ module XTwitterScraper
       def initialize: (
         has_more: bool,
         job: ::Hash[Symbol, top],
+        poll_after_ms: Integer,
         results: ::Array[::Hash[Symbol, top]],
+        wait_url: String,
         ?next_cursor: String
       ) -> void
 
       def to_hash: -> {
         has_more: bool,
         job: ::Hash[Symbol, top],
+        poll_after_ms: Integer,
         results: ::Array[::Hash[Symbol, top]],
+        wait_url: String,
         next_cursor: String
       }
     end
