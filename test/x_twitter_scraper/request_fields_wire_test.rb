@@ -11,6 +11,8 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
   include WebMock::API
 
   BOOLEAN = XTwitterScraper::Internal::Type::Boolean
+  FILE_INPUT = XTwitterScraper::Internal::Type::FileInput
+  STRINGS = XTwitterScraper::Internal::Type::ArrayOf[String]
   PATH_ID = "id42"
   ROWS = [
     {
@@ -46,7 +48,8 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
         "hideInactive" => BOOLEAN,
         "joinedSince" => Date,
         "joinedUntil" => Date,
-        "location" => String
+        "location" => String,
+        "change" => :Change
       }
     },
     {
@@ -178,7 +181,11 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
         "untilDate" => Date,
         "url" => String,
         "verifiedOnly" => BOOLEAN,
-        "withinTime" => String
+        "withinTime" => String,
+        "mediaType" => :MediaType,
+        "quotes" => :Quotes,
+        "replies" => :Replies,
+        "retweets" => :Retweets
       }
     },
     {
@@ -220,7 +227,11 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
         "untilDate" => Date,
         "url" => String,
         "verifiedOnly" => BOOLEAN,
-        "withinTime" => String
+        "withinTime" => String,
+        "mediaType" => :MediaType,
+        "quotes" => :Quotes,
+        "replies" => :Replies,
+        "retweets" => :Retweets
       }
     },
     {
@@ -299,7 +310,12 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
         "untilDate" => Date,
         "url" => String,
         "verifiedOnly" => BOOLEAN,
-        "withinTime" => String
+        "withinTime" => String,
+        "mediaType" => :MediaType,
+        "queryType" => :QueryType,
+        "quotes" => :Quotes,
+        "replies" => :Replies,
+        "retweets" => :Retweets
       }
     },
     {
@@ -324,7 +340,8 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
         "fields" => String,
         "hasEmail" => BOOLEAN,
         "maxScan" => Integer,
-        "omit" => String
+        "omit" => String,
+        "mode" => :Mode
       }
     },
     {
@@ -340,7 +357,8 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
         "fields" => String,
         "hasEmail" => BOOLEAN,
         "maxScan" => Integer,
-        "omit" => String
+        "omit" => String,
+        "mode" => :Mode
       }
     },
     {
@@ -397,7 +415,12 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
         "url" => String,
         "verifiedOnly" => BOOLEAN,
         "within" => String,
-        "withinTime" => String
+        "withinTime" => String,
+        "mediaType" => :MediaType,
+        "mode" => :Mode,
+        "quotes" => :Quotes,
+        "replies" => :Replies,
+        "retweets" => :Retweets
       }
     },
     {
@@ -475,7 +498,9 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
         "omit" => String,
         "place" => String,
         "placeCountry" => String,
-        "pointRadius" => String
+        "pointRadius" => String,
+        "mode" => :Mode,
+        "queryType" => :QueryType
       }
     },
     {
@@ -672,7 +697,8 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
         "pointRadius" => String,
         "sinceTime" => String,
         "topic" => String,
-        "untilTime" => String
+        "untilTime" => String,
+        "mode" => :Mode
       }
     },
     {
@@ -694,7 +720,8 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
         "pointRadius" => String,
         "sinceTime" => String,
         "topic" => String,
-        "untilTime" => String
+        "untilTime" => String,
+        "mode" => :Mode
       }
     },
     {
@@ -712,12 +739,179 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
         "maxScan" => Integer,
         "omit" => String
       }
+    },
+    {
+      op: "PATCH /api/v1/monitors/keywords/{id}",
+      call: "monitors.keywords.update",
+      params: XTwitterScraper::Monitors::KeywordUpdateParams,
+      required: {},
+      fields: {
+        "name" => String
+      }
+    },
+    {
+      op: "PATCH /api/v1/monitors/{id}",
+      call: "monitors.update",
+      params: XTwitterScraper::MonitorUpdateParams,
+      required: {},
+      fields: {
+        "name" => String
+      }
+    },
+    {
+      op: "POST /api/v1/credits/topup",
+      call: "credits.topup_balance",
+      params: XTwitterScraper::CreditTopupBalanceParams,
+      required: {dollars: 10},
+      fields: {
+        "returnPath" => String, "currency" => :Currency
+      }
+    },
+    {
+      op: "POST /api/v1/extractions",
+      call: "extractions.run",
+      params: XTwitterScraper::ExtractionRunParams,
+      required: {tool_type: :thread_extractor},
+      fields: {
+        "businessEmailOnly" => BOOLEAN,
+        "emailDomains" => String,
+        "enrichProfiles" => BOOLEAN,
+        "hasEmail" => BOOLEAN,
+        "imageShows" => String,
+        "textOnlyTerms" => String,
+        "topic" => String
+      }
+    },
+    {
+      op: "POST /api/v1/extractions/estimate",
+      call: "extractions.estimate_cost",
+      params: XTwitterScraper::ExtractionEstimateCostParams,
+      required: {tool_type: :thread_extractor},
+      fields: {
+        "businessEmailOnly" => BOOLEAN,
+        "emailDomains" => String,
+        "enrichProfiles" => BOOLEAN,
+        "hasEmail" => BOOLEAN,
+        "imageShows" => String,
+        "textOnlyTerms" => String,
+        "topic" => String
+      }
+    },
+    {
+      op: "POST /api/v1/monitors",
+      call: "monitors.create",
+      params: XTwitterScraper::MonitorCreateParams,
+      required: {event_types: [:"follower.removed"], username: "a"},
+      fields: {
+        "name" => String
+      }
+    },
+    {
+      op: "POST /api/v1/monitors/keywords",
+      call: "monitors.keywords.create",
+      params: XTwitterScraper::Monitors::KeywordCreateParams,
+      required: {event_types: [:"follower.removed"], query: "cats"},
+      fields: {
+        "name" => String
+      }
+    },
+    {
+      op: "POST /api/v1/subscribe",
+      call: "subscribe.create",
+      params: XTwitterScraper::SubscribeCreateParams,
+      required: {},
+      fields: {
+        "currency" => :Currency
+      }
+    },
+    {
+      op: "POST /api/v1/x/accounts/bulk-retry",
+      call: "x.accounts.bulk_retry",
+      params: XTwitterScraper::X::AccountBulkRetryParams,
+      required: {},
+      fields: {
+        "accountIds" => STRINGS
+      }
+    },
+    {
+      op: "POST /api/v1/x/media",
+      call: "x.media.upload",
+      params: XTwitterScraper::X::MediaUploadParams,
+      required: {account: "@a", idempotency_key: "k1"},
+      fields: {
+        "is_long_video" => BOOLEAN
+      }
+    },
+    {
+      op: "POST /api/v1/x/media/download",
+      call: "x.media.download",
+      params: XTwitterScraper::X::MediaDownloadParams,
+      required: {},
+      fields: {
+        "imageShows" => String
+      }
+    },
+    {
+      op: "POST /api/v1/x/tweets",
+      call: "x.tweets.create",
+      params: XTwitterScraper::X::TweetCreateParams,
+      required: {account: "@a", idempotency_key: "k1"},
+      fields: {
+        "media_ids" => STRINGS
+      }
+    }
+  ].freeze
+  UPLOADS = [
+    {
+      op: "PATCH /api/v1/x/profile/avatar",
+      call: "x.profile.update_avatar",
+      params: XTwitterScraper::X::ProfileUpdateAvatarParams,
+      required: {account: "@a", idempotency_key: "k1"},
+      file: :file,
+      json: {url: "https://example.com/a.png"}
+    },
+    {
+      op: "PATCH /api/v1/x/profile/banner",
+      call: "x.profile.update_banner",
+      params: XTwitterScraper::X::ProfileUpdateBannerParams,
+      required: {account: "@a", idempotency_key: "k1"},
+      file: :file,
+      json: {url: "https://example.com/a.png"}
+    },
+    {
+      op: "POST /api/v1/support/tickets",
+      call: "support.tickets.create",
+      params: XTwitterScraper::Support::TicketCreateParams,
+      required: {subject: "s"},
+      file: :attachments,
+      json: {body: "https://example.com/a.png"}
+    },
+    {
+      op: "POST /api/v1/support/tickets/{id}/messages",
+      call: "support.tickets.reply",
+      params: XTwitterScraper::Support::TicketReplyParams,
+      required: {},
+      file: :attachments,
+      json: {body: "https://example.com/a.png"}
+    },
+    {
+      op: "POST /api/v1/x/media",
+      call: "x.media.upload",
+      params: XTwitterScraper::X::MediaUploadParams,
+      required: {account: "@a", idempotency_key: "k1"},
+      file: :file,
+      json: {url: "https://example.com/a.png"}
     }
   ].freeze
 
   def before_all
     super
     WebMock.enable!
+  end
+
+  def setup
+    super
+    stub_request(:any, %r{\Ahttp://localhost/}).to_return_json(status: 200, body: {})
   end
 
   def teardown
@@ -733,44 +927,85 @@ class XTwitterScraper::Test::RequestFieldsWireTest < Minitest::Test
     )
   end
 
+  def resolve(row, type) = type.is_a?(Symbol) ? row.fetch(:params).const_get(type) : type
+
   def sample(type, index)
-    value = {
+    return type.values.first if type.is_a?(XTwitterScraper::Internal::Type::Enum)
+
+    {
       BOOLEAN => true,
       Integer => index + 1,
       Date => Date.new(2026, 11, 9) + index,
-      String => "v#{index}"
-    }
-    value = value.fetch(type)
-    [value, value.is_a?(Date) ? value.iso8601 : value.to_s]
+      String => "v#{index}",
+      STRINGS => ["v#{index}", "w#{index}"]
+    }.fetch(type)
+  end
+
+  def encode(value, verb)
+    value = value.iso8601 if value.is_a?(Date)
+    verb == :get || value.is_a?(Symbol) ? value.to_s : value
   end
 
   def snake(wire) = wire.gsub(/([A-Z])/) { "_#{_1.downcase}" }.to_sym
 
+  def target(row)
+    verb, path = row.fetch(:op).split
+    [verb.downcase.to_sym, "http://localhost#{path.delete_prefix('/api/v1').gsub(/\{\w+\}/, PATH_ID)}"]
+  end
+
+  def invoke(row, **)
+    resource = row.fetch(:call).split(".")[..-2].reduce(client) { _1.public_send(_2) }
+    args = row.fetch(:op).include?("{") ? [PATH_ID] : []
+    resource.public_send(row.fetch(:call).split(".").last, *args, **row.fetch(:required), **)
+  end
+
   ROWS.each do |row|
     define_method("test_#{row.fetch(:call).tr('.', '_')}_names_and_sends_its_fields") do
-      verb, path = row.fetch(:op).split
-      path = path.delete_prefix("/api/v1").gsub(/\{\w+\}/, PATH_ID)
-      values = row.fetch(:fields).each_with_index.to_h do |(wire, type), index|
-        [wire, sample(type, index)]
-      end
-      kwargs = values.to_h { |wire, (value, _)| [snake(wire), value] }
+      verb, url = target(row)
+      types = row.fetch(:fields).transform_values { resolve(row, _1) }
+      values = types.each_with_index.to_h { |(wire, type), index| [wire, sample(type, index)] }
+      kwargs = values.transform_keys { snake(_1) }
       known = row.fetch(:params).fields
 
-      row.fetch(:fields).each do |wire, type|
+      types.each do |wire, type|
         assert_equal(type, known.dig(snake(wire), :type), "#{row.fetch(:op)} model names #{wire}")
       end
       model = row.fetch(:params).new(**row.fetch(:required), **kwargs)
       kwargs.each { |name, value| assert_equal(value, model.public_send(name)) }
 
-      stub_request(:any, %r{\Ahttp://localhost/}).to_return_json(status: 200, body: {})
-      resource = row.fetch(:call).split(".")[..-2].reduce(client) { _1.public_send(_2) }
-      args = row.fetch(:op).include?("{") ? [PATH_ID] : []
-      resource.public_send(row.fetch(:call).split(".").last, *args, **row.fetch(:required), **kwargs)
+      invoke(row, **kwargs)
 
-      sent = values.to_h { |wire, (_, encoded)| [wire, encoded] }
-      assert_requested(verb.downcase.to_sym, "http://localhost#{path}", query: hash_including(sent))
+      sent = values.transform_values { encode(_1, verb) }
       renamed = kwargs.keys.map(&:to_s) - sent.keys
-      assert_requested(verb.downcase.to_sym, "http://localhost#{path}", query: hash_excluding(*renamed))
+      where = verb == :get ? :query : :body
+      assert_requested(verb, url, where => hash_including(sent))
+      assert_requested(verb, url, where => hash_excluding(*renamed))
+    end
+  end
+
+  UPLOADS.each do |row|
+    define_method("test_#{row.fetch(:call).tr('.', '_')}_sends_multipart_only_with_a_file") do
+      verb, url = target(row)
+      name = row.fetch(:file)
+      type = name == :file ? FILE_INPUT : XTwitterScraper::Internal::Type::ArrayOf[FILE_INPUT]
+      assert_equal(type, row.fetch(:params).fields.dig(name, :type), "#{row.fetch(:op)} model names #{name}")
+
+      upload = StringIO.new("bytes")
+      invoke(row, name => name == :file ? upload : [upload])
+      assert_requested(verb, url) do |request|
+        request.headers.fetch("Content-Type").start_with?("multipart/form-data") &&
+          request.body.include?(%(name="#{name}"))
+      end
+
+      WebMock::RequestRegistry.instance.reset!
+      invoke(row, **row.fetch(:json))
+      json = {"Content-Type" => "application/json"}
+      assert_requested(
+        verb,
+        url,
+        headers: json,
+        body: hash_including(row.fetch(:json).transform_keys(&:to_s))
+      )
     end
   end
 end
