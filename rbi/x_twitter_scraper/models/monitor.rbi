@@ -35,6 +35,13 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :x_user_id
 
+      # Customer-set label of the account monitor, when set.
+      sig { returns(T.nilable(String)) }
+      attr_reader :name
+
+      sig { params(name: String).void }
+      attr_writer :name
+
       # When Xquik automatically paused this monitor.
       sig { returns(T.nilable(Time)) }
       attr_reader :paused_at
@@ -65,6 +72,7 @@ module XTwitterScraper
           next_billing_at: Time,
           username: String,
           x_user_id: String,
+          name: String,
           paused_at: Time,
           paused_reason: XTwitterScraper::Monitor::PausedReason::OrSymbol
         ).returns(T.attached_class)
@@ -79,6 +87,8 @@ module XTwitterScraper
         next_billing_at:,
         username:,
         x_user_id:,
+        # Customer-set label of the account monitor, when set.
+        name: nil,
         # When Xquik automatically paused this monitor.
         paused_at: nil,
         # Why Xquik automatically paused this monitor.
@@ -96,6 +106,7 @@ module XTwitterScraper
             next_billing_at: Time,
             username: String,
             x_user_id: String,
+            name: String,
             paused_at: Time,
             paused_reason: XTwitterScraper::Monitor::PausedReason::TaggedSymbol
           }
