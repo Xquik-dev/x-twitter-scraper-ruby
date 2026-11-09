@@ -77,12 +77,6 @@ module XTwitterScraper
         sig { params(bookmark_count: Integer).void }
         attr_writer :bookmark_count
 
-        sig { returns(T.nilable(String)) }
-        attr_reader :created_at
-
-        sig { params(created_at: String).void }
-        attr_writer :created_at
-
         sig { returns(T.nilable(Integer)) }
         attr_reader :like_count
 
@@ -118,7 +112,6 @@ module XTwitterScraper
             id: String,
             text: String,
             bookmark_count: Integer,
-            created_at: String,
             like_count: Integer,
             quote_count: Integer,
             reply_count: Integer,
@@ -130,7 +123,6 @@ module XTwitterScraper
           id:,
           text:,
           bookmark_count: nil,
-          created_at: nil,
           like_count: nil,
           quote_count: nil,
           reply_count: nil,
@@ -145,7 +137,6 @@ module XTwitterScraper
               id: String,
               text: String,
               bookmark_count: Integer,
-              created_at: String,
               like_count: Integer,
               quote_count: Integer,
               reply_count: Integer,
