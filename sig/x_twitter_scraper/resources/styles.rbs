@@ -12,8 +12,8 @@ module XTwitterScraper
 
       def update: (
         String id,
-        ?label: String,
         tweets: ::Array[XTwitterScraper::StyleUpdateParams::Tweet],
+        ?label: String,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::StyleProfile
 

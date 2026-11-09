@@ -29,12 +29,12 @@ module XTwitterScraper
       required :tweets,
                -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::StyleUpdateParams::Tweet] }
 
-      # @!method initialize(id:, label: nil, tweets:, request_options: {})
+      # @!method initialize(id:, tweets:, label: nil, request_options: {})
       #   @param id [String]
       #
-      #   @param label [String] Display label for the style
-      #
       #   @param tweets [Array<XTwitterScraper::Models::StyleUpdateParams::Tweet>] Array of tweet objects
+      #
+      #   @param label [String] Display label for the style
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
 
