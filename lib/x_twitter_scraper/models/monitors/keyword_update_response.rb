@@ -43,7 +43,28 @@ module XTwitterScraper
         #   @return [String]
         required :query, String
 
-        # @!method initialize(id:, created_at:, event_types:, is_active:, next_billing_at:, query:)
+        # @!attribute name
+        #   Customer-set label of the keyword monitor, when set.
+        #
+        #   @return [String, nil]
+        optional :name, String
+
+        # @!attribute paused_at
+        #   When Xquik paused this keyword monitor.
+        #
+        #   @return [Time, nil]
+        optional :paused_at, Time, api_name: :pausedAt
+
+        # @!attribute paused_reason
+        #   Why Xquik paused this keyword monitor. The balance could not pay an hour, so add
+        #   credits & resume. Absent when the monitor is active or you paused it yourself.
+        #
+        #   @return [Symbol, XTwitterScraper::Models::Monitors::KeywordUpdateResponse::PausedReason, nil]
+        optional :paused_reason,
+                 enum: -> { XTwitterScraper::Monitors::KeywordUpdateResponse::PausedReason },
+                 api_name: :pausedReason
+
+        # @!method initialize(id:, created_at:, event_types:, is_active:, next_billing_at:, query:, name: nil, paused_at: nil, paused_reason: nil)
         #   Keyword monitor that tracks matching public X activity.
         #
         #   @param id [String]
@@ -57,6 +78,25 @@ module XTwitterScraper
         #   @param next_billing_at [Time] Next hourly credit charge time for this keyword query monitor.
         #
         #   @param query [String]
+        #
+        #   @param name [String] Customer-set label of the keyword monitor, when set.
+        #
+        #   @param paused_at [Time] When Xquik paused this keyword monitor.
+        #
+        #   @param paused_reason [Symbol, XTwitterScraper::Models::Monitors::KeywordUpdateResponse::PausedReason] Why Xquik paused this keyword monitor. The balance could not pay an hour, so add
+
+        # Why Xquik paused this keyword monitor. The balance could not pay an hour, so add
+        # credits & resume. Absent when the monitor is active or you paused it yourself.
+        #
+        # @see XTwitterScraper::Models::Monitors::KeywordUpdateResponse#paused_reason
+        module PausedReason
+          extend XTwitterScraper::Internal::Type::Enum
+
+          INSUFFICIENT_CREDITS = :insufficient_credits
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
     end
   end
