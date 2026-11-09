@@ -15,8 +15,6 @@
       "GET /api/v1/support/tickets response missing nextCursor",
       "GET /api/v1/webhooks response missing hasMore",
       "GET /api/v1/webhooks response missing nextCursor",
-      "GET /api/v1/webhooks/{id}/deliveries response missing hasMore",
-      "GET /api/v1/webhooks/{id}/deliveries response missing nextCursor",
       "GET /api/v1/x/articles/{tweetId} response missing article.articleId",
       "GET /api/v1/x/articles/{tweetId} response missing article.bodyMarkdown",
       "GET /api/v1/x/articles/{tweetId} response missing article.bookmarkCount",
