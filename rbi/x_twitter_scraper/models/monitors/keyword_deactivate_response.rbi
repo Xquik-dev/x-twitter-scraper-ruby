@@ -16,14 +16,36 @@ module XTwitterScraper
             )
           end
 
+        sig { returns(Symbol) }
+        attr_accessor :deletion_status
+
+        # Poll this monitor URL until it returns 404.
+        sig { returns(String) }
+        attr_accessor :status_url
+
         sig { returns(T::Boolean) }
         attr_accessor :success
 
-        sig { params(success: T::Boolean).returns(T.attached_class) }
-        def self.new(success: true)
+        sig do
+          params(
+            deletion_status: Symbol,
+            status_url: String,
+            success: T::Boolean
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          deletion_status: :deleting,
+          # Poll this monitor URL until it returns 404.
+          status_url:,
+          success: true
+        )
         end
 
-        sig { override.returns({ success: T::Boolean }) }
+        sig do
+          override.returns(
+            { deletion_status: Symbol, status_url: String, success: T::Boolean }
+          )
+        end
         def to_hash
         end
       end
