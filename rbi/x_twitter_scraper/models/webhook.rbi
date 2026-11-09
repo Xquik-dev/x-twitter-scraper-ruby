@@ -28,7 +28,7 @@ module XTwitterScraper
       attr_accessor :delivery_status
 
       # Array of event types to subscribe to.
-      sig { returns(T::Array[XTwitterScraper::EventType::TaggedSymbol]) }
+      sig { returns(T::Array[XTwitterScraper::StreamEventType::TaggedSymbol]) }
       attr_accessor :event_types
 
       # Consecutive delivery failures that pause the endpoint.
@@ -48,7 +48,7 @@ module XTwitterScraper
           consecutive_failures: Integer,
           created_at: Time,
           delivery_status: XTwitterScraper::Webhook::DeliveryStatus::OrSymbol,
-          event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
+          event_types: T::Array[XTwitterScraper::StreamEventType::OrSymbol],
           failure_hard_cap: Integer,
           is_active: T::Boolean,
           url: String
@@ -79,7 +79,8 @@ module XTwitterScraper
             created_at: Time,
             delivery_status:
               XTwitterScraper::Webhook::DeliveryStatus::TaggedSymbol,
-            event_types: T::Array[XTwitterScraper::EventType::TaggedSymbol],
+            event_types:
+              T::Array[XTwitterScraper::StreamEventType::TaggedSymbol],
             failure_hard_cap: Integer,
             is_active: T::Boolean,
             url: String

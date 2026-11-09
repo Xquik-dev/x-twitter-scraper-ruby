@@ -135,6 +135,8 @@ module XTwitterScraper
 
   class SearchTweet = XTwitterScraper::Models::SearchTweet
 
+  module StreamEventType = XTwitterScraper::Models::StreamEventType
+
   class StyleAnalyzeParams = XTwitterScraper::Models::StyleAnalyzeParams
 
   class StyleCompareParams = XTwitterScraper::Models::StyleCompareParams

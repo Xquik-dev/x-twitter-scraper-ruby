@@ -33,8 +33,8 @@ module XTwitterScraper
       sig { returns(Time) }
       attr_accessor :occurred_at
 
-      # Type of monitor event fired when account activity occurs.
-      sig { returns(XTwitterScraper::EventType::TaggedSymbol) }
+      # Type of event an account, keyword or post monitor fires, as events and webhooks name it.
+      sig { returns(XTwitterScraper::StreamEventType::TaggedSymbol) }
       attr_accessor :type
 
       # Keyword monitor ID included on detailed keyword events.
@@ -88,7 +88,7 @@ module XTwitterScraper
           monitor_id: String,
           monitor_type: XTwitterScraper::EventDetail::MonitorType::OrSymbol,
           occurred_at: Time,
-          type: XTwitterScraper::EventType::OrSymbol,
+          type: XTwitterScraper::StreamEventType::OrSymbol,
           keyword_monitor_id: String,
           monitor_name: String,
           query: String,
@@ -106,7 +106,7 @@ module XTwitterScraper
         # Source monitor type for this detailed event.
         monitor_type:,
         occurred_at:,
-        # Type of monitor event fired when account activity occurs.
+        # Type of event an account, keyword or post monitor fires, as events and webhooks name it.
         type:,
         # Keyword monitor ID included on detailed keyword events.
         keyword_monitor_id: nil,
@@ -133,7 +133,7 @@ module XTwitterScraper
             monitor_type:
               XTwitterScraper::EventDetail::MonitorType::TaggedSymbol,
             occurred_at: Time,
-            type: XTwitterScraper::EventType::TaggedSymbol,
+            type: XTwitterScraper::StreamEventType::TaggedSymbol,
             keyword_monitor_id: String,
             monitor_name: String,
             query: String,

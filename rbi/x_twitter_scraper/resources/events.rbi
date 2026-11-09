@@ -26,7 +26,7 @@ module XTwitterScraper
       sig do
         params(
           cursor: String,
-          event_type: XTwitterScraper::EventType::OrSymbol,
+          event_type: XTwitterScraper::StreamEventType::OrSymbol,
           keyword_monitor_id: String,
           limit: Integer,
           monitor_id: String,

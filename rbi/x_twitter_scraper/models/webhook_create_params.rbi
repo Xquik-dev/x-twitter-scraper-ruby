@@ -19,7 +19,7 @@ module XTwitterScraper
         end
 
       # Array of event types to subscribe to.
-      sig { returns(T::Array[XTwitterScraper::EventType::OrSymbol]) }
+      sig { returns(T::Array[XTwitterScraper::StreamEventType::OrSymbol]) }
       attr_accessor :event_types
 
       # HTTPS URL
@@ -28,7 +28,7 @@ module XTwitterScraper
 
       sig do
         params(
-          event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
+          event_types: T::Array[XTwitterScraper::StreamEventType::OrSymbol],
           url: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -45,7 +45,7 @@ module XTwitterScraper
       sig do
         override.returns(
           {
-            event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
+            event_types: T::Array[XTwitterScraper::StreamEventType::OrSymbol],
             url: String,
             request_options: XTwitterScraper::RequestOptions
           }

@@ -11,7 +11,7 @@ module XTwitterScraper
         monitor_id: String,
         monitor_type: XTwitterScraper::Models::Event::monitor_type,
         occurred_at: Time,
-        type: XTwitterScraper::Models::event_type,
+        type: XTwitterScraper::Models::stream_event_type,
         author_id: String,
         author_username: String,
         keyword_monitor_id: String,
@@ -34,7 +34,7 @@ module XTwitterScraper
 
       attr_accessor occurred_at: Time
 
-      attr_accessor type: XTwitterScraper::Models::event_type
+      attr_accessor type: XTwitterScraper::Models::stream_event_type
 
       attr_reader author_id: String?
 
@@ -78,7 +78,7 @@ module XTwitterScraper
         monitor_id: String,
         monitor_type: XTwitterScraper::Models::Event::monitor_type,
         occurred_at: Time,
-        type: XTwitterScraper::Models::event_type,
+        type: XTwitterScraper::Models::stream_event_type,
         ?author_id: String,
         ?author_username: String,
         ?keyword_monitor_id: String,
@@ -96,7 +96,7 @@ module XTwitterScraper
         monitor_id: String,
         monitor_type: XTwitterScraper::Models::Event::monitor_type,
         occurred_at: Time,
-        type: XTwitterScraper::Models::event_type,
+        type: XTwitterScraper::Models::stream_event_type,
         author_id: String,
         author_username: String,
         keyword_monitor_id: String,

@@ -35,10 +35,10 @@ module XTwitterScraper
       required :occurred_at, Time, api_name: :occurredAt
 
       # @!attribute type
-      #   Type of monitor event fired when account activity occurs.
+      #   Type of event an account, keyword or post monitor fires, as events and webhooks name it.
       #
-      #   @return [Symbol, XTwitterScraper::Models::EventType]
-      required :type, enum: -> { XTwitterScraper::EventType }
+      #   @return [Symbol, XTwitterScraper::Models::StreamEventType]
+      required :type, enum: -> { XTwitterScraper::StreamEventType }
 
       # @!attribute author_id
       #   Permanent X user ID of the monitored post's author, present for post events.
@@ -109,7 +109,7 @@ module XTwitterScraper
       #
       #   @param occurred_at [Time]
       #
-      #   @param type [Symbol, XTwitterScraper::Models::EventType] Type of monitor event fired when account activity occurs.
+      #   @param type [Symbol, XTwitterScraper::Models::StreamEventType] Type of event an account, keyword or post monitor fires, as events and webhooks name it.
       #
       #   @param author_id [String] Permanent X user ID of the monitored post's author, present for post events.
       #
