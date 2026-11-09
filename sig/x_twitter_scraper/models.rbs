@@ -79,6 +79,8 @@ module XTwitterScraper
 
   class UserTipJar = XTwitterScraper::Models::UserTipJar
 
+  module Currency = XTwitterScraper::Models::Currency
+
   module EventType = XTwitterScraper::Models::EventType
 
   class ExtractionEstimateCostParams = XTwitterScraper::Models::ExtractionEstimateCostParams
