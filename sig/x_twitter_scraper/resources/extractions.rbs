@@ -136,6 +136,7 @@ module XTwitterScraper
         String id,
         format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_,
         ?business_email_only: bool,
+        ?change: XTwitterScraper::Models::ExtractionExportResultsParams::change,
         ?compare: String,
         ?email_domains: String,
         ?has_description: bool,

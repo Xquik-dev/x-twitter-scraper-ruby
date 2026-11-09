@@ -36,6 +36,26 @@ module XTwitterScraper
       sig { params(business_email_only: T::Boolean).void }
       attr_writer :business_email_only
 
+      # With compare, `added` keeps this run's new rows and `removed` keeps the earlier
+      # run's rows that this run lacks. The default is `added`. A run of another account
+      # ignores it.
+      sig do
+        returns(
+          T.nilable(
+            XTwitterScraper::ExtractionExportResultsParams::Change::OrSymbol
+          )
+        )
+      end
+      attr_reader :change
+
+      sig do
+        params(
+          change:
+            XTwitterScraper::ExtractionExportResultsParams::Change::OrSymbol
+        ).void
+      end
+      attr_writer :change
+
       # ID of another run of this tool. For an earlier whole run of the same account,
       # the export holds only the rows that differ. For a run of another account, it
       # holds only this run's rows that the other run also lists.
@@ -236,6 +256,8 @@ module XTwitterScraper
           format_:
             XTwitterScraper::ExtractionExportResultsParams::Format::OrSymbol,
           business_email_only: T::Boolean,
+          change:
+            XTwitterScraper::ExtractionExportResultsParams::Change::OrSymbol,
           compare: String,
           email_domains: String,
           has_description: T::Boolean,
@@ -272,6 +294,10 @@ module XTwitterScraper
         format_:,
         # Require an email outside free webmail, such as Gmail, in the row's Email column.
         business_email_only: nil,
+        # With compare, `added` keeps this run's new rows and `removed` keeps the earlier
+        # run's rows that this run lacks. The default is `added`. A run of another account
+        # ignores it.
+        change: nil,
         # ID of another run of this tool. For an earlier whole run of the same account,
         # the export holds only the rows that differ. For a run of another account, it
         # holds only this run's rows that the other run also lists.
@@ -342,6 +368,8 @@ module XTwitterScraper
             format_:
               XTwitterScraper::ExtractionExportResultsParams::Format::OrSymbol,
             business_email_only: T::Boolean,
+            change:
+              XTwitterScraper::ExtractionExportResultsParams::Change::OrSymbol,
             compare: String,
             email_domains: String,
             has_description: T::Boolean,
@@ -429,6 +457,43 @@ module XTwitterScraper
           override.returns(
             T::Array[
               XTwitterScraper::ExtractionExportResultsParams::Format::TaggedSymbol
+            ]
+          )
+        end
+        def self.values
+        end
+      end
+
+      # With compare, `added` keeps this run's new rows and `removed` keeps the earlier
+      # run's rows that this run lacks. The default is `added`. A run of another account
+      # ignores it.
+      module Change
+        extend XTwitterScraper::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(
+              Symbol,
+              XTwitterScraper::ExtractionExportResultsParams::Change
+            )
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        ADDED =
+          T.let(
+            :added,
+            XTwitterScraper::ExtractionExportResultsParams::Change::TaggedSymbol
+          )
+        REMOVED =
+          T.let(
+            :removed,
+            XTwitterScraper::ExtractionExportResultsParams::Change::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              XTwitterScraper::ExtractionExportResultsParams::Change::TaggedSymbol
             ]
           )
         end

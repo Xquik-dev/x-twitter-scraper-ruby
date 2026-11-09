@@ -307,13 +307,15 @@ module XTwitterScraper
 
       # Export extraction results
       #
-      # @overload export_results(id, format_:, business_email_only: nil, compare: nil, email_domains: nil, has_description: nil, has_email: nil, has_location: nil, has_media: nil, has_website: nil, hide_fake: nil, hide_inactive: nil, joined_since: nil, joined_until: nil, lang: nil, location: nil, max_followers: nil, max_following: nil, max_posts: nil, min_followers: nil, min_following: nil, min_likes: nil, min_posts: nil, min_replies: nil, min_retweets: nil, min_views: nil, search: nil, since_date: nil, until_date: nil, verified: nil, request_options: {})
+      # @overload export_results(id, format_:, business_email_only: nil, change: nil, compare: nil, email_domains: nil, has_description: nil, has_email: nil, has_location: nil, has_media: nil, has_website: nil, hide_fake: nil, hide_inactive: nil, joined_since: nil, joined_until: nil, lang: nil, location: nil, max_followers: nil, max_following: nil, max_posts: nil, min_followers: nil, min_following: nil, min_likes: nil, min_posts: nil, min_replies: nil, min_retweets: nil, min_views: nil, search: nil, since_date: nil, until_date: nil, verified: nil, request_options: {})
       #
       # @param id [String] Extraction public ID
       #
       # @param format_ [Symbol, XTwitterScraper::Models::ExtractionExportResultsParams::Format] Export file format
       #
       # @param business_email_only [Boolean] Require an email outside free webmail, such as Gmail, in the row's Email column.
+      #
+      # @param change [Symbol, XTwitterScraper::Models::ExtractionExportResultsParams::Change] With compare, `added` keeps this run's new rows and `removed` keeps the earlier
       #
       # @param compare [String] ID of another run of this tool. For an earlier whole run of the same account, th
       #

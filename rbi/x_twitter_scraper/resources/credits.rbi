@@ -50,6 +50,8 @@ module XTwitterScraper
       sig do
         params(
           dollars: Integer,
+          currency:
+            XTwitterScraper::CreditTopupBalanceParams::Currency::OrSymbol,
           locale: String,
           return_path: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
@@ -58,6 +60,8 @@ module XTwitterScraper
       def topup_balance(
         # Amount to top up in US dollars. Minimum 10.
         dollars:,
+        # ISO 4217 code of a currency Xquik charges in.
+        currency: nil,
         # Optional checkout locale. Defaults to en.
         locale: nil,
         # Optional Xquik tool page to return to after Checkout, such as

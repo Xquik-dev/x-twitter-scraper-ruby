@@ -278,6 +278,22 @@ module XTwitterScraper
         sig { params(min_views: Integer).void }
         attr_writer :min_views
 
+        # Optional legacy pagination override. Filters such as keywords don't apply with
+        # it.
+        sig do
+          returns(
+            T.nilable(XTwitterScraper::X::TweetGetQuotesParams::Mode::OrSymbol)
+          )
+        end
+        attr_reader :mode
+
+        sig do
+          params(
+            mode: XTwitterScraper::X::TweetGetQuotesParams::Mode::OrSymbol
+          ).void
+        end
+        attr_writer :mode
+
         # Only return native reposts.
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :native_retweets
@@ -337,6 +353,28 @@ module XTwitterScraper
 
         sig { params(point_radius: String).void }
         attr_writer :point_radius
+
+        # Latest for newest first, or Top for the quotes X ranks highest. A later Latest
+        # page can hold a newer quote. Top is X's ranking, not a count order, & a later
+        # page can hold a quote X ranks higher. Any case works. Alias sort, which also
+        # takes Recency & Relevance. Send the same value with each cursor. Standard pages
+        # list Latest.
+        sig do
+          returns(
+            T.nilable(
+              XTwitterScraper::X::TweetGetQuotesParams::QueryType::OrSymbol
+            )
+          )
+        end
+        attr_reader :query_type
+
+        sig do
+          params(
+            query_type:
+              XTwitterScraper::X::TweetGetQuotesParams::QueryType::OrSymbol
+          ).void
+        end
+        attr_writer :query_type
 
         # Quote mode.
         sig do
@@ -526,6 +564,7 @@ module XTwitterScraper
             min_replies: Integer,
             min_retweets: Integer,
             min_views: Integer,
+            mode: XTwitterScraper::X::TweetGetQuotesParams::Mode::OrSymbol,
             native_retweets: T::Boolean,
             near: String,
             news: T::Boolean,
@@ -534,6 +573,8 @@ module XTwitterScraper
             place: String,
             place_country: String,
             point_radius: String,
+            query_type:
+              XTwitterScraper::X::TweetGetQuotesParams::QueryType::OrSymbol,
             quotes: XTwitterScraper::X::TweetGetQuotesParams::Quotes::OrSymbol,
             quotes_of_tweet_id: String,
             replies:
@@ -633,6 +674,9 @@ module XTwitterScraper
           min_retweets: nil,
           # Minimum view count threshold.
           min_views: nil,
+          # Optional legacy pagination override. Filters such as keywords don't apply with
+          # it.
+          mode: nil,
           # Only return native reposts.
           native_retweets: nil,
           # Match a place name.
@@ -653,6 +697,12 @@ module XTwitterScraper
           place_country: nil,
           # Geo point radius, such as -73.99 40.73 25mi.
           point_radius: nil,
+          # Latest for newest first, or Top for the quotes X ranks highest. A later Latest
+          # page can hold a newer quote. Top is X's ranking, not a count order, & a later
+          # page can hold a quote X ranks higher. Any case works. Alias sort, which also
+          # takes Recency & Relevance. Send the same value with each cursor. Standard pages
+          # list Latest.
+          query_type: nil,
           # Quote mode.
           quotes: nil,
           # Only quotes of this tweet ID.
@@ -730,6 +780,7 @@ module XTwitterScraper
               min_replies: Integer,
               min_retweets: Integer,
               min_views: Integer,
+              mode: XTwitterScraper::X::TweetGetQuotesParams::Mode::OrSymbol,
               native_retweets: T::Boolean,
               near: String,
               news: T::Boolean,
@@ -738,6 +789,8 @@ module XTwitterScraper
               place: String,
               place_country: String,
               point_radius: String,
+              query_type:
+                XTwitterScraper::X::TweetGetQuotesParams::QueryType::OrSymbol,
               quotes:
                 XTwitterScraper::X::TweetGetQuotesParams::Quotes::OrSymbol,
               quotes_of_tweet_id: String,
@@ -921,6 +974,70 @@ module XTwitterScraper
             override.returns(
               T::Array[
                 XTwitterScraper::X::TweetGetQuotesParams::Retweets::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        # Optional legacy pagination override. Filters such as keywords don't apply with
+        # it.
+        module Mode
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, XTwitterScraper::X::TweetGetQuotesParams::Mode)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          STANDARD =
+            T.let(
+              :standard,
+              XTwitterScraper::X::TweetGetQuotesParams::Mode::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::X::TweetGetQuotesParams::Mode::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        # Latest for newest first, or Top for the quotes X ranks highest. A later Latest
+        # page can hold a newer quote. Top is X's ranking, not a count order, & a later
+        # page can hold a quote X ranks higher. Any case works. Alias sort, which also
+        # takes Recency & Relevance. Send the same value with each cursor. Standard pages
+        # list Latest.
+        module QueryType
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, XTwitterScraper::X::TweetGetQuotesParams::QueryType)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          LATEST =
+            T.let(
+              :Latest,
+              XTwitterScraper::X::TweetGetQuotesParams::QueryType::TaggedSymbol
+            )
+          TOP =
+            T.let(
+              :Top,
+              XTwitterScraper::X::TweetGetQuotesParams::QueryType::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::X::TweetGetQuotesParams::QueryType::TaggedSymbol
               ]
             )
           end

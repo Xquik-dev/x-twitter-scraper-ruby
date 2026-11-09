@@ -156,6 +156,24 @@ module XTwitterScraper
           sig { params(max_retweets: Integer).void }
           attr_writer :max_retweets
 
+          # Filter media. Its aliases are has_video & has_media.
+          sig do
+            returns(
+              T.nilable(
+                XTwitterScraper::X::Communities::TweetListParams::MediaType::OrSymbol
+              )
+            )
+          end
+          attr_reader :media_type
+
+          sig do
+            params(
+              media_type:
+                XTwitterScraper::X::Communities::TweetListParams::MediaType::OrSymbol
+            ).void
+          end
+          attr_writer :media_type
+
           # Filter tweets mentioning a username.
           sig { returns(T.nilable(String)) }
           attr_reader :mentioning
@@ -248,12 +266,66 @@ module XTwitterScraper
           end
           attr_writer :query_type
 
+          # Only when the caller requests a quote mode.
+          sig do
+            returns(
+              T.nilable(
+                XTwitterScraper::X::Communities::TweetListParams::Quotes::OrSymbol
+              )
+            )
+          end
+          attr_reader :quotes
+
+          sig do
+            params(
+              quotes:
+                XTwitterScraper::X::Communities::TweetListParams::Quotes::OrSymbol
+            ).void
+          end
+          attr_writer :quotes
+
           # Only quotes of this tweet ID.
           sig { returns(T.nilable(String)) }
           attr_reader :quotes_of_tweet_id
 
           sig { params(quotes_of_tweet_id: String).void }
           attr_writer :quotes_of_tweet_id
+
+          # Reply mode. Exclude keeps own-thread replies.
+          sig do
+            returns(
+              T.nilable(
+                XTwitterScraper::X::Communities::TweetListParams::Replies::OrSymbol
+              )
+            )
+          end
+          attr_reader :replies
+
+          sig do
+            params(
+              replies:
+                XTwitterScraper::X::Communities::TweetListParams::Replies::OrSymbol
+            ).void
+          end
+          attr_writer :replies
+
+          # Only when the caller requests a repost mode.
+          sig do
+            returns(
+              T.nilable(
+                XTwitterScraper::X::Communities::TweetListParams::Retweets::OrSymbol
+              )
+            )
+          end
+          attr_reader :retweets
+
+          sig do
+            params(
+              retweets:
+                XTwitterScraper::X::Communities::TweetListParams::Retweets::OrSymbol
+            ).void
+          end
+          attr_writer :retweets
 
           # Only retweets of this tweet ID.
           sig { returns(T.nilable(String)) }
@@ -335,6 +407,8 @@ module XTwitterScraper
               max_quotes: Integer,
               max_replies: Integer,
               max_retweets: Integer,
+              media_type:
+                XTwitterScraper::X::Communities::TweetListParams::MediaType::OrSymbol,
               mentioning: String,
               min_bookmarks: Integer,
               min_likes: Integer,
@@ -347,7 +421,13 @@ module XTwitterScraper
               page_size: Integer,
               query_type:
                 XTwitterScraper::X::Communities::TweetListParams::QueryType::OrSymbol,
+              quotes:
+                XTwitterScraper::X::Communities::TweetListParams::Quotes::OrSymbol,
               quotes_of_tweet_id: String,
+              replies:
+                XTwitterScraper::X::Communities::TweetListParams::Replies::OrSymbol,
+              retweets:
+                XTwitterScraper::X::Communities::TweetListParams::Retweets::OrSymbol,
               retweets_of_tweet_id: String,
               since_date: Date,
               since_id: String,
@@ -407,6 +487,8 @@ module XTwitterScraper
             max_replies: nil,
             # Maximum retweets threshold.
             max_retweets: nil,
+            # Filter media. Its aliases are has_video & has_media.
+            media_type: nil,
             # Filter tweets mentioning a username.
             mentioning: nil,
             # Minimum bookmark count threshold.
@@ -433,8 +515,14 @@ module XTwitterScraper
             page_size: nil,
             # Sort order for community results (Latest or Top)
             query_type: nil,
+            # Only when the caller requests a quote mode.
+            quotes: nil,
             # Only quotes of this tweet ID.
             quotes_of_tweet_id: nil,
+            # Reply mode. Exclude keeps own-thread replies.
+            replies: nil,
+            # Only when the caller requests a repost mode.
+            retweets: nil,
             # Only retweets of this tweet ID.
             retweets_of_tweet_id: nil,
             # Start date in YYYY-MM-DD format, as a UTC day. A date means one thing in any
@@ -480,6 +568,8 @@ module XTwitterScraper
                 max_quotes: Integer,
                 max_replies: Integer,
                 max_retweets: Integer,
+                media_type:
+                  XTwitterScraper::X::Communities::TweetListParams::MediaType::OrSymbol,
                 mentioning: String,
                 min_bookmarks: Integer,
                 min_likes: Integer,
@@ -492,7 +582,13 @@ module XTwitterScraper
                 page_size: Integer,
                 query_type:
                   XTwitterScraper::X::Communities::TweetListParams::QueryType::OrSymbol,
+                quotes:
+                  XTwitterScraper::X::Communities::TweetListParams::Quotes::OrSymbol,
                 quotes_of_tweet_id: String,
+                replies:
+                  XTwitterScraper::X::Communities::TweetListParams::Replies::OrSymbol,
+                retweets:
+                  XTwitterScraper::X::Communities::TweetListParams::Retweets::OrSymbol,
                 retweets_of_tweet_id: String,
                 since_date: Date,
                 since_id: String,
@@ -536,6 +632,181 @@ module XTwitterScraper
               override.returns(
                 T::Array[
                   XTwitterScraper::X::Communities::TweetListParams::QueryType::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
+          # Filter media. Its aliases are has_video & has_media.
+          module MediaType
+            extend XTwitterScraper::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  XTwitterScraper::X::Communities::TweetListParams::MediaType
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            IMAGES =
+              T.let(
+                :images,
+                XTwitterScraper::X::Communities::TweetListParams::MediaType::TaggedSymbol
+              )
+            VIDEOS =
+              T.let(
+                :videos,
+                XTwitterScraper::X::Communities::TweetListParams::MediaType::TaggedSymbol
+              )
+            GIFS =
+              T.let(
+                :gifs,
+                XTwitterScraper::X::Communities::TweetListParams::MediaType::TaggedSymbol
+              )
+            MEDIA =
+              T.let(
+                :media,
+                XTwitterScraper::X::Communities::TweetListParams::MediaType::TaggedSymbol
+              )
+            LINKS =
+              T.let(
+                :links,
+                XTwitterScraper::X::Communities::TweetListParams::MediaType::TaggedSymbol
+              )
+            NONE =
+              T.let(
+                :none,
+                XTwitterScraper::X::Communities::TweetListParams::MediaType::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  XTwitterScraper::X::Communities::TweetListParams::MediaType::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
+          # Only when the caller requests a quote mode.
+          module Quotes
+            extend XTwitterScraper::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  XTwitterScraper::X::Communities::TweetListParams::Quotes
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            INCLUDE =
+              T.let(
+                :include,
+                XTwitterScraper::X::Communities::TweetListParams::Quotes::TaggedSymbol
+              )
+            EXCLUDE =
+              T.let(
+                :exclude,
+                XTwitterScraper::X::Communities::TweetListParams::Quotes::TaggedSymbol
+              )
+            ONLY =
+              T.let(
+                :only,
+                XTwitterScraper::X::Communities::TweetListParams::Quotes::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  XTwitterScraper::X::Communities::TweetListParams::Quotes::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
+          # Reply mode. Exclude keeps own-thread replies.
+          module Replies
+            extend XTwitterScraper::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  XTwitterScraper::X::Communities::TweetListParams::Replies
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            INCLUDE =
+              T.let(
+                :include,
+                XTwitterScraper::X::Communities::TweetListParams::Replies::TaggedSymbol
+              )
+            EXCLUDE =
+              T.let(
+                :exclude,
+                XTwitterScraper::X::Communities::TweetListParams::Replies::TaggedSymbol
+              )
+            ONLY =
+              T.let(
+                :only,
+                XTwitterScraper::X::Communities::TweetListParams::Replies::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  XTwitterScraper::X::Communities::TweetListParams::Replies::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
+          # Only when the caller requests a repost mode.
+          module Retweets
+            extend XTwitterScraper::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  XTwitterScraper::X::Communities::TweetListParams::Retweets
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            INCLUDE =
+              T.let(
+                :include,
+                XTwitterScraper::X::Communities::TweetListParams::Retweets::TaggedSymbol
+              )
+            EXCLUDE =
+              T.let(
+                :exclude,
+                XTwitterScraper::X::Communities::TweetListParams::Retweets::TaggedSymbol
+              )
+            ONLY =
+              T.let(
+                :only,
+                XTwitterScraper::X::Communities::TweetListParams::Retweets::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  XTwitterScraper::X::Communities::TweetListParams::Retweets::TaggedSymbol
                 ]
               )
             end

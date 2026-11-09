@@ -225,7 +225,7 @@ module XTwitterScraper
 
         # List quote tweets of a tweet
         #
-        # @overload get_quotes(id, advanced_query: nil, any_words: nil, blue_verified_only: nil, bounding_box: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, fields: nil, from_user: nil, geocode: nil, hashtags: nil, include_replies: nil, in_reply_to_tweet_id: nil, keywords: nil, language: nil, list_id: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, near: nil, news: nil, omit: nil, page_size: nil, place: nil, place_country: nil, point_radius: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, since_time: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
+        # @overload get_quotes(id, advanced_query: nil, any_words: nil, blue_verified_only: nil, bounding_box: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, fields: nil, from_user: nil, geocode: nil, hashtags: nil, include_replies: nil, in_reply_to_tweet_id: nil, keywords: nil, language: nil, list_id: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, mode: nil, native_retweets: nil, near: nil, news: nil, omit: nil, page_size: nil, place: nil, place_country: nil, point_radius: nil, query_type: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, since_time: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
         #
         # @param id [String] Numeric tweet ID to get quotes, 15-20 digits
         #
@@ -297,6 +297,8 @@ module XTwitterScraper
         #
         # @param min_views [Integer] Minimum view count threshold.
         #
+        # @param mode [Symbol, XTwitterScraper::Models::X::TweetGetQuotesParams::Mode] Optional legacy pagination override. Filters such as keywords don't apply with i
+        #
         # @param native_retweets [Boolean] Only return native reposts.
         #
         # @param near [String] Match a place name.
@@ -312,6 +314,8 @@ module XTwitterScraper
         # @param place_country [String] Search within a country code.
         #
         # @param point_radius [String] Geo point radius, such as -73.99 40.73 25mi.
+        #
+        # @param query_type [Symbol, XTwitterScraper::Models::X::TweetGetQuotesParams::QueryType] Latest for newest first, or Top for the quotes X ranks highest. A later Latest p
         #
         # @param quotes [Symbol, XTwitterScraper::Models::X::TweetGetQuotesParams::Quotes] Quote mode.
         #
@@ -389,6 +393,7 @@ module XTwitterScraper
               page_size: "pageSize",
               place_country: "placeCountry",
               point_radius: "pointRadius",
+              query_type: "queryType",
               quotes_of_tweet_id: "quotesOfTweetId",
               retweets_of_tweet_id: "retweetsOfTweetId",
               since_date: "sinceDate",

@@ -144,6 +144,13 @@ module XTwitterScraper
         #   @return [Integer, nil]
         optional :min_statuses, Integer
 
+        # @!attribute mode
+        #   Omit mode for resumable maximum coverage. Standard keeps legacy pagination.
+        #   Coverage returns diagnostics once and rejects cursors.
+        #
+        #   @return [Symbol, XTwitterScraper::Models::X::ListRetrieveMembersParams::Mode, nil]
+        optional :mode, enum: -> { XTwitterScraper::X::ListRetrieveMembersParams::Mode }
+
         # @!attribute omit
         #   Fields to drop from each row, comma-separated. It takes the same names as
         #   fields. With fields, it drops from the kept fields. A longer URL fails at the
@@ -176,7 +183,7 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :verified_type, String
 
-        # @!method initialize(id:, after: nil, bio_contains: nil, blue_verified_only: nil, business_email_only: nil, cursor: nil, email_domains: nil, fields: nil, has_email: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_scan: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, omit: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
+        # @!method initialize(id:, after: nil, bio_contains: nil, blue_verified_only: nil, business_email_only: nil, cursor: nil, email_domains: nil, fields: nil, has_email: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_scan: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, mode: nil, omit: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
         #   @param id [String]
         #
         #   @param after [String] Legacy cursor alias. Prefer cursor.
@@ -217,6 +224,8 @@ module XTwitterScraper
         #
         #   @param min_statuses [Integer] Minimum post count. minPosts is also accepted.
         #
+        #   @param mode [Symbol, XTwitterScraper::Models::X::ListRetrieveMembersParams::Mode] Omit mode for resumable maximum coverage. Standard keeps legacy pagination. Cove
+        #
         #   @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         #   @param page_size [Integer] Members per page (20-200, default 20)
@@ -228,6 +237,18 @@ module XTwitterScraper
         #   @param verified_type [String] Match the verification type exactly, ignoring case.
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
+
+        # Omit mode for resumable maximum coverage. Standard keeps legacy pagination.
+        # Coverage returns diagnostics once and rejects cursors.
+        module Mode
+          extend XTwitterScraper::Internal::Type::Enum
+
+          STANDARD = :standard
+          COVERAGE = :coverage
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
     end
   end

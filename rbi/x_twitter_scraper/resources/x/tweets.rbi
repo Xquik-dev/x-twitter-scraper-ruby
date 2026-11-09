@@ -265,6 +265,7 @@ module XTwitterScraper
             min_replies: Integer,
             min_retweets: Integer,
             min_views: Integer,
+            mode: XTwitterScraper::X::TweetGetQuotesParams::Mode::OrSymbol,
             native_retweets: T::Boolean,
             near: String,
             news: T::Boolean,
@@ -273,6 +274,8 @@ module XTwitterScraper
             place: String,
             place_country: String,
             point_radius: String,
+            query_type:
+              XTwitterScraper::X::TweetGetQuotesParams::QueryType::OrSymbol,
             quotes: XTwitterScraper::X::TweetGetQuotesParams::Quotes::OrSymbol,
             quotes_of_tweet_id: String,
             replies:
@@ -373,6 +376,9 @@ module XTwitterScraper
           min_retweets: nil,
           # Minimum view count threshold.
           min_views: nil,
+          # Optional legacy pagination override. Filters such as keywords don't apply with
+          # it.
+          mode: nil,
           # Only return native reposts.
           native_retweets: nil,
           # Match a place name.
@@ -393,6 +399,12 @@ module XTwitterScraper
           place_country: nil,
           # Geo point radius, such as -73.99 40.73 25mi.
           point_radius: nil,
+          # Latest for newest first, or Top for the quotes X ranks highest. A later Latest
+          # page can hold a newer quote. Top is X's ranking, not a count order, & a later
+          # page can hold a quote X ranks higher. Any case works. Alias sort, which also
+          # takes Recency & Relevance. Send the same value with each cursor. Standard pages
+          # list Latest.
+          query_type: nil,
           # Quote mode.
           quotes: nil,
           # Only quotes of this tweet ID.

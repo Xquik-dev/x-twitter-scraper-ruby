@@ -1072,6 +1072,7 @@ module XTwitterScraper
             min_replies: Integer,
             min_retweets: Integer,
             min_views: Integer,
+            mode: XTwitterScraper::X::UserRetrieveRepliesParams::Mode::OrSymbol,
             native_retweets: T::Boolean,
             near: String,
             news: T::Boolean,
@@ -1190,6 +1191,9 @@ module XTwitterScraper
           min_retweets: nil,
           # Minimum view count threshold.
           min_views: nil,
+          # Optional legacy pagination override. Filters such as keywords don't apply with
+          # it.
+          mode: nil,
           # Only return native reposts.
           native_retweets: nil,
           # Match a place name.
@@ -1393,6 +1397,7 @@ module XTwitterScraper
             min_replies: Integer,
             min_retweets: Integer,
             min_views: Integer,
+            mode: XTwitterScraper::X::UserRetrieveTweetsParams::Mode::OrSymbol,
             native_retweets: T::Boolean,
             near: String,
             news: T::Boolean,
@@ -1513,6 +1518,9 @@ module XTwitterScraper
           min_retweets: nil,
           # Minimum view count threshold.
           min_views: nil,
+          # Optional legacy pagination override. Filters such as keywords don't apply with
+          # it.
+          mode: nil,
           # Only return native reposts.
           native_retweets: nil,
           # Match a place name.

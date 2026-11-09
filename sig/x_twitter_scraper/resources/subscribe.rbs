@@ -6,6 +6,7 @@ module XTwitterScraper
   module Resources
     class Subscribe
       def create: (
+        ?currency: XTwitterScraper::Models::SubscribeCreateParams::currency,
         ?tier: XTwitterScraper::Models::SubscribeCreateParams::tier,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::SubscribeCreateResponse

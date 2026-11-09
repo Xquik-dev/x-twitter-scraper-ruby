@@ -27,6 +27,7 @@ module XTwitterScraper
           min_followers: Integer,
           min_following: Integer,
           min_statuses: Integer,
+          mode: XTwitterScraper::Models::X::ListRetrieveMembersParams::mode,
           omit: String,
           page_size: Integer,
           username_contains: String,
@@ -117,6 +118,12 @@ module XTwitterScraper
 
         def min_statuses=: (Integer) -> Integer
 
+        attr_reader mode: XTwitterScraper::Models::X::ListRetrieveMembersParams::mode?
+
+        def mode=: (
+          XTwitterScraper::Models::X::ListRetrieveMembersParams::mode
+        ) -> XTwitterScraper::Models::X::ListRetrieveMembersParams::mode
+
         attr_reader omit: String?
 
         def omit=: (String) -> String
@@ -158,6 +165,7 @@ module XTwitterScraper
           ?min_followers: Integer,
           ?min_following: Integer,
           ?min_statuses: Integer,
+          ?mode: XTwitterScraper::Models::X::ListRetrieveMembersParams::mode,
           ?omit: String,
           ?page_size: Integer,
           ?username_contains: String,
@@ -187,6 +195,7 @@ module XTwitterScraper
           min_followers: Integer,
           min_following: Integer,
           min_statuses: Integer,
+          mode: XTwitterScraper::Models::X::ListRetrieveMembersParams::mode,
           omit: String,
           page_size: Integer,
           username_contains: String,
@@ -194,6 +203,17 @@ module XTwitterScraper
           verified_type: String,
           request_options: XTwitterScraper::RequestOptions
         }
+
+        type mode = :standard | :coverage
+
+        module Mode
+          extend XTwitterScraper::Internal::Type::Enum
+
+          STANDARD: :standard
+          COVERAGE: :coverage
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::ListRetrieveMembersParams::mode]
+        end
       end
     end
   end

@@ -9,6 +9,7 @@ module XTwitterScraper
         id: String,
         format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_,
         business_email_only: bool,
+        change: XTwitterScraper::Models::ExtractionExportResultsParams::change,
         compare: String,
         email_domains: String,
         has_description: bool,
@@ -50,6 +51,12 @@ module XTwitterScraper
       attr_reader business_email_only: bool?
 
       def business_email_only=: (bool) -> bool
+
+      attr_reader change: XTwitterScraper::Models::ExtractionExportResultsParams::change?
+
+      def change=: (
+        XTwitterScraper::Models::ExtractionExportResultsParams::change
+      ) -> XTwitterScraper::Models::ExtractionExportResultsParams::change
 
       attr_reader compare: String?
 
@@ -163,6 +170,7 @@ module XTwitterScraper
         id: String,
         format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_,
         ?business_email_only: bool,
+        ?change: XTwitterScraper::Models::ExtractionExportResultsParams::change,
         ?compare: String,
         ?email_domains: String,
         ?has_description: bool,
@@ -197,6 +205,7 @@ module XTwitterScraper
         id: String,
         format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_,
         business_email_only: bool,
+        change: XTwitterScraper::Models::ExtractionExportResultsParams::change,
         compare: String,
         email_domains: String,
         has_description: bool,
@@ -241,6 +250,17 @@ module XTwitterScraper
         XLSX: :xlsx
 
         def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionExportResultsParams::format_]
+      end
+
+      type change = :added | :removed
+
+      module Change
+        extend XTwitterScraper::Internal::Type::Enum
+
+        ADDED: :added
+        REMOVED: :removed
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionExportResultsParams::change]
       end
     end
   end

@@ -43,6 +43,7 @@ module XTwitterScraper
           min_replies: Integer,
           min_retweets: Integer,
           min_views: Integer,
+          mode: XTwitterScraper::Models::X::UserRetrieveRepliesParams::mode,
           native_retweets: bool,
           near: String,
           news: bool,
@@ -220,6 +221,12 @@ module XTwitterScraper
 
         def min_views=: (Integer) -> Integer
 
+        attr_reader mode: XTwitterScraper::Models::X::UserRetrieveRepliesParams::mode?
+
+        def mode=: (
+          XTwitterScraper::Models::X::UserRetrieveRepliesParams::mode
+        ) -> XTwitterScraper::Models::X::UserRetrieveRepliesParams::mode
+
         attr_reader native_retweets: bool?
 
         def native_retweets=: (bool) -> bool
@@ -367,6 +374,7 @@ module XTwitterScraper
           ?min_replies: Integer,
           ?min_retweets: Integer,
           ?min_views: Integer,
+          ?mode: XTwitterScraper::Models::X::UserRetrieveRepliesParams::mode,
           ?native_retweets: bool,
           ?near: String,
           ?news: bool,
@@ -433,6 +441,7 @@ module XTwitterScraper
           min_replies: Integer,
           min_retweets: Integer,
           min_views: Integer,
+          mode: XTwitterScraper::Models::X::UserRetrieveRepliesParams::mode,
           native_retweets: bool,
           near: String,
           news: bool,
@@ -511,6 +520,16 @@ module XTwitterScraper
           ONLY: :only
 
           def self?.values: -> ::Array[XTwitterScraper::Models::X::UserRetrieveRepliesParams::retweets]
+        end
+
+        type mode = :standard
+
+        module Mode
+          extend XTwitterScraper::Internal::Type::Enum
+
+          STANDARD: :standard
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::UserRetrieveRepliesParams::mode]
         end
       end
     end

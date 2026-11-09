@@ -291,6 +291,24 @@ module XTwitterScraper
         sig { params(min_views: Integer).void }
         attr_writer :min_views
 
+        # Optional legacy pagination override. Filters such as keywords don't apply with
+        # it.
+        sig do
+          returns(
+            T.nilable(
+              XTwitterScraper::X::UserRetrieveRepliesParams::Mode::OrSymbol
+            )
+          )
+        end
+        attr_reader :mode
+
+        sig do
+          params(
+            mode: XTwitterScraper::X::UserRetrieveRepliesParams::Mode::OrSymbol
+          ).void
+        end
+        attr_writer :mode
+
         # Only return native reposts.
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :native_retweets
@@ -554,6 +572,7 @@ module XTwitterScraper
             min_replies: Integer,
             min_retweets: Integer,
             min_views: Integer,
+            mode: XTwitterScraper::X::UserRetrieveRepliesParams::Mode::OrSymbol,
             native_retweets: T::Boolean,
             near: String,
             news: T::Boolean,
@@ -671,6 +690,9 @@ module XTwitterScraper
           min_retweets: nil,
           # Minimum view count threshold.
           min_views: nil,
+          # Optional legacy pagination override. Filters such as keywords don't apply with
+          # it.
+          mode: nil,
           # Only return native reposts.
           native_retweets: nil,
           # Match a place name.
@@ -776,6 +798,8 @@ module XTwitterScraper
               min_replies: Integer,
               min_retweets: Integer,
               min_views: Integer,
+              mode:
+                XTwitterScraper::X::UserRetrieveRepliesParams::Mode::OrSymbol,
               native_retweets: T::Boolean,
               near: String,
               news: T::Boolean,
@@ -980,6 +1004,34 @@ module XTwitterScraper
             override.returns(
               T::Array[
                 XTwitterScraper::X::UserRetrieveRepliesParams::Retweets::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        # Optional legacy pagination override. Filters such as keywords don't apply with
+        # it.
+        module Mode
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, XTwitterScraper::X::UserRetrieveRepliesParams::Mode)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          STANDARD =
+            T.let(
+              :standard,
+              XTwitterScraper::X::UserRetrieveRepliesParams::Mode::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::X::UserRetrieveRepliesParams::Mode::TaggedSymbol
               ]
             )
           end
