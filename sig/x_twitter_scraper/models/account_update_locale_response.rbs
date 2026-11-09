@@ -4,14 +4,22 @@
 
 module XTwitterScraper
   module Models
-    type account_update_locale_response = { success: true }
+    type account_update_locale_response =
+      {
+        success: true,
+        ignored_fields: ::Array[String]
+      }
 
     class AccountUpdateLocaleResponse < XTwitterScraper::Internal::Type::BaseModel
       attr_accessor success: true
 
-      def initialize: (?success: true) -> void
+      attr_reader ignored_fields: ::Array[String]?
 
-      def to_hash: -> { success: true }
+      def ignored_fields=: (::Array[String]) -> ::Array[String]
+
+      def initialize: (?success: true, ?ignored_fields: ::Array[String]) -> void
+
+      def to_hash: -> { success: true, ignored_fields: ::Array[String] }
     end
   end
 end
