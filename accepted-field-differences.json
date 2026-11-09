@@ -2732,11 +2732,7 @@
   {
     "reason": "The SDK's types mark these fields required and the spec does not. The SDK enforces neither when it sends a request, so this shows only in its type signatures.",
     "differences": [
-      "GET /api/v1/x/communities/search request required communityId",
-      "GET /api/v1/x/communities/tweets request required communityId",
-      "GET /api/v1/x/tweets/search request required q",
-      "GET /api/v1/x/users/batch request required ids",
-      "PUT /api/v1/styles/{id} request required label"
+      "POST /api/v1/x/media request required url"
     ]
   },
   {

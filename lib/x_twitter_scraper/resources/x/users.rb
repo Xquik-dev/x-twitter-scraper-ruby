@@ -69,7 +69,7 @@ module XTwitterScraper
 
         # Look up multiple users by IDs in one call
         #
-        # @overload retrieve_batch(ids:, bio_contains: nil, blue_verified_only: nil, business_email_only: nil, email_domains: nil, fields: nil, has_email: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, omit: nil, username_contains: nil, usernames: nil, verified_only: nil, verified_type: nil, request_options: {})
+        # @overload retrieve_batch(ids: nil, bio_contains: nil, blue_verified_only: nil, business_email_only: nil, email_domains: nil, fields: nil, has_email: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, omit: nil, username_contains: nil, usernames: nil, verified_only: nil, verified_type: nil, request_options: {})
         #
         # @param ids [String] Comma-separated numeric user IDs (1-100 values). Duplicate IDs are ignored while
         #
@@ -120,7 +120,7 @@ module XTwitterScraper
         # @return [XTwitterScraper::Models::X::UserRetrieveBatchResponse]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveBatchParams
-        def retrieve_batch(params)
+        def retrieve_batch(params = {})
           parsed, options = XTwitterScraper::X::UserRetrieveBatchParams.dump_request(params)
           query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
           @client.request(

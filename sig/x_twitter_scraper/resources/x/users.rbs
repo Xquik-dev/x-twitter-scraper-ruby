@@ -23,7 +23,7 @@ module XTwitterScraper
         ) -> XTwitterScraper::Models::X::UserRemoveFollowerResponse
 
         def retrieve_batch: (
-          ids: String,
+          ?ids: String,
           ?bio_contains: String,
           ?blue_verified_only: bool,
           ?business_email_only: bool,

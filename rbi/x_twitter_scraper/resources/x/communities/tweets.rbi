@@ -66,7 +66,7 @@ module XTwitterScraper
           end
           def list(
             # Numeric ID of the community to search
-            community_id:,
+            community_id: nil,
             # Keyword query within the selected community
             q:,
             # Words or quoted phrases where any one can match. Separate with spaces, commas,

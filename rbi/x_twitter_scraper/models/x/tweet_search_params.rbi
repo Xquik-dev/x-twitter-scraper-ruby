@@ -20,8 +20,11 @@ module XTwitterScraper
           end
 
         # Query, Tweet ID, or status URL. Valid inline bounds apply per page.
-        sig { returns(String) }
-        attr_accessor :q
+        sig { returns(T.nilable(String)) }
+        attr_reader :q
+
+        sig { params(q: String).void }
+        attr_writer :q
 
         # Raw advanced search query appended as-is.
         sig { returns(T.nilable(String)) }
@@ -615,7 +618,7 @@ module XTwitterScraper
         end
         def self.new(
           # Query, Tweet ID, or status URL. Valid inline bounds apply per page.
-          q:,
+          q: nil,
           # Raw advanced search query appended as-is.
           advanced_query: nil,
           # Words or quoted phrases where any one can match. Separate with spaces, commas,

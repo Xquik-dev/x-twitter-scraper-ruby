@@ -18,13 +18,15 @@ module XTwitterScraper
 
       attr_accessor id: String
 
-      attr_accessor label: String
+      attr_reader label: String?
+
+      def label=: (String) -> String
 
       attr_accessor tweets: ::Array[XTwitterScraper::StyleUpdateParams::Tweet]
 
       def initialize: (
         id: String,
-        label: String,
+        ?label: String,
         tweets: ::Array[XTwitterScraper::StyleUpdateParams::Tweet],
         ?request_options: XTwitterScraper::request_opts
       ) -> void

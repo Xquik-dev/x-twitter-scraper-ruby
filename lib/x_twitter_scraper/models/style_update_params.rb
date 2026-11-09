@@ -19,8 +19,8 @@ module XTwitterScraper
       # @!attribute label
       #   Display label for the style
       #
-      #   @return [String]
-      required :label, String
+      #   @return [String, nil]
+      optional :label, String
 
       # @!attribute tweets
       #   Array of tweet objects
@@ -29,7 +29,7 @@ module XTwitterScraper
       required :tweets,
                -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::StyleUpdateParams::Tweet] }
 
-      # @!method initialize(id:, label:, tweets:, request_options: {})
+      # @!method initialize(id:, label: nil, tweets:, request_options: {})
       #   @param id [String]
       #
       #   @param label [String] Display label for the style

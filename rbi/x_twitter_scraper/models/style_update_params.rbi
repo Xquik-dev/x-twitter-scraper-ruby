@@ -22,8 +22,11 @@ module XTwitterScraper
       attr_accessor :id
 
       # Display label for the style
-      sig { returns(String) }
-      attr_accessor :label
+      sig { returns(T.nilable(String)) }
+      attr_reader :label
+
+      sig { params(label: String).void }
+      attr_writer :label
 
       # Array of tweet objects
       sig { returns(T::Array[XTwitterScraper::StyleUpdateParams::Tweet]) }
@@ -40,7 +43,7 @@ module XTwitterScraper
       def self.new(
         id:,
         # Display label for the style
-        label:,
+        label: nil,
         # Array of tweet objects
         tweets:,
         request_options: {}

@@ -972,7 +972,7 @@ module XTwitterScraper
         end
         def search(
           # Query, Tweet ID, or status URL. Valid inline bounds apply per page.
-          q:,
+          q: nil,
           # Raw advanced search query appended as-is.
           advanced_query: nil,
           # Words or quoted phrases where any one can match. Separate with spaces, commas,

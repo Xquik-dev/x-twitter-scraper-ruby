@@ -36,7 +36,9 @@ module XTwitterScraper
         extend XTwitterScraper::Internal::Type::RequestParameters::Converter
         include XTwitterScraper::Internal::Type::RequestParameters
 
-        attr_accessor ids: String
+        attr_reader ids: String?
+
+        def ids=: (String) -> String
 
         attr_reader bio_contains: String?
 
@@ -123,7 +125,7 @@ module XTwitterScraper
         def verified_type=: (String) -> String
 
         def initialize: (
-          ids: String,
+          ?ids: String,
           ?bio_contains: String,
           ?blue_verified_only: bool,
           ?business_email_only: bool,

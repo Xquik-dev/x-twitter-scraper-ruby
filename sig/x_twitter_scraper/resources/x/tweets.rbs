@@ -270,7 +270,7 @@ module XTwitterScraper
         ) -> XTwitterScraper::PaginatedTweets
 
         def search: (
-          q: String,
+          ?q: String,
           ?advanced_query: String,
           ?any_words: String,
           ?blue_verified_only: bool,
