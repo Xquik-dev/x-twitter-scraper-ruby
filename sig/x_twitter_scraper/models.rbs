@@ -63,9 +63,15 @@ module XTwitterScraper
 
   class ImageFilterSummary = XTwitterScraper::Models::ImageFilterSummary
 
+  class ImageFilteredTweets = XTwitterScraper::Models::ImageFilteredTweets
+
   class ProfileContactInfo = XTwitterScraper::Models::ProfileContactInfo
 
   class ReplyTweet = XTwitterScraper::Models::ReplyTweet
+
+  class TopicFilterSummary = XTwitterScraper::Models::TopicFilterSummary
+
+  class TopicFilteredTweets = XTwitterScraper::Models::TopicFilteredTweets
 
   class TweetAuthorUnavailable = XTwitterScraper::Models::TweetAuthorUnavailable
 

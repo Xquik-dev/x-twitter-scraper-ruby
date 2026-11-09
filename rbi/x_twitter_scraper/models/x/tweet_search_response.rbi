@@ -13,6 +13,8 @@ module XTwitterScraper
         Variants =
           T.type_alias do
             T.any(
+              XTwitterScraper::TopicFilteredTweets,
+              XTwitterScraper::ImageFilteredTweets,
               XTwitterScraper::PaginatedTweets,
               XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse
             )

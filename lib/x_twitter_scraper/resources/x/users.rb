@@ -700,7 +700,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::PaginatedTweets]
+        # @return [XTwitterScraper::Models::TopicFilteredTweets, XTwitterScraper::Models::ImageFilteredTweets, XTwitterScraper::Models::PaginatedTweets]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveMediaParams
         def retrieve_media(id, params = {})
@@ -744,7 +744,7 @@ module XTwitterScraper
               verified_only: "verifiedOnly",
               within_time: "withinTime"
             ),
-            model: XTwitterScraper::PaginatedTweets,
+            model: XTwitterScraper::Models::X::UserRetrieveMediaResponse,
             options: options
           )
         end
@@ -1043,7 +1043,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::PaginatedTweets]
+        # @return [XTwitterScraper::Models::TopicFilteredTweets, XTwitterScraper::Models::ImageFilteredTweets, XTwitterScraper::Models::PaginatedTweets]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveRepliesParams
         def retrieve_replies(id, params = {})
@@ -1095,7 +1095,7 @@ module XTwitterScraper
               verified_only: "verifiedOnly",
               within_time: "withinTime"
             ),
-            model: XTwitterScraper::PaginatedTweets,
+            model: XTwitterScraper::Models::X::UserRetrieveRepliesResponse,
             options: options
           )
         end
@@ -1325,7 +1325,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::PaginatedTweets]
+        # @return [XTwitterScraper::Models::TopicFilteredTweets, XTwitterScraper::Models::ImageFilteredTweets, XTwitterScraper::Models::PaginatedTweets]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveTweetsParams
         def retrieve_tweets(id, params = {})
@@ -1378,7 +1378,7 @@ module XTwitterScraper
               verified_only: "verifiedOnly",
               within_time: "withinTime"
             ),
-            model: XTwitterScraper::PaginatedTweets,
+            model: XTwitterScraper::Models::X::UserRetrieveTweetsResponse,
             options: options
           )
         end
