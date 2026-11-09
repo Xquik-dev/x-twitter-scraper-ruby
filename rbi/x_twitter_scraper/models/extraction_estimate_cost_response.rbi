@@ -104,14 +104,14 @@ module XTwitterScraper
             :collection,
             XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
           )
+        LIKE_COUNT =
+          T.let(
+            :likeCount,
+            XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
+          )
         PAGINATION_CAP =
           T.let(
             :paginationCap,
-            XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
-          )
-        POSTS =
-          T.let(
-            :posts,
             XTwitterScraper::Models::ExtractionEstimateCostResponse::Source::TaggedSymbol
           )
         QUOTE_COUNT =
