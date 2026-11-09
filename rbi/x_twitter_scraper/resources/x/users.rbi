@@ -583,7 +583,7 @@ module XTwitterScraper
           mentioning: nil,
           # Minimum bookmark count threshold.
           min_bookmarks: nil,
-          # Minimum likes threshold. minLikes is also accepted.
+          # Deprecated alias of min_likes, sent as minLikes.
           min_faves: nil,
           # Minimum likes. Its aliases are minFaves, min_likes & min_faves.
           min_likes: nil,
@@ -746,7 +746,7 @@ module XTwitterScraper
           mentioning: nil,
           # Minimum bookmark count threshold.
           min_bookmarks: nil,
-          # Minimum likes threshold. minLikes is also accepted.
+          # Deprecated alias of min_likes, sent as minLikes.
           min_faves: nil,
           # Minimum likes. Its aliases are minFaves, min_likes & min_faves.
           min_likes: nil,
@@ -906,7 +906,7 @@ module XTwitterScraper
           mentioning: nil,
           # Minimum bookmark count threshold.
           min_bookmarks: nil,
-          # Minimum likes threshold. minLikes is also accepted.
+          # Deprecated alias of min_likes, sent as minLikes.
           min_faves: nil,
           # Minimum likes. Its aliases are minFaves, min_likes & min_faves.
           min_likes: nil,
@@ -1111,7 +1111,7 @@ module XTwitterScraper
           mentioning: nil,
           # Minimum bookmark count threshold.
           min_bookmarks: nil,
-          # Minimum likes threshold. minLikes is also accepted.
+          # Deprecated alias of min_likes, sent as minLikes.
           min_faves: nil,
           # Minimum likes. Its aliases are minFaves, min_likes & min_faves.
           min_likes: nil,
@@ -1440,7 +1440,7 @@ module XTwitterScraper
           mentioning: nil,
           # Minimum bookmark count threshold.
           min_bookmarks: nil,
-          # Minimum likes threshold. minLikes is also accepted.
+          # Deprecated alias of min_likes, sent as minLikes.
           min_faves: nil,
           # Minimum likes. Its aliases are minFaves, min_likes & min_faves.
           min_likes: nil,

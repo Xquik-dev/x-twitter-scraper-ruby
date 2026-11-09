@@ -211,11 +211,16 @@ class CheckApiFieldsTest < Minitest::Test
     write_file(File.join(@root, ACCEPTED_FILE), JSON.generate(groups))
   end
 
-  def run_check(spec = document, source: nil, resources: @resources)
+  def run_check(spec = document, source: nil, resources: @resources, ceiling: ApiFieldsCheck::ACCEPTED_CEILING)
     write_file(@spec_path, JSON.generate(spec))
     status = nil
     stdout, stderr = capture_io do
-      status = ApiFieldsCheck.main(source: source || @spec_path, root: @root, resources: resources)
+      status = ApiFieldsCheck.main(
+        source: source || @spec_path,
+        root: @root,
+        resources: resources,
+        ceiling: ceiling
+      )
     end
     [status, stdout, stderr.lines(chomp: true)]
   end
@@ -396,6 +401,15 @@ class CheckApiFieldsTest < Minitest::Test
     spec = edited { operation(_1)["parameters"] << string_query("sort") }
 
     assert_equal(0, run_check(spec).first)
+  end
+
+  def test_a_list_longer_than_its_ceiling_fails
+    write_accepted([{"reason" => "Kept on purpose.", "differences" => ["#{OPERATION} request missing sort"]}])
+    spec = edited { operation(_1)["parameters"] << string_query("sort") }
+
+    assert_equal(0, run_check(spec, ceiling: 1).first)
+    grown = "#{ACCEPTED_FILE} lists 1 accepted difference, more than the 0 it may hold."
+    assert_equal([1, "", [grown, ApiFieldsCheck::GROWN_NEXT]], run_check(spec, ceiling: 0))
   end
 
   def test_a_stale_acceptance_fails
@@ -648,6 +662,16 @@ class CheckApiFieldsTest < Minitest::Test
 
     assert_kind_of(Hash, accepted)
     assert_empty(accepted.values.grep_v(ApiFieldsCheck::DIFFERENCE))
+  end
+
+  def test_the_ceiling_falls_with_the_repository_list
+    accepted = ApiFieldsCheck.read_accepted(ScriptSupport::ROOT)
+
+    assert_equal(
+      accepted.length,
+      ApiFieldsCheck::ACCEPTED_CEILING,
+      "Lower ACCEPTED_CEILING in scripts/check_api_fields.rb to #{accepted.length}."
+    )
   end
 
   def run_script(source)

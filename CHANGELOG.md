@@ -15,6 +15,10 @@
 * A successful connection attempt names the connected account's `account_id`.
 * Enums gain the values the API now serves. Write actions gain `:block`, `:bookmark`, `:delete_dm`, `:mute`, `:unblock`, `:unbookmark` and `:unmute`. `EventType` gains the deleted post, live video, Space, following, follower and count events. `Locale` gains `:zh`, `:ja` and `:ko`. Event monitor types gain `:post`. Extraction query types gain `:relevance`, and extraction statuses gain `:pending` and `:canceled`. Monitor pause reasons gain `:x_account_protected` and `:insufficient_credits`. Reply stop reasons gain `:partial_view`, `:window_covered` and `:window_passed`.
 
+### Bug fixes
+
+* `min_faves` on the 9 tweet list methods, such as `x.tweets.search` and `x.users.retrieve_tweets`, is sent as `minLikes`, the name the API documents. It stays as a deprecated alias of `min_likes`, so calls that pass it keep working. When a call passes both, the later one wins.
+
 ## 0.10.6 (2026-10-14)
 
 [Full changelog from v0.10.5 to v0.10.6](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.5...v0.10.6)
