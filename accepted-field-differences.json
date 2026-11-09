@@ -29,8 +29,6 @@
       "GET /api/v1/x/tweets/search response missing topicFilter",
       "GET /api/v1/x/tweets/search response missing tweets[].imageScore",
       "GET /api/v1/x/tweets/search response missing tweets[].topicScore",
-      "GET /api/v1/x/tweets/{id}/replies response missing nested_replies[].hiddenByAuthor",
-      "GET /api/v1/x/tweets/{id}/replies response missing tweets[].hiddenByAuthor",
       "GET /api/v1/x/users/{id}/followers response missing scanLimit",
       "GET /api/v1/x/users/{id}/following response missing scanLimit",
       "GET /api/v1/x/users/{id}/media response missing imageFilter",
