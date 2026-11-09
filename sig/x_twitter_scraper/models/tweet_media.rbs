@@ -13,6 +13,40 @@ module XTwitterScraper
 
       attr_accessor url: String
 
+      attr_reader adult_content: bool?
+
+      def adult_content=: (bool) -> bool
+
+      attr_reader availability_reason: String?
+
+      def availability_reason=: (String) -> String
+
+      attr_reader description: String?
+
+      def description=: (String) -> String
+
+      attr_reader edited_with_native_editor: bool?
+
+      def edited_with_native_editor=: (bool) -> bool
+
+      attr_reader embeddable: bool?
+
+      def embeddable=: (bool) -> bool
+
+      attr_reader graphic_violence: bool?
+
+      def graphic_violence=: (bool) -> bool
+
+      attr_reader grok_image_annotation: XTwitterScraper::TweetMedia::GrokImageAnnotation?
+
+      def grok_image_annotation=: (
+        XTwitterScraper::TweetMedia::GrokImageAnnotation | ::Hash[Symbol, top]
+      ) -> XTwitterScraper::TweetMedia::GrokImageAnnotation
+
+      attr_reader grok_post_id: String?
+
+      def grok_post_id=: (String) -> String
+
       attr_reader id: String?
 
       def id=: (String) -> String
@@ -73,17 +107,53 @@ module XTwitterScraper
 
       def monetizable=: (bool) -> bool
 
+      attr_reader other_sensitive_content: bool?
+
+      def other_sensitive_content=: (bool) -> bool
+
       attr_reader sizes: ::Hash[Symbol, XTwitterScraper::TweetMedia::Size]?
 
       def sizes=: (
         ::Hash[Symbol, XTwitterScraper::TweetMedia::Size]
       ) -> ::Hash[Symbol, XTwitterScraper::TweetMedia::Size]
 
+      attr_reader source_status_id: String?
+
+      def source_status_id=: (String) -> String
+
+      attr_reader source_user: XTwitterScraper::UserProfile?
+
+      def source_user=: (
+        XTwitterScraper::UserProfile | ::Hash[Symbol, top]
+      ) -> XTwitterScraper::UserProfile
+
+      attr_reader source_user_id: String?
+
+      def source_user_id=: (String) -> String
+
+      attr_reader tags: ::Array[XTwitterScraper::TweetMedia::Tag]?
+
+      def tags=: (
+        ::Array[XTwitterScraper::TweetMedia::Tag | ::Hash[Symbol, top]]
+      ) -> ::Array[XTwitterScraper::TweetMedia::Tag]
+
+      attr_reader title: String?
+
+      def title=: (String) -> String
+
       attr_reader video_variants: ::Array[XTwitterScraper::TweetMedia::VideoVariant]?
 
       def video_variants=: (
         ::Array[XTwitterScraper::TweetMedia::VideoVariant]
       ) -> ::Array[XTwitterScraper::TweetMedia::VideoVariant]
+
+      attr_reader visit_site_url: String?
+
+      def visit_site_url=: (String) -> String
+
+      attr_reader watch_now_url: String?
+
+      def watch_now_url=: (String) -> String
 
       attr_reader width: Integer?
 
@@ -93,6 +163,14 @@ module XTwitterScraper
         media_url: String,
         type: XTwitterScraper::Models::TweetMedia::type_,
         url: String,
+        ?adult_content: bool,
+        ?availability_reason: String,
+        ?description: String,
+        ?edited_with_native_editor: bool,
+        ?embeddable: bool,
+        ?graphic_violence: bool,
+        ?grok_image_annotation: XTwitterScraper::TweetMedia::GrokImageAnnotation | ::Hash[Symbol, top],
+        ?grok_post_id: String,
         ?id: String,
         ?allow_download: bool,
         ?alt_text: String,
@@ -107,8 +185,16 @@ module XTwitterScraper
         ?indices: ::Array[Integer],
         ?media_key: String,
         ?monetizable: bool,
+        ?other_sensitive_content: bool,
         ?sizes: ::Hash[Symbol, XTwitterScraper::TweetMedia::Size],
+        ?source_status_id: String,
+        ?source_user: XTwitterScraper::UserProfile | ::Hash[Symbol, top],
+        ?source_user_id: String,
+        ?tags: ::Array[XTwitterScraper::TweetMedia::Tag | ::Hash[Symbol, top]],
+        ?title: String,
         ?video_variants: ::Array[XTwitterScraper::TweetMedia::VideoVariant],
+        ?visit_site_url: String,
+        ?watch_now_url: String,
         ?width: Integer
       ) -> void
 
@@ -198,6 +284,51 @@ module XTwitterScraper
           content_type: String,
           url: String,
           ?bitrate: Integer
+        ) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
+      end
+
+      type grok_image_annotation = ::Hash[Symbol, top]
+
+      class GrokImageAnnotation < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader prompt: String?
+
+        def prompt=: (String) -> String
+
+        attr_reader upsampled_prompt: String?
+
+        def upsampled_prompt=: (String) -> String
+
+        def initialize: (?prompt: String, ?upsampled_prompt: String) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
+      end
+
+      type tag = ::Hash[Symbol, top]
+
+      class Tag < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_reader screen_name: String?
+
+        def screen_name=: (String) -> String
+
+        attr_reader type: String?
+
+        def type=: (String) -> String
+
+        attr_reader user_id: String?
+
+        def user_id=: (String) -> String
+
+        def initialize: (
+          ?name: String,
+          ?screen_name: String,
+          ?type: String,
+          ?user_id: String
         ) -> void
 
         def to_hash: -> ::Hash[Symbol, top]

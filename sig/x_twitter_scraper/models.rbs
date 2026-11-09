@@ -63,6 +63,18 @@ module XTwitterScraper
 
   class ProfileContactInfo = XTwitterScraper::Models::ProfileContactInfo
 
+  class TweetAuthorUnavailable = XTwitterScraper::Models::TweetAuthorUnavailable
+
+  class TweetExclusiveContent = XTwitterScraper::Models::TweetExclusiveContent
+
+  class TweetInterstitial = XTwitterScraper::Models::TweetInterstitial
+
+  class TweetPoint = XTwitterScraper::Models::TweetPoint
+
+  class TweetSubscriberBadge = XTwitterScraper::Models::TweetSubscriberBadge
+
+  class TweetTombstone = XTwitterScraper::Models::TweetTombstone
+
   class UserTipJar = XTwitterScraper::Models::UserTipJar
 
   module EventType = XTwitterScraper::Models::EventType

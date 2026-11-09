@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type tweet_author_unavailable = ::Hash[Symbol, top]
+
+    class TweetAuthorUnavailable < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor reason: String
+
+      attr_reader message: String?
+
+      def message=: (String) -> String
+
+      def initialize: (reason: String, ?message: String) -> void
+
+      def to_hash: -> ::Hash[Symbol, top]
+    end
+  end
+end

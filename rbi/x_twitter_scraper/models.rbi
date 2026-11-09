@@ -142,7 +142,19 @@ module XTwitterScraper
 
   TrendListParams = XTwitterScraper::Models::TrendListParams
 
+  TweetAuthorUnavailable = XTwitterScraper::Models::TweetAuthorUnavailable
+
+  TweetExclusiveContent = XTwitterScraper::Models::TweetExclusiveContent
+
+  TweetInterstitial = XTwitterScraper::Models::TweetInterstitial
+
   TweetMedia = XTwitterScraper::Models::TweetMedia
+
+  TweetPoint = XTwitterScraper::Models::TweetPoint
+
+  TweetSubscriberBadge = XTwitterScraper::Models::TweetSubscriberBadge
+
+  TweetTombstone = XTwitterScraper::Models::TweetTombstone
 
   UserProfile = XTwitterScraper::Models::UserProfile
 

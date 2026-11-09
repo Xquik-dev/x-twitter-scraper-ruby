@@ -23,6 +23,71 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :url
 
+      # Adult-content warning.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :adult_content
+
+      sig { params(adult_content: T::Boolean).void }
+      attr_writer :adult_content
+
+      # Why X made the media unavailable, such as `Dmcaed` after a copyright report.
+      # Omitted on available media.
+      sig { returns(T.nilable(String)) }
+      attr_reader :availability_reason
+
+      sig { params(availability_reason: String).void }
+      attr_writer :availability_reason
+
+      # Media description.
+      sig { returns(T.nilable(String)) }
+      attr_reader :description
+
+      sig { params(description: String).void }
+      attr_writer :description
+
+      # True when the author edited this media in X's own editor before posting. Absent
+      # when X sends no editor info.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :edited_with_native_editor
+
+      sig { params(edited_with_native_editor: T::Boolean).void }
+      attr_writer :edited_with_native_editor
+
+      # Embeddable status.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :embeddable
+
+      sig { params(embeddable: T::Boolean).void }
+      attr_writer :embeddable
+
+      # Graphic-violence warning.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :graphic_violence
+
+      sig { params(graphic_violence: T::Boolean).void }
+      attr_writer :graphic_violence
+
+      # Prompt a Grok image came from. Absent on other media & when X sends no prompt.
+      sig do
+        returns(T.nilable(XTwitterScraper::TweetMedia::GrokImageAnnotation))
+      end
+      attr_reader :grok_image_annotation
+
+      sig do
+        params(
+          grok_image_annotation:
+            XTwitterScraper::TweetMedia::GrokImageAnnotation::OrHash
+        ).void
+      end
+      attr_writer :grok_image_annotation
+
+      # Grok post ID associated with the media.
+      sig { returns(T.nilable(String)) }
+      attr_reader :grok_post_id
+
+      sig { params(grok_post_id: String).void }
+      attr_writer :grok_post_id
+
       # X media entity ID.
       sig { returns(T.nilable(String)) }
       attr_reader :id
@@ -141,6 +206,12 @@ module XTwitterScraper
       sig { params(monetizable: T::Boolean).void }
       attr_writer :monetizable
 
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :other_sensitive_content
+
+      sig { params(other_sensitive_content: T::Boolean).void }
+      attr_writer :other_sensitive_content
+
       # Named media renditions and resize modes.
       sig do
         returns(T.nilable(T::Hash[Symbol, XTwitterScraper::TweetMedia::Size]))
@@ -153,6 +224,44 @@ module XTwitterScraper
         ).void
       end
       attr_writer :sizes
+
+      # Source tweet ID for copied media.
+      sig { returns(T.nilable(String)) }
+      attr_reader :source_status_id
+
+      sig { params(source_status_id: String).void }
+      attr_writer :source_status_id
+
+      # The account that first posted the media. Some reads carry only its name, picture
+      # & badges.
+      sig { returns(T.nilable(XTwitterScraper::UserProfile)) }
+      attr_reader :source_user
+
+      sig { params(source_user: XTwitterScraper::UserProfile::OrHash).void }
+      attr_writer :source_user
+
+      # Source profile ID for copied media.
+      sig { returns(T.nilable(String)) }
+      attr_reader :source_user_id
+
+      sig { params(source_user_id: String).void }
+      attr_writer :source_user_id
+
+      # Public profiles tagged in the media.
+      sig { returns(T.nilable(T::Array[XTwitterScraper::TweetMedia::Tag])) }
+      attr_reader :tags
+
+      sig do
+        params(tags: T::Array[XTwitterScraper::TweetMedia::Tag::OrHash]).void
+      end
+      attr_writer :tags
+
+      # Media title.
+      sig { returns(T.nilable(String)) }
+      attr_reader :title
+
+      sig { params(title: String).void }
+      attr_writer :title
 
       # Available video encodings, ordered as returned
       sig do
@@ -168,6 +277,20 @@ module XTwitterScraper
       end
       attr_writer :video_variants
 
+      # Public destination URL.
+      sig { returns(T.nilable(String)) }
+      attr_reader :visit_site_url
+
+      sig { params(visit_site_url: String).void }
+      attr_writer :visit_site_url
+
+      # Public media action URL.
+      sig { returns(T.nilable(String)) }
+      attr_reader :watch_now_url
+
+      sig { params(watch_now_url: String).void }
+      attr_writer :watch_now_url
+
       # Original media width.
       sig { returns(T.nilable(Integer)) }
       attr_reader :width
@@ -181,6 +304,15 @@ module XTwitterScraper
           media_url: String,
           type: XTwitterScraper::TweetMedia::Type::OrSymbol,
           url: String,
+          adult_content: T::Boolean,
+          availability_reason: String,
+          description: String,
+          edited_with_native_editor: T::Boolean,
+          embeddable: T::Boolean,
+          graphic_violence: T::Boolean,
+          grok_image_annotation:
+            XTwitterScraper::TweetMedia::GrokImageAnnotation::OrHash,
+          grok_post_id: String,
           id: String,
           allow_download: T::Boolean,
           alt_text: String,
@@ -199,9 +331,17 @@ module XTwitterScraper
           indices: T::Array[Integer],
           media_key: String,
           monetizable: T::Boolean,
+          other_sensitive_content: T::Boolean,
           sizes: T::Hash[Symbol, XTwitterScraper::TweetMedia::Size::OrHash],
+          source_status_id: String,
+          source_user: XTwitterScraper::UserProfile::OrHash,
+          source_user_id: String,
+          tags: T::Array[XTwitterScraper::TweetMedia::Tag::OrHash],
+          title: String,
           video_variants:
             T::Array[XTwitterScraper::TweetMedia::VideoVariant::OrHash],
+          visit_site_url: String,
+          watch_now_url: String,
           width: Integer
         ).returns(T.attached_class)
       end
@@ -211,6 +351,24 @@ module XTwitterScraper
         type:,
         # X media link from the tweet
         url:,
+        # Adult-content warning.
+        adult_content: nil,
+        # Why X made the media unavailable, such as `Dmcaed` after a copyright report.
+        # Omitted on available media.
+        availability_reason: nil,
+        # Media description.
+        description: nil,
+        # True when the author edited this media in X's own editor before posting. Absent
+        # when X sends no editor info.
+        edited_with_native_editor: nil,
+        # Embeddable status.
+        embeddable: nil,
+        # Graphic-violence warning.
+        graphic_violence: nil,
+        # Prompt a Grok image came from. Absent on other media & when X sends no prompt.
+        grok_image_annotation: nil,
+        # Grok post ID associated with the media.
+        grok_post_id: nil,
         # X media entity ID.
         id: nil,
         # Whether X permits direct media download.
@@ -239,10 +397,26 @@ module XTwitterScraper
         media_key: nil,
         # Whether X reports the media as monetizable.
         monetizable: nil,
+        other_sensitive_content: nil,
         # Named media renditions and resize modes.
         sizes: nil,
+        # Source tweet ID for copied media.
+        source_status_id: nil,
+        # The account that first posted the media. Some reads carry only its name, picture
+        # & badges.
+        source_user: nil,
+        # Source profile ID for copied media.
+        source_user_id: nil,
+        # Public profiles tagged in the media.
+        tags: nil,
+        # Media title.
+        title: nil,
         # Available video encodings, ordered as returned
         video_variants: nil,
+        # Public destination URL.
+        visit_site_url: nil,
+        # Public media action URL.
+        watch_now_url: nil,
         # Original media width.
         width: nil
       )
@@ -254,6 +428,15 @@ module XTwitterScraper
             media_url: String,
             type: XTwitterScraper::TweetMedia::Type::TaggedSymbol,
             url: String,
+            adult_content: T::Boolean,
+            availability_reason: String,
+            description: String,
+            edited_with_native_editor: T::Boolean,
+            embeddable: T::Boolean,
+            graphic_violence: T::Boolean,
+            grok_image_annotation:
+              XTwitterScraper::TweetMedia::GrokImageAnnotation,
+            grok_post_id: String,
             id: String,
             allow_download: T::Boolean,
             alt_text: String,
@@ -269,8 +452,16 @@ module XTwitterScraper
             indices: T::Array[Integer],
             media_key: String,
             monetizable: T::Boolean,
+            other_sensitive_content: T::Boolean,
             sizes: T::Hash[Symbol, XTwitterScraper::TweetMedia::Size],
+            source_status_id: String,
+            source_user: XTwitterScraper::UserProfile,
+            source_user_id: String,
+            tags: T::Array[XTwitterScraper::TweetMedia::Tag],
+            title: String,
             video_variants: T::Array[XTwitterScraper::TweetMedia::VideoVariant],
+            visit_site_url: String,
+            watch_now_url: String,
             width: Integer
           }
         )
@@ -434,6 +625,101 @@ module XTwitterScraper
         sig do
           override.returns(
             { content_type: String, url: String, bitrate: Integer }
+          )
+        end
+        def to_hash
+        end
+      end
+
+      class GrokImageAnnotation < XTwitterScraper::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              XTwitterScraper::TweetMedia::GrokImageAnnotation,
+              XTwitterScraper::Internal::AnyHash
+            )
+          end
+
+        # Prompt the image came from.
+        sig { returns(T.nilable(String)) }
+        attr_reader :prompt
+
+        sig { params(prompt: String).void }
+        attr_writer :prompt
+
+        # Grok's longer rewrite of the prompt.
+        sig { returns(T.nilable(String)) }
+        attr_reader :upsampled_prompt
+
+        sig { params(upsampled_prompt: String).void }
+        attr_writer :upsampled_prompt
+
+        # Prompt a Grok image came from. Absent on other media & when X sends no prompt.
+        sig do
+          params(prompt: String, upsampled_prompt: String).returns(
+            T.attached_class
+          )
+        end
+        def self.new(
+          # Prompt the image came from.
+          prompt: nil,
+          # Grok's longer rewrite of the prompt.
+          upsampled_prompt: nil
+        )
+        end
+
+        sig { override.returns({ prompt: String, upsampled_prompt: String }) }
+        def to_hash
+        end
+      end
+
+      class Tag < XTwitterScraper::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              XTwitterScraper::TweetMedia::Tag,
+              XTwitterScraper::Internal::AnyHash
+            )
+          end
+
+        sig { returns(T.nilable(String)) }
+        attr_reader :name
+
+        sig { params(name: String).void }
+        attr_writer :name
+
+        sig { returns(T.nilable(String)) }
+        attr_reader :screen_name
+
+        sig { params(screen_name: String).void }
+        attr_writer :screen_name
+
+        sig { returns(T.nilable(String)) }
+        attr_reader :type
+
+        sig { params(type: String).void }
+        attr_writer :type
+
+        sig { returns(T.nilable(String)) }
+        attr_reader :user_id
+
+        sig { params(user_id: String).void }
+        attr_writer :user_id
+
+        sig do
+          params(
+            name: String,
+            screen_name: String,
+            type: String,
+            user_id: String
+          ).returns(T.attached_class)
+        end
+        def self.new(name: nil, screen_name: nil, type: nil, user_id: nil)
+        end
+
+        sig do
+          override.returns(
+            { name: String, screen_name: String, type: String, user_id: String }
           )
         end
         def to_hash

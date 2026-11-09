@@ -1,0 +1,114 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type tweet_tombstone = ::Hash[Symbol, top]
+
+    class TweetTombstone < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader type: String?
+
+      def type=: (String) -> String
+
+      attr_reader text: XTwitterScraper::TweetTombstone::Text?
+
+      def text=: (
+        XTwitterScraper::TweetTombstone::Text | ::Hash[Symbol, top]
+      ) -> XTwitterScraper::TweetTombstone::Text
+
+      def initialize: (
+        ?type: String,
+        ?text: XTwitterScraper::TweetTombstone::Text | ::Hash[Symbol, top]
+      ) -> void
+
+      def to_hash: -> ::Hash[Symbol, top]
+
+      type text = ::Hash[Symbol, top]
+
+      class Text < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader text: String?
+
+        def text=: (String) -> String
+
+        attr_reader rtl: bool?
+
+        def rtl=: (bool) -> bool
+
+        attr_reader entities: ::Array[XTwitterScraper::TweetTombstone::Text::Entity]?
+
+        def entities=: (
+          ::Array[XTwitterScraper::TweetTombstone::Text::Entity | ::Hash[Symbol, top]]
+        ) -> ::Array[XTwitterScraper::TweetTombstone::Text::Entity]
+
+        def initialize: (
+          ?text: String,
+          ?rtl: bool,
+          ?entities: ::Array[XTwitterScraper::TweetTombstone::Text::Entity | ::Hash[Symbol, top]]
+        ) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
+
+        type entity = ::Hash[Symbol, top]
+
+        class Entity < XTwitterScraper::Internal::Type::BaseModel
+          attr_reader from_index: Integer?
+
+          def from_index=: (Integer) -> Integer
+
+          attr_reader to_index: Integer?
+
+          def to_index=: (Integer) -> Integer
+
+          attr_reader ref: XTwitterScraper::TweetTombstone::Text::Entity::Ref?
+
+          def ref=: (
+            XTwitterScraper::TweetTombstone::Text::Entity::Ref | ::Hash[Symbol, top]
+          ) -> XTwitterScraper::TweetTombstone::Text::Entity::Ref
+
+          def initialize: (
+            ?from_index: Integer,
+            ?to_index: Integer,
+            ?ref: XTwitterScraper::TweetTombstone::Text::Entity::Ref | ::Hash[Symbol, top]
+          ) -> void
+
+          def to_hash: -> ::Hash[Symbol, top]
+
+          type ref = ::Hash[Symbol, top]
+
+          class Ref < XTwitterScraper::Internal::Type::BaseModel
+            attr_reader type: String?
+
+            def type=: (String) -> String
+
+            attr_reader url: String?
+
+            def url=: (String) -> String
+
+            attr_reader url_type: String?
+
+            def url_type=: (String) -> String
+
+            attr_reader text: String?
+
+            def text=: (String) -> String
+
+            attr_reader screen_name: String?
+
+            def screen_name=: (String) -> String
+
+            def initialize: (
+              ?type: String,
+              ?url: String,
+              ?url_type: String,
+              ?text: String,
+              ?screen_name: String
+            ) -> void
+
+            def to_hash: -> ::Hash[Symbol, top]
+          end
+        end
+      end
+    end
+  end
+end
