@@ -259,6 +259,12 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :profile_picture, String, api_name: :profilePicture
 
+        # @!attribute profile_picture_original
+        #   The same profile picture at full size.
+        #
+        #   @return [String, nil]
+        optional :profile_picture_original, String, api_name: :profilePictureOriginal
+
         # @!attribute protected
         #
         #   @return [Boolean, nil]
@@ -274,7 +280,7 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :url, String
 
-        # @!method initialize(id:, name:, username:, created_at: nil, description: nil, favourites_count: nil, followers_count: nil, following_count: nil, is_blue_verified: nil, is_translator: nil, is_verified: nil, location: nil, media_count: nil, profile_banner_url: nil, profile_picture: nil, protected: nil, statuses_count: nil, url: nil)
+        # @!method initialize(id:, name:, username:, created_at: nil, description: nil, favourites_count: nil, followers_count: nil, following_count: nil, is_blue_verified: nil, is_translator: nil, is_verified: nil, location: nil, media_count: nil, profile_banner_url: nil, profile_picture: nil, profile_picture_original: nil, protected: nil, statuses_count: nil, url: nil)
         #   X Article author profile fields returned when available.
         #
         #   @param id [String]
@@ -292,6 +298,7 @@ module XTwitterScraper
         #   @param media_count [Integer]
         #   @param profile_banner_url [String]
         #   @param profile_picture [String]
+        #   @param profile_picture_original [String] The same profile picture at full size.
         #   @param protected [Boolean]
         #   @param statuses_count [Integer]
         #   @param url [String]

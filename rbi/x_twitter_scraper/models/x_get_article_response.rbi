@@ -460,6 +460,13 @@ module XTwitterScraper
         sig { params(profile_picture: String).void }
         attr_writer :profile_picture
 
+        # The same profile picture at full size.
+        sig { returns(T.nilable(String)) }
+        attr_reader :profile_picture_original
+
+        sig { params(profile_picture_original: String).void }
+        attr_writer :profile_picture_original
+
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :protected
 
@@ -496,6 +503,7 @@ module XTwitterScraper
             media_count: Integer,
             profile_banner_url: String,
             profile_picture: String,
+            profile_picture_original: String,
             protected: T::Boolean,
             statuses_count: Integer,
             url: String
@@ -517,6 +525,8 @@ module XTwitterScraper
           media_count: nil,
           profile_banner_url: nil,
           profile_picture: nil,
+          # The same profile picture at full size.
+          profile_picture_original: nil,
           protected: nil,
           statuses_count: nil,
           url: nil
@@ -541,6 +551,7 @@ module XTwitterScraper
               media_count: Integer,
               profile_banner_url: String,
               profile_picture: String,
+              profile_picture_original: String,
               protected: T::Boolean,
               statuses_count: Integer,
               url: String
