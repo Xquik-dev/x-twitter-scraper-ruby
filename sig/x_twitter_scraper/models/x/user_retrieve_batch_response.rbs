@@ -7,6 +7,7 @@ module XTwitterScraper
     module X
       type user_retrieve_batch_response =
         {
+          failed_ids: ::Array[String],
           has_next_page: false,
           next_cursor: String,
           processed_count: Integer,
@@ -14,10 +15,13 @@ module XTwitterScraper
           returned_count: Integer,
           unavailable_ids: ::Array[String],
           unprocessed_ids: ::Array[String],
-          users: ::Array[XTwitterScraper::UserProfile]
+          users: ::Array[XTwitterScraper::UserProfile],
+          filtered_count: Integer
         }
 
       class UserRetrieveBatchResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor failed_ids: ::Array[String]
+
         attr_accessor has_next_page: false
 
         attr_accessor next_cursor: String
@@ -34,6 +38,10 @@ module XTwitterScraper
 
         attr_accessor users: ::Array[XTwitterScraper::UserProfile]
 
+        attr_reader filtered_count: Integer?
+
+        def filtered_count=: (Integer) -> Integer
+
         def initialize: (
           next_cursor: String,
           processed_count: Integer,
@@ -42,10 +50,13 @@ module XTwitterScraper
           unavailable_ids: ::Array[String],
           unprocessed_ids: ::Array[String],
           users: ::Array[XTwitterScraper::UserProfile],
-          ?has_next_page: false
+          failed_ids: ::Array[String],
+          ?has_next_page: false,
+          ?filtered_count: Integer
         ) -> void
 
         def to_hash: -> {
+          failed_ids: ::Array[String],
           has_next_page: false,
           next_cursor: String,
           processed_count: Integer,
@@ -53,7 +64,8 @@ module XTwitterScraper
           returned_count: Integer,
           unavailable_ids: ::Array[String],
           unprocessed_ids: ::Array[String],
-          users: ::Array[XTwitterScraper::UserProfile]
+          users: ::Array[XTwitterScraper::UserProfile],
+          filtered_count: Integer
         }
       end
     end

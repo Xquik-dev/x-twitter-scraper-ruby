@@ -16,6 +16,11 @@ module XTwitterScraper
             )
           end
 
+        # Processed IDs that failed to load, in first-seen request order. They cost
+        # nothing. Retry them.
+        sig { returns(T::Array[String]) }
+        attr_accessor :failed_ids
+
         # Batch lookups never paginate.
         sig { returns(T::Boolean) }
         attr_accessor :has_next_page
@@ -48,6 +53,13 @@ module XTwitterScraper
         sig { returns(T::Array[XTwitterScraper::UserProfile]) }
         attr_accessor :users
 
+        # Profiles rejected by the requested filters.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :filtered_count
+
+        sig { params(filtered_count: Integer).void }
+        attr_writer :filtered_count
+
         # Batch user lookup results. Duplicate requested IDs are ignored while preserving
         # first-seen order. unavailable_ids identifies processed IDs with no returned
         # profile. unprocessed_ids identifies IDs skipped when available credits limit
@@ -61,7 +73,9 @@ module XTwitterScraper
             unavailable_ids: T::Array[String],
             unprocessed_ids: T::Array[String],
             users: T::Array[XTwitterScraper::UserProfile::OrHash],
-            has_next_page: T::Boolean
+            failed_ids: T::Array[String],
+            has_next_page: T::Boolean,
+            filtered_count: Integer
           ).returns(T.attached_class)
         end
         def self.new(
@@ -79,14 +93,20 @@ module XTwitterScraper
           # IDs after adding credits.
           unprocessed_ids:,
           users:,
+          # Processed IDs that failed to load, in first-seen request order. They cost
+          # nothing. Retry them.
+          failed_ids:,
           # Batch lookups never paginate.
-          has_next_page: false
+          has_next_page: false,
+          # Profiles rejected by the requested filters.
+          filtered_count: nil
         )
         end
 
         sig do
           override.returns(
             {
+              failed_ids: T::Array[String],
               has_next_page: T::Boolean,
               next_cursor: String,
               processed_count: Integer,
@@ -94,7 +114,8 @@ module XTwitterScraper
               returned_count: Integer,
               unavailable_ids: T::Array[String],
               unprocessed_ids: T::Array[String],
-              users: T::Array[XTwitterScraper::UserProfile]
+              users: T::Array[XTwitterScraper::UserProfile],
+              filtered_count: Integer
             }
           )
         end

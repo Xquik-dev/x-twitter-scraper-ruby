@@ -74,8 +74,6 @@
       "GET /api/v1/x/tweets/{id}/replies response missing diagnostic.strategiesAttempted[].newDirectReplyPages",
       "GET /api/v1/x/tweets/{id}/replies response missing nested_replies[].hiddenByAuthor",
       "GET /api/v1/x/tweets/{id}/replies response missing tweets[].hiddenByAuthor",
-      "GET /api/v1/x/users/batch response missing failed_ids",
-      "GET /api/v1/x/users/batch response missing filtered_count",
       "GET /api/v1/x/users/{id}/followers response missing scanLimit",
       "GET /api/v1/x/users/{id}/following response missing scanLimit",
       "GET /api/v1/x/users/{id}/media response missing imageFilter",

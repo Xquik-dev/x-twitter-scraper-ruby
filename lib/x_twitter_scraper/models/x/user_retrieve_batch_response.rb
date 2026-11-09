@@ -9,6 +9,13 @@ module XTwitterScraper
     module X
       # @see XTwitterScraper::Resources::X::Users#retrieve_batch
       class UserRetrieveBatchResponse < XTwitterScraper::Internal::Type::BaseModel
+        # @!attribute failed_ids
+        #   Processed IDs that failed to load, in first-seen request order. They cost
+        #   nothing. Retry them.
+        #
+        #   @return [Array<String>]
+        required :failed_ids, XTwitterScraper::Internal::Type::ArrayOf[String]
+
         # @!attribute has_next_page
         #   Batch lookups never paginate.
         #
@@ -57,7 +64,13 @@ module XTwitterScraper
         #   @return [Array<XTwitterScraper::Models::UserProfile>]
         required :users, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile] }
 
-        # @!method initialize(next_cursor:, processed_count:, requested_count:, returned_count:, unavailable_ids:, unprocessed_ids:, users:, has_next_page: false)
+        # @!attribute filtered_count
+        #   Profiles rejected by the requested filters.
+        #
+        #   @return [Integer, nil]
+        optional :filtered_count, Integer
+
+        # @!method initialize(failed_ids:, has_next_page: false, next_cursor:, processed_count:, requested_count:, returned_count:, unavailable_ids:, unprocessed_ids:, users:, filtered_count: nil)
         #   Batch user lookup results. Duplicate requested IDs are ignored while preserving
         #   first-seen order. unavailable_ids identifies processed IDs with no returned
         #   profile. unprocessed_ids identifies IDs skipped when available credits limit
@@ -77,7 +90,11 @@ module XTwitterScraper
         #
         #   @param users [Array<XTwitterScraper::Models::UserProfile>]
         #
+        #   @param failed_ids [Array<String>] Processed IDs that failed to load, in first-seen request order. They cost nothin
+        #
         #   @param has_next_page [Boolean, false] Batch lookups never paginate.
+        #
+        #   @param filtered_count [Integer] Profiles rejected by the requested filters.
       end
     end
   end
