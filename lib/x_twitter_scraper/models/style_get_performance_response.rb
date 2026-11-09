@@ -40,6 +40,11 @@ module XTwitterScraper
         #   @return [String]
         required :text, String
 
+        # @!attribute bookmark_count
+        #
+        #   @return [Integer, nil]
+        optional :bookmark_count, Integer, api_name: :bookmarkCount
+
         # @!attribute created_at
         #
         #   @return [String, nil]
@@ -49,6 +54,11 @@ module XTwitterScraper
         #
         #   @return [Integer, nil]
         optional :like_count, Integer, api_name: :likeCount
+
+        # @!attribute quote_count
+        #
+        #   @return [Integer, nil]
+        optional :quote_count, Integer, api_name: :quoteCount
 
         # @!attribute reply_count
         #
@@ -65,11 +75,13 @@ module XTwitterScraper
         #   @return [Integer, nil]
         optional :view_count, Integer, api_name: :viewCount
 
-        # @!method initialize(id:, text:, created_at: nil, like_count: nil, reply_count: nil, retweet_count: nil, view_count: nil)
+        # @!method initialize(id:, text:, bookmark_count: nil, created_at: nil, like_count: nil, quote_count: nil, reply_count: nil, retweet_count: nil, view_count: nil)
         #   @param id [String]
         #   @param text [String]
+        #   @param bookmark_count [Integer]
         #   @param created_at [String]
         #   @param like_count [Integer]
+        #   @param quote_count [Integer]
         #   @param reply_count [Integer]
         #   @param retweet_count [Integer]
         #   @param view_count [Integer]
