@@ -15,20 +15,35 @@ module XTwitterScraper
           )
         end
 
+      sig { returns(T::Boolean) }
+      attr_accessor :has_more
+
       sig { returns(T::Array[XTwitterScraper::StyleProfileSummary]) }
       attr_accessor :styles
 
+      sig { returns(T.nilable(String)) }
+      attr_reader :next_cursor
+
+      sig { params(next_cursor: String).void }
+      attr_writer :next_cursor
+
       sig do
         params(
-          styles: T::Array[XTwitterScraper::StyleProfileSummary::OrHash]
+          has_more: T::Boolean,
+          styles: T::Array[XTwitterScraper::StyleProfileSummary::OrHash],
+          next_cursor: String
         ).returns(T.attached_class)
       end
-      def self.new(styles:)
+      def self.new(has_more:, styles:, next_cursor: nil)
       end
 
       sig do
         override.returns(
-          { styles: T::Array[XTwitterScraper::StyleProfileSummary] }
+          {
+            has_more: T::Boolean,
+            styles: T::Array[XTwitterScraper::StyleProfileSummary],
+            next_cursor: String
+          }
         )
       end
       def to_hash
