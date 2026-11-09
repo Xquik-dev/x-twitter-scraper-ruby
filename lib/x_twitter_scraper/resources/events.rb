@@ -34,7 +34,7 @@ module XTwitterScraper
       #
       # @param cursor [String] Previous nextCursor.
       #
-      # @param event_type [Symbol, XTwitterScraper::Models::EventType] Filter events by type
+      # @param event_type [Symbol, XTwitterScraper::Models::StreamEventType] Filter events by type
       #
       # @param keyword_monitor_id [String] Keyword monitor ID.
       #

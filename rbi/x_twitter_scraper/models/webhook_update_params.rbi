@@ -22,11 +22,15 @@ module XTwitterScraper
       attr_accessor :id
 
       # Array of event types to subscribe to.
-      sig { returns(T.nilable(T::Array[XTwitterScraper::EventType::OrSymbol])) }
+      sig do
+        returns(T.nilable(T::Array[XTwitterScraper::StreamEventType::OrSymbol]))
+      end
       attr_reader :event_types
 
       sig do
-        params(event_types: T::Array[XTwitterScraper::EventType::OrSymbol]).void
+        params(
+          event_types: T::Array[XTwitterScraper::StreamEventType::OrSymbol]
+        ).void
       end
       attr_writer :event_types
 
@@ -45,7 +49,7 @@ module XTwitterScraper
       sig do
         params(
           id: String,
-          event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
+          event_types: T::Array[XTwitterScraper::StreamEventType::OrSymbol],
           is_active: T::Boolean,
           url: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
@@ -65,7 +69,7 @@ module XTwitterScraper
         override.returns(
           {
             id: String,
-            event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
+            event_types: T::Array[XTwitterScraper::StreamEventType::OrSymbol],
             is_active: T::Boolean,
             url: String,
             request_options: XTwitterScraper::RequestOptions

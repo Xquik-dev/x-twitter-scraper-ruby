@@ -36,9 +36,9 @@ module XTwitterScraper
       # @!attribute event_types
       #   Array of event types to subscribe to.
       #
-      #   @return [Array<Symbol, XTwitterScraper::Models::EventType>]
+      #   @return [Array<Symbol, XTwitterScraper::Models::StreamEventType>]
       required :event_types,
-               -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType] },
+               -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::StreamEventType] },
                api_name: :eventTypes
 
       # @!attribute failure_hard_cap
@@ -68,7 +68,7 @@ module XTwitterScraper
       #
       #   @param delivery_status [Symbol, XTwitterScraper::Models::Webhook::DeliveryStatus] Endpoint delivery state. needs_attention means delivery stopped after repeated f
       #
-      #   @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
+      #   @param event_types [Array<Symbol, XTwitterScraper::Models::StreamEventType>] Array of event types to subscribe to.
       #
       #   @param failure_hard_cap [Integer] Consecutive delivery failures that pause the endpoint.
       #

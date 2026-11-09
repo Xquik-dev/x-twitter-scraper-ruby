@@ -22,7 +22,7 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
       response => {
         id: String,
         created_at: Time,
-        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
+        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::StreamEventType]),
         secret: String,
         url: String
       }
@@ -42,7 +42,7 @@ class XTwitterScraper::Test::Resources::WebhooksTest < XTwitterScraper::Test::Re
         consecutive_failures: Integer,
         created_at: Time,
         delivery_status: XTwitterScraper::Webhook::DeliveryStatus,
-        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType]),
+        event_types: ^(XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::StreamEventType]),
         failure_hard_cap: Integer,
         is_active: XTwitterScraper::Internal::Type::Boolean,
         url: String

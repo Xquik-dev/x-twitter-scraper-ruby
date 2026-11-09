@@ -10,7 +10,7 @@ module XTwitterScraper
         consecutive_failures: Integer,
         created_at: Time,
         delivery_status: XTwitterScraper::Models::Webhook::delivery_status,
-        event_types: ::Array[XTwitterScraper::Models::event_type],
+        event_types: ::Array[XTwitterScraper::Models::stream_event_type],
         failure_hard_cap: Integer,
         is_active: bool,
         url: String
@@ -25,7 +25,7 @@ module XTwitterScraper
 
       attr_accessor delivery_status: XTwitterScraper::Models::Webhook::delivery_status
 
-      attr_accessor event_types: ::Array[XTwitterScraper::Models::event_type]
+      attr_accessor event_types: ::Array[XTwitterScraper::Models::stream_event_type]
 
       attr_accessor failure_hard_cap: Integer
 
@@ -38,7 +38,7 @@ module XTwitterScraper
         consecutive_failures: Integer,
         created_at: Time,
         delivery_status: XTwitterScraper::Models::Webhook::delivery_status,
-        event_types: ::Array[XTwitterScraper::Models::event_type],
+        event_types: ::Array[XTwitterScraper::Models::stream_event_type],
         failure_hard_cap: Integer,
         is_active: bool,
         url: String
@@ -49,7 +49,7 @@ module XTwitterScraper
         consecutive_failures: Integer,
         created_at: Time,
         delivery_status: XTwitterScraper::Models::Webhook::delivery_status,
-        event_types: ::Array[XTwitterScraper::Models::event_type],
+        event_types: ::Array[XTwitterScraper::Models::stream_event_type],
         failure_hard_cap: Integer,
         is_active: bool,
         url: String

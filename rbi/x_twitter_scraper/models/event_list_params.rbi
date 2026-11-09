@@ -26,10 +26,12 @@ module XTwitterScraper
       attr_writer :cursor
 
       # Filter events by type
-      sig { returns(T.nilable(XTwitterScraper::EventType::OrSymbol)) }
+      sig { returns(T.nilable(XTwitterScraper::StreamEventType::OrSymbol)) }
       attr_reader :event_type
 
-      sig { params(event_type: XTwitterScraper::EventType::OrSymbol).void }
+      sig do
+        params(event_type: XTwitterScraper::StreamEventType::OrSymbol).void
+      end
       attr_writer :event_type
 
       # Keyword monitor ID.
@@ -66,7 +68,7 @@ module XTwitterScraper
       sig do
         params(
           cursor: String,
-          event_type: XTwitterScraper::EventType::OrSymbol,
+          event_type: XTwitterScraper::StreamEventType::OrSymbol,
           keyword_monitor_id: String,
           limit: Integer,
           monitor_id: String,
@@ -98,7 +100,7 @@ module XTwitterScraper
         override.returns(
           {
             cursor: String,
-            event_type: XTwitterScraper::EventType::OrSymbol,
+            event_type: XTwitterScraper::StreamEventType::OrSymbol,
             keyword_monitor_id: String,
             limit: Integer,
             monitor_id: String,
