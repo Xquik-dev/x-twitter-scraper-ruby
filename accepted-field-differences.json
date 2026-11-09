@@ -109,10 +109,7 @@
       "POST /api/v1/x/account-connection-challenges/{id}/submit response missing expiresAt",
       "POST /api/v1/x/account-connection-challenges/{id}/submit response missing message",
       "POST /api/v1/x/account-connection-challenges/{id}/submit response missing object",
-      "POST /api/v1/x/account-connection-challenges/{id}/submit response missing username",
-      "POST /api/v1/x/media/download response missing imageFilter",
-      "POST /api/v1/x/media/download response missing items",
-      "POST /api/v1/x/media/download response missing unprocessedTweetIds"
+      "POST /api/v1/x/account-connection-challenges/{id}/submit response missing username"
     ]
   },
   {
