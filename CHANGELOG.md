@@ -13,6 +13,7 @@
 * Extraction tool types gain `:user_affiliates`.
 * `x.accounts.create` and `x.accounts.reauth` take a `connection_attempt_id` you generate. Read the attempt's status with it, even if the response never reaches you.
 * A successful connection attempt names the connected account's `account_id`.
+* The 5 relationship list methods, `x.users.retrieve_followers`, `retrieve_following`, `retrieve_verified_followers`, `x.lists.retrieve_followers` and `retrieve_members`, return `UserListPage`, which names `scan_limit`, or the coverage response with its `diagnostic`. Both still subclass `PaginatedUsers`, so `is_a?(PaginatedUsers)` and every earlier reader keep working.
 * Enums gain the values the API now serves. Write actions gain `:block`, `:bookmark`, `:delete_dm`, `:mute`, `:unblock`, `:unbookmark` and `:unmute`. `EventType` gains the deleted post, live video, Space, following, follower and count events. `Locale` gains `:zh`, `:ja` and `:ko`. Event monitor types gain `:post`. Extraction query types gain `:relevance`, and extraction statuses gain `:pending` and `:canceled`. Monitor pause reasons gain `:x_account_protected` and `:insufficient_credits`. Reply stop reasons gain `:partial_view`, `:window_covered` and `:window_passed`.
 
 ### Bug fixes

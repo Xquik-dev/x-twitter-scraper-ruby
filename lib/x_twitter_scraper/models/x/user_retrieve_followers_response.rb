@@ -13,8 +13,8 @@ module XTwitterScraper
       module UserRetrieveFollowersResponse
         extend XTwitterScraper::Internal::Type::Union
 
-        # Paginated user profiles. No-mode follower, following, and verified follower requests merge independent views automatically. Response fields, page size, aliases, filters, and per-returned-profile billing stay unchanged. Existing unprefixed cursors retain legacy behavior. Follow next_cursor while has_next_page is true.
-        variant -> { XTwitterScraper::PaginatedUsers }
+        # A relationship page. A filtered read's last page may name the scan limit that ended it.
+        variant -> { XTwitterScraper::UserListPage }
 
         # Paginated user profiles. No-mode follower, following, and verified follower requests merge independent views automatically. Response fields, page size, aliases, filters, and per-returned-profile billing stay unchanged. Existing unprefixed cursors retain legacy behavior. Follow next_cursor while has_next_page is true.
         variant -> { XTwitterScraper::Models::X::UserRetrieveFollowersResponse::UserListCoverageResponse }
@@ -234,7 +234,7 @@ module XTwitterScraper
         end
 
         # @!method self.variants
-        #   @return [Array(XTwitterScraper::Models::PaginatedUsers, XTwitterScraper::Models::X::UserRetrieveFollowersResponse::UserListCoverageResponse)]
+        #   @return [Array(XTwitterScraper::Models::UserListPage, XTwitterScraper::Models::X::UserRetrieveFollowersResponse::UserListCoverageResponse)]
       end
     end
   end

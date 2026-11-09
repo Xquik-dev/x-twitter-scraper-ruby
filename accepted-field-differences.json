@@ -2,13 +2,6 @@
   {
     "reason": "The API added these response fields after the SDK's models were last updated. The SDK still returns each one through `#[]` and `#to_h` on the model. Each line leaves this list once its model names the field.",
     "differences": [
-      "GET /api/v1/x/lists/{id}/followers response missing diagnostic",
-      "GET /api/v1/x/lists/{id}/followers response missing scanLimit",
-      "GET /api/v1/x/lists/{id}/members response missing diagnostic",
-      "GET /api/v1/x/lists/{id}/members response missing scanLimit",
-      "GET /api/v1/x/users/{id}/followers response missing scanLimit",
-      "GET /api/v1/x/users/{id}/following response missing scanLimit",
-      "GET /api/v1/x/users/{id}/verified-followers response missing scanLimit",
       "POST /api/v1/drafts response missing ignoredFields"
     ]
   },
