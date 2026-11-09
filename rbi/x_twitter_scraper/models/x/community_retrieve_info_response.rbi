@@ -68,6 +68,31 @@ module XTwitterScraper
           sig { returns(String) }
           attr_accessor :id
 
+          sig { returns(T.nilable(XTwitterScraper::Models::UserProfile)) }
+          attr_reader :admin
+
+          sig do
+            params(admin: XTwitterScraper::Models::UserProfile::OrHash).void
+          end
+          attr_writer :admin
+
+          sig do
+            returns(
+              T.nilable(
+                XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner
+              )
+            )
+          end
+          attr_reader :banner
+
+          sig do
+            params(
+              banner:
+                XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::OrHash
+            ).void
+          end
+          attr_writer :banner
+
           # Community banner image URL
           sig { returns(T.nilable(String)) }
           attr_reader :banner_url
@@ -134,6 +159,32 @@ module XTwitterScraper
           sig { params(member_count: Integer).void }
           attr_writer :member_count
 
+          # The members X previews beside the member count. A keyword or topic result gives
+          # each member's ID & picture only.
+          sig do
+            returns(
+              T.nilable(
+                T::Array[
+                  XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::MembersFacepile::Variants
+                ]
+              )
+            )
+          end
+          attr_reader :members_facepile
+
+          sig do
+            params(
+              members_facepile:
+                T::Array[
+                  T.any(
+                    XTwitterScraper::Models::UserProfile::OrHash,
+                    XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::MembersFacepile::CommunityMemberPreview::OrHash
+                  )
+                ]
+            ).void
+          end
+          attr_writer :members_facepile
+
           # Total moderator count
           sig { returns(T.nilable(Integer)) }
           attr_reader :moderator_count
@@ -166,6 +217,13 @@ module XTwitterScraper
           end
           attr_writer :primary_topic
 
+          # What the community asks a user who joins
+          sig { returns(T.nilable(String)) }
+          attr_reader :question
+
+          sig { params(question: String).void }
+          attr_writer :question
+
           # Community rules
           sig do
             returns(
@@ -188,10 +246,20 @@ module XTwitterScraper
           end
           attr_writer :rules
 
+          # Tags X finds the community by
+          sig { returns(T.nilable(T::Array[String])) }
+          attr_reader :search_tags
+
+          sig { params(search_tags: T::Array[String]).void }
+          attr_writer :search_tags
+
           # Community info object
           sig do
             params(
               id: String,
+              admin: XTwitterScraper::Models::UserProfile::OrHash,
+              banner:
+                XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::OrHash,
               banner_url: String,
               created_at: String,
               creator:
@@ -201,19 +269,30 @@ module XTwitterScraper
               is_nsfw: T::Boolean,
               join_policy: String,
               member_count: Integer,
+              members_facepile:
+                T::Array[
+                  T.any(
+                    XTwitterScraper::Models::UserProfile::OrHash,
+                    XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::MembersFacepile::CommunityMemberPreview::OrHash
+                  )
+                ],
               moderator_count: Integer,
               name: String,
               primary_topic:
                 XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic::OrHash,
+              question: String,
               rules:
                 T::Array[
                   XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule::OrHash
-                ]
+                ],
+              search_tags: T::Array[String]
             ).returns(T.attached_class)
           end
           def self.new(
             # Unique community identifier
             id:,
+            admin: nil,
+            banner: nil,
             # Community banner image URL
             banner_url: nil,
             # Community creation timestamp
@@ -229,14 +308,21 @@ module XTwitterScraper
             join_policy: nil,
             # Total member count
             member_count: nil,
+            # The members X previews beside the member count. A keyword or topic result gives
+            # each member's ID & picture only.
+            members_facepile: nil,
             # Total moderator count
             moderator_count: nil,
             # Display name of the community
             name: nil,
             # Primary topic
             primary_topic: nil,
+            # What the community asks a user who joins
+            question: nil,
             # Community rules
-            rules: nil
+            rules: nil,
+            # Tags X finds the community by
+            search_tags: nil
           )
           end
 
@@ -244,6 +330,9 @@ module XTwitterScraper
             override.returns(
               {
                 id: String,
+                admin: XTwitterScraper::Models::UserProfile,
+                banner:
+                  XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner,
                 banner_url: String,
                 created_at: String,
                 creator:
@@ -253,14 +342,20 @@ module XTwitterScraper
                 is_nsfw: T::Boolean,
                 join_policy: String,
                 member_count: Integer,
+                members_facepile:
+                  T::Array[
+                    XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::MembersFacepile::Variants
+                  ],
                 moderator_count: Integer,
                 name: String,
                 primary_topic:
                   XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
+                question: String,
                 rules:
                   T::Array[
                     XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule
-                  ]
+                  ],
+                search_tags: T::Array[String]
               }
             )
           end
@@ -388,6 +483,331 @@ module XTwitterScraper
               )
             end
             def to_hash
+            end
+          end
+
+          class Banner < XTwitterScraper::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner,
+                  XTwitterScraper::Internal::AnyHash
+                )
+              end
+
+            # Banner image URL at its original size
+            sig { returns(String) }
+            attr_accessor :url
+
+            # Banner width in pixels
+            sig { returns(T.nilable(Integer)) }
+            attr_reader :width
+
+            sig { params(width: Integer).void }
+            attr_writer :width
+
+            # Banner height in pixels
+            sig { returns(T.nilable(Integer)) }
+            attr_reader :height
+
+            sig { params(height: Integer).void }
+            attr_writer :height
+
+            # Main colors of the banner, largest share first
+            sig do
+              returns(
+                T.nilable(
+                  T::Array[
+                    XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Color
+                  ]
+                )
+              )
+            end
+            attr_reader :colors
+
+            sig do
+              params(
+                colors:
+                  T::Array[
+                    XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Color::OrHash
+                  ]
+              ).void
+            end
+            attr_writer :colors
+
+            # Area X keeps in view when it crops the banner, in pixels from the top left
+            sig do
+              returns(
+                T.nilable(
+                  XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Focus
+                )
+              )
+            end
+            attr_reader :focus
+
+            sig do
+              params(
+                focus:
+                  XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Focus::OrHash
+              ).void
+            end
+            attr_writer :focus
+
+            # The banner X shows for a community, with its size & colors.
+            sig do
+              params(
+                url: String,
+                width: Integer,
+                height: Integer,
+                colors:
+                  T::Array[
+                    XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Color::OrHash
+                  ],
+                focus:
+                  XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Focus::OrHash
+              ).returns(T.attached_class)
+            end
+            def self.new(
+              # Banner image URL at its original size
+              url:,
+              # Banner width in pixels
+              width: nil,
+              # Banner height in pixels
+              height: nil,
+              # Main colors of the banner, largest share first
+              colors: nil,
+              # Area X keeps in view when it crops the banner, in pixels from the top left
+              focus: nil
+            )
+            end
+
+            sig do
+              override.returns(
+                {
+                  url: String,
+                  width: Integer,
+                  height: Integer,
+                  colors:
+                    T::Array[
+                      XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Color
+                    ],
+                  focus:
+                    XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Focus
+                }
+              )
+            end
+            def to_hash
+            end
+
+            class Color < XTwitterScraper::Internal::Type::BaseModel
+              OrHash =
+                T.type_alias do
+                  T.any(
+                    XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Color,
+                    XTwitterScraper::Internal::AnyHash
+                  )
+                end
+
+              # Share of the banner in this color
+              sig { returns(Float) }
+              attr_accessor :percentage
+
+              # Red value of the color
+              sig { returns(Integer) }
+              attr_accessor :red
+
+              # Green value of the color
+              sig { returns(Integer) }
+              attr_accessor :green
+
+              # Blue value of the color
+              sig { returns(Integer) }
+              attr_accessor :blue
+
+              sig do
+                params(
+                  percentage: Float,
+                  red: Integer,
+                  green: Integer,
+                  blue: Integer
+                ).returns(T.attached_class)
+              end
+              def self.new(
+                # Share of the banner in this color
+                percentage:,
+                # Red value of the color
+                red:,
+                # Green value of the color
+                green:,
+                # Blue value of the color
+                blue:
+              )
+              end
+
+              sig do
+                override.returns(
+                  {
+                    percentage: Float,
+                    red: Integer,
+                    green: Integer,
+                    blue: Integer
+                  }
+                )
+              end
+              def to_hash
+              end
+            end
+
+            class Focus < XTwitterScraper::Internal::Type::BaseModel
+              OrHash =
+                T.type_alias do
+                  T.any(
+                    XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Focus,
+                    XTwitterScraper::Internal::AnyHash
+                  )
+                end
+
+              # Distance from the left edge
+              sig { returns(T.nilable(Integer)) }
+              attr_reader :left
+
+              sig { params(left: Integer).void }
+              attr_writer :left
+
+              # Distance from the top edge
+              sig { returns(T.nilable(Integer)) }
+              attr_reader :top
+
+              sig { params(top: Integer).void }
+              attr_writer :top
+
+              # Width of the area
+              sig { returns(T.nilable(Integer)) }
+              attr_reader :width
+
+              sig { params(width: Integer).void }
+              attr_writer :width
+
+              # Height of the area
+              sig { returns(T.nilable(Integer)) }
+              attr_reader :height
+
+              sig { params(height: Integer).void }
+              attr_writer :height
+
+              # Area X keeps in view when it crops the banner, in pixels from the top left
+              sig do
+                params(
+                  left: Integer,
+                  top: Integer,
+                  width: Integer,
+                  height: Integer
+                ).returns(T.attached_class)
+              end
+              def self.new(
+                # Distance from the left edge
+                left: nil,
+                # Distance from the top edge
+                top: nil,
+                # Width of the area
+                width: nil,
+                # Height of the area
+                height: nil
+              )
+              end
+
+              sig do
+                override.returns(
+                  {
+                    left: Integer,
+                    top: Integer,
+                    width: Integer,
+                    height: Integer
+                  }
+                )
+              end
+              def to_hash
+              end
+            end
+          end
+
+          module MembersFacepile
+            extend XTwitterScraper::Internal::Type::Union
+
+            Variants =
+              T.type_alias do
+                T.any(
+                  XTwitterScraper::Models::UserProfile,
+                  XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::MembersFacepile::CommunityMemberPreview
+                )
+              end
+
+            class CommunityMemberPreview < XTwitterScraper::Internal::Type::BaseModel
+              OrHash =
+                T.type_alias do
+                  T.any(
+                    XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::MembersFacepile::CommunityMemberPreview,
+                    XTwitterScraper::Internal::AnyHash
+                  )
+                end
+
+              # Numeric X user ID of the member
+              sig { returns(String) }
+              attr_accessor :id
+
+              # Profile picture URL of the member
+              sig { returns(T.nilable(String)) }
+              attr_reader :profile_picture
+
+              sig { params(profile_picture: String).void }
+              attr_writer :profile_picture
+
+              # The member's profile picture at full size
+              sig { returns(T.nilable(String)) }
+              attr_reader :profile_picture_original
+
+              sig { params(profile_picture_original: String).void }
+              attr_writer :profile_picture_original
+
+              # A member X previews by ID & profile picture only.
+              sig do
+                params(
+                  id: String,
+                  profile_picture: String,
+                  profile_picture_original: String
+                ).returns(T.attached_class)
+              end
+              def self.new(
+                # Numeric X user ID of the member
+                id:,
+                # Profile picture URL of the member
+                profile_picture: nil,
+                # The member's profile picture at full size
+                profile_picture_original: nil
+              )
+              end
+
+              sig do
+                override.returns(
+                  {
+                    id: String,
+                    profile_picture: String,
+                    profile_picture_original: String
+                  }
+                )
+              end
+              def to_hash
+              end
+            end
+
+            sig do
+              override.returns(
+                T::Array[
+                  XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::MembersFacepile::Variants
+                ]
+              )
+            end
+            def self.variants
             end
           end
         end
