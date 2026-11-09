@@ -275,7 +275,8 @@ module XTwitterScraper
               new_direct_replies: Integer,
               new_nested_replies: Integer,
               pages_attempted: Integer,
-              stop_reason: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::stop_reason
+              stop_reason: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::stop_reason,
+              new_direct_reply_pages: ::Array[Integer]
             }
 
           class StrategiesAttempted < XTwitterScraper::Internal::Type::BaseModel
@@ -289,12 +290,17 @@ module XTwitterScraper
 
             attr_accessor stop_reason: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::stop_reason
 
+            attr_reader new_direct_reply_pages: ::Array[Integer]?
+
+            def new_direct_reply_pages=: (::Array[Integer]) -> ::Array[Integer]
+
             def initialize: (
               name: String,
               new_direct_replies: Integer,
               new_nested_replies: Integer,
               pages_attempted: Integer,
-              stop_reason: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::stop_reason
+              stop_reason: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::stop_reason,
+              ?new_direct_reply_pages: ::Array[Integer]
             ) -> void
 
             def to_hash: -> {
@@ -302,7 +308,8 @@ module XTwitterScraper
               new_direct_replies: Integer,
               new_nested_replies: Integer,
               pages_attempted: Integer,
-              stop_reason: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::stop_reason
+              stop_reason: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::stop_reason,
+              new_direct_reply_pages: ::Array[Integer]
             }
 
             type stop_reason =
