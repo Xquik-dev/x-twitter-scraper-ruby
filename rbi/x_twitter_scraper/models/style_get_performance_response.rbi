@@ -71,12 +71,6 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :text
 
-        sig { returns(T.nilable(String)) }
-        attr_reader :created_at
-
-        sig { params(created_at: String).void }
-        attr_writer :created_at
-
         sig { returns(T.nilable(Integer)) }
         attr_reader :like_count
 
@@ -105,7 +99,6 @@ module XTwitterScraper
           params(
             id: String,
             text: String,
-            created_at: String,
             like_count: Integer,
             reply_count: Integer,
             retweet_count: Integer,
@@ -115,7 +108,6 @@ module XTwitterScraper
         def self.new(
           id:,
           text:,
-          created_at: nil,
           like_count: nil,
           reply_count: nil,
           retweet_count: nil,
@@ -128,7 +120,6 @@ module XTwitterScraper
             {
               id: String,
               text: String,
-              created_at: String,
               like_count: Integer,
               reply_count: Integer,
               retweet_count: Integer,

@@ -34,7 +34,6 @@ module XTwitterScraper
         {
           id: String,
           text: String,
-          created_at: String,
           like_count: Integer,
           reply_count: Integer,
           retweet_count: Integer,
@@ -45,10 +44,6 @@ module XTwitterScraper
         attr_accessor id: String
 
         attr_accessor text: String
-
-        attr_reader created_at: String?
-
-        def created_at=: (String) -> String
 
         attr_reader like_count: Integer?
 
@@ -69,7 +64,6 @@ module XTwitterScraper
         def initialize: (
           id: String,
           text: String,
-          ?created_at: String,
           ?like_count: Integer,
           ?reply_count: Integer,
           ?retweet_count: Integer,
@@ -79,7 +73,6 @@ module XTwitterScraper
         def to_hash: -> {
           id: String,
           text: String,
-          created_at: String,
           like_count: Integer,
           reply_count: Integer,
           retweet_count: Integer,

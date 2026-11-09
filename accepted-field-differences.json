@@ -2724,12 +2724,6 @@
     ]
   },
   {
-    "reason": "Fields the current spec no longer lists. The SDK keeps them, so code written for earlier versions keeps working.",
-    "differences": [
-      "GET /api/v1/styles/{id}/performance response extra tweets[].createdAt"
-    ]
-  },
-  {
     "reason": "The SDK's enum lists fewer values than the spec here. The SDK sends whatever value a caller passes, so each value still reaches the API.",
     "differences": [
       "GET /api/v1/events request enum eventType",
