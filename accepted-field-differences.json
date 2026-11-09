@@ -13,8 +13,6 @@
       "GET /api/v1/styles/{id}/performance response missing tweets[].quoteCount",
       "GET /api/v1/support/tickets response missing hasMore",
       "GET /api/v1/support/tickets response missing nextCursor",
-      "GET /api/v1/webhooks response missing hasMore",
-      "GET /api/v1/webhooks response missing nextCursor",
       "GET /api/v1/x/articles/{tweetId} response missing article.articleId",
       "GET /api/v1/x/articles/{tweetId} response missing article.bodyMarkdown",
       "GET /api/v1/x/articles/{tweetId} response missing article.bookmarkCount",
