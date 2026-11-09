@@ -30,7 +30,7 @@ module XTwitterScraper
 
       def to_hash: -> ::Hash[Symbol, top]
 
-      type unchecked = ::Hash[Symbol, top]
+      type unchecked_ = ::Hash[Symbol, top]
 
       class Unchecked < XTwitterScraper::Internal::Type::BaseModel
         attr_accessor id: String
