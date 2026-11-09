@@ -122,6 +122,9 @@ module XTwitterScraper
 
           def initialize: (
             id: String,
+            is_nsfw: bool,
+            member_count: Integer,
+            name: String,
             ?admin: XTwitterScraper::Models::UserProfile | ::Hash[Symbol, top],
             ?banner: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner | ::Hash[Symbol, top],
             ?banner_url: String,
@@ -129,12 +132,9 @@ module XTwitterScraper
             ?creator: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator,
             ?description: String,
             ?invites_policy: String,
-            is_nsfw: bool,
             ?join_policy: String,
-            member_count: Integer,
             ?members_facepile: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::members_facepile],
             ?moderator_count: Integer,
-            name: String,
             ?primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
             ?question: String,
             ?rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule],
@@ -202,7 +202,7 @@ module XTwitterScraper
 
             attr_accessor name: String
 
-            def initialize: (?id: String, name: String) -> void
+            def initialize: (name: String, ?id: String) -> void
 
             def to_hash: -> { id: String, name: String }
           end
