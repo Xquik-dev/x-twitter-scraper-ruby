@@ -45,6 +45,12 @@ module XTwitterScraper
       end
       attr_accessor :plan
 
+      # Subscription state without billing provider identifiers.
+      sig do
+        returns(XTwitterScraper::Models::AccountRetrieveResponse::Subscription)
+      end
+      attr_accessor :subscription
+
       sig do
         returns(
           T.nilable(
@@ -77,6 +83,8 @@ module XTwitterScraper
           monitors_used: Integer,
           plan:
             XTwitterScraper::Models::AccountRetrieveResponse::Plan::OrSymbol,
+          subscription:
+            XTwitterScraper::Models::AccountRetrieveResponse::Subscription::OrHash,
           credit_info:
             XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo::OrHash,
           x_username: String
@@ -89,6 +97,8 @@ module XTwitterScraper
         monitors_allowed:,
         monitors_used:,
         plan:,
+        # Subscription state without billing provider identifiers.
+        subscription:,
         credit_info: nil,
         # Linked X username, omitted when no X account is connected.
         x_username: nil
@@ -104,6 +114,8 @@ module XTwitterScraper
             monitors_used: Integer,
             plan:
               XTwitterScraper::Models::AccountRetrieveResponse::Plan::TaggedSymbol,
+            subscription:
+              XTwitterScraper::Models::AccountRetrieveResponse::Subscription,
             credit_info:
               XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo,
             x_username: String
@@ -312,6 +324,176 @@ module XTwitterScraper
           )
         end
         def to_hash
+        end
+      end
+
+      class Subscription < XTwitterScraper::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              XTwitterScraper::Models::AccountRetrieveResponse::Subscription,
+              XTwitterScraper::Internal::AnyHash
+            )
+          end
+
+        sig do
+          returns(
+            XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Status::TaggedSymbol
+          )
+        end
+        attr_accessor :status
+
+        sig do
+          returns(
+            T.nilable(
+              XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Tier::TaggedSymbol
+            )
+          )
+        end
+        attr_reader :tier
+
+        sig do
+          params(
+            tier:
+              XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Tier::OrSymbol
+          ).void
+        end
+        attr_writer :tier
+
+        sig { returns(T.nilable(Time)) }
+        attr_reader :current_period_start
+
+        sig { params(current_period_start: Time).void }
+        attr_writer :current_period_start
+
+        # Renewal date, or the end date when canceling.
+        sig { returns(T.nilable(Time)) }
+        attr_reader :current_period_end
+
+        sig { params(current_period_end: Time).void }
+        attr_writer :current_period_end
+
+        # Subscription state without billing provider identifiers.
+        sig do
+          params(
+            status:
+              XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Status::OrSymbol,
+            tier:
+              XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Tier::OrSymbol,
+            current_period_start: Time,
+            current_period_end: Time
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          status:,
+          tier: nil,
+          current_period_start: nil,
+          # Renewal date, or the end date when canceling.
+          current_period_end: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              status:
+                XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Status::TaggedSymbol,
+              tier:
+                XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Tier::TaggedSymbol,
+              current_period_start: Time,
+              current_period_end: Time
+            }
+          )
+        end
+        def to_hash
+        end
+
+        module Status
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Status
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          NONE =
+            T.let(
+              :none,
+              XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Status::TaggedSymbol
+            )
+          ACTIVE =
+            T.let(
+              :active,
+              XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Status::TaggedSymbol
+            )
+          PAST_DUE =
+            T.let(
+              :past_due,
+              XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Status::TaggedSymbol
+            )
+          CANCELING =
+            T.let(
+              :canceling,
+              XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Status::TaggedSymbol
+            )
+          INCOMPLETE =
+            T.let(
+              :incomplete,
+              XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Status::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Status::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        module Tier
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Tier
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          STARTER =
+            T.let(
+              :starter,
+              XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Tier::TaggedSymbol
+            )
+          PRO =
+            T.let(
+              :pro,
+              XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Tier::TaggedSymbol
+            )
+          BUSINESS =
+            T.let(
+              :business,
+              XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Tier::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Tier::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
     end
