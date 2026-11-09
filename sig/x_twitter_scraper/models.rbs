@@ -3,6 +3,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 module XTwitterScraper
+  class AccountBasedIn = XTwitterScraper::Models::AccountBasedIn
+
   class AccountRetrieveParams = XTwitterScraper::Models::AccountRetrieveParams
 
   class AccountSetXUsernameParams = XTwitterScraper::Models::AccountSetXUsernameParams
@@ -58,6 +60,10 @@ module XTwitterScraper
   class EventListParams = XTwitterScraper::Models::EventListParams
 
   class EventRetrieveParams = XTwitterScraper::Models::EventRetrieveParams
+
+  class ProfileContactInfo = XTwitterScraper::Models::ProfileContactInfo
+
+  class UserTipJar = XTwitterScraper::Models::UserTipJar
 
   module EventType = XTwitterScraper::Models::EventType
 

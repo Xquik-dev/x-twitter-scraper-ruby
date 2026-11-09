@@ -13,6 +13,30 @@ module XTwitterScraper
 
       attr_accessor username: String
 
+      attr_accessor account_based_in: XTwitterScraper::AccountBasedIn?
+
+      attr_reader account_based_in_accurate: bool?
+
+      def account_based_in_accurate=: (bool) -> bool
+
+      attr_reader account_based_in_unavailable: bool?
+
+      def account_based_in_unavailable=: (bool) -> bool
+
+      attr_reader advertiser_account_service_levels: ::Array[String]?
+
+      def advertiser_account_service_levels=: (
+        ::Array[String]
+      ) -> ::Array[String]
+
+      attr_reader advertiser_account_type: String?
+
+      def advertiser_account_type=: (String) -> String
+
+      attr_reader affiliate_username: String?
+
+      def affiliate_username=: (String) -> String
+
       attr_reader affiliates_highlighted_label: XTwitterScraper::UserProfile::AffiliatesHighlightedLabel?
 
       def affiliates_highlighted_label=: (
@@ -23,13 +47,37 @@ module XTwitterScraper
 
       def automated_by=: (String) -> String
 
+      attr_reader birthdate: XTwitterScraper::UserProfile::Birthdate?
+
+      def birthdate=: (
+        XTwitterScraper::UserProfile::Birthdate | ::Hash[Symbol, top]
+      ) -> XTwitterScraper::UserProfile::Birthdate
+
       attr_reader business_account_affiliates_count: Integer?
 
       def business_account_affiliates_count=: (Integer) -> Integer
 
+      attr_reader business_profile_state: String?
+
+      def business_profile_state=: (String) -> String
+
       attr_reader community_role: String?
 
       def community_role=: (String) -> String
+
+      attr_reader connected_via: String?
+
+      def connected_via=: (String) -> String
+
+      attr_reader connected_via_accurate: bool?
+
+      def connected_via_accurate=: (bool) -> bool
+
+      attr_reader contact_info: XTwitterScraper::ProfileContactInfo?
+
+      def contact_info=: (
+        XTwitterScraper::ProfileContactInfo | ::Hash[Symbol, top]
+      ) -> XTwitterScraper::ProfileContactInfo
 
       attr_reader cover_picture: String?
 
@@ -43,9 +91,25 @@ module XTwitterScraper
 
       def creator_subscriptions_count=: (Integer) -> Integer
 
+      attr_reader default_profile: bool?
+
+      def default_profile=: (bool) -> bool
+
+      attr_reader default_profile_image: bool?
+
+      def default_profile_image=: (bool) -> bool
+
       attr_reader description: String?
 
       def description=: (String) -> String
+
+      attr_reader email: String?
+
+      def email=: (String) -> String
+
+      attr_reader fast_followers_count: Integer?
+
+      def fast_followers_count=: (Integer) -> Integer
 
       attr_reader favourites_count: Integer?
 
@@ -59,9 +123,21 @@ module XTwitterScraper
 
       def following=: (Integer) -> Integer
 
+      attr_reader geo_enabled: bool?
+
+      def geo_enabled=: (bool) -> bool
+
+      attr_reader grok_translated_bio: ::Hash[Symbol, top]?
+
+      def grok_translated_bio=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
       attr_reader has_custom_timelines: bool?
 
       def has_custom_timelines=: (bool) -> bool
+
+      attr_reader has_extended_profile: bool?
+
+      def has_extended_profile=: (bool) -> bool
 
       attr_reader has_graduated_access: bool?
 
@@ -95,6 +171,10 @@ module XTwitterScraper
 
       def is_profile_translatable=: (bool) -> bool
 
+      attr_reader is_translation_enabled: bool?
+
+      def is_translation_enabled=: (bool) -> bool
+
       attr_reader is_translator: bool?
 
       def is_translator=: (bool) -> bool
@@ -103,6 +183,10 @@ module XTwitterScraper
 
       def is_verified=: (bool) -> bool
 
+      attr_reader listed_count: Integer?
+
+      def listed_count=: (Integer) -> Integer
+
       attr_reader location: String?
 
       def location=: (String) -> String
@@ -110,6 +194,10 @@ module XTwitterScraper
       attr_reader media_count: Integer?
 
       def media_count=: (Integer) -> Integer
+
+      attr_reader normal_followers_count: Integer?
+
+      def normal_followers_count=: (Integer) -> Integer
 
       attr_reader parody_commentary_fan_label: String?
 
@@ -122,6 +210,10 @@ module XTwitterScraper
       attr_reader possibly_sensitive: bool?
 
       def possibly_sensitive=: (bool) -> bool
+
+      attr_reader professional: ::Hash[Symbol, top]?
+
+      def professional=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
       attr_reader profile_bio: ::Hash[Symbol, top]?
 
@@ -147,6 +239,10 @@ module XTwitterScraper
 
       def profile_picture=: (String) -> String
 
+      attr_reader profile_picture_original: String?
+
+      def profile_picture_original=: (String) -> String
+
       attr_reader profile_sort_enabled: bool?
 
       def profile_sort_enabled=: (bool) -> bool
@@ -159,13 +255,33 @@ module XTwitterScraper
 
       def protected=: (bool) -> bool
 
+      attr_reader redirects_to_username: String?
+
+      def redirects_to_username=: (String) -> String
+
+      attr_accessor retweeted_at: Time?
+
       attr_reader statuses_count: Integer?
 
       def statuses_count=: (Integer) -> Integer
 
+      attr_reader subscribers_count: Integer?
+
+      def subscribers_count=: (Integer) -> Integer
+
       attr_reader super_follow_eligible: bool?
 
       def super_follow_eligible=: (bool) -> bool
+
+      attr_reader super_follows_user_profile_active: bool?
+
+      def super_follows_user_profile_active=: (bool) -> bool
+
+      attr_reader tip_jar: XTwitterScraper::UserTipJar?
+
+      def tip_jar=: (
+        XTwitterScraper::UserTipJar | ::Hash[Symbol, top]
+      ) -> XTwitterScraper::UserTipJar
 
       attr_reader unavailable: bool?
 
@@ -179,6 +295,18 @@ module XTwitterScraper
 
       def url=: (String) -> String
 
+      attr_reader username_changes: XTwitterScraper::UserProfile::UsernameChanges?
+
+      def username_changes=: (
+        XTwitterScraper::UserProfile::UsernameChanges | ::Hash[Symbol, top]
+      ) -> XTwitterScraper::UserProfile::UsernameChanges
+
+      attr_reader verification_reason: XTwitterScraper::UserProfile::VerificationReason?
+
+      def verification_reason=: (
+        XTwitterScraper::UserProfile::VerificationReason | ::Hash[Symbol, top]
+      ) -> XTwitterScraper::UserProfile::VerificationReason
+
       attr_reader verified: bool?
 
       def verified=: (bool) -> bool
@@ -191,22 +319,44 @@ module XTwitterScraper
 
       def withheld_in_countries=: (::Array[String]) -> ::Array[String]
 
+      attr_reader withheld_scope: String?
+
+      def withheld_scope=: (String) -> String
+
       def initialize: (
         id: String,
         name: String,
         username: String,
+        ?account_based_in: (XTwitterScraper::AccountBasedIn | ::Hash[Symbol, top])?,
+        ?account_based_in_accurate: bool,
+        ?account_based_in_unavailable: bool,
+        ?advertiser_account_service_levels: ::Array[String],
+        ?advertiser_account_type: String,
+        ?affiliate_username: String,
         ?affiliates_highlighted_label: XTwitterScraper::UserProfile::AffiliatesHighlightedLabel | ::Hash[Symbol, top],
         ?automated_by: String,
+        ?birthdate: XTwitterScraper::UserProfile::Birthdate | ::Hash[Symbol, top],
         ?business_account_affiliates_count: Integer,
+        ?business_profile_state: String,
         ?community_role: String,
+        ?connected_via: String,
+        ?connected_via_accurate: bool,
+        ?contact_info: XTwitterScraper::ProfileContactInfo | ::Hash[Symbol, top],
         ?cover_picture: String,
         ?created_at: String,
         ?creator_subscriptions_count: Integer,
+        ?default_profile: bool,
+        ?default_profile_image: bool,
         ?description: String,
+        ?email: String,
+        ?fast_followers_count: Integer,
         ?favourites_count: Integer,
         ?followers: Integer,
         ?following: Integer,
+        ?geo_enabled: bool,
+        ?grok_translated_bio: ::Hash[Symbol, top],
         ?has_custom_timelines: bool,
+        ?has_extended_profile: bool,
         ?has_graduated_access: bool,
         ?has_hidden_subscriptions_on_profile: bool,
         ?highlights_info: XTwitterScraper::UserProfile::HighlightsInfo | ::Hash[Symbol, top],
@@ -214,30 +364,43 @@ module XTwitterScraper
         ?is_automated: bool,
         ?is_blue_verified: bool,
         ?is_profile_translatable: bool,
+        ?is_translation_enabled: bool,
         ?is_translator: bool,
         ?is_verified: bool,
+        ?listed_count: Integer,
         ?location: String,
         ?media_count: Integer,
+        ?normal_followers_count: Integer,
         ?parody_commentary_fan_label: String,
         ?pinned_tweet_ids: ::Array[String],
         ?possibly_sensitive: bool,
+        ?professional: ::Hash[Symbol, top],
         ?profile_bio: ::Hash[Symbol, top],
         ?profile_banner_url: String,
         ?profile_description_language: String,
         ?profile_image_shape: String,
         ?profile_interstitial_type: String,
         ?profile_picture: String,
+        ?profile_picture_original: String,
         ?profile_sort_enabled: bool,
         ?profile_translator_type: String,
         ?protected: bool,
+        ?redirects_to_username: String,
+        ?retweeted_at: Time?,
         ?statuses_count: Integer,
+        ?subscribers_count: Integer,
         ?super_follow_eligible: bool,
+        ?super_follows_user_profile_active: bool,
+        ?tip_jar: XTwitterScraper::UserTipJar | ::Hash[Symbol, top],
         ?unavailable: bool,
         ?unavailable_reason: String,
         ?url: String,
+        ?username_changes: XTwitterScraper::UserProfile::UsernameChanges | ::Hash[Symbol, top],
+        ?verification_reason: XTwitterScraper::UserProfile::VerificationReason | ::Hash[Symbol, top],
         ?verified: bool,
         ?verified_type: String,
-        ?withheld_in_countries: ::Array[String]
+        ?withheld_in_countries: ::Array[String],
+        ?withheld_scope: String
       ) -> void
 
       def to_hash: -> ::Hash[Symbol, top]
@@ -323,6 +486,90 @@ module XTwitterScraper
         ) -> void
 
         def to_hash: -> ::Hash[Symbol, top]
+      end
+
+      type birthdate = ::Hash[Symbol, top]
+
+      class Birthdate < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader day: Integer?
+
+        def day=: (Integer) -> Integer
+
+        attr_reader month: Integer?
+
+        def month=: (Integer) -> Integer
+
+        attr_reader year: Integer?
+
+        def year=: (Integer) -> Integer
+
+        def initialize: (?day: Integer, ?month: Integer, ?year: Integer) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
+      end
+
+      type username_changes = ::Hash[Symbol, top]
+
+      class UsernameChanges < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor count: Integer
+
+        attr_reader last_changed_at: Time?
+
+        def last_changed_at=: (Time) -> Time
+
+        def initialize: (count: Integer, ?last_changed_at: Time) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
+      end
+
+      type verification_reason = ::Hash[Symbol, top]
+
+      class VerificationReason < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader text: String?
+
+        def text=: (String) -> String
+
+        attr_reader entities: ::Array[XTwitterScraper::UserProfile::VerificationReason::Entity]?
+
+        def entities=: (
+          ::Array[XTwitterScraper::UserProfile::VerificationReason::Entity | ::Hash[Symbol, top]]
+        ) -> ::Array[XTwitterScraper::UserProfile::VerificationReason::Entity]
+
+        def initialize: (
+          ?text: String,
+          ?entities: ::Array[XTwitterScraper::UserProfile::VerificationReason::Entity | ::Hash[Symbol, top]]
+        ) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
+
+        type entity = ::Hash[Symbol, top]
+
+        class Entity < XTwitterScraper::Internal::Type::BaseModel
+          attr_reader from_index: Integer?
+
+          def from_index=: (Integer) -> Integer
+
+          attr_reader to_index: Integer?
+
+          def to_index=: (Integer) -> Integer
+
+          attr_reader url: String?
+
+          def url=: (String) -> String
+
+          attr_reader url_type: String?
+
+          def url_type=: (String) -> String
+
+          def initialize: (
+            ?from_index: Integer,
+            ?to_index: Integer,
+            ?url: String,
+            ?url_type: String
+          ) -> void
+
+          def to_hash: -> ::Hash[Symbol, top]
+        end
       end
     end
   end
