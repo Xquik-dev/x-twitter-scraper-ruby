@@ -19,23 +19,37 @@ module XTwitterScraper
       #   @return [Hash{Symbol=>Object}]
       required :job, XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]
 
+      # @!attribute poll_after_ms
+      #
+      #   @return [Integer]
+      required :poll_after_ms, Integer, api_name: :pollAfterMs
+
       # @!attribute results
       #
       #   @return [Array<Hash{Symbol=>Object}>]
       required :results,
                XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]]
 
+      # @!attribute wait_url
+      #
+      #   @return [String]
+      required :wait_url, String, api_name: :waitUrl
+
       # @!attribute next_cursor
       #
       #   @return [String, nil]
       optional :next_cursor, String, api_name: :nextCursor
 
-      # @!method initialize(has_more:, job:, results:, next_cursor: nil)
+      # @!method initialize(has_more:, job:, poll_after_ms:, results:, wait_url:, next_cursor: nil)
       #   @param has_more [Boolean]
       #
       #   @param job [Hash{Symbol=>Object}] Extraction job metadata - shape varies by tool type (JSON)
       #
+      #   @param poll_after_ms [Integer]
+      #
       #   @param results [Array<Hash{Symbol=>Object}>]
+      #
+      #   @param wait_url [String]
       #
       #   @param next_cursor [String]
     end

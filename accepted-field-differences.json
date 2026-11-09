@@ -7,8 +7,6 @@
       "GET /api/v1/credits response missing auto_topup_stopped",
       "GET /api/v1/credits/topup/status response missing chargedCurrency",
       "GET /api/v1/credits/topup/status response missing chargedMinorUnits",
-      "GET /api/v1/extractions/{id} response missing pollAfterMs",
-      "GET /api/v1/extractions/{id} response missing waitUrl",
       "GET /api/v1/monitors response missing hasMore",
       "GET /api/v1/monitors response missing nextCursor",
       "GET /api/v1/monitors/keywords response missing hasMore",
