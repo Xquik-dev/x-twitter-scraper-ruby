@@ -12,9 +12,15 @@ module XTwitterScraper
         monitor_type: XTwitterScraper::Models::Event::monitor_type,
         occurred_at: Time,
         type: XTwitterScraper::Models::event_type,
+        author_id: String,
+        author_username: String,
         keyword_monitor_id: String,
+        monitor_name: String,
+        post_id: String,
+        post_url: String,
         query: String,
-        username: String
+        username: String,
+        x_user_id: String
       }
 
     class Event < XTwitterScraper::Internal::Type::BaseModel
@@ -30,9 +36,29 @@ module XTwitterScraper
 
       attr_accessor type: XTwitterScraper::Models::event_type
 
+      attr_reader author_id: String?
+
+      def author_id=: (String) -> String
+
+      attr_reader author_username: String?
+
+      def author_username=: (String) -> String
+
       attr_reader keyword_monitor_id: String?
 
       def keyword_monitor_id=: (String) -> String
+
+      attr_reader monitor_name: String?
+
+      def monitor_name=: (String) -> String
+
+      attr_reader post_id: String?
+
+      def post_id=: (String) -> String
+
+      attr_reader post_url: String?
+
+      def post_url=: (String) -> String
 
       attr_reader query: String?
 
@@ -42,6 +68,10 @@ module XTwitterScraper
 
       def username=: (String) -> String
 
+      attr_reader x_user_id: String?
+
+      def x_user_id=: (String) -> String
+
       def initialize: (
         id: String,
         data: ::Hash[Symbol, top],
@@ -49,9 +79,15 @@ module XTwitterScraper
         monitor_type: XTwitterScraper::Models::Event::monitor_type,
         occurred_at: Time,
         type: XTwitterScraper::Models::event_type,
+        ?author_id: String,
+        ?author_username: String,
         ?keyword_monitor_id: String,
+        ?monitor_name: String,
+        ?post_id: String,
+        ?post_url: String,
         ?query: String,
-        ?username: String
+        ?username: String,
+        ?x_user_id: String
       ) -> void
 
       def to_hash: -> {
@@ -61,9 +97,15 @@ module XTwitterScraper
         monitor_type: XTwitterScraper::Models::Event::monitor_type,
         occurred_at: Time,
         type: XTwitterScraper::Models::event_type,
+        author_id: String,
+        author_username: String,
         keyword_monitor_id: String,
+        monitor_name: String,
+        post_id: String,
+        post_url: String,
         query: String,
-        username: String
+        username: String,
+        x_user_id: String
       }
 
       type monitor_type = :account | :keyword | :post
