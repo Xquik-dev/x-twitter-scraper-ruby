@@ -29,7 +29,7 @@ module XTwitterScraper
         def list: (
           ids: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::PaginatedTweets
+        ) -> XTwitterScraper::Models::X::TweetListResponse
 
         def delete: (
           String id,
