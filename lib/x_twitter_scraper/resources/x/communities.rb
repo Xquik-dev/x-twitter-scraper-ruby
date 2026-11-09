@@ -78,9 +78,13 @@ module XTwitterScraper
 
         # Get community name, description & member count
         #
-        # @overload retrieve_info(id, request_options: {})
+        # @overload retrieve_info(id, fields: nil, omit: nil, request_options: {})
         #
         # @param id [String] Community ID
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

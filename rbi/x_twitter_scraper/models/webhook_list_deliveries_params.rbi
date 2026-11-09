@@ -21,18 +21,50 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :id
 
+      # Previous nextCursor. The after alias also works. Offset pagination is not
+      # supported.
+      sig { returns(T.nilable(String)) }
+      attr_reader :cursor
+
+      sig { params(cursor: String).void }
+      attr_writer :cursor
+
+      # Maximum deliveries per page, from 1 to 10,000. Default 100. Pass nextCursor as
+      # cursor for the next page.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :limit
+
+      sig { params(limit: Integer).void }
+      attr_writer :limit
+
       sig do
         params(
           id: String,
+          cursor: String,
+          limit: Integer,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(id:, request_options: {})
+      def self.new(
+        id:,
+        # Previous nextCursor. The after alias also works. Offset pagination is not
+        # supported.
+        cursor: nil,
+        # Maximum deliveries per page, from 1 to 10,000. Default 100. Pass nextCursor as
+        # cursor for the next page.
+        limit: nil,
+        request_options: {}
+      )
       end
 
       sig do
         override.returns(
-          { id: String, request_options: XTwitterScraper::RequestOptions }
+          {
+            id: String,
+            cursor: String,
+            limit: Integer,
+            request_options: XTwitterScraper::RequestOptions
+          }
         )
       end
       def to_hash

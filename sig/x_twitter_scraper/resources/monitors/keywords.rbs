@@ -25,6 +25,8 @@ module XTwitterScraper
         ) -> XTwitterScraper::Models::Monitors::KeywordUpdateResponse
 
         def list: (
+          ?cursor: String,
+          ?limit: Integer,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::Monitors::KeywordListResponse
 

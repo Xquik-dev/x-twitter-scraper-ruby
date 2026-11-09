@@ -62,7 +62,11 @@ module XTwitterScraper
 
       # List webhooks
       #
-      # @overload list(request_options: {})
+      # @overload list(cursor: nil, limit: nil, request_options: {})
+      #
+      # @param cursor [String] Previous nextCursor. The after alias also works. Offset pagination is not suppor
+      #
+      # @param limit [Integer] Maximum items per page, from 1 to 10,000. Default 200. Pass nextCursor as cursor
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -103,9 +107,13 @@ module XTwitterScraper
 
       # List webhook deliveries
       #
-      # @overload list_deliveries(id, request_options: {})
+      # @overload list_deliveries(id, cursor: nil, limit: nil, request_options: {})
       #
       # @param id [String] Resource ID returned by the matching create or list endpoint.
+      #
+      # @param cursor [String] Previous nextCursor. The after alias also works. Offset pagination is not suppor
+      #
+      # @param limit [Integer] Maximum deliveries per page, from 1 to 10,000. Default 100. Pass nextCursor as c
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #

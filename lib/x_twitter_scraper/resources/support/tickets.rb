@@ -83,7 +83,11 @@ module XTwitterScraper
 
         # List user's support tickets
         #
-        # @overload list(request_options: {})
+        # @overload list(cursor: nil, limit: nil, request_options: {})
+        #
+        # @param cursor [String] Previous nextCursor. The after alias also works. Offset pagination is not suppor
+        #
+        # @param limit [Integer] Maximum items per page, from 1 to 10,000. Default 200. Pass nextCursor as cursor
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

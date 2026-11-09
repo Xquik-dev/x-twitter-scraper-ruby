@@ -68,10 +68,20 @@ module XTwitterScraper
       # List monitors
       sig do
         params(
+          cursor: String,
+          limit: Integer,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Models::MonitorListResponse)
       end
-      def list(request_options: {})
+      def list(
+        # Previous nextCursor. The after alias also works. Offset pagination is not
+        # supported.
+        cursor: nil,
+        # Maximum items per page, from 1 to 10,000. Default 200. Pass nextCursor as cursor
+        # for the next page.
+        limit: nil,
+        request_options: {}
+      )
       end
 
       # Delete monitor

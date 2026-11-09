@@ -54,9 +54,13 @@ module XTwitterScraper
 
         # Get tweet with full text, author, metrics & media
         #
-        # @overload retrieve(id, request_options: {})
+        # @overload retrieve(id, fields: nil, omit: nil, request_options: {})
         #
         # @param id [String] Numeric tweet ID, 15-20 digits
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

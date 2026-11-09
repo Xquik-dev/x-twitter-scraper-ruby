@@ -14,9 +14,13 @@ module XTwitterScraper
 
         # Get user profile with follower counts & verification
         #
-        # @overload retrieve(id, request_options: {})
+        # @overload retrieve(id, fields: nil, omit: nil, request_options: {})
         #
         # @param id [String] X username (without @) or user ID
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

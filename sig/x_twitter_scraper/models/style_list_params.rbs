@@ -5,15 +5,32 @@
 module XTwitterScraper
   module Models
     type style_list_params =
-      {  } & XTwitterScraper::Internal::Type::request_parameters
+      { cursor: String, limit: Integer }
+      & XTwitterScraper::Internal::Type::request_parameters
 
     class StyleListParams < XTwitterScraper::Internal::Type::BaseModel
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
-      def initialize: (?request_options: XTwitterScraper::request_opts) -> void
+      attr_reader cursor: String?
 
-      def to_hash: -> { request_options: XTwitterScraper::RequestOptions }
+      def cursor=: (String) -> String
+
+      attr_reader limit: Integer?
+
+      def limit=: (Integer) -> Integer
+
+      def initialize: (
+        ?cursor: String,
+        ?limit: Integer,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        cursor: String,
+        limit: Integer,
+        request_options: XTwitterScraper::RequestOptions
+      }
     end
   end
 end

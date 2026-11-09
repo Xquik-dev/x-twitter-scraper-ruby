@@ -36,7 +36,9 @@ module XTwitterScraper
 
         # Get bookmark folders
         #
-        # @overload retrieve_folders(request_options: {})
+        # @overload retrieve_folders(cursor: nil, request_options: {})
+        #
+        # @param cursor [String] Pagination cursor for collection results. Also read as next_cursor, next_token,
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

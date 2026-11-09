@@ -29,10 +29,16 @@ module XTwitterScraper
         # Get bookmark folders
         sig do
           params(
+            cursor: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse)
         end
-        def retrieve_folders(request_options: {})
+        def retrieve_folders(
+          # Pagination cursor for collection results. Also read as next_cursor, next_token,
+          # pagination_token or continuation_token.
+          cursor: nil,
+          request_options: {}
+        )
         end
 
         # @api private

@@ -10,6 +10,8 @@ module XTwitterScraper
 
         def retrieve: (
           String id,
+          ?fields: String,
+          ?omit: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::UserProfile
 

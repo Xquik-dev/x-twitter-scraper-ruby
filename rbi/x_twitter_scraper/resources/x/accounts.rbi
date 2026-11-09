@@ -52,10 +52,21 @@ module XTwitterScraper
         # List connected X accounts
         sig do
           params(
+            cursor: String,
+            limit: Integer,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::AccountListResponse)
         end
-        def list(request_options: {})
+        def list(
+          # Previous nextCursor. The after alias also works. Offset pagination is not
+          # supported.
+          cursor: nil,
+          # Maximum items per page, from 1 to 10,000. Default 50. A low credit balance can
+          # return fewer paid results. When it covers none, the answer is 402
+          # insufficient_credits.
+          limit: nil,
+          request_options: {}
+        )
         end
 
         # Disconnect X account
