@@ -8,6 +8,8 @@ module XTwitterScraper
       {
         status: XTwitterScraper::Models::CreditRetrieveTopupStatusResponse::status,
         amount_dollars: Integer?,
+        charged_currency: XTwitterScraper::Models::currency,
+        charged_minor_units: Integer,
         credits: String
       }
 
@@ -16,6 +18,16 @@ module XTwitterScraper
 
       attr_accessor amount_dollars: Integer?
 
+      attr_reader charged_currency: XTwitterScraper::Models::currency?
+
+      def charged_currency=: (
+        XTwitterScraper::Models::currency
+      ) -> XTwitterScraper::Models::currency
+
+      attr_reader charged_minor_units: Integer?
+
+      def charged_minor_units=: (Integer) -> Integer
+
       attr_reader credits: String?
 
       def credits=: (String) -> String
@@ -23,12 +35,16 @@ module XTwitterScraper
       def initialize: (
         status: XTwitterScraper::Models::CreditRetrieveTopupStatusResponse::status,
         ?amount_dollars: Integer?,
+        ?charged_currency: XTwitterScraper::Models::currency,
+        ?charged_minor_units: Integer,
         ?credits: String
       ) -> void
 
       def to_hash: -> {
         status: XTwitterScraper::Models::CreditRetrieveTopupStatusResponse::status,
         amount_dollars: Integer?,
+        charged_currency: XTwitterScraper::Models::currency,
+        charged_minor_units: Integer,
         credits: String
       }
 

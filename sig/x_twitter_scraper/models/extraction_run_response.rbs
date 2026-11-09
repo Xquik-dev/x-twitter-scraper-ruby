@@ -10,8 +10,15 @@ module XTwitterScraper
         credits_available: String,
         credits_required: String,
         estimated_results: Integer,
+        id: String,
+        poll_after_ms: Integer,
         source: String,
-        resolved_x_user_id: String
+        resolved_x_user_id: String,
+        status: XTwitterScraper::Models::ExtractionRunResponse::status,
+        status_url: String,
+        tool_type: XTwitterScraper::Models::ExtractionRunResponse::tool_type,
+        url: String,
+        wait_url: String
       }
 
     class ExtractionRunResponse < XTwitterScraper::Internal::Type::BaseModel
@@ -31,6 +38,14 @@ module XTwitterScraper
 
       def estimated_results=: (Integer) -> Integer
 
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader poll_after_ms: Integer?
+
+      def poll_after_ms=: (Integer) -> Integer
+
       attr_reader source: String?
 
       def source=: (String) -> String
@@ -39,13 +54,44 @@ module XTwitterScraper
 
       def resolved_x_user_id=: (String) -> String
 
+      attr_reader status: XTwitterScraper::Models::ExtractionRunResponse::status?
+
+      def status=: (
+        XTwitterScraper::Models::ExtractionRunResponse::status
+      ) -> XTwitterScraper::Models::ExtractionRunResponse::status
+
+      attr_reader status_url: String?
+
+      def status_url=: (String) -> String
+
+      attr_reader tool_type: XTwitterScraper::Models::ExtractionRunResponse::tool_type?
+
+      def tool_type=: (
+        XTwitterScraper::Models::ExtractionRunResponse::tool_type
+      ) -> XTwitterScraper::Models::ExtractionRunResponse::tool_type
+
+      attr_reader url: String?
+
+      def url=: (String) -> String
+
+      attr_reader wait_url: String?
+
+      def wait_url=: (String) -> String
+
       def initialize: (
         ?allowed: bool,
         ?credits_available: String,
         ?credits_required: String,
         ?estimated_results: Integer,
+        ?id: String,
+        ?poll_after_ms: Integer,
         ?source: String,
-        ?resolved_x_user_id: String
+        ?resolved_x_user_id: String,
+        ?status: XTwitterScraper::Models::ExtractionRunResponse::status,
+        ?status_url: String,
+        ?tool_type: XTwitterScraper::Models::ExtractionRunResponse::tool_type,
+        ?url: String,
+        ?wait_url: String
       ) -> void
 
       def to_hash: -> {
@@ -53,9 +99,87 @@ module XTwitterScraper
         credits_available: String,
         credits_required: String,
         estimated_results: Integer,
+        id: String,
+        poll_after_ms: Integer,
         source: String,
-        resolved_x_user_id: String
+        resolved_x_user_id: String,
+        status: XTwitterScraper::Models::ExtractionRunResponse::status,
+        status_url: String,
+        tool_type: XTwitterScraper::Models::ExtractionRunResponse::tool_type,
+        url: String,
+        wait_url: String
       }
+
+      type status = :pending | :running | :canceled | :completed | :failed
+
+      module Status
+        extend XTwitterScraper::Internal::Type::Enum
+
+        PENDING: :pending
+        RUNNING: :running
+        CANCELED: :canceled
+        COMPLETED: :completed
+        FAILED: :failed
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionRunResponse::status]
+      end
+
+      type tool_type =
+        :article_extractor
+        | :community_extractor
+        | :community_moderator_explorer
+        | :community_post_extractor
+        | :community_search
+        | :favoriters
+        | :follower_explorer
+        | :following_explorer
+        | :list_follower_explorer
+        | :list_member_extractor
+        | :list_post_extractor
+        | :mention_extractor
+        | :people_search
+        | :post_extractor
+        | :quote_extractor
+        | :reply_extractor
+        | :repost_extractor
+        | :space_explorer
+        | :thread_extractor
+        | :tweet_search_extractor
+        | :user_affiliates
+        | :user_likes
+        | :user_media
+        | :verified_follower_explorer
+
+      module ToolType
+        extend XTwitterScraper::Internal::Type::Enum
+
+        ARTICLE_EXTRACTOR: :article_extractor
+        COMMUNITY_EXTRACTOR: :community_extractor
+        COMMUNITY_MODERATOR_EXPLORER: :community_moderator_explorer
+        COMMUNITY_POST_EXTRACTOR: :community_post_extractor
+        COMMUNITY_SEARCH: :community_search
+        FAVORITERS: :favoriters
+        FOLLOWER_EXPLORER: :follower_explorer
+        FOLLOWING_EXPLORER: :following_explorer
+        LIST_FOLLOWER_EXPLORER: :list_follower_explorer
+        LIST_MEMBER_EXTRACTOR: :list_member_extractor
+        LIST_POST_EXTRACTOR: :list_post_extractor
+        MENTION_EXTRACTOR: :mention_extractor
+        PEOPLE_SEARCH: :people_search
+        POST_EXTRACTOR: :post_extractor
+        QUOTE_EXTRACTOR: :quote_extractor
+        REPLY_EXTRACTOR: :reply_extractor
+        REPOST_EXTRACTOR: :repost_extractor
+        SPACE_EXPLORER: :space_explorer
+        THREAD_EXTRACTOR: :thread_extractor
+        TWEET_SEARCH_EXTRACTOR: :tweet_search_extractor
+        USER_AFFILIATES: :user_affiliates
+        USER_LIKES: :user_likes
+        USER_MEDIA: :user_media
+        VERIFIED_FOLLOWER_EXPLORER: :verified_follower_explorer
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionRunResponse::tool_type]
+      end
     end
   end
 end

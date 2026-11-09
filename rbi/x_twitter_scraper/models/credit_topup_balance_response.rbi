@@ -15,6 +15,15 @@ module XTwitterScraper
           )
         end
 
+      # Currency the checkout charges.
+      sig { returns(XTwitterScraper::Models::Currency::TaggedSymbol) }
+      attr_accessor :charged_currency
+
+      # Amount the checkout charges before tax, in the currency's smallest unit. JPY and
+      # KRW have no decimals, so 1580 JPY is ¥1,580.
+      sig { returns(Integer) }
+      attr_accessor :charged_minor_units
+
       # Stable Xquik redirect URL for the active checkout.
       sig { returns(String) }
       attr_accessor :redirect_url
@@ -25,9 +34,14 @@ module XTwitterScraper
       attr_accessor :url
 
       sig do
-        params(redirect_url: String, url: String).returns(T.attached_class)
+        params(charged_currency: XTwitterScraper::Models::Currency::OrSymbol, charged_minor_units: Integer, redirect_url: String, url: String).returns(T.attached_class)
       end
       def self.new(
+# Currency the checkout charges.
+charged_currency:,
+# Amount the checkout charges before tax, in the currency's smallest unit. JPY and
+# KRW have no decimals, so 1580 JPY is ¥1,580.
+charged_minor_units:,
         # Stable Xquik redirect URL for the active checkout.
         redirect_url:,
         # Same stable Xquik redirect URL as redirect_url. The response never exposes the
@@ -36,7 +50,7 @@ module XTwitterScraper
       )
       end
 
-      sig { override.returns({ redirect_url: String, url: String }) }
+      sig { override.returns({ charged_currency: XTwitterScraper::Models::Currency::TaggedSymbol, charged_minor_units: Integer, redirect_url: String, url: String }) }
       def to_hash
       end
     end

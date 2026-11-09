@@ -4,16 +4,36 @@
 
 module XTwitterScraper
   module Models
-    type credit_topup_balance_response = { redirect_url: String, url: String }
+    type credit_topup_balance_response =
+      {
+        charged_currency: XTwitterScraper::Models::currency,
+        charged_minor_units: Integer,
+        redirect_url: String,
+        url: String
+      }
 
     class CreditTopupBalanceResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor charged_currency: XTwitterScraper::Models::currency
+
+      attr_accessor charged_minor_units: Integer
+
       attr_accessor redirect_url: String
 
       attr_accessor url: String
 
-      def initialize: (redirect_url: String, url: String) -> void
+      def initialize: (
+        charged_currency: XTwitterScraper::Models::currency,
+        charged_minor_units: Integer,
+        redirect_url: String,
+        url: String
+      ) -> void
 
-      def to_hash: -> { redirect_url: String, url: String }
+      def to_hash: -> {
+        charged_currency: XTwitterScraper::Models::currency,
+        charged_minor_units: Integer,
+        redirect_url: String,
+        url: String
+      }
     end
   end
 end

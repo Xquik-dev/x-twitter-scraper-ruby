@@ -9,8 +9,12 @@ module XTwitterScraper
         {
           id: String,
           created_at: Time,
+          expires_at: Time,
           health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health,
           status: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::status,
+          message: String,
+          object: :x_account_connection_challenge,
+          username: String,
           x_user_id: String,
           x_username: String
         }
@@ -22,6 +26,10 @@ module XTwitterScraper
 
         def created_at=: (Time) -> Time
 
+        attr_reader expires_at: Time?
+
+        def expires_at=: (Time) -> Time
+
         attr_reader health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health?
 
         def health=: (
@@ -29,6 +37,20 @@ module XTwitterScraper
         ) -> XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health
 
         attr_accessor status: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::status
+
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        attr_reader object: :x_account_connection_challenge?
+
+        def object=: (
+          :x_account_connection_challenge
+        ) -> :x_account_connection_challenge
+
+        attr_reader username: String?
+
+        def username=: (String) -> String
 
         attr_reader x_user_id: String?
 
@@ -42,7 +64,11 @@ module XTwitterScraper
           id: String,
           status: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::status,
           ?created_at: Time,
+          ?expires_at: Time,
           ?health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health,
+          ?message: String,
+          ?object: :x_account_connection_challenge,
+          ?username: String,
           ?x_user_id: String,
           ?x_username: String
         ) -> void
@@ -50,8 +76,12 @@ module XTwitterScraper
         def to_hash: -> {
           id: String,
           created_at: Time,
+          expires_at: Time,
           health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health,
           status: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::status,
+          message: String,
+          object: :x_account_connection_challenge,
+          username: String,
           x_user_id: String,
           x_username: String
         }
