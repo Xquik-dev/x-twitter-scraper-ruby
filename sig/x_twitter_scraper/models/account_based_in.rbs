@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type account_based_in = ::Hash[Symbol, top]
+
+    class AccountBasedIn < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor value: String
+
+      attr_accessor level: XTwitterScraper::Models::AccountBasedIn::level
+
+      attr_accessor observed_at: Time
+
+      def initialize: (
+        value: String,
+        level: XTwitterScraper::Models::AccountBasedIn::level,
+        observed_at: Time
+      ) -> void
+
+      def to_hash: -> ::Hash[Symbol, top]
+
+      type level = :country | :region
+
+      module Level
+        extend XTwitterScraper::Internal::Type::Enum
+
+        COUNTRY: :country
+        REGION: :region
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::AccountBasedIn::level]
+      end
+    end
+  end
+end
