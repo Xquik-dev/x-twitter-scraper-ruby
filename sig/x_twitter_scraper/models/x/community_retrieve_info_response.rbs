@@ -130,7 +130,7 @@ module XTwitterScraper
           type creator =
             { id: String, username: String, verified: bool, name: String }
 
-          class Creator < XTwitterScraper::Internal::Type::BaseModel
+          class Creator < XTwitterScraper::Models::UserProfile
             attr_accessor id: String
 
             attr_accessor username: String

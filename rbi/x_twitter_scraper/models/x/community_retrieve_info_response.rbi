@@ -267,7 +267,7 @@ module XTwitterScraper
           def to_hash
           end
 
-          class Creator < XTwitterScraper::Internal::Type::BaseModel
+          class Creator < XTwitterScraper::Models::UserProfile
             OrHash =
               T.type_alias do
                 T.any(

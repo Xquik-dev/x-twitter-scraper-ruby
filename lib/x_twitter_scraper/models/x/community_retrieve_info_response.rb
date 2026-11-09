@@ -129,7 +129,7 @@ module XTwitterScraper
           #   @param rules [Array<XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule>] Community rules
 
           # @see XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community#creator
-          class Creator < XTwitterScraper::Internal::Type::BaseModel
+          class Creator < XTwitterScraper::Models::UserProfile
             # @!attribute id
             #
             #   @return [String]
