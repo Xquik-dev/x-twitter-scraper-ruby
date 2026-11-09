@@ -1353,19 +1353,34 @@ module XTwitterScraper
           sig { params(edit_tweet_ids: T::Array[String]).void }
           attr_writer :edit_tweet_ids
 
+          sig { returns(T.nilable(String)) }
+          attr_reader :initial_tweet_id
+
+          sig { params(initial_tweet_id: String).void }
+          attr_writer :initial_tweet_id
+
           # Edit history metadata returned by X.
           sig do
             params(
               editable_until_msecs: String,
-              edit_tweet_ids: T::Array[String]
+              edit_tweet_ids: T::Array[String],
+              initial_tweet_id: String
             ).returns(T.attached_class)
           end
-          def self.new(editable_until_msecs: nil, edit_tweet_ids: nil)
+          def self.new(
+            editable_until_msecs: nil,
+            edit_tweet_ids: nil,
+            initial_tweet_id: nil
+          )
           end
 
           sig do
             override.returns(
-              { editable_until_msecs: String, edit_tweet_ids: T::Array[String] }
+              {
+                editable_until_msecs: String,
+                edit_tweet_ids: T::Array[String],
+                initial_tweet_id: String
+              }
             )
           end
           def to_hash
