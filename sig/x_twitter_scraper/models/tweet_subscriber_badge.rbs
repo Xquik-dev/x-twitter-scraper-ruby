@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type tweet_subscriber_badge = ::Hash[Symbol, top]
+
+    class TweetSubscriberBadge < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor creator_id: String
+
+      def initialize: (creator_id: String) -> void
+
+      def to_hash: -> ::Hash[Symbol, top]
+    end
+  end
+end

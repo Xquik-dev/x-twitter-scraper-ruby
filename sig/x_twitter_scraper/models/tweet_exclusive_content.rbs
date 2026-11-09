@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type tweet_exclusive_content = ::Hash[Symbol, top]
+
+    class TweetExclusiveContent < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor creator_user_name: String
+
+      attr_reader subscribe_url: String?
+
+      def subscribe_url=: (String) -> String
+
+      def initialize: (
+        creator_user_name: String,
+        ?subscribe_url: String
+      ) -> void
+
+      def to_hash: -> ::Hash[Symbol, top]
+    end
+  end
+end
