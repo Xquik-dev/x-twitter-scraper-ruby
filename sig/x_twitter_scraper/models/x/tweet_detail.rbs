@@ -587,7 +587,11 @@ module XTwitterScraper
         end
 
         type edit =
-          { editable_until_msecs: String, edit_tweet_ids: ::Array[String] }
+          {
+            editable_until_msecs: String,
+            edit_tweet_ids: ::Array[String],
+            initial_tweet_id: String
+          }
 
         class Edit < XTwitterScraper::Internal::Type::BaseModel
           attr_reader editable_until_msecs: String?
@@ -598,9 +602,14 @@ module XTwitterScraper
 
           def edit_tweet_ids=: (::Array[String]) -> ::Array[String]
 
+          attr_reader initial_tweet_id: String?
+
+          def initial_tweet_id=: (String) -> String
+
           def initialize: (
             ?editable_until_msecs: String,
-            ?edit_tweet_ids: ::Array[String]
+            ?edit_tweet_ids: ::Array[String],
+            ?initial_tweet_id: String
           ) -> void
 
           def to_hash: -> ::Hash[Symbol, top]

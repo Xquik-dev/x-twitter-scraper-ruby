@@ -847,11 +847,17 @@ module XTwitterScraper
           #   @return [Array<String>, nil]
           optional :edit_tweet_ids, XTwitterScraper::Internal::Type::ArrayOf[String], api_name: :editTweetIds
 
-          # @!method initialize(editable_until_msecs: nil, edit_tweet_ids: nil)
+          # @!attribute initial_tweet_id
+          #
+          #   @return [String, nil]
+          optional :initial_tweet_id, String, api_name: :initialTweetId
+
+          # @!method initialize(editable_until_msecs: nil, edit_tweet_ids: nil, initial_tweet_id: nil)
           #   Edit history metadata returned by X.
           #
           #   @param editable_until_msecs [String]
           #   @param edit_tweet_ids [Array<String>]
+          #   @param initial_tweet_id [String]
         end
 
         # @see XTwitterScraper::Models::X::TweetDetail#note_tweet
