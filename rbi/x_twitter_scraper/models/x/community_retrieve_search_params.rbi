@@ -20,8 +20,11 @@ module XTwitterScraper
           end
 
         # Numeric ID of the community whose posts to search
-        sig { returns(String) }
-        attr_accessor :community_id
+        sig { returns(T.nilable(String)) }
+        attr_reader :community_id
+
+        sig { params(community_id: String).void }
+        attr_writer :community_id
 
         # Search query
         sig { returns(String) }
@@ -440,7 +443,7 @@ module XTwitterScraper
         end
         def self.new(
           # Numeric ID of the community whose posts to search
-          community_id:,
+          community_id: nil,
           # Search query
           q:,
           # Words or quoted phrases where any one can match. Separate with spaces, commas,

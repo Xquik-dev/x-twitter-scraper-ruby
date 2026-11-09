@@ -78,7 +78,9 @@ module XTwitterScraper
         extend XTwitterScraper::Internal::Type::RequestParameters::Converter
         include XTwitterScraper::Internal::Type::RequestParameters
 
-        attr_accessor q: String
+        attr_reader q: String?
+
+        def q=: (String) -> String
 
         attr_reader advanced_query: String?
 
@@ -345,7 +347,7 @@ module XTwitterScraper
         def within_time=: (String) -> String
 
         def initialize: (
-          q: String,
+          ?q: String,
           ?advanced_query: String,
           ?any_words: String,
           ?blue_verified_only: bool,

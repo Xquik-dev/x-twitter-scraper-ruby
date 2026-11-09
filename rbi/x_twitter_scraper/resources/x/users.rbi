@@ -94,7 +94,7 @@ module XTwitterScraper
         def retrieve_batch(
           # Comma-separated numeric user IDs (1-100 values). Duplicate IDs are ignored while
           # preserving first-seen order.
-          ids:,
+          ids: nil,
           # Match any comma-separated or line-separated bio term, ignoring case.
           bio_contains: nil,
           # Only return profiles X marks as blue verified. X marks many business &

@@ -21,8 +21,11 @@ module XTwitterScraper
 
         # Comma-separated numeric user IDs (1-100 values). Duplicate IDs are ignored while
         # preserving first-seen order.
-        sig { returns(String) }
-        attr_accessor :ids
+        sig { returns(T.nilable(String)) }
+        attr_reader :ids
+
+        sig { params(ids: String).void }
+        attr_writer :ids
 
         # Match any comma-separated or line-separated bio term, ignoring case.
         sig { returns(T.nilable(String)) }
@@ -213,7 +216,7 @@ module XTwitterScraper
         def self.new(
           # Comma-separated numeric user IDs (1-100 values). Duplicate IDs are ignored while
           # preserving first-seen order.
-          ids:,
+          ids: nil,
           # Match any comma-separated or line-separated bio term, ignoring case.
           bio_contains: nil,
           # Only return profiles X marks as blue verified. X marks many business &

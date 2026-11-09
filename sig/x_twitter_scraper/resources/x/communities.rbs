@@ -87,7 +87,7 @@ module XTwitterScraper
         ) -> XTwitterScraper::PaginatedUsers
 
         def retrieve_search: (
-          community_id: String,
+          ?community_id: String,
           q: String,
           ?any_words: String,
           ?blue_verified_only: bool,
