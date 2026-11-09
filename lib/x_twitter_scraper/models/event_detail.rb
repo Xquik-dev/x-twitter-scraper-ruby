@@ -48,6 +48,13 @@ module XTwitterScraper
       #   @return [String, nil]
       optional :keyword_monitor_id, String, api_name: :keywordMonitorId
 
+      # @!attribute monitor_name
+      #   Your monitor label when Xquik created this event, present when set. A rename
+      #   leaves the event's label unchanged.
+      #
+      #   @return [String, nil]
+      optional :monitor_name, String, api_name: :monitorName
+
       # @!attribute query
       #   Keyword query for this detailed monitor event.
       #
@@ -65,7 +72,14 @@ module XTwitterScraper
       #   @return [String, nil]
       optional :x_event_id, String, api_name: :xEventId
 
-      # @!method initialize(id:, data:, monitor_id:, monitor_type:, occurred_at:, type:, keyword_monitor_id: nil, query: nil, username: nil, x_event_id: nil)
+      # @!attribute x_user_id
+      #   Permanent X user ID of the monitored account on account events. It stays the
+      #   same after a username change.
+      #
+      #   @return [String, nil]
+      optional :x_user_id, String, api_name: :xUserId
+
+      # @!method initialize(id:, data:, monitor_id:, monitor_type:, occurred_at:, type:, keyword_monitor_id: nil, monitor_name: nil, query: nil, username: nil, x_event_id: nil, x_user_id: nil)
       #   Full monitor event including payload data and optional X event ID.
       #
       #   @param id [String]
@@ -82,11 +96,15 @@ module XTwitterScraper
       #
       #   @param keyword_monitor_id [String] Keyword monitor ID included on detailed keyword events.
       #
+      #   @param monitor_name [String] Your monitor label when Xquik created this event, present when set. A rename lea
+      #
       #   @param query [String] Keyword query for this detailed monitor event.
       #
       #   @param username [String] Account username for this detailed monitor event.
       #
       #   @param x_event_id [String]
+      #
+      #   @param x_user_id [String] Permanent X user ID of the monitored account on account events. It stays the sam
 
       # Source monitor type for this detailed event.
       #
