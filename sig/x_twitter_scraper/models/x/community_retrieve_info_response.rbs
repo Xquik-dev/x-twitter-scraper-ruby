@@ -24,6 +24,8 @@ module XTwitterScraper
         type community =
           {
             id: String,
+            admin: XTwitterScraper::Models::UserProfile,
+            banner: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner,
             banner_url: String,
             created_at: String,
             creator: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator,
@@ -32,14 +34,29 @@ module XTwitterScraper
             is_nsfw: bool,
             join_policy: String,
             member_count: Integer,
+            members_facepile: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::members_facepile],
             moderator_count: Integer,
             name: String,
             primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
-            rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
+            question: String,
+            rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule],
+            search_tags: ::Array[String]
           }
 
         class Community < XTwitterScraper::Internal::Type::BaseModel
           attr_accessor id: String
+
+          attr_reader admin: XTwitterScraper::Models::UserProfile?
+
+          def admin=: (
+            XTwitterScraper::Models::UserProfile | ::Hash[Symbol, top]
+          ) -> XTwitterScraper::Models::UserProfile
+
+          attr_reader banner: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner?
+
+          def banner=: (
+            XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner | ::Hash[Symbol, top]
+          ) -> XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner
 
           attr_reader banner_url: String?
 
@@ -75,6 +92,12 @@ module XTwitterScraper
 
           def member_count=: (Integer) -> Integer
 
+          attr_reader members_facepile: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::members_facepile]?
+
+          def members_facepile=: (
+            ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::members_facepile]
+          ) -> ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::members_facepile]
+
           attr_reader moderator_count: Integer?
 
           def moderator_count=: (Integer) -> Integer
@@ -89,14 +112,24 @@ module XTwitterScraper
             XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic
           ) -> XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic
 
+          attr_reader question: String?
+
+          def question=: (String) -> String
+
           attr_reader rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]?
 
           def rules=: (
             ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
           ) -> ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
 
+          attr_reader search_tags: ::Array[String]?
+
+          def search_tags=: (::Array[String]) -> ::Array[String]
+
           def initialize: (
             id: String,
+            ?admin: XTwitterScraper::Models::UserProfile | ::Hash[Symbol, top],
+            ?banner: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner | ::Hash[Symbol, top],
             ?banner_url: String,
             ?created_at: String,
             ?creator: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator,
@@ -105,14 +138,19 @@ module XTwitterScraper
             ?is_nsfw: bool,
             ?join_policy: String,
             ?member_count: Integer,
+            ?members_facepile: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::members_facepile],
             ?moderator_count: Integer,
             ?name: String,
             ?primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
-            ?rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
+            ?question: String,
+            ?rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule],
+            ?search_tags: ::Array[String]
           ) -> void
 
           def to_hash: -> {
             id: String,
+            admin: XTwitterScraper::Models::UserProfile,
+            banner: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner,
             banner_url: String,
             created_at: String,
             creator: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator,
@@ -121,10 +159,13 @@ module XTwitterScraper
             is_nsfw: bool,
             join_policy: String,
             member_count: Integer,
+            members_facepile: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::members_facepile],
             moderator_count: Integer,
             name: String,
             primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
-            rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
+            question: String,
+            rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule],
+            search_tags: ::Array[String]
           }
 
           type creator =
@@ -194,6 +235,124 @@ module XTwitterScraper
             ) -> void
 
             def to_hash: -> { id: String, description: String, name: String }
+          end
+
+          type banner = ::Hash[Symbol, top]
+
+          class Banner < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor url: String
+
+            attr_reader width: Integer?
+
+            def width=: (Integer) -> Integer
+
+            attr_reader height: Integer?
+
+            def height=: (Integer) -> Integer
+
+            attr_reader colors: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Color]?
+
+            def colors=: (
+              ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Color | ::Hash[Symbol, top]]
+            ) -> ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Color]
+
+            attr_reader focus: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Focus?
+
+            def focus=: (
+              XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Focus | ::Hash[Symbol, top]
+            ) -> XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Focus
+
+            def initialize: (
+              url: String,
+              ?width: Integer,
+              ?height: Integer,
+              ?colors: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Color | ::Hash[Symbol, top]],
+              ?focus: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::Focus | ::Hash[Symbol, top]
+            ) -> void
+
+            def to_hash: -> ::Hash[Symbol, top]
+
+            type color = ::Hash[Symbol, top]
+
+            class Color < XTwitterScraper::Internal::Type::BaseModel
+              attr_accessor percentage: Float
+
+              attr_accessor red: Integer
+
+              attr_accessor green: Integer
+
+              attr_accessor blue: Integer
+
+              def initialize: (
+                percentage: Float,
+                red: Integer,
+                green: Integer,
+                blue: Integer
+              ) -> void
+
+              def to_hash: -> ::Hash[Symbol, top]
+            end
+
+            type focus = ::Hash[Symbol, top]
+
+            class Focus < XTwitterScraper::Internal::Type::BaseModel
+              attr_reader left: Integer?
+
+              def left=: (Integer) -> Integer
+
+              attr_reader top: Integer?
+
+              def top=: (Integer) -> Integer
+
+              attr_reader width: Integer?
+
+              def width=: (Integer) -> Integer
+
+              attr_reader height: Integer?
+
+              def height=: (Integer) -> Integer
+
+              def initialize: (
+                ?left: Integer,
+                ?top: Integer,
+                ?width: Integer,
+                ?height: Integer
+              ) -> void
+
+              def to_hash: -> ::Hash[Symbol, top]
+            end
+          end
+
+          type members_facepile =
+            XTwitterScraper::Models::UserProfile
+            | XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::MembersFacepile::CommunityMemberPreview
+
+          module MembersFacepile
+            extend XTwitterScraper::Internal::Type::Union
+
+            type community_member_preview = ::Hash[Symbol, top]
+
+            class CommunityMemberPreview < XTwitterScraper::Internal::Type::BaseModel
+              attr_accessor id: String
+
+              attr_reader profile_picture: String?
+
+              def profile_picture=: (String) -> String
+
+              attr_reader profile_picture_original: String?
+
+              def profile_picture_original=: (String) -> String
+
+              def initialize: (
+                id: String,
+                ?profile_picture: String,
+                ?profile_picture_original: String
+              ) -> void
+
+              def to_hash: -> ::Hash[Symbol, top]
+            end
+
+            def self?.variants: -> ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::members_facepile]
           end
         end
       end
