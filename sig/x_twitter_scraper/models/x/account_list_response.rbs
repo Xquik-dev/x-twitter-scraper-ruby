@@ -6,16 +6,34 @@ module XTwitterScraper
   module Models
     module X
       type account_list_response =
-        { accounts: ::Array[XTwitterScraper::X::XAccount] }
+        {
+          accounts: ::Array[XTwitterScraper::X::XAccount],
+          has_more: bool,
+          next_cursor: String
+        }
 
       class AccountListResponse < XTwitterScraper::Internal::Type::BaseModel
         attr_accessor accounts: ::Array[XTwitterScraper::X::XAccount]
 
+        attr_reader has_more: bool?
+
+        def has_more=: (bool) -> bool
+
+        attr_reader next_cursor: String?
+
+        def next_cursor=: (String) -> String
+
         def initialize: (
-          accounts: ::Array[XTwitterScraper::X::XAccount]
+          accounts: ::Array[XTwitterScraper::X::XAccount],
+          ?has_more: bool,
+          ?next_cursor: String
         ) -> void
 
-        def to_hash: -> { accounts: ::Array[XTwitterScraper::X::XAccount] }
+        def to_hash: -> {
+          accounts: ::Array[XTwitterScraper::X::XAccount],
+          has_more: bool,
+          next_cursor: String
+        }
       end
     end
   end
