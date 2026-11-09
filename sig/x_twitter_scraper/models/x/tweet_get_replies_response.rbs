@@ -4,7 +4,13 @@ module XTwitterScraper
       type tweet_get_replies_response =
         {
           diagnostic: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic,
-          nested_replies: ::Array[XTwitterScraper::SearchTweet]
+          hidden_replies: Integer,
+          limit_reached: bool,
+          message: String,
+          nested_replies: ::Array[XTwitterScraper::SearchTweet],
+          order_partial: bool,
+          partial_before: Time,
+          unreached_replies: Integer
         }
 
       class TweetGetRepliesResponse < XTwitterScraper::Models::PaginatedTweets
@@ -14,20 +20,56 @@ module XTwitterScraper
           XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic _
         ) -> XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic
 
+        attr_reader hidden_replies: Integer?
+
+        def hidden_replies=: (Integer) -> Integer
+
+        attr_reader limit_reached: bool?
+
+        def limit_reached=: (bool) -> bool
+
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
         def nested_replies: -> ::Array[XTwitterScraper::SearchTweet]?
 
         def nested_replies=: (
           ::Array[XTwitterScraper::SearchTweet] _
         ) -> ::Array[XTwitterScraper::SearchTweet]
 
+        attr_reader order_partial: bool?
+
+        def order_partial=: (bool) -> bool
+
+        attr_reader partial_before: Time?
+
+        def partial_before=: (Time) -> Time
+
+        attr_reader unreached_replies: Integer?
+
+        def unreached_replies=: (Integer) -> Integer
+
         def initialize: (
           ?diagnostic: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic,
-          ?nested_replies: ::Array[XTwitterScraper::SearchTweet]
+          ?hidden_replies: Integer,
+          ?limit_reached: bool,
+          ?message: String,
+          ?nested_replies: ::Array[XTwitterScraper::SearchTweet],
+          ?order_partial: bool,
+          ?partial_before: Time,
+          ?unreached_replies: Integer
         ) -> void
 
         def to_hash: -> {
           diagnostic: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic,
-          nested_replies: ::Array[XTwitterScraper::SearchTweet]
+          hidden_replies: Integer,
+          limit_reached: bool,
+          message: String,
+          nested_replies: ::Array[XTwitterScraper::SearchTweet],
+          order_partial: bool,
+          partial_before: Time,
+          unreached_replies: Integer
         }
 
         type diagnostic =
@@ -46,10 +88,13 @@ module XTwitterScraper
             reported_reply_count: Integer,
             response_truncated: bool,
             richness: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::Richness,
+            sources_ended: bool,
             strategies_attempted: ::Array[XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted],
             target_direct_replies: Integer,
             unique_direct_replies: Integer,
-            unrelated_count: Integer
+            unrelated_count: Integer,
+            reply_scope_complete: bool,
+            reply_tree_complete: bool
           }
 
         class Diagnostic < XTwitterScraper::Internal::Type::BaseModel
@@ -81,6 +126,8 @@ module XTwitterScraper
 
           attr_accessor richness: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::Richness
 
+          attr_accessor sources_ended: bool
+
           attr_accessor strategies_attempted: ::Array[XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted]
 
           attr_accessor target_direct_replies: Integer
@@ -88,6 +135,14 @@ module XTwitterScraper
           attr_accessor unique_direct_replies: Integer
 
           attr_accessor unrelated_count: Integer
+
+          attr_reader reply_scope_complete: bool?
+
+          def reply_scope_complete=: (bool) -> bool
+
+          attr_reader reply_tree_complete: bool?
+
+          def reply_tree_complete=: (bool) -> bool
 
           def initialize: (
             complete: bool,
@@ -104,10 +159,13 @@ module XTwitterScraper
             reported_reply_count: Integer,
             response_truncated: bool,
             richness: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::Richness,
+            sources_ended: bool,
             strategies_attempted: ::Array[XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted],
             target_direct_replies: Integer,
             unique_direct_replies: Integer,
-            unrelated_count: Integer
+            unrelated_count: Integer,
+            ?reply_scope_complete: bool,
+            ?reply_tree_complete: bool
           ) -> void
 
           def to_hash: -> {
@@ -125,10 +183,13 @@ module XTwitterScraper
             reported_reply_count: Integer,
             response_truncated: bool,
             richness: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::Richness,
+            sources_ended: bool,
             strategies_attempted: ::Array[XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted],
             target_direct_replies: Integer,
             unique_direct_replies: Integer,
-            unrelated_count: Integer
+            unrelated_count: Integer,
+            reply_scope_complete: bool,
+            reply_tree_complete: bool
           }
 
           type richness =

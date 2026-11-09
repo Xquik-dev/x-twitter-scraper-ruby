@@ -8,7 +8,12 @@ module XTwitterScraper
       {
         has_next_page: bool,
         next_cursor: String,
-        tweets: ::Array[XTwitterScraper::SearchTweet]
+        tweets: ::Array[XTwitterScraper::SearchTweet],
+        filtered_count: Integer,
+        read_back_to: Time,
+        search_context: XTwitterScraper::PaginatedTweets::SearchContext,
+        searched_query: String,
+        window_complete: bool
       }
 
     class PaginatedTweets < XTwitterScraper::Internal::Type::BaseModel
@@ -18,17 +23,83 @@ module XTwitterScraper
 
       attr_accessor tweets: ::Array[XTwitterScraper::SearchTweet]
 
+      attr_reader filtered_count: Integer?
+
+      def filtered_count=: (Integer) -> Integer
+
+      attr_reader read_back_to: Time?
+
+      def read_back_to=: (Time) -> Time
+
+      attr_reader search_context: XTwitterScraper::PaginatedTweets::SearchContext?
+
+      def search_context=: (
+        XTwitterScraper::PaginatedTweets::SearchContext | ::Hash[Symbol, top]
+      ) -> XTwitterScraper::PaginatedTweets::SearchContext
+
+      attr_reader searched_query: String?
+
+      def searched_query=: (String) -> String
+
+      attr_reader window_complete: bool?
+
+      def window_complete=: (bool) -> bool
+
       def initialize: (
         has_next_page: bool,
         next_cursor: String,
-        tweets: ::Array[XTwitterScraper::SearchTweet]
+        tweets: ::Array[XTwitterScraper::SearchTweet],
+        ?filtered_count: Integer,
+        ?read_back_to: Time,
+        ?search_context: XTwitterScraper::PaginatedTweets::SearchContext | ::Hash[Symbol, top],
+        ?searched_query: String,
+        ?window_complete: bool
       ) -> void
 
       def to_hash: -> {
         has_next_page: bool,
         next_cursor: String,
-        tweets: ::Array[XTwitterScraper::SearchTweet]
+        tweets: ::Array[XTwitterScraper::SearchTweet],
+        filtered_count: Integer,
+        read_back_to: Time,
+        search_context: XTwitterScraper::PaginatedTweets::SearchContext,
+        searched_query: String,
+        window_complete: bool
       }
+
+      type search_context = ::Hash[Symbol, top]
+
+      class SearchContext < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor smart_tag: XTwitterScraper::PaginatedTweets::SearchContext::SmartTag
+
+        def initialize: (
+          smart_tag: XTwitterScraper::PaginatedTweets::SearchContext::SmartTag | ::Hash[Symbol, top]
+        ) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
+
+        type smart_tag = ::Hash[Symbol, top]
+
+        class SmartTag < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_reader active: bool?
+
+          def active=: (bool) -> bool
+
+          attr_reader supports_ohlc: bool?
+
+          def supports_ohlc=: (bool) -> bool
+
+          def initialize: (
+            id: String,
+            ?active: bool,
+            ?supports_ohlc: bool
+          ) -> void
+
+          def to_hash: -> ::Hash[Symbol, top]
+        end
+      end
     end
   end
 end

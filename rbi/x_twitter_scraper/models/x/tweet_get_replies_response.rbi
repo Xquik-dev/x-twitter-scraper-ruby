@@ -30,6 +30,30 @@ module XTwitterScraper
         end
         attr_writer :diagnostic
 
+        # Present on the last automatic page, and on a complete-mode answer without rows.
+        # X counts this many more replies but shows them to nobody. They may be hidden,
+        # protected or deleted. A retry returns the same replies.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :hidden_replies
+
+        sig { params(hidden_replies: Integer).void }
+        attr_writer :hidden_replies
+
+        # Present when your limit cut a complete-mode answer. The post has more replies.
+        # Raise limit to get them all.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :limit_reached
+
+        sig { params(limit_reached: T::Boolean).void }
+        attr_writer :limit_reached
+
+        # Explains an answer cut by your limit.
+        sig { returns(T.nilable(String)) }
+        attr_reader :message
+
+        sig { params(message: String).void }
+        attr_writer :message
+
         # Nested replies. Excluded from direct coverage.
         sig { returns(T.nilable(T::Array[XTwitterScraper::SearchTweet])) }
         attr_reader :nested_replies
@@ -41,6 +65,34 @@ module XTwitterScraper
         end
         attr_writer :nested_replies
 
+        # Present with latest or oldest sort. The read stopped before it held every reply
+        # X shows. Rows stay sorted by date, but replies may be missing between them.
+        # Retry later for a gap-free order. Complete mode and automatic pages set it
+        # alike.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :order_partial
+
+        sig { params(order_partial: T::Boolean).void }
+        attr_writer :order_partial
+
+        # Present on an answer that lacks some replies posted before this time. A retry
+        # returns about the same replies.
+        sig { returns(T.nilable(Time)) }
+        attr_reader :partial_before
+
+        sig { params(partial_before: Time).void }
+        attr_writer :partial_before
+
+        # Present on automatic pages without filters while X counts replies the read
+        # hasn't reached. If a reply that belongs in your rows is missing, it's among
+        # them. The count drops as you read more pages. On the last page, it counts the
+        # replies the read can't reach.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :unreached_replies
+
+        sig { params(unreached_replies: Integer).void }
+        attr_writer :unreached_replies
+
         # Direct reply rows. No-mode requests use resumable automatic coverage. Complete
         # mode also returns nested replies and coverage diagnostics. Keep nested replies
         # separate from direct coverage.
@@ -48,14 +100,42 @@ module XTwitterScraper
           params(
             diagnostic:
               XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::OrHash,
-            nested_replies: T::Array[XTwitterScraper::SearchTweet::OrHash]
+            hidden_replies: Integer,
+            limit_reached: T::Boolean,
+            message: String,
+            nested_replies: T::Array[XTwitterScraper::SearchTweet::OrHash],
+            order_partial: T::Boolean,
+            partial_before: Time,
+            unreached_replies: Integer
           ).returns(T.attached_class)
         end
         def self.new(
           # Evidence for direct-reply coverage and collector behavior.
           diagnostic: nil,
+          # Present on the last automatic page, and on a complete-mode answer without rows.
+          # X counts this many more replies but shows them to nobody. They may be hidden,
+          # protected or deleted. A retry returns the same replies.
+          hidden_replies: nil,
+          # Present when your limit cut a complete-mode answer. The post has more replies.
+          # Raise limit to get them all.
+          limit_reached: nil,
+          # Explains an answer cut by your limit.
+          message: nil,
           # Nested replies. Excluded from direct coverage.
-          nested_replies: nil
+          nested_replies: nil,
+          # Present with latest or oldest sort. The read stopped before it held every reply
+          # X shows. Rows stay sorted by date, but replies may be missing between them.
+          # Retry later for a gap-free order. Complete mode and automatic pages set it
+          # alike.
+          order_partial: nil,
+          # Present on an answer that lacks some replies posted before this time. A retry
+          # returns about the same replies.
+          partial_before: nil,
+          # Present on automatic pages without filters while X counts replies the read
+          # hasn't reached. If a reply that belongs in your rows is missing, it's among
+          # them. The count drops as you read more pages. On the last page, it counts the
+          # replies the read can't reach.
+          unreached_replies: nil
         )
         end
 
@@ -64,7 +144,13 @@ module XTwitterScraper
             {
               diagnostic:
                 XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic,
-              nested_replies: T::Array[XTwitterScraper::SearchTweet]
+              hidden_replies: Integer,
+              limit_reached: T::Boolean,
+              message: String,
+              nested_replies: T::Array[XTwitterScraper::SearchTweet],
+              order_partial: T::Boolean,
+              partial_before: Time,
+              unreached_replies: Integer
             }
           )
         end
@@ -148,6 +234,10 @@ module XTwitterScraper
           end
           attr_writer :richness
 
+          # True when no more replies can be found. A retry returns the same rows.
+          sig { returns(T::Boolean) }
+          attr_accessor :sources_ended
+
           # Per-strategy pagination and contribution evidence.
           sig do
             returns(
@@ -170,6 +260,21 @@ module XTwitterScraper
           sig { returns(Integer) }
           attr_accessor :unrelated_count
 
+          # Replies are accounted for through the requested scope & depth. Source errors
+          # remain separate.
+          sig { returns(T.nilable(T::Boolean)) }
+          attr_reader :reply_scope_complete
+
+          sig { params(reply_scope_complete: T::Boolean).void }
+          attr_writer :reply_scope_complete
+
+          # All child counts are known & match collected replies.
+          sig { returns(T.nilable(T::Boolean)) }
+          attr_reader :reply_tree_complete
+
+          sig { params(reply_tree_complete: T::Boolean).void }
+          attr_writer :reply_tree_complete
+
           # Evidence for direct-reply coverage and collector behavior.
           sig do
             params(
@@ -188,13 +293,16 @@ module XTwitterScraper
               response_truncated: T::Boolean,
               richness:
                 XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::Richness::OrHash,
+              sources_ended: T::Boolean,
               strategies_attempted:
                 T::Array[
                   XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::OrHash
                 ],
               target_direct_replies: Integer,
               unique_direct_replies: Integer,
-              unrelated_count: Integer
+              unrelated_count: Integer,
+              reply_scope_complete: T::Boolean,
+              reply_tree_complete: T::Boolean
             ).returns(T.attached_class)
           end
           def self.new(
@@ -226,6 +334,8 @@ module XTwitterScraper
             response_truncated:,
             # Field-presence counts across the collected direct replies.
             richness:,
+            # True when no more replies can be found. A retry returns the same rows.
+            sources_ended:,
             # Per-strategy pagination and contribution evidence.
             strategies_attempted:,
             # Minimum direct replies required for the coverage target.
@@ -233,7 +343,12 @@ module XTwitterScraper
             # Unique replies whose parent ID equals the source post ID.
             unique_direct_replies:,
             # Tweets rejected because they belonged elsewhere.
-            unrelated_count:
+            unrelated_count:,
+            # Replies are accounted for through the requested scope & depth. Source errors
+            # remain separate.
+            reply_scope_complete: nil,
+            # All child counts are known & match collected replies.
+            reply_tree_complete: nil
           )
           end
 
@@ -255,13 +370,16 @@ module XTwitterScraper
                 response_truncated: T::Boolean,
                 richness:
                   XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::Richness,
+                sources_ended: T::Boolean,
                 strategies_attempted:
                   T::Array[
                     XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted
                   ],
                 target_direct_replies: Integer,
                 unique_direct_replies: Integer,
-                unrelated_count: Integer
+                unrelated_count: Integer,
+                reply_scope_complete: T::Boolean,
+                reply_tree_complete: T::Boolean
               }
             )
           end

@@ -11,20 +11,78 @@ module XTwitterScraper
         #   @return [XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic, nil]
         optional :diagnostic, -> { XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic }
 
+        # @!attribute hidden_replies
+        #   Present on the last automatic page, and on a complete-mode answer without rows.
+        #   X counts this many more replies but shows them to nobody. They may be hidden,
+        #   protected or deleted. A retry returns the same replies.
+        #
+        #   @return [Integer, nil]
+        optional :hidden_replies, Integer, api_name: :hiddenReplies
+
+        # @!attribute limit_reached
+        #   Present when your limit cut a complete-mode answer. The post has more replies.
+        #   Raise limit to get them all.
+        #
+        #   @return [Boolean, nil]
+        optional :limit_reached, XTwitterScraper::Internal::Type::Boolean
+
+        # @!attribute message
+        #   Explains an answer cut by your limit.
+        #
+        #   @return [String, nil]
+        optional :message, String
+
         # @!attribute nested_replies
         #   Nested replies. Excluded from direct coverage.
         #
         #   @return [Array<XTwitterScraper::Models::SearchTweet>, nil]
         optional :nested_replies, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet] }
 
-        # @!method initialize(diagnostic: nil, nested_replies: nil)
+        # @!attribute order_partial
+        #   Present with latest or oldest sort. The read stopped before it held every reply
+        #   X shows. Rows stay sorted by date, but replies may be missing between them.
+        #   Retry later for a gap-free order. Complete mode and automatic pages set it
+        #   alike.
+        #
+        #   @return [Boolean, nil]
+        optional :order_partial, XTwitterScraper::Internal::Type::Boolean, api_name: :orderPartial
+
+        # @!attribute partial_before
+        #   Present on an answer that lacks some replies posted before this time. A retry
+        #   returns about the same replies.
+        #
+        #   @return [Time, nil]
+        optional :partial_before, Time, api_name: :partialBefore
+
+        # @!attribute unreached_replies
+        #   Present on automatic pages without filters while X counts replies the read
+        #   hasn't reached. If a reply that belongs in your rows is missing, it's among
+        #   them. The count drops as you read more pages. On the last page, it counts the
+        #   replies the read can't reach.
+        #
+        #   @return [Integer, nil]
+        optional :unreached_replies, Integer, api_name: :unreachedReplies
+
+        # @!method initialize(diagnostic: nil, hidden_replies: nil, limit_reached: nil, message: nil, nested_replies: nil, order_partial: nil, partial_before: nil, unreached_replies: nil)
         #   Direct reply rows. No-mode requests use resumable automatic coverage. Complete
         #   mode also returns nested replies and coverage diagnostics. Keep nested replies
         #   separate from direct coverage.
         #
         #   @param diagnostic [XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic] Evidence for direct-reply coverage and collector behavior.
         #
+        #   @param hidden_replies [Integer] Present on the last automatic page, and on a complete-mode answer without rows.
+        #
+        #   @param limit_reached [Boolean] Present when your limit cut a complete-mode answer. The post has more replies. R
+        #
+        #   @param message [String] Explains an answer cut by your limit.
+        #
         #   @param nested_replies [Array<XTwitterScraper::Models::SearchTweet>] Nested replies. Excluded from direct coverage.
+        #
+        #   @param order_partial [Boolean] Present with latest or oldest sort. The read stopped before it held every reply
+        #
+        #   @param partial_before [Time] Present on an answer that lacks some replies posted before this time. A retry re
+        #
+        #   @param unreached_replies [Integer] Present on automatic pages without filters while X counts replies the read hasn'
 
         class Diagnostic < XTwitterScraper::Internal::Type::BaseModel
           # @!attribute complete
@@ -113,6 +171,12 @@ module XTwitterScraper
           #   @return [XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::Richness]
           required :richness, -> { XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::Richness }
 
+          # @!attribute sources_ended
+          #   True when no more replies can be found. A retry returns the same rows.
+          #
+          #   @return [Boolean]
+          required :sources_ended, XTwitterScraper::Internal::Type::Boolean, api_name: :sourcesEnded
+
           # @!attribute strategies_attempted
           #   Per-strategy pagination and contribution evidence.
           #
@@ -139,7 +203,24 @@ module XTwitterScraper
           #   @return [Integer]
           required :unrelated_count, Integer, api_name: :unrelatedCount
 
-          # @!method initialize(complete:, coverage_percentage:, cursor_failures:, duplicate_count:, empty_false_progress_pages:, malformed_count:, missing_response_modules_or_fields:, nested_reply_count:, pages_attempted:, recommended_fallback:, repeated_cursor_count:, reported_reply_count:, response_truncated:, richness:, strategies_attempted:, target_direct_replies:, unique_direct_replies:, unrelated_count:)
+          # @!attribute reply_scope_complete
+          #   Replies are accounted for through the requested scope & depth. Source errors
+          #   remain separate.
+          #
+          #   @return [Boolean, nil]
+          optional :reply_scope_complete,
+                   XTwitterScraper::Internal::Type::Boolean,
+                   api_name: :replyScopeComplete
+
+          # @!attribute reply_tree_complete
+          #   All child counts are known & match collected replies.
+          #
+          #   @return [Boolean, nil]
+          optional :reply_tree_complete,
+                   XTwitterScraper::Internal::Type::Boolean,
+                   api_name: :replyTreeComplete
+
+          # @!method initialize(complete:, coverage_percentage:, cursor_failures:, duplicate_count:, empty_false_progress_pages:, malformed_count:, missing_response_modules_or_fields:, nested_reply_count:, pages_attempted:, recommended_fallback:, repeated_cursor_count:, reported_reply_count:, response_truncated:, richness:, sources_ended:, strategies_attempted:, target_direct_replies:, unique_direct_replies:, unrelated_count:, reply_scope_complete: nil, reply_tree_complete: nil)
           #   Evidence for direct-reply coverage and collector behavior.
           #
           #   @param complete [Boolean] Whether coverage met the target without truncation.
@@ -170,6 +251,8 @@ module XTwitterScraper
           #
           #   @param richness [XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::Richness] Field-presence counts across the collected direct replies.
           #
+          #   @param sources_ended [Boolean] True when no more replies can be found. A retry returns the same rows.
+          #
           #   @param strategies_attempted [Array<XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted>] Per-strategy pagination and contribution evidence.
           #
           #   @param target_direct_replies [Integer] Minimum direct replies required for the coverage target.
@@ -177,6 +260,10 @@ module XTwitterScraper
           #   @param unique_direct_replies [Integer] Unique replies whose parent ID equals the source post ID.
           #
           #   @param unrelated_count [Integer] Tweets rejected because they belonged elsewhere.
+          #
+          #   @param reply_scope_complete [Boolean] Replies are accounted for through the requested scope & depth. Source errors rem
+          #
+          #   @param reply_tree_complete [Boolean] All child counts are known & match collected replies.
 
           # @see XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic#richness
           class Richness < XTwitterScraper::Internal::Type::BaseModel
