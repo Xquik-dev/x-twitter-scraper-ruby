@@ -331,7 +331,7 @@ module XTwitterScraper
         end
         def retrieve_search(
           # Numeric ID of the community whose posts to search
-          community_id:,
+          community_id: nil,
           # Search query
           q:,
           # Words or quoted phrases where any one can match. Separate with spaces, commas,

@@ -16,8 +16,8 @@ module XTwitterScraper
         #   Comma-separated numeric user IDs (1-100 values). Duplicate IDs are ignored while
         #   preserving first-seen order.
         #
-        #   @return [String]
-        required :ids, String
+        #   @return [String, nil]
+        optional :ids, String
 
         # @!attribute bio_contains
         #   Match any comma-separated or line-separated bio term, ignoring case.
@@ -157,7 +157,7 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :verified_type, String
 
-        # @!method initialize(ids:, bio_contains: nil, blue_verified_only: nil, business_email_only: nil, email_domains: nil, fields: nil, has_email: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, omit: nil, username_contains: nil, usernames: nil, verified_only: nil, verified_type: nil, request_options: {})
+        # @!method initialize(ids: nil, bio_contains: nil, blue_verified_only: nil, business_email_only: nil, email_domains: nil, fields: nil, has_email: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, omit: nil, username_contains: nil, usernames: nil, verified_only: nil, verified_type: nil, request_options: {})
         #   @param ids [String] Comma-separated numeric user IDs (1-100 values). Duplicate IDs are ignored while
         #
         #   @param bio_contains [String] Match any comma-separated or line-separated bio term, ignoring case.

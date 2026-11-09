@@ -30,7 +30,7 @@ module XTwitterScraper
 
       # Save style profile with custom tweets
       #
-      # @overload update(id, label:, tweets:, request_options: {})
+      # @overload update(id, label: nil, tweets:, request_options: {})
       #
       # @param id [String] Style profile ID or X username
       #

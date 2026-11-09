@@ -35,7 +35,7 @@ module XTwitterScraper
         # Style profile ID or X username
         id,
         # Display label for the style
-        label:,
+        label: nil,
         # Array of tweet objects
         tweets:,
         request_options: {}
