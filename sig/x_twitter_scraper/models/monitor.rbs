@@ -13,6 +13,7 @@ module XTwitterScraper
         next_billing_at: Time,
         username: String,
         x_user_id: String,
+        name: String,
         paused_at: Time,
         paused_reason: XTwitterScraper::Models::Monitor::paused_reason
       }
@@ -32,6 +33,10 @@ module XTwitterScraper
 
       attr_accessor x_user_id: String
 
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
       attr_reader paused_at: Time?
 
       def paused_at=: (Time) -> Time
@@ -50,6 +55,7 @@ module XTwitterScraper
         next_billing_at: Time,
         username: String,
         x_user_id: String,
+        ?name: String,
         ?paused_at: Time,
         ?paused_reason: XTwitterScraper::Models::Monitor::paused_reason
       ) -> void
@@ -62,6 +68,7 @@ module XTwitterScraper
         next_billing_at: Time,
         username: String,
         x_user_id: String,
+        name: String,
         paused_at: Time,
         paused_reason: XTwitterScraper::Models::Monitor::paused_reason
       }
