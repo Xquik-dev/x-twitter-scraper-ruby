@@ -126,6 +126,8 @@ module XTwitterScraper
 
   GuestWalletTopupParams = XTwitterScraper::Models::GuestWalletTopupParams
 
+  ImageFilterSummary = XTwitterScraper::Models::ImageFilterSummary
+
   Monitor = XTwitterScraper::Models::Monitor
 
   MonitorCreateParams = XTwitterScraper::Models::MonitorCreateParams
