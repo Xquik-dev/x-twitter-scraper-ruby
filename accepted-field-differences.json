@@ -1,6 +1,6 @@
 [
   {
-    "reason": "The SDK's model and the spec disagree on whether the API always returns these fields. The SDK reads a response either way, so this shows only in its type signatures.",
+    "reason": "The API always sends `community.creator.verified`, and the SDK requires it. The spec requires it on only 1 branch of `Community.creator`, so it reads the field as optional. This line leaves once https://xquik.com/openapi.json requires it on both branches.",
     "differences": [
       "GET /api/v1/x/communities/{id}/info response required community.creator.verified"
     ]
