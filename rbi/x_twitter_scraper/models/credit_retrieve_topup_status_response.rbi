@@ -53,18 +53,20 @@ module XTwitterScraper
           status:
             XTwitterScraper::Models::CreditRetrieveTopupStatusResponse::Status::OrSymbol,
           amount_dollars: T.nilable(Integer),
-          charged_currency: XTwitterScraper::Models::Currency::OrSymbol, charged_minor_units: Integer, credits: String
+          charged_currency: XTwitterScraper::Models::Currency::OrSymbol,
+          charged_minor_units: Integer,
+          credits: String
         ).returns(T.attached_class)
       end
       def self.new(
         status:,
         # Dollar amount requested for the top-up.
         amount_dollars: nil,
-# Currency the checkout charged.
-charged_currency: nil,
-# Amount the checkout charged before tax, in the currency's smallest unit. JPY and
-# KRW have no decimals, so 1580 JPY is ¥1,580.
-charged_minor_units: nil,
+        # Currency the checkout charged.
+        charged_currency: nil,
+        # Amount the checkout charged before tax, in the currency's smallest unit. JPY and
+        # KRW have no decimals, so 1580 JPY is ¥1,580.
+        charged_minor_units: nil,
         # Bigint string credit amount granted or pending.
         credits: nil
       )
@@ -76,7 +78,9 @@ charged_minor_units: nil,
             status:
               XTwitterScraper::Models::CreditRetrieveTopupStatusResponse::Status::TaggedSymbol,
             amount_dollars: T.nilable(Integer),
-            charged_currency: XTwitterScraper::Models::Currency::TaggedSymbol, charged_minor_units: Integer, credits: String
+            charged_currency: XTwitterScraper::Models::Currency::TaggedSymbol,
+            charged_minor_units: Integer,
+            credits: String
           }
         )
       end
