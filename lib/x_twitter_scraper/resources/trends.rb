@@ -10,9 +10,13 @@ module XTwitterScraper
     class Trends
       # Get trending hashtags & topics by region (alias)
       #
-      # @overload list(count: nil, woeid: nil, request_options: {})
+      # @overload list(count: nil, fields: nil, omit: nil, woeid: nil, request_options: {})
       #
       # @param count [Integer] Number of trending topics returned (1-50, default 30)
+      #
+      # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+      #
+      # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
       #
       # @param woeid [Integer] Region Yahoo WOEID code (1=Worldwide, 23424977=US, 23424975=UK, 23424969=Turkey)
       #

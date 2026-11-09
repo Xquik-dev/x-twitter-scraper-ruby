@@ -72,6 +72,18 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :exclude_words, String
 
+        # @!attribute fields
+        #   Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #   author.username. A list keeps the field in each item. Case & underscores do not
+        #   matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+        #   always stay. An unknown name answers 400 unknown_field with the valid names,
+        #   before any read. The price stays the same. SDK row types then hold only the
+        #   named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+        #   the fields you need with `fields` & `omit`.
+        #
+        #   @return [String, nil]
+        optional :fields, String
+
         # @!attribute from_user
         #   Filter by author username.
         #
@@ -89,6 +101,17 @@ module XTwitterScraper
         #
         #   @return [String, nil]
         optional :hashtags, String
+
+        # @!attribute image_shows
+        #   Keep only posts whose photos show this. Send charts, screenshots,
+        #   product_photos, memes or people, or describe it in words, such as a rocket.
+        #   AI-powered analysis checks posts with photos X doesn't mark sensitive & keeps
+        #   scores of 0.5 or more. Other posts stay out at no charge. Each kept post costs 2
+        #   credits, the AI analysis price, instead of the read price, & a post the filter
+        #   drops costs nothing. imageFilter states the cutoff & counts.
+        #
+        #   @return [String, nil]
+        optional :image_shows, String
 
         # @!attribute in_reply_to_tweet_id
         #   Only replies to this tweet ID.
@@ -156,6 +179,12 @@ module XTwitterScraper
         #   @return [Integer, nil]
         optional :min_faves, Integer
 
+        # @!attribute min_likes
+        #   Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+        #
+        #   @return [Integer, nil]
+        optional :min_likes, Integer
+
         # @!attribute min_quotes
         #   Minimum quote count threshold.
         #
@@ -197,6 +226,14 @@ module XTwitterScraper
         #
         #   @return [Boolean, nil]
         optional :news, XTwitterScraper::Internal::Type::Boolean
+
+        # @!attribute omit
+        #   Fields to drop from each row, comma-separated. It takes the same names as
+        #   fields. With fields, it drops from the kept fields. A longer URL fails at the
+        #   edge before Xquik reads it.
+        #
+        #   @return [String, nil]
+        optional :omit, String
 
         # @!attribute page_size
         #   Maximum page items (1-100, default 20). Source, filters, or credits can reduce
@@ -266,6 +303,16 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :to_user, String
 
+        # @!attribute topic
+        #   Keep only posts about this topic. AI-powered analysis asks "Is this post about
+        #   <topic>?" of each post & keeps scores of 0.5 or more. It reads post text & safe
+        #   photos. Each kept post costs 2 credits, the AI analysis price, instead of the
+        #   read price, & a post the filter drops costs nothing. limit counts checked posts,
+        #   & only kept posts come back. topicFilter states the cutoff & counts.
+        #
+        #   @return [String, nil]
+        optional :topic, String
+
         # @!attribute until_date
         #   End date in YYYY-MM-DD format.
         #
@@ -296,7 +343,7 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :within_time, String
 
-        # @!method initialize(id:, any_words: nil, blue_verified_only: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, from_user: nil, geocode: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, near: nil, news: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, source: nil, to_user: nil, until_date: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
+        # @!method initialize(id:, any_words: nil, blue_verified_only: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, fields: nil, from_user: nil, geocode: nil, hashtags: nil, image_shows: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, near: nil, news: nil, omit: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, source: nil, to_user: nil, topic: nil, until_date: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
         #   @param id [String]
         #
         #   @param any_words [String] Words or quoted phrases where any one can match. Separate with spaces, commas, o
@@ -317,11 +364,15 @@ module XTwitterScraper
         #
         #   @param exclude_words [String] Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
         #
+        #   @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #
         #   @param from_user [String] Filter by author username.
         #
         #   @param geocode [String] Match latitude, longitude, and radius.
         #
         #   @param hashtags [String] Hashtags separated by spaces, commas, or lines.
+        #
+        #   @param image_shows [String] Keep only posts whose photos show this. Send charts, screenshots, product_photos
         #
         #   @param in_reply_to_tweet_id [String] Only replies to this tweet ID.
         #
@@ -345,6 +396,8 @@ module XTwitterScraper
         #
         #   @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
         #
+        #   @param min_likes [Integer] Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+        #
         #   @param min_quotes [Integer] Minimum quote count threshold.
         #
         #   @param min_replies [Integer] Minimum replies threshold.
@@ -358,6 +411,8 @@ module XTwitterScraper
         #   @param near [String] Match a place name.
         #
         #   @param news [Boolean] Only return news results.
+        #
+        #   @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         #   @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
         #
@@ -380,6 +435,8 @@ module XTwitterScraper
         #   @param source [String] Match the source application.
         #
         #   @param to_user [String] Filter replies sent to a username.
+        #
+        #   @param topic [String] Keep only posts about this topic. AI-powered analysis asks "Is this post about <
         #
         #   @param until_date [Date] End date in YYYY-MM-DD format.
         #

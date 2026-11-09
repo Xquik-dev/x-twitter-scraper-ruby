@@ -30,6 +30,7 @@ module XTwitterScraper
           keyword_monitor_id: String,
           limit: Integer,
           monitor_id: String,
+          post_monitor_id: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Models::EventListResponse)
       end
@@ -47,6 +48,8 @@ module XTwitterScraper
         limit: nil,
         # Account monitor ID.
         monitor_id: nil,
+        # Post monitor ID. The post_monitor_id alias also works.
+        post_monitor_id: nil,
         request_options: {}
       )
       end

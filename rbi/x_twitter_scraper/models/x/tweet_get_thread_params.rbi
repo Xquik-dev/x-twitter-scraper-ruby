@@ -72,6 +72,19 @@ module XTwitterScraper
         sig { params(exclude_words: String).void }
         attr_writer :exclude_words
 
+        # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        # author.username. A list keeps the field in each item. Case & underscores do not
+        # matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+        # always stay. An unknown name answers 400 unknown_field with the valid names,
+        # before any read. The price stays the same. SDK row types then hold only the
+        # named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+        # the fields you need with `fields` & `omit`.
+        sig { returns(T.nilable(String)) }
+        attr_reader :fields
+
+        sig { params(fields: String).void }
+        attr_writer :fields
+
         # Filter by author username.
         sig { returns(T.nilable(String)) }
         attr_reader :from_user
@@ -106,6 +119,13 @@ module XTwitterScraper
 
         sig { params(max_faves: Integer).void }
         attr_writer :max_faves
+
+        # Return Tweets at or below this ID.
+        sig { returns(T.nilable(String)) }
+        attr_reader :max_id
+
+        sig { params(max_id: String).void }
+        attr_writer :max_id
 
         # Maximum quotes threshold.
         sig { returns(T.nilable(Integer)) }
@@ -167,6 +187,13 @@ module XTwitterScraper
         sig { params(min_faves: Integer).void }
         attr_writer :min_faves
 
+        # Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :min_likes
+
+        sig { params(min_likes: Integer).void }
+        attr_writer :min_likes
+
         # Minimum quote count threshold.
         sig { returns(T.nilable(Integer)) }
         attr_reader :min_quotes
@@ -194,6 +221,22 @@ module XTwitterScraper
 
         sig { params(min_views: Integer).void }
         attr_writer :min_views
+
+        # Only return native reposts.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :native_retweets
+
+        sig { params(native_retweets: T::Boolean).void }
+        attr_writer :native_retweets
+
+        # Fields to drop from each row, comma-separated. It takes the same names as
+        # fields. With fields, it drops from the kept fields. A longer URL fails at the
+        # edge before Xquik reads it.
+        sig { returns(T.nilable(String)) }
+        attr_reader :omit
+
+        sig { params(omit: String).void }
+        attr_writer :omit
 
         # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
         # results. Continue while has_next_page is true. Deprecated limit and count
@@ -277,6 +320,14 @@ module XTwitterScraper
         sig { params(since_date: Date).void }
         attr_writer :since_date
 
+        # Return Tweets whose IDs exceed this ID. Searches accept `since_id` & `max_id`
+        # bounds.
+        sig { returns(T.nilable(String)) }
+        attr_reader :since_id
+
+        sig { params(since_id: String).void }
+        attr_writer :since_id
+
         # Filter replies sent to a username.
         sig { returns(T.nilable(String)) }
         attr_reader :to_user
@@ -305,6 +356,14 @@ module XTwitterScraper
         sig { params(verified_only: T::Boolean).void }
         attr_writer :verified_only
 
+        # Keeps Tweets from a recent window, such as 90m or 7d. Use a whole number & s, m,
+        # h or d.
+        sig { returns(T.nilable(String)) }
+        attr_reader :within_time
+
+        sig { params(within_time: String).void }
+        attr_writer :within_time
+
         sig do
           params(
             id: String,
@@ -315,11 +374,13 @@ module XTwitterScraper
             cursor: String,
             exact_phrase: String,
             exclude_words: String,
+            fields: String,
             from_user: String,
             hashtags: String,
             in_reply_to_tweet_id: String,
             language: String,
             max_faves: Integer,
+            max_id: String,
             max_quotes: Integer,
             max_replies: Integer,
             max_retweets: Integer,
@@ -328,10 +389,13 @@ module XTwitterScraper
             mentioning: String,
             min_bookmarks: Integer,
             min_faves: Integer,
+            min_likes: Integer,
             min_quotes: Integer,
             min_replies: Integer,
             min_retweets: Integer,
             min_views: Integer,
+            native_retweets: T::Boolean,
+            omit: String,
             page_size: Integer,
             quotes: XTwitterScraper::X::TweetGetThreadParams::Quotes::OrSymbol,
             quotes_of_tweet_id: String,
@@ -341,10 +405,12 @@ module XTwitterScraper
               XTwitterScraper::X::TweetGetThreadParams::Retweets::OrSymbol,
             retweets_of_tweet_id: String,
             since_date: Date,
+            since_id: String,
             to_user: String,
             until_date: Date,
             url: String,
             verified_only: T::Boolean,
+            within_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -365,6 +431,14 @@ module XTwitterScraper
           exact_phrase: nil,
           # Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
           exclude_words: nil,
+          # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+          # author.username. A list keeps the field in each item. Case & underscores do not
+          # matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+          # always stay. An unknown name answers 400 unknown_field with the valid names,
+          # before any read. The price stays the same. SDK row types then hold only the
+          # named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+          # the fields you need with `fields` & `omit`.
+          fields: nil,
           # Filter by author username.
           from_user: nil,
           # Hashtags separated by spaces, commas, or lines.
@@ -375,6 +449,8 @@ module XTwitterScraper
           language: nil,
           # Maximum likes threshold. maxLikes is also accepted.
           max_faves: nil,
+          # Return Tweets at or below this ID.
+          max_id: nil,
           # Maximum quotes threshold.
           max_quotes: nil,
           # Maximum replies threshold.
@@ -389,6 +465,8 @@ module XTwitterScraper
           min_bookmarks: nil,
           # Minimum likes threshold. minLikes is also accepted.
           min_faves: nil,
+          # Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+          min_likes: nil,
           # Minimum quote count threshold.
           min_quotes: nil,
           # Minimum replies threshold.
@@ -397,6 +475,12 @@ module XTwitterScraper
           min_retweets: nil,
           # Minimum view count threshold.
           min_views: nil,
+          # Only return native reposts.
+          native_retweets: nil,
+          # Fields to drop from each row, comma-separated. It takes the same names as
+          # fields. With fields, it drops from the kept fields. A longer URL fails at the
+          # edge before Xquik reads it.
+          omit: nil,
           # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
           # results. Continue while has_next_page is true. Deprecated limit and count
           # aliases remain accepted.
@@ -413,6 +497,9 @@ module XTwitterScraper
           retweets_of_tweet_id: nil,
           # Start date in YYYY-MM-DD format.
           since_date: nil,
+          # Return Tweets whose IDs exceed this ID. Searches accept `since_id` & `max_id`
+          # bounds.
+          since_id: nil,
           # Filter replies sent to a username.
           to_user: nil,
           # End date in YYYY-MM-DD format.
@@ -421,6 +508,9 @@ module XTwitterScraper
           url: nil,
           # Only return tweets from verified authors.
           verified_only: nil,
+          # Keeps Tweets from a recent window, such as 90m or 7d. Use a whole number & s, m,
+          # h or d.
+          within_time: nil,
           request_options: {}
         )
         end
@@ -436,11 +526,13 @@ module XTwitterScraper
               cursor: String,
               exact_phrase: String,
               exclude_words: String,
+              fields: String,
               from_user: String,
               hashtags: String,
               in_reply_to_tweet_id: String,
               language: String,
               max_faves: Integer,
+              max_id: String,
               max_quotes: Integer,
               max_replies: Integer,
               max_retweets: Integer,
@@ -449,10 +541,13 @@ module XTwitterScraper
               mentioning: String,
               min_bookmarks: Integer,
               min_faves: Integer,
+              min_likes: Integer,
               min_quotes: Integer,
               min_replies: Integer,
               min_retweets: Integer,
               min_views: Integer,
+              native_retweets: T::Boolean,
+              omit: String,
               page_size: Integer,
               quotes:
                 XTwitterScraper::X::TweetGetThreadParams::Quotes::OrSymbol,
@@ -463,10 +558,12 @@ module XTwitterScraper
                 XTwitterScraper::X::TweetGetThreadParams::Retweets::OrSymbol,
               retweets_of_tweet_id: String,
               since_date: Date,
+              since_id: String,
               to_user: String,
               until_date: Date,
               url: String,
               verified_only: T::Boolean,
+              within_time: String,
               request_options: XTwitterScraper::RequestOptions
             }
           )

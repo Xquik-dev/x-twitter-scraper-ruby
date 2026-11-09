@@ -22,11 +22,38 @@ module XTwitterScraper
       #   @return [Symbol, XTwitterScraper::Models::ExtractionExportResultsParams::Format]
       required :format_, enum: -> { XTwitterScraper::ExtractionExportResultsParams::Format }
 
+      # @!attribute business_email_only
+      #   Require an email outside free webmail, such as Gmail, in the row's Email column.
+      #
+      #   @return [Boolean, nil]
+      optional :business_email_only, XTwitterScraper::Internal::Type::Boolean
+
+      # @!attribute compare
+      #   ID of another run of this tool. For an earlier whole run of the same account,
+      #   the export holds only the rows that differ. For a run of another account, it
+      #   holds only this run's rows that the other run also lists.
+      #
+      #   @return [String, nil]
+      optional :compare, String
+
+      # @!attribute email_domains
+      #   Require the row's email at one of these domains. Separate domains with commas.
+      #   Subdomains match.
+      #
+      #   @return [String, nil]
+      optional :email_domains, String
+
       # @!attribute has_description
       #   Require a non-empty description.
       #
       #   @return [Boolean, nil]
       optional :has_description, XTwitterScraper::Internal::Type::Boolean
+
+      # @!attribute has_email
+      #   Require an email in the row's Email column.
+      #
+      #   @return [Boolean, nil]
+      optional :has_email, XTwitterScraper::Internal::Type::Boolean
 
       # @!attribute has_location
       #   Require a non-empty location.
@@ -40,11 +67,49 @@ module XTwitterScraper
       #   @return [Boolean, nil]
       optional :has_media, XTwitterScraper::Internal::Type::Boolean
 
+      # @!attribute has_website
+      #   Require a website on the profile.
+      #
+      #   @return [Boolean, nil]
+      optional :has_website, XTwitterScraper::Internal::Type::Boolean
+
+      # @!attribute hide_fake
+      #   Drop accounts with at least 3 of these signs. No posts, a default picture, an
+      #   empty bio, or following at least 100 accounts and 10 times their followers.
+      #
+      #   @return [Boolean, nil]
+      optional :hide_fake, XTwitterScraper::Internal::Type::Boolean
+
+      # @!attribute hide_inactive
+      #   Drop accounts with under 1 post a month since joining that are at least 180 days
+      #   old.
+      #
+      #   @return [Boolean, nil]
+      optional :hide_inactive, XTwitterScraper::Internal::Type::Boolean
+
+      # @!attribute joined_since
+      #   Keep accounts that joined X on this UTC day or later.
+      #
+      #   @return [Date, nil]
+      optional :joined_since, Date
+
+      # @!attribute joined_until
+      #   Keep accounts that joined X before this UTC day.
+      #
+      #   @return [Date, nil]
+      optional :joined_until, Date
+
       # @!attribute lang
       #   Filter by language code.
       #
       #   @return [String, nil]
       optional :lang, String
+
+      # @!attribute location
+      #   Keep accounts whose location contains this text.
+      #
+      #   @return [String, nil]
+      optional :location, String
 
       # @!attribute max_followers
       #   Maximum follower count.
@@ -130,18 +195,38 @@ module XTwitterScraper
       #   @return [Boolean, nil]
       optional :verified, XTwitterScraper::Internal::Type::Boolean
 
-      # @!method initialize(id:, format_:, has_description: nil, has_location: nil, has_media: nil, lang: nil, max_followers: nil, max_following: nil, max_posts: nil, min_followers: nil, min_following: nil, min_likes: nil, min_posts: nil, min_replies: nil, min_retweets: nil, min_views: nil, search: nil, since_date: nil, until_date: nil, verified: nil, request_options: {})
+      # @!method initialize(id:, format_:, business_email_only: nil, compare: nil, email_domains: nil, has_description: nil, has_email: nil, has_location: nil, has_media: nil, has_website: nil, hide_fake: nil, hide_inactive: nil, joined_since: nil, joined_until: nil, lang: nil, location: nil, max_followers: nil, max_following: nil, max_posts: nil, min_followers: nil, min_following: nil, min_likes: nil, min_posts: nil, min_replies: nil, min_retweets: nil, min_views: nil, search: nil, since_date: nil, until_date: nil, verified: nil, request_options: {})
       #   @param id [String]
       #
       #   @param format_ [Symbol, XTwitterScraper::Models::ExtractionExportResultsParams::Format] Export file format
       #
+      #   @param business_email_only [Boolean] Require an email outside free webmail, such as Gmail, in the row's Email column.
+      #
+      #   @param compare [String] ID of another run of this tool. For an earlier whole run of the same account, th
+      #
+      #   @param email_domains [String] Require the row's email at one of these domains. Separate domains with commas. S
+      #
       #   @param has_description [Boolean] Require a non-empty description.
+      #
+      #   @param has_email [Boolean] Require an email in the row's Email column.
       #
       #   @param has_location [Boolean] Require a non-empty location.
       #
       #   @param has_media [Boolean] Require media.
       #
+      #   @param has_website [Boolean] Require a website on the profile.
+      #
+      #   @param hide_fake [Boolean] Drop accounts with at least 3 of these signs. No posts, a default picture, an em
+      #
+      #   @param hide_inactive [Boolean] Drop accounts with under 1 post a month since joining that are at least 180 days
+      #
+      #   @param joined_since [Date] Keep accounts that joined X on this UTC day or later.
+      #
+      #   @param joined_until [Date] Keep accounts that joined X before this UTC day.
+      #
       #   @param lang [String] Filter by language code.
+      #
+      #   @param location [String] Keep accounts whose location contains this text.
       #
       #   @param max_followers [Integer] Maximum follower count.
       #

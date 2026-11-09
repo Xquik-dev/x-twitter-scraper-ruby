@@ -29,12 +29,43 @@ module XTwitterScraper
       end
       attr_accessor :format_
 
+      # Require an email outside free webmail, such as Gmail, in the row's Email column.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :business_email_only
+
+      sig { params(business_email_only: T::Boolean).void }
+      attr_writer :business_email_only
+
+      # ID of another run of this tool. For an earlier whole run of the same account,
+      # the export holds only the rows that differ. For a run of another account, it
+      # holds only this run's rows that the other run also lists.
+      sig { returns(T.nilable(String)) }
+      attr_reader :compare
+
+      sig { params(compare: String).void }
+      attr_writer :compare
+
+      # Require the row's email at one of these domains. Separate domains with commas.
+      # Subdomains match.
+      sig { returns(T.nilable(String)) }
+      attr_reader :email_domains
+
+      sig { params(email_domains: String).void }
+      attr_writer :email_domains
+
       # Require a non-empty description.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :has_description
 
       sig { params(has_description: T::Boolean).void }
       attr_writer :has_description
+
+      # Require an email in the row's Email column.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :has_email
+
+      sig { params(has_email: T::Boolean).void }
+      attr_writer :has_email
 
       # Require a non-empty location.
       sig { returns(T.nilable(T::Boolean)) }
@@ -50,12 +81,56 @@ module XTwitterScraper
       sig { params(has_media: T::Boolean).void }
       attr_writer :has_media
 
+      # Require a website on the profile.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :has_website
+
+      sig { params(has_website: T::Boolean).void }
+      attr_writer :has_website
+
+      # Drop accounts with at least 3 of these signs. No posts, a default picture, an
+      # empty bio, or following at least 100 accounts and 10 times their followers.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :hide_fake
+
+      sig { params(hide_fake: T::Boolean).void }
+      attr_writer :hide_fake
+
+      # Drop accounts with under 1 post a month since joining that are at least 180 days
+      # old.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :hide_inactive
+
+      sig { params(hide_inactive: T::Boolean).void }
+      attr_writer :hide_inactive
+
+      # Keep accounts that joined X on this UTC day or later.
+      sig { returns(T.nilable(Date)) }
+      attr_reader :joined_since
+
+      sig { params(joined_since: Date).void }
+      attr_writer :joined_since
+
+      # Keep accounts that joined X before this UTC day.
+      sig { returns(T.nilable(Date)) }
+      attr_reader :joined_until
+
+      sig { params(joined_until: Date).void }
+      attr_writer :joined_until
+
       # Filter by language code.
       sig { returns(T.nilable(String)) }
       attr_reader :lang
 
       sig { params(lang: String).void }
       attr_writer :lang
+
+      # Keep accounts whose location contains this text.
+      sig { returns(T.nilable(String)) }
+      attr_reader :location
+
+      sig { params(location: String).void }
+      attr_writer :location
 
       # Maximum follower count.
       sig { returns(T.nilable(Integer)) }
@@ -160,10 +235,20 @@ module XTwitterScraper
           id: String,
           format_:
             XTwitterScraper::ExtractionExportResultsParams::Format::OrSymbol,
+          business_email_only: T::Boolean,
+          compare: String,
+          email_domains: String,
           has_description: T::Boolean,
+          has_email: T::Boolean,
           has_location: T::Boolean,
           has_media: T::Boolean,
+          has_website: T::Boolean,
+          hide_fake: T::Boolean,
+          hide_inactive: T::Boolean,
+          joined_since: Date,
+          joined_until: Date,
           lang: String,
+          location: String,
           max_followers: Integer,
           max_following: Integer,
           max_posts: Integer,
@@ -185,14 +270,39 @@ module XTwitterScraper
         id:,
         # Export file format
         format_:,
+        # Require an email outside free webmail, such as Gmail, in the row's Email column.
+        business_email_only: nil,
+        # ID of another run of this tool. For an earlier whole run of the same account,
+        # the export holds only the rows that differ. For a run of another account, it
+        # holds only this run's rows that the other run also lists.
+        compare: nil,
+        # Require the row's email at one of these domains. Separate domains with commas.
+        # Subdomains match.
+        email_domains: nil,
         # Require a non-empty description.
         has_description: nil,
+        # Require an email in the row's Email column.
+        has_email: nil,
         # Require a non-empty location.
         has_location: nil,
         # Require media.
         has_media: nil,
+        # Require a website on the profile.
+        has_website: nil,
+        # Drop accounts with at least 3 of these signs. No posts, a default picture, an
+        # empty bio, or following at least 100 accounts and 10 times their followers.
+        hide_fake: nil,
+        # Drop accounts with under 1 post a month since joining that are at least 180 days
+        # old.
+        hide_inactive: nil,
+        # Keep accounts that joined X on this UTC day or later.
+        joined_since: nil,
+        # Keep accounts that joined X before this UTC day.
+        joined_until: nil,
         # Filter by language code.
         lang: nil,
+        # Keep accounts whose location contains this text.
+        location: nil,
         # Maximum follower count.
         max_followers: nil,
         # Maximum following count.
@@ -231,10 +341,20 @@ module XTwitterScraper
             id: String,
             format_:
               XTwitterScraper::ExtractionExportResultsParams::Format::OrSymbol,
+            business_email_only: T::Boolean,
+            compare: String,
+            email_domains: String,
             has_description: T::Boolean,
+            has_email: T::Boolean,
             has_location: T::Boolean,
             has_media: T::Boolean,
+            has_website: T::Boolean,
+            hide_fake: T::Boolean,
+            hide_inactive: T::Boolean,
+            joined_since: Date,
+            joined_until: Date,
             lang: String,
+            location: String,
             max_followers: Integer,
             max_following: Integer,
             max_posts: Integer,

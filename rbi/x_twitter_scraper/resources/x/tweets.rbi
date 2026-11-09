@@ -71,12 +71,26 @@ module XTwitterScraper
         sig do
           params(
             ids: String,
+            fields: String,
+            omit: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::PaginatedTweets)
         end
         def list(
           # Comma-separated tweet IDs (max 100)
           ids:,
+          # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+          # author.username. A list keeps the field in each item. Case & underscores do not
+          # matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+          # always stay. An unknown name answers 400 unknown_field with the valid names,
+          # before any read. The price stays the same. SDK row types then hold only the
+          # named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+          # the fields you need with `fields` & `omit`.
+          fields: nil,
+          # Fields to drop from each row, comma-separated. It takes the same names as
+          # fields. With fields, it drops from the kept fields. A longer URL fails at the
+          # edge before Xquik reads it.
+          omit: nil,
           request_options: {}
         )
         end
@@ -111,7 +125,12 @@ module XTwitterScraper
           params(
             id: String,
             bio_contains: String,
+            blue_verified_only: T::Boolean,
+            business_email_only: T::Boolean,
             cursor: String,
+            email_domains: String,
+            fields: String,
+            has_email: T::Boolean,
             has_location: T::Boolean,
             has_website: T::Boolean,
             location_contains: String,
@@ -122,6 +141,7 @@ module XTwitterScraper
             min_followers: Integer,
             min_following: Integer,
             min_statuses: Integer,
+            omit: String,
             page_size: Integer,
             username_contains: String,
             verified_only: T::Boolean,
@@ -134,8 +154,26 @@ module XTwitterScraper
           id,
           # Match any comma-separated or line-separated bio term, ignoring case.
           bio_contains: nil,
+          # Only return profiles X marks as blue verified. X marks many business &
+          # government accounts blue too. Use verifiedType for 1 badge type.
+          blue_verified_only: nil,
+          # Only return profiles that publish an email outside free webmail, such as Gmail.
+          business_email_only: nil,
           # Pagination cursor for favoriters
           cursor: nil,
+          # Only return profiles with an email at one of these domains. Separate domains
+          # with commas. Subdomains match.
+          email_domains: nil,
+          # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+          # author.username. A list keeps the field in each item. Case & underscores do not
+          # matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+          # always stay. An unknown name answers 400 unknown_field with the valid names,
+          # before any read. The price stays the same. SDK row types then hold only the
+          # named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+          # the fields you need with `fields` & `omit`.
+          fields: nil,
+          # Only return profiles that publish an email.
+          has_email: nil,
           # Only return profiles with a location.
           has_location: nil,
           # Only return profiles with a website.
@@ -156,6 +194,10 @@ module XTwitterScraper
           min_following: nil,
           # Minimum post count. minPosts is also accepted.
           min_statuses: nil,
+          # Fields to drop from each row, comma-separated. It takes the same names as
+          # fields. With fields, it drops from the kept fields. A longer URL fails at the
+          # edge before Xquik reads it.
+          omit: nil,
           # Maximum user profiles requested from this page (20-200, default 200). Source,
           # filters, or credits can return fewer profiles. Keep requesting next_cursor while
           # has_next_page is true. Deprecated aliases remain accepted.
@@ -174,8 +216,10 @@ module XTwitterScraper
         sig do
           params(
             id: String,
+            advanced_query: String,
             any_words: String,
             blue_verified_only: T::Boolean,
+            bounding_box: String,
             card_name: String,
             cashtags: String,
             conversation_id: String,
@@ -183,12 +227,15 @@ module XTwitterScraper
             exact_phrase: String,
             exclude_source: String,
             exclude_words: String,
+            fields: String,
             from_user: String,
             geocode: String,
             hashtags: String,
             include_replies: T::Boolean,
             in_reply_to_tweet_id: String,
+            keywords: String,
             language: String,
+            list_id: String,
             max_faves: Integer,
             max_id: String,
             max_quotes: Integer,
@@ -199,6 +246,7 @@ module XTwitterScraper
             mentioning: String,
             min_bookmarks: Integer,
             min_faves: Integer,
+            min_likes: Integer,
             min_quotes: Integer,
             min_replies: Integer,
             min_retweets: Integer,
@@ -206,7 +254,11 @@ module XTwitterScraper
             native_retweets: T::Boolean,
             near: String,
             news: T::Boolean,
+            omit: String,
             page_size: Integer,
+            place: String,
+            place_country: String,
+            point_radius: String,
             quotes: XTwitterScraper::X::TweetGetQuotesParams::Quotes::OrSymbol,
             quotes_of_tweet_id: String,
             replies:
@@ -232,11 +284,15 @@ module XTwitterScraper
         def get_quotes(
           # Numeric tweet ID to get quotes, 15-20 digits
           id,
+          # Raw advanced search query appended as-is.
+          advanced_query: nil,
           # Words or quoted phrases where any one can match. Separate with spaces, commas,
           # or lines.
           any_words: nil,
           # Only return tweets from Blue-verified authors.
           blue_verified_only: nil,
+          # Geo bounding box, such as -74.1 40.6 -73.9 40.8.
+          bounding_box: nil,
           # Match the Tweet card name.
           card_name: nil,
           # Cashtags separated by spaces, commas, or lines.
@@ -251,6 +307,14 @@ module XTwitterScraper
           exclude_source: nil,
           # Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
           exclude_words: nil,
+          # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+          # author.username. A list keeps the field in each item. Case & underscores do not
+          # matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+          # always stay. An unknown name answers 400 unknown_field with the valid names,
+          # before any read. The price stays the same. SDK row types then hold only the
+          # named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+          # the fields you need with `fields` & `omit`.
+          fields: nil,
           # Filter by author username.
           from_user: nil,
           # Match latitude, longitude, and radius.
@@ -261,8 +325,12 @@ module XTwitterScraper
           include_replies: nil,
           # Only replies to this tweet ID.
           in_reply_to_tweet_id: nil,
+          # Words the Tweets must match, in X search syntax.
+          keywords: nil,
           # Language code filter, e.g. en or tr.
           language: nil,
+          # Search within a list ID.
+          list_id: nil,
           # Maximum likes threshold. maxLikes is also accepted.
           max_faves: nil,
           # Return Tweets older than this Tweet ID.
@@ -281,6 +349,8 @@ module XTwitterScraper
           min_bookmarks: nil,
           # Minimum likes threshold. minLikes is also accepted.
           min_faves: nil,
+          # Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+          min_likes: nil,
           # Minimum quote count threshold.
           min_quotes: nil,
           # Minimum replies threshold.
@@ -295,10 +365,20 @@ module XTwitterScraper
           near: nil,
           # Only return news results.
           news: nil,
+          # Fields to drop from each row, comma-separated. It takes the same names as
+          # fields. With fields, it drops from the kept fields. A longer URL fails at the
+          # edge before Xquik reads it.
+          omit: nil,
           # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
           # results. Continue while has_next_page is true. Deprecated limit and count
           # aliases remain accepted.
           page_size: nil,
+          # Search within a place ID.
+          place: nil,
+          # Search within a country code.
+          place_country: nil,
+          # Geo point radius, such as -73.99 40.73 25mi.
+          point_radius: nil,
           # Quote mode.
           quotes: nil,
           # Only quotes of this tweet ID.
@@ -343,6 +423,7 @@ module XTwitterScraper
         sig do
           params(
             id: String,
+            after: String,
             any_words: String,
             blue_verified_only: T::Boolean,
             card_name: String,
@@ -353,10 +434,12 @@ module XTwitterScraper
             exclude_original_author: T::Boolean,
             exclude_source: String,
             exclude_words: String,
+            fields: String,
             from_user: String,
             geocode: String,
             hashtags: String,
             has_media_only: T::Boolean,
+            include_hidden: T::Boolean,
             include_original_post: T::Boolean,
             in_reply_to_tweet_id: String,
             language: String,
@@ -372,6 +455,7 @@ module XTwitterScraper
             mentioning: String,
             min_bookmarks: Integer,
             min_faves: Integer,
+            min_likes: Integer,
             min_quotes: Integer,
             min_replies: Integer,
             min_retweets: Integer,
@@ -380,6 +464,7 @@ module XTwitterScraper
             native_retweets: T::Boolean,
             near: String,
             news: T::Boolean,
+            omit: String,
             page_size: Integer,
             quotes: XTwitterScraper::X::TweetGetRepliesParams::Quotes::OrSymbol,
             quotes_of_tweet_id: String,
@@ -408,6 +493,8 @@ module XTwitterScraper
         def get_replies(
           # Tweet ID to get replies
           id,
+          # Legacy cursor alias. Prefer cursor.
+          after: nil,
           # Words or quoted phrases where any one can match. Separate with spaces, commas,
           # or lines.
           any_words: nil,
@@ -430,6 +517,14 @@ module XTwitterScraper
           exclude_source: nil,
           # Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
           exclude_words: nil,
+          # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+          # author.username. A list keeps the field in each item. Case & underscores do not
+          # matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+          # always stay. An unknown name answers 400 unknown_field with the valid names,
+          # before any read. The price stays the same. SDK row types then hold only the
+          # named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+          # the fields you need with `fields` & `omit`.
+          fields: nil,
           # Filter by author username.
           from_user: nil,
           # Match latitude, longitude, and radius.
@@ -438,6 +533,10 @@ module XTwitterScraper
           hashtags: nil,
           # Only return replies containing media.
           has_media_only: nil,
+          # Complete mode only. Adds the replies the post's author hid, each with
+          # hiddenByAuthor true. They count toward limit like any reply. A paged read
+          # answers 400. Get its hidden replies from GET /x/tweets/{id}/hidden-replies.
+          include_hidden: nil,
           # Include the source post and count it toward limit.
           include_original_post: nil,
           # Only replies to this tweet ID.
@@ -468,6 +567,8 @@ module XTwitterScraper
           min_bookmarks: nil,
           # Minimum likes threshold. minLikes is also accepted.
           min_faves: nil,
+          # Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+          min_likes: nil,
           # Minimum quote count threshold.
           min_quotes: nil,
           # Minimum replies threshold.
@@ -487,6 +588,10 @@ module XTwitterScraper
           near: nil,
           # Only return news results.
           news: nil,
+          # Fields to drop from each row, comma-separated. It takes the same names as
+          # fields. With fields, it drops from the kept fields. A longer URL fails at the
+          # edge before Xquik reads it.
+          omit: nil,
           # Automatic pages accept 1-300 Tweets. Standard pages keep 1-100. Default 20.
           # Continue while has_next_page is true. Deprecated aliases remain accepted.
           page_size: nil,
@@ -537,9 +642,16 @@ module XTwitterScraper
           params(
             id: String,
             bio_contains: String,
+            blue_verified_only: T::Boolean,
+            business_email_only: T::Boolean,
             cursor: String,
+            email_domains: String,
+            enrich_profiles: T::Boolean,
+            fields: String,
+            has_email: T::Boolean,
             has_location: T::Boolean,
             has_website: T::Boolean,
+            include_retweet_timestamp: T::Boolean,
             location_contains: String,
             max_followers: Integer,
             max_following: Integer,
@@ -548,6 +660,7 @@ module XTwitterScraper
             min_followers: Integer,
             min_following: Integer,
             min_statuses: Integer,
+            omit: String,
             page_size: Integer,
             username_contains: String,
             verified_only: T::Boolean,
@@ -560,12 +673,35 @@ module XTwitterScraper
           id,
           # Match any comma-separated or line-separated bio term, ignoring case.
           bio_contains: nil,
+          # Only return profiles X marks as blue verified. X marks many business &
+          # government accounts blue too. Use verifiedType for 1 badge type.
+          blue_verified_only: nil,
+          # Only return profiles that publish an email outside free webmail, such as Gmail.
+          business_email_only: nil,
           # Pagination cursor for retweeters
           cursor: nil,
+          # Only return profiles with an email at one of these domains. Separate domains
+          # with commas. Subdomains match.
+          email_domains: nil,
+          # Add each row's full profile, as GET /x/users/{id} returns it. Pages take several
+          # seconds longer.
+          enrich_profiles: nil,
+          # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+          # author.username. A list keeps the field in each item. Case & underscores do not
+          # matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+          # always stay. An unknown name answers 400 unknown_field with the valid names,
+          # before any read. The price stays the same. SDK row types then hold only the
+          # named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+          # the fields you need with `fields` & `omit`.
+          fields: nil,
+          # Only return profiles that publish an email.
+          has_email: nil,
           # Only return profiles with a location.
           has_location: nil,
           # Only return profiles with a website.
           has_website: nil,
+          # Look up repost event times.
+          include_retweet_timestamp: nil,
           # Match a location substring, ignoring case.
           location_contains: nil,
           # Maximum follower count. Missing counts pass this maximum.
@@ -582,6 +718,10 @@ module XTwitterScraper
           min_following: nil,
           # Minimum post count. minPosts is also accepted.
           min_statuses: nil,
+          # Fields to drop from each row, comma-separated. It takes the same names as
+          # fields. With fields, it drops from the kept fields. A longer URL fails at the
+          # edge before Xquik reads it.
+          omit: nil,
           # Maximum user profiles requested from this page (20-200, default 200). Source,
           # filters, or credits can return fewer profiles. Keep requesting next_cursor while
           # has_next_page is true. Deprecated aliases remain accepted.
@@ -607,11 +747,13 @@ module XTwitterScraper
             cursor: String,
             exact_phrase: String,
             exclude_words: String,
+            fields: String,
             from_user: String,
             hashtags: String,
             in_reply_to_tweet_id: String,
             language: String,
             max_faves: Integer,
+            max_id: String,
             max_quotes: Integer,
             max_replies: Integer,
             max_retweets: Integer,
@@ -620,10 +762,13 @@ module XTwitterScraper
             mentioning: String,
             min_bookmarks: Integer,
             min_faves: Integer,
+            min_likes: Integer,
             min_quotes: Integer,
             min_replies: Integer,
             min_retweets: Integer,
             min_views: Integer,
+            native_retweets: T::Boolean,
+            omit: String,
             page_size: Integer,
             quotes: XTwitterScraper::X::TweetGetThreadParams::Quotes::OrSymbol,
             quotes_of_tweet_id: String,
@@ -633,10 +778,12 @@ module XTwitterScraper
               XTwitterScraper::X::TweetGetThreadParams::Retweets::OrSymbol,
             retweets_of_tweet_id: String,
             since_date: Date,
+            since_id: String,
             to_user: String,
             until_date: Date,
             url: String,
             verified_only: T::Boolean,
+            within_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::PaginatedTweets)
         end
@@ -658,6 +805,14 @@ module XTwitterScraper
           exact_phrase: nil,
           # Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
           exclude_words: nil,
+          # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+          # author.username. A list keeps the field in each item. Case & underscores do not
+          # matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+          # always stay. An unknown name answers 400 unknown_field with the valid names,
+          # before any read. The price stays the same. SDK row types then hold only the
+          # named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+          # the fields you need with `fields` & `omit`.
+          fields: nil,
           # Filter by author username.
           from_user: nil,
           # Hashtags separated by spaces, commas, or lines.
@@ -668,6 +823,8 @@ module XTwitterScraper
           language: nil,
           # Maximum likes threshold. maxLikes is also accepted.
           max_faves: nil,
+          # Return Tweets at or below this ID.
+          max_id: nil,
           # Maximum quotes threshold.
           max_quotes: nil,
           # Maximum replies threshold.
@@ -682,6 +839,8 @@ module XTwitterScraper
           min_bookmarks: nil,
           # Minimum likes threshold. minLikes is also accepted.
           min_faves: nil,
+          # Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+          min_likes: nil,
           # Minimum quote count threshold.
           min_quotes: nil,
           # Minimum replies threshold.
@@ -690,6 +849,12 @@ module XTwitterScraper
           min_retweets: nil,
           # Minimum view count threshold.
           min_views: nil,
+          # Only return native reposts.
+          native_retweets: nil,
+          # Fields to drop from each row, comma-separated. It takes the same names as
+          # fields. With fields, it drops from the kept fields. A longer URL fails at the
+          # edge before Xquik reads it.
+          omit: nil,
           # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
           # results. Continue while has_next_page is true. Deprecated limit and count
           # aliases remain accepted.
@@ -706,6 +871,9 @@ module XTwitterScraper
           retweets_of_tweet_id: nil,
           # Start date in YYYY-MM-DD format.
           since_date: nil,
+          # Return Tweets whose IDs exceed this ID. Searches accept `since_id` & `max_id`
+          # bounds.
+          since_id: nil,
           # Filter replies sent to a username.
           to_user: nil,
           # End date in YYYY-MM-DD format.
@@ -714,6 +882,9 @@ module XTwitterScraper
           url: nil,
           # Only return tweets from verified authors.
           verified_only: nil,
+          # Keeps Tweets from a recent window, such as 90m or 7d. Use a whole number & s, m,
+          # h or d.
+          within_time: nil,
           request_options: {}
         )
         end
@@ -735,10 +906,13 @@ module XTwitterScraper
             exact_phrase: String,
             exclude_source: String,
             exclude_words: String,
+            fields: String,
             from_user: String,
             geocode: String,
             hashtags: String,
+            image_shows: String,
             in_reply_to_tweet_id: String,
+            keywords: String,
             language: String,
             limit: Integer,
             list_id: String,
@@ -752,6 +926,7 @@ module XTwitterScraper
             mentioning: String,
             min_bookmarks: Integer,
             min_faves: Integer,
+            min_likes: Integer,
             min_quotes: Integer,
             min_replies: Integer,
             min_retweets: Integer,
@@ -760,6 +935,7 @@ module XTwitterScraper
             native_retweets: T::Boolean,
             near: String,
             news: T::Boolean,
+            omit: String,
             place: String,
             place_country: String,
             point_radius: String,
@@ -775,7 +951,9 @@ module XTwitterScraper
             since_id: String,
             since_time: String,
             source: String,
+            text_only_terms: String,
             to_user: String,
+            topic: String,
             until_date: Date,
             until_time: String,
             url: String,
@@ -812,14 +990,31 @@ module XTwitterScraper
           exclude_source: nil,
           # Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
           exclude_words: nil,
+          # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+          # author.username. A list keeps the field in each item. Case & underscores do not
+          # matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+          # always stay. An unknown name answers 400 unknown_field with the valid names,
+          # before any read. The price stays the same. SDK row types then hold only the
+          # named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+          # the fields you need with `fields` & `omit`.
+          fields: nil,
           # Filter by author username.
           from_user: nil,
           # Match latitude, longitude, and radius.
           geocode: nil,
           # Hashtags separated by spaces, commas, or lines.
           hashtags: nil,
+          # Keep only posts whose photos show this. Send charts, screenshots,
+          # product_photos, memes or people, or describe it in words, such as a rocket.
+          # AI-powered analysis checks posts with photos X doesn't mark sensitive & keeps
+          # scores of 0.5 or more. Other posts stay out at no charge. Each kept post costs 2
+          # credits, the AI analysis price, instead of the read price, & a post the filter
+          # drops costs nothing. imageFilter states the cutoff & counts.
+          image_shows: nil,
           # Only replies to this tweet ID.
           in_reply_to_tweet_id: nil,
+          # Words the Tweets must match, in X search syntax.
+          keywords: nil,
           # Language code filter, e.g. en or tr.
           language: nil,
           # Result upper bound. Omit it for the existing 20-row page size. Explicit coverage
@@ -846,6 +1041,8 @@ module XTwitterScraper
           min_bookmarks: nil,
           # Minimum likes threshold. minLikes is also accepted.
           min_faves: nil,
+          # Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+          min_likes: nil,
           # Minimum quote count threshold.
           min_quotes: nil,
           # Minimum replies threshold.
@@ -863,6 +1060,10 @@ module XTwitterScraper
           near: nil,
           # Only return news results.
           news: nil,
+          # Fields to drop from each row, comma-separated. It takes the same names as
+          # fields. With fields, it drops from the kept fields. A longer URL fails at the
+          # edge before Xquik reads it.
+          omit: nil,
           # Search within a place ID.
           place: nil,
           # Search within a country code.
@@ -891,8 +1092,18 @@ module XTwitterScraper
           since_time: nil,
           # Match the source application.
           source: nil,
+          # Keeps a post only when at least 1 of these words or quoted phrases appears
+          # outside the author's name and username, such as in its text, a link, its card or
+          # a quoted post.
+          text_only_terms: nil,
           # Filter replies sent to a username.
           to_user: nil,
+          # Keep only posts about this topic. AI-powered analysis asks "Is this post about
+          # <topic>?" of each post & keeps scores of 0.5 or more. It reads post text & safe
+          # photos. Each kept post costs 2 credits, the AI analysis price, instead of the
+          # read price, & a post the filter drops costs nothing. limit counts checked posts,
+          # & only kept posts come back. topicFilter states the cutoff & counts.
+          topic: nil,
           # End date in YYYY-MM-DD format.
           until_date: nil,
           # Exclusive ISO bound.

@@ -127,9 +127,19 @@ module XTwitterScraper
 
       # Get trending hashtags & topics from X by region
       #
-      # @overload get_trends(count: nil, woeid: nil, request_options: {})
+      # @overload get_trends(at: nil, count: nil, country: nil, fields: nil, location: nil, omit: nil, woeid: nil, request_options: {})
+      #
+      # @param at [String] A past time, to read what was trending on Twitter then. Takes an ISO 8601 time,
       #
       # @param count [Integer] Number of trending topics to return (1-50, default 30)
+      #
+      # @param country [String] Country to read trends for, by name or 2-letter code, such as Turkey or TR. Case
+      #
+      # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+      #
+      # @param location [String] Town or country to read trends for, by name, such as Istanbul. Case insensitive.
+      #
+      # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
       #
       # @param woeid [Integer] Region WOEID (1=Worldwide, 23424977=US, 23424975=UK, 23424969=Turkey)
       #

@@ -8,11 +8,60 @@ module XTwitterScraper
       type list_retrieve_tweets_params =
         {
           id: String,
+          advanced_query: String,
+          after: String,
+          any_words: String,
+          blue_verified_only: bool,
+          bounding_box: String,
+          card_name: String,
+          cashtags: String,
+          conversation_id: String,
           cursor: String,
+          exact_phrase: String,
+          exclude_source: String,
+          exclude_words: String,
+          fields: String,
+          from_user: String,
+          geocode: String,
+          hashtags: String,
+          in_reply_to_tweet_id: String,
           include_replies: bool,
+          keywords: String,
+          language: String,
+          max_faves: Integer,
+          max_id: String,
+          max_quotes: Integer,
+          max_replies: Integer,
+          max_retweets: Integer,
+          mentioning: String,
+          min_bookmarks: Integer,
+          min_likes: Integer,
+          min_quotes: Integer,
+          min_replies: Integer,
+          min_retweets: Integer,
+          min_views: Integer,
+          native_retweets: bool,
+          near: String,
+          news: bool,
+          omit: String,
           page_size: Integer,
+          place: String,
+          place_country: String,
+          point_radius: String,
+          quotes_of_tweet_id: String,
+          retweets_of_tweet_id: String,
+          safe: bool,
+          since_date: Date,
+          since_id: String,
           since_time: String,
-          until_time: String
+          source: String,
+          to_user: String,
+          until_date: Date,
+          until_time: String,
+          url: String,
+          verified_only: bool,
+          within: String,
+          within_time: String
         }
         & XTwitterScraper::Internal::Type::request_parameters
 
@@ -22,43 +71,337 @@ module XTwitterScraper
 
         attr_accessor id: String
 
+        attr_reader advanced_query: String?
+
+        def advanced_query=: (String) -> String
+
+        attr_reader after: String?
+
+        def after=: (String) -> String
+
+        attr_reader any_words: String?
+
+        def any_words=: (String) -> String
+
+        attr_reader blue_verified_only: bool?
+
+        def blue_verified_only=: (bool) -> bool
+
+        attr_reader bounding_box: String?
+
+        def bounding_box=: (String) -> String
+
+        attr_reader card_name: String?
+
+        def card_name=: (String) -> String
+
+        attr_reader cashtags: String?
+
+        def cashtags=: (String) -> String
+
+        attr_reader conversation_id: String?
+
+        def conversation_id=: (String) -> String
+
         attr_reader cursor: String?
 
         def cursor=: (String) -> String
+
+        attr_reader exact_phrase: String?
+
+        def exact_phrase=: (String) -> String
+
+        attr_reader exclude_source: String?
+
+        def exclude_source=: (String) -> String
+
+        attr_reader exclude_words: String?
+
+        def exclude_words=: (String) -> String
+
+        attr_reader fields: String?
+
+        def fields=: (String) -> String
+
+        attr_reader from_user: String?
+
+        def from_user=: (String) -> String
+
+        attr_reader geocode: String?
+
+        def geocode=: (String) -> String
+
+        attr_reader hashtags: String?
+
+        def hashtags=: (String) -> String
+
+        attr_reader in_reply_to_tweet_id: String?
+
+        def in_reply_to_tweet_id=: (String) -> String
 
         attr_reader include_replies: bool?
 
         def include_replies=: (bool) -> bool
 
+        attr_reader keywords: String?
+
+        def keywords=: (String) -> String
+
+        attr_reader language: String?
+
+        def language=: (String) -> String
+
+        attr_reader max_faves: Integer?
+
+        def max_faves=: (Integer) -> Integer
+
+        attr_reader max_id: String?
+
+        def max_id=: (String) -> String
+
+        attr_reader max_quotes: Integer?
+
+        def max_quotes=: (Integer) -> Integer
+
+        attr_reader max_replies: Integer?
+
+        def max_replies=: (Integer) -> Integer
+
+        attr_reader max_retweets: Integer?
+
+        def max_retweets=: (Integer) -> Integer
+
+        attr_reader mentioning: String?
+
+        def mentioning=: (String) -> String
+
+        attr_reader min_bookmarks: Integer?
+
+        def min_bookmarks=: (Integer) -> Integer
+
+        attr_reader min_likes: Integer?
+
+        def min_likes=: (Integer) -> Integer
+
+        attr_reader min_quotes: Integer?
+
+        def min_quotes=: (Integer) -> Integer
+
+        attr_reader min_replies: Integer?
+
+        def min_replies=: (Integer) -> Integer
+
+        attr_reader min_retweets: Integer?
+
+        def min_retweets=: (Integer) -> Integer
+
+        attr_reader min_views: Integer?
+
+        def min_views=: (Integer) -> Integer
+
+        attr_reader native_retweets: bool?
+
+        def native_retweets=: (bool) -> bool
+
+        attr_reader near: String?
+
+        def near=: (String) -> String
+
+        attr_reader news: bool?
+
+        def news=: (bool) -> bool
+
+        attr_reader omit: String?
+
+        def omit=: (String) -> String
+
         attr_reader page_size: Integer?
 
         def page_size=: (Integer) -> Integer
+
+        attr_reader place: String?
+
+        def place=: (String) -> String
+
+        attr_reader place_country: String?
+
+        def place_country=: (String) -> String
+
+        attr_reader point_radius: String?
+
+        def point_radius=: (String) -> String
+
+        attr_reader quotes_of_tweet_id: String?
+
+        def quotes_of_tweet_id=: (String) -> String
+
+        attr_reader retweets_of_tweet_id: String?
+
+        def retweets_of_tweet_id=: (String) -> String
+
+        attr_reader safe: bool?
+
+        def safe=: (bool) -> bool
+
+        attr_reader since_date: Date?
+
+        def since_date=: (Date) -> Date
+
+        attr_reader since_id: String?
+
+        def since_id=: (String) -> String
 
         attr_reader since_time: String?
 
         def since_time=: (String) -> String
 
+        attr_reader source: String?
+
+        def source=: (String) -> String
+
+        attr_reader to_user: String?
+
+        def to_user=: (String) -> String
+
+        attr_reader until_date: Date?
+
+        def until_date=: (Date) -> Date
+
         attr_reader until_time: String?
 
         def until_time=: (String) -> String
 
+        attr_reader url: String?
+
+        def url=: (String) -> String
+
+        attr_reader verified_only: bool?
+
+        def verified_only=: (bool) -> bool
+
+        attr_reader within: String?
+
+        def within=: (String) -> String
+
+        attr_reader within_time: String?
+
+        def within_time=: (String) -> String
+
         def initialize: (
           id: String,
+          ?advanced_query: String,
+          ?after: String,
+          ?any_words: String,
+          ?blue_verified_only: bool,
+          ?bounding_box: String,
+          ?card_name: String,
+          ?cashtags: String,
+          ?conversation_id: String,
           ?cursor: String,
+          ?exact_phrase: String,
+          ?exclude_source: String,
+          ?exclude_words: String,
+          ?fields: String,
+          ?from_user: String,
+          ?geocode: String,
+          ?hashtags: String,
+          ?in_reply_to_tweet_id: String,
           ?include_replies: bool,
+          ?keywords: String,
+          ?language: String,
+          ?max_faves: Integer,
+          ?max_id: String,
+          ?max_quotes: Integer,
+          ?max_replies: Integer,
+          ?max_retweets: Integer,
+          ?mentioning: String,
+          ?min_bookmarks: Integer,
+          ?min_likes: Integer,
+          ?min_quotes: Integer,
+          ?min_replies: Integer,
+          ?min_retweets: Integer,
+          ?min_views: Integer,
+          ?native_retweets: bool,
+          ?near: String,
+          ?news: bool,
+          ?omit: String,
           ?page_size: Integer,
+          ?place: String,
+          ?place_country: String,
+          ?point_radius: String,
+          ?quotes_of_tweet_id: String,
+          ?retweets_of_tweet_id: String,
+          ?safe: bool,
+          ?since_date: Date,
+          ?since_id: String,
           ?since_time: String,
+          ?source: String,
+          ?to_user: String,
+          ?until_date: Date,
           ?until_time: String,
+          ?url: String,
+          ?verified_only: bool,
+          ?within: String,
+          ?within_time: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
         def to_hash: -> {
           id: String,
+          advanced_query: String,
+          after: String,
+          any_words: String,
+          blue_verified_only: bool,
+          bounding_box: String,
+          card_name: String,
+          cashtags: String,
+          conversation_id: String,
           cursor: String,
+          exact_phrase: String,
+          exclude_source: String,
+          exclude_words: String,
+          fields: String,
+          from_user: String,
+          geocode: String,
+          hashtags: String,
+          in_reply_to_tweet_id: String,
           include_replies: bool,
+          keywords: String,
+          language: String,
+          max_faves: Integer,
+          max_id: String,
+          max_quotes: Integer,
+          max_replies: Integer,
+          max_retweets: Integer,
+          mentioning: String,
+          min_bookmarks: Integer,
+          min_likes: Integer,
+          min_quotes: Integer,
+          min_replies: Integer,
+          min_retweets: Integer,
+          min_views: Integer,
+          native_retweets: bool,
+          near: String,
+          news: bool,
+          omit: String,
           page_size: Integer,
+          place: String,
+          place_country: String,
+          point_radius: String,
+          quotes_of_tweet_id: String,
+          retweets_of_tweet_id: String,
+          safe: bool,
+          since_date: Date,
+          since_id: String,
           since_time: String,
+          source: String,
+          to_user: String,
+          until_date: Date,
           until_time: String,
+          url: String,
+          verified_only: bool,
+          within: String,
+          within_time: String,
           request_options: XTwitterScraper::RequestOptions
         }
       end

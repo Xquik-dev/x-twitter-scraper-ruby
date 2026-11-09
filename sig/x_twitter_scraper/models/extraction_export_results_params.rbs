@@ -8,10 +8,20 @@ module XTwitterScraper
       {
         id: String,
         format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_,
+        business_email_only: bool,
+        compare: String,
+        email_domains: String,
         has_description: bool,
+        has_email: bool,
         has_location: bool,
         has_media: bool,
+        has_website: bool,
+        hide_fake: bool,
+        hide_inactive: bool,
+        joined_since: Date,
+        joined_until: Date,
         lang: String,
+        location: String,
         max_followers: Integer,
         max_following: Integer,
         max_posts: Integer,
@@ -37,9 +47,25 @@ module XTwitterScraper
 
       attr_accessor format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_
 
+      attr_reader business_email_only: bool?
+
+      def business_email_only=: (bool) -> bool
+
+      attr_reader compare: String?
+
+      def compare=: (String) -> String
+
+      attr_reader email_domains: String?
+
+      def email_domains=: (String) -> String
+
       attr_reader has_description: bool?
 
       def has_description=: (bool) -> bool
+
+      attr_reader has_email: bool?
+
+      def has_email=: (bool) -> bool
 
       attr_reader has_location: bool?
 
@@ -49,9 +75,33 @@ module XTwitterScraper
 
       def has_media=: (bool) -> bool
 
+      attr_reader has_website: bool?
+
+      def has_website=: (bool) -> bool
+
+      attr_reader hide_fake: bool?
+
+      def hide_fake=: (bool) -> bool
+
+      attr_reader hide_inactive: bool?
+
+      def hide_inactive=: (bool) -> bool
+
+      attr_reader joined_since: Date?
+
+      def joined_since=: (Date) -> Date
+
+      attr_reader joined_until: Date?
+
+      def joined_until=: (Date) -> Date
+
       attr_reader lang: String?
 
       def lang=: (String) -> String
+
+      attr_reader location: String?
+
+      def location=: (String) -> String
 
       attr_reader max_followers: Integer?
 
@@ -112,10 +162,20 @@ module XTwitterScraper
       def initialize: (
         id: String,
         format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_,
+        ?business_email_only: bool,
+        ?compare: String,
+        ?email_domains: String,
         ?has_description: bool,
+        ?has_email: bool,
         ?has_location: bool,
         ?has_media: bool,
+        ?has_website: bool,
+        ?hide_fake: bool,
+        ?hide_inactive: bool,
+        ?joined_since: Date,
+        ?joined_until: Date,
         ?lang: String,
+        ?location: String,
         ?max_followers: Integer,
         ?max_following: Integer,
         ?max_posts: Integer,
@@ -136,10 +196,20 @@ module XTwitterScraper
       def to_hash: -> {
         id: String,
         format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_,
+        business_email_only: bool,
+        compare: String,
+        email_domains: String,
         has_description: bool,
+        has_email: bool,
         has_location: bool,
         has_media: bool,
+        has_website: bool,
+        hide_fake: bool,
+        hide_inactive: bool,
+        joined_since: Date,
+        joined_until: Date,
         lang: String,
+        location: String,
         max_followers: Integer,
         max_following: Integer,
         max_posts: Integer,

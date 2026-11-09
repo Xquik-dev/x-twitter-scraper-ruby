@@ -9,6 +9,7 @@
 
 ### Features
 
+* Params types name 343 optional query fields the API accepts on 32 methods, such as `min_likes` on the tweet list methods and `post_monitor_id` on `events.list`. Each is sent under its API name.
 * Extraction tool types gain `:user_affiliates`.
 * `x.accounts.create` and `x.accounts.reauth` take a `connection_attempt_id` you generate. Read the attempt's status with it, even if the response never reaches you.
 * A successful connection attempt names the connected account's `account_id`.

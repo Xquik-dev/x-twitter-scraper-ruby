@@ -17,6 +17,12 @@ module XTwitterScraper
         #   @return [String]
         required :id, String
 
+        # @!attribute after
+        #   Legacy cursor alias. Prefer cursor.
+        #
+        #   @return [String, nil]
+        optional :after, String
+
         # @!attribute any_words
         #   Words or quoted phrases where any one can match. Separate with spaces, commas,
         #   or lines.
@@ -79,6 +85,18 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :exclude_words, String
 
+        # @!attribute fields
+        #   Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #   author.username. A list keeps the field in each item. Case & underscores do not
+        #   matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+        #   always stay. An unknown name answers 400 unknown_field with the valid names,
+        #   before any read. The price stays the same. SDK row types then hold only the
+        #   named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+        #   the fields you need with `fields` & `omit`.
+        #
+        #   @return [String, nil]
+        optional :fields, String
+
         # @!attribute from_user
         #   Filter by author username.
         #
@@ -102,6 +120,14 @@ module XTwitterScraper
         #
         #   @return [Boolean, nil]
         optional :has_media_only, XTwitterScraper::Internal::Type::Boolean
+
+        # @!attribute include_hidden
+        #   Complete mode only. Adds the replies the post's author hid, each with
+        #   hiddenByAuthor true. They count toward limit like any reply. A paged read
+        #   answers 400. Get its hidden replies from GET /x/tweets/{id}/hidden-replies.
+        #
+        #   @return [Boolean, nil]
+        optional :include_hidden, XTwitterScraper::Internal::Type::Boolean
 
         # @!attribute include_original_post
         #   Include the source post and count it toward limit.
@@ -189,6 +215,12 @@ module XTwitterScraper
         #   @return [Integer, nil]
         optional :min_faves, Integer
 
+        # @!attribute min_likes
+        #   Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+        #
+        #   @return [Integer, nil]
+        optional :min_likes, Integer
+
         # @!attribute min_quotes
         #   Minimum quote count threshold.
         #
@@ -239,6 +271,14 @@ module XTwitterScraper
         #
         #   @return [Boolean, nil]
         optional :news, XTwitterScraper::Internal::Type::Boolean
+
+        # @!attribute omit
+        #   Fields to drop from each row, comma-separated. It takes the same names as
+        #   fields. With fields, it drops from the kept fields. A longer URL fails at the
+        #   edge before Xquik reads it.
+        #
+        #   @return [String, nil]
+        optional :omit, String
 
         # @!attribute page_size
         #   Automatic pages accept 1-300 Tweets. Standard pages keep 1-100. Default 20.
@@ -361,8 +401,10 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :within_time, String
 
-        # @!method initialize(id:, any_words: nil, blue_verified_only: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_original_author: nil, exclude_source: nil, exclude_words: nil, from_user: nil, geocode: nil, hashtags: nil, has_media_only: nil, include_original_post: nil, in_reply_to_tweet_id: nil, language: nil, limit: nil, max_depth: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, mode: nil, native_retweets: nil, near: nil, news: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, scope: nil, since_date: nil, since_id: nil, since_time: nil, sort: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
+        # @!method initialize(id:, after: nil, any_words: nil, blue_verified_only: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_original_author: nil, exclude_source: nil, exclude_words: nil, fields: nil, from_user: nil, geocode: nil, hashtags: nil, has_media_only: nil, include_hidden: nil, include_original_post: nil, in_reply_to_tweet_id: nil, language: nil, limit: nil, max_depth: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, mode: nil, native_retweets: nil, near: nil, news: nil, omit: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, scope: nil, since_date: nil, since_id: nil, since_time: nil, sort: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
         #   @param id [String]
+        #
+        #   @param after [String] Legacy cursor alias. Prefer cursor.
         #
         #   @param any_words [String] Words or quoted phrases where any one can match. Separate with spaces, commas, o
         #
@@ -384,6 +426,8 @@ module XTwitterScraper
         #
         #   @param exclude_words [String] Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
         #
+        #   @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #
         #   @param from_user [String] Filter by author username.
         #
         #   @param geocode [String] Match latitude, longitude, and radius.
@@ -391,6 +435,8 @@ module XTwitterScraper
         #   @param hashtags [String] Hashtags separated by spaces, commas, or lines.
         #
         #   @param has_media_only [Boolean] Only return replies containing media.
+        #
+        #   @param include_hidden [Boolean] Complete mode only. Adds the replies the post's author hid, each with hiddenByAu
         #
         #   @param include_original_post [Boolean] Include the source post and count it toward limit.
         #
@@ -420,6 +466,8 @@ module XTwitterScraper
         #
         #   @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
         #
+        #   @param min_likes [Integer] Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+        #
         #   @param min_quotes [Integer] Minimum quote count threshold.
         #
         #   @param min_replies [Integer] Minimum replies threshold.
@@ -435,6 +483,8 @@ module XTwitterScraper
         #   @param near [String] Match a place name.
         #
         #   @param news [Boolean] Only return news results.
+        #
+        #   @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         #   @param page_size [Integer] Automatic pages accept 1-300 Tweets. Standard pages keep 1-100. Default 20. Cont
         #

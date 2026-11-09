@@ -7,6 +7,8 @@ module XTwitterScraper
     class Trends
       def list: (
         ?count: Integer,
+        ?fields: String,
+        ?omit: String,
         ?woeid: Integer,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::TrendListResponse

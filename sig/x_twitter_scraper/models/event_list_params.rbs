@@ -10,7 +10,8 @@ module XTwitterScraper
         event_type: XTwitterScraper::Models::event_type,
         keyword_monitor_id: String,
         limit: Integer,
-        monitor_id: String
+        monitor_id: String,
+        post_monitor_id: String
       }
       & XTwitterScraper::Internal::Type::request_parameters
 
@@ -40,12 +41,17 @@ module XTwitterScraper
 
       def monitor_id=: (String) -> String
 
+      attr_reader post_monitor_id: String?
+
+      def post_monitor_id=: (String) -> String
+
       def initialize: (
         ?cursor: String,
         ?event_type: XTwitterScraper::Models::event_type,
         ?keyword_monitor_id: String,
         ?limit: Integer,
         ?monitor_id: String,
+        ?post_monitor_id: String,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
@@ -55,6 +61,7 @@ module XTwitterScraper
         keyword_monitor_id: String,
         limit: Integer,
         monitor_id: String,
+        post_monitor_id: String,
         request_options: XTwitterScraper::RequestOptions
       }
     end

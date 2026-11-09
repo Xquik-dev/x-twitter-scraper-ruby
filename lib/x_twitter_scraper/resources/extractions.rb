@@ -10,7 +10,7 @@ module XTwitterScraper
     class Extractions
       # Get extraction results
       #
-      # @overload retrieve(id, cursor: nil, field_style: nil, include_raw: nil, limit: nil, output_mode: nil, output_preset: nil, request_options: {})
+      # @overload retrieve(id, cursor: nil, field_style: nil, include_raw: nil, limit: nil, output_mode: nil, output_preset: nil, wait: nil, request_options: {})
       #
       # @param id [String] Extraction public ID (UUID)
       #
@@ -25,6 +25,8 @@ module XTwitterScraper
       # @param output_mode [Symbol, XTwitterScraper::Models::ExtractionRetrieveParams::OutputMode] Select compact, full, or raw-compatible result fields.
       #
       # @param output_preset [Symbol, XTwitterScraper::Models::ExtractionRetrieveParams::OutputPreset] Keep enrichment nested or merge it into each result.
+      #
+      # @param wait [Integer] Wait up to this many seconds when the job is active.
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -291,19 +293,39 @@ module XTwitterScraper
 
       # Export extraction results
       #
-      # @overload export_results(id, format_:, has_description: nil, has_location: nil, has_media: nil, lang: nil, max_followers: nil, max_following: nil, max_posts: nil, min_followers: nil, min_following: nil, min_likes: nil, min_posts: nil, min_replies: nil, min_retweets: nil, min_views: nil, search: nil, since_date: nil, until_date: nil, verified: nil, request_options: {})
+      # @overload export_results(id, format_:, business_email_only: nil, compare: nil, email_domains: nil, has_description: nil, has_email: nil, has_location: nil, has_media: nil, has_website: nil, hide_fake: nil, hide_inactive: nil, joined_since: nil, joined_until: nil, lang: nil, location: nil, max_followers: nil, max_following: nil, max_posts: nil, min_followers: nil, min_following: nil, min_likes: nil, min_posts: nil, min_replies: nil, min_retweets: nil, min_views: nil, search: nil, since_date: nil, until_date: nil, verified: nil, request_options: {})
       #
       # @param id [String] Extraction public ID
       #
       # @param format_ [Symbol, XTwitterScraper::Models::ExtractionExportResultsParams::Format] Export file format
       #
+      # @param business_email_only [Boolean] Require an email outside free webmail, such as Gmail, in the row's Email column.
+      #
+      # @param compare [String] ID of another run of this tool. For an earlier whole run of the same account, th
+      #
+      # @param email_domains [String] Require the row's email at one of these domains. Separate domains with commas. S
+      #
       # @param has_description [Boolean] Require a non-empty description.
+      #
+      # @param has_email [Boolean] Require an email in the row's Email column.
       #
       # @param has_location [Boolean] Require a non-empty location.
       #
       # @param has_media [Boolean] Require media.
       #
+      # @param has_website [Boolean] Require a website on the profile.
+      #
+      # @param hide_fake [Boolean] Drop accounts with at least 3 of these signs. No posts, a default picture, an em
+      #
+      # @param hide_inactive [Boolean] Drop accounts with under 1 post a month since joining that are at least 180 days
+      #
+      # @param joined_since [Date] Keep accounts that joined X on this UTC day or later.
+      #
+      # @param joined_until [Date] Keep accounts that joined X before this UTC day.
+      #
       # @param lang [String] Filter by language code.
+      #
+      # @param location [String] Keep accounts whose location contains this text.
       #
       # @param max_followers [Integer] Maximum follower count.
       #
@@ -345,10 +367,18 @@ module XTwitterScraper
           method: :get,
           path: ["extractions/%1$s/export", id],
           query: query.transform_keys(
+            business_email_only: "businessEmailOnly",
+            email_domains: "emailDomains",
             format_: "format",
             has_description: "hasDescription",
+            has_email: "hasEmail",
             has_location: "hasLocation",
             has_media: "hasMedia",
+            has_website: "hasWebsite",
+            hide_fake: "hideFake",
+            hide_inactive: "hideInactive",
+            joined_since: "joinedSince",
+            joined_until: "joinedUntil",
             max_followers: "maxFollowers",
             max_following: "maxFollowing",
             max_posts: "maxPosts",

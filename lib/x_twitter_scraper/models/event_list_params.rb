@@ -44,7 +44,13 @@ module XTwitterScraper
       #   @return [String, nil]
       optional :monitor_id, String
 
-      # @!method initialize(cursor: nil, event_type: nil, keyword_monitor_id: nil, limit: nil, monitor_id: nil, request_options: {})
+      # @!attribute post_monitor_id
+      #   Post monitor ID. The post_monitor_id alias also works.
+      #
+      #   @return [String, nil]
+      optional :post_monitor_id, String
+
+      # @!method initialize(cursor: nil, event_type: nil, keyword_monitor_id: nil, limit: nil, monitor_id: nil, post_monitor_id: nil, request_options: {})
       #   @param cursor [String] Previous nextCursor.
       #
       #   @param event_type [Symbol, XTwitterScraper::Models::EventType] Filter events by type
@@ -54,6 +60,8 @@ module XTwitterScraper
       #   @param limit [Integer] Maximum number of items to return (1-100, default 50). For paid per-result endpo
       #
       #   @param monitor_id [String] Account monitor ID.
+      #
+      #   @param post_monitor_id [String] Post monitor ID. The post_monitor_id alias also works.
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
     end

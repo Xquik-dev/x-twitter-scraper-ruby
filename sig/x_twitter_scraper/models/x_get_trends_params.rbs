@@ -5,29 +5,67 @@
 module XTwitterScraper
   module Models
     type x_get_trends_params =
-      { count: Integer, woeid: Integer }
+      {
+        at: String,
+        count: Integer,
+        country: String,
+        fields: String,
+        location: String,
+        omit: String,
+        woeid: Integer
+      }
       & XTwitterScraper::Internal::Type::request_parameters
 
     class XGetTrendsParams < XTwitterScraper::Internal::Type::BaseModel
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
 
+      attr_reader at: String?
+
+      def at=: (String) -> String
+
       attr_reader count: Integer?
 
       def count=: (Integer) -> Integer
+
+      attr_reader country: String?
+
+      def country=: (String) -> String
+
+      attr_reader fields: String?
+
+      def fields=: (String) -> String
+
+      attr_reader location: String?
+
+      def location=: (String) -> String
+
+      attr_reader omit: String?
+
+      def omit=: (String) -> String
 
       attr_reader woeid: Integer?
 
       def woeid=: (Integer) -> Integer
 
       def initialize: (
+        ?at: String,
         ?count: Integer,
+        ?country: String,
+        ?fields: String,
+        ?location: String,
+        ?omit: String,
         ?woeid: Integer,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
       def to_hash: -> {
+        at: String,
         count: Integer,
+        country: String,
+        fields: String,
+        location: String,
+        omit: String,
         woeid: Integer,
         request_options: XTwitterScraper::RequestOptions
       }

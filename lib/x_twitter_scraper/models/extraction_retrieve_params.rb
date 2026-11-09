@@ -52,7 +52,13 @@ module XTwitterScraper
       #   @return [Symbol, XTwitterScraper::Models::ExtractionRetrieveParams::OutputPreset, nil]
       optional :output_preset, enum: -> { XTwitterScraper::ExtractionRetrieveParams::OutputPreset }
 
-      # @!method initialize(id:, cursor: nil, field_style: nil, include_raw: nil, limit: nil, output_mode: nil, output_preset: nil, request_options: {})
+      # @!attribute wait
+      #   Wait up to this many seconds when the job is active.
+      #
+      #   @return [Integer, nil]
+      optional :wait, Integer
+
+      # @!method initialize(id:, cursor: nil, field_style: nil, include_raw: nil, limit: nil, output_mode: nil, output_preset: nil, wait: nil, request_options: {})
       #   @param id [String]
       #
       #   @param cursor [String] Previous nextCursor.
@@ -66,6 +72,8 @@ module XTwitterScraper
       #   @param output_mode [Symbol, XTwitterScraper::Models::ExtractionRetrieveParams::OutputMode] Select compact, full, or raw-compatible result fields.
       #
       #   @param output_preset [Symbol, XTwitterScraper::Models::ExtractionRetrieveParams::OutputPreset] Keep enrichment nested or merge it into each result.
+      #
+      #   @param wait [Integer] Wait up to this many seconds when the job is active.
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
 
