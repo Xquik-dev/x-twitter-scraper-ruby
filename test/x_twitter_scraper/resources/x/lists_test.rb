@@ -11,15 +11,14 @@ class XTwitterScraper::Test::Resources::X::ListsTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.lists.retrieve_followers("id")
 
     assert_pattern do
-      response => XTwitterScraper::PaginatedUsers
+      response => XTwitterScraper::Models::X::ListRetrieveFollowersResponse
     end
 
     assert_pattern do
-      response => {
-        has_next_page: XTwitterScraper::Internal::Type::Boolean,
-        next_cursor: String,
-        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile])
-      }
+      case response
+      in XTwitterScraper::Models::X::ListRetrieveFollowersResponse::UserListCoverageResponse
+      in XTwitterScraper::UserListPage
+      end
     end
   end
 
@@ -27,15 +26,14 @@ class XTwitterScraper::Test::Resources::X::ListsTest < XTwitterScraper::Test::Re
     response = @x_twitter_scraper.x.lists.retrieve_members("id")
 
     assert_pattern do
-      response => XTwitterScraper::PaginatedUsers
+      response => XTwitterScraper::Models::X::ListRetrieveMembersResponse
     end
 
     assert_pattern do
-      response => {
-        has_next_page: XTwitterScraper::Internal::Type::Boolean,
-        next_cursor: String,
-        users: ^(XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile])
-      }
+      case response
+      in XTwitterScraper::Models::X::ListRetrieveMembersResponse::UserListCoverageResponse
+      in XTwitterScraper::UserListPage
+      end
     end
   end
 
