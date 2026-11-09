@@ -64,11 +64,14 @@ module XTwitterScraper
         #
         # @see XTwitterScraper::Models::X::TweetRetrieveParams
         def retrieve(id, params = {})
+          parsed, options = XTwitterScraper::X::TweetRetrieveParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: ["x/tweets/%1$s", id],
+            query: query,
             model: XTwitterScraper::Models::X::TweetRetrieveResponse,
-            options: params[:request_options]
+            options: options
           )
         end
 

@@ -91,11 +91,14 @@ module XTwitterScraper
         #
         # @see XTwitterScraper::Models::Support::TicketListParams
         def list(params = {})
+          parsed, options = XTwitterScraper::Support::TicketListParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: "support/tickets",
+            query: query,
             model: XTwitterScraper::Models::Support::TicketListResponse,
-            options: params[:request_options]
+            options: options
           )
         end
 

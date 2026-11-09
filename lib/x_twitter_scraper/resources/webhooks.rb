@@ -70,11 +70,14 @@ module XTwitterScraper
       #
       # @see XTwitterScraper::Models::WebhookListParams
       def list(params = {})
+        parsed, options = XTwitterScraper::WebhookListParams.dump_request(params)
+        query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "webhooks",
+          query: query,
           model: XTwitterScraper::Models::WebhookListResponse,
-          options: params[:request_options]
+          options: options
         )
       end
 
@@ -110,11 +113,14 @@ module XTwitterScraper
       #
       # @see XTwitterScraper::Models::WebhookListDeliveriesParams
       def list_deliveries(id, params = {})
+        parsed, options = XTwitterScraper::WebhookListDeliveriesParams.dump_request(params)
+        query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["webhooks/%1$s/deliveries", id],
+          query: query,
           model: XTwitterScraper::Models::WebhookListDeliveriesResponse,
-          options: params[:request_options]
+          options: options
         )
       end
 

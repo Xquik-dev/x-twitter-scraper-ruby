@@ -44,11 +44,14 @@ module XTwitterScraper
         #
         # @see XTwitterScraper::Models::X::BookmarkRetrieveFoldersParams
         def retrieve_folders(params = {})
+          parsed, options = XTwitterScraper::X::BookmarkRetrieveFoldersParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: "x/bookmarks/folders",
+            query: query,
             model: XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse,
-            options: params[:request_options]
+            options: options
           )
         end
 

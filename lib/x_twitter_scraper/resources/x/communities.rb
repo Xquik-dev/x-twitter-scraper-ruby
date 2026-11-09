@@ -88,11 +88,14 @@ module XTwitterScraper
         #
         # @see XTwitterScraper::Models::X::CommunityRetrieveInfoParams
         def retrieve_info(id, params = {})
+          parsed, options = XTwitterScraper::X::CommunityRetrieveInfoParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: ["x/communities/%1$s/info", id],
+            query: query,
             model: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse,
-            options: params[:request_options]
+            options: options
           )
         end
 
