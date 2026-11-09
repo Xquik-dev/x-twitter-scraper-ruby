@@ -61,6 +61,8 @@ module XTwitterScraper
 
   class EventRetrieveParams = XTwitterScraper::Models::EventRetrieveParams
 
+  class ImageFilterSummary = XTwitterScraper::Models::ImageFilterSummary
+
   class ProfileContactInfo = XTwitterScraper::Models::ProfileContactInfo
 
   class TweetAuthorUnavailable = XTwitterScraper::Models::TweetAuthorUnavailable
