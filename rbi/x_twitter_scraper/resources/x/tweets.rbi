@@ -93,7 +93,7 @@ module XTwitterScraper
             fields: String,
             omit: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::PaginatedTweets)
+          ).returns(XTwitterScraper::Models::X::TweetListResponse)
         end
         def list(
           # Comma-separated tweet IDs (max 100)

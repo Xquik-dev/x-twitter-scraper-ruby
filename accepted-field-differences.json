@@ -24,7 +24,6 @@
       "GET /api/v1/x/lists/{id}/followers response missing scanLimit",
       "GET /api/v1/x/lists/{id}/members response missing diagnostic",
       "GET /api/v1/x/lists/{id}/members response missing scanLimit",
-      "GET /api/v1/x/tweets response missing skipped",
       "GET /api/v1/x/tweets/search response missing imageFilter",
       "GET /api/v1/x/tweets/search response missing topicFilter",
       "GET /api/v1/x/tweets/search response missing tweets[].imageScore",

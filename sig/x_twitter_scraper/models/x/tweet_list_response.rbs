@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_list_response =
+        { skipped: ::Array[XTwitterScraper::Models::X::TweetListResponse::Skipped] }
+
+      class TweetListResponse < XTwitterScraper::Models::PaginatedTweets
+        attr_reader skipped: ::Array[XTwitterScraper::Models::X::TweetListResponse::Skipped]?
+
+        def skipped=: (
+          ::Array[XTwitterScraper::Models::X::TweetListResponse::Skipped]
+        ) -> ::Array[XTwitterScraper::Models::X::TweetListResponse::Skipped]
+
+        def initialize: (
+          ?skipped: ::Array[XTwitterScraper::Models::X::TweetListResponse::Skipped]
+        ) -> void
+
+        def to_hash: -> {
+          skipped: ::Array[XTwitterScraper::Models::X::TweetListResponse::Skipped]
+        }
+
+        type skipped = { entry: String, reason: String }
+
+        class Skipped < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor entry: String
+
+          attr_accessor reason: String
+
+          def initialize: (entry: String, reason: String) -> void
+
+          def to_hash: -> { entry: String, reason: String }
+        end
+      end
+    end
+  end
+end
