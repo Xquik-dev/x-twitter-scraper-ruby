@@ -20,6 +20,7 @@
 ### Bug fixes
 
 * `min_faves` on the 9 tweet list methods, such as `x.tweets.search` and `x.users.retrieve_tweets`, is sent as `minLikes`, the name the API documents. It stays as a deprecated alias of `min_likes`, so calls that pass it keep working. When a call passes both, the later one wins.
+* The community creator's `verified` from `x.communities.retrieve_info` is optional in the model, Sorbet and RBS signatures. The API leaves it out of a full creator profile when X sends no badge state for it, as the API spec says.
 
 ## 0.10.6 (2026-10-14)
 
