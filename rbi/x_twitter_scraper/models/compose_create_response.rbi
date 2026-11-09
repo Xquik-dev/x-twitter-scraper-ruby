@@ -265,7 +265,7 @@ module XTwitterScraper
           def self.new(
             # Human-readable published signal name.
             action:,
-            multiplier: :"Production weight not published by X"
+            multiplier: :"Source default. Production value can vary."
           )
           end
 
@@ -629,7 +629,7 @@ module XTwitterScraper
           top_suggestion:,
           # Present only when every check passes.
           intent_url: nil,
-          total_checks: 9
+          total_checks: 1
         )
         end
 

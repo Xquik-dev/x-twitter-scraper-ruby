@@ -151,13 +151,13 @@ module XTwitterScraper
 
           # @!attribute multiplier
           #
-          #   @return [Symbol, :"Production weight not published by X"]
-          required :multiplier, const: :"Production weight not published by X"
+          #   @return [Symbol, :"Source default. Production value can vary."]
+          required :multiplier, const: :"Source default. Production value can vary."
 
-          # @!method initialize(action:, multiplier: :"Production weight not published by X")
+          # @!method initialize(action:, multiplier: :"Source default. Production value can vary.")
           #   @param action [String] Human-readable published signal name.
           #
-          #   @param multiplier [Symbol, :"Production weight not published by X"]
+          #   @param multiplier [Symbol, :"Source default. Production value can vary."]
         end
 
         class RadarRecommendation < XTwitterScraper::Internal::Type::BaseModel
@@ -338,8 +338,8 @@ module XTwitterScraper
 
         # @!attribute total_checks
         #
-        #   @return [Integer, 9]
-        required :total_checks, const: 9, api_name: :totalChecks
+        #   @return [Integer, 1]
+        required :total_checks, const: 1, api_name: :totalChecks
 
         # @!attribute intent_url
         #   Present only when every check passes.
@@ -347,7 +347,7 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :intent_url, String, api_name: :intentUrl
 
-        # @!method initialize(checklist:, next_step:, passed:, passed_count:, top_suggestion:, intent_url: nil, total_checks: 9)
+        # @!method initialize(checklist:, next_step:, passed:, passed_count:, top_suggestion:, intent_url: nil, total_checks: 1)
         #   @param checklist [Array<XTwitterScraper::Models::ComposeCreateResponse::ComposeScoreResult::Checklist>] Deterministic editorial checks. Not a reach prediction.
         #
         #   @param next_step [String]
@@ -360,7 +360,7 @@ module XTwitterScraper
         #
         #   @param intent_url [String] Present only when every check passes.
         #
-        #   @param total_checks [Integer, 9]
+        #   @param total_checks [Integer, 1]
 
         class Checklist < XTwitterScraper::Internal::Type::BaseModel
           # @!attribute factor

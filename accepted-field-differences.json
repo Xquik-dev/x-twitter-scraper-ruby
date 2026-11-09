@@ -60,9 +60,6 @@
   {
     "reason": "The SDK's enum lists other values than the spec here. The SDK returns a value its enum does not list as the API sent it, so each one still reaches the caller.",
     "differences": [
-      "POST /api/v1/compose response enum engagementMultipliers[].multiplier",
-      "POST /api/v1/compose response enum totalChecks",
-      "POST /api/v1/extractions/estimate response enum source",
       "POST /api/v1/x/account-connection-challenges/{id}/submit response enum status"
     ]
   },

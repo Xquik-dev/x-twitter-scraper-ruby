@@ -109,22 +109,22 @@ module XTwitterScraper
         type engagement_multiplier =
           {
             action: String,
-            multiplier: :"Production weight not published by X"
+            multiplier: :"Source default. Production value can vary."
           }
 
         class EngagementMultiplier < XTwitterScraper::Internal::Type::BaseModel
           attr_accessor action: String
 
-          attr_accessor multiplier: :"Production weight not published by X"
+          attr_accessor multiplier: :"Source default. Production value can vary."
 
           def initialize: (
             action: String,
-            ?multiplier: :"Production weight not published by X"
+            ?multiplier: :"Source default. Production value can vary."
           ) -> void
 
           def to_hash: -> {
             action: String,
-            multiplier: :"Production weight not published by X"
+            multiplier: :"Source default. Production value can vary."
           }
         end
 
@@ -261,7 +261,7 @@ module XTwitterScraper
           passed: bool,
           passed_count: Integer,
           top_suggestion: String,
-          total_checks: 9,
+          total_checks: 1,
           intent_url: String
         }
 
@@ -276,7 +276,7 @@ module XTwitterScraper
 
         attr_accessor top_suggestion: String
 
-        attr_accessor total_checks: 9
+        attr_accessor total_checks: 1
 
         attr_reader intent_url: String?
 
@@ -289,7 +289,7 @@ module XTwitterScraper
           passed_count: Integer,
           top_suggestion: String,
           ?intent_url: String,
-          ?total_checks: 9
+          ?total_checks: 1
         ) -> void
 
         def to_hash: -> {
@@ -298,7 +298,7 @@ module XTwitterScraper
           passed: bool,
           passed_count: Integer,
           top_suggestion: String,
-          total_checks: 9,
+          total_checks: 1,
           intent_url: String
         }
 
