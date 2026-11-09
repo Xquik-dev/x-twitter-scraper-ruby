@@ -13,8 +13,20 @@ module XTwitterScraper
       #   @return [Array<XTwitterScraper::Models::Delivery>]
       required :deliveries, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Delivery] }
 
-      # @!method initialize(deliveries:)
+      # @!attribute has_more
+      #
+      #   @return [Boolean]
+      required :has_more, XTwitterScraper::Internal::Type::Boolean, api_name: :hasMore
+
+      # @!attribute next_cursor
+      #
+      #   @return [String, nil]
+      optional :next_cursor, String, api_name: :nextCursor
+
+      # @!method initialize(deliveries:, has_more:, next_cursor: nil)
       #   @param deliveries [Array<XTwitterScraper::Models::Delivery>]
+      #   @param has_more [Boolean]
+      #   @param next_cursor [String]
     end
   end
 end

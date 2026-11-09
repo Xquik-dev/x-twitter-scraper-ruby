@@ -18,16 +18,33 @@ module XTwitterScraper
       sig { returns(T::Array[XTwitterScraper::Delivery]) }
       attr_accessor :deliveries
 
+      sig { returns(T::Boolean) }
+      attr_accessor :has_more
+
+      sig { returns(T.nilable(String)) }
+      attr_reader :next_cursor
+
+      sig { params(next_cursor: String).void }
+      attr_writer :next_cursor
+
       sig do
-        params(deliveries: T::Array[XTwitterScraper::Delivery::OrHash]).returns(
-          T.attached_class
-        )
+        params(
+          deliveries: T::Array[XTwitterScraper::Delivery::OrHash],
+          has_more: T::Boolean,
+          next_cursor: String
+        ).returns(T.attached_class)
       end
-      def self.new(deliveries:)
+      def self.new(deliveries:, has_more:, next_cursor: nil)
       end
 
       sig do
-        override.returns({ deliveries: T::Array[XTwitterScraper::Delivery] })
+        override.returns(
+          {
+            deliveries: T::Array[XTwitterScraper::Delivery],
+            has_more: T::Boolean,
+            next_cursor: String
+          }
+        )
       end
       def to_hash
       end
