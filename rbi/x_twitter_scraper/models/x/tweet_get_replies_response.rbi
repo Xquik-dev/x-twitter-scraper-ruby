@@ -546,6 +546,13 @@ module XTwitterScraper
             end
             attr_accessor :stop_reason
 
+            # The page, from 1, where each new direct reply appeared.
+            sig { returns(T.nilable(T::Array[Integer])) }
+            attr_reader :new_direct_reply_pages
+
+            sig { params(new_direct_reply_pages: T::Array[Integer]).void }
+            attr_writer :new_direct_reply_pages
+
             sig do
               params(
                 name: String,
@@ -553,7 +560,8 @@ module XTwitterScraper
                 new_nested_replies: Integer,
                 pages_attempted: Integer,
                 stop_reason:
-                  XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::StopReason::OrSymbol
+                  XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::StopReason::OrSymbol,
+                new_direct_reply_pages: T::Array[Integer]
               ).returns(T.attached_class)
             end
             def self.new(
@@ -561,7 +569,9 @@ module XTwitterScraper
               new_direct_replies:,
               new_nested_replies:,
               pages_attempted:,
-              stop_reason:
+              stop_reason:,
+              # The page, from 1, where each new direct reply appeared.
+              new_direct_reply_pages: nil
             )
             end
 
@@ -573,7 +583,8 @@ module XTwitterScraper
                   new_nested_replies: Integer,
                   pages_attempted: Integer,
                   stop_reason:
-                    XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::StopReason::TaggedSymbol
+                    XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::StopReason::TaggedSymbol,
+                  new_direct_reply_pages: T::Array[Integer]
                 }
               )
             end
