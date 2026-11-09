@@ -575,7 +575,7 @@ class CheckApiFieldsTest < Minitest::Test
   end
 
   def test_the_sdk_query_fields_use_their_wire_names
-    names = %w[cursor eventType keywordMonitorId limit monitorId]
+    names = %w[cursor eventType keywordMonitorId limit monitorId postMonitorId]
     spec = {
       "paths" => {
         "/api/v1/events" => {
