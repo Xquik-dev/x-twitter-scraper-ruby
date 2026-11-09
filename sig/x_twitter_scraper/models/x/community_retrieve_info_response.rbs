@@ -63,25 +63,19 @@ module XTwitterScraper
 
           def invites_policy=: (String) -> String
 
-          attr_reader is_nsfw: bool?
-
-          def is_nsfw=: (bool) -> bool
+          attr_accessor is_nsfw: bool
 
           attr_reader join_policy: String?
 
           def join_policy=: (String) -> String
 
-          attr_reader member_count: Integer?
-
-          def member_count=: (Integer) -> Integer
+          attr_accessor member_count: Integer
 
           attr_reader moderator_count: Integer?
 
           def moderator_count=: (Integer) -> Integer
 
-          attr_reader name: String?
-
-          def name=: (String) -> String
+          attr_accessor name: String
 
           attr_reader primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic?
 
@@ -102,11 +96,11 @@ module XTwitterScraper
             ?creator: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator,
             ?description: String,
             ?invites_policy: String,
-            ?is_nsfw: bool,
+            is_nsfw: bool,
             ?join_policy: String,
-            ?member_count: Integer,
+            member_count: Integer,
             ?moderator_count: Integer,
-            ?name: String,
+            name: String,
             ?primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
             ?rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
           ) -> void
@@ -163,11 +157,9 @@ module XTwitterScraper
 
             def id=: (String) -> String
 
-            attr_reader name: String?
+            attr_accessor name: String
 
-            def name=: (String) -> String
-
-            def initialize: (?id: String, ?name: String) -> void
+            def initialize: (?id: String, name: String) -> void
 
             def to_hash: -> { id: String, name: String }
           end

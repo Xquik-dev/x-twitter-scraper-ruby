@@ -42,10 +42,10 @@ module XTwitterScraper
 
           # @!attribute name
           #
-          #   @return [String]
-          required :name, String
+          #   @return [String, nil]
+          optional :name, String
 
-          # @!method initialize(id:, name:)
+          # @!method initialize(id:, name: nil)
           #   @param id [String]
           #   @param name [String]
         end

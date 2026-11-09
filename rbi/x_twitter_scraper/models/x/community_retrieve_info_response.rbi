@@ -114,11 +114,8 @@ module XTwitterScraper
           attr_writer :invites_policy
 
           # Whether the community is marked sensitive
-          sig { returns(T.nilable(T::Boolean)) }
-          attr_reader :is_nsfw
-
-          sig { params(is_nsfw: T::Boolean).void }
-          attr_writer :is_nsfw
+          sig { returns(T::Boolean) }
+          attr_accessor :is_nsfw
 
           # Join policy (open or restricted)
           sig { returns(T.nilable(String)) }
@@ -128,11 +125,8 @@ module XTwitterScraper
           attr_writer :join_policy
 
           # Total member count
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :member_count
-
-          sig { params(member_count: Integer).void }
-          attr_writer :member_count
+          sig { returns(Integer) }
+          attr_accessor :member_count
 
           # Total moderator count
           sig { returns(T.nilable(Integer)) }
@@ -142,11 +136,8 @@ module XTwitterScraper
           attr_writer :moderator_count
 
           # Display name of the community
-          sig { returns(T.nilable(String)) }
-          attr_reader :name
-
-          sig { params(name: String).void }
-          attr_writer :name
+          sig { returns(String) }
+          attr_accessor :name
 
           # Primary topic
           sig do
@@ -224,15 +215,15 @@ module XTwitterScraper
             # Invitation policy
             invites_policy: nil,
             # Whether the community is marked sensitive
-            is_nsfw: nil,
+            is_nsfw:,
             # Join policy (open or restricted)
             join_policy: nil,
             # Total member count
-            member_count: nil,
+            member_count:,
             # Total moderator count
             moderator_count: nil,
             # Display name of the community
-            name: nil,
+            name:,
             # Primary topic
             primary_topic: nil,
             # Community rules
@@ -331,15 +322,12 @@ module XTwitterScraper
             sig { params(id: String).void }
             attr_writer :id
 
-            sig { returns(T.nilable(String)) }
-            attr_reader :name
-
-            sig { params(name: String).void }
-            attr_writer :name
+            sig { returns(String) }
+            attr_accessor :name
 
             # Primary topic
             sig { params(id: String, name: String).returns(T.attached_class) }
-            def self.new(id: nil, name: nil)
+            def self.new(id: nil, name:)
             end
 
             sig { override.returns({ id: String, name: String }) }

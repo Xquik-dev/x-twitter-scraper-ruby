@@ -43,39 +43,11 @@ module XTwitterScraper
           end
           attr_writer :diagnostic
 
-          sig do
-            returns(
-              T.nilable(
-                XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::HasNextPage::TaggedBoolean
-              )
-            )
-          end
-          attr_reader :has_next_page
+          sig { returns(XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::HasNextPage::TaggedBoolean) }
+          attr_accessor :has_next_page
 
-          sig do
-            params(
-              has_next_page:
-                XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::HasNextPage::OrBoolean
-            ).void
-          end
-          attr_writer :has_next_page
-
-          sig do
-            returns(
-              T.nilable(
-                XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::NextCursor::TaggedSymbol
-              )
-            )
-          end
-          attr_reader :next_cursor
-
-          sig do
-            params(
-              next_cursor:
-                XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::NextCursor::OrSymbol
-            ).void
-          end
-          attr_writer :next_cursor
+          sig { returns(XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::NextCursor::TaggedSymbol) }
+          attr_accessor :next_cursor
 
           # No-mode search, user Tweet, user reply, and direct reply reads use automatic
           # coverage. Shape, filters, aliases, and billing stay compatible. Unprefixed
@@ -94,8 +66,8 @@ module XTwitterScraper
           def self.new(
             # Coverage evidence across parallel search strategies.
             diagnostic:,
-            has_next_page: nil,
-            next_cursor: nil
+            has_next_page:,
+            next_cursor:
           )
           end
 

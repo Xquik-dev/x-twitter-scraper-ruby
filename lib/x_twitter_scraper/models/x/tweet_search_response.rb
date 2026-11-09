@@ -28,17 +28,17 @@ module XTwitterScraper
 
           # @!attribute has_next_page
           #
-          #   @return [Boolean, XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::HasNextPage, nil]
-          optional :has_next_page,
+          #   @return [Boolean, XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::HasNextPage]
+          required :has_next_page,
                    enum: -> { XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::HasNextPage }
 
           # @!attribute next_cursor
           #
-          #   @return [Symbol, XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::NextCursor, nil]
-          optional :next_cursor,
+          #   @return [Symbol, XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::NextCursor]
+          required :next_cursor,
                    enum: -> { XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse::NextCursor }
 
-          # @!method initialize(diagnostic:, has_next_page: nil, next_cursor: nil)
+          # @!method initialize(diagnostic:, has_next_page:, next_cursor:)
           #   No-mode search, user Tweet, user reply, and direct reply reads use automatic
           #   coverage. Shape, filters, aliases, and billing stay compatible. Unprefixed
           #   cursors remain legacy. Follow next_cursor while has_next_page is true. An empty

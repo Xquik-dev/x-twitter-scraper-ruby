@@ -36,9 +36,11 @@ module XTwitterScraper
         class Folder < XTwitterScraper::Internal::Type::BaseModel
           attr_accessor id: String
 
-          attr_accessor name: String
+          attr_reader name: String?
 
-          def initialize: (id: String, name: String) -> void
+          def name=: (String) -> String
+
+          def initialize: (id: String, ?name: String) -> void
 
           def to_hash: -> { id: String, name: String }
         end

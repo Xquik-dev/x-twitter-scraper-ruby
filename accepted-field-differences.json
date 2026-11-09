@@ -2732,20 +2732,7 @@
   {
     "reason": "The SDK's model and the spec disagree on whether the API always returns these fields. The SDK reads a response either way, so this shows only in its type signatures.",
     "differences": [
-      "GET /api/v1/x/bookmarks/folders response required folders[].name",
-      "GET /api/v1/x/communities/{id}/info response required community.creator.verified",
-      "GET /api/v1/x/communities/{id}/info response required community.is_nsfw",
-      "GET /api/v1/x/communities/{id}/info response required community.member_count",
-      "GET /api/v1/x/communities/{id}/info response required community.name",
-      "GET /api/v1/x/communities/{id}/info response required community.primary_topic.name",
-      "GET /api/v1/x/tweets/search response required has_next_page",
-      "GET /api/v1/x/tweets/search response required next_cursor",
-      "GET /api/v1/x/users/{id}/followers response required has_next_page",
-      "GET /api/v1/x/users/{id}/followers response required next_cursor",
-      "GET /api/v1/x/users/{id}/following response required has_next_page",
-      "GET /api/v1/x/users/{id}/following response required next_cursor",
-      "GET /api/v1/x/users/{id}/verified-followers response required has_next_page",
-      "GET /api/v1/x/users/{id}/verified-followers response required next_cursor"
+      "GET /api/v1/x/communities/{id}/info response required community.creator.verified"
     ]
   }
 ]
