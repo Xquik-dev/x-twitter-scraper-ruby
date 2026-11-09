@@ -8,7 +8,8 @@ module XTwitterScraper
       {
         has_next_page: bool,
         next_cursor: String,
-        users: ::Array[XTwitterScraper::UserProfile]
+        users: ::Array[XTwitterScraper::UserProfile],
+        filtered_count: Integer
       }
 
     class PaginatedUsers < XTwitterScraper::Internal::Type::BaseModel
@@ -18,16 +19,22 @@ module XTwitterScraper
 
       attr_accessor users: ::Array[XTwitterScraper::UserProfile]
 
+      attr_reader filtered_count: Integer?
+
+      def filtered_count=: (Integer) -> Integer
+
       def initialize: (
         has_next_page: bool,
         next_cursor: String,
-        users: ::Array[XTwitterScraper::UserProfile]
+        users: ::Array[XTwitterScraper::UserProfile],
+        ?filtered_count: Integer
       ) -> void
 
       def to_hash: -> {
         has_next_page: bool,
         next_cursor: String,
-        users: ::Array[XTwitterScraper::UserProfile]
+        users: ::Array[XTwitterScraper::UserProfile],
+        filtered_count: Integer
       }
     end
   end
