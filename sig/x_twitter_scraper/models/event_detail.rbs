@@ -13,9 +13,11 @@ module XTwitterScraper
         occurred_at: Time,
         type: XTwitterScraper::Models::event_type,
         keyword_monitor_id: String,
+        monitor_name: String,
         query: String,
         username: String,
-        x_event_id: String
+        x_event_id: String,
+        x_user_id: String
       }
 
     class EventDetail < XTwitterScraper::Internal::Type::BaseModel
@@ -35,6 +37,10 @@ module XTwitterScraper
 
       def keyword_monitor_id=: (String) -> String
 
+      attr_reader monitor_name: String?
+
+      def monitor_name=: (String) -> String
+
       attr_reader query: String?
 
       def query=: (String) -> String
@@ -47,6 +53,10 @@ module XTwitterScraper
 
       def x_event_id=: (String) -> String
 
+      attr_reader x_user_id: String?
+
+      def x_user_id=: (String) -> String
+
       def initialize: (
         id: String,
         data: ::Hash[Symbol, top],
@@ -55,9 +65,11 @@ module XTwitterScraper
         occurred_at: Time,
         type: XTwitterScraper::Models::event_type,
         ?keyword_monitor_id: String,
+        ?monitor_name: String,
         ?query: String,
         ?username: String,
-        ?x_event_id: String
+        ?x_event_id: String,
+        ?x_user_id: String
       ) -> void
 
       def to_hash: -> {
@@ -68,9 +80,11 @@ module XTwitterScraper
         occurred_at: Time,
         type: XTwitterScraper::Models::event_type,
         keyword_monitor_id: String,
+        monitor_name: String,
         query: String,
         username: String,
-        x_event_id: String
+        x_event_id: String,
+        x_user_id: String
       }
 
       type monitor_type = :account | :keyword | :post
