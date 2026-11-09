@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type image_filtered_tweets =
+      {
+        image_filter: XTwitterScraper::Models::ImageFilterSummary,
+        tweets: ::Array[XTwitterScraper::Models::ImageFilteredTweets::Tweet]
+      }
+
+    class ImageFilteredTweets < XTwitterScraper::Models::PaginatedTweets
+      attr_accessor image_filter: XTwitterScraper::Models::ImageFilterSummary
+
+      def tweets: -> ::Array[XTwitterScraper::Models::ImageFilteredTweets::Tweet]
+
+      def tweets=: (
+        ::Array[XTwitterScraper::Models::ImageFilteredTweets::Tweet] _
+      ) -> ::Array[XTwitterScraper::Models::ImageFilteredTweets::Tweet]
+
+      def initialize: (
+        image_filter: XTwitterScraper::Models::ImageFilterSummary,
+        tweets: ::Array[XTwitterScraper::Models::ImageFilteredTweets::Tweet]
+      ) -> void
+
+      def to_hash: -> {
+        image_filter: XTwitterScraper::Models::ImageFilterSummary,
+        tweets: ::Array[XTwitterScraper::Models::ImageFilteredTweets::Tweet]
+      }
+
+      type tweet = { image_score: Float }
+
+      class Tweet < XTwitterScraper::Models::SearchTweet
+        attr_accessor image_score: Float
+
+        def initialize: (image_score: Float) -> void
+
+        def to_hash: -> { image_score: Float }
+      end
+    end
+  end
+end

@@ -2,7 +2,9 @@ module XTwitterScraper
   module Models
     module X
       type tweet_search_response =
-        XTwitterScraper::PaginatedTweets
+        XTwitterScraper::TopicFilteredTweets
+        | XTwitterScraper::ImageFilteredTweets
+        | XTwitterScraper::PaginatedTweets
         | XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse
 
       module TweetSearchResponse

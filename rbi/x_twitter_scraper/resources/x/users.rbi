@@ -717,7 +717,9 @@ module XTwitterScraper
             within: String,
             within_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::PaginatedTweets)
+          ).returns(
+            XTwitterScraper::Models::X::UserRetrieveMediaResponse::Variants
+          )
         end
         def retrieve_media(
           # User ID or username for media lookup
@@ -1103,7 +1105,9 @@ module XTwitterScraper
             within: String,
             within_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::PaginatedTweets)
+          ).returns(
+            XTwitterScraper::Models::X::UserRetrieveRepliesResponse::Variants
+          )
         end
         def retrieve_replies(
           # Target user ID or username for the replies timeline.
@@ -1428,7 +1432,9 @@ module XTwitterScraper
             within: String,
             within_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::PaginatedTweets)
+          ).returns(
+            XTwitterScraper::Models::X::UserRetrieveTweetsResponse::Variants
+          )
         end
         def retrieve_tweets(
           # X user ID or username
