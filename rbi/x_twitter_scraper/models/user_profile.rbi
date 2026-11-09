@@ -92,7 +92,9 @@ module XTwitterScraper
       sig { returns(T.nilable(XTwitterScraper::UserProfile::Birthdate)) }
       attr_reader :birthdate
 
-      sig { params(birthdate: XTwitterScraper::UserProfile::Birthdate::OrHash).void }
+      sig do
+        params(birthdate: XTwitterScraper::UserProfile::Birthdate::OrHash).void
+      end
       attr_writer :birthdate
 
       sig { returns(T.nilable(Integer)) }
@@ -132,7 +134,9 @@ module XTwitterScraper
       sig { returns(T.nilable(XTwitterScraper::ProfileContactInfo)) }
       attr_reader :contact_info
 
-      sig { params(contact_info: XTwitterScraper::ProfileContactInfo::OrHash).void }
+      sig do
+        params(contact_info: XTwitterScraper::ProfileContactInfo::OrHash).void
+      end
       attr_writer :contact_info
 
       sig { returns(T.nilable(String)) }
@@ -494,14 +498,26 @@ module XTwitterScraper
       sig { returns(T.nilable(XTwitterScraper::UserProfile::UsernameChanges)) }
       attr_reader :username_changes
 
-      sig { params(username_changes: XTwitterScraper::UserProfile::UsernameChanges::OrHash).void }
+      sig do
+        params(
+          username_changes:
+            XTwitterScraper::UserProfile::UsernameChanges::OrHash
+        ).void
+      end
       attr_writer :username_changes
 
       # X's text on why the profile is verified, with its links.
-      sig { returns(T.nilable(XTwitterScraper::UserProfile::VerificationReason)) }
+      sig do
+        returns(T.nilable(XTwitterScraper::UserProfile::VerificationReason))
+      end
       attr_reader :verification_reason
 
-      sig { params(verification_reason: XTwitterScraper::UserProfile::VerificationReason::OrHash).void }
+      sig do
+        params(
+          verification_reason:
+            XTwitterScraper::UserProfile::VerificationReason::OrHash
+        ).void
+      end
       attr_writer :verification_reason
 
       sig { returns(T.nilable(T::Boolean)) }
@@ -535,20 +551,38 @@ module XTwitterScraper
           id: String,
           name: String,
           username: String,
-          account_based_in: T.nilable(XTwitterScraper::AccountBasedIn::OrHash), account_based_in_accurate: T::Boolean, account_based_in_unavailable: T::Boolean, advertiser_account_service_levels: T::Array[String], advertiser_account_type: String, affiliate_username: String, affiliates_highlighted_label:
+          account_based_in: T.nilable(XTwitterScraper::AccountBasedIn::OrHash),
+          account_based_in_accurate: T::Boolean,
+          account_based_in_unavailable: T::Boolean,
+          advertiser_account_service_levels: T::Array[String],
+          advertiser_account_type: String,
+          affiliate_username: String,
+          affiliates_highlighted_label:
             XTwitterScraper::UserProfile::AffiliatesHighlightedLabel::OrHash,
           automated_by: String,
-          birthdate: XTwitterScraper::UserProfile::Birthdate::OrHash, business_account_affiliates_count: Integer,
-          business_profile_state: String, community_role: String,
-          connected_via: String, connected_via_accurate: T::Boolean, contact_info: XTwitterScraper::ProfileContactInfo::OrHash, cover_picture: String,
+          birthdate: XTwitterScraper::UserProfile::Birthdate::OrHash,
+          business_account_affiliates_count: Integer,
+          business_profile_state: String,
+          community_role: String,
+          connected_via: String,
+          connected_via_accurate: T::Boolean,
+          contact_info: XTwitterScraper::ProfileContactInfo::OrHash,
+          cover_picture: String,
           created_at: String,
           creator_subscriptions_count: Integer,
-          default_profile: T::Boolean, default_profile_image: T::Boolean, description: String,
-          email: String, fast_followers_count: Integer, favourites_count: Integer,
+          default_profile: T::Boolean,
+          default_profile_image: T::Boolean,
+          description: String,
+          email: String,
+          fast_followers_count: Integer,
+          favourites_count: Integer,
           followers: Integer,
           following: Integer,
-          geo_enabled: T::Boolean, grok_translated_bio: T::Hash[Symbol, T.anything], has_custom_timelines: T::Boolean,
-          has_extended_profile: T::Boolean, has_graduated_access: T::Boolean,
+          geo_enabled: T::Boolean,
+          grok_translated_bio: T::Hash[Symbol, T.anything],
+          has_custom_timelines: T::Boolean,
+          has_extended_profile: T::Boolean,
+          has_graduated_access: T::Boolean,
           has_hidden_subscriptions_on_profile: T::Boolean,
           highlights_info: XTwitterScraper::UserProfile::HighlightsInfo::OrHash,
           identity_verification:
@@ -556,90 +590,105 @@ module XTwitterScraper
           is_automated: T::Boolean,
           is_blue_verified: T::Boolean,
           is_profile_translatable: T::Boolean,
-          is_translation_enabled: T::Boolean, is_translator: T::Boolean,
+          is_translation_enabled: T::Boolean,
+          is_translator: T::Boolean,
           is_verified: T::Boolean,
-          listed_count: Integer, location: String,
+          listed_count: Integer,
+          location: String,
           media_count: Integer,
-          normal_followers_count: Integer, parody_commentary_fan_label: String,
+          normal_followers_count: Integer,
+          parody_commentary_fan_label: String,
           pinned_tweet_ids: T::Array[String],
           possibly_sensitive: T::Boolean,
-          professional: T::Hash[Symbol, T.anything], profile_bio: T::Hash[Symbol, T.anything],
+          professional: T::Hash[Symbol, T.anything],
+          profile_bio: T::Hash[Symbol, T.anything],
           profile_banner_url: String,
           profile_description_language: String,
           profile_image_shape: String,
           profile_interstitial_type: String,
           profile_picture: String,
-          profile_picture_original: String, profile_sort_enabled: T::Boolean,
+          profile_picture_original: String,
+          profile_sort_enabled: T::Boolean,
           profile_translator_type: String,
           protected: T::Boolean,
-          redirects_to_username: String, retweeted_at: T.nilable(Time), statuses_count: Integer,
-          subscribers_count: Integer, super_follow_eligible: T::Boolean,
-          super_follows_user_profile_active: T::Boolean, tip_jar: XTwitterScraper::UserTipJar::OrHash, unavailable: T::Boolean,
+          redirects_to_username: String,
+          retweeted_at: T.nilable(Time),
+          statuses_count: Integer,
+          subscribers_count: Integer,
+          super_follow_eligible: T::Boolean,
+          super_follows_user_profile_active: T::Boolean,
+          tip_jar: XTwitterScraper::UserTipJar::OrHash,
+          unavailable: T::Boolean,
           unavailable_reason: String,
           url: String,
-          username_changes: XTwitterScraper::UserProfile::UsernameChanges::OrHash, verification_reason: XTwitterScraper::UserProfile::VerificationReason::OrHash, verified: T::Boolean,
+          username_changes:
+            XTwitterScraper::UserProfile::UsernameChanges::OrHash,
+          verification_reason:
+            XTwitterScraper::UserProfile::VerificationReason::OrHash,
+          verified: T::Boolean,
           verified_type: String,
-          withheld_in_countries: T::Array[String], withheld_scope: String
+          withheld_in_countries: T::Array[String],
+          withheld_scope: String
         ).returns(T.attached_class)
       end
       def self.new(
         id:,
         name:,
         username:,
-# Null when X shows no label.
-account_based_in: nil,
-# False when X notes accountBasedIn may be inaccurate.
-account_based_in_accurate: nil,
-# True when X withheld accountBasedIn from this read. Retry later.
-account_based_in_unavailable: nil,
-# X Ads services the account uses, such as `analytics`, `media_studio` or `smb`.
-# Empty for an account without ads.
-advertiser_account_service_levels: nil,
-# The account's X Ads type. `none` for an account without ads, or
-# `promotable_user` for one that may run them.
-advertiser_account_type: nil,
-# Handle of the organization X shows the account is affiliated with, from its
-# About page.
-affiliate_username: nil,
+        # Null when X shows no label.
+        account_based_in: nil,
+        # False when X notes accountBasedIn may be inaccurate.
+        account_based_in_accurate: nil,
+        # True when X withheld accountBasedIn from this read. Retry later.
+        account_based_in_unavailable: nil,
+        # X Ads services the account uses, such as `analytics`, `media_studio` or `smb`.
+        # Empty for an account without ads.
+        advertiser_account_service_levels: nil,
+        # The account's X Ads type. `none` for an account without ads, or
+        # `promotable_user` for one that may run them.
+        advertiser_account_type: nil,
+        # Handle of the organization X shows the account is affiliated with, from its
+        # About page.
+        affiliate_username: nil,
         # Organization affiliation label shown on an X profile.
         affiliates_highlighted_label: nil,
         automated_by: nil,
-# The parts of the birthday the account made public.
-birthdate: nil,
+        # The parts of the birthday the account made public.
+        birthdate: nil,
         business_account_affiliates_count: nil,
-# Whether X treats the profile as a business profile. `none` or `enabled`.
-business_profile_state: nil,
+        # Whether X treats the profile as a business profile. `none` or `enabled`.
+        business_profile_state: nil,
         # Community role when returned by community member reads
         community_role: nil,
-# How the account first connected to X.
-connected_via: nil,
-# False when X notes that country may be inaccurate.
-connected_via_accurate: nil,
-contact_info: nil,
+        # How the account first connected to X.
+        connected_via: nil,
+        # False when X notes that country may be inaccurate.
+        connected_via_accurate: nil,
+        contact_info: nil,
         cover_picture: nil,
         created_at: nil,
         creator_subscriptions_count: nil,
-# Whether the profile keeps X's default theme.
-default_profile: nil,
-# Whether the profile keeps X's default avatar.
-default_profile_image: nil,
+        # Whether the profile keeps X's default theme.
+        default_profile: nil,
+        # Whether the profile keeps X's default avatar.
+        default_profile_image: nil,
         description: nil,
-# First email the account publishes on its profile, lowercased. Omitted when it
-# publishes none.
-email: nil,
-# Followers X counts as fast followers.
-fast_followers_count: nil,
+        # First email the account publishes on its profile, lowercased. Omitted when it
+        # publishes none.
+        email: nil,
+        # Followers X counts as fast followers.
+        fast_followers_count: nil,
         favourites_count: nil,
         followers: nil,
         following: nil,
-# Whether the profile may add a location to posts.
-geo_enabled: nil,
-# Public profile bio translation returned by X
-grok_translated_bio: nil,
+        # Whether the profile may add a location to posts.
+        geo_enabled: nil,
+        # Public profile bio translation returned by X
+        grok_translated_bio: nil,
         has_custom_timelines: nil,
-# Whether the profile filled X's extended fields, such as a birth date. True or
-# false.
-has_extended_profile: nil,
+        # Whether the profile filled X's extended fields, such as a birth date. True or
+        # false.
+        has_extended_profile: nil,
         has_graduated_access: nil,
         has_hidden_subscriptions_on_profile: nil,
         # Profile highlight availability and count metadata.
@@ -650,22 +699,22 @@ has_extended_profile: nil,
         # Whether X shows a blue verification badge
         is_blue_verified: nil,
         is_profile_translatable: nil,
-# Whether the account turned on X's translation of its posts. True or false.
-is_translation_enabled: nil,
+        # Whether the account turned on X's translation of its posts. True or false.
+        is_translation_enabled: nil,
         is_translator: nil,
         # Whether X marks the profile as verified
         is_verified: nil,
-# Public lists that include the profile.
-listed_count: nil,
+        # Public lists that include the profile.
+        listed_count: nil,
         location: nil,
         media_count: nil,
-# Followers minus fast followers.
-normal_followers_count: nil,
+        # Followers minus fast followers.
+        normal_followers_count: nil,
         parody_commentary_fan_label: nil,
         pinned_tweet_ids: nil,
         possibly_sensitive: nil,
-# Professional metadata with category display settings
-professional: nil,
+        # Professional metadata with category display settings
+        professional: nil,
         # Structured profile bio with entity annotations
         profile_bio: nil,
         # Original X profile banner field when available
@@ -674,39 +723,39 @@ professional: nil,
         profile_image_shape: nil,
         profile_interstitial_type: nil,
         profile_picture: nil,
-# The same profile picture at full size, as the account uploaded it. Download this
-# one for the image.
-profile_picture_original: nil,
+        # The same profile picture at full size, as the account uploaded it. Download this
+        # one for the image.
+        profile_picture_original: nil,
         profile_sort_enabled: nil,
         profile_translator_type: nil,
         # Whether the profile protects its posts
         protected: nil,
-# Handle x.com sends this profile's visitors to, such as the new handle of a
-# renamed account whose old handle now holds a placeholder. Missing when x.com
-# shows the profile itself.
-redirects_to_username: nil,
-# UTC repost time with includeRetweetTimestamp. Null when Xquik found no repost
-# time. Otherwise omitted.
-retweeted_at: nil,
+        # Handle x.com sends this profile's visitors to, such as the new handle of a
+        # renamed account whose old handle now holds a placeholder. Missing when x.com
+        # shows the profile itself.
+        redirects_to_username: nil,
+        # UTC repost time with includeRetweetTimestamp. Null when Xquik found no repost
+        # time. Otherwise omitted.
+        retweeted_at: nil,
         statuses_count: nil,
-# Accounts subscribed to the profile's paid Subscriptions. 0 when it has none.
-subscribers_count: nil,
+        # Accounts subscribed to the profile's paid Subscriptions. 0 when it has none.
+        subscribers_count: nil,
         super_follow_eligible: nil,
-# Whether X marks the subscription profile as active.
-super_follows_user_profile_active: nil,
-tip_jar: nil,
+        # Whether X marks the subscription profile as active.
+        super_follows_user_profile_active: nil,
+        tip_jar: nil,
         unavailable: nil,
         unavailable_reason: nil,
         url: nil,
-# How often the account changed its username.
-username_changes: nil,
-# X's text on why the profile is verified, with its links.
-verification_reason: nil,
+        # How often the account changed its username.
+        username_changes: nil,
+        # X's text on why the profile is verified, with its links.
+        verification_reason: nil,
         verified: nil,
         verified_type: nil,
         withheld_in_countries: nil,
-# Whether X withholds a post or user
-withheld_scope: nil
+        # Whether X withholds a post or user
+        withheld_scope: nil
       )
       end
 
@@ -716,20 +765,38 @@ withheld_scope: nil
             id: String,
             name: String,
             username: String,
-            account_based_in: T.nilable(XTwitterScraper::AccountBasedIn), account_based_in_accurate: T::Boolean, account_based_in_unavailable: T::Boolean, advertiser_account_service_levels: T::Array[String], advertiser_account_type: String, affiliate_username: String, affiliates_highlighted_label:
+            account_based_in: T.nilable(XTwitterScraper::AccountBasedIn),
+            account_based_in_accurate: T::Boolean,
+            account_based_in_unavailable: T::Boolean,
+            advertiser_account_service_levels: T::Array[String],
+            advertiser_account_type: String,
+            affiliate_username: String,
+            affiliates_highlighted_label:
               XTwitterScraper::UserProfile::AffiliatesHighlightedLabel,
             automated_by: String,
-            birthdate: XTwitterScraper::UserProfile::Birthdate, business_account_affiliates_count: Integer,
-            business_profile_state: String, community_role: String,
-            connected_via: String, connected_via_accurate: T::Boolean, contact_info: XTwitterScraper::ProfileContactInfo, cover_picture: String,
+            birthdate: XTwitterScraper::UserProfile::Birthdate,
+            business_account_affiliates_count: Integer,
+            business_profile_state: String,
+            community_role: String,
+            connected_via: String,
+            connected_via_accurate: T::Boolean,
+            contact_info: XTwitterScraper::ProfileContactInfo,
+            cover_picture: String,
             created_at: String,
             creator_subscriptions_count: Integer,
-            default_profile: T::Boolean, default_profile_image: T::Boolean, description: String,
-            email: String, fast_followers_count: Integer, favourites_count: Integer,
+            default_profile: T::Boolean,
+            default_profile_image: T::Boolean,
+            description: String,
+            email: String,
+            fast_followers_count: Integer,
+            favourites_count: Integer,
             followers: Integer,
             following: Integer,
-            geo_enabled: T::Boolean, grok_translated_bio: T::Hash[Symbol, T.anything], has_custom_timelines: T::Boolean,
-            has_extended_profile: T::Boolean, has_graduated_access: T::Boolean,
+            geo_enabled: T::Boolean,
+            grok_translated_bio: T::Hash[Symbol, T.anything],
+            has_custom_timelines: T::Boolean,
+            has_extended_profile: T::Boolean,
+            has_graduated_access: T::Boolean,
             has_hidden_subscriptions_on_profile: T::Boolean,
             highlights_info: XTwitterScraper::UserProfile::HighlightsInfo,
             identity_verification:
@@ -737,30 +804,44 @@ withheld_scope: nil
             is_automated: T::Boolean,
             is_blue_verified: T::Boolean,
             is_profile_translatable: T::Boolean,
-            is_translation_enabled: T::Boolean, is_translator: T::Boolean,
+            is_translation_enabled: T::Boolean,
+            is_translator: T::Boolean,
             is_verified: T::Boolean,
-            listed_count: Integer, location: String,
+            listed_count: Integer,
+            location: String,
             media_count: Integer,
-            normal_followers_count: Integer, parody_commentary_fan_label: String,
+            normal_followers_count: Integer,
+            parody_commentary_fan_label: String,
             pinned_tweet_ids: T::Array[String],
             possibly_sensitive: T::Boolean,
-            professional: T::Hash[Symbol, T.anything], profile_bio: T::Hash[Symbol, T.anything],
+            professional: T::Hash[Symbol, T.anything],
+            profile_bio: T::Hash[Symbol, T.anything],
             profile_banner_url: String,
             profile_description_language: String,
             profile_image_shape: String,
             profile_interstitial_type: String,
             profile_picture: String,
-            profile_picture_original: String, profile_sort_enabled: T::Boolean,
+            profile_picture_original: String,
+            profile_sort_enabled: T::Boolean,
             profile_translator_type: String,
             protected: T::Boolean,
-            redirects_to_username: String, retweeted_at: T.nilable(Time), statuses_count: Integer,
-            subscribers_count: Integer, super_follow_eligible: T::Boolean,
-            super_follows_user_profile_active: T::Boolean, tip_jar: XTwitterScraper::UserTipJar, unavailable: T::Boolean,
+            redirects_to_username: String,
+            retweeted_at: T.nilable(Time),
+            statuses_count: Integer,
+            subscribers_count: Integer,
+            super_follow_eligible: T::Boolean,
+            super_follows_user_profile_active: T::Boolean,
+            tip_jar: XTwitterScraper::UserTipJar,
+            unavailable: T::Boolean,
             unavailable_reason: String,
             url: String,
-            username_changes: XTwitterScraper::UserProfile::UsernameChanges, verification_reason: XTwitterScraper::UserProfile::VerificationReason, verified: T::Boolean,
+            username_changes: XTwitterScraper::UserProfile::UsernameChanges,
+            verification_reason:
+              XTwitterScraper::UserProfile::VerificationReason,
+            verified: T::Boolean,
             verified_type: String,
-            withheld_in_countries: T::Array[String], withheld_scope: String
+            withheld_in_countries: T::Array[String],
+            withheld_scope: String
           }
         )
       end
@@ -776,6 +857,29 @@ withheld_scope: nil
             )
           end
 
+        # More labels X shows beside the affiliation, such as an automated account's
+        # owner.
+        sig do
+          returns(
+            T.nilable(
+              T::Array[
+                XTwitterScraper::UserProfile::AffiliatesHighlightedLabel::AuxiliaryLabel
+              ]
+            )
+          )
+        end
+        attr_reader :auxiliary_labels
+
+        sig do
+          params(
+            auxiliary_labels:
+              T::Array[
+                XTwitterScraper::UserProfile::AffiliatesHighlightedLabel::AuxiliaryLabel::OrHash
+              ]
+          ).void
+        end
+        attr_writer :auxiliary_labels
+
         sig { returns(T.nilable(String)) }
         attr_reader :badge_url
 
@@ -787,6 +891,13 @@ withheld_scope: nil
 
         sig { params(description: String).void }
         attr_writer :description
+
+        # Public text, ranges, references, and mention data.
+        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+        attr_reader :long_description
+
+        sig { params(long_description: T::Hash[Symbol, T.anything]).void }
+        attr_writer :long_description
 
         sig { returns(T.nilable(String)) }
         attr_reader :url
@@ -815,8 +926,13 @@ withheld_scope: nil
         # Organization affiliation label shown on an X profile.
         sig do
           params(
+            auxiliary_labels:
+              T::Array[
+                XTwitterScraper::UserProfile::AffiliatesHighlightedLabel::AuxiliaryLabel::OrHash
+              ],
             badge_url: String,
             description: String,
+            long_description: T::Hash[Symbol, T.anything],
             url: String,
             url_type: String,
             user_label_display_type: String,
@@ -824,8 +940,13 @@ withheld_scope: nil
           ).returns(T.attached_class)
         end
         def self.new(
+          # More labels X shows beside the affiliation, such as an automated account's
+          # owner.
+          auxiliary_labels: nil,
           badge_url: nil,
           description: nil,
+          # Public text, ranges, references, and mention data.
+          long_description: nil,
           url: nil,
           url_type: nil,
           user_label_display_type: nil,
@@ -836,8 +957,13 @@ withheld_scope: nil
         sig do
           override.returns(
             {
+              auxiliary_labels:
+                T::Array[
+                  XTwitterScraper::UserProfile::AffiliatesHighlightedLabel::AuxiliaryLabel
+                ],
               badge_url: String,
               description: String,
+              long_description: T::Hash[Symbol, T.anything],
               url: String,
               url_type: String,
               user_label_display_type: String,
@@ -846,6 +972,79 @@ withheld_scope: nil
           )
         end
         def to_hash
+        end
+
+        class AuxiliaryLabel < XTwitterScraper::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                XTwitterScraper::UserProfile::AffiliatesHighlightedLabel::AuxiliaryLabel,
+                XTwitterScraper::Internal::AnyHash
+              )
+            end
+
+          sig { returns(T.nilable(String)) }
+          attr_reader :badge_url
+
+          sig { params(badge_url: String).void }
+          attr_writer :badge_url
+
+          sig { returns(T.nilable(String)) }
+          attr_reader :description
+
+          sig { params(description: String).void }
+          attr_writer :description
+
+          sig { returns(T.nilable(String)) }
+          attr_reader :url
+
+          sig { params(url: String).void }
+          attr_writer :url
+
+          sig { returns(T.nilable(String)) }
+          attr_reader :user_label_display_type
+
+          sig { params(user_label_display_type: String).void }
+          attr_writer :user_label_display_type
+
+          sig { returns(T.nilable(String)) }
+          attr_reader :user_label_type
+
+          sig { params(user_label_type: String).void }
+          attr_writer :user_label_type
+
+          # A label X shows on an X profile beside its affiliation label.
+          sig do
+            params(
+              badge_url: String,
+              description: String,
+              url: String,
+              user_label_display_type: String,
+              user_label_type: String
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            badge_url: nil,
+            description: nil,
+            url: nil,
+            user_label_display_type: nil,
+            user_label_type: nil
+          )
+          end
+
+          sig do
+            override.returns(
+              {
+                badge_url: String,
+                description: String,
+                url: String,
+                user_label_display_type: String,
+                user_label_type: String
+              }
+            )
+          end
+          def to_hash
+          end
         end
       end
 
@@ -910,6 +1109,13 @@ withheld_scope: nil
         sig { params(is_identity_verified: T::Boolean).void }
         attr_writer :is_identity_verified
 
+        # The year X shows as the start of verification, in place of verifiedSinceMsec.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :override_verified_year
+
+        sig { params(override_verified_year: Integer).void }
+        attr_writer :override_verified_year
+
         sig { returns(T.nilable(String)) }
         attr_reader :verified_since_msec
 
@@ -921,12 +1127,15 @@ withheld_scope: nil
           params(
             description: String,
             is_identity_verified: T::Boolean,
+            override_verified_year: Integer,
             verified_since_msec: String
           ).returns(T.attached_class)
         end
         def self.new(
           description: nil,
           is_identity_verified: nil,
+          # The year X shows as the start of verification, in place of verifiedSinceMsec.
+          override_verified_year: nil,
           verified_since_msec: nil
         )
         end
@@ -936,6 +1145,7 @@ withheld_scope: nil
             {
               description: String,
               is_identity_verified: T::Boolean,
+              override_verified_year: Integer,
               verified_since_msec: String
             }
           )
@@ -945,7 +1155,13 @@ withheld_scope: nil
       end
 
       class Birthdate < XTwitterScraper::Internal::Type::BaseModel
-        OrHash = T.type_alias { T.any(XTwitterScraper::UserProfile::Birthdate, XTwitterScraper::Internal::AnyHash) }
+        OrHash =
+          T.type_alias do
+            T.any(
+              XTwitterScraper::UserProfile::Birthdate,
+              XTwitterScraper::Internal::AnyHash
+            )
+          end
 
         sig { returns(T.nilable(Integer)) }
         attr_reader :day
@@ -966,21 +1182,29 @@ withheld_scope: nil
         attr_writer :year
 
         # The parts of the birthday the account made public.
-        sig { params(day: Integer, month: Integer, year: Integer).returns(T.attached_class) }
-        def self.new(
-          day: nil,
-          month: nil,
-          year: nil
-        )
+        sig do
+          params(day: Integer, month: Integer, year: Integer).returns(
+            T.attached_class
+          )
+        end
+        def self.new(day: nil, month: nil, year: nil)
         end
 
-        sig { override.returns({ day: Integer, month: Integer, year: Integer }) }
+        sig do
+          override.returns({ day: Integer, month: Integer, year: Integer })
+        end
         def to_hash
         end
       end
 
       class UsernameChanges < XTwitterScraper::Internal::Type::BaseModel
-        OrHash = T.type_alias { T.any(XTwitterScraper::UserProfile::UsernameChanges, XTwitterScraper::Internal::AnyHash) }
+        OrHash =
+          T.type_alias do
+            T.any(
+              XTwitterScraper::UserProfile::UsernameChanges,
+              XTwitterScraper::Internal::AnyHash
+            )
+          end
 
         # Whole number from 0.
         sig { returns(Integer) }
@@ -994,7 +1218,11 @@ withheld_scope: nil
         attr_writer :last_changed_at
 
         # How often the account changed its username.
-        sig { params(count: Integer, last_changed_at: Time).returns(T.attached_class) }
+        sig do
+          params(count: Integer, last_changed_at: Time).returns(
+            T.attached_class
+          )
+        end
         def self.new(
           # Whole number from 0.
           count:,
@@ -1009,7 +1237,13 @@ withheld_scope: nil
       end
 
       class VerificationReason < XTwitterScraper::Internal::Type::BaseModel
-        OrHash = T.type_alias { T.any(XTwitterScraper::UserProfile::VerificationReason, XTwitterScraper::Internal::AnyHash) }
+        OrHash =
+          T.type_alias do
+            T.any(
+              XTwitterScraper::UserProfile::VerificationReason,
+              XTwitterScraper::Internal::AnyHash
+            )
+          end
 
         sig { returns(T.nilable(String)) }
         attr_reader :text
@@ -1018,14 +1252,35 @@ withheld_scope: nil
         attr_writer :text
 
         # Links inside the text, by character range.
-        sig { returns(T.nilable(T::Array[XTwitterScraper::UserProfile::VerificationReason::Entity])) }
+        sig do
+          returns(
+            T.nilable(
+              T::Array[XTwitterScraper::UserProfile::VerificationReason::Entity]
+            )
+          )
+        end
         attr_reader :entities
 
-        sig { params(entities: T::Array[XTwitterScraper::UserProfile::VerificationReason::Entity::OrHash]).void }
+        sig do
+          params(
+            entities:
+              T::Array[
+                XTwitterScraper::UserProfile::VerificationReason::Entity::OrHash
+              ]
+          ).void
+        end
         attr_writer :entities
 
         # X's text on why the profile is verified, with its links.
-        sig { params(text: String, entities: T::Array[XTwitterScraper::UserProfile::VerificationReason::Entity::OrHash]).returns(T.attached_class) }
+        sig do
+          params(
+            text: String,
+            entities:
+              T::Array[
+                XTwitterScraper::UserProfile::VerificationReason::Entity::OrHash
+              ]
+          ).returns(T.attached_class)
+        end
         def self.new(
           text: nil,
           # Links inside the text, by character range.
@@ -1033,12 +1288,28 @@ withheld_scope: nil
         )
         end
 
-        sig { override.returns({ text: String, entities: T::Array[XTwitterScraper::UserProfile::VerificationReason::Entity] }) }
+        sig do
+          override.returns(
+            {
+              text: String,
+              entities:
+                T::Array[
+                  XTwitterScraper::UserProfile::VerificationReason::Entity
+                ]
+            }
+          )
+        end
         def to_hash
         end
 
         class Entity < XTwitterScraper::Internal::Type::BaseModel
-          OrHash = T.type_alias { T.any(XTwitterScraper::UserProfile::VerificationReason::Entity, XTwitterScraper::Internal::AnyHash) }
+          OrHash =
+            T.type_alias do
+              T.any(
+                XTwitterScraper::UserProfile::VerificationReason::Entity,
+                XTwitterScraper::Internal::AnyHash
+              )
+            end
 
           # Whole number from 0.
           sig { returns(T.nilable(Integer)) }
@@ -1066,7 +1337,14 @@ withheld_scope: nil
           sig { params(url_type: String).void }
           attr_writer :url_type
 
-          sig { params(from_index: Integer, to_index: Integer, url: String, url_type: String).returns(T.attached_class) }
+          sig do
+            params(
+              from_index: Integer,
+              to_index: Integer,
+              url: String,
+              url_type: String
+            ).returns(T.attached_class)
+          end
           def self.new(
             # Whole number from 0.
             from_index: nil,
@@ -1077,7 +1355,16 @@ withheld_scope: nil
           )
           end
 
-          sig { override.returns({ from_index: Integer, to_index: Integer, url: String, url_type: String }) }
+          sig do
+            override.returns(
+              {
+                from_index: Integer,
+                to_index: Integer,
+                url: String,
+                url_type: String
+              }
+            )
+          end
           def to_hash
           end
         end
