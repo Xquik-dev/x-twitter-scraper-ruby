@@ -21,7 +21,7 @@ class XTwitterScraper::Test::Resources::EventsTest < XTwitterScraper::Test::Reso
         monitor_id: String,
         monitor_type: XTwitterScraper::EventDetail::MonitorType,
         occurred_at: Time,
-        type: XTwitterScraper::EventType,
+        type: XTwitterScraper::StreamEventType,
         keyword_monitor_id: String | nil,
         query: String | nil,
         username: String | nil,

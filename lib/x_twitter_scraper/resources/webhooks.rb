@@ -12,7 +12,7 @@ module XTwitterScraper
       #
       # @overload create(event_types:, url:, request_options: {})
       #
-      # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::StreamEventType>] Array of event types to subscribe to.
       #
       # @param url [String] HTTPS URL
       #
@@ -38,7 +38,7 @@ module XTwitterScraper
       #
       # @param id [String] Resource ID returned by the matching create or list endpoint.
       #
-      # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::StreamEventType>] Array of event types to subscribe to.
       #
       # @param is_active [Boolean]
       #

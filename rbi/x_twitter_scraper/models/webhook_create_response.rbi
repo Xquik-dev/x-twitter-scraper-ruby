@@ -22,7 +22,7 @@ module XTwitterScraper
       attr_accessor :created_at
 
       # Array of event types to subscribe to.
-      sig { returns(T::Array[XTwitterScraper::EventType::TaggedSymbol]) }
+      sig { returns(T::Array[XTwitterScraper::StreamEventType::TaggedSymbol]) }
       attr_accessor :event_types
 
       # Plaintext HMAC signing secret returned only at creation.
@@ -42,7 +42,7 @@ module XTwitterScraper
         params(
           id: String,
           created_at: Time,
-          event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
+          event_types: T::Array[XTwitterScraper::StreamEventType::OrSymbol],
           secret: String,
           url: String,
           ignored_fields: T::Array[String]
@@ -65,7 +65,8 @@ module XTwitterScraper
           {
             id: String,
             created_at: Time,
-            event_types: T::Array[XTwitterScraper::EventType::TaggedSymbol],
+            event_types:
+              T::Array[XTwitterScraper::StreamEventType::TaggedSymbol],
             secret: String,
             url: String,
             ignored_fields: T::Array[String]

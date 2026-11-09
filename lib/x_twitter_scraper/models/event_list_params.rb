@@ -20,8 +20,8 @@ module XTwitterScraper
       # @!attribute event_type
       #   Filter events by type
       #
-      #   @return [Symbol, XTwitterScraper::Models::EventType, nil]
-      optional :event_type, enum: -> { XTwitterScraper::EventType }
+      #   @return [Symbol, XTwitterScraper::Models::StreamEventType, nil]
+      optional :event_type, enum: -> { XTwitterScraper::StreamEventType }
 
       # @!attribute keyword_monitor_id
       #   Keyword monitor ID.
@@ -53,7 +53,7 @@ module XTwitterScraper
       # @!method initialize(cursor: nil, event_type: nil, keyword_monitor_id: nil, limit: nil, monitor_id: nil, post_monitor_id: nil, request_options: {})
       #   @param cursor [String] Previous nextCursor.
       #
-      #   @param event_type [Symbol, XTwitterScraper::Models::EventType] Filter events by type
+      #   @param event_type [Symbol, XTwitterScraper::Models::StreamEventType] Filter events by type
       #
       #   @param keyword_monitor_id [String] Keyword monitor ID.
       #

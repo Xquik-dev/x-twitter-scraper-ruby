@@ -19,9 +19,9 @@ module XTwitterScraper
       # @!attribute event_types
       #   Array of event types to subscribe to.
       #
-      #   @return [Array<Symbol, XTwitterScraper::Models::EventType>, nil]
+      #   @return [Array<Symbol, XTwitterScraper::Models::StreamEventType>, nil]
       optional :event_types,
-               -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::EventType] },
+               -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::StreamEventType] },
                api_name: :eventTypes
 
       # @!attribute is_active
@@ -37,7 +37,7 @@ module XTwitterScraper
       # @!method initialize(id:, event_types: nil, is_active: nil, url: nil, request_options: {})
       #   @param id [String]
       #
-      #   @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
+      #   @param event_types [Array<Symbol, XTwitterScraper::Models::StreamEventType>] Array of event types to subscribe to.
       #
       #   @param is_active [Boolean]
       #
