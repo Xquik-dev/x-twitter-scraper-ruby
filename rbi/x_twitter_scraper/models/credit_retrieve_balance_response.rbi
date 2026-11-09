@@ -22,6 +22,12 @@ module XTwitterScraper
       sig { returns(T::Boolean) }
       attr_accessor :auto_topup_enabled
 
+      # Whether declined charges stopped automatic top-up while it is enabled. It stops
+      # after 3 declines in a row on 1 card. A paid top-up, a paid plan renewal, or the
+      # next automatic top-up on a new card clears it.
+      sig { returns(T::Boolean) }
+      attr_accessor :auto_topup_stopped
+
       # Credit balance threshold that triggers automatic top-up when enabled,
       # represented as a bigint string.
       sig { returns(String) }
@@ -44,6 +50,7 @@ module XTwitterScraper
         params(
           auto_topup_amount_dollars: Float,
           auto_topup_enabled: T::Boolean,
+          auto_topup_stopped: T::Boolean,
           auto_topup_threshold: String,
           balance: String,
           lifetime_purchased: String,
@@ -54,6 +61,10 @@ module XTwitterScraper
         # Configured dollar amount for each automatic top-up.
         auto_topup_amount_dollars:,
         auto_topup_enabled:,
+        # Whether declined charges stopped automatic top-up while it is enabled. It stops
+        # after 3 declines in a row on 1 card. A paid top-up, a paid plan renewal, or the
+        # next automatic top-up on a new card clears it.
+        auto_topup_stopped:,
         # Credit balance threshold that triggers automatic top-up when enabled,
         # represented as a bigint string.
         auto_topup_threshold:,
@@ -72,6 +83,7 @@ module XTwitterScraper
           {
             auto_topup_amount_dollars: Float,
             auto_topup_enabled: T::Boolean,
+            auto_topup_stopped: T::Boolean,
             auto_topup_threshold: String,
             balance: String,
             lifetime_purchased: String,

@@ -8,6 +8,7 @@ module XTwitterScraper
       {
         auto_topup_amount_dollars: Float,
         auto_topup_enabled: bool,
+        auto_topup_stopped: bool,
         auto_topup_threshold: String,
         balance: String,
         lifetime_purchased: String,
@@ -18,6 +19,8 @@ module XTwitterScraper
       attr_accessor auto_topup_amount_dollars: Float
 
       attr_accessor auto_topup_enabled: bool
+
+      attr_accessor auto_topup_stopped: bool
 
       attr_accessor auto_topup_threshold: String
 
@@ -30,6 +33,7 @@ module XTwitterScraper
       def initialize: (
         auto_topup_amount_dollars: Float,
         auto_topup_enabled: bool,
+        auto_topup_stopped: bool,
         auto_topup_threshold: String,
         balance: String,
         lifetime_purchased: String,
@@ -39,6 +43,7 @@ module XTwitterScraper
       def to_hash: -> {
         auto_topup_amount_dollars: Float,
         auto_topup_enabled: bool,
+        auto_topup_stopped: bool,
         auto_topup_threshold: String,
         balance: String,
         lifetime_purchased: String,
