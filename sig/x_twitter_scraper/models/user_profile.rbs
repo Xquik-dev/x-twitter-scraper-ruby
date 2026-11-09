@@ -408,6 +408,12 @@ module XTwitterScraper
       type affiliates_highlighted_label = ::Hash[Symbol, top]
 
       class AffiliatesHighlightedLabel < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader auxiliary_labels: ::Array[XTwitterScraper::UserProfile::AffiliatesHighlightedLabel::AuxiliaryLabel]?
+
+        def auxiliary_labels=: (
+          ::Array[XTwitterScraper::UserProfile::AffiliatesHighlightedLabel::AuxiliaryLabel | ::Hash[Symbol, top]]
+        ) -> ::Array[XTwitterScraper::UserProfile::AffiliatesHighlightedLabel::AuxiliaryLabel]
+
         attr_reader badge_url: String?
 
         def badge_url=: (String) -> String
@@ -415,6 +421,10 @@ module XTwitterScraper
         attr_reader description: String?
 
         def description=: (String) -> String
+
+        attr_reader long_description: ::Hash[Symbol, top]?
+
+        def long_description=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
         attr_reader url: String?
 
@@ -433,8 +443,10 @@ module XTwitterScraper
         def user_label_type=: (String) -> String
 
         def initialize: (
+          ?auxiliary_labels: ::Array[XTwitterScraper::UserProfile::AffiliatesHighlightedLabel::AuxiliaryLabel | ::Hash[Symbol, top]],
           ?badge_url: String,
           ?description: String,
+          ?long_description: ::Hash[Symbol, top],
           ?url: String,
           ?url_type: String,
           ?user_label_display_type: String,
@@ -442,6 +454,40 @@ module XTwitterScraper
         ) -> void
 
         def to_hash: -> ::Hash[Symbol, top]
+
+        type auxiliary_label = ::Hash[Symbol, top]
+
+        class AuxiliaryLabel < XTwitterScraper::Internal::Type::BaseModel
+          attr_reader badge_url: String?
+
+          def badge_url=: (String) -> String
+
+          attr_reader description: String?
+
+          def description=: (String) -> String
+
+          attr_reader url: String?
+
+          def url=: (String) -> String
+
+          attr_reader user_label_display_type: String?
+
+          def user_label_display_type=: (String) -> String
+
+          attr_reader user_label_type: String?
+
+          def user_label_type=: (String) -> String
+
+          def initialize: (
+            ?badge_url: String,
+            ?description: String,
+            ?url: String,
+            ?user_label_display_type: String,
+            ?user_label_type: String
+          ) -> void
+
+          def to_hash: -> ::Hash[Symbol, top]
+        end
       end
 
       type highlights_info =
@@ -475,6 +521,10 @@ module XTwitterScraper
 
         def is_identity_verified=: (bool) -> bool
 
+        attr_reader override_verified_year: Integer?
+
+        def override_verified_year=: (Integer) -> Integer
+
         attr_reader verified_since_msec: String?
 
         def verified_since_msec=: (String) -> String
@@ -482,6 +532,7 @@ module XTwitterScraper
         def initialize: (
           ?description: String,
           ?is_identity_verified: bool,
+          ?override_verified_year: Integer,
           ?verified_since_msec: String
         ) -> void
 
