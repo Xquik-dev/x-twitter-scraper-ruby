@@ -93,7 +93,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::PaginatedTweets]
+        # @return [XTwitterScraper::Models::X::TweetListResponse]
         #
         # @see XTwitterScraper::Models::X::TweetListParams
         def list(params)
@@ -103,7 +103,7 @@ module XTwitterScraper
             method: :get,
             path: "x/tweets",
             query: query,
-            model: XTwitterScraper::PaginatedTweets,
+            model: XTwitterScraper::Models::X::TweetListResponse,
             options: options
           )
         end
