@@ -69,6 +69,7 @@ class CheckApiFieldsTest < Minitest::Test
   TYPE_NEXT = ApiFieldsCheck::UNREADABLE_TYPE_NEXT
   REQUEST_NEXT = ApiFieldsCheck::UNREADABLE_REQUEST_NEXT
   ACCEPTED_FILE = ApiFieldsCheck::ACCEPTED_FILE
+  FIXTURE_LIST_CEILING = 1
   ACCEPTED_INVALID_NEXT = "Fix #{ACCEPTED_FILE} in the format CONTRIBUTING.md shows under API fields.".freeze
   STALE_SORT = "#{ACCEPTED_FILE} lists #{OPERATION} request missing sort, " \
                "which the check no longer finds. Remove it.".freeze
@@ -211,7 +212,7 @@ class CheckApiFieldsTest < Minitest::Test
     write_file(File.join(@root, ACCEPTED_FILE), JSON.generate(groups))
   end
 
-  def run_check(spec = document, source: nil, resources: @resources, ceiling: ApiFieldsCheck::ACCEPTED_CEILING)
+  def run_check(spec = document, source: nil, resources: @resources, ceiling: FIXTURE_LIST_CEILING)
     write_file(@spec_path, JSON.generate(spec))
     status = nil
     stdout, stderr = capture_io do
