@@ -28,15 +28,35 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :url
 
+      # Currency the checkout charges. Only a checkout_created answer has it.
+      sig do
+        returns(T.nilable(XTwitterScraper::Models::Currency::TaggedSymbol))
+      end
+      attr_reader :charged_currency
+
+      sig do
+        params(
+          charged_currency: XTwitterScraper::Models::Currency::OrSymbol
+        ).void
+      end
+      attr_writer :charged_currency
+
       sig do
         params(
           message: String,
           status:
             XTwitterScraper::Models::SubscribeCreateResponse::Status::OrSymbol,
-          url: String
+          url: String,
+          charged_currency: XTwitterScraper::Models::Currency::OrSymbol
         ).returns(T.attached_class)
       end
-      def self.new(message:, status:, url:)
+      def self.new(
+        message:,
+        status:,
+        url:,
+        # Currency the checkout charges. Only a checkout_created answer has it.
+        charged_currency: nil
+      )
       end
 
       sig do
@@ -45,7 +65,8 @@ module XTwitterScraper
             message: String,
             status:
               XTwitterScraper::Models::SubscribeCreateResponse::Status::TaggedSymbol,
-            url: String
+            url: String,
+            charged_currency: XTwitterScraper::Models::Currency::TaggedSymbol
           }
         )
       end

@@ -1,0 +1,50 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# frozen_string_literal: true
+
+module XTwitterScraper
+  module Models
+    # ISO 4217 code of a currency Xquik charges in.
+    module Currency
+      extend XTwitterScraper::Internal::Type::Enum
+
+      USD = :USD
+      EUR = :EUR
+      GBP = :GBP
+      TRY = :TRY
+      JPY = :JPY
+      CNY = :CNY
+      KRW = :KRW
+      CAD = :CAD
+      AUD = :AUD
+      MXN = :MXN
+      AED = :AED
+      BRL = :BRL
+      CHF = :CHF
+      CZK = :CZK
+      DKK = :DKK
+      HKD = :HKD
+      HUF = :HUF
+      IDR = :IDR
+      ILS = :ILS
+      INR = :INR
+      MYR = :MYR
+      NOK = :NOK
+      NZD = :NZD
+      PHP = :PHP
+      PLN = :PLN
+      QAR = :QAR
+      RON = :RON
+      SAR = :SAR
+      SEK = :SEK
+      SGD = :SGD
+      THB = :THB
+      ZAR = :ZAR
+
+      # @!method self.values
+      #   @return [Array<Symbol>]
+    end
+  end
+end

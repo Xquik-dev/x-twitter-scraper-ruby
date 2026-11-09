@@ -72,7 +72,6 @@
       "POST /api/v1/extractions response missing toolType",
       "POST /api/v1/extractions response missing url",
       "POST /api/v1/extractions response missing waitUrl",
-      "POST /api/v1/subscribe response missing chargedCurrency",
       "POST /api/v1/x/account-connection-challenges/{id}/submit response missing expiresAt",
       "POST /api/v1/x/account-connection-challenges/{id}/submit response missing message",
       "POST /api/v1/x/account-connection-challenges/{id}/submit response missing object",

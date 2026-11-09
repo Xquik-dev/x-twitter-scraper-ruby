@@ -66,6 +66,8 @@ module XTwitterScraper
 
   CreditTopupBalanceParams = XTwitterScraper::Models::CreditTopupBalanceParams
 
+  Currency = XTwitterScraper::Models::Currency
+
   Delivery = XTwitterScraper::Models::Delivery
 
   Draft = XTwitterScraper::Models::Draft
