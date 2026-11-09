@@ -125,9 +125,11 @@ module XTwitterScraper
           number_comments: Integer,
           score: Integer,
           selftext: String,
+          sentiment: XTwitterScraper::Models::RadarItem::Metadata::sentiment,
           source_format: XTwitterScraper::Models::RadarItem::Metadata::source_format,
           subreddit: String,
-          upvote_ratio: Float
+          upvote_ratio: Float,
+          windows: ::Array[XTwitterScraper::Models::RadarItem::Metadata::window]
         }
 
       class Metadata < XTwitterScraper::Internal::Type::BaseModel
@@ -159,6 +161,12 @@ module XTwitterScraper
 
         def selftext=: (String) -> String
 
+        attr_reader sentiment: XTwitterScraper::Models::RadarItem::Metadata::sentiment?
+
+        def sentiment=: (
+          XTwitterScraper::Models::RadarItem::Metadata::sentiment
+        ) -> XTwitterScraper::Models::RadarItem::Metadata::sentiment
+
         attr_reader source_format: XTwitterScraper::Models::RadarItem::Metadata::source_format?
 
         def source_format=: (
@@ -173,6 +181,12 @@ module XTwitterScraper
 
         def upvote_ratio=: (Float) -> Float
 
+        attr_reader windows: ::Array[XTwitterScraper::Models::RadarItem::Metadata::window]?
+
+        def windows=: (
+          ::Array[XTwitterScraper::Models::RadarItem::Metadata::window]
+        ) -> ::Array[XTwitterScraper::Models::RadarItem::Metadata::window]
+
         def initialize: (
           ?author: String,
           ?content_url: String,
@@ -181,9 +195,11 @@ module XTwitterScraper
           ?number_comments: Integer,
           ?score: Integer,
           ?selftext: String,
+          ?sentiment: XTwitterScraper::Models::RadarItem::Metadata::sentiment,
           ?source_format: XTwitterScraper::Models::RadarItem::Metadata::source_format,
           ?subreddit: String,
-          ?upvote_ratio: Float
+          ?upvote_ratio: Float,
+          ?windows: ::Array[XTwitterScraper::Models::RadarItem::Metadata::window]
         ) -> void
 
         def to_hash: -> {
@@ -194,9 +210,11 @@ module XTwitterScraper
           number_comments: Integer,
           score: Integer,
           selftext: String,
+          sentiment: XTwitterScraper::Models::RadarItem::Metadata::sentiment,
           source_format: XTwitterScraper::Models::RadarItem::Metadata::source_format,
           subreddit: String,
-          upvote_ratio: Float
+          upvote_ratio: Float,
+          windows: ::Array[XTwitterScraper::Models::RadarItem::Metadata::window]
         }
 
         type source_format = :html | :json | :rss
@@ -209,6 +227,33 @@ module XTwitterScraper
           RSS: :rss
 
           def self?.values: -> ::Array[XTwitterScraper::Models::RadarItem::Metadata::source_format]
+        end
+
+        type sentiment = :positive | :neutral | :negative
+
+        module Sentiment
+          extend XTwitterScraper::Internal::Type::Enum
+
+          POSITIVE: :positive
+          NEUTRAL: :neutral
+          NEGATIVE: :negative
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::RadarItem::Metadata::sentiment]
+        end
+
+        type window = :now | :hour | :day | :week | :month | :year
+
+        module Window
+          extend XTwitterScraper::Internal::Type::Enum
+
+          NOW: :now
+          HOUR: :hour
+          DAY: :day
+          WEEK: :week
+          MONTH: :month
+          YEAR: :year
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::RadarItem::Metadata::window]
         end
       end
 
