@@ -7,7 +7,10 @@
 module XTwitterScraper
   module Models
     class UserTipJar < XTwitterScraper::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(XTwitterScraper::UserTipJar, XTwitterScraper::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(XTwitterScraper::UserTipJar, XTwitterScraper::Internal::AnyHash)
+        end
 
       sig { returns(T.nilable(String)) }
       attr_reader :bandcamp_handle
@@ -64,7 +67,19 @@ module XTwitterScraper
       attr_writer :venmo_handle
 
       # Public payment and creator-support handles shown on X.
-      sig { params(bandcamp_handle: String, bitcoin_handle: String, cash_app_handle: String, ethereum_handle: String, gofundme_handle: String, is_enabled: T::Boolean, patreon_handle: String, pay_pal_handle: String, venmo_handle: String).returns(T.attached_class) }
+      sig do
+        params(
+          bandcamp_handle: String,
+          bitcoin_handle: String,
+          cash_app_handle: String,
+          ethereum_handle: String,
+          gofundme_handle: String,
+          is_enabled: T::Boolean,
+          patreon_handle: String,
+          pay_pal_handle: String,
+          venmo_handle: String
+        ).returns(T.attached_class)
+      end
       def self.new(
         bandcamp_handle: nil,
         bitcoin_handle: nil,
@@ -78,7 +93,21 @@ module XTwitterScraper
       )
       end
 
-      sig { override.returns({ bandcamp_handle: String, bitcoin_handle: String, cash_app_handle: String, ethereum_handle: String, gofundme_handle: String, is_enabled: T::Boolean, patreon_handle: String, pay_pal_handle: String, venmo_handle: String }) }
+      sig do
+        override.returns(
+          {
+            bandcamp_handle: String,
+            bitcoin_handle: String,
+            cash_app_handle: String,
+            ethereum_handle: String,
+            gofundme_handle: String,
+            is_enabled: T::Boolean,
+            patreon_handle: String,
+            pay_pal_handle: String,
+            venmo_handle: String
+          }
+        )
+      end
       def to_hash
       end
     end

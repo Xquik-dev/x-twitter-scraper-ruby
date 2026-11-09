@@ -7,32 +7,62 @@
 module XTwitterScraper
   module Models
     class ProfileContactInfo < XTwitterScraper::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(XTwitterScraper::ProfileContactInfo, XTwitterScraper::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(
+            XTwitterScraper::ProfileContactInfo,
+            XTwitterScraper::Internal::AnyHash
+          )
+        end
 
       # Emails in the bio, name or location, lowercased.
-      sig { returns(T.nilable(T::Array[XTwitterScraper::ProfileContactInfo::Email])) }
+      sig do
+        returns(T.nilable(T::Array[XTwitterScraper::ProfileContactInfo::Email]))
+      end
       attr_reader :emails
 
-      sig { params(emails: T::Array[XTwitterScraper::ProfileContactInfo::Email::OrHash]).void }
+      sig do
+        params(
+          emails: T::Array[XTwitterScraper::ProfileContactInfo::Email::OrHash]
+        ).void
+      end
       attr_writer :emails
 
       # Phone numbers on the profile. Only a spelling that can be nothing else counts.
-      sig { returns(T.nilable(T::Array[XTwitterScraper::ProfileContactInfo::Phone])) }
+      sig do
+        returns(T.nilable(T::Array[XTwitterScraper::ProfileContactInfo::Phone]))
+      end
       attr_reader :phones
 
-      sig { params(phones: T::Array[XTwitterScraper::ProfileContactInfo::Phone::OrHash]).void }
+      sig do
+        params(
+          phones: T::Array[XTwitterScraper::ProfileContactInfo::Phone::OrHash]
+        ).void
+      end
       attr_writer :phones
 
       # The profile's website & the links in its bio.
-      sig { returns(T.nilable(T::Array[XTwitterScraper::ProfileContactInfo::Link])) }
+      sig do
+        returns(T.nilable(T::Array[XTwitterScraper::ProfileContactInfo::Link]))
+      end
       attr_reader :links
 
-      sig { params(links: T::Array[XTwitterScraper::ProfileContactInfo::Link::OrHash]).void }
+      sig do
+        params(
+          links: T::Array[XTwitterScraper::ProfileContactInfo::Link::OrHash]
+        ).void
+      end
       attr_writer :links
 
       # Emails, phone numbers & links the account publishes on its own profile. Omitted
       # when it publishes none.
-      sig { params(emails: T::Array[XTwitterScraper::ProfileContactInfo::Email::OrHash], phones: T::Array[XTwitterScraper::ProfileContactInfo::Phone::OrHash], links: T::Array[XTwitterScraper::ProfileContactInfo::Link::OrHash]).returns(T.attached_class) }
+      sig do
+        params(
+          emails: T::Array[XTwitterScraper::ProfileContactInfo::Email::OrHash],
+          phones: T::Array[XTwitterScraper::ProfileContactInfo::Phone::OrHash],
+          links: T::Array[XTwitterScraper::ProfileContactInfo::Link::OrHash]
+        ).returns(T.attached_class)
+      end
       def self.new(
         # Emails in the bio, name or location, lowercased.
         emails: nil,
@@ -43,12 +73,26 @@ module XTwitterScraper
       )
       end
 
-      sig { override.returns({ emails: T::Array[XTwitterScraper::ProfileContactInfo::Email], phones: T::Array[XTwitterScraper::ProfileContactInfo::Phone], links: T::Array[XTwitterScraper::ProfileContactInfo::Link] }) }
+      sig do
+        override.returns(
+          {
+            emails: T::Array[XTwitterScraper::ProfileContactInfo::Email],
+            phones: T::Array[XTwitterScraper::ProfileContactInfo::Phone],
+            links: T::Array[XTwitterScraper::ProfileContactInfo::Link]
+          }
+        )
+      end
       def to_hash
       end
 
       class Email < XTwitterScraper::Internal::Type::BaseModel
-        OrHash = T.type_alias { T.any(XTwitterScraper::ProfileContactInfo::Email, XTwitterScraper::Internal::AnyHash) }
+        OrHash =
+          T.type_alias do
+            T.any(
+              XTwitterScraper::ProfileContactInfo::Email,
+              XTwitterScraper::Internal::AnyHash
+            )
+          end
 
         # The email address.
         sig { returns(String) }
@@ -59,7 +103,11 @@ module XTwitterScraper
         attr_accessor :domain
 
         # Profile field that holds the email.
-        sig { returns(XTwitterScraper::ProfileContactInfo::Email::Source::TaggedSymbol) }
+        sig do
+          returns(
+            XTwitterScraper::ProfileContactInfo::Email::Source::TaggedSymbol
+          )
+        end
         attr_accessor :source
 
         # The account's own spelling, sent when it spelled the email out.
@@ -69,7 +117,15 @@ module XTwitterScraper
         sig { params(written_as: String).void }
         attr_writer :written_as
 
-        sig { params(value: String, domain: String, source: XTwitterScraper::ProfileContactInfo::Email::Source::OrSymbol, written_as: String).returns(T.attached_class) }
+        sig do
+          params(
+            value: String,
+            domain: String,
+            source:
+              XTwitterScraper::ProfileContactInfo::Email::Source::OrSymbol,
+            written_as: String
+          ).returns(T.attached_class)
+        end
         def self.new(
           # The email address.
           value:,
@@ -82,7 +138,17 @@ module XTwitterScraper
         )
         end
 
-        sig { override.returns({ value: String, domain: String, source: XTwitterScraper::ProfileContactInfo::Email::Source::TaggedSymbol, written_as: String }) }
+        sig do
+          override.returns(
+            {
+              value: String,
+              domain: String,
+              source:
+                XTwitterScraper::ProfileContactInfo::Email::Source::TaggedSymbol,
+              written_as: String
+            }
+          )
+        end
         def to_hash
         end
 
@@ -90,28 +156,59 @@ module XTwitterScraper
         module Source
           extend XTwitterScraper::Internal::Type::Enum
 
-          TaggedSymbol = T.type_alias { T.all(Symbol, XTwitterScraper::ProfileContactInfo::Email::Source) }
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, XTwitterScraper::ProfileContactInfo::Email::Source)
+            end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-          BIO = T.let(:bio, XTwitterScraper::ProfileContactInfo::Email::Source::TaggedSymbol)
-          NAME = T.let(:name, XTwitterScraper::ProfileContactInfo::Email::Source::TaggedSymbol)
-          LOCATION = T.let(:location, XTwitterScraper::ProfileContactInfo::Email::Source::TaggedSymbol)
+          BIO =
+            T.let(
+              :bio,
+              XTwitterScraper::ProfileContactInfo::Email::Source::TaggedSymbol
+            )
+          NAME =
+            T.let(
+              :name,
+              XTwitterScraper::ProfileContactInfo::Email::Source::TaggedSymbol
+            )
+          LOCATION =
+            T.let(
+              :location,
+              XTwitterScraper::ProfileContactInfo::Email::Source::TaggedSymbol
+            )
 
-          sig { override.returns(T::Array[XTwitterScraper::ProfileContactInfo::Email::Source::TaggedSymbol]) }
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::ProfileContactInfo::Email::Source::TaggedSymbol
+              ]
+            )
+          end
           def self.values
           end
         end
       end
 
       class Phone < XTwitterScraper::Internal::Type::BaseModel
-        OrHash = T.type_alias { T.any(XTwitterScraper::ProfileContactInfo::Phone, XTwitterScraper::Internal::AnyHash) }
+        OrHash =
+          T.type_alias do
+            T.any(
+              XTwitterScraper::ProfileContactInfo::Phone,
+              XTwitterScraper::Internal::AnyHash
+            )
+          end
 
         # The digits, with a leading + when the account wrote a country code.
         sig { returns(String) }
         attr_accessor :value
 
         # Profile field that holds the number.
-        sig { returns(XTwitterScraper::ProfileContactInfo::Phone::Source::TaggedSymbol) }
+        sig do
+          returns(
+            XTwitterScraper::ProfileContactInfo::Phone::Source::TaggedSymbol
+          )
+        end
         attr_accessor :source
 
         # The account's own spelling of the number.
@@ -121,7 +218,14 @@ module XTwitterScraper
         sig { params(written_as: String).void }
         attr_writer :written_as
 
-        sig { params(value: String, source: XTwitterScraper::ProfileContactInfo::Phone::Source::OrSymbol, written_as: String).returns(T.attached_class) }
+        sig do
+          params(
+            value: String,
+            source:
+              XTwitterScraper::ProfileContactInfo::Phone::Source::OrSymbol,
+            written_as: String
+          ).returns(T.attached_class)
+        end
         def self.new(
           # The digits, with a leading + when the account wrote a country code.
           value:,
@@ -132,7 +236,16 @@ module XTwitterScraper
         )
         end
 
-        sig { override.returns({ value: String, source: XTwitterScraper::ProfileContactInfo::Phone::Source::TaggedSymbol, written_as: String }) }
+        sig do
+          override.returns(
+            {
+              value: String,
+              source:
+                XTwitterScraper::ProfileContactInfo::Phone::Source::TaggedSymbol,
+              written_as: String
+            }
+          )
+        end
         def to_hash
         end
 
@@ -140,22 +253,53 @@ module XTwitterScraper
         module Source
           extend XTwitterScraper::Internal::Type::Enum
 
-          TaggedSymbol = T.type_alias { T.all(Symbol, XTwitterScraper::ProfileContactInfo::Phone::Source) }
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, XTwitterScraper::ProfileContactInfo::Phone::Source)
+            end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-          BIO = T.let(:bio, XTwitterScraper::ProfileContactInfo::Phone::Source::TaggedSymbol)
-          NAME = T.let(:name, XTwitterScraper::ProfileContactInfo::Phone::Source::TaggedSymbol)
-          LOCATION = T.let(:location, XTwitterScraper::ProfileContactInfo::Phone::Source::TaggedSymbol)
-          URL = T.let(:url, XTwitterScraper::ProfileContactInfo::Phone::Source::TaggedSymbol)
+          BIO =
+            T.let(
+              :bio,
+              XTwitterScraper::ProfileContactInfo::Phone::Source::TaggedSymbol
+            )
+          NAME =
+            T.let(
+              :name,
+              XTwitterScraper::ProfileContactInfo::Phone::Source::TaggedSymbol
+            )
+          LOCATION =
+            T.let(
+              :location,
+              XTwitterScraper::ProfileContactInfo::Phone::Source::TaggedSymbol
+            )
+          URL =
+            T.let(
+              :url,
+              XTwitterScraper::ProfileContactInfo::Phone::Source::TaggedSymbol
+            )
 
-          sig { override.returns(T::Array[XTwitterScraper::ProfileContactInfo::Phone::Source::TaggedSymbol]) }
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::ProfileContactInfo::Phone::Source::TaggedSymbol
+              ]
+            )
+          end
           def self.values
           end
         end
       end
 
       class Link < XTwitterScraper::Internal::Type::BaseModel
-        OrHash = T.type_alias { T.any(XTwitterScraper::ProfileContactInfo::Link, XTwitterScraper::Internal::AnyHash) }
+        OrHash =
+          T.type_alias do
+            T.any(
+              XTwitterScraper::ProfileContactInfo::Link,
+              XTwitterScraper::Internal::AnyHash
+            )
+          end
 
         # The link, as X expands it.
         sig { returns(String) }
@@ -167,10 +311,20 @@ module XTwitterScraper
         attr_accessor :network
 
         # `url` for the website field, `bio` for a bio link.
-        sig { returns(XTwitterScraper::ProfileContactInfo::Link::Source::TaggedSymbol) }
+        sig do
+          returns(
+            XTwitterScraper::ProfileContactInfo::Link::Source::TaggedSymbol
+          )
+        end
         attr_accessor :source
 
-        sig { params(url: String, network: String, source: XTwitterScraper::ProfileContactInfo::Link::Source::OrSymbol).returns(T.attached_class) }
+        sig do
+          params(
+            url: String,
+            network: String,
+            source: XTwitterScraper::ProfileContactInfo::Link::Source::OrSymbol
+          ).returns(T.attached_class)
+        end
         def self.new(
           # The link, as X expands it.
           url:,
@@ -182,7 +336,16 @@ module XTwitterScraper
         )
         end
 
-        sig { override.returns({ url: String, network: String, source: XTwitterScraper::ProfileContactInfo::Link::Source::TaggedSymbol }) }
+        sig do
+          override.returns(
+            {
+              url: String,
+              network: String,
+              source:
+                XTwitterScraper::ProfileContactInfo::Link::Source::TaggedSymbol
+            }
+          )
+        end
         def to_hash
         end
 
@@ -190,13 +353,30 @@ module XTwitterScraper
         module Source
           extend XTwitterScraper::Internal::Type::Enum
 
-          TaggedSymbol = T.type_alias { T.all(Symbol, XTwitterScraper::ProfileContactInfo::Link::Source) }
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, XTwitterScraper::ProfileContactInfo::Link::Source)
+            end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-          URL = T.let(:url, XTwitterScraper::ProfileContactInfo::Link::Source::TaggedSymbol)
-          BIO = T.let(:bio, XTwitterScraper::ProfileContactInfo::Link::Source::TaggedSymbol)
+          URL =
+            T.let(
+              :url,
+              XTwitterScraper::ProfileContactInfo::Link::Source::TaggedSymbol
+            )
+          BIO =
+            T.let(
+              :bio,
+              XTwitterScraper::ProfileContactInfo::Link::Source::TaggedSymbol
+            )
 
-          sig { override.returns(T::Array[XTwitterScraper::ProfileContactInfo::Link::Source::TaggedSymbol]) }
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::ProfileContactInfo::Link::Source::TaggedSymbol
+              ]
+            )
+          end
           def self.values
           end
         end

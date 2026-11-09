@@ -12,21 +12,21 @@ module XTwitterScraper
       #
       #   @return [Array<XTwitterScraper::Models::ProfileContactInfo::Email>, nil]
       optional :emails,
-                        -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::ProfileContactInfo::Email] }
+               -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::ProfileContactInfo::Email] }
 
       # @!attribute phones
       #   Phone numbers on the profile. Only a spelling that can be nothing else counts.
       #
       #   @return [Array<XTwitterScraper::Models::ProfileContactInfo::Phone>, nil]
       optional :phones,
-                        -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::ProfileContactInfo::Phone] }
+               -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::ProfileContactInfo::Phone] }
 
       # @!attribute links
       #   The profile's website & the links in its bio.
       #
       #   @return [Array<XTwitterScraper::Models::ProfileContactInfo::Link>, nil]
       optional :links,
-                       -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::ProfileContactInfo::Link] }
+               -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::ProfileContactInfo::Link] }
 
       # @!method initialize(emails: nil, phones: nil, links: nil)
       #   Emails, phone numbers & links the account publishes on its own profile. Omitted
@@ -155,7 +155,7 @@ module XTwitterScraper
         # @!method initialize(url:, network:, source:)
         #   @param url [String] The link, as X expands it.
         #
-        #   @param network [String] Site the link belongs to, such as `linkedin`, `github` or `telegram`. Any other 
+        #   @param network [String] Site the link belongs to, such as `linkedin`, `github` or `telegram`. Any other
         #
         #   @param source [Symbol, XTwitterScraper::Models::ProfileContactInfo::Link::Source] `url` for the website field, `bio` for a bio link.
 
