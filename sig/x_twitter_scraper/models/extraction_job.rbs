@@ -11,7 +11,14 @@ module XTwitterScraper
         status: XTwitterScraper::Models::ExtractionJob::status,
         tool_type: XTwitterScraper::Models::ExtractionJob::tool_type,
         total_results: Integer,
-        completed_at: Time
+        url: String,
+        completed_at: Time,
+        completion_reason: XTwitterScraper::Models::ExtractionJob::completion_reason,
+        effective_results_limit: Integer,
+        error_message: String,
+        image_filter: XTwitterScraper::ImageFilterSummary,
+        results_limit: Integer,
+        topic_filter: XTwitterScraper::ExtractionJob::TopicFilter
       }
 
     class ExtractionJob < XTwitterScraper::Internal::Type::BaseModel
@@ -25,9 +32,41 @@ module XTwitterScraper
 
       attr_accessor total_results: Integer
 
+      attr_accessor url: String
+
       attr_reader completed_at: Time?
 
       def completed_at=: (Time) -> Time
+
+      attr_reader completion_reason: XTwitterScraper::Models::ExtractionJob::completion_reason?
+
+      def completion_reason=: (
+        XTwitterScraper::Models::ExtractionJob::completion_reason
+      ) -> XTwitterScraper::Models::ExtractionJob::completion_reason
+
+      attr_reader effective_results_limit: Integer?
+
+      def effective_results_limit=: (Integer) -> Integer
+
+      attr_reader error_message: String?
+
+      def error_message=: (String) -> String
+
+      attr_reader image_filter: XTwitterScraper::ImageFilterSummary?
+
+      def image_filter=: (
+        XTwitterScraper::ImageFilterSummary | ::Hash[Symbol, top]
+      ) -> XTwitterScraper::ImageFilterSummary
+
+      attr_reader results_limit: Integer?
+
+      def results_limit=: (Integer) -> Integer
+
+      attr_reader topic_filter: XTwitterScraper::ExtractionJob::TopicFilter?
+
+      def topic_filter=: (
+        XTwitterScraper::ExtractionJob::TopicFilter | ::Hash[Symbol, top]
+      ) -> XTwitterScraper::ExtractionJob::TopicFilter
 
       def initialize: (
         id: String,
@@ -35,7 +74,14 @@ module XTwitterScraper
         status: XTwitterScraper::Models::ExtractionJob::status,
         tool_type: XTwitterScraper::Models::ExtractionJob::tool_type,
         total_results: Integer,
-        ?completed_at: Time
+        url: String,
+        ?completed_at: Time,
+        ?completion_reason: XTwitterScraper::Models::ExtractionJob::completion_reason,
+        ?effective_results_limit: Integer,
+        ?error_message: String,
+        ?image_filter: XTwitterScraper::ImageFilterSummary | ::Hash[Symbol, top],
+        ?results_limit: Integer,
+        ?topic_filter: XTwitterScraper::ExtractionJob::TopicFilter | ::Hash[Symbol, top]
       ) -> void
 
       def to_hash: -> {
@@ -44,7 +90,14 @@ module XTwitterScraper
         status: XTwitterScraper::Models::ExtractionJob::status,
         tool_type: XTwitterScraper::Models::ExtractionJob::tool_type,
         total_results: Integer,
-        completed_at: Time
+        url: String,
+        completed_at: Time,
+        completion_reason: XTwitterScraper::Models::ExtractionJob::completion_reason,
+        effective_results_limit: Integer,
+        error_message: String,
+        image_filter: XTwitterScraper::ImageFilterSummary,
+        results_limit: Integer,
+        topic_filter: XTwitterScraper::ExtractionJob::TopicFilter
       }
 
       type status = :running | :completed | :failed | :pending | :canceled
@@ -116,6 +169,70 @@ module XTwitterScraper
         VERIFIED_FOLLOWER_EXPLORER: :verified_follower_explorer
 
         def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionJob::tool_type]
+      end
+
+      type completion_reason =
+        :budget_limited
+        | :canceled
+        | :deadline_reached
+        | :failed
+        | :pagination_safety_limit
+        | :partial_failure
+        | :requested_limit_reached
+        | :source_exhausted
+
+      module CompletionReason
+        extend XTwitterScraper::Internal::Type::Enum
+
+        BUDGET_LIMITED: :budget_limited
+        CANCELED: :canceled
+        DEADLINE_REACHED: :deadline_reached
+        FAILED: :failed
+        PAGINATION_SAFETY_LIMIT: :pagination_safety_limit
+        PARTIAL_FAILURE: :partial_failure
+        REQUESTED_LIMIT_REACHED: :requested_limit_reached
+        SOURCE_EXHAUSTED: :source_exhausted
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ExtractionJob::completion_reason]
+      end
+
+      type topic_filter = ::Hash[Symbol, top]
+
+      class TopicFilter < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor topic: String
+
+        attr_accessor question: String
+
+        attr_accessor cutoff: Float
+
+        attr_accessor checked: Integer
+
+        attr_accessor kept: Integer
+
+        attr_accessor unchecked: ::Array[XTwitterScraper::ExtractionJob::TopicFilter::Unchecked]
+
+        def initialize: (
+          topic: String,
+          question: String,
+          cutoff: Float,
+          checked: Integer,
+          kept: Integer,
+          unchecked: ::Array[XTwitterScraper::ExtractionJob::TopicFilter::Unchecked | ::Hash[Symbol, top]]
+        ) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
+
+        type unchecked = ::Hash[Symbol, top]
+
+        class Unchecked < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor reason: String
+
+          def initialize: (id: String, reason: String) -> void
+
+          def to_hash: -> ::Hash[Symbol, top]
+        end
       end
     end
   end

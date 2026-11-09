@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type image_filter_summary = ::Hash[Symbol, top]
+
+    class ImageFilterSummary < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor image_shows: String
+
+      attr_accessor question: String
+
+      attr_accessor cutoff: Float
+
+      attr_accessor checked: Integer
+
+      attr_accessor kept: Integer
+
+      attr_accessor unchecked: ::Array[XTwitterScraper::ImageFilterSummary::Unchecked]
+
+      def initialize: (
+        image_shows: String,
+        question: String,
+        cutoff: Float,
+        checked: Integer,
+        kept: Integer,
+        unchecked: ::Array[XTwitterScraper::ImageFilterSummary::Unchecked | ::Hash[Symbol, top]]
+      ) -> void
+
+      def to_hash: -> ::Hash[Symbol, top]
+
+      type unchecked = ::Hash[Symbol, top]
+
+      class Unchecked < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor reason: String
+
+        def initialize: (id: String, reason: String) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
+      end
+    end
+  end
+end
