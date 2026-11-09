@@ -19,6 +19,7 @@ module ApiFieldsCheck
   DEFAULT_SPEC = "https://xquik.com/openapi.json"
   SPEC_VARIABLE = "XQUIK_OPENAPI_SPEC"
   ACCEPTED_FILE = "accepted-field-differences.json"
+  ACCEPTED_CEILING = 9
   HTTP_METHODS = %w[get put post delete options head patch trace].freeze
   BODY_TYPES = %w[application/json multipart/form-data application/x-www-form-urlencoded].freeze
   RESPONSE_TYPES = %w[application/json].freeze
@@ -41,6 +42,8 @@ module ApiFieldsCheck
                          "or teach scripts/check_api_fields.rb the new type."
   FIX_NEXT = "Fix each field above in the SDK, or list it in #{ACCEPTED_FILE} with a reason.".freeze
   REMOVE_NEXT = "Remove each difference above from #{ACCEPTED_FILE}.".freeze
+  GROWN_NEXT = "Fix each new difference in the SDK instead of accepting it. " \
+               "ACCEPTED_CEILING in scripts/check_api_fields.rb only falls."
 
   class Failure < StandardError
     attr_reader :lines
@@ -860,9 +863,13 @@ module ApiFieldsCheck
 
   def count(number, noun) = number == 1 ? "1 #{noun}" : "#{number} #{noun}s"
 
-  def check(source:, root:, resources:)
+  def check(source:, root:, resources:, ceiling:)
     spec = spec_shapes(load_spec(source), source)
     accepted = read_accepted(root)
+    if accepted.length > ceiling
+      listed = count(accepted.length, "accepted difference")
+      raise Failure.new("#{ACCEPTED_FILE} lists #{listed}, more than the #{ceiling} it may hold.", GROWN_NEXT)
+    end
     sdk = SdkReader.new(root: root, resources: resources, base_path: sdk_base_path).shapes
     compared = (spec.keys & sdk.keys).sort
     if compared.empty?
@@ -884,8 +891,13 @@ module ApiFieldsCheck
       "and #{ACCEPTED_FILE} lists #{count(accepted.length, 'accepted difference')}."
   end
 
-  def main(source: spec_source, root: ROOT, resources: File.join(root, RESOURCES))
-    puts(check(source: source, root: root, resources: resources))
+  def main(
+    source: spec_source,
+    root: ROOT,
+    resources: File.join(root, RESOURCES),
+    ceiling: ACCEPTED_CEILING
+  )
+    puts(check(source: source, root: root, resources: resources, ceiling: ceiling))
     0
   rescue Failure => e
     warn(e.lines.join("\n"))

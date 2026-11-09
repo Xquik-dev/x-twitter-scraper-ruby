@@ -110,8 +110,10 @@ GET /api/v1/monitors response enum monitors[].pausedReason
 - `missing` means the spec has the field and the SDK does not. Add it to its
   model in `lib/x_twitter_scraper/models`, `rbi/x_twitter_scraper/models` and
   `sig/x_twitter_scraper/models`.
-- `extra` means the SDK has a field the spec does not list. Keep it when callers
-  may use it, and accept it.
+- `extra` means the SDK has a field the spec does not list. When the spec lists
+  it under another name, as `minLikes` for `min_faves`, keep the parameter and
+  send it under the spec's name. Otherwise keep it when callers may use it, and
+  accept it.
 - `enum` means both sides list values and the values differ. Add the missing
   values, and accept values the SDK keeps.
 - `required` and `nullable` mean the flags differ. Fix them only when the change
@@ -123,7 +125,10 @@ satisfy the check. Accept it instead.
 `accepted-field-differences.json` holds the reviewed differences the SDK keeps
 for now, in groups with a non-empty `reason`. A difference appears at most once.
 An accepted difference the check no longer finds fails as stale, so remove it
-from the file. The list can therefore only fall as the SDK catches up.
+from the file. `ACCEPTED_CEILING` in `scripts/check_api_fields.rb` holds the
+list's length. The check fails when the list holds more, and a test fails until
+the ceiling falls with the list. The list can therefore only fall as the SDK
+catches up.
 
 ```json
 [

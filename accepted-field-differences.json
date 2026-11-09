@@ -13,20 +13,6 @@
     ]
   },
   {
-    "reason": "Filters the current spec no longer lists on these routes. The SDK keeps them, so code written for earlier versions keeps working.",
-    "differences": [
-      "GET /api/v1/x/tweets/search request extra minFaves",
-      "GET /api/v1/x/tweets/{id}/quotes request extra minFaves",
-      "GET /api/v1/x/tweets/{id}/replies request extra minFaves",
-      "GET /api/v1/x/tweets/{id}/thread request extra minFaves",
-      "GET /api/v1/x/users/{id}/likes request extra minFaves",
-      "GET /api/v1/x/users/{id}/media request extra minFaves",
-      "GET /api/v1/x/users/{id}/mentions request extra minFaves",
-      "GET /api/v1/x/users/{id}/replies request extra minFaves",
-      "GET /api/v1/x/users/{id}/tweets request extra minFaves"
-    ]
-  },
-  {
     "reason": "The SDK's model and the spec disagree on whether the API always returns these fields. The SDK reads a response either way, so this shows only in its type signatures.",
     "differences": [
       "GET /api/v1/x/communities/{id}/info response required community.creator.verified"

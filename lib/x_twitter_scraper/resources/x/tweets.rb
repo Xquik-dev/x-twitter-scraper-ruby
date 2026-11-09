@@ -287,7 +287,7 @@ module XTwitterScraper
         #
         # @param min_bookmarks [Integer] Minimum bookmark count threshold.
         #
-        # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
+        # @param min_faves [Integer] Deprecated alias of min_likes, sent as minLikes.
         #
         # @param min_likes [Integer] Minimum likes. Its aliases are minFaves, min_likes & min_faves.
         #
@@ -385,7 +385,7 @@ module XTwitterScraper
               max_retweets: "maxRetweets",
               media_type: "mediaType",
               min_bookmarks: "minBookmarks",
-              min_faves: "minFaves",
+              min_faves: "minLikes",
               min_likes: "minLikes",
               min_quotes: "minQuotes",
               min_replies: "minReplies",
@@ -474,7 +474,7 @@ module XTwitterScraper
         #
         # @param min_bookmarks [Integer] Minimum bookmark count threshold.
         #
-        # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
+        # @param min_faves [Integer] Deprecated alias of min_likes, sent as minLikes.
         #
         # @param min_likes [Integer] Minimum likes. Its aliases are minFaves, min_likes & min_faves.
         #
@@ -557,7 +557,7 @@ module XTwitterScraper
               max_retweets: "maxRetweets",
               media_type: "mediaType",
               min_bookmarks: "minBookmarks",
-              min_faves: "minFaves",
+              min_faves: "minLikes",
               min_likes: "minLikes",
               min_quotes: "minQuotes",
               min_replies: "minReplies",
@@ -720,7 +720,7 @@ module XTwitterScraper
         #
         # @param min_bookmarks [Integer] Minimum bookmark count threshold.
         #
-        # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
+        # @param min_faves [Integer] Deprecated alias of min_likes, sent as minLikes.
         #
         # @param min_likes [Integer] Minimum likes. Its aliases are minFaves, min_likes & min_faves.
         #
@@ -788,7 +788,7 @@ module XTwitterScraper
               max_retweets: "maxRetweets",
               media_type: "mediaType",
               min_bookmarks: "minBookmarks",
-              min_faves: "minFaves",
+              min_faves: "minLikes",
               min_likes: "minLikes",
               min_quotes: "minQuotes",
               min_replies: "minReplies",
@@ -876,7 +876,7 @@ module XTwitterScraper
         #
         # @param min_bookmarks [Integer] Minimum bookmark count threshold.
         #
-        # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
+        # @param min_faves [Integer] Deprecated alias of min_likes, sent as minLikes.
         #
         # @param min_likes [Integer] Minimum likes. Its aliases are minFaves, min_likes & min_faves.
         #
@@ -976,7 +976,7 @@ module XTwitterScraper
               max_retweets: "maxRetweets",
               media_type: "mediaType",
               min_bookmarks: "minBookmarks",
-              min_faves: "minFaves",
+              min_faves: "minLikes",
               min_likes: "minLikes",
               min_quotes: "minQuotes",
               min_replies: "minReplies",
