@@ -18,11 +18,32 @@ module XTwitterScraper
       sig { returns(T::Boolean) }
       attr_accessor :success
 
-      sig { params(success: T::Boolean).returns(T.attached_class) }
-      def self.new(success: true)
+      # Fields the request sent that this route does not read, in the order sent. They
+      # changed nothing. The answer leaves this out when the route read every field.
+      sig { returns(T.nilable(T::Array[String])) }
+      attr_reader :ignored_fields
+
+      sig { params(ignored_fields: T::Array[String]).void }
+      attr_writer :ignored_fields
+
+      sig do
+        params(success: T::Boolean, ignored_fields: T::Array[String]).returns(
+          T.attached_class
+        )
+      end
+      def self.new(
+        success: true,
+        # Fields the request sent that this route does not read, in the order sent. They
+        # changed nothing. The answer leaves this out when the route read every field.
+        ignored_fields: nil
+      )
       end
 
-      sig { override.returns({ success: T::Boolean }) }
+      sig do
+        override.returns(
+          { success: T::Boolean, ignored_fields: T::Array[String] }
+        )
+      end
       def to_hash
       end
     end
