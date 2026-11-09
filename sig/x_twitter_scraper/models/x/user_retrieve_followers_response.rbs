@@ -2,8 +2,8 @@ module XTwitterScraper
   module Models
     module X
       type user_retrieve_followers_response =
-        XTwitterScraper::UserListPage
-        | XTwitterScraper::Models::X::UserRetrieveFollowersResponse::UserListCoverageResponse
+        XTwitterScraper::Models::X::UserRetrieveFollowersResponse::UserListCoverageResponse
+        | XTwitterScraper::UserListPage
 
       module UserRetrieveFollowersResponse
         extend XTwitterScraper::Internal::Type::Union

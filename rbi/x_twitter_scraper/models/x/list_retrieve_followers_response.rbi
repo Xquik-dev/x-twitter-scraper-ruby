@@ -14,8 +14,8 @@ module XTwitterScraper
         Variants =
           T.type_alias do
             T.any(
-              XTwitterScraper::UserListPage,
-              XTwitterScraper::Models::X::ListRetrieveFollowersResponse::UserListCoverageResponse
+              XTwitterScraper::Models::X::ListRetrieveFollowersResponse::UserListCoverageResponse,
+              XTwitterScraper::UserListPage
             )
           end
 
