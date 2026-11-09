@@ -57,7 +57,6 @@
       "GET /api/v1/x/users/{id}/tweets response missing tweets[].imageScore",
       "GET /api/v1/x/users/{id}/tweets response missing tweets[].topicScore",
       "GET /api/v1/x/users/{id}/verified-followers response missing scanLimit",
-      "PATCH /api/v1/account response missing ignoredFields",
       "POST /api/v1/credits/topup response missing chargedCurrency",
       "POST /api/v1/credits/topup response missing chargedMinorUnits",
       "POST /api/v1/drafts response missing ignoredFields",
