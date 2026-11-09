@@ -36,6 +36,39 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :query
 
+        # Customer-set label of the keyword monitor, when set.
+        sig { returns(T.nilable(String)) }
+        attr_reader :name
+
+        sig { params(name: String).void }
+        attr_writer :name
+
+        # When Xquik paused this keyword monitor.
+        sig { returns(T.nilable(Time)) }
+        attr_reader :paused_at
+
+        sig { params(paused_at: Time).void }
+        attr_writer :paused_at
+
+        # Why Xquik paused this keyword monitor. The balance could not pay an hour, so add
+        # credits & resume. Absent when the monitor is active or you paused it yourself.
+        sig do
+          returns(
+            T.nilable(
+              XTwitterScraper::Monitors::KeywordUpdateResponse::PausedReason::TaggedSymbol
+            )
+          )
+        end
+        attr_reader :paused_reason
+
+        sig do
+          params(
+            paused_reason:
+              XTwitterScraper::Monitors::KeywordUpdateResponse::PausedReason::OrSymbol
+          ).void
+        end
+        attr_writer :paused_reason
+
         # Keyword monitor that tracks matching public X activity.
         sig do
           params(
@@ -44,7 +77,11 @@ module XTwitterScraper
             event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
             is_active: T::Boolean,
             next_billing_at: Time,
-            query: String
+            query: String,
+            name: String,
+            paused_at: Time,
+            paused_reason:
+              XTwitterScraper::Monitors::KeywordUpdateResponse::PausedReason::OrSymbol
           ).returns(T.attached_class)
         end
         def self.new(
@@ -55,7 +92,14 @@ module XTwitterScraper
           is_active:,
           # Next hourly credit charge time for this keyword query monitor.
           next_billing_at:,
-          query:
+          query:,
+          # Customer-set label of the keyword monitor, when set.
+          name: nil,
+          # When Xquik paused this keyword monitor.
+          paused_at: nil,
+          # Why Xquik paused this keyword monitor. The balance could not pay an hour, so add
+          # credits & resume. Absent when the monitor is active or you paused it yourself.
+          paused_reason: nil
         )
         end
 
@@ -67,11 +111,46 @@ module XTwitterScraper
               event_types: T::Array[XTwitterScraper::EventType::TaggedSymbol],
               is_active: T::Boolean,
               next_billing_at: Time,
-              query: String
+              query: String,
+              name: String,
+              paused_at: Time,
+              paused_reason:
+                XTwitterScraper::Monitors::KeywordUpdateResponse::PausedReason::TaggedSymbol
             }
           )
         end
         def to_hash
+        end
+
+        # Why Xquik paused this keyword monitor. The balance could not pay an hour, so add
+        # credits & resume. Absent when the monitor is active or you paused it yourself.
+        module PausedReason
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                XTwitterScraper::Monitors::KeywordUpdateResponse::PausedReason
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          INSUFFICIENT_CREDITS =
+            T.let(
+              :insufficient_credits,
+              XTwitterScraper::Monitors::KeywordUpdateResponse::PausedReason::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::Monitors::KeywordUpdateResponse::PausedReason::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
     end
