@@ -7,8 +7,9 @@ module XTwitterScraper
     class Support
       class Tickets
         def create: (
-          body: String,
           subject: String,
+          ?attachments: ::Array[XTwitterScraper::Internal::file_input],
+          ?body: String,
           ?idempotency_key: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::Support::TicketCreateResponse
@@ -32,7 +33,8 @@ module XTwitterScraper
 
         def reply: (
           String id,
-          body: String,
+          ?attachments: ::Array[XTwitterScraper::Internal::file_input],
+          ?body: String,
           ?idempotency_key: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::Support::TicketReplyResponse

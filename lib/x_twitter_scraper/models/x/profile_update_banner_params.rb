@@ -21,20 +21,28 @@ module XTwitterScraper
         # @!attribute url
         #   HTTPS URL to the banner image to download
         #
-        #   @return [String]
-        required :url, String
+        #   @return [String, nil]
+        optional :url, String
 
         # @!attribute idempotency_key
         #
         #   @return [String]
         required :idempotency_key, String
 
-        # @!method initialize(account:, url:, idempotency_key:, request_options: {})
+        # @!attribute file
+        #   Banner image (max 95 MiB)
+        #
+        #   @return [Pathname, StringIO, IO, String, XTwitterScraper::FilePart, nil]
+        optional :file, XTwitterScraper::Internal::Type::FileInput
+
+        # @!method initialize(account:, idempotency_key:, file: nil, url: nil, request_options: {})
         #   @param account [String] X account (@username or ID) receiving banner from URL
         #
         #   @param url [String] HTTPS URL to the banner image to download
         #
         #   @param idempotency_key [String]
+        #
+        #   @param file [Pathname, StringIO, IO, String, XTwitterScraper::FilePart] Banner image (max 95 MiB)
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end

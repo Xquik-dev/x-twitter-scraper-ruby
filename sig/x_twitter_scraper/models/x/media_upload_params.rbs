@@ -10,6 +10,7 @@ module XTwitterScraper
           account: String,
           url: String,
           idempotency_key: String,
+          file: XTwitterScraper::Internal::file_input,
           is_long_video: bool
         }
         & XTwitterScraper::Internal::Type::request_parameters
@@ -20,9 +21,17 @@ module XTwitterScraper
 
         attr_accessor account: String
 
-        attr_accessor url: String
+        attr_reader url: String?
+
+        def url=: (String) -> String
 
         attr_accessor idempotency_key: String
+
+        attr_reader file: XTwitterScraper::Internal::file_input?
+
+        def file=: (
+          XTwitterScraper::Internal::file_input
+        ) -> XTwitterScraper::Internal::file_input
 
         attr_reader is_long_video: bool?
 
@@ -30,9 +39,10 @@ module XTwitterScraper
 
         def initialize: (
           account: String,
-          url: String,
           idempotency_key: String,
+          ?file: XTwitterScraper::Internal::file_input,
           ?is_long_video: bool,
+          ?url: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
@@ -40,6 +50,7 @@ module XTwitterScraper
           account: String,
           url: String,
           idempotency_key: String,
+          file: XTwitterScraper::Internal::file_input,
           is_long_video: bool,
           request_options: XTwitterScraper::RequestOptions
         }

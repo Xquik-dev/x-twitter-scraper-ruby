@@ -18,15 +18,17 @@ module XTwitterScraper
 
         def update_avatar: (
           account: String,
-          url: String,
           idempotency_key: String,
+          ?file: XTwitterScraper::Internal::file_input,
+          ?url: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::ProfileUpdateAvatarResponse
 
         def update_banner: (
           account: String,
-          url: String,
           idempotency_key: String,
+          ?file: XTwitterScraper::Internal::file_input,
+          ?url: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::ProfileUpdateBannerResponse
 

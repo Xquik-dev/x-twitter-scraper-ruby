@@ -12,17 +12,20 @@ module XTwitterScraper
         # Create a support ticket
         sig do
           params(
-            body: String,
             subject: String,
+            attachments: T::Array[XTwitterScraper::Internal::FileInput],
+            body: String,
             idempotency_key: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::Support::TicketCreateResponse)
         end
         def create(
           # Body param
-          body:,
-          # Body param
           subject:,
+          # 1 to 4 support image or video uploads.
+          attachments: nil,
+          # Body param
+          body: nil,
           # Header param: Generate one random value per ticket or reply. Reuse it only when
           # retrying identical text and attachments. Never log this value.
           idempotency_key: nil,
@@ -84,6 +87,7 @@ module XTwitterScraper
         sig do
           params(
             id: String,
+            attachments: T::Array[XTwitterScraper::Internal::FileInput],
             body: String,
             idempotency_key: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
@@ -92,8 +96,10 @@ module XTwitterScraper
         def reply(
           # Path param: Support ticket public ID for the reply
           id,
+          # 1 to 4 support image or video uploads.
+          attachments: nil,
           # Body param
-          body:,
+          body: nil,
           # Header param: Generate one random value per ticket or reply. Reuse it only when
           # retrying identical text and attachments. Never log this value.
           idempotency_key: nil,

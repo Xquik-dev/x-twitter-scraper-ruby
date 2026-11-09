@@ -6,7 +6,12 @@ module XTwitterScraper
   module Models
     module Support
       type ticket_reply_params =
-        { id: String, body: String, idempotency_key: String }
+        {
+          id: String,
+          body: String,
+          attachments: ::Array[XTwitterScraper::Internal::file_input],
+          idempotency_key: String
+        }
         & XTwitterScraper::Internal::Type::request_parameters
 
       class TicketReplyParams < XTwitterScraper::Internal::Type::BaseModel
@@ -15,7 +20,15 @@ module XTwitterScraper
 
         attr_accessor id: String
 
-        attr_accessor body: String
+        attr_reader body: String?
+
+        def body=: (String) -> String
+
+        attr_reader attachments: ::Array[XTwitterScraper::Internal::file_input]?
+
+        def attachments=: (
+          ::Array[XTwitterScraper::Internal::file_input]
+        ) -> ::Array[XTwitterScraper::Internal::file_input]
 
         attr_reader idempotency_key: String?
 
@@ -23,7 +36,8 @@ module XTwitterScraper
 
         def initialize: (
           id: String,
-          body: String,
+          ?attachments: ::Array[XTwitterScraper::Internal::file_input],
+          ?body: String,
           ?idempotency_key: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
@@ -31,6 +45,7 @@ module XTwitterScraper
         def to_hash: -> {
           id: String,
           body: String,
+          attachments: ::Array[XTwitterScraper::Internal::file_input],
           idempotency_key: String,
           request_options: XTwitterScraper::RequestOptions
         }

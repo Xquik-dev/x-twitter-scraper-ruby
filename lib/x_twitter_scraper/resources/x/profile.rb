@@ -45,13 +45,15 @@ module XTwitterScraper
 
         # Update profile avatar
         #
-        # @overload update_avatar(account:, url:, idempotency_key:, request_options: {})
+        # @overload update_avatar(account:, idempotency_key:, file: nil, url: nil, request_options: {})
         #
         # @param account [String] Body param: X account (@username or ID) receiving avatar from URL
         #
         # @param url [String] Body param: HTTPS URL to the avatar image to download
         #
         # @param idempotency_key [String] Header param: Generate one unique value for each intended write. Reuse it only w
+        #
+        # @param file [Pathname, StringIO, IO, String, XTwitterScraper::FilePart] Avatar image (max 95 MiB)
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -61,15 +63,12 @@ module XTwitterScraper
         def update_avatar(params)
           parsed, options = XTwitterScraper::X::ProfileUpdateAvatarParams.dump_request(params)
           header_params = {idempotency_key: "idempotency-key"}
+          headers = parsed.slice(*header_params.keys).transform_keys(header_params)
+          headers["content-type"] = "multipart/form-data" if parsed.key?(:file)
           @client.request(
             method: :patch,
             path: "x/profile/avatar",
-            headers: {
-              "content-type" => "multipart/form-data",
-              **parsed.slice(*header_params.keys)
-            }.transform_keys(
-              header_params
-            ),
+            headers: headers,
             body: parsed.except(*header_params.keys),
             model: XTwitterScraper::Models::X::ProfileUpdateAvatarResponse,
             options: options
@@ -78,13 +77,15 @@ module XTwitterScraper
 
         # Update profile banner
         #
-        # @overload update_banner(account:, url:, idempotency_key:, request_options: {})
+        # @overload update_banner(account:, idempotency_key:, file: nil, url: nil, request_options: {})
         #
         # @param account [String] Body param: X account (@username or ID) receiving banner from URL
         #
         # @param url [String] Body param: HTTPS URL to the banner image to download
         #
         # @param idempotency_key [String] Header param: Generate one unique value for each intended write. Reuse it only w
+        #
+        # @param file [Pathname, StringIO, IO, String, XTwitterScraper::FilePart] Banner image (max 95 MiB)
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -94,15 +95,12 @@ module XTwitterScraper
         def update_banner(params)
           parsed, options = XTwitterScraper::X::ProfileUpdateBannerParams.dump_request(params)
           header_params = {idempotency_key: "idempotency-key"}
+          headers = parsed.slice(*header_params.keys).transform_keys(header_params)
+          headers["content-type"] = "multipart/form-data" if parsed.key?(:file)
           @client.request(
             method: :patch,
             path: "x/profile/banner",
-            headers: {
-              "content-type" => "multipart/form-data",
-              **parsed.slice(*header_params.keys)
-            }.transform_keys(
-              header_params
-            ),
+            headers: headers,
             body: parsed.except(*header_params.keys),
             model: XTwitterScraper::Models::X::ProfileUpdateBannerResponse,
             options: options

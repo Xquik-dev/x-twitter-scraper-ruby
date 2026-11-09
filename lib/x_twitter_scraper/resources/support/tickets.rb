@@ -11,11 +11,13 @@ module XTwitterScraper
       class Tickets
         # Create a support ticket
         #
-        # @overload create(body:, subject:, idempotency_key: nil, request_options: {})
+        # @overload create(subject:, attachments: nil, body: nil, idempotency_key: nil, request_options: {})
         #
         # @param body [String] Body param
         #
         # @param subject [String] Body param
+        #
+        # @param attachments [Array<Pathname, StringIO, IO, String, XTwitterScraper::FilePart>] 1 to 4 support image or video uploads.
         #
         # @param idempotency_key [String] Header param: Generate one random value per ticket or reply. Reuse it only when
         #
@@ -27,10 +29,12 @@ module XTwitterScraper
         def create(params)
           parsed, options = XTwitterScraper::Support::TicketCreateParams.dump_request(params)
           header_params = {idempotency_key: "idempotency-key"}
+          headers = parsed.slice(*header_params.keys).transform_keys(header_params)
+          headers["content-type"] = "multipart/form-data" if parsed.key?(:attachments)
           @client.request(
             method: :post,
             path: "support/tickets",
-            headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+            headers: headers,
             body: parsed.except(*header_params.keys),
             model: XTwitterScraper::Models::Support::TicketCreateResponse,
             options: options
@@ -108,11 +112,13 @@ module XTwitterScraper
 
         # Reply to a support ticket
         #
-        # @overload reply(id, body:, idempotency_key: nil, request_options: {})
+        # @overload reply(id, attachments: nil, body: nil, idempotency_key: nil, request_options: {})
         #
         # @param id [String] Path param: Support ticket public ID for the reply
         #
         # @param body [String] Body param
+        #
+        # @param attachments [Array<Pathname, StringIO, IO, String, XTwitterScraper::FilePart>] 1 to 4 support image or video uploads.
         #
         # @param idempotency_key [String] Header param: Generate one random value per ticket or reply. Reuse it only when
         #
@@ -124,10 +130,12 @@ module XTwitterScraper
         def reply(id, params)
           parsed, options = XTwitterScraper::Support::TicketReplyParams.dump_request(params)
           header_params = {idempotency_key: "idempotency-key"}
+          headers = parsed.slice(*header_params.keys).transform_keys(header_params)
+          headers["content-type"] = "multipart/form-data" if parsed.key?(:attachments)
           @client.request(
             method: :post,
             path: ["support/tickets/%1$s/messages", id],
-            headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+            headers: headers,
             body: parsed.except(*header_params.keys),
             model: XTwitterScraper::Models::Support::TicketReplyResponse,
             options: options

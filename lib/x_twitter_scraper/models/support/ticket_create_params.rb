@@ -14,22 +14,30 @@ module XTwitterScraper
 
         # @!attribute body
         #
-        #   @return [String]
-        required :body, String
+        #   @return [String, nil]
+        optional :body, String
 
         # @!attribute subject
         #
         #   @return [String]
         required :subject, String
 
+        # @!attribute attachments
+        #   1 to 4 support image or video uploads.
+        #
+        #   @return [Array<Pathname, StringIO, IO, String, XTwitterScraper::FilePart>, nil]
+        optional :attachments, XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Internal::Type::FileInput]
+
         # @!attribute idempotency_key
         #
         #   @return [String, nil]
         optional :idempotency_key, String
 
-        # @!method initialize(body:, subject:, idempotency_key: nil, request_options: {})
+        # @!method initialize(subject:, attachments: nil, body: nil, idempotency_key: nil, request_options: {})
         #   @param body [String]
         #   @param subject [String]
+        #   @param attachments [Array<Pathname, StringIO, IO, String, XTwitterScraper::FilePart>] 1 to 4 support image or video uploads.
+        #
         #   @param idempotency_key [String]
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end

@@ -40,13 +40,15 @@ module XTwitterScraper
 
         # Upload media
         #
-        # @overload upload(account:, url:, idempotency_key:, is_long_video: nil, request_options: {})
+        # @overload upload(account:, idempotency_key:, file: nil, is_long_video: nil, url: nil, request_options: {})
         #
         # @param account [String] Body param: X account (@username or ID) uploading media from URL
         #
         # @param url [String] Body param: HTTPS URL to download and upload as media
         #
         # @param idempotency_key [String] Header param: Generate one unique value for each intended write. Reuse it only w
+        #
+        # @param file [Pathname, StringIO, IO, String, XTwitterScraper::FilePart] Media file to upload, up to 95 MB. A larger file gets 413 `media_too_large` befo
         #
         # @param is_long_video [Boolean] Set true only for video/mp4 multipart uploads longer than 140 seconds.
         #
@@ -58,15 +60,12 @@ module XTwitterScraper
         def upload(params)
           parsed, options = XTwitterScraper::X::MediaUploadParams.dump_request(params)
           header_params = {idempotency_key: "idempotency-key"}
+          headers = parsed.slice(*header_params.keys).transform_keys(header_params)
+          headers["content-type"] = "multipart/form-data" if parsed.key?(:file)
           @client.request(
             method: :post,
             path: "x/media",
-            headers: {
-              "content-type" => "multipart/form-data",
-              **parsed.slice(*header_params.keys)
-            }.transform_keys(
-              header_params
-            ),
+            headers: headers,
             body: parsed.except(*header_params.keys),
             model: XTwitterScraper::Models::X::MediaUploadResponse,
             options: options
