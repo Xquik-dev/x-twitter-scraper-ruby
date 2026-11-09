@@ -8,7 +8,10 @@ module XTwitterScraper
       {
         count: Integer,
         trends: ::Array[XTwitterScraper::Models::XGetTrendsResponse::Trend],
-        woeid: Integer
+        woeid: Integer,
+        captured_at: Time,
+        location: XTwitterScraper::Models::XGetTrendsResponse::Location,
+        requested_at: Time
       }
 
     class XGetTrendsResponse < XTwitterScraper::Internal::Type::BaseModel
@@ -18,16 +21,36 @@ module XTwitterScraper
 
       attr_accessor woeid: Integer
 
+      attr_reader captured_at: Time?
+
+      def captured_at=: (Time) -> Time
+
+      attr_reader location: XTwitterScraper::Models::XGetTrendsResponse::Location?
+
+      def location=: (
+        XTwitterScraper::Models::XGetTrendsResponse::Location | ::Hash[Symbol, top]
+      ) -> XTwitterScraper::Models::XGetTrendsResponse::Location
+
+      attr_reader requested_at: Time?
+
+      def requested_at=: (Time) -> Time
+
       def initialize: (
         count: Integer,
         trends: ::Array[XTwitterScraper::Models::XGetTrendsResponse::Trend],
-        woeid: Integer
+        woeid: Integer,
+        ?captured_at: Time,
+        ?location: XTwitterScraper::Models::XGetTrendsResponse::Location | ::Hash[Symbol, top],
+        ?requested_at: Time
       ) -> void
 
       def to_hash: -> {
         count: Integer,
         trends: ::Array[XTwitterScraper::Models::XGetTrendsResponse::Trend],
-        woeid: Integer
+        woeid: Integer,
+        captured_at: Time,
+        location: XTwitterScraper::Models::XGetTrendsResponse::Location,
+        requested_at: Time
       }
 
       type trend =
@@ -83,6 +106,39 @@ module XTwitterScraper
           tweet_volume: Integer?,
           url: String
         }
+      end
+
+      type location = ::Hash[Symbol, top]
+
+      class Location < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor woeid: Integer
+
+        attr_accessor name: String
+
+        attr_accessor country: String?
+
+        attr_accessor country_code: String?
+
+        attr_accessor place_type: String?
+
+        attr_accessor place_type_code: Integer?
+
+        attr_accessor parent_woeid: Integer?
+
+        attr_accessor url: String?
+
+        def initialize: (
+          woeid: Integer,
+          name: String,
+          country: String?,
+          country_code: String?,
+          place_type: String?,
+          place_type_code: Integer?,
+          parent_woeid: Integer?,
+          url: String?
+        ) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
       end
     end
   end
