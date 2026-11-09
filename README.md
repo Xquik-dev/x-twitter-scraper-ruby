@@ -57,10 +57,10 @@ Next, read the [Ruby SDK guide](https://docs.xquik.com/sdks/ruby), [REST API ref
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13739/badge)](https://www.bestpractices.dev/projects/13739)
 
 - 10,000+ downloads of x-twitter-scraper on RubyGems ([source](https://rubygems.org/gems/x-twitter-scraper)) <!-- trust:rubygems-x-twitter-scraper 10546 -->
-- 5.1 s p99 REST server read time over 7 days, failures included ([source](https://xquik.com/benchmarks#speed)) <!-- trust:rest-p99 5087 -->
+- 4.9 s p99 REST server read time over 7 days, failures included ([source](https://xquik.com/benchmarks#speed)) <!-- trust:rest-p99 4871 -->
 - This repo meets the OpenSSF Best Practices passing criteria ([source](https://www.bestpractices.dev/projects/13739)) <!-- trust:openssf-x-twitter-scraper-ruby 1 -->
 
-Checked on 2026-11-08. See each number with its date & source on [xquik.com/benchmarks](https://xquik.com/benchmarks) or as [JSON](https://xquik.com/trust.json).
+Checked on 2026-11-09. See each number with its date & source on [xquik.com/benchmarks](https://xquik.com/benchmarks) or as [JSON](https://xquik.com/trust.json).
 
 <!-- trust:end -->
 
