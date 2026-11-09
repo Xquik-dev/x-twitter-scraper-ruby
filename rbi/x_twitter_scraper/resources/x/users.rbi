@@ -487,16 +487,13 @@ module XTwitterScraper
             id: String,
             any_words: String,
             blue_verified_only: T::Boolean,
-            card_name: String,
             cashtags: String,
             conversation_id: String,
             cursor: String,
             exact_phrase: String,
-            exclude_source: String,
             exclude_words: String,
             fields: String,
             from_user: String,
-            geocode: String,
             hashtags: String,
             in_reply_to_tweet_id: String,
             language: String,
@@ -516,8 +513,6 @@ module XTwitterScraper
             min_retweets: Integer,
             min_views: Integer,
             native_retweets: T::Boolean,
-            near: String,
-            news: T::Boolean,
             omit: String,
             page_size: Integer,
             quotes:
@@ -528,15 +523,12 @@ module XTwitterScraper
             retweets:
               XTwitterScraper::X::UserRetrieveLikesParams::Retweets::OrSymbol,
             retweets_of_tweet_id: String,
-            safe: T::Boolean,
             since_date: Date,
             since_id: String,
-            source: String,
             to_user: String,
             until_date: Date,
             url: String,
             verified_only: T::Boolean,
-            within: String,
             within_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::PaginatedTweets)
@@ -549,8 +541,6 @@ module XTwitterScraper
           any_words: nil,
           # Only return tweets from Blue-verified authors.
           blue_verified_only: nil,
-          # Match the Tweet card name.
-          card_name: nil,
           # Cashtags separated by spaces, commas, or lines.
           cashtags: nil,
           # Conversation ID filter.
@@ -559,8 +549,6 @@ module XTwitterScraper
           cursor: nil,
           # Exact phrase to match.
           exact_phrase: nil,
-          # Exclude a source application.
-          exclude_source: nil,
           # Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
           exclude_words: nil,
           # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
@@ -573,8 +561,6 @@ module XTwitterScraper
           fields: nil,
           # Filter by author username.
           from_user: nil,
-          # Match latitude, longitude, and radius.
-          geocode: nil,
           # Hashtags separated by spaces, commas, or lines.
           hashtags: nil,
           # Only replies to this tweet ID.
@@ -611,10 +597,6 @@ module XTwitterScraper
           min_views: nil,
           # Only return native reposts.
           native_retweets: nil,
-          # Match a place name.
-          near: nil,
-          # Only return news results.
-          news: nil,
           # Fields to drop from each row, comma-separated. It takes the same names as
           # fields. With fields, it drops from the kept fields. A longer URL fails at the
           # edge before Xquik reads it.
@@ -633,14 +615,10 @@ module XTwitterScraper
           retweets: nil,
           # Only retweets of this tweet ID.
           retweets_of_tweet_id: nil,
-          # Enable the safe-search filter.
-          safe: nil,
           # Start date in YYYY-MM-DD format.
           since_date: nil,
           # Return Tweets newer than this Tweet ID.
           since_id: nil,
-          # Match the source application.
-          source: nil,
           # Filter replies sent to a username.
           to_user: nil,
           # End date in YYYY-MM-DD format.
@@ -649,8 +627,6 @@ module XTwitterScraper
           url: nil,
           # Only return tweets from verified authors.
           verified_only: nil,
-          # Set the radius for the near filter.
-          within: nil,
           # Match Tweets inside a recent time window.
           within_time: nil,
           request_options: {}
@@ -663,16 +639,13 @@ module XTwitterScraper
             id: String,
             any_words: String,
             blue_verified_only: T::Boolean,
-            card_name: String,
             cashtags: String,
             conversation_id: String,
             cursor: String,
             exact_phrase: String,
-            exclude_source: String,
             exclude_words: String,
             fields: String,
             from_user: String,
-            geocode: String,
             hashtags: String,
             image_shows: String,
             in_reply_to_tweet_id: String,
@@ -693,8 +666,6 @@ module XTwitterScraper
             min_retweets: Integer,
             min_views: Integer,
             native_retweets: T::Boolean,
-            near: String,
-            news: T::Boolean,
             omit: String,
             page_size: Integer,
             quotes:
@@ -705,16 +676,13 @@ module XTwitterScraper
             retweets:
               XTwitterScraper::X::UserRetrieveMediaParams::Retweets::OrSymbol,
             retweets_of_tweet_id: String,
-            safe: T::Boolean,
             since_date: Date,
             since_id: String,
-            source: String,
             to_user: String,
             topic: String,
             until_date: Date,
             url: String,
             verified_only: T::Boolean,
-            within: String,
             within_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(
@@ -729,8 +697,6 @@ module XTwitterScraper
           any_words: nil,
           # Only return tweets from Blue-verified authors.
           blue_verified_only: nil,
-          # Match the Tweet card name.
-          card_name: nil,
           # Cashtags separated by spaces, commas, or lines.
           cashtags: nil,
           # Conversation ID filter.
@@ -739,8 +705,6 @@ module XTwitterScraper
           cursor: nil,
           # Exact phrase to match.
           exact_phrase: nil,
-          # Exclude a source application.
-          exclude_source: nil,
           # Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
           exclude_words: nil,
           # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
@@ -753,8 +717,6 @@ module XTwitterScraper
           fields: nil,
           # Filter by author username.
           from_user: nil,
-          # Match latitude, longitude, and radius.
-          geocode: nil,
           # Hashtags separated by spaces, commas, or lines.
           hashtags: nil,
           # Keep only posts whose photos show this. Send charts, screenshots,
@@ -798,10 +760,6 @@ module XTwitterScraper
           min_views: nil,
           # Only return native reposts.
           native_retweets: nil,
-          # Match a place name.
-          near: nil,
-          # Only return news results.
-          news: nil,
           # Fields to drop from each row, comma-separated. It takes the same names as
           # fields. With fields, it drops from the kept fields. A longer URL fails at the
           # edge before Xquik reads it.
@@ -820,14 +778,10 @@ module XTwitterScraper
           retweets: nil,
           # Only retweets of this tweet ID.
           retweets_of_tweet_id: nil,
-          # Enable the safe-search filter.
-          safe: nil,
           # Start date in YYYY-MM-DD format.
           since_date: nil,
           # Return Tweets newer than this Tweet ID.
           since_id: nil,
-          # Match the source application.
-          source: nil,
           # Filter replies sent to a username.
           to_user: nil,
           # Keep only posts about this topic. AI-powered analysis asks "Is this post about
@@ -842,8 +796,6 @@ module XTwitterScraper
           url: nil,
           # Only return tweets from verified authors.
           verified_only: nil,
-          # Set the radius for the near filter.
-          within: nil,
           # Match Tweets inside a recent time window.
           within_time: nil,
           request_options: {}
@@ -856,16 +808,13 @@ module XTwitterScraper
             id: String,
             any_words: String,
             blue_verified_only: T::Boolean,
-            card_name: String,
             cashtags: String,
             conversation_id: String,
             cursor: String,
             exact_phrase: String,
-            exclude_source: String,
             exclude_words: String,
             fields: String,
             from_user: String,
-            geocode: String,
             hashtags: String,
             in_reply_to_tweet_id: String,
             language: String,
@@ -885,8 +834,6 @@ module XTwitterScraper
             min_retweets: Integer,
             min_views: Integer,
             native_retweets: T::Boolean,
-            near: String,
-            news: T::Boolean,
             omit: String,
             page_size: Integer,
             quotes:
@@ -897,17 +844,14 @@ module XTwitterScraper
             retweets:
               XTwitterScraper::X::UserRetrieveMentionsParams::Retweets::OrSymbol,
             retweets_of_tweet_id: String,
-            safe: T::Boolean,
             since_date: Date,
             since_id: String,
             since_time: String,
-            source: String,
             to_user: String,
             until_date: Date,
             until_time: String,
             url: String,
             verified_only: T::Boolean,
-            within: String,
             within_time: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::PaginatedTweets)
@@ -920,8 +864,6 @@ module XTwitterScraper
           any_words: nil,
           # Only return tweets from Blue-verified authors.
           blue_verified_only: nil,
-          # Match the Tweet card name.
-          card_name: nil,
           # Cashtags separated by spaces, commas, or lines.
           cashtags: nil,
           # Conversation ID filter.
@@ -930,8 +872,6 @@ module XTwitterScraper
           cursor: nil,
           # Exact phrase to match.
           exact_phrase: nil,
-          # Exclude a source application.
-          exclude_source: nil,
           # Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
           exclude_words: nil,
           # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
@@ -944,8 +884,6 @@ module XTwitterScraper
           fields: nil,
           # Filter by author username.
           from_user: nil,
-          # Match latitude, longitude, and radius.
-          geocode: nil,
           # Hashtags separated by spaces, commas, or lines.
           hashtags: nil,
           # Only replies to this tweet ID.
@@ -982,10 +920,6 @@ module XTwitterScraper
           min_views: nil,
           # Only return native reposts.
           native_retweets: nil,
-          # Match a place name.
-          near: nil,
-          # Only return news results.
-          news: nil,
           # Fields to drop from each row, comma-separated. It takes the same names as
           # fields. With fields, it drops from the kept fields. A longer URL fails at the
           # edge before Xquik reads it.
@@ -1004,16 +938,12 @@ module XTwitterScraper
           retweets: nil,
           # Only retweets of this tweet ID.
           retweets_of_tweet_id: nil,
-          # Enable the safe-search filter.
-          safe: nil,
           # Start date in YYYY-MM-DD format.
           since_date: nil,
           # Return Tweets newer than this Tweet ID.
           since_id: nil,
           # Unix timestamp - return mentions after this time
           since_time: nil,
-          # Match the source application.
-          source: nil,
           # Filter replies sent to a username.
           to_user: nil,
           # End date in YYYY-MM-DD format.
@@ -1024,8 +954,6 @@ module XTwitterScraper
           url: nil,
           # Only return tweets from verified authors.
           verified_only: nil,
-          # Set the radius for the near filter.
-          within: nil,
           # Match Tweets inside a recent time window.
           within_time: nil,
           request_options: {}
