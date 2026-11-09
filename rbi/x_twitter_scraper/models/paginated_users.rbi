@@ -24,6 +24,13 @@ module XTwitterScraper
       sig { returns(T::Array[XTwitterScraper::UserProfile]) }
       attr_accessor :users
 
+      # Whole number from 0.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :filtered_count
+
+      sig { params(filtered_count: Integer).void }
+      attr_writer :filtered_count
+
       # Paginated user profiles. No-mode follower, following, and verified follower
       # requests merge independent views automatically. Response fields, page size,
       # aliases, filters, and per-returned-profile billing stay unchanged. Existing
@@ -33,10 +40,17 @@ module XTwitterScraper
         params(
           has_next_page: T::Boolean,
           next_cursor: String,
-          users: T::Array[XTwitterScraper::UserProfile::OrHash]
+          users: T::Array[XTwitterScraper::UserProfile::OrHash],
+          filtered_count: Integer
         ).returns(T.attached_class)
       end
-      def self.new(has_next_page:, next_cursor:, users:)
+      def self.new(
+        has_next_page:,
+        next_cursor:,
+        users:,
+        # Whole number from 0.
+        filtered_count: nil
+      )
       end
 
       sig do
@@ -44,7 +58,8 @@ module XTwitterScraper
           {
             has_next_page: T::Boolean,
             next_cursor: String,
-            users: T::Array[XTwitterScraper::UserProfile]
+            users: T::Array[XTwitterScraper::UserProfile],
+            filtered_count: Integer
           }
         )
       end

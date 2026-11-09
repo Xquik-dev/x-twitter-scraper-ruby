@@ -22,7 +22,13 @@ module XTwitterScraper
       #   @return [Array<XTwitterScraper::Models::UserProfile>]
       required :users, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile] }
 
-      # @!method initialize(has_next_page:, next_cursor:, users:)
+      # @!attribute filtered_count
+      #   Whole number from 0.
+      #
+      #   @return [Integer, nil]
+      optional :filtered_count, Integer
+
+      # @!method initialize(has_next_page:, next_cursor:, users:, filtered_count: nil)
       #   Paginated user profiles. No-mode follower, following, and verified follower
       #   requests merge independent views automatically. Response fields, page size,
       #   aliases, filters, and per-returned-profile billing stay unchanged. Existing
@@ -32,6 +38,7 @@ module XTwitterScraper
       #   @param has_next_page [Boolean]
       #   @param next_cursor [String]
       #   @param users [Array<XTwitterScraper::Models::UserProfile>]
+      #   @param filtered_count [Integer] Whole number from 0.
     end
   end
 end
