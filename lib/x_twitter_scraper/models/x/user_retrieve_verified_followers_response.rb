@@ -29,17 +29,17 @@ module XTwitterScraper
 
           # @!attribute has_next_page
           #
-          #   @return [Boolean, XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::HasNextPage, nil]
-          optional :has_next_page,
+          #   @return [Boolean, XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::HasNextPage]
+          required :has_next_page,
                    enum: -> { XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::HasNextPage }
 
           # @!attribute next_cursor
           #
-          #   @return [Symbol, XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::NextCursor, nil]
-          optional :next_cursor,
+          #   @return [Symbol, XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::NextCursor]
+          required :next_cursor,
                    enum: -> { XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::NextCursor }
 
-          # @!method initialize(diagnostic:, has_next_page: nil, next_cursor: nil)
+          # @!method initialize(diagnostic:, has_next_page:, next_cursor:)
           #   Paginated user profiles. No-mode follower, following, and verified follower
           #   requests merge independent views automatically. Response fields, page size,
           #   aliases, filters, and per-returned-profile billing stay unchanged. Existing

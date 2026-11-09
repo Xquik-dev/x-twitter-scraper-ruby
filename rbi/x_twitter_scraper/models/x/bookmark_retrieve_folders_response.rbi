@@ -79,8 +79,11 @@ module XTwitterScraper
           sig { returns(String) }
           attr_accessor :id
 
-          sig { returns(String) }
-          attr_accessor :name
+          sig { returns(T.nilable(String)) }
+          attr_reader :name
+
+          sig { params(name: String).void }
+          attr_writer :name
 
           # Public folder cover image metadata.
           sig do
@@ -110,7 +113,7 @@ module XTwitterScraper
           end
           def self.new(
             id:,
-            name:,
+            name: nil,
             # Public folder cover image metadata.
             media: nil
           )

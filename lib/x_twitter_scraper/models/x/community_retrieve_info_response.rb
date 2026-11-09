@@ -69,8 +69,8 @@ module XTwitterScraper
           # @!attribute is_nsfw
           #   Whether the community is marked sensitive
           #
-          #   @return [Boolean, nil]
-          optional :is_nsfw, XTwitterScraper::Internal::Type::Boolean
+          #   @return [Boolean]
+          required :is_nsfw, XTwitterScraper::Internal::Type::Boolean
 
           # @!attribute join_policy
           #   Join policy (open or restricted)
@@ -81,8 +81,8 @@ module XTwitterScraper
           # @!attribute member_count
           #   Total member count
           #
-          #   @return [Integer, nil]
-          optional :member_count, Integer
+          #   @return [Integer]
+          required :member_count, Integer
 
           # @!attribute members_facepile
           #   The members X previews beside the member count. A keyword or topic result gives
@@ -102,8 +102,8 @@ module XTwitterScraper
           # @!attribute name
           #   Display name of the community
           #
-          #   @return [String, nil]
-          optional :name, String
+          #   @return [String]
+          required :name, String
 
           # @!attribute primary_topic
           #   Primary topic
@@ -131,7 +131,7 @@ module XTwitterScraper
           #   @return [Array<String>, nil]
           optional :search_tags, XTwitterScraper::Internal::Type::ArrayOf[String], api_name: :searchTags
 
-          # @!method initialize(id:, admin: nil, banner: nil, banner_url: nil, created_at: nil, creator: nil, description: nil, invites_policy: nil, is_nsfw: nil, join_policy: nil, member_count: nil, members_facepile: nil, moderator_count: nil, name: nil, primary_topic: nil, question: nil, rules: nil, search_tags: nil)
+          # @!method initialize(id:, admin: nil, banner: nil, banner_url: nil, created_at: nil, creator: nil, description: nil, invites_policy: nil, is_nsfw:, join_policy: nil, member_count:, members_facepile: nil, moderator_count: nil, name:, primary_topic: nil, question: nil, rules: nil, search_tags: nil)
           #   Community info object
           #
           #   @param id [String] Unique community identifier
@@ -208,10 +208,10 @@ module XTwitterScraper
 
             # @!attribute name
             #
-            #   @return [String, nil]
-            optional :name, String
+            #   @return [String]
+            required :name, String
 
-            # @!method initialize(id: nil, name: nil)
+            # @!method initialize(id: nil, name:)
             #   Primary topic
             #
             #   @param id [String]

@@ -41,7 +41,9 @@ module XTwitterScraper
         class Folder < XTwitterScraper::Internal::Type::BaseModel
           attr_accessor id: String
 
-          attr_accessor name: String
+          attr_reader name: String?
+
+          def name=: (String) -> String
 
           attr_reader media: XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media?
 
@@ -51,7 +53,7 @@ module XTwitterScraper
 
           def initialize: (
             id: String,
-            name: String,
+            ?name: String,
             ?media: XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media | ::Hash[Symbol, top]
           ) -> void
 

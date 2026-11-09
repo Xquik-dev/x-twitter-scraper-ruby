@@ -42,8 +42,8 @@ module XTwitterScraper
 
           # @!attribute name
           #
-          #   @return [String]
-          required :name, String
+          #   @return [String, nil]
+          optional :name, String
 
           # @!attribute media
           #   Public folder cover image metadata.
@@ -51,7 +51,7 @@ module XTwitterScraper
           #   @return [XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media, nil]
           optional :media, -> { XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media }
 
-          # @!method initialize(id:, name:, media: nil)
+          # @!method initialize(id:, name: nil, media: nil)
           #   @param id [String]
           #   @param name [String]
           #   @param media [XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media] Public folder cover image metadata.

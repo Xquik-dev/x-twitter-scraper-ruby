@@ -22,13 +22,13 @@ module XTwitterScraper
             XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic _
           ) -> XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic
 
-          def has_next_page: -> XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::has_next_page?
+          def has_next_page: -> XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::has_next_page
 
           def has_next_page=: (
             XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::has_next_page _
           ) -> XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::has_next_page
 
-          def next_cursor: -> XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::next_cursor?
+          def next_cursor: -> XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::next_cursor
 
           def next_cursor=: (
             XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::next_cursor _
@@ -36,8 +36,8 @@ module XTwitterScraper
 
           def initialize: (
             diagnostic: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::Diagnostic,
-            ?has_next_page: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::has_next_page,
-            ?next_cursor: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::next_cursor
+            has_next_page: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::has_next_page,
+            next_cursor: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::next_cursor
           ) -> void
 
           def to_hash: -> {

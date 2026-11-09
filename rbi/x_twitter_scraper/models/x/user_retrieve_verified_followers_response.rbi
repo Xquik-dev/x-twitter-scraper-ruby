@@ -44,39 +44,11 @@ module XTwitterScraper
           end
           attr_writer :diagnostic
 
-          sig do
-            returns(
-              T.nilable(
-                XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::HasNextPage::TaggedBoolean
-              )
-            )
-          end
-          attr_reader :has_next_page
+          sig { returns(XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::HasNextPage::TaggedBoolean) }
+          attr_accessor :has_next_page
 
-          sig do
-            params(
-              has_next_page:
-                XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::HasNextPage::OrBoolean
-            ).void
-          end
-          attr_writer :has_next_page
-
-          sig do
-            returns(
-              T.nilable(
-                XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::NextCursor::TaggedSymbol
-              )
-            )
-          end
-          attr_reader :next_cursor
-
-          sig do
-            params(
-              next_cursor:
-                XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::NextCursor::OrSymbol
-            ).void
-          end
-          attr_writer :next_cursor
+          sig { returns(XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse::NextCursor::TaggedSymbol) }
+          attr_accessor :next_cursor
 
           # Paginated user profiles. No-mode follower, following, and verified follower
           # requests merge independent views automatically. Response fields, page size,
@@ -96,8 +68,8 @@ module XTwitterScraper
           def self.new(
             # Coverage evidence across parallel relationship strategies.
             diagnostic:,
-            has_next_page: nil,
-            next_cursor: nil
+            has_next_page:,
+            next_cursor:
           )
           end
 
