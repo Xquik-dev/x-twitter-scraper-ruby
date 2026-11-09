@@ -7,7 +7,13 @@
 module XTwitterScraper
   module Models
     class AccountBasedIn < XTwitterScraper::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(XTwitterScraper::AccountBasedIn, XTwitterScraper::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(
+            XTwitterScraper::AccountBasedIn,
+            XTwitterScraper::Internal::AnyHash
+          )
+        end
 
       sig { returns(String) }
       attr_accessor :value
@@ -19,28 +25,45 @@ module XTwitterScraper
       attr_accessor :observed_at
 
       # Null when X shows no label.
-      sig { params(value: String, level: XTwitterScraper::AccountBasedIn::Level::OrSymbol, observed_at: Time).returns(T.attached_class) }
-      def self.new(
-        value:,
-        level:,
-        observed_at:
-      )
+      sig do
+        params(
+          value: String,
+          level: XTwitterScraper::AccountBasedIn::Level::OrSymbol,
+          observed_at: Time
+        ).returns(T.attached_class)
+      end
+      def self.new(value:, level:, observed_at:)
       end
 
-      sig { override.returns({ value: String, level: XTwitterScraper::AccountBasedIn::Level::TaggedSymbol, observed_at: Time }) }
+      sig do
+        override.returns(
+          {
+            value: String,
+            level: XTwitterScraper::AccountBasedIn::Level::TaggedSymbol,
+            observed_at: Time
+          }
+        )
+      end
       def to_hash
       end
 
       module Level
         extend XTwitterScraper::Internal::Type::Enum
 
-        TaggedSymbol = T.type_alias { T.all(Symbol, XTwitterScraper::AccountBasedIn::Level) }
+        TaggedSymbol =
+          T.type_alias { T.all(Symbol, XTwitterScraper::AccountBasedIn::Level) }
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-        COUNTRY = T.let(:country, XTwitterScraper::AccountBasedIn::Level::TaggedSymbol)
-        REGION = T.let(:region, XTwitterScraper::AccountBasedIn::Level::TaggedSymbol)
+        COUNTRY =
+          T.let(:country, XTwitterScraper::AccountBasedIn::Level::TaggedSymbol)
+        REGION =
+          T.let(:region, XTwitterScraper::AccountBasedIn::Level::TaggedSymbol)
 
-        sig { override.returns(T::Array[XTwitterScraper::AccountBasedIn::Level::TaggedSymbol]) }
+        sig do
+          override.returns(
+            T::Array[XTwitterScraper::AccountBasedIn::Level::TaggedSymbol]
+          )
+        end
         def self.values
         end
       end
