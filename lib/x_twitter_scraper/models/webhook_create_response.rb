@@ -37,7 +37,12 @@ module XTwitterScraper
       #   @return [String]
       required :url, String
 
-      # @!method initialize(id:, created_at:, event_types:, secret:, url:)
+      # @!attribute ignored_fields
+      #
+      #   @return [Array<String>, nil]
+      optional :ignored_fields, XTwitterScraper::Internal::Type::ArrayOf[String], api_name: :ignoredFields
+
+      # @!method initialize(id:, created_at:, event_types:, secret:, url:, ignored_fields: nil)
       #   @param id [String]
       #
       #   @param created_at [Time]
@@ -47,6 +52,8 @@ module XTwitterScraper
       #   @param secret [String] Plaintext HMAC signing secret returned only at creation.
       #
       #   @param url [String]
+      #
+      #   @param ignored_fields [Array<String>]
     end
   end
 end

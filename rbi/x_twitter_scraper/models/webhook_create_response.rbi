@@ -32,13 +32,20 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :url
 
+      sig { returns(T.nilable(T::Array[String])) }
+      attr_reader :ignored_fields
+
+      sig { params(ignored_fields: T::Array[String]).void }
+      attr_writer :ignored_fields
+
       sig do
         params(
           id: String,
           created_at: Time,
           event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           secret: String,
-          url: String
+          url: String,
+          ignored_fields: T::Array[String]
         ).returns(T.attached_class)
       end
       def self.new(
@@ -48,7 +55,8 @@ module XTwitterScraper
         event_types:,
         # Plaintext HMAC signing secret returned only at creation.
         secret:,
-        url:
+        url:,
+        ignored_fields: nil
       )
       end
 
@@ -59,7 +67,8 @@ module XTwitterScraper
             created_at: Time,
             event_types: T::Array[XTwitterScraper::EventType::TaggedSymbol],
             secret: String,
-            url: String
+            url: String,
+            ignored_fields: T::Array[String]
           }
         )
       end
