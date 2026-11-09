@@ -6,7 +6,12 @@ module XTwitterScraper
   module Models
     module X
       type profile_update_banner_params =
-        { account: String, url: String, idempotency_key: String }
+        {
+          account: String,
+          url: String,
+          idempotency_key: String,
+          file: XTwitterScraper::Internal::file_input
+        }
         & XTwitterScraper::Internal::Type::request_parameters
 
       class ProfileUpdateBannerParams < XTwitterScraper::Internal::Type::BaseModel
@@ -15,14 +20,23 @@ module XTwitterScraper
 
         attr_accessor account: String
 
-        attr_accessor url: String
+        attr_reader url: String?
+
+        def url=: (String) -> String
 
         attr_accessor idempotency_key: String
 
+        attr_reader file: XTwitterScraper::Internal::file_input?
+
+        def file=: (
+          XTwitterScraper::Internal::file_input
+        ) -> XTwitterScraper::Internal::file_input
+
         def initialize: (
           account: String,
-          url: String,
           idempotency_key: String,
+          ?file: XTwitterScraper::Internal::file_input,
+          ?url: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
@@ -30,6 +44,7 @@ module XTwitterScraper
           account: String,
           url: String,
           idempotency_key: String,
+          file: XTwitterScraper::Internal::file_input,
           request_options: XTwitterScraper::RequestOptions
         }
       end

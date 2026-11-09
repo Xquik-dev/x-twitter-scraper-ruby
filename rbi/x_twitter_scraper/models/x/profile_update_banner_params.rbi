@@ -24,26 +24,39 @@ module XTwitterScraper
         attr_accessor :account
 
         # HTTPS URL to the banner image to download
-        sig { returns(String) }
-        attr_accessor :url
+        sig { returns(T.nilable(String)) }
+        attr_reader :url
+
+        sig { params(url: String).void }
+        attr_writer :url
 
         sig { returns(String) }
         attr_accessor :idempotency_key
 
+        # Banner image (max 95 MiB)
+        sig { returns(T.nilable(XTwitterScraper::Internal::FileInput)) }
+        attr_reader :file
+
+        sig { params(file: XTwitterScraper::Internal::FileInput).void }
+        attr_writer :file
+
         sig do
           params(
             account: String,
-            url: String,
             idempotency_key: String,
+            file: XTwitterScraper::Internal::FileInput,
+            url: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
           # X account (@username or ID) receiving banner from URL
           account:,
-          # HTTPS URL to the banner image to download
-          url:,
           idempotency_key:,
+          # Banner image (max 95 MiB)
+          file: nil,
+          # HTTPS URL to the banner image to download
+          url: nil,
           request_options: {}
         )
         end
@@ -54,6 +67,7 @@ module XTwitterScraper
               account: String,
               url: String,
               idempotency_key: String,
+              file: XTwitterScraper::Internal::FileInput,
               request_options: XTwitterScraper::RequestOptions
             }
           )

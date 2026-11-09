@@ -17,9 +17,10 @@ module XTwitterScraper
 
         def upload: (
           account: String,
-          url: String,
           idempotency_key: String,
+          ?file: XTwitterScraper::Internal::file_input,
           ?is_long_video: bool,
+          ?url: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::MediaUploadResponse
 

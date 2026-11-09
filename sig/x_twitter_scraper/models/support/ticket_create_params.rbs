@@ -6,24 +6,38 @@ module XTwitterScraper
   module Models
     module Support
       type ticket_create_params =
-        { body: String, subject: String, idempotency_key: String }
+        {
+          body: String,
+          subject: String,
+          attachments: ::Array[XTwitterScraper::Internal::file_input],
+          idempotency_key: String
+        }
         & XTwitterScraper::Internal::Type::request_parameters
 
       class TicketCreateParams < XTwitterScraper::Internal::Type::BaseModel
         extend XTwitterScraper::Internal::Type::RequestParameters::Converter
         include XTwitterScraper::Internal::Type::RequestParameters
 
-        attr_accessor body: String
+        attr_reader body: String?
+
+        def body=: (String) -> String
 
         attr_accessor subject: String
+
+        attr_reader attachments: ::Array[XTwitterScraper::Internal::file_input]?
+
+        def attachments=: (
+          ::Array[XTwitterScraper::Internal::file_input]
+        ) -> ::Array[XTwitterScraper::Internal::file_input]
 
         attr_reader idempotency_key: String?
 
         def idempotency_key=: (String) -> String
 
         def initialize: (
-          body: String,
           subject: String,
+          ?attachments: ::Array[XTwitterScraper::Internal::file_input],
+          ?body: String,
           ?idempotency_key: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
@@ -31,6 +45,7 @@ module XTwitterScraper
         def to_hash: -> {
           body: String,
           subject: String,
+          attachments: ::Array[XTwitterScraper::Internal::file_input],
           idempotency_key: String,
           request_options: XTwitterScraper::RequestOptions
         }

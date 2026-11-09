@@ -45,21 +45,24 @@ module XTwitterScraper
         sig do
           params(
             account: String,
-            url: String,
             idempotency_key: String,
+            file: XTwitterScraper::Internal::FileInput,
+            url: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::ProfileUpdateAvatarResponse)
         end
         def update_avatar(
           # Body param: X account (@username or ID) receiving avatar from URL
           account:,
-          # Body param: HTTPS URL to the avatar image to download
-          url:,
           # Header param: Generate one unique value for each intended write. Reuse it only
           # when retrying the exact same account, action, target, and payload. A reused key
           # returns the original action. Reusing it with different input returns 409. Replay
           # protection remains active for at least 90 days.
           idempotency_key:,
+          # Avatar image (max 95 MiB)
+          file: nil,
+          # Body param: HTTPS URL to the avatar image to download
+          url: nil,
           request_options: {}
         )
         end
@@ -68,21 +71,24 @@ module XTwitterScraper
         sig do
           params(
             account: String,
-            url: String,
             idempotency_key: String,
+            file: XTwitterScraper::Internal::FileInput,
+            url: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::ProfileUpdateBannerResponse)
         end
         def update_banner(
           # Body param: X account (@username or ID) receiving banner from URL
           account:,
-          # Body param: HTTPS URL to the banner image to download
-          url:,
           # Header param: Generate one unique value for each intended write. Reuse it only
           # when retrying the exact same account, action, target, and payload. A reused key
           # returns the original action. Reusing it with different input returns 409. Replay
           # protection remains active for at least 90 days.
           idempotency_key:,
+          # Banner image (max 95 MiB)
+          file: nil,
+          # Body param: HTTPS URL to the banner image to download
+          url: nil,
           request_options: {}
         )
         end

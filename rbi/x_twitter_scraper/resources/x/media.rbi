@@ -43,24 +43,28 @@ module XTwitterScraper
         sig do
           params(
             account: String,
-            url: String,
             idempotency_key: String,
+            file: XTwitterScraper::Internal::FileInput,
             is_long_video: T::Boolean,
+            url: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::MediaUploadResponse)
         end
         def upload(
           # Body param: X account (@username or ID) uploading media from URL
           account:,
-          # Body param: HTTPS URL to download and upload as media
-          url:,
           # Header param: Generate one unique value for each intended write. Reuse it only
           # when retrying the exact same account, action, target, and payload. A reused key
           # returns the original action. Reusing it with different input returns 409. Replay
           # protection remains active for at least 90 days.
           idempotency_key:,
+          # Media file to upload, up to 95 MB. A larger file gets 413 `media_too_large`
+          # before any account lookup.
+          file: nil,
           # Set true only for video/mp4 multipart uploads longer than 140 seconds.
           is_long_video: nil,
+          # Body param: HTTPS URL to download and upload as media
+          url: nil,
           request_options: {}
         )
         end
