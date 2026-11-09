@@ -619,9 +619,19 @@ module XTwitterScraper
 
           def entities=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
+          attr_reader inline_media: ::Array[XTwitterScraper::Models::X::TweetDetail::NoteTweet::InlineMedia]?
+
+          def inline_media=: (
+            ::Array[XTwitterScraper::Models::X::TweetDetail::NoteTweet::InlineMedia | ::Hash[Symbol, top]]
+          ) -> ::Array[XTwitterScraper::Models::X::TweetDetail::NoteTweet::InlineMedia]
+
           attr_reader is_expandable: bool?
 
           def is_expandable=: (bool) -> bool
+
+          attr_reader note_id: String?
+
+          def note_id=: (String) -> String
 
           attr_reader richtext_tags: ::Array[XTwitterScraper::X::TweetDetail::NoteTweet::RichtextTag]?
 
@@ -633,7 +643,9 @@ module XTwitterScraper
             text: String,
             ?id: String,
             ?entities: ::Hash[Symbol, top],
+            ?inline_media: ::Array[XTwitterScraper::Models::X::TweetDetail::NoteTweet::InlineMedia | ::Hash[Symbol, top]],
             ?is_expandable: bool,
+            ?note_id: String,
             ?richtext_tags: ::Array[XTwitterScraper::X::TweetDetail::NoteTweet::RichtextTag]
           ) -> void
 
@@ -654,6 +666,18 @@ module XTwitterScraper
               to_index: Integer,
               types: ::Array[String]
             ) -> void
+
+            def to_hash: -> ::Hash[Symbol, top]
+          end
+
+          type inline_media = ::Hash[Symbol, top]
+
+          class InlineMedia < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor index: Integer
+
+            attr_accessor media_id: String
+
+            def initialize: (index: Integer, media_id: String) -> void
 
             def to_hash: -> ::Hash[Symbol, top]
           end
