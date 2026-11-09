@@ -17,7 +17,7 @@ module XTwitterScraper
       # @param topic [String]
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [XTwitterScraper::Models::DraftDetail]
+      # @return [XTwitterScraper::Models::DraftCreateResponse]
       #
       # @see XTwitterScraper::Models::DraftCreateParams
       def create(params)
@@ -26,7 +26,7 @@ module XTwitterScraper
           method: :post,
           path: "drafts",
           body: parsed,
-          model: XTwitterScraper::DraftDetail,
+          model: XTwitterScraper::Models::DraftCreateResponse,
           options: options
         )
       end

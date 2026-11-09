@@ -19,7 +19,7 @@ module ApiFieldsCheck
   DEFAULT_SPEC = "https://xquik.com/openapi.json"
   SPEC_VARIABLE = "XQUIK_OPENAPI_SPEC"
   ACCEPTED_FILE = "accepted-field-differences.json"
-  ACCEPTED_CEILING = 2
+  ACCEPTED_CEILING = 1
   HTTP_METHODS = %w[get put post delete options head patch trace].freeze
   BODY_TYPES = %w[application/json multipart/form-data application/x-www-form-urlencoded].freeze
   RESPONSE_TYPES = %w[application/json].freeze
