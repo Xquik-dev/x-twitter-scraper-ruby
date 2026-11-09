@@ -2,8 +2,6 @@
   {
     "reason": "The API added these response fields after the SDK's models were last updated. The SDK still returns each one through `#[]` and `#to_h` on the model. Each line leaves this list once its model names the field.",
     "differences": [
-      "DELETE /api/v1/monitors/{id} response missing deletionStatus",
-      "DELETE /api/v1/monitors/{id} response missing statusUrl",
       "GET /api/v1/account response missing creditInfo.autoTopupStopped",
       "GET /api/v1/account response missing subscription",
       "GET /api/v1/credits response missing auto_topup_stopped",

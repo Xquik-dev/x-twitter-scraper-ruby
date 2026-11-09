@@ -4,14 +4,31 @@
 
 module XTwitterScraper
   module Models
-    type monitor_deactivate_response = { success: true }
+    type monitor_deactivate_response =
+      {
+        deletion_status: :deleting,
+        status_url: String,
+        success: true
+      }
 
     class MonitorDeactivateResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor deletion_status: :deleting
+
+      attr_accessor status_url: String
+
       attr_accessor success: true
 
-      def initialize: (?success: true) -> void
+      def initialize: (
+        ?deletion_status: :deleting,
+        status_url: String,
+        ?success: true
+      ) -> void
 
-      def to_hash: -> { success: true }
+      def to_hash: -> {
+        deletion_status: :deleting,
+        status_url: String,
+        success: true
+      }
     end
   end
 end
