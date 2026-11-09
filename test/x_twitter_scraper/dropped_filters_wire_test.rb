@@ -59,7 +59,7 @@ class XTwitterScraper::Test::DroppedFiltersWireTest < Minitest::Test
 
       page = client.x.public_send(resource).public_send(method, "42", any_words: "rust", **DROPPED)
 
-      assert_instance_of(XTwitterScraper::PaginatedTweets, page, path)
+      assert_equal([], page.tweets, path)
       assert_requested(
         :get,
         url,
