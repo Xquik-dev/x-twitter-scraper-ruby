@@ -16,39 +16,39 @@ module XTwitterScraper
 
         # @!attribute created_at
         #
-        #   @return [Time]
-        required :created_at, Time, api_name: :createdAt
+        #   @return [Time, nil]
+        optional :created_at, Time, api_name: :createdAt
 
         # @!attribute health
         #
-        #   @return [Symbol, XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Health]
-        required :health,
+        #   @return [Symbol, XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Health, nil]
+        optional :health,
                  enum: -> { XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Health }
 
         # @!attribute status
         #
-        #   @return [Symbol, :active]
-        required :status, const: :active
+        #   @return [Symbol, XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Status]
+        required :status, enum: -> { XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Status }
 
         # @!attribute x_user_id
         #
-        #   @return [String]
-        required :x_user_id, String, api_name: :xUserId
+        #   @return [String, nil]
+        optional :x_user_id, String, api_name: :xUserId
 
         # @!attribute x_username
         #
-        #   @return [String]
-        required :x_username, String, api_name: :xUsername
+        #   @return [String, nil]
+        optional :x_username, String, api_name: :xUsername
 
-        # @!method initialize(id:, created_at:, health:, x_user_id:, x_username:, status: :active)
+        # @!method initialize(id:, status:, created_at: nil, health: nil, x_user_id: nil, x_username: nil)
         #   Sanitized X account summary returned by connect and reauth.
         #
         #   @param id [String]
+        #   @param status [Symbol, XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Status]
         #   @param created_at [Time]
         #   @param health [Symbol, XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Health]
         #   @param x_user_id [String]
         #   @param x_username [String]
-        #   @param status [Symbol, :active]
 
         # @see XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse#health
         module Health
@@ -60,6 +60,17 @@ module XTwitterScraper
           RECOVERING = :recovering
           SUSPENDED = :suspended
           TEMPORARY_ISSUE = :temporaryIssue
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # @see XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse#status
+        module Status
+          extend XTwitterScraper::Internal::Type::Enum
+
+          ACTIVE = :active
+          REQUIRES_EMAIL_CODE = :requires_email_code
 
           # @!method self.values
           #   @return [Array<Symbol>]

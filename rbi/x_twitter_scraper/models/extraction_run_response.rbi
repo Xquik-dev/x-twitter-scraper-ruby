@@ -15,20 +15,35 @@ module XTwitterScraper
           )
         end
 
-      sig { returns(T::Boolean) }
-      attr_accessor :allowed
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :allowed
 
-      sig { returns(String) }
-      attr_accessor :credits_available
+      sig { params(allowed: T::Boolean).void }
+      attr_writer :allowed
 
-      sig { returns(String) }
-      attr_accessor :credits_required
+      sig { returns(T.nilable(String)) }
+      attr_reader :credits_available
 
-      sig { returns(Integer) }
-      attr_accessor :estimated_results
+      sig { params(credits_available: String).void }
+      attr_writer :credits_available
 
-      sig { returns(String) }
-      attr_accessor :source
+      sig { returns(T.nilable(String)) }
+      attr_reader :credits_required
+
+      sig { params(credits_required: String).void }
+      attr_writer :credits_required
+
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :estimated_results
+
+      sig { params(estimated_results: Integer).void }
+      attr_writer :estimated_results
+
+      sig { returns(T.nilable(String)) }
+      attr_reader :source
+
+      sig { params(source: String).void }
+      attr_writer :source
 
       sig { returns(T.nilable(String)) }
       attr_reader :resolved_x_user_id
@@ -47,11 +62,11 @@ module XTwitterScraper
         ).returns(T.attached_class)
       end
       def self.new(
-        allowed:,
-        credits_available:,
-        credits_required:,
-        estimated_results:,
-        source:,
+        allowed: nil,
+        credits_available: nil,
+        credits_required: nil,
+        estimated_results: nil,
+        source: nil,
         resolved_x_user_id: nil
       )
       end

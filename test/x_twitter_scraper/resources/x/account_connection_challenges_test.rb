@@ -18,11 +18,11 @@ class XTwitterScraper::Test::Resources::X::AccountConnectionChallengesTest < XTw
     assert_pattern do
       response => {
         id: String,
-        created_at: Time,
-        health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Health,
-        status: Symbol,
-        x_user_id: String,
-        x_username: String
+        status: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Status,
+        created_at: Time | nil,
+        health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Health | nil,
+        x_user_id: String | nil,
+        x_username: String | nil
       }
     end
   end
