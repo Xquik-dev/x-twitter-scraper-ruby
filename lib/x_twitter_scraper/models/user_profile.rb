@@ -27,25 +27,25 @@ module XTwitterScraper
       #
       #   @return [XTwitterScraper::Models::AccountBasedIn, nil]
       optional :account_based_in,
-                                  -> { XTwitterScraper::AccountBasedIn },
-                                  api_name: :accountBasedIn,
-                                  nil?: true
+               -> { XTwitterScraper::AccountBasedIn },
+               api_name: :accountBasedIn,
+               nil?: true
 
       # @!attribute account_based_in_accurate
       #   False when X notes accountBasedIn may be inaccurate.
       #
       #   @return [Boolean, nil]
       optional :account_based_in_accurate,
-                                           XTwitterScraper::Internal::Type::Boolean,
-                                           api_name: :accountBasedInAccurate
+               XTwitterScraper::Internal::Type::Boolean,
+               api_name: :accountBasedInAccurate
 
       # @!attribute account_based_in_unavailable
       #   True when X withheld accountBasedIn from this read. Retry later.
       #
       #   @return [Boolean, nil]
       optional :account_based_in_unavailable,
-                                              XTwitterScraper::Internal::Type::Boolean,
-                                              api_name: :accountBasedInUnavailable
+               XTwitterScraper::Internal::Type::Boolean,
+               api_name: :accountBasedInUnavailable
 
       # @!attribute advertiser_account_service_levels
       #   X Ads services the account uses, such as `analytics`, `media_studio` or `smb`.
@@ -53,8 +53,8 @@ module XTwitterScraper
       #
       #   @return [Array<String>, nil]
       optional :advertiser_account_service_levels,
-                                                   XTwitterScraper::Internal::Type::ArrayOf[String],
-                                                   api_name: :advertiserAccountServiceLevels
+               XTwitterScraper::Internal::Type::ArrayOf[String],
+               api_name: :advertiserAccountServiceLevels
 
       # @!attribute advertiser_account_type
       #   The account's X Ads type. `none` for an account without ads, or
@@ -117,8 +117,8 @@ module XTwitterScraper
       #
       #   @return [Boolean, nil]
       optional :connected_via_accurate,
-                                        XTwitterScraper::Internal::Type::Boolean,
-                                        api_name: :connectedViaAccurate
+               XTwitterScraper::Internal::Type::Boolean,
+               api_name: :connectedViaAccurate
 
       # @!attribute contact_info
       #
@@ -151,8 +151,8 @@ module XTwitterScraper
       #
       #   @return [Boolean, nil]
       optional :default_profile_image,
-                                       XTwitterScraper::Internal::Type::Boolean,
-                                       api_name: :defaultProfileImage
+               XTwitterScraper::Internal::Type::Boolean,
+               api_name: :defaultProfileImage
 
       # @!attribute description
       #
@@ -198,8 +198,8 @@ module XTwitterScraper
       #
       #   @return [Hash{Symbol=>Object}, nil]
       optional :grok_translated_bio,
-                                     XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown],
-                                     api_name: :grokTranslatedBio
+               XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown],
+               api_name: :grokTranslatedBio
 
       # @!attribute has_custom_timelines
       #
@@ -266,8 +266,8 @@ module XTwitterScraper
       #
       #   @return [Boolean, nil]
       optional :is_translation_enabled,
-                                        XTwitterScraper::Internal::Type::Boolean,
-                                        api_name: :isTranslationEnabled
+               XTwitterScraper::Internal::Type::Boolean,
+               api_name: :isTranslationEnabled
 
       # @!attribute is_translator
       #
@@ -322,7 +322,7 @@ module XTwitterScraper
       #
       #   @return [Hash{Symbol=>Object}, nil]
       optional :professional,
-                              XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]
+               XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]
 
       # @!attribute profile_bio
       #   Structured profile bio with entity annotations
@@ -417,8 +417,8 @@ module XTwitterScraper
       #
       #   @return [Boolean, nil]
       optional :super_follows_user_profile_active,
-                                                   XTwitterScraper::Internal::Type::Boolean,
-                                                   api_name: :superFollowsUserProfileActive
+               XTwitterScraper::Internal::Type::Boolean,
+               api_name: :superFollowsUserProfileActive
 
       # @!attribute tip_jar
       #
@@ -445,16 +445,16 @@ module XTwitterScraper
       #
       #   @return [XTwitterScraper::Models::UserProfile::UsernameChanges, nil]
       optional :username_changes,
-                                  -> { XTwitterScraper::UserProfile::UsernameChanges },
-                                  api_name: :usernameChanges
+               -> { XTwitterScraper::UserProfile::UsernameChanges },
+               api_name: :usernameChanges
 
       # @!attribute verification_reason
       #   X's text on why the profile is verified, with its links.
       #
       #   @return [XTwitterScraper::Models::UserProfile::VerificationReason, nil]
       optional :verification_reason,
-                                     -> { XTwitterScraper::UserProfile::VerificationReason },
-                                     api_name: :verificationReason
+               -> { XTwitterScraper::UserProfile::VerificationReason },
+               api_name: :verificationReason
 
       # @!attribute verified
       #
@@ -638,6 +638,17 @@ module XTwitterScraper
 
       # @see XTwitterScraper::Models::UserProfile#affiliates_highlighted_label
       class AffiliatesHighlightedLabel < XTwitterScraper::Internal::Type::BaseModel
+        # @!attribute auxiliary_labels
+        #   More labels X shows beside the affiliation, such as an automated account's
+        #   owner.
+        #
+        #   @return [Array<XTwitterScraper::Models::UserProfile::AffiliatesHighlightedLabel::AuxiliaryLabel>, nil]
+        optional :auxiliary_labels,
+                 -> {
+                   XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile::AffiliatesHighlightedLabel::AuxiliaryLabel]
+                 },
+                 api_name: :auxiliaryLabels
+
         # @!attribute badge_url
         #
         #   @return [String, nil]
@@ -647,6 +658,14 @@ module XTwitterScraper
         #
         #   @return [String, nil]
         optional :description, String
+
+        # @!attribute long_description
+        #   Public text, ranges, references, and mention data.
+        #
+        #   @return [Hash{Symbol=>Object}, nil]
+        optional :long_description,
+                 XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown],
+                 api_name: :longDescription
 
         # @!attribute url
         #
@@ -668,15 +687,54 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :user_label_type, String, api_name: :userLabelType
 
-        # @!method initialize(badge_url: nil, description: nil, url: nil, url_type: nil, user_label_display_type: nil, user_label_type: nil)
+        # @!method initialize(auxiliary_labels: nil, badge_url: nil, description: nil, long_description: nil, url: nil, url_type: nil, user_label_display_type: nil, user_label_type: nil)
         #   Organization affiliation label shown on an X profile.
         #
+        #   @param auxiliary_labels [Array<XTwitterScraper::Models::UserProfile::AffiliatesHighlightedLabel::AuxiliaryLabel>] More labels X shows beside the affiliation, such as an automated account's owner
         #   @param badge_url [String]
         #   @param description [String]
+        #   @param long_description [Hash{Symbol=>Object}] Public text, ranges, references, and mention data.
         #   @param url [String]
         #   @param url_type [String]
         #   @param user_label_display_type [String]
         #   @param user_label_type [String]
+
+        # @see XTwitterScraper::Models::UserProfile::AffiliatesHighlightedLabel#auxiliary_labels
+        class AuxiliaryLabel < XTwitterScraper::Internal::Type::BaseModel
+          # @!attribute badge_url
+          #
+          #   @return [String, nil]
+          optional :badge_url, String, api_name: :badgeUrl
+
+          # @!attribute description
+          #
+          #   @return [String, nil]
+          optional :description, String
+
+          # @!attribute url
+          #
+          #   @return [String, nil]
+          optional :url, String
+
+          # @!attribute user_label_display_type
+          #
+          #   @return [String, nil]
+          optional :user_label_display_type, String, api_name: :userLabelDisplayType
+
+          # @!attribute user_label_type
+          #
+          #   @return [String, nil]
+          optional :user_label_type, String, api_name: :userLabelType
+
+          # @!method initialize(badge_url: nil, description: nil, url: nil, user_label_display_type: nil, user_label_type: nil)
+          #   A label X shows on an X profile beside its affiliation label.
+          #
+          #   @param badge_url [String]
+          #   @param description [String]
+          #   @param url [String]
+          #   @param user_label_display_type [String]
+          #   @param user_label_type [String]
+        end
       end
 
       # @see XTwitterScraper::Models::UserProfile#highlights_info
@@ -714,16 +772,23 @@ module XTwitterScraper
                  XTwitterScraper::Internal::Type::Boolean,
                  api_name: :isIdentityVerified
 
+        # @!attribute override_verified_year
+        #   The year X shows as the start of verification, in place of verifiedSinceMsec.
+        #
+        #   @return [Integer, nil]
+        optional :override_verified_year, Integer, api_name: :overrideVerifiedYear
+
         # @!attribute verified_since_msec
         #
         #   @return [String, nil]
         optional :verified_since_msec, String, api_name: :verifiedSinceMsec
 
-        # @!method initialize(description: nil, is_identity_verified: nil, verified_since_msec: nil)
+        # @!method initialize(description: nil, is_identity_verified: nil, override_verified_year: nil, verified_since_msec: nil)
         #   Identity verification metadata displayed by X.
         #
         #   @param description [String]
         #   @param is_identity_verified [Boolean]
+        #   @param override_verified_year [Integer] The year X shows as the start of verification, in place of verifiedSinceMsec.
         #   @param verified_since_msec [String]
       end
 
@@ -786,7 +851,7 @@ module XTwitterScraper
         #
         #   @return [Array<XTwitterScraper::Models::UserProfile::VerificationReason::Entity>, nil]
         optional :entities,
-                            -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile::VerificationReason::Entity] }
+                 -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::UserProfile::VerificationReason::Entity] }
 
         # @!method initialize(text: nil, entities: nil)
         #   X's text on why the profile is verified, with its links.
