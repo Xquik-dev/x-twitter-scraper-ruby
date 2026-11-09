@@ -47,6 +47,12 @@ module XTwitterScraper
       #   @return [String]
       required :x_user_id, String, api_name: :xUserId
 
+      # @!attribute name
+      #   Customer-set label of the account monitor, when set.
+      #
+      #   @return [String, nil]
+      optional :name, String
+
       # @!attribute paused_at
       #   When Xquik automatically paused this monitor.
       #
@@ -59,7 +65,7 @@ module XTwitterScraper
       #   @return [Symbol, XTwitterScraper::Models::Monitor::PausedReason, nil]
       optional :paused_reason, enum: -> { XTwitterScraper::Monitor::PausedReason }, api_name: :pausedReason
 
-      # @!method initialize(id:, created_at:, event_types:, is_active:, next_billing_at:, username:, x_user_id:, paused_at: nil, paused_reason: nil)
+      # @!method initialize(id:, created_at:, event_types:, is_active:, next_billing_at:, username:, x_user_id:, name: nil, paused_at: nil, paused_reason: nil)
       #   Account monitor that tracks activity for a given X user.
       #
       #   @param id [String]
@@ -75,6 +81,8 @@ module XTwitterScraper
       #   @param username [String]
       #
       #   @param x_user_id [String]
+      #
+      #   @param name [String] Customer-set label of the account monitor, when set.
       #
       #   @param paused_at [Time] When Xquik automatically paused this monitor.
       #
