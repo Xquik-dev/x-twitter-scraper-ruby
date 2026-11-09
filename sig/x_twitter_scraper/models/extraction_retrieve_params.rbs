@@ -12,7 +12,8 @@ module XTwitterScraper
         include_raw: bool,
         limit: Integer,
         output_mode: XTwitterScraper::Models::ExtractionRetrieveParams::output_mode,
-        output_preset: XTwitterScraper::Models::ExtractionRetrieveParams::output_preset
+        output_preset: XTwitterScraper::Models::ExtractionRetrieveParams::output_preset,
+        wait: Integer
       }
       & XTwitterScraper::Internal::Type::request_parameters
 
@@ -52,6 +53,10 @@ module XTwitterScraper
         XTwitterScraper::Models::ExtractionRetrieveParams::output_preset
       ) -> XTwitterScraper::Models::ExtractionRetrieveParams::output_preset
 
+      attr_reader wait: Integer?
+
+      def wait=: (Integer) -> Integer
+
       def initialize: (
         id: String,
         ?cursor: String,
@@ -60,6 +65,7 @@ module XTwitterScraper
         ?limit: Integer,
         ?output_mode: XTwitterScraper::Models::ExtractionRetrieveParams::output_mode,
         ?output_preset: XTwitterScraper::Models::ExtractionRetrieveParams::output_preset,
+        ?wait: Integer,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
@@ -71,6 +77,7 @@ module XTwitterScraper
         limit: Integer,
         output_mode: XTwitterScraper::Models::ExtractionRetrieveParams::output_mode,
         output_preset: XTwitterScraper::Models::ExtractionRetrieveParams::output_preset,
+        wait: Integer,
         request_options: XTwitterScraper::RequestOptions
       }
 

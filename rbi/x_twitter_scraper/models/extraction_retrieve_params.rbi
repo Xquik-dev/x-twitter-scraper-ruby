@@ -96,6 +96,13 @@ module XTwitterScraper
       end
       attr_writer :output_preset
 
+      # Wait up to this many seconds when the job is active.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :wait
+
+      sig { params(wait: Integer).void }
+      attr_writer :wait
+
       sig do
         params(
           id: String,
@@ -108,6 +115,7 @@ module XTwitterScraper
             XTwitterScraper::ExtractionRetrieveParams::OutputMode::OrSymbol,
           output_preset:
             XTwitterScraper::ExtractionRetrieveParams::OutputPreset::OrSymbol,
+          wait: Integer,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -125,6 +133,8 @@ module XTwitterScraper
         output_mode: nil,
         # Keep enrichment nested or merge it into each result.
         output_preset: nil,
+        # Wait up to this many seconds when the job is active.
+        wait: nil,
         request_options: {}
       )
       end
@@ -142,6 +152,7 @@ module XTwitterScraper
               XTwitterScraper::ExtractionRetrieveParams::OutputMode::OrSymbol,
             output_preset:
               XTwitterScraper::ExtractionRetrieveParams::OutputPreset::OrSymbol,
+            wait: Integer,
             request_options: XTwitterScraper::RequestOptions
           }
         )

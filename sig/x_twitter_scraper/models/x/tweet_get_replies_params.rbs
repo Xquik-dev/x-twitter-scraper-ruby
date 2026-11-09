@@ -8,6 +8,7 @@ module XTwitterScraper
       type tweet_get_replies_params =
         {
           id: String,
+          after: String,
           any_words: String,
           blue_verified_only: bool,
           card_name: String,
@@ -18,10 +19,12 @@ module XTwitterScraper
           exclude_original_author: bool,
           exclude_source: String,
           exclude_words: String,
+          fields: String,
           from_user: String,
           geocode: String,
           hashtags: String,
           has_media_only: bool,
+          include_hidden: bool,
           include_original_post: bool,
           in_reply_to_tweet_id: String,
           language: String,
@@ -36,6 +39,7 @@ module XTwitterScraper
           mentioning: String,
           min_bookmarks: Integer,
           min_faves: Integer,
+          min_likes: Integer,
           min_quotes: Integer,
           min_replies: Integer,
           min_retweets: Integer,
@@ -44,6 +48,7 @@ module XTwitterScraper
           native_retweets: bool,
           near: String,
           news: bool,
+          omit: String,
           page_size: Integer,
           quotes: XTwitterScraper::Models::X::TweetGetRepliesParams::quotes,
           quotes_of_tweet_id: String,
@@ -72,6 +77,10 @@ module XTwitterScraper
         include XTwitterScraper::Internal::Type::RequestParameters
 
         attr_accessor id: String
+
+        attr_reader after: String?
+
+        def after=: (String) -> String
 
         attr_reader any_words: String?
 
@@ -113,6 +122,10 @@ module XTwitterScraper
 
         def exclude_words=: (String) -> String
 
+        attr_reader fields: String?
+
+        def fields=: (String) -> String
+
         attr_reader from_user: String?
 
         def from_user=: (String) -> String
@@ -128,6 +141,10 @@ module XTwitterScraper
         attr_reader has_media_only: bool?
 
         def has_media_only=: (bool) -> bool
+
+        attr_reader include_hidden: bool?
+
+        def include_hidden=: (bool) -> bool
 
         attr_reader include_original_post: bool?
 
@@ -187,6 +204,10 @@ module XTwitterScraper
 
         def min_faves=: (Integer) -> Integer
 
+        attr_reader min_likes: Integer?
+
+        def min_likes=: (Integer) -> Integer
+
         attr_reader min_quotes: Integer?
 
         def min_quotes=: (Integer) -> Integer
@@ -220,6 +241,10 @@ module XTwitterScraper
         attr_reader news: bool?
 
         def news=: (bool) -> bool
+
+        attr_reader omit: String?
+
+        def omit=: (String) -> String
 
         attr_reader page_size: Integer?
 
@@ -313,6 +338,7 @@ module XTwitterScraper
 
         def initialize: (
           id: String,
+          ?after: String,
           ?any_words: String,
           ?blue_verified_only: bool,
           ?card_name: String,
@@ -323,10 +349,12 @@ module XTwitterScraper
           ?exclude_original_author: bool,
           ?exclude_source: String,
           ?exclude_words: String,
+          ?fields: String,
           ?from_user: String,
           ?geocode: String,
           ?hashtags: String,
           ?has_media_only: bool,
+          ?include_hidden: bool,
           ?include_original_post: bool,
           ?in_reply_to_tweet_id: String,
           ?language: String,
@@ -341,6 +369,7 @@ module XTwitterScraper
           ?mentioning: String,
           ?min_bookmarks: Integer,
           ?min_faves: Integer,
+          ?min_likes: Integer,
           ?min_quotes: Integer,
           ?min_replies: Integer,
           ?min_retweets: Integer,
@@ -349,6 +378,7 @@ module XTwitterScraper
           ?native_retweets: bool,
           ?near: String,
           ?news: bool,
+          ?omit: String,
           ?page_size: Integer,
           ?quotes: XTwitterScraper::Models::X::TweetGetRepliesParams::quotes,
           ?quotes_of_tweet_id: String,
@@ -374,6 +404,7 @@ module XTwitterScraper
 
         def to_hash: -> {
           id: String,
+          after: String,
           any_words: String,
           blue_verified_only: bool,
           card_name: String,
@@ -384,10 +415,12 @@ module XTwitterScraper
           exclude_original_author: bool,
           exclude_source: String,
           exclude_words: String,
+          fields: String,
           from_user: String,
           geocode: String,
           hashtags: String,
           has_media_only: bool,
+          include_hidden: bool,
           include_original_post: bool,
           in_reply_to_tweet_id: String,
           language: String,
@@ -402,6 +435,7 @@ module XTwitterScraper
           mentioning: String,
           min_bookmarks: Integer,
           min_faves: Integer,
+          min_likes: Integer,
           min_quotes: Integer,
           min_replies: Integer,
           min_retweets: Integer,
@@ -410,6 +444,7 @@ module XTwitterScraper
           native_retweets: bool,
           near: String,
           news: bool,
+          omit: String,
           page_size: Integer,
           quotes: XTwitterScraper::Models::X::TweetGetRepliesParams::quotes,
           quotes_of_tweet_id: String,

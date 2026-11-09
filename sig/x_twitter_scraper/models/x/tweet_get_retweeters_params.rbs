@@ -9,9 +9,16 @@ module XTwitterScraper
         {
           id: String,
           bio_contains: String,
+          blue_verified_only: bool,
+          business_email_only: bool,
           cursor: String,
+          email_domains: String,
+          enrich_profiles: bool,
+          fields: String,
+          has_email: bool,
           has_location: bool,
           has_website: bool,
+          include_retweet_timestamp: bool,
           location_contains: String,
           max_followers: Integer,
           max_following: Integer,
@@ -20,6 +27,7 @@ module XTwitterScraper
           min_followers: Integer,
           min_following: Integer,
           min_statuses: Integer,
+          omit: String,
           page_size: Integer,
           username_contains: String,
           verified_only: bool,
@@ -37,9 +45,33 @@ module XTwitterScraper
 
         def bio_contains=: (String) -> String
 
+        attr_reader blue_verified_only: bool?
+
+        def blue_verified_only=: (bool) -> bool
+
+        attr_reader business_email_only: bool?
+
+        def business_email_only=: (bool) -> bool
+
         attr_reader cursor: String?
 
         def cursor=: (String) -> String
+
+        attr_reader email_domains: String?
+
+        def email_domains=: (String) -> String
+
+        attr_reader enrich_profiles: bool?
+
+        def enrich_profiles=: (bool) -> bool
+
+        attr_reader fields: String?
+
+        def fields=: (String) -> String
+
+        attr_reader has_email: bool?
+
+        def has_email=: (bool) -> bool
 
         attr_reader has_location: bool?
 
@@ -48,6 +80,10 @@ module XTwitterScraper
         attr_reader has_website: bool?
 
         def has_website=: (bool) -> bool
+
+        attr_reader include_retweet_timestamp: bool?
+
+        def include_retweet_timestamp=: (bool) -> bool
 
         attr_reader location_contains: String?
 
@@ -81,6 +117,10 @@ module XTwitterScraper
 
         def min_statuses=: (Integer) -> Integer
 
+        attr_reader omit: String?
+
+        def omit=: (String) -> String
+
         attr_reader page_size: Integer?
 
         def page_size=: (Integer) -> Integer
@@ -100,9 +140,16 @@ module XTwitterScraper
         def initialize: (
           id: String,
           ?bio_contains: String,
+          ?blue_verified_only: bool,
+          ?business_email_only: bool,
           ?cursor: String,
+          ?email_domains: String,
+          ?enrich_profiles: bool,
+          ?fields: String,
+          ?has_email: bool,
           ?has_location: bool,
           ?has_website: bool,
+          ?include_retweet_timestamp: bool,
           ?location_contains: String,
           ?max_followers: Integer,
           ?max_following: Integer,
@@ -111,6 +158,7 @@ module XTwitterScraper
           ?min_followers: Integer,
           ?min_following: Integer,
           ?min_statuses: Integer,
+          ?omit: String,
           ?page_size: Integer,
           ?username_contains: String,
           ?verified_only: bool,
@@ -121,9 +169,16 @@ module XTwitterScraper
         def to_hash: -> {
           id: String,
           bio_contains: String,
+          blue_verified_only: bool,
+          business_email_only: bool,
           cursor: String,
+          email_domains: String,
+          enrich_profiles: bool,
+          fields: String,
+          has_email: bool,
           has_location: bool,
           has_website: bool,
+          include_retweet_timestamp: bool,
           location_contains: String,
           max_followers: Integer,
           max_following: Integer,
@@ -132,6 +187,7 @@ module XTwitterScraper
           min_followers: Integer,
           min_following: Integer,
           min_statuses: Integer,
+          omit: String,
           page_size: Integer,
           username_contains: String,
           verified_only: bool,

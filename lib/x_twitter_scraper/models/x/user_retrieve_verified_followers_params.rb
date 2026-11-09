@@ -29,12 +29,57 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :bio_contains, String
 
+        # @!attribute blue_verified_only
+        #   Only return profiles X marks as blue verified. X marks many business &
+        #   government accounts blue too. Use verifiedType for 1 badge type.
+        #
+        #   @return [Boolean, nil]
+        optional :blue_verified_only, XTwitterScraper::Internal::Type::Boolean
+
+        # @!attribute business_email_only
+        #   Only return profiles that publish an email outside free webmail, such as Gmail.
+        #
+        #   @return [Boolean, nil]
+        optional :business_email_only, XTwitterScraper::Internal::Type::Boolean
+
         # @!attribute cursor
         #   Cursor from the previous response. Xquik cursors resume automatic coverage.
         #   Existing unprefixed cursors keep legacy standard behavior.
         #
         #   @return [String, nil]
         optional :cursor, String
+
+        # @!attribute email_domains
+        #   Only return profiles with an email at one of these domains. Separate domains
+        #   with commas. Subdomains match.
+        #
+        #   @return [String, nil]
+        optional :email_domains, String
+
+        # @!attribute enrich_profiles
+        #   Add each row's full profile, as GET /x/users/{id} returns it. Pages take several
+        #   seconds longer.
+        #
+        #   @return [Boolean, nil]
+        optional :enrich_profiles, XTwitterScraper::Internal::Type::Boolean
+
+        # @!attribute fields
+        #   Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #   author.username. A list keeps the field in each item. Case & underscores do not
+        #   matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+        #   always stay. An unknown name answers 400 unknown_field with the valid names,
+        #   before any read. The price stays the same. SDK row types then hold only the
+        #   named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+        #   the fields you need with `fields` & `omit`.
+        #
+        #   @return [String, nil]
+        optional :fields, String
+
+        # @!attribute has_email
+        #   Only return profiles that publish an email.
+        #
+        #   @return [Boolean, nil]
+        optional :has_email, XTwitterScraper::Internal::Type::Boolean
 
         # @!attribute has_location
         #   Only return profiles with a location.
@@ -73,6 +118,17 @@ module XTwitterScraper
         #   @return [Integer, nil]
         optional :max_following, Integer
 
+        # @!attribute max_scan
+        #   Most profiles 1 request reads, kept or dropped by the filters. The request then
+        #   answers the profiles it kept, the count it dropped & the cursor to read on. Each
+        #   request of a cursor may send its own value. Without it, a filtered read scans at
+        #   most 100,000 profiles of the list across all its pages, & the page that reaches
+        #   them ends the list with `scanLimit`. An unfiltered read has no scan limit.
+        #   Automatic mode only.
+        #
+        #   @return [Integer, nil]
+        optional :max_scan, Integer
+
         # @!attribute max_statuses
         #   Maximum post count. maxPosts is also accepted.
         #
@@ -110,6 +166,14 @@ module XTwitterScraper
         #   @return [Symbol, XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersParams::Mode, nil]
         optional :mode, enum: -> { XTwitterScraper::X::UserRetrieveVerifiedFollowersParams::Mode }
 
+        # @!attribute omit
+        #   Fields to drop from each row, comma-separated. It takes the same names as
+        #   fields. With fields, it drops from the kept fields. A longer URL fails at the
+        #   edge before Xquik reads it.
+        #
+        #   @return [String, nil]
+        optional :omit, String
+
         # @!attribute page_size
         #   Maximum user profiles: automatic 300; standard 200. Sources return fewer
         #   profiles. Continue with has_next_page.
@@ -135,14 +199,26 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :verified_type, String
 
-        # @!method initialize(id:, after: nil, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, limit: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, mode: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
+        # @!method initialize(id:, after: nil, bio_contains: nil, blue_verified_only: nil, business_email_only: nil, cursor: nil, email_domains: nil, enrich_profiles: nil, fields: nil, has_email: nil, has_location: nil, has_website: nil, limit: nil, location_contains: nil, max_followers: nil, max_following: nil, max_scan: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, mode: nil, omit: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
         #   @param id [String]
         #
         #   @param after [String] Legacy cursor alias. Prefer cursor.
         #
         #   @param bio_contains [String] Match any comma-separated or line-separated bio term, ignoring case.
         #
+        #   @param blue_verified_only [Boolean] Only return profiles X marks as blue verified. X marks many business & governmen
+        #
+        #   @param business_email_only [Boolean] Only return profiles that publish an email outside free webmail, such as Gmail.
+        #
         #   @param cursor [String] Cursor from the previous response. Xquik cursors resume automatic coverage. Exis
+        #
+        #   @param email_domains [String] Only return profiles with an email at one of these domains. Separate domains wit
+        #
+        #   @param enrich_profiles [Boolean] Add each row's full profile, as GET /x/users/{id} returns it. Pages take several
+        #
+        #   @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #
+        #   @param has_email [Boolean] Only return profiles that publish an email.
         #
         #   @param has_location [Boolean] Only return profiles with a location.
         #
@@ -156,6 +232,8 @@ module XTwitterScraper
         #
         #   @param max_following [Integer] Maximum following count.
         #
+        #   @param max_scan [Integer] Most profiles 1 request reads, kept or dropped by the filters. The request then
+        #
         #   @param max_statuses [Integer] Maximum post count. maxPosts is also accepted.
         #
         #   @param min_account_age_days [Integer] Minimum account age in whole days.
@@ -167,6 +245,8 @@ module XTwitterScraper
         #   @param min_statuses [Integer] Minimum post count. minPosts is also accepted.
         #
         #   @param mode [Symbol, XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersParams::Mode] Omit mode for resumable maximum coverage. Standard keeps legacy pagination. Cove
+        #
+        #   @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         #   @param page_size [Integer] Maximum user profiles: automatic 300; standard 200. Sources return fewer profile
         #

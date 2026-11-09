@@ -23,11 +23,56 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :bio_contains, String
 
+        # @!attribute blue_verified_only
+        #   Only return profiles X marks as blue verified. X marks many business &
+        #   government accounts blue too. Use verifiedType for 1 badge type.
+        #
+        #   @return [Boolean, nil]
+        optional :blue_verified_only, XTwitterScraper::Internal::Type::Boolean
+
+        # @!attribute business_email_only
+        #   Only return profiles that publish an email outside free webmail, such as Gmail.
+        #
+        #   @return [Boolean, nil]
+        optional :business_email_only, XTwitterScraper::Internal::Type::Boolean
+
         # @!attribute cursor
         #   Pagination cursor for retweeters
         #
         #   @return [String, nil]
         optional :cursor, String
+
+        # @!attribute email_domains
+        #   Only return profiles with an email at one of these domains. Separate domains
+        #   with commas. Subdomains match.
+        #
+        #   @return [String, nil]
+        optional :email_domains, String
+
+        # @!attribute enrich_profiles
+        #   Add each row's full profile, as GET /x/users/{id} returns it. Pages take several
+        #   seconds longer.
+        #
+        #   @return [Boolean, nil]
+        optional :enrich_profiles, XTwitterScraper::Internal::Type::Boolean
+
+        # @!attribute fields
+        #   Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #   author.username. A list keeps the field in each item. Case & underscores do not
+        #   matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+        #   always stay. An unknown name answers 400 unknown_field with the valid names,
+        #   before any read. The price stays the same. SDK row types then hold only the
+        #   named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+        #   the fields you need with `fields` & `omit`.
+        #
+        #   @return [String, nil]
+        optional :fields, String
+
+        # @!attribute has_email
+        #   Only return profiles that publish an email.
+        #
+        #   @return [Boolean, nil]
+        optional :has_email, XTwitterScraper::Internal::Type::Boolean
 
         # @!attribute has_location
         #   Only return profiles with a location.
@@ -40,6 +85,12 @@ module XTwitterScraper
         #
         #   @return [Boolean, nil]
         optional :has_website, XTwitterScraper::Internal::Type::Boolean
+
+        # @!attribute include_retweet_timestamp
+        #   Look up repost event times.
+        #
+        #   @return [Boolean, nil]
+        optional :include_retweet_timestamp, XTwitterScraper::Internal::Type::Boolean
 
         # @!attribute location_contains
         #   Match a location substring, ignoring case.
@@ -89,6 +140,14 @@ module XTwitterScraper
         #   @return [Integer, nil]
         optional :min_statuses, Integer
 
+        # @!attribute omit
+        #   Fields to drop from each row, comma-separated. It takes the same names as
+        #   fields. With fields, it drops from the kept fields. A longer URL fails at the
+        #   edge before Xquik reads it.
+        #
+        #   @return [String, nil]
+        optional :omit, String
+
         # @!attribute page_size
         #   Maximum user profiles requested from this page (20-200, default 200). Source,
         #   filters, or credits can return fewer profiles. Keep requesting next_cursor while
@@ -115,16 +174,30 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :verified_type, String
 
-        # @!method initialize(id:, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
+        # @!method initialize(id:, bio_contains: nil, blue_verified_only: nil, business_email_only: nil, cursor: nil, email_domains: nil, enrich_profiles: nil, fields: nil, has_email: nil, has_location: nil, has_website: nil, include_retweet_timestamp: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, omit: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
         #   @param id [String]
         #
         #   @param bio_contains [String] Match any comma-separated or line-separated bio term, ignoring case.
         #
+        #   @param blue_verified_only [Boolean] Only return profiles X marks as blue verified. X marks many business & governmen
+        #
+        #   @param business_email_only [Boolean] Only return profiles that publish an email outside free webmail, such as Gmail.
+        #
         #   @param cursor [String] Pagination cursor for retweeters
+        #
+        #   @param email_domains [String] Only return profiles with an email at one of these domains. Separate domains wit
+        #
+        #   @param enrich_profiles [Boolean] Add each row's full profile, as GET /x/users/{id} returns it. Pages take several
+        #
+        #   @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #
+        #   @param has_email [Boolean] Only return profiles that publish an email.
         #
         #   @param has_location [Boolean] Only return profiles with a location.
         #
         #   @param has_website [Boolean] Only return profiles with a website.
+        #
+        #   @param include_retweet_timestamp [Boolean] Look up repost event times.
         #
         #   @param location_contains [String] Match a location substring, ignoring case.
         #
@@ -141,6 +214,8 @@ module XTwitterScraper
         #   @param min_following [Integer] Minimum following count.
         #
         #   @param min_statuses [Integer] Minimum post count. minPosts is also accepted.
+        #
+        #   @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         #   @param page_size [Integer] Maximum user profiles requested from this page (20-200, default 200). Source, fi
         #

@@ -56,6 +56,13 @@ module XTwitterScraper
       sig { params(monitor_id: String).void }
       attr_writer :monitor_id
 
+      # Post monitor ID. The post_monitor_id alias also works.
+      sig { returns(T.nilable(String)) }
+      attr_reader :post_monitor_id
+
+      sig { params(post_monitor_id: String).void }
+      attr_writer :post_monitor_id
+
       sig do
         params(
           cursor: String,
@@ -63,6 +70,7 @@ module XTwitterScraper
           keyword_monitor_id: String,
           limit: Integer,
           monitor_id: String,
+          post_monitor_id: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -80,6 +88,8 @@ module XTwitterScraper
         limit: nil,
         # Account monitor ID.
         monitor_id: nil,
+        # Post monitor ID. The post_monitor_id alias also works.
+        post_monitor_id: nil,
         request_options: {}
       )
       end
@@ -92,6 +102,7 @@ module XTwitterScraper
             keyword_monitor_id: String,
             limit: Integer,
             monitor_id: String,
+            post_monitor_id: String,
             request_options: XTwitterScraper::RequestOptions
           }
         )

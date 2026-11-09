@@ -6,7 +6,7 @@ module XTwitterScraper
   module Models
     module X
       type follower_check_params =
-        { source: String, target: String }
+        { source: String, target: String, fields: String, omit: String }
         & XTwitterScraper::Internal::Type::request_parameters
 
       class FollowerCheckParams < XTwitterScraper::Internal::Type::BaseModel
@@ -17,15 +17,27 @@ module XTwitterScraper
 
         attr_accessor target: String
 
+        attr_reader fields: String?
+
+        def fields=: (String) -> String
+
+        attr_reader omit: String?
+
+        def omit=: (String) -> String
+
         def initialize: (
           source: String,
           target: String,
+          ?fields: String,
+          ?omit: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
         def to_hash: -> {
           source: String,
           target: String,
+          fields: String,
+          omit: String,
           request_options: XTwitterScraper::RequestOptions
         }
       end

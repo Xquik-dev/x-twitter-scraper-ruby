@@ -13,6 +13,7 @@ module XTwitterScraper
         ?limit: Integer,
         ?output_mode: XTwitterScraper::Models::ExtractionRetrieveParams::output_mode,
         ?output_preset: XTwitterScraper::Models::ExtractionRetrieveParams::output_preset,
+        ?wait: Integer,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::ExtractionRetrieveResponse
 
@@ -127,10 +128,20 @@ module XTwitterScraper
       def export_results: (
         String id,
         format_: XTwitterScraper::Models::ExtractionExportResultsParams::format_,
+        ?business_email_only: bool,
+        ?compare: String,
+        ?email_domains: String,
         ?has_description: bool,
+        ?has_email: bool,
         ?has_location: bool,
         ?has_media: bool,
+        ?has_website: bool,
+        ?hide_fake: bool,
+        ?hide_inactive: bool,
+        ?joined_since: Date,
+        ?joined_until: Date,
         ?lang: String,
+        ?location: String,
         ?max_followers: Integer,
         ?max_following: Integer,
         ?max_posts: Integer,

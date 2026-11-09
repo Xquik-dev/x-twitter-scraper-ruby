@@ -49,7 +49,12 @@ module XTwitterScraper
       ) -> XTwitterScraper::Models::XGetNotificationsResponse
 
       def get_trends: (
+        ?at: String,
         ?count: Integer,
+        ?country: String,
+        ?fields: String,
+        ?location: String,
+        ?omit: String,
         ?woeid: Integer,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::XGetTrendsResponse

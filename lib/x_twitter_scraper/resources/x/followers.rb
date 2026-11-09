@@ -11,11 +11,15 @@ module XTwitterScraper
       class Followers
         # Check if one user follows another
         #
-        # @overload check(source:, target:, request_options: {})
+        # @overload check(source:, target:, fields: nil, omit: nil, request_options: {})
         #
         # @param source [String] Source username, @username, or X or Twitter profile URL
         #
         # @param target [String] Target username, @username, or X or Twitter profile URL
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

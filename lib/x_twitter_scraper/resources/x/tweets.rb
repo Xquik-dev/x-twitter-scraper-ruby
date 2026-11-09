@@ -74,9 +74,13 @@ module XTwitterScraper
 
         # Get multiple tweets by IDs
         #
-        # @overload list(ids:, request_options: {})
+        # @overload list(ids:, fields: nil, omit: nil, request_options: {})
         #
         # @param ids [String] Comma-separated tweet IDs (max 100)
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -127,13 +131,23 @@ module XTwitterScraper
         # identities even when the post reports likes. In that case this endpoint returns
         # 424 `favoriters_unavailable` instead of a misleading empty success.
         #
-        # @overload get_favoriters(id, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
+        # @overload get_favoriters(id, bio_contains: nil, blue_verified_only: nil, business_email_only: nil, cursor: nil, email_domains: nil, fields: nil, has_email: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, omit: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
         #
         # @param id [String] Tweet ID to get favoriters
         #
         # @param bio_contains [String] Match any comma-separated or line-separated bio term, ignoring case.
         #
+        # @param blue_verified_only [Boolean] Only return profiles X marks as blue verified. X marks many business & governmen
+        #
+        # @param business_email_only [Boolean] Only return profiles that publish an email outside free webmail, such as Gmail.
+        #
         # @param cursor [String] Pagination cursor for favoriters
+        #
+        # @param email_domains [String] Only return profiles with an email at one of these domains. Separate domains wit
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #
+        # @param has_email [Boolean] Only return profiles that publish an email.
         #
         # @param has_location [Boolean] Only return profiles with a location.
         #
@@ -154,6 +168,8 @@ module XTwitterScraper
         # @param min_following [Integer] Minimum following count.
         #
         # @param min_statuses [Integer] Minimum post count. minPosts is also accepted.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         # @param page_size [Integer] Maximum user profiles requested from this page (20-200, default 200). Source, fi
         #
@@ -176,6 +192,10 @@ module XTwitterScraper
             path: ["x/tweets/%1$s/favoriters", id],
             query: query.transform_keys(
               bio_contains: "bioContains",
+              blue_verified_only: "blueVerifiedOnly",
+              business_email_only: "businessEmailOnly",
+              email_domains: "emailDomains",
+              has_email: "hasEmail",
               has_location: "hasLocation",
               has_website: "hasWebsite",
               location_contains: "locationContains",
@@ -198,13 +218,17 @@ module XTwitterScraper
 
         # List quote tweets of a tweet
         #
-        # @overload get_quotes(id, any_words: nil, blue_verified_only: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, from_user: nil, geocode: nil, hashtags: nil, include_replies: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, near: nil, news: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, since_time: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
+        # @overload get_quotes(id, advanced_query: nil, any_words: nil, blue_verified_only: nil, bounding_box: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, fields: nil, from_user: nil, geocode: nil, hashtags: nil, include_replies: nil, in_reply_to_tweet_id: nil, keywords: nil, language: nil, list_id: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, near: nil, news: nil, omit: nil, page_size: nil, place: nil, place_country: nil, point_radius: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, since_time: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
         #
         # @param id [String] Numeric tweet ID to get quotes, 15-20 digits
+        #
+        # @param advanced_query [String] Raw advanced search query appended as-is.
         #
         # @param any_words [String] Words or quoted phrases where any one can match. Separate with spaces, commas, o
         #
         # @param blue_verified_only [Boolean] Only return tweets from Blue-verified authors.
+        #
+        # @param bounding_box [String] Geo bounding box, such as -74.1 40.6 -73.9 40.8.
         #
         # @param card_name [String] Match the Tweet card name.
         #
@@ -220,6 +244,8 @@ module XTwitterScraper
         #
         # @param exclude_words [String] Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
         #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #
         # @param from_user [String] Filter by author username.
         #
         # @param geocode [String] Match latitude, longitude, and radius.
@@ -230,7 +256,11 @@ module XTwitterScraper
         #
         # @param in_reply_to_tweet_id [String] Only replies to this tweet ID.
         #
+        # @param keywords [String] Words the Tweets must match, in X search syntax.
+        #
         # @param language [String] Language code filter, e.g. en or tr.
+        #
+        # @param list_id [String] Search within a list ID.
         #
         # @param max_faves [Integer] Maximum likes threshold. maxLikes is also accepted.
         #
@@ -250,6 +280,8 @@ module XTwitterScraper
         #
         # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
         #
+        # @param min_likes [Integer] Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+        #
         # @param min_quotes [Integer] Minimum quote count threshold.
         #
         # @param min_replies [Integer] Minimum replies threshold.
@@ -264,7 +296,15 @@ module XTwitterScraper
         #
         # @param news [Boolean] Only return news results.
         #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
+        #
         # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
+        #
+        # @param place [String] Search within a place ID.
+        #
+        # @param place_country [String] Search within a country code.
+        #
+        # @param point_radius [String] Geo point radius, such as -73.99 40.73 25mi.
         #
         # @param quotes [Symbol, XTwitterScraper::Models::X::TweetGetQuotesParams::Quotes] Quote mode.
         #
@@ -312,8 +352,10 @@ module XTwitterScraper
             method: :get,
             path: ["x/tweets/%1$s/quotes", id],
             query: query.transform_keys(
+              advanced_query: "advancedQuery",
               any_words: "anyWords",
               blue_verified_only: "blueVerifiedOnly",
+              bounding_box: "boundingBox",
               card_name: "cardName",
               conversation_id: "conversationId",
               exact_phrase: "exactPhrase",
@@ -322,6 +364,7 @@ module XTwitterScraper
               from_user: "fromUser",
               include_replies: "includeReplies",
               in_reply_to_tweet_id: "inReplyToTweetId",
+              list_id: "listId",
               max_faves: "maxFaves",
               max_id: "maxId",
               max_quotes: "maxQuotes",
@@ -330,12 +373,15 @@ module XTwitterScraper
               media_type: "mediaType",
               min_bookmarks: "minBookmarks",
               min_faves: "minFaves",
+              min_likes: "minLikes",
               min_quotes: "minQuotes",
               min_replies: "minReplies",
               min_retweets: "minRetweets",
               min_views: "minViews",
               native_retweets: "nativeRetweets",
               page_size: "pageSize",
+              place_country: "placeCountry",
+              point_radius: "pointRadius",
               quotes_of_tweet_id: "quotesOfTweetId",
               retweets_of_tweet_id: "retweetsOfTweetId",
               since_date: "sinceDate",
@@ -356,9 +402,11 @@ module XTwitterScraper
         # pagination. Complete mode returns nested replies, diagnostics, and 424 when
         # direct coverage stays below 80%.
         #
-        # @overload get_replies(id, any_words: nil, blue_verified_only: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_original_author: nil, exclude_source: nil, exclude_words: nil, from_user: nil, geocode: nil, hashtags: nil, has_media_only: nil, include_original_post: nil, in_reply_to_tweet_id: nil, language: nil, limit: nil, max_depth: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, mode: nil, native_retweets: nil, near: nil, news: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, scope: nil, since_date: nil, since_id: nil, since_time: nil, sort: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
+        # @overload get_replies(id, after: nil, any_words: nil, blue_verified_only: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_original_author: nil, exclude_source: nil, exclude_words: nil, fields: nil, from_user: nil, geocode: nil, hashtags: nil, has_media_only: nil, include_hidden: nil, include_original_post: nil, in_reply_to_tweet_id: nil, language: nil, limit: nil, max_depth: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, mode: nil, native_retweets: nil, near: nil, news: nil, omit: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, scope: nil, since_date: nil, since_id: nil, since_time: nil, sort: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
         #
         # @param id [String] Tweet ID to get replies
+        #
+        # @param after [String] Legacy cursor alias. Prefer cursor.
         #
         # @param any_words [String] Words or quoted phrases where any one can match. Separate with spaces, commas, o
         #
@@ -380,6 +428,8 @@ module XTwitterScraper
         #
         # @param exclude_words [String] Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
         #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #
         # @param from_user [String] Filter by author username.
         #
         # @param geocode [String] Match latitude, longitude, and radius.
@@ -387,6 +437,8 @@ module XTwitterScraper
         # @param hashtags [String] Hashtags separated by spaces, commas, or lines.
         #
         # @param has_media_only [Boolean] Only return replies containing media.
+        #
+        # @param include_hidden [Boolean] Complete mode only. Adds the replies the post's author hid, each with hiddenByAu
         #
         # @param include_original_post [Boolean] Include the source post and count it toward limit.
         #
@@ -416,6 +468,8 @@ module XTwitterScraper
         #
         # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
         #
+        # @param min_likes [Integer] Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+        #
         # @param min_quotes [Integer] Minimum quote count threshold.
         #
         # @param min_replies [Integer] Minimum replies threshold.
@@ -431,6 +485,8 @@ module XTwitterScraper
         # @param near [String] Match a place name.
         #
         # @param news [Boolean] Only return news results.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         # @param page_size [Integer] Automatic pages accept 1-300 Tweets. Standard pages keep 1-100. Default 20. Cont
         #
@@ -494,6 +550,7 @@ module XTwitterScraper
               exclude_words: "excludeWords",
               from_user: "fromUser",
               has_media_only: "hasMediaOnly",
+              include_hidden: "includeHidden",
               include_original_post: "includeOriginalPost",
               in_reply_to_tweet_id: "inReplyToTweetId",
               max_depth: "maxDepth",
@@ -505,6 +562,7 @@ module XTwitterScraper
               media_type: "mediaType",
               min_bookmarks: "minBookmarks",
               min_faves: "minFaves",
+              min_likes: "minLikes",
               min_quotes: "minQuotes",
               min_replies: "minReplies",
               min_retweets: "minRetweets",
@@ -529,17 +587,31 @@ module XTwitterScraper
 
         # List users who retweeted a tweet
         #
-        # @overload get_retweeters(id, bio_contains: nil, cursor: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
+        # @overload get_retweeters(id, bio_contains: nil, blue_verified_only: nil, business_email_only: nil, cursor: nil, email_domains: nil, enrich_profiles: nil, fields: nil, has_email: nil, has_location: nil, has_website: nil, include_retweet_timestamp: nil, location_contains: nil, max_followers: nil, max_following: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, omit: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
         #
         # @param id [String] Tweet ID to get retweeters
         #
         # @param bio_contains [String] Match any comma-separated or line-separated bio term, ignoring case.
         #
+        # @param blue_verified_only [Boolean] Only return profiles X marks as blue verified. X marks many business & governmen
+        #
+        # @param business_email_only [Boolean] Only return profiles that publish an email outside free webmail, such as Gmail.
+        #
         # @param cursor [String] Pagination cursor for retweeters
+        #
+        # @param email_domains [String] Only return profiles with an email at one of these domains. Separate domains wit
+        #
+        # @param enrich_profiles [Boolean] Add each row's full profile, as GET /x/users/{id} returns it. Pages take several
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #
+        # @param has_email [Boolean] Only return profiles that publish an email.
         #
         # @param has_location [Boolean] Only return profiles with a location.
         #
         # @param has_website [Boolean] Only return profiles with a website.
+        #
+        # @param include_retweet_timestamp [Boolean] Look up repost event times.
         #
         # @param location_contains [String] Match a location substring, ignoring case.
         #
@@ -556,6 +628,8 @@ module XTwitterScraper
         # @param min_following [Integer] Minimum following count.
         #
         # @param min_statuses [Integer] Minimum post count. minPosts is also accepted.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         # @param page_size [Integer] Maximum user profiles requested from this page (20-200, default 200). Source, fi
         #
@@ -578,8 +652,14 @@ module XTwitterScraper
             path: ["x/tweets/%1$s/retweeters", id],
             query: query.transform_keys(
               bio_contains: "bioContains",
+              blue_verified_only: "blueVerifiedOnly",
+              business_email_only: "businessEmailOnly",
+              email_domains: "emailDomains",
+              enrich_profiles: "enrichProfiles",
+              has_email: "hasEmail",
               has_location: "hasLocation",
               has_website: "hasWebsite",
+              include_retweet_timestamp: "includeRetweetTimestamp",
               location_contains: "locationContains",
               max_followers: "maxFollowers",
               max_following: "maxFollowing",
@@ -600,7 +680,7 @@ module XTwitterScraper
 
         # Get full conversation thread for a tweet
         #
-        # @overload get_thread(id, any_words: nil, blue_verified_only: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, to_user: nil, until_date: nil, url: nil, verified_only: nil, request_options: {})
+        # @overload get_thread(id, any_words: nil, blue_verified_only: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, fields: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, omit: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, since_id: nil, to_user: nil, until_date: nil, url: nil, verified_only: nil, within_time: nil, request_options: {})
         #
         # @param id [String] Tweet ID to get thread context
         #
@@ -618,6 +698,8 @@ module XTwitterScraper
         #
         # @param exclude_words [String] Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
         #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #
         # @param from_user [String] Filter by author username.
         #
         # @param hashtags [String] Hashtags separated by spaces, commas, or lines.
@@ -627,6 +709,8 @@ module XTwitterScraper
         # @param language [String] Language code filter, e.g. en or tr.
         #
         # @param max_faves [Integer] Maximum likes threshold. maxLikes is also accepted.
+        #
+        # @param max_id [String] Return Tweets at or below this ID.
         #
         # @param max_quotes [Integer] Maximum quotes threshold.
         #
@@ -642,6 +726,8 @@ module XTwitterScraper
         #
         # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
         #
+        # @param min_likes [Integer] Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+        #
         # @param min_quotes [Integer] Minimum quote count threshold.
         #
         # @param min_replies [Integer] Minimum replies threshold.
@@ -649,6 +735,10 @@ module XTwitterScraper
         # @param min_retweets [Integer] Minimum retweets threshold.
         #
         # @param min_views [Integer] Minimum view count threshold.
+        #
+        # @param native_retweets [Boolean] Only return native reposts.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
         #
@@ -664,6 +754,8 @@ module XTwitterScraper
         #
         # @param since_date [Date] Start date in YYYY-MM-DD format.
         #
+        # @param since_id [String] Return Tweets whose IDs exceed this ID. Searches accept `since_id` & `max_id` bo
+        #
         # @param to_user [String] Filter replies sent to a username.
         #
         # @param until_date [Date] End date in YYYY-MM-DD format.
@@ -671,6 +763,8 @@ module XTwitterScraper
         # @param url [String] URL substring or domain filter.
         #
         # @param verified_only [Boolean] Only return tweets from verified authors.
+        #
+        # @param within_time [String] Keeps Tweets from a recent window, such as 90m or 7d. Use a whole number & s, m,
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -692,23 +786,28 @@ module XTwitterScraper
               from_user: "fromUser",
               in_reply_to_tweet_id: "inReplyToTweetId",
               max_faves: "maxFaves",
+              max_id: "maxId",
               max_quotes: "maxQuotes",
               max_replies: "maxReplies",
               max_retweets: "maxRetweets",
               media_type: "mediaType",
               min_bookmarks: "minBookmarks",
               min_faves: "minFaves",
+              min_likes: "minLikes",
               min_quotes: "minQuotes",
               min_replies: "minReplies",
               min_retweets: "minRetweets",
               min_views: "minViews",
+              native_retweets: "nativeRetweets",
               page_size: "pageSize",
               quotes_of_tweet_id: "quotesOfTweetId",
               retweets_of_tweet_id: "retweetsOfTweetId",
               since_date: "sinceDate",
+              since_id: "sinceId",
               to_user: "toUser",
               until_date: "untilDate",
-              verified_only: "verifiedOnly"
+              verified_only: "verifiedOnly",
+              within_time: "withinTime"
             ),
             model: XTwitterScraper::PaginatedTweets,
             options: options
@@ -719,7 +818,7 @@ module XTwitterScraper
         # newest-first across cursor pages. Existing cursors preserve their established
         # ordering.
         #
-        # @overload search(q:, advanced_query: nil, any_words: nil, blue_verified_only: nil, bounding_box: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, from_user: nil, geocode: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, limit: nil, list_id: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, mode: nil, native_retweets: nil, near: nil, news: nil, place: nil, place_country: nil, point_radius: nil, query_type: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, since_time: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
+        # @overload search(q:, advanced_query: nil, any_words: nil, blue_verified_only: nil, bounding_box: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, fields: nil, from_user: nil, geocode: nil, hashtags: nil, image_shows: nil, in_reply_to_tweet_id: nil, keywords: nil, language: nil, limit: nil, list_id: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, mode: nil, native_retweets: nil, near: nil, news: nil, omit: nil, place: nil, place_country: nil, point_radius: nil, query_type: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, since_time: nil, source: nil, text_only_terms: nil, to_user: nil, topic: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
         #
         # @param q [String] Query, Tweet ID, or status URL. Valid inline bounds apply per page.
         #
@@ -745,13 +844,19 @@ module XTwitterScraper
         #
         # @param exclude_words [String] Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
         #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        #
         # @param from_user [String] Filter by author username.
         #
         # @param geocode [String] Match latitude, longitude, and radius.
         #
         # @param hashtags [String] Hashtags separated by spaces, commas, or lines.
         #
+        # @param image_shows [String] Keep only posts whose photos show this. Send charts, screenshots, product_photos
+        #
         # @param in_reply_to_tweet_id [String] Only replies to this tweet ID.
+        #
+        # @param keywords [String] Words the Tweets must match, in X search syntax.
         #
         # @param language [String] Language code filter, e.g. en or tr.
         #
@@ -777,6 +882,8 @@ module XTwitterScraper
         #
         # @param min_faves [Integer] Minimum likes threshold. minLikes is also accepted.
         #
+        # @param min_likes [Integer] Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+        #
         # @param min_quotes [Integer] Minimum quote count threshold.
         #
         # @param min_replies [Integer] Minimum replies threshold.
@@ -792,6 +899,8 @@ module XTwitterScraper
         # @param near [String] Match a place name.
         #
         # @param news [Boolean] Only return news results.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         # @param place [String] Search within a place ID.
         #
@@ -821,7 +930,11 @@ module XTwitterScraper
         #
         # @param source [String] Match the source application.
         #
+        # @param text_only_terms [String] Keeps a post only when at least 1 of these words or quoted phrases appears outsi
+        #
         # @param to_user [String] Filter replies sent to a username.
+        #
+        # @param topic [String] Keep only posts about this topic. AI-powered analysis asks "Is this post about <
         #
         # @param until_date [Date] End date in YYYY-MM-DD format.
         #
@@ -857,6 +970,7 @@ module XTwitterScraper
               exclude_source: "excludeSource",
               exclude_words: "excludeWords",
               from_user: "fromUser",
+              image_shows: "imageShows",
               in_reply_to_tweet_id: "inReplyToTweetId",
               list_id: "listId",
               max_faves: "maxFaves",
@@ -867,6 +981,7 @@ module XTwitterScraper
               media_type: "mediaType",
               min_bookmarks: "minBookmarks",
               min_faves: "minFaves",
+              min_likes: "minLikes",
               min_quotes: "minQuotes",
               min_replies: "minReplies",
               min_retweets: "minRetweets",
@@ -880,6 +995,7 @@ module XTwitterScraper
               since_date: "sinceDate",
               since_id: "sinceId",
               since_time: "sinceTime",
+              text_only_terms: "textOnlyTerms",
               to_user: "toUser",
               until_date: "untilDate",
               until_time: "untilTime",

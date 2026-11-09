@@ -30,7 +30,7 @@ module XTwitterScraper
 
       # List events
       #
-      # @overload list(cursor: nil, event_type: nil, keyword_monitor_id: nil, limit: nil, monitor_id: nil, request_options: {})
+      # @overload list(cursor: nil, event_type: nil, keyword_monitor_id: nil, limit: nil, monitor_id: nil, post_monitor_id: nil, request_options: {})
       #
       # @param cursor [String] Previous nextCursor.
       #
@@ -41,6 +41,8 @@ module XTwitterScraper
       # @param limit [Integer] Maximum number of items to return (1-100, default 50). For paid per-result endpo
       #
       # @param monitor_id [String] Account monitor ID.
+      #
+      # @param post_monitor_id [String] Post monitor ID. The post_monitor_id alias also works.
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -56,7 +58,8 @@ module XTwitterScraper
           query: query.transform_keys(
             event_type: "eventType",
             keyword_monitor_id: "keywordMonitorId",
-            monitor_id: "monitorId"
+            monitor_id: "monitorId",
+            post_monitor_id: "postMonitorId"
           ),
           model: XTwitterScraper::Models::EventListResponse,
           options: options

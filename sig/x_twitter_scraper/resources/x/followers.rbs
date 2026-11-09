@@ -9,6 +9,8 @@ module XTwitterScraper
         def check: (
           source: String,
           target: String,
+          ?fields: String,
+          ?omit: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::FollowerCheckResponse
 

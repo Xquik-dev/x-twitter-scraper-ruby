@@ -86,6 +86,19 @@ module XTwitterScraper
         sig { params(exclude_words: String).void }
         attr_writer :exclude_words
 
+        # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        # author.username. A list keeps the field in each item. Case & underscores do not
+        # matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+        # always stay. An unknown name answers 400 unknown_field with the valid names,
+        # before any read. The price stays the same. SDK row types then hold only the
+        # named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+        # the fields you need with `fields` & `omit`.
+        sig { returns(T.nilable(String)) }
+        attr_reader :fields
+
+        sig { params(fields: String).void }
+        attr_writer :fields
+
         # Filter by author username.
         sig { returns(T.nilable(String)) }
         attr_reader :from_user
@@ -106,6 +119,18 @@ module XTwitterScraper
 
         sig { params(hashtags: String).void }
         attr_writer :hashtags
+
+        # Keep only posts whose photos show this. Send charts, screenshots,
+        # product_photos, memes or people, or describe it in words, such as a rocket.
+        # AI-powered analysis checks posts with photos X doesn't mark sensitive & keeps
+        # scores of 0.5 or more. Other posts stay out at no charge. Each kept post costs 2
+        # credits, the AI analysis price, instead of the read price, & a post the filter
+        # drops costs nothing. imageFilter states the cutoff & counts.
+        sig { returns(T.nilable(String)) }
+        attr_reader :image_shows
+
+        sig { params(image_shows: String).void }
+        attr_writer :image_shows
 
         # Only replies to this tweet ID.
         sig { returns(T.nilable(String)) }
@@ -195,6 +220,13 @@ module XTwitterScraper
         sig { params(min_faves: Integer).void }
         attr_writer :min_faves
 
+        # Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :min_likes
+
+        sig { params(min_likes: Integer).void }
+        attr_writer :min_likes
+
         # Minimum quote count threshold.
         sig { returns(T.nilable(Integer)) }
         attr_reader :min_quotes
@@ -243,6 +275,15 @@ module XTwitterScraper
 
         sig { params(news: T::Boolean).void }
         attr_writer :news
+
+        # Fields to drop from each row, comma-separated. It takes the same names as
+        # fields. With fields, it drops from the kept fields. A longer URL fails at the
+        # edge before Xquik reads it.
+        sig { returns(T.nilable(String)) }
+        attr_reader :omit
+
+        sig { params(omit: String).void }
+        attr_writer :omit
 
         # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
         # results. Continue while has_next_page is true. Deprecated limit and count
@@ -356,6 +397,17 @@ module XTwitterScraper
         sig { params(to_user: String).void }
         attr_writer :to_user
 
+        # Keep only posts about this topic. AI-powered analysis asks "Is this post about
+        # <topic>?" of each post & keeps scores of 0.5 or more. It reads post text & safe
+        # photos. Each kept post costs 2 credits, the AI analysis price, instead of the
+        # read price, & a post the filter drops costs nothing. limit counts checked posts,
+        # & only kept posts come back. topicFilter states the cutoff & counts.
+        sig { returns(T.nilable(String)) }
+        attr_reader :topic
+
+        sig { params(topic: String).void }
+        attr_writer :topic
+
         # End date in YYYY-MM-DD format.
         sig { returns(T.nilable(Date)) }
         attr_reader :until_date
@@ -403,9 +455,11 @@ module XTwitterScraper
             exact_phrase: String,
             exclude_source: String,
             exclude_words: String,
+            fields: String,
             from_user: String,
             geocode: String,
             hashtags: String,
+            image_shows: String,
             in_reply_to_tweet_id: String,
             language: String,
             max_faves: Integer,
@@ -418,6 +472,7 @@ module XTwitterScraper
             mentioning: String,
             min_bookmarks: Integer,
             min_faves: Integer,
+            min_likes: Integer,
             min_quotes: Integer,
             min_replies: Integer,
             min_retweets: Integer,
@@ -425,6 +480,7 @@ module XTwitterScraper
             native_retweets: T::Boolean,
             near: String,
             news: T::Boolean,
+            omit: String,
             page_size: Integer,
             quotes:
               XTwitterScraper::X::UserRetrieveMediaParams::Quotes::OrSymbol,
@@ -439,6 +495,7 @@ module XTwitterScraper
             since_id: String,
             source: String,
             to_user: String,
+            topic: String,
             until_date: Date,
             url: String,
             verified_only: T::Boolean,
@@ -468,12 +525,27 @@ module XTwitterScraper
           exclude_source: nil,
           # Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
           exclude_words: nil,
+          # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+          # author.username. A list keeps the field in each item. Case & underscores do not
+          # matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+          # always stay. An unknown name answers 400 unknown_field with the valid names,
+          # before any read. The price stays the same. SDK row types then hold only the
+          # named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+          # the fields you need with `fields` & `omit`.
+          fields: nil,
           # Filter by author username.
           from_user: nil,
           # Match latitude, longitude, and radius.
           geocode: nil,
           # Hashtags separated by spaces, commas, or lines.
           hashtags: nil,
+          # Keep only posts whose photos show this. Send charts, screenshots,
+          # product_photos, memes or people, or describe it in words, such as a rocket.
+          # AI-powered analysis checks posts with photos X doesn't mark sensitive & keeps
+          # scores of 0.5 or more. Other posts stay out at no charge. Each kept post costs 2
+          # credits, the AI analysis price, instead of the read price, & a post the filter
+          # drops costs nothing. imageFilter states the cutoff & counts.
+          image_shows: nil,
           # Only replies to this tweet ID.
           in_reply_to_tweet_id: nil,
           # Language code filter, e.g. en or tr.
@@ -496,6 +568,8 @@ module XTwitterScraper
           min_bookmarks: nil,
           # Minimum likes threshold. minLikes is also accepted.
           min_faves: nil,
+          # Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+          min_likes: nil,
           # Minimum quote count threshold.
           min_quotes: nil,
           # Minimum replies threshold.
@@ -510,6 +584,10 @@ module XTwitterScraper
           near: nil,
           # Only return news results.
           news: nil,
+          # Fields to drop from each row, comma-separated. It takes the same names as
+          # fields. With fields, it drops from the kept fields. A longer URL fails at the
+          # edge before Xquik reads it.
+          omit: nil,
           # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
           # results. Continue while has_next_page is true. Deprecated limit and count
           # aliases remain accepted.
@@ -534,6 +612,12 @@ module XTwitterScraper
           source: nil,
           # Filter replies sent to a username.
           to_user: nil,
+          # Keep only posts about this topic. AI-powered analysis asks "Is this post about
+          # <topic>?" of each post & keeps scores of 0.5 or more. It reads post text & safe
+          # photos. Each kept post costs 2 credits, the AI analysis price, instead of the
+          # read price, & a post the filter drops costs nothing. limit counts checked posts,
+          # & only kept posts come back. topicFilter states the cutoff & counts.
+          topic: nil,
           # End date in YYYY-MM-DD format.
           until_date: nil,
           # URL substring or domain filter.
@@ -561,9 +645,11 @@ module XTwitterScraper
               exact_phrase: String,
               exclude_source: String,
               exclude_words: String,
+              fields: String,
               from_user: String,
               geocode: String,
               hashtags: String,
+              image_shows: String,
               in_reply_to_tweet_id: String,
               language: String,
               max_faves: Integer,
@@ -576,6 +662,7 @@ module XTwitterScraper
               mentioning: String,
               min_bookmarks: Integer,
               min_faves: Integer,
+              min_likes: Integer,
               min_quotes: Integer,
               min_replies: Integer,
               min_retweets: Integer,
@@ -583,6 +670,7 @@ module XTwitterScraper
               native_retweets: T::Boolean,
               near: String,
               news: T::Boolean,
+              omit: String,
               page_size: Integer,
               quotes:
                 XTwitterScraper::X::UserRetrieveMediaParams::Quotes::OrSymbol,
@@ -597,6 +685,7 @@ module XTwitterScraper
               since_id: String,
               source: String,
               to_user: String,
+              topic: String,
               until_date: Date,
               url: String,
               verified_only: T::Boolean,

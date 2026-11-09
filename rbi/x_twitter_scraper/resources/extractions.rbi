@@ -21,6 +21,7 @@ module XTwitterScraper
             XTwitterScraper::ExtractionRetrieveParams::OutputMode::OrSymbol,
           output_preset:
             XTwitterScraper::ExtractionRetrieveParams::OutputPreset::OrSymbol,
+          wait: Integer,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Models::ExtractionRetrieveResponse)
       end
@@ -39,6 +40,8 @@ module XTwitterScraper
         output_mode: nil,
         # Keep enrichment nested or merge it into each result.
         output_preset: nil,
+        # Wait up to this many seconds when the job is active.
+        wait: nil,
         request_options: {}
       )
       end
@@ -395,10 +398,20 @@ module XTwitterScraper
           id: String,
           format_:
             XTwitterScraper::ExtractionExportResultsParams::Format::OrSymbol,
+          business_email_only: T::Boolean,
+          compare: String,
+          email_domains: String,
           has_description: T::Boolean,
+          has_email: T::Boolean,
           has_location: T::Boolean,
           has_media: T::Boolean,
+          has_website: T::Boolean,
+          hide_fake: T::Boolean,
+          hide_inactive: T::Boolean,
+          joined_since: Date,
+          joined_until: Date,
           lang: String,
+          location: String,
           max_followers: Integer,
           max_following: Integer,
           max_posts: Integer,
@@ -421,14 +434,39 @@ module XTwitterScraper
         id,
         # Export file format
         format_:,
+        # Require an email outside free webmail, such as Gmail, in the row's Email column.
+        business_email_only: nil,
+        # ID of another run of this tool. For an earlier whole run of the same account,
+        # the export holds only the rows that differ. For a run of another account, it
+        # holds only this run's rows that the other run also lists.
+        compare: nil,
+        # Require the row's email at one of these domains. Separate domains with commas.
+        # Subdomains match.
+        email_domains: nil,
         # Require a non-empty description.
         has_description: nil,
+        # Require an email in the row's Email column.
+        has_email: nil,
         # Require a non-empty location.
         has_location: nil,
         # Require media.
         has_media: nil,
+        # Require a website on the profile.
+        has_website: nil,
+        # Drop accounts with at least 3 of these signs. No posts, a default picture, an
+        # empty bio, or following at least 100 accounts and 10 times their followers.
+        hide_fake: nil,
+        # Drop accounts with under 1 post a month since joining that are at least 180 days
+        # old.
+        hide_inactive: nil,
+        # Keep accounts that joined X on this UTC day or later.
+        joined_since: nil,
+        # Keep accounts that joined X before this UTC day.
+        joined_until: nil,
         # Filter by language code.
         lang: nil,
+        # Keep accounts whose location contains this text.
+        location: nil,
         # Maximum follower count.
         max_followers: nil,
         # Maximum following count.

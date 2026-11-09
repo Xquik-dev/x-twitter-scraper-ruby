@@ -10,19 +10,27 @@ module XTwitterScraper
           id: String,
           after: String,
           bio_contains: String,
+          blue_verified_only: bool,
+          business_email_only: bool,
           cursor: String,
+          email_domains: String,
+          enrich_profiles: bool,
+          fields: String,
+          has_email: bool,
           has_location: bool,
           has_website: bool,
           limit: Integer,
           location_contains: String,
           max_followers: Integer,
           max_following: Integer,
+          max_scan: Integer,
           max_statuses: Integer,
           min_account_age_days: Integer,
           min_followers: Integer,
           min_following: Integer,
           min_statuses: Integer,
           mode: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersParams::mode,
+          omit: String,
           page_size: Integer,
           username_contains: String,
           verified_only: bool,
@@ -44,9 +52,33 @@ module XTwitterScraper
 
         def bio_contains=: (String) -> String
 
+        attr_reader blue_verified_only: bool?
+
+        def blue_verified_only=: (bool) -> bool
+
+        attr_reader business_email_only: bool?
+
+        def business_email_only=: (bool) -> bool
+
         attr_reader cursor: String?
 
         def cursor=: (String) -> String
+
+        attr_reader email_domains: String?
+
+        def email_domains=: (String) -> String
+
+        attr_reader enrich_profiles: bool?
+
+        def enrich_profiles=: (bool) -> bool
+
+        attr_reader fields: String?
+
+        def fields=: (String) -> String
+
+        attr_reader has_email: bool?
+
+        def has_email=: (bool) -> bool
 
         attr_reader has_location: bool?
 
@@ -71,6 +103,10 @@ module XTwitterScraper
         attr_reader max_following: Integer?
 
         def max_following=: (Integer) -> Integer
+
+        attr_reader max_scan: Integer?
+
+        def max_scan=: (Integer) -> Integer
 
         attr_reader max_statuses: Integer?
 
@@ -98,6 +134,10 @@ module XTwitterScraper
           XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersParams::mode
         ) -> XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersParams::mode
 
+        attr_reader omit: String?
+
+        def omit=: (String) -> String
+
         attr_reader page_size: Integer?
 
         def page_size=: (Integer) -> Integer
@@ -118,19 +158,27 @@ module XTwitterScraper
           id: String,
           ?after: String,
           ?bio_contains: String,
+          ?blue_verified_only: bool,
+          ?business_email_only: bool,
           ?cursor: String,
+          ?email_domains: String,
+          ?enrich_profiles: bool,
+          ?fields: String,
+          ?has_email: bool,
           ?has_location: bool,
           ?has_website: bool,
           ?limit: Integer,
           ?location_contains: String,
           ?max_followers: Integer,
           ?max_following: Integer,
+          ?max_scan: Integer,
           ?max_statuses: Integer,
           ?min_account_age_days: Integer,
           ?min_followers: Integer,
           ?min_following: Integer,
           ?min_statuses: Integer,
           ?mode: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersParams::mode,
+          ?omit: String,
           ?page_size: Integer,
           ?username_contains: String,
           ?verified_only: bool,
@@ -142,19 +190,27 @@ module XTwitterScraper
           id: String,
           after: String,
           bio_contains: String,
+          blue_verified_only: bool,
+          business_email_only: bool,
           cursor: String,
+          email_domains: String,
+          enrich_profiles: bool,
+          fields: String,
+          has_email: bool,
           has_location: bool,
           has_website: bool,
           limit: Integer,
           location_contains: String,
           max_followers: Integer,
           max_following: Integer,
+          max_scan: Integer,
           max_statuses: Integer,
           min_account_age_days: Integer,
           min_followers: Integer,
           min_following: Integer,
           min_statuses: Integer,
           mode: XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersParams::mode,
+          omit: String,
           page_size: Integer,
           username_contains: String,
           verified_only: bool,
