@@ -5,16 +5,32 @@
 module XTwitterScraper
   module Models
     type style_list_response =
-      { styles: ::Array[XTwitterScraper::StyleProfileSummary] }
+      {
+        has_more: bool,
+        styles: ::Array[XTwitterScraper::StyleProfileSummary],
+        next_cursor: String
+      }
 
     class StyleListResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor has_more: bool
+
       attr_accessor styles: ::Array[XTwitterScraper::StyleProfileSummary]
 
+      attr_reader next_cursor: String?
+
+      def next_cursor=: (String) -> String
+
       def initialize: (
-        styles: ::Array[XTwitterScraper::StyleProfileSummary]
+        has_more: bool,
+        styles: ::Array[XTwitterScraper::StyleProfileSummary],
+        ?next_cursor: String
       ) -> void
 
-      def to_hash: -> { styles: ::Array[XTwitterScraper::StyleProfileSummary] }
+      def to_hash: -> {
+        has_more: bool,
+        styles: ::Array[XTwitterScraper::StyleProfileSummary],
+        next_cursor: String
+      }
     end
   end
 end
