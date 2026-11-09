@@ -4,14 +4,33 @@
 
 module XTwitterScraper
   module Models
-    type webhook_list_response = { webhooks: ::Array[XTwitterScraper::Webhook] }
+    type webhook_list_response =
+      {
+        has_more: bool,
+        webhooks: ::Array[XTwitterScraper::Webhook],
+        next_cursor: String
+      }
 
     class WebhookListResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor has_more: bool
+
       attr_accessor webhooks: ::Array[XTwitterScraper::Webhook]
 
-      def initialize: (webhooks: ::Array[XTwitterScraper::Webhook]) -> void
+      attr_reader next_cursor: String?
 
-      def to_hash: -> { webhooks: ::Array[XTwitterScraper::Webhook] }
+      def next_cursor=: (String) -> String
+
+      def initialize: (
+        has_more: bool,
+        webhooks: ::Array[XTwitterScraper::Webhook],
+        ?next_cursor: String
+      ) -> void
+
+      def to_hash: -> {
+        has_more: bool,
+        webhooks: ::Array[XTwitterScraper::Webhook],
+        next_cursor: String
+      }
     end
   end
 end
