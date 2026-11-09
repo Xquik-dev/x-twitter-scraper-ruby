@@ -25,6 +25,12 @@ module XTwitterScraper
         sig { params(created_at: Time).void }
         attr_writer :created_at
 
+        sig { returns(T.nilable(Time)) }
+        attr_reader :expires_at
+
+        sig { params(expires_at: Time).void }
+        attr_writer :expires_at
+
         sig do
           returns(
             T.nilable(
@@ -50,6 +56,24 @@ module XTwitterScraper
         attr_accessor :status
 
         sig { returns(T.nilable(String)) }
+        attr_reader :message
+
+        sig { params(message: String).void }
+        attr_writer :message
+
+        sig { returns(T.nilable(Symbol)) }
+        attr_reader :object
+
+        sig { params(object: Symbol).void }
+        attr_writer :object
+
+        sig { returns(T.nilable(String)) }
+        attr_reader :username
+
+        sig { params(username: String).void }
+        attr_writer :username
+
+        sig { returns(T.nilable(String)) }
         attr_reader :x_user_id
 
         sig { params(x_user_id: String).void }
@@ -68,8 +92,12 @@ module XTwitterScraper
             status:
               XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Status::OrSymbol,
             created_at: Time,
+            expires_at: Time,
             health:
               XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Health::OrSymbol,
+            message: String,
+            object: Symbol,
+            username: String,
             x_user_id: String,
             x_username: String
           ).returns(T.attached_class)
@@ -78,7 +106,11 @@ module XTwitterScraper
           id:,
           status:,
           created_at: nil,
+          expires_at: nil,
           health: nil,
+          message: nil,
+          object: :x_account_connection_challenge,
+          username: nil,
           x_user_id: nil,
           x_username: nil
         )
@@ -89,10 +121,14 @@ module XTwitterScraper
             {
               id: String,
               created_at: Time,
+              expires_at: Time,
               health:
                 XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Health::TaggedSymbol,
               status:
                 XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Status::TaggedSymbol,
+              message: String,
+              object: Symbol,
+              username: String,
               x_user_id: String,
               x_username: String
             }

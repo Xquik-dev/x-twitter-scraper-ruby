@@ -31,22 +31,43 @@ module XTwitterScraper
 
       type article =
         {
+          article_id: String,
+          body_markdown: String,
           body_text: String,
+          bookmark_count: Integer,
           contents: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content],
           cover_image_url: String,
+          cover_media: ::Hash[Symbol, top],
           created_at: String,
+          lifecycle_state: ::Hash[Symbol, top],
           like_count: Integer,
+          metadata: ::Hash[Symbol, top],
           preview_text: String,
           quote_count: Integer,
           reply_count: Integer,
+          retweet_count: Integer,
+          summary_text: String,
           title: String,
+          unknown_counts: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::unknown_count],
           view_count: Integer
         }
 
       class Article < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader article_id: String?
+
+        def article_id=: (String) -> String
+
+        attr_reader body_markdown: String?
+
+        def body_markdown=: (String) -> String
+
         attr_reader body_text: String?
 
         def body_text=: (String) -> String
+
+        attr_reader bookmark_count: Integer?
+
+        def bookmark_count=: (Integer) -> Integer
 
         attr_reader contents: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content]?
 
@@ -58,13 +79,25 @@ module XTwitterScraper
 
         def cover_image_url=: (String) -> String
 
+        attr_reader cover_media: ::Hash[Symbol, top]?
+
+        def cover_media=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
         attr_reader created_at: String?
 
         def created_at=: (String) -> String
 
+        attr_reader lifecycle_state: ::Hash[Symbol, top]?
+
+        def lifecycle_state=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
         attr_reader like_count: Integer?
 
         def like_count=: (Integer) -> Integer
+
+        attr_reader metadata: ::Hash[Symbol, top]?
+
+        def metadata=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
         attr_reader preview_text: String?
 
@@ -78,52 +111,103 @@ module XTwitterScraper
 
         def reply_count=: (Integer) -> Integer
 
+        attr_reader retweet_count: Integer?
+
+        def retweet_count=: (Integer) -> Integer
+
+        attr_reader summary_text: String?
+
+        def summary_text=: (String) -> String
+
         attr_reader title: String?
 
         def title=: (String) -> String
+
+        attr_reader unknown_counts: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::unknown_count]?
+
+        def unknown_counts=: (
+          ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::unknown_count]
+        ) -> ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::unknown_count]
 
         attr_reader view_count: Integer?
 
         def view_count=: (Integer) -> Integer
 
         def initialize: (
+          ?article_id: String,
+          ?body_markdown: String,
           ?body_text: String,
+          ?bookmark_count: Integer,
           ?contents: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content],
           ?cover_image_url: String,
+          ?cover_media: ::Hash[Symbol, top],
           ?created_at: String,
+          ?lifecycle_state: ::Hash[Symbol, top],
           ?like_count: Integer,
+          ?metadata: ::Hash[Symbol, top],
           ?preview_text: String,
           ?quote_count: Integer,
           ?reply_count: Integer,
+          ?retweet_count: Integer,
+          ?summary_text: String,
           ?title: String,
+          ?unknown_counts: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::unknown_count],
           ?view_count: Integer
         ) -> void
 
         def to_hash: -> {
+          article_id: String,
+          body_markdown: String,
           body_text: String,
+          bookmark_count: Integer,
           contents: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content],
           cover_image_url: String,
+          cover_media: ::Hash[Symbol, top],
           created_at: String,
+          lifecycle_state: ::Hash[Symbol, top],
           like_count: Integer,
+          metadata: ::Hash[Symbol, top],
           preview_text: String,
           quote_count: Integer,
           reply_count: Integer,
+          retweet_count: Integer,
+          summary_text: String,
           title: String,
+          unknown_counts: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::unknown_count],
           view_count: Integer
         }
 
         type content =
           {
+            alt_text: String,
+            caption: String,
+            duration_ms: Integer,
             height: Integer,
             inline_style_ranges: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::InlineStyleRange],
+            links: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::Link],
+            media_type: XTwitterScraper::Models::XGetArticleResponse::Article::Content::media_type,
             preview_url: String,
             text: String,
+            tweet_id: String,
             type: String,
             url: String,
+            variants: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::Variant],
             width: Integer
           }
 
         class Content < XTwitterScraper::Internal::Type::BaseModel
+          attr_reader alt_text: String?
+
+          def alt_text=: (String) -> String
+
+          attr_reader caption: String?
+
+          def caption=: (String) -> String
+
+          attr_reader duration_ms: Integer?
+
+          def duration_ms=: (Integer) -> Integer
+
           attr_reader height: Integer?
 
           def height=: (Integer) -> Integer
@@ -134,6 +218,18 @@ module XTwitterScraper
             ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::InlineStyleRange]
           ) -> ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::InlineStyleRange]
 
+          attr_reader links: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::Link]?
+
+          def links=: (
+            ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::Link | ::Hash[Symbol, top]]
+          ) -> ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::Link]
+
+          attr_reader media_type: XTwitterScraper::Models::XGetArticleResponse::Article::Content::media_type?
+
+          def media_type=: (
+            XTwitterScraper::Models::XGetArticleResponse::Article::Content::media_type
+          ) -> XTwitterScraper::Models::XGetArticleResponse::Article::Content::media_type
+
           attr_reader preview_url: String?
 
           def preview_url=: (String) -> String
@@ -141,6 +237,10 @@ module XTwitterScraper
           attr_reader text: String?
 
           def text=: (String) -> String
+
+          attr_reader tweet_id: String?
+
+          def tweet_id=: (String) -> String
 
           attr_reader type: String?
 
@@ -150,27 +250,47 @@ module XTwitterScraper
 
           def url=: (String) -> String
 
+          attr_reader variants: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::Variant]?
+
+          def variants=: (
+            ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::Variant | ::Hash[Symbol, top]]
+          ) -> ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::Variant]
+
           attr_reader width: Integer?
 
           def width=: (Integer) -> Integer
 
           def initialize: (
+            ?alt_text: String,
+            ?caption: String,
+            ?duration_ms: Integer,
             ?height: Integer,
             ?inline_style_ranges: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::InlineStyleRange],
+            ?links: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::Link | ::Hash[Symbol, top]],
+            ?media_type: XTwitterScraper::Models::XGetArticleResponse::Article::Content::media_type,
             ?preview_url: String,
             ?text: String,
+            ?tweet_id: String,
             ?type: String,
             ?url: String,
+            ?variants: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::Variant | ::Hash[Symbol, top]],
             ?width: Integer
           ) -> void
 
           def to_hash: -> {
+            alt_text: String,
+            caption: String,
+            duration_ms: Integer,
             height: Integer,
             inline_style_ranges: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::InlineStyleRange],
+            links: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::Link],
+            media_type: XTwitterScraper::Models::XGetArticleResponse::Article::Content::media_type,
             preview_url: String,
             text: String,
+            tweet_id: String,
             type: String,
             url: String,
+            variants: ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::Variant],
             width: Integer
           }
 
@@ -198,6 +318,83 @@ module XTwitterScraper
 
             def to_hash: -> { length: Integer, offset: Integer, style: String }
           end
+
+          type link = ::Hash[Symbol, top]
+
+          class Link < XTwitterScraper::Internal::Type::BaseModel
+            attr_reader offset: Integer?
+
+            def offset=: (Integer) -> Integer
+
+            attr_reader length: Integer?
+
+            def length=: (Integer) -> Integer
+
+            attr_reader url: String?
+
+            def url=: (String) -> String
+
+            def initialize: (
+              ?offset: Integer,
+              ?length: Integer,
+              ?url: String
+            ) -> void
+
+            def to_hash: -> ::Hash[Symbol, top]
+          end
+
+          type media_type = :image | :video | :gif
+
+          module MediaType
+            extend XTwitterScraper::Internal::Type::Enum
+
+            IMAGE: :image
+            VIDEO: :video
+            GIF: :gif
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::Content::media_type]
+          end
+
+          type variant = ::Hash[Symbol, top]
+
+          class Variant < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor content_type: String
+
+            attr_accessor url: String
+
+            attr_reader bitrate: Integer?
+
+            def bitrate=: (Integer) -> Integer
+
+            def initialize: (
+              content_type: String,
+              url: String,
+              ?bitrate: Integer
+            ) -> void
+
+            def to_hash: -> ::Hash[Symbol, top]
+          end
+        end
+
+        type unknown_count =
+          :retweetCount
+          | :replyCount
+          | :likeCount
+          | :quoteCount
+          | :viewCount
+          | :bookmarkCount
+
+        module UnknownCount
+          extend XTwitterScraper::Internal::Type::Enum
+
+          RETWEET_COUNT: :retweetCount
+          REPLY_COUNT: :replyCount
+          LIKE_COUNT: :likeCount
+          QUOTE_COUNT: :quoteCount
+          VIEW_COUNT: :viewCount
+          BOOKMARK_COUNT: :bookmarkCount
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::XGetArticleResponse::Article::unknown_count]
         end
       end
 

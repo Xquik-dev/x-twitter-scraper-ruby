@@ -26,6 +26,21 @@ module XTwitterScraper
       sig { returns(T.nilable(Integer)) }
       attr_accessor :amount_dollars
 
+      # Currency the checkout charged.
+      sig { returns(T.nilable(XTwitterScraper::Models::Currency::TaggedSymbol)) }
+      attr_reader :charged_currency
+
+      sig { params(charged_currency: XTwitterScraper::Models::Currency::OrSymbol).void }
+      attr_writer :charged_currency
+
+      # Amount the checkout charged before tax, in the currency's smallest unit. JPY and
+      # KRW have no decimals, so 1580 JPY is ¥1,580.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :charged_minor_units
+
+      sig { params(charged_minor_units: Integer).void }
+      attr_writer :charged_minor_units
+
       # Bigint string credit amount granted or pending.
       sig { returns(T.nilable(String)) }
       attr_reader :credits
@@ -38,13 +53,18 @@ module XTwitterScraper
           status:
             XTwitterScraper::Models::CreditRetrieveTopupStatusResponse::Status::OrSymbol,
           amount_dollars: T.nilable(Integer),
-          credits: String
+          charged_currency: XTwitterScraper::Models::Currency::OrSymbol, charged_minor_units: Integer, credits: String
         ).returns(T.attached_class)
       end
       def self.new(
         status:,
         # Dollar amount requested for the top-up.
         amount_dollars: nil,
+# Currency the checkout charged.
+charged_currency: nil,
+# Amount the checkout charged before tax, in the currency's smallest unit. JPY and
+# KRW have no decimals, so 1580 JPY is ¥1,580.
+charged_minor_units: nil,
         # Bigint string credit amount granted or pending.
         credits: nil
       )
@@ -56,7 +76,7 @@ module XTwitterScraper
             status:
               XTwitterScraper::Models::CreditRetrieveTopupStatusResponse::Status::TaggedSymbol,
             amount_dollars: T.nilable(Integer),
-            credits: String
+            charged_currency: XTwitterScraper::Models::Currency::TaggedSymbol, charged_minor_units: Integer, credits: String
           }
         )
       end
