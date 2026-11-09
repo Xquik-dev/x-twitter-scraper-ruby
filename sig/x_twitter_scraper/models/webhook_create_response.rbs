@@ -10,7 +10,8 @@ module XTwitterScraper
         created_at: Time,
         event_types: ::Array[XTwitterScraper::Models::event_type],
         secret: String,
-        url: String
+        url: String,
+        ignored_fields: ::Array[String]
       }
 
     class WebhookCreateResponse < XTwitterScraper::Internal::Type::BaseModel
@@ -24,12 +25,17 @@ module XTwitterScraper
 
       attr_accessor url: String
 
+      attr_reader ignored_fields: ::Array[String]?
+
+      def ignored_fields=: (::Array[String]) -> ::Array[String]
+
       def initialize: (
         id: String,
         created_at: Time,
         event_types: ::Array[XTwitterScraper::Models::event_type],
         secret: String,
-        url: String
+        url: String,
+        ?ignored_fields: ::Array[String]
       ) -> void
 
       def to_hash: -> {
@@ -37,7 +43,8 @@ module XTwitterScraper
         created_at: Time,
         event_types: ::Array[XTwitterScraper::Models::event_type],
         secret: String,
-        url: String
+        url: String,
+        ignored_fields: ::Array[String]
       }
     end
   end
