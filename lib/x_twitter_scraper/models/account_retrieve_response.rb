@@ -34,6 +34,12 @@ module XTwitterScraper
       #   @return [Symbol, XTwitterScraper::Models::AccountRetrieveResponse::Plan]
       required :plan, enum: -> { XTwitterScraper::Models::AccountRetrieveResponse::Plan }
 
+      # @!attribute subscription
+      #   Subscription state without billing provider identifiers.
+      #
+      #   @return [XTwitterScraper::Models::AccountRetrieveResponse::Subscription]
+      required :subscription, -> { XTwitterScraper::Models::AccountRetrieveResponse::Subscription }
+
       # @!attribute credit_info
       #
       #   @return [XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo, nil]
@@ -47,7 +53,7 @@ module XTwitterScraper
       #   @return [String, nil]
       optional :x_username, String, api_name: :xUsername
 
-      # @!method initialize(monitor_billing:, monitors_allowed:, monitors_used:, plan:, credit_info: nil, x_username: nil)
+      # @!method initialize(monitor_billing:, monitors_allowed:, monitors_used:, plan:, subscription:, credit_info: nil, x_username: nil)
       #   @param monitor_billing [XTwitterScraper::Models::AccountRetrieveResponse::MonitorBilling]
       #
       #   @param monitors_allowed [Integer] Deprecated. Monitor slots are unlimited, so this is always Number.MAX_SAFE_INTEG
@@ -55,6 +61,8 @@ module XTwitterScraper
       #   @param monitors_used [Integer]
       #
       #   @param plan [Symbol, XTwitterScraper::Models::AccountRetrieveResponse::Plan]
+      #
+      #   @param subscription [XTwitterScraper::Models::AccountRetrieveResponse::Subscription] Subscription state without billing provider identifiers.
       #
       #   @param credit_info [XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo]
       #
@@ -190,6 +198,67 @@ module XTwitterScraper
         #   @param lifetime_purchased [String] Total purchased credits as a bigint string.
         #
         #   @param lifetime_used [String] Total consumed credits as a bigint string.
+      end
+
+      # @see XTwitterScraper::Models::AccountRetrieveResponse#subscription
+      class Subscription < XTwitterScraper::Internal::Type::BaseModel
+        # @!attribute status
+        #
+        #   @return [Symbol, XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Status]
+        required :status, enum: -> { XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Status }
+
+        # @!attribute tier
+        #
+        #   @return [Symbol, XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Tier, nil]
+        optional :tier, enum: -> { XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Tier }
+
+        # @!attribute current_period_start
+        #
+        #   @return [Time, nil]
+        optional :current_period_start, Time, api_name: :currentPeriodStart
+
+        # @!attribute current_period_end
+        #   Renewal date, or the end date when canceling.
+        #
+        #   @return [Time, nil]
+        optional :current_period_end, Time, api_name: :currentPeriodEnd
+
+        # @!method initialize(status:, tier: nil, current_period_start: nil, current_period_end: nil)
+        #   Subscription state without billing provider identifiers.
+        #
+        #   @param status [Symbol, XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Status]
+        #
+        #   @param tier [Symbol, XTwitterScraper::Models::AccountRetrieveResponse::Subscription::Tier]
+        #
+        #   @param current_period_start [Time]
+        #
+        #   @param current_period_end [Time] Renewal date, or the end date when canceling.
+
+        # @see XTwitterScraper::Models::AccountRetrieveResponse::Subscription#status
+        module Status
+          extend XTwitterScraper::Internal::Type::Enum
+
+          NONE = :none
+          ACTIVE = :active
+          PAST_DUE = :past_due
+          CANCELING = :canceling
+          INCOMPLETE = :incomplete
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # @see XTwitterScraper::Models::AccountRetrieveResponse::Subscription#tier
+        module Tier
+          extend XTwitterScraper::Internal::Type::Enum
+
+          STARTER = :starter
+          PRO = :pro
+          BUSINESS = :business
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
     end
   end

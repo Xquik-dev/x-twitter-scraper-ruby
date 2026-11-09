@@ -10,6 +10,7 @@ module XTwitterScraper
         monitors_allowed: Integer,
         monitors_used: Integer,
         plan: XTwitterScraper::Models::AccountRetrieveResponse::plan,
+        subscription: XTwitterScraper::Models::AccountRetrieveResponse::Subscription,
         credit_info: XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo,
         x_username: String
       }
@@ -22,6 +23,8 @@ module XTwitterScraper
       attr_accessor monitors_used: Integer
 
       attr_accessor plan: XTwitterScraper::Models::AccountRetrieveResponse::plan
+
+      attr_accessor subscription: XTwitterScraper::Models::AccountRetrieveResponse::Subscription
 
       attr_reader credit_info: XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo?
 
@@ -38,6 +41,7 @@ module XTwitterScraper
         monitors_allowed: Integer,
         monitors_used: Integer,
         plan: XTwitterScraper::Models::AccountRetrieveResponse::plan,
+        subscription: XTwitterScraper::Models::AccountRetrieveResponse::Subscription | ::Hash[Symbol, top],
         ?credit_info: XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo,
         ?x_username: String
       ) -> void
@@ -47,6 +51,7 @@ module XTwitterScraper
         monitors_allowed: Integer,
         monitors_used: Integer,
         plan: XTwitterScraper::Models::AccountRetrieveResponse::plan,
+        subscription: XTwitterScraper::Models::AccountRetrieveResponse::Subscription,
         credit_info: XTwitterScraper::Models::AccountRetrieveResponse::CreditInfo,
         x_username: String
       }
@@ -154,6 +159,61 @@ module XTwitterScraper
           lifetime_purchased: String,
           lifetime_used: String
         }
+      end
+
+      type subscription = ::Hash[Symbol, top]
+
+      class Subscription < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor status: XTwitterScraper::Models::AccountRetrieveResponse::Subscription::status
+
+        attr_reader tier: XTwitterScraper::Models::AccountRetrieveResponse::Subscription::tier?
+
+        def tier=: (
+          XTwitterScraper::Models::AccountRetrieveResponse::Subscription::tier
+        ) -> XTwitterScraper::Models::AccountRetrieveResponse::Subscription::tier
+
+        attr_reader current_period_start: Time?
+
+        def current_period_start=: (Time) -> Time
+
+        attr_reader current_period_end: Time?
+
+        def current_period_end=: (Time) -> Time
+
+        def initialize: (
+          status: XTwitterScraper::Models::AccountRetrieveResponse::Subscription::status,
+          ?tier: XTwitterScraper::Models::AccountRetrieveResponse::Subscription::tier,
+          ?current_period_start: Time,
+          ?current_period_end: Time
+        ) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
+
+        type status = :none | :active | :past_due | :canceling | :incomplete
+
+        module Status
+          extend XTwitterScraper::Internal::Type::Enum
+
+          NONE: :none
+          ACTIVE: :active
+          PAST_DUE: :past_due
+          CANCELING: :canceling
+          INCOMPLETE: :incomplete
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::AccountRetrieveResponse::Subscription::status]
+        end
+
+        type tier = :starter | :pro | :business
+
+        module Tier
+          extend XTwitterScraper::Internal::Type::Enum
+
+          STARTER: :starter
+          PRO: :pro
+          BUSINESS: :business
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::AccountRetrieveResponse::Subscription::tier]
+        end
       end
     end
   end
