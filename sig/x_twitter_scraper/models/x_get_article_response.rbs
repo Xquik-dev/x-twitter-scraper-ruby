@@ -218,6 +218,7 @@ module XTwitterScraper
           media_count: Integer,
           profile_banner_url: String,
           profile_picture: String,
+          profile_picture_original: String,
           protected: bool,
           statuses_count: Integer,
           url: String
@@ -278,6 +279,10 @@ module XTwitterScraper
 
         def profile_picture=: (String) -> String
 
+        attr_reader profile_picture_original: String?
+
+        def profile_picture_original=: (String) -> String
+
         attr_reader protected: bool?
 
         def protected=: (bool) -> bool
@@ -306,6 +311,7 @@ module XTwitterScraper
           ?media_count: Integer,
           ?profile_banner_url: String,
           ?profile_picture: String,
+          ?profile_picture_original: String,
           ?protected: bool,
           ?statuses_count: Integer,
           ?url: String
@@ -327,6 +333,7 @@ module XTwitterScraper
           media_count: Integer,
           profile_banner_url: String,
           profile_picture: String,
+          profile_picture_original: String,
           protected: bool,
           statuses_count: Integer,
           url: String
