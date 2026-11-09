@@ -154,6 +154,8 @@ module XTwitterScraper
 
   RadarRetrieveTrendingTopicsParams = XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams
 
+  ReplyTweet = XTwitterScraper::Models::ReplyTweet
+
   SearchTweet = XTwitterScraper::Models::SearchTweet
 
   StyleAnalyzeParams = XTwitterScraper::Models::StyleAnalyzeParams

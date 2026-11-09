@@ -65,6 +65,8 @@ module XTwitterScraper
 
   class ProfileContactInfo = XTwitterScraper::Models::ProfileContactInfo
 
+  class ReplyTweet = XTwitterScraper::Models::ReplyTweet
+
   class TweetAuthorUnavailable = XTwitterScraper::Models::TweetAuthorUnavailable
 
   class TweetExclusiveContent = XTwitterScraper::Models::TweetExclusiveContent
