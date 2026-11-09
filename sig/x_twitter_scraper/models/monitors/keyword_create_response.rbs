@@ -12,7 +12,10 @@ module XTwitterScraper
           event_types: ::Array[XTwitterScraper::Models::event_type],
           is_active: bool,
           next_billing_at: Time,
-          query: String
+          query: String,
+          name: String,
+          paused_at: Time,
+          paused_reason: XTwitterScraper::Models::Monitors::KeywordCreateResponse::paused_reason
         }
 
       class KeywordCreateResponse < XTwitterScraper::Internal::Type::BaseModel
@@ -28,13 +31,30 @@ module XTwitterScraper
 
         attr_accessor query: String
 
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_reader paused_at: Time?
+
+        def paused_at=: (Time) -> Time
+
+        attr_reader paused_reason: XTwitterScraper::Models::Monitors::KeywordCreateResponse::paused_reason?
+
+        def paused_reason=: (
+          XTwitterScraper::Models::Monitors::KeywordCreateResponse::paused_reason
+        ) -> XTwitterScraper::Models::Monitors::KeywordCreateResponse::paused_reason
+
         def initialize: (
           id: String,
           created_at: Time,
           event_types: ::Array[XTwitterScraper::Models::event_type],
           is_active: bool,
           next_billing_at: Time,
-          query: String
+          query: String,
+          ?name: String,
+          ?paused_at: Time,
+          ?paused_reason: XTwitterScraper::Models::Monitors::KeywordCreateResponse::paused_reason
         ) -> void
 
         def to_hash: -> {
@@ -43,8 +63,21 @@ module XTwitterScraper
           event_types: ::Array[XTwitterScraper::Models::event_type],
           is_active: bool,
           next_billing_at: Time,
-          query: String
+          query: String,
+          name: String,
+          paused_at: Time,
+          paused_reason: XTwitterScraper::Models::Monitors::KeywordCreateResponse::paused_reason
         }
+
+        type paused_reason = :insufficient_credits
+
+        module PausedReason
+          extend XTwitterScraper::Internal::Type::Enum
+
+          INSUFFICIENT_CREDITS: :insufficient_credits
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::Monitors::KeywordCreateResponse::paused_reason]
+        end
       end
     end
   end
