@@ -58,12 +58,6 @@
     ]
   },
   {
-    "reason": "The SDK's types mark these fields required and the spec does not. The SDK enforces neither when it sends a request, so this shows only in its type signatures.",
-    "differences": [
-      "POST /api/v1/x/media request required url"
-    ]
-  },
-  {
     "reason": "The SDK's model and the spec disagree on whether the API always returns these fields. The SDK reads a response either way, so this shows only in its type signatures.",
     "differences": [
       "GET /api/v1/x/communities/{id}/info response required community.creator.verified"
