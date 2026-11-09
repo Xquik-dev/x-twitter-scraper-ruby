@@ -7,18 +7,30 @@ module XTwitterScraper
     module Support
       type ticket_list_response =
         {
-          tickets: ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket]
+          has_more: bool,
+          tickets: ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket],
+          next_cursor: String
         }
 
       class TicketListResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor has_more: bool
+
         attr_accessor tickets: ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket]
 
+        attr_reader next_cursor: String?
+
+        def next_cursor=: (String) -> String
+
         def initialize: (
-          tickets: ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket]
+          has_more: bool,
+          tickets: ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket],
+          ?next_cursor: String
         ) -> void
 
         def to_hash: -> {
-          tickets: ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket]
+          has_more: bool,
+          tickets: ::Array[XTwitterScraper::Models::Support::TicketListResponse::Ticket],
+          next_cursor: String
         }
 
         type ticket =

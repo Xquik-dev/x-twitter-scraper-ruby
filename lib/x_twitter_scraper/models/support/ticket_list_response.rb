@@ -9,14 +9,26 @@ module XTwitterScraper
     module Support
       # @see XTwitterScraper::Resources::Support::Tickets#list
       class TicketListResponse < XTwitterScraper::Internal::Type::BaseModel
+        # @!attribute has_more
+        #
+        #   @return [Boolean]
+        required :has_more, XTwitterScraper::Internal::Type::Boolean, api_name: :hasMore
+
         # @!attribute tickets
         #
         #   @return [Array<XTwitterScraper::Models::Support::TicketListResponse::Ticket>]
         required :tickets,
                  -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::Support::TicketListResponse::Ticket] }
 
-        # @!method initialize(tickets:)
+        # @!attribute next_cursor
+        #
+        #   @return [String, nil]
+        optional :next_cursor, String, api_name: :nextCursor
+
+        # @!method initialize(has_more:, tickets:, next_cursor: nil)
+        #   @param has_more [Boolean]
         #   @param tickets [Array<XTwitterScraper::Models::Support::TicketListResponse::Ticket>]
+        #   @param next_cursor [String]
 
         class Ticket < XTwitterScraper::Internal::Type::BaseModel
           # @!attribute created_at

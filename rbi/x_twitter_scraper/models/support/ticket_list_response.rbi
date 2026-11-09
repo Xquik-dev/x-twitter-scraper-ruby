@@ -16,6 +16,9 @@ module XTwitterScraper
             )
           end
 
+        sig { returns(T::Boolean) }
+        attr_accessor :has_more
+
         sig do
           returns(
             T::Array[
@@ -25,24 +28,34 @@ module XTwitterScraper
         end
         attr_accessor :tickets
 
+        sig { returns(T.nilable(String)) }
+        attr_reader :next_cursor
+
+        sig { params(next_cursor: String).void }
+        attr_writer :next_cursor
+
         sig do
           params(
+            has_more: T::Boolean,
             tickets:
               T::Array[
                 XTwitterScraper::Models::Support::TicketListResponse::Ticket::OrHash
-              ]
+              ],
+            next_cursor: String
           ).returns(T.attached_class)
         end
-        def self.new(tickets:)
+        def self.new(has_more:, tickets:, next_cursor: nil)
         end
 
         sig do
           override.returns(
             {
+              has_more: T::Boolean,
               tickets:
                 T::Array[
                   XTwitterScraper::Models::Support::TicketListResponse::Ticket
-                ]
+                ],
+              next_cursor: String
             }
           )
         end
