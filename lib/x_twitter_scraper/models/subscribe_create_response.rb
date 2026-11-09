@@ -23,10 +23,17 @@ module XTwitterScraper
       #   @return [String]
       required :url, String
 
-      # @!method initialize(message:, status:, url:)
+      # @!attribute charged_currency
+      #   Currency the checkout charges. Only a checkout_created answer has it.
+      #
+      #   @return [Symbol, XTwitterScraper::Models::Currency, nil]
+      optional :charged_currency, enum: -> { XTwitterScraper::Models::Currency }, api_name: :chargedCurrency
+
+      # @!method initialize(message:, status:, url:, charged_currency: nil)
       #   @param message [String]
       #   @param status [Symbol, XTwitterScraper::Models::SubscribeCreateResponse::Status]
       #   @param url [String]
+      #   @param charged_currency [Symbol, XTwitterScraper::Models::Currency] Currency the checkout charges. Only a checkout_created answer has it.
 
       # @see XTwitterScraper::Models::SubscribeCreateResponse#status
       module Status

@@ -8,7 +8,8 @@ module XTwitterScraper
       {
         message: String,
         status: XTwitterScraper::Models::SubscribeCreateResponse::status,
-        url: String
+        url: String,
+        charged_currency: XTwitterScraper::Models::currency
       }
 
     class SubscribeCreateResponse < XTwitterScraper::Internal::Type::BaseModel
@@ -18,16 +19,24 @@ module XTwitterScraper
 
       attr_accessor url: String
 
+      attr_reader charged_currency: XTwitterScraper::Models::currency?
+
+      def charged_currency=: (
+        XTwitterScraper::Models::currency
+      ) -> XTwitterScraper::Models::currency
+
       def initialize: (
         message: String,
         status: XTwitterScraper::Models::SubscribeCreateResponse::status,
-        url: String
+        url: String,
+        ?charged_currency: XTwitterScraper::Models::currency
       ) -> void
 
       def to_hash: -> {
         message: String,
         status: XTwitterScraper::Models::SubscribeCreateResponse::status,
-        url: String
+        url: String,
+        charged_currency: XTwitterScraper::Models::currency
       }
 
       type status = :checkout_created | :already_subscribed | :payment_issue
