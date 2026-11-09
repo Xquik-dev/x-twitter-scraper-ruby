@@ -3,17 +3,24 @@ module XTwitterScraper
     module X
       type tweet_get_replies_response =
         {
+          tweets: ::Array[XTwitterScraper::ReplyTweet],
           diagnostic: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic,
           hidden_replies: Integer,
           limit_reached: bool,
           message: String,
-          nested_replies: ::Array[XTwitterScraper::SearchTweet],
+          nested_replies: ::Array[XTwitterScraper::ReplyTweet],
           order_partial: bool,
           partial_before: Time,
           unreached_replies: Integer
         }
 
       class TweetGetRepliesResponse < XTwitterScraper::Models::PaginatedTweets
+        def tweets: -> ::Array[XTwitterScraper::ReplyTweet]
+
+        def tweets=: (
+          ::Array[XTwitterScraper::ReplyTweet] _
+        ) -> ::Array[XTwitterScraper::ReplyTweet]
+
         def diagnostic: -> XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic?
 
         def diagnostic=: (
@@ -32,11 +39,11 @@ module XTwitterScraper
 
         def message=: (String) -> String
 
-        def nested_replies: -> ::Array[XTwitterScraper::SearchTweet]?
+        def nested_replies: -> ::Array[XTwitterScraper::ReplyTweet]?
 
         def nested_replies=: (
-          ::Array[XTwitterScraper::SearchTweet] _
-        ) -> ::Array[XTwitterScraper::SearchTweet]
+          ::Array[XTwitterScraper::ReplyTweet] _
+        ) -> ::Array[XTwitterScraper::ReplyTweet]
 
         attr_reader order_partial: bool?
 
@@ -51,22 +58,24 @@ module XTwitterScraper
         def unreached_replies=: (Integer) -> Integer
 
         def initialize: (
+          tweets: ::Array[XTwitterScraper::ReplyTweet],
           ?diagnostic: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic,
           ?hidden_replies: Integer,
           ?limit_reached: bool,
           ?message: String,
-          ?nested_replies: ::Array[XTwitterScraper::SearchTweet],
+          ?nested_replies: ::Array[XTwitterScraper::ReplyTweet],
           ?order_partial: bool,
           ?partial_before: Time,
           ?unreached_replies: Integer
         ) -> void
 
         def to_hash: -> {
+          tweets: ::Array[XTwitterScraper::ReplyTweet],
           diagnostic: XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic,
           hidden_replies: Integer,
           limit_reached: bool,
           message: String,
-          nested_replies: ::Array[XTwitterScraper::SearchTweet],
+          nested_replies: ::Array[XTwitterScraper::ReplyTweet],
           order_partial: bool,
           partial_before: Time,
           unreached_replies: Integer

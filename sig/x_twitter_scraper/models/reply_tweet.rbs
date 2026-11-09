@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type reply_tweet = { hidden_by_author: bool }
+
+    class ReplyTweet < XTwitterScraper::Models::SearchTweet
+      attr_reader hidden_by_author: bool?
+
+      def hidden_by_author=: (bool) -> bool
+
+      def initialize: (?hidden_by_author: bool) -> void
+
+      def to_hash: -> { hidden_by_author: bool }
+    end
+  end
+end

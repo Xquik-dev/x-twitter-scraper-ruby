@@ -12,6 +12,9 @@ module XTwitterScraper
             )
           end
 
+        sig { returns(T::Array[XTwitterScraper::ReplyTweet]) }
+        attr_accessor :tweets
+
         # Evidence for direct-reply coverage and collector behavior.
         sig do
           returns(
@@ -55,12 +58,12 @@ module XTwitterScraper
         attr_writer :message
 
         # Nested replies. Excluded from direct coverage.
-        sig { returns(T.nilable(T::Array[XTwitterScraper::SearchTweet])) }
+        sig { returns(T.nilable(T::Array[XTwitterScraper::ReplyTweet])) }
         attr_reader :nested_replies
 
         sig do
           params(
-            nested_replies: T::Array[XTwitterScraper::SearchTweet::OrHash]
+            nested_replies: T::Array[XTwitterScraper::ReplyTweet::OrHash]
           ).void
         end
         attr_writer :nested_replies
@@ -98,18 +101,20 @@ module XTwitterScraper
         # separate from direct coverage.
         sig do
           params(
+            tweets: T::Array[XTwitterScraper::ReplyTweet::OrHash],
             diagnostic:
               XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::OrHash,
             hidden_replies: Integer,
             limit_reached: T::Boolean,
             message: String,
-            nested_replies: T::Array[XTwitterScraper::SearchTweet::OrHash],
+            nested_replies: T::Array[XTwitterScraper::ReplyTweet::OrHash],
             order_partial: T::Boolean,
             partial_before: Time,
             unreached_replies: Integer
           ).returns(T.attached_class)
         end
         def self.new(
+          tweets:,
           # Evidence for direct-reply coverage and collector behavior.
           diagnostic: nil,
           # Present on the last automatic page, and on a complete-mode answer without rows.
@@ -142,12 +147,13 @@ module XTwitterScraper
         sig do
           override.returns(
             {
+              tweets: T::Array[XTwitterScraper::ReplyTweet],
               diagnostic:
                 XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic,
               hidden_replies: Integer,
               limit_reached: T::Boolean,
               message: String,
-              nested_replies: T::Array[XTwitterScraper::SearchTweet],
+              nested_replies: T::Array[XTwitterScraper::ReplyTweet],
               order_partial: T::Boolean,
               partial_before: Time,
               unreached_replies: Integer

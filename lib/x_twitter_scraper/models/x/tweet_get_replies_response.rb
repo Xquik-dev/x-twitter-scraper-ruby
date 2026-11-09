@@ -5,6 +5,11 @@ module XTwitterScraper
     module X
       # @see XTwitterScraper::Resources::X::Tweets#get_replies
       class TweetGetRepliesResponse < XTwitterScraper::Models::PaginatedTweets
+        # @!attribute tweets
+        #
+        #   @return [Array<XTwitterScraper::Models::ReplyTweet>]
+        required :tweets, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::ReplyTweet] }
+
         # @!attribute diagnostic
         #   Evidence for direct-reply coverage and collector behavior.
         #
@@ -35,8 +40,8 @@ module XTwitterScraper
         # @!attribute nested_replies
         #   Nested replies. Excluded from direct coverage.
         #
-        #   @return [Array<XTwitterScraper::Models::SearchTweet>, nil]
-        optional :nested_replies, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::SearchTweet] }
+        #   @return [Array<XTwitterScraper::Models::ReplyTweet>, nil]
+        optional :nested_replies, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::ReplyTweet] }
 
         # @!attribute order_partial
         #   Present with latest or oldest sort. The read stopped before it held every reply
@@ -63,10 +68,12 @@ module XTwitterScraper
         #   @return [Integer, nil]
         optional :unreached_replies, Integer, api_name: :unreachedReplies
 
-        # @!method initialize(diagnostic: nil, hidden_replies: nil, limit_reached: nil, message: nil, nested_replies: nil, order_partial: nil, partial_before: nil, unreached_replies: nil)
+        # @!method initialize(tweets:, diagnostic: nil, hidden_replies: nil, limit_reached: nil, message: nil, nested_replies: nil, order_partial: nil, partial_before: nil, unreached_replies: nil)
         #   Direct reply rows. No-mode requests use resumable automatic coverage. Complete
         #   mode also returns nested replies and coverage diagnostics. Keep nested replies
         #   separate from direct coverage.
+        #
+        #   @param tweets [Array<XTwitterScraper::Models::ReplyTweet>]
         #
         #   @param diagnostic [XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic] Evidence for direct-reply coverage and collector behavior.
         #
@@ -76,7 +83,7 @@ module XTwitterScraper
         #
         #   @param message [String] Explains an answer cut by your limit.
         #
-        #   @param nested_replies [Array<XTwitterScraper::Models::SearchTweet>] Nested replies. Excluded from direct coverage.
+        #   @param nested_replies [Array<XTwitterScraper::Models::ReplyTweet>] Nested replies. Excluded from direct coverage.
         #
         #   @param order_partial [Boolean] Present with latest or oldest sort. The read stopped before it held every reply
         #
