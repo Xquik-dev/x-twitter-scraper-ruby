@@ -403,12 +403,21 @@ module XTwitterScraper
                      enum: -> { XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::StopReason },
                      api_name: :stopReason
 
-            # @!method initialize(name:, new_direct_replies:, new_nested_replies:, pages_attempted:, stop_reason:)
+            # @!attribute new_direct_reply_pages
+            #   The page, from 1, where each new direct reply appeared.
+            #
+            #   @return [Array<Integer>, nil]
+            optional :new_direct_reply_pages,
+                     XTwitterScraper::Internal::Type::ArrayOf[Integer],
+                     api_name: :newDirectReplyPages
+
+            # @!method initialize(name:, new_direct_replies:, new_nested_replies:, pages_attempted:, stop_reason:, new_direct_reply_pages: nil)
             #   @param name [String]
             #   @param new_direct_replies [Integer]
             #   @param new_nested_replies [Integer]
             #   @param pages_attempted [Integer]
             #   @param stop_reason [Symbol, XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::StopReason]
+            #   @param new_direct_reply_pages [Array<Integer>] The page, from 1, where each new direct reply appeared.
 
             # @see XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted#stop_reason
             module StopReason
