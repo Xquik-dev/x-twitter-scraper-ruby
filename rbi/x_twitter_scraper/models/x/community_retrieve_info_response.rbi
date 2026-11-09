@@ -368,8 +368,11 @@ module XTwitterScraper
             sig { returns(String) }
             attr_accessor :username
 
-            sig { returns(T::Boolean) }
-            attr_accessor :verified
+            sig { returns(T.nilable(T::Boolean)) }
+            attr_reader :verified
+
+            sig { params(verified: T::Boolean).void }
+            attr_writer :verified
 
             sig { returns(T.nilable(String)) }
             attr_reader :name
@@ -385,7 +388,7 @@ module XTwitterScraper
                 name: String
               ).returns(T.attached_class)
             end
-            def self.new(id:, username:, verified:, name: nil)
+            def self.new(id:, username:, verified: nil, name: nil)
             end
 
             sig do

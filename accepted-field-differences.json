@@ -1,8 +1,1 @@
-[
-  {
-    "reason": "The API always sends `community.creator.verified`, and the SDK requires it. The spec requires it on only 1 branch of `Community.creator`, so it reads the field as optional. This line leaves once https://xquik.com/openapi.json requires it on both branches.",
-    "differences": [
-      "GET /api/v1/x/communities/{id}/info response required community.creator.verified"
-    ]
-  }
-]
+[]

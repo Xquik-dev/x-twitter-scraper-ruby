@@ -184,15 +184,15 @@ module XTwitterScraper
 
             # @!attribute verified
             #
-            #   @return [Boolean]
-            required :verified, XTwitterScraper::Internal::Type::Boolean
+            #   @return [Boolean, nil]
+            optional :verified, XTwitterScraper::Internal::Type::Boolean
 
             # @!attribute name
             #
             #   @return [String, nil]
             optional :name, String
 
-            # @!method initialize(id:, username:, verified:, name: nil)
+            # @!method initialize(id:, username:, verified: nil, name: nil)
             #   @param id [String]
             #   @param username [String]
             #   @param verified [Boolean]
