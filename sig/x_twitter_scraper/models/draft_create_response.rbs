@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type draft_create_response = { ignored_fields: ::Array[String] }
+
+    class DraftCreateResponse < XTwitterScraper::Models::DraftDetail
+      attr_reader ignored_fields: ::Array[String]?
+
+      def ignored_fields=: (::Array[String]) -> ::Array[String]
+
+      def initialize: (?ignored_fields: ::Array[String]) -> void
+
+      def to_hash: -> { ignored_fields: ::Array[String] }
+    end
+  end
+end

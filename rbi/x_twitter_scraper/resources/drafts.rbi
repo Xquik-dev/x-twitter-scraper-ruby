@@ -15,7 +15,7 @@ module XTwitterScraper
           goal: XTwitterScraper::DraftCreateParams::Goal::OrSymbol,
           topic: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
-        ).returns(XTwitterScraper::DraftDetail)
+        ).returns(XTwitterScraper::Models::DraftCreateResponse)
       end
       def create(text:, goal: nil, topic: nil, request_options: {})
       end

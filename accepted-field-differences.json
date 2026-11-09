@@ -1,11 +1,5 @@
 [
   {
-    "reason": "The API added these response fields after the SDK's models were last updated. The SDK still returns each one through `#[]` and `#to_h` on the model. Each line leaves this list once its model names the field.",
-    "differences": [
-      "POST /api/v1/drafts response missing ignoredFields"
-    ]
-  },
-  {
     "reason": "The SDK's model and the spec disagree on whether the API always returns these fields. The SDK reads a response either way, so this shows only in its type signatures.",
     "differences": [
       "GET /api/v1/x/communities/{id}/info response required community.creator.verified"
