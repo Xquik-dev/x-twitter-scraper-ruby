@@ -871,10 +871,24 @@ module XTwitterScraper
           #   @return [Hash{Symbol=>Object}, nil]
           optional :entities, XTwitterScraper::Internal::Type::HashOf[XTwitterScraper::Internal::Type::Unknown]
 
+          # @!attribute inline_media
+          #   Inline media positions in the Note Tweet text.
+          #
+          #   @return [Array<XTwitterScraper::Models::X::TweetDetail::NoteTweet::InlineMedia>, nil]
+          optional :inline_media,
+                   -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::TweetDetail::NoteTweet::InlineMedia] },
+                   api_name: :inlineMedia
+
           # @!attribute is_expandable
           #
           #   @return [Boolean, nil]
           optional :is_expandable, XTwitterScraper::Internal::Type::Boolean, api_name: :isExpandable
+
+          # @!attribute note_id
+          #   The Note's own ID, apart from the post's.
+          #
+          #   @return [String, nil]
+          optional :note_id, String, api_name: :noteId
 
           # @!attribute richtext_tags
           #
@@ -885,13 +899,15 @@ module XTwitterScraper
                    },
                    api_name: :richtextTags
 
-          # @!method initialize(text:, id: nil, entities: nil, is_expandable: nil, richtext_tags: nil)
+          # @!method initialize(text:, id: nil, entities: nil, inline_media: nil, is_expandable: nil, note_id: nil, richtext_tags: nil)
           #   Complete Note Tweet content and rich-text metadata.
           #
           #   @param text [String]
           #   @param id [String]
           #   @param entities [Hash{Symbol=>Object}]
+          #   @param inline_media [Array<XTwitterScraper::Models::X::TweetDetail::NoteTweet::InlineMedia>] Inline media positions in the Note Tweet text.
           #   @param is_expandable [Boolean]
+          #   @param note_id [String] The Note's own ID, apart from the post's.
           #   @param richtext_tags [Array<XTwitterScraper::Models::X::TweetDetail::NoteTweet::RichtextTag>]
 
           class RichtextTag < XTwitterScraper::Internal::Type::BaseModel
@@ -914,6 +930,25 @@ module XTwitterScraper
             #   @param from_index [Integer]
             #   @param to_index [Integer]
             #   @param types [Array<String>]
+          end
+
+          # @see XTwitterScraper::Models::X::TweetDetail::NoteTweet#inline_media
+          class InlineMedia < XTwitterScraper::Internal::Type::BaseModel
+            # @!attribute index
+            #   Whole number from 0.
+            #
+            #   @return [Integer]
+            required :index, Integer
+
+            # @!attribute media_id
+            #
+            #   @return [String]
+            required :media_id, String, api_name: :mediaId
+
+            # @!method initialize(index:, media_id:)
+            #   @param index [Integer] Whole number from 0.
+            #
+            #   @param media_id [String]
           end
         end
 

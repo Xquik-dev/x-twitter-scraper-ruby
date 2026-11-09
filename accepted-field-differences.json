@@ -71,8 +71,6 @@
       "GET /api/v1/x/tweets/search response missing tweets[].imageScore",
       "GET /api/v1/x/tweets/search response missing tweets[].topicScore",
       "GET /api/v1/x/tweets/{id} response missing tweet.edit.initialTweetId",
-      "GET /api/v1/x/tweets/{id} response missing tweet.noteTweet.inlineMedia",
-      "GET /api/v1/x/tweets/{id} response missing tweet.noteTweet.noteId",
       "GET /api/v1/x/tweets/{id}/replies response missing diagnostic.strategiesAttempted[].newDirectReplyPages",
       "GET /api/v1/x/tweets/{id}/replies response missing nested_replies[].hiddenByAuthor",
       "GET /api/v1/x/tweets/{id}/replies response missing tweets[].hiddenByAuthor",

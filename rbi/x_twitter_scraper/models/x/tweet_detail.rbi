@@ -1396,11 +1396,40 @@ module XTwitterScraper
           sig { params(entities: T::Hash[Symbol, T.anything]).void }
           attr_writer :entities
 
+          # Inline media positions in the Note Tweet text.
+          sig do
+            returns(
+              T.nilable(
+                T::Array[
+                  XTwitterScraper::Models::X::TweetDetail::NoteTweet::InlineMedia
+                ]
+              )
+            )
+          end
+          attr_reader :inline_media
+
+          sig do
+            params(
+              inline_media:
+                T::Array[
+                  XTwitterScraper::Models::X::TweetDetail::NoteTweet::InlineMedia::OrHash
+                ]
+            ).void
+          end
+          attr_writer :inline_media
+
           sig { returns(T.nilable(T::Boolean)) }
           attr_reader :is_expandable
 
           sig { params(is_expandable: T::Boolean).void }
           attr_writer :is_expandable
+
+          # The Note's own ID, apart from the post's.
+          sig { returns(T.nilable(String)) }
+          attr_reader :note_id
+
+          sig { params(note_id: String).void }
+          attr_writer :note_id
 
           sig do
             returns(
@@ -1429,7 +1458,12 @@ module XTwitterScraper
               text: String,
               id: String,
               entities: T::Hash[Symbol, T.anything],
+              inline_media:
+                T::Array[
+                  XTwitterScraper::Models::X::TweetDetail::NoteTweet::InlineMedia::OrHash
+                ],
               is_expandable: T::Boolean,
+              note_id: String,
               richtext_tags:
                 T::Array[
                   XTwitterScraper::X::TweetDetail::NoteTweet::RichtextTag::OrHash
@@ -1440,7 +1474,11 @@ module XTwitterScraper
             text:,
             id: nil,
             entities: nil,
+            # Inline media positions in the Note Tweet text.
+            inline_media: nil,
             is_expandable: nil,
+            # The Note's own ID, apart from the post's.
+            note_id: nil,
             richtext_tags: nil
           )
           end
@@ -1451,7 +1489,12 @@ module XTwitterScraper
                 text: String,
                 id: String,
                 entities: T::Hash[Symbol, T.anything],
+                inline_media:
+                  T::Array[
+                    XTwitterScraper::Models::X::TweetDetail::NoteTweet::InlineMedia
+                  ],
                 is_expandable: T::Boolean,
+                note_id: String,
                 richtext_tags:
                   T::Array[
                     XTwitterScraper::X::TweetDetail::NoteTweet::RichtextTag
@@ -1499,6 +1542,37 @@ module XTwitterScraper
                 }
               )
             end
+            def to_hash
+            end
+          end
+
+          class InlineMedia < XTwitterScraper::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  XTwitterScraper::Models::X::TweetDetail::NoteTweet::InlineMedia,
+                  XTwitterScraper::Internal::AnyHash
+                )
+              end
+
+            # Whole number from 0.
+            sig { returns(Integer) }
+            attr_accessor :index
+
+            sig { returns(String) }
+            attr_accessor :media_id
+
+            sig do
+              params(index: Integer, media_id: String).returns(T.attached_class)
+            end
+            def self.new(
+              # Whole number from 0.
+              index:,
+              media_id:
+            )
+            end
+
+            sig { override.returns({ index: Integer, media_id: String }) }
             def to_hash
             end
           end
