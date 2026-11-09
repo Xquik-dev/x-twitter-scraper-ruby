@@ -170,6 +170,8 @@ module XTwitterScraper
 
   TweetTombstone = XTwitterScraper::Models::TweetTombstone
 
+  UserListPage = XTwitterScraper::Models::UserListPage
+
   UserProfile = XTwitterScraper::Models::UserProfile
 
   UserTipJar = XTwitterScraper::Models::UserTipJar

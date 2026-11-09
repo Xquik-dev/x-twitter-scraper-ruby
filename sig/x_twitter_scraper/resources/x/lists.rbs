@@ -34,7 +34,7 @@ module XTwitterScraper
           ?verified_only: bool,
           ?verified_type: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::PaginatedUsers
+        ) -> XTwitterScraper::Models::X::list_retrieve_followers_response
 
         def retrieve_members: (
           String id,
@@ -64,7 +64,7 @@ module XTwitterScraper
           ?verified_only: bool,
           ?verified_type: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::PaginatedUsers
+        ) -> XTwitterScraper::Models::X::list_retrieve_members_response
 
         def retrieve_tweets: (
           String id,

@@ -67,7 +67,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::PaginatedUsers]
+        # @return [XTwitterScraper::Models::UserListPage, XTwitterScraper::Models::X::ListRetrieveFollowersResponse::UserListCoverageResponse]
         #
         # @see XTwitterScraper::Models::X::ListRetrieveFollowersParams
         def retrieve_followers(id, params = {})
@@ -98,7 +98,7 @@ module XTwitterScraper
               verified_only: "verifiedOnly",
               verified_type: "verifiedType"
             ),
-            model: XTwitterScraper::PaginatedUsers,
+            model: XTwitterScraper::Models::X::ListRetrieveFollowersResponse,
             options: options
           )
         end
@@ -161,7 +161,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::PaginatedUsers]
+        # @return [XTwitterScraper::Models::UserListPage, XTwitterScraper::Models::X::ListRetrieveMembersResponse::UserListCoverageResponse]
         #
         # @see XTwitterScraper::Models::X::ListRetrieveMembersParams
         def retrieve_members(id, params = {})
@@ -192,7 +192,7 @@ module XTwitterScraper
               verified_only: "verifiedOnly",
               verified_type: "verifiedType"
             ),
-            model: XTwitterScraper::PaginatedUsers,
+            model: XTwitterScraper::Models::X::ListRetrieveMembersResponse,
             options: options
           )
         end

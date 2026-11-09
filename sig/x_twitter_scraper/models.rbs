@@ -85,6 +85,8 @@ module XTwitterScraper
 
   class TweetTombstone = XTwitterScraper::Models::TweetTombstone
 
+  class UserListPage = XTwitterScraper::Models::UserListPage
+
   class UserTipJar = XTwitterScraper::Models::UserTipJar
 
   module Currency = XTwitterScraper::Models::Currency

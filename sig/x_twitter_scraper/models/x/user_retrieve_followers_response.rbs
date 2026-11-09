@@ -2,7 +2,7 @@ module XTwitterScraper
   module Models
     module X
       type user_retrieve_followers_response =
-        XTwitterScraper::PaginatedUsers
+        XTwitterScraper::UserListPage
         | XTwitterScraper::Models::X::UserRetrieveFollowersResponse::UserListCoverageResponse
 
       module UserRetrieveFollowersResponse

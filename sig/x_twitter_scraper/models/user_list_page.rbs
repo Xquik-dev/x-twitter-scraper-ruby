@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type user_list_page = { scan_limit: XTwitterScraper::Models::UserListPage::ScanLimit }
+
+    class UserListPage < XTwitterScraper::Models::PaginatedUsers
+      attr_reader scan_limit: XTwitterScraper::Models::UserListPage::ScanLimit?
+
+      def scan_limit=: (
+        XTwitterScraper::Models::UserListPage::ScanLimit
+      ) -> XTwitterScraper::Models::UserListPage::ScanLimit
+
+      def initialize: (?scan_limit: XTwitterScraper::Models::UserListPage::ScanLimit) -> void
+
+      def to_hash: -> { scan_limit: XTwitterScraper::Models::UserListPage::ScanLimit }
+
+      type scan_limit = { limit: 100000, message: String, rows_read: Integer }
+
+      class ScanLimit < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor limit: 100000
+
+        attr_accessor message: String
+
+        attr_accessor rows_read: Integer
+
+        def initialize: (
+          message: String,
+          rows_read: Integer,
+          ?limit: 100000
+        ) -> void
+
+        def to_hash: -> { limit: 100000, message: String, rows_read: Integer }
+      end
+    end
+  end
+end
