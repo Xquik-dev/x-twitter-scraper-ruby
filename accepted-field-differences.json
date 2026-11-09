@@ -20,7 +20,6 @@
       "GET /api/v1/x/articles/{tweetId} response missing article.retweetCount",
       "GET /api/v1/x/articles/{tweetId} response missing article.summaryText",
       "GET /api/v1/x/articles/{tweetId} response missing article.unknownCounts",
-      "GET /api/v1/x/bookmarks/folders response missing folders[].media",
       "GET /api/v1/x/communities/{id}/info response missing community.admin",
       "GET /api/v1/x/communities/{id}/info response missing community.banner",
       "GET /api/v1/x/communities/{id}/info response missing community.membersFacepile",

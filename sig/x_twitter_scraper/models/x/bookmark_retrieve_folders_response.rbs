@@ -31,16 +31,131 @@ module XTwitterScraper
           next_cursor: String
         }
 
-        type folder = { id: String, name: String }
+        type folder =
+          {
+            id: String,
+            name: String,
+            media: XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media
+          }
 
         class Folder < XTwitterScraper::Internal::Type::BaseModel
           attr_accessor id: String
 
           attr_accessor name: String
 
-          def initialize: (id: String, name: String) -> void
+          attr_reader media: XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media?
 
-          def to_hash: -> { id: String, name: String }
+          def media=: (
+            XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media | ::Hash[Symbol, top]
+          ) -> XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media
+
+          def initialize: (
+            id: String,
+            name: String,
+            ?media: XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media | ::Hash[Symbol, top]
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            name: String,
+            media: XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media
+          }
+
+          type media = ::Hash[Symbol, top]
+
+          class Media < XTwitterScraper::Internal::Type::BaseModel
+            attr_reader id: String?
+
+            def id=: (String) -> String
+
+            attr_reader media_id: String?
+
+            def media_id=: (String) -> String
+
+            attr_reader media_key: String?
+
+            def media_key=: (String) -> String
+
+            attr_reader original_image_height: Integer?
+
+            def original_image_height=: (Integer) -> Integer
+
+            attr_reader original_image_url: String?
+
+            def original_image_url=: (String) -> String
+
+            attr_reader original_image_width: Integer?
+
+            def original_image_width=: (Integer) -> Integer
+
+            attr_reader palette: ::Array[XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media::Palette]?
+
+            def palette=: (
+              ::Array[XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media::Palette | ::Hash[Symbol, top]]
+            ) -> ::Array[XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media::Palette]
+
+            attr_reader type: String?
+
+            def type=: (String) -> String
+
+            def initialize: (
+              ?id: String,
+              ?media_id: String,
+              ?media_key: String,
+              ?original_image_height: Integer,
+              ?original_image_url: String,
+              ?original_image_width: Integer,
+              ?palette: ::Array[XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media::Palette | ::Hash[Symbol, top]],
+              ?type: String
+            ) -> void
+
+            def to_hash: -> ::Hash[Symbol, top]
+
+            type palette = ::Hash[Symbol, top]
+
+            class Palette < XTwitterScraper::Internal::Type::BaseModel
+              attr_reader percentage: Float?
+
+              def percentage=: (Float) -> Float
+
+              attr_reader rgb: XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media::Palette::Rgb?
+
+              def rgb=: (
+                XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media::Palette::Rgb | ::Hash[Symbol, top]
+              ) -> XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media::Palette::Rgb
+
+              def initialize: (
+                ?percentage: Float,
+                ?rgb: XTwitterScraper::Models::X::BookmarkRetrieveFoldersResponse::Folder::Media::Palette::Rgb | ::Hash[Symbol, top]
+              ) -> void
+
+              def to_hash: -> ::Hash[Symbol, top]
+
+              type rgb = ::Hash[Symbol, top]
+
+              class Rgb < XTwitterScraper::Internal::Type::BaseModel
+                attr_reader blue: Float?
+
+                def blue=: (Float) -> Float
+
+                attr_reader green: Float?
+
+                def green=: (Float) -> Float
+
+                attr_reader red: Float?
+
+                def red=: (Float) -> Float
+
+                def initialize: (
+                  ?blue: Float,
+                  ?green: Float,
+                  ?red: Float
+                ) -> void
+
+                def to_hash: -> ::Hash[Symbol, top]
+              end
+            end
+          end
         end
       end
     end
