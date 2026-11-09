@@ -22,8 +22,14 @@ module XTwitterScraper
       sig { returns(T::Hash[Symbol, T.anything]) }
       attr_accessor :job
 
+      sig { returns(Integer) }
+      attr_accessor :poll_after_ms
+
       sig { returns(T::Array[T::Hash[Symbol, T.anything]]) }
       attr_accessor :results
+
+      sig { returns(String) }
+      attr_accessor :wait_url
 
       sig { returns(T.nilable(String)) }
       attr_reader :next_cursor
@@ -35,7 +41,9 @@ module XTwitterScraper
         params(
           has_more: T::Boolean,
           job: T::Hash[Symbol, T.anything],
+          poll_after_ms: Integer,
           results: T::Array[T::Hash[Symbol, T.anything]],
+          wait_url: String,
           next_cursor: String
         ).returns(T.attached_class)
       end
@@ -43,7 +51,9 @@ module XTwitterScraper
         has_more:,
         # Extraction job metadata - shape varies by tool type (JSON)
         job:,
+        poll_after_ms:,
         results:,
+        wait_url:,
         next_cursor: nil
       )
       end
@@ -53,7 +63,9 @@ module XTwitterScraper
           {
             has_more: T::Boolean,
             job: T::Hash[Symbol, T.anything],
+            poll_after_ms: Integer,
             results: T::Array[T::Hash[Symbol, T.anything]],
+            wait_url: String,
             next_cursor: String
           }
         )
