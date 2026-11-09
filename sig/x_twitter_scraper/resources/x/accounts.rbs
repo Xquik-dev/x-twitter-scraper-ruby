@@ -32,6 +32,7 @@ module XTwitterScraper
         ) -> XTwitterScraper::Models::X::AccountDeleteResponse
 
         def bulk_retry: (
+          ?account_ids: ::Array[String],
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::AccountBulkRetryResponse
 

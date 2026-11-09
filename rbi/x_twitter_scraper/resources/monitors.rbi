@@ -20,6 +20,7 @@ module XTwitterScraper
         params(
           event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           username: String,
+          name: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Models::MonitorCreateResponse)
       end
@@ -28,6 +29,9 @@ module XTwitterScraper
         event_types:,
         # X username (without @)
         username:,
+        # Your label for the monitor. Its events carry it as monitorName. Xquik normalizes
+        # whitespace.
+        name: nil,
         request_options: {}
       )
       end
@@ -52,6 +56,7 @@ module XTwitterScraper
           id: String,
           event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           is_active: T::Boolean,
+          name: T.nilable(String),
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Monitor)
       end
@@ -61,6 +66,8 @@ module XTwitterScraper
         # Array of event types to subscribe to.
         event_types: nil,
         is_active: nil,
+        # New label for the account monitor. Send null to remove the label.
+        name: nil,
         request_options: {}
       )
       end

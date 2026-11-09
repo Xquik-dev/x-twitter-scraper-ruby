@@ -87,10 +87,16 @@ module XTwitterScraper
         # automated failure reasons, making them eligible for retry on next use.
         sig do
           params(
+            account_ids: T::Array[String],
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::AccountBulkRetryResponse)
         end
-        def bulk_retry(request_options: {})
+        def bulk_retry(
+          # IDs of the X accounts to retry. Accounts that failed for another reason, or
+          # belong to someone else, stay as they are.
+          account_ids: nil,
+          request_options: {}
+        )
         end
 
         # Re-authenticate X account

@@ -50,6 +50,12 @@ module XTwitterScraper
       #   @return [String, nil]
       optional :bounding_box, String, api_name: :boundingBox
 
+      # @!attribute business_email_only
+      #   Require an email the profile publishes outside free webmail, such as Gmail.
+      #
+      #   @return [Boolean, nil]
+      optional :business_email_only, XTwitterScraper::Internal::Type::Boolean, api_name: :businessEmailOnly
+
       # @!attribute card_name
       #   Match the Tweet card name.
       #
@@ -91,6 +97,21 @@ module XTwitterScraper
       optional :dedupe_mode,
                enum: -> { XTwitterScraper::ExtractionEstimateCostParams::DedupeMode },
                api_name: :dedupeMode
+
+      # @!attribute email_domains
+      #   Require an email at one of these domains. Separate domains with commas.
+      #   Subdomains match.
+      #
+      #   @return [String, nil]
+      optional :email_domains, String, api_name: :emailDomains
+
+      # @!attribute enrich_profiles
+      #   Add each user's full profile to follower_explorer, following_explorer,
+      #   verified_follower_explorer, people_search & repost_extractor rows. Jobs take
+      #   longer.
+      #
+      #   @return [Boolean, nil]
+      optional :enrich_profiles, XTwitterScraper::Internal::Type::Boolean, api_name: :enrichProfiles
 
       # @!attribute exact_phrase
       #   Exact phrase to match (tweet_search_extractor)
@@ -137,6 +158,12 @@ module XTwitterScraper
       #   @return [String, nil]
       optional :hashtags, String
 
+      # @!attribute has_email
+      #   Require an email the profile publishes.
+      #
+      #   @return [Boolean, nil]
+      optional :has_email, XTwitterScraper::Internal::Type::Boolean, api_name: :hasEmail
+
       # @!attribute has_location
       #   Require a profile location.
       #
@@ -176,6 +203,17 @@ module XTwitterScraper
       optional :include_target_metadata,
                XTwitterScraper::Internal::Type::Boolean,
                api_name: :includeTargetMetadata
+
+      # @!attribute image_shows
+      #   Keep only the posts whose photos show this. Use charts, screenshots,
+      #   product_photos, memes or people, or describe it in your own words. Each post
+      #   with a safe photo is checked, & each stored post costs 2 credits instead of its
+      #   read price. Posts without a safe photo aren't checked, billed or stored, & a
+      #   post the filter drops costs nothing. resultsLimit caps the posts read. Works
+      #   with tools that return posts. Send topic or imageShows, not both.
+      #
+      #   @return [String, nil]
+      optional :image_shows, String, api_name: :imageShows
 
       # @!attribute in_reply_to_tweet_id
       #   Only replies to this tweet ID (tweet_search_extractor)
@@ -562,11 +600,28 @@ module XTwitterScraper
       #   @return [Array<String>, nil]
       optional :target_usernames, XTwitterScraper::Internal::Type::ArrayOf[String], api_name: :targetUsernames
 
+      # @!attribute text_only_terms
+      #   Collects a post only when 1 of these words or quoted phrases is in its text, a
+      #   link, its card or a quoted post. The author's name and username don't count.
+      #
+      #   @return [String, nil]
+      optional :text_only_terms, String, api_name: :textOnlyTerms
+
       # @!attribute to_user
       #   Filter replies sent to a username (tweet_search_extractor)
       #
       #   @return [String, nil]
       optional :to_user, String, api_name: :toUser
+
+      # @!attribute topic
+      #   Keep only the posts about this topic, such as "the Rust programming language".
+      #   Each post the job reads is checked, only matching posts are stored, & each
+      #   stored post costs 2 credits instead of its read price. A post the filter drops
+      #   costs nothing. resultsLimit caps the posts read & checked. Works with tools that
+      #   return posts. Send topic or imageShows, not both.
+      #
+      #   @return [String, nil]
+      optional :topic, String
 
       # @!attribute until_date
       #   End date YYYY-MM-DD (tweet_search_extractor)
@@ -618,7 +673,7 @@ module XTwitterScraper
       #   @return [String, nil]
       optional :within_time, String, api_name: :withinTime
 
-      # @!method initialize(tool_type:, advanced_query: nil, any_words: nil, bio_contains: nil, blue_verified_only: nil, bounding_box: nil, card_name: nil, cashtags: nil, collection_strategy: nil, conversation_id: nil, dedupe_across_targets: nil, dedupe_mode: nil, exact_phrase: nil, exclude_original_author: nil, exclude_source: nil, exclude_words: nil, from_user: nil, geocode: nil, hashtags: nil, has_location: nil, has_media_only: nil, has_website: nil, include_original_post: nil, include_search_terms: nil, include_target_metadata: nil, in_reply_to_tweet_id: nil, language: nil, list_id: nil, location_contains: nil, max_depth: nil, max_followers: nil, max_following: nil, max_id: nil, max_items_per_target: nil, max_likes: nil, max_pages_per_target: nil, max_posts: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_account_age_days: nil, min_bookmarks: nil, min_faves: nil, min_followers: nil, min_following: nil, min_posts: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, near: nil, news: nil, overlap_mode: nil, place: nil, place_country: nil, point_radius: nil, query_type: nil, quotes: nil, quotes_of_tweet_id: nil, relation_targets: nil, replies: nil, results_limit: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, scope: nil, search_queries: nil, search_query: nil, since_date: nil, since_id: nil, since_time: nil, sort: nil, source: nil, start_cursor: nil, target_community_id: nil, target_community_ids: nil, target_list_id: nil, target_list_ids: nil, targets: nil, target_space_id: nil, target_tweet_id: nil, target_tweet_ids: nil, target_username: nil, target_usernames: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, username_contains: nil, verified_only: nil, verified_type: nil, within: nil, within_time: nil, request_options: {})
+      # @!method initialize(tool_type:, advanced_query: nil, any_words: nil, bio_contains: nil, blue_verified_only: nil, bounding_box: nil, business_email_only: nil, card_name: nil, cashtags: nil, collection_strategy: nil, conversation_id: nil, dedupe_across_targets: nil, dedupe_mode: nil, email_domains: nil, enrich_profiles: nil, exact_phrase: nil, exclude_original_author: nil, exclude_source: nil, exclude_words: nil, from_user: nil, geocode: nil, hashtags: nil, has_email: nil, has_location: nil, has_media_only: nil, has_website: nil, include_original_post: nil, include_search_terms: nil, include_target_metadata: nil, image_shows: nil, in_reply_to_tweet_id: nil, language: nil, list_id: nil, location_contains: nil, max_depth: nil, max_followers: nil, max_following: nil, max_id: nil, max_items_per_target: nil, max_likes: nil, max_pages_per_target: nil, max_posts: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_account_age_days: nil, min_bookmarks: nil, min_faves: nil, min_followers: nil, min_following: nil, min_posts: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, near: nil, news: nil, overlap_mode: nil, place: nil, place_country: nil, point_radius: nil, query_type: nil, quotes: nil, quotes_of_tweet_id: nil, relation_targets: nil, replies: nil, results_limit: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, scope: nil, search_queries: nil, search_query: nil, since_date: nil, since_id: nil, since_time: nil, sort: nil, source: nil, start_cursor: nil, target_community_id: nil, target_community_ids: nil, target_list_id: nil, target_list_ids: nil, targets: nil, target_space_id: nil, target_tweet_id: nil, target_tweet_ids: nil, target_username: nil, target_usernames: nil, text_only_terms: nil, to_user: nil, topic: nil, until_date: nil, until_time: nil, url: nil, username_contains: nil, verified_only: nil, verified_type: nil, within: nil, within_time: nil, request_options: {})
       #   @param tool_type [Symbol, XTwitterScraper::Models::ExtractionEstimateCostParams::ToolType] Identifier for the extraction tool used to run a job.
       #
       #   @param advanced_query [String] Raw advanced search query appended as-is (tweet_search_extractor)
@@ -631,6 +686,8 @@ module XTwitterScraper
       #
       #   @param bounding_box [String] Geo bounding box, e.g. -74.1 40.6 -73.9 40.8 (tweet_search_extractor)
       #
+      #   @param business_email_only [Boolean] Require an email the profile publishes outside free webmail, such as Gmail.
+      #
       #   @param card_name [String] Match the Tweet card name.
       #
       #   @param cashtags [String] Cashtags separated by spaces, commas, or lines. (tweet_search_extractor)
@@ -642,6 +699,10 @@ module XTwitterScraper
       #   @param dedupe_across_targets [Boolean] Merge duplicate results across collection targets.
       #
       #   @param dedupe_mode [Symbol, XTwitterScraper::Models::ExtractionEstimateCostParams::DedupeMode] Keep target duplicates, first rows, or merged overlap.
+      #
+      #   @param email_domains [String] Require an email at one of these domains. Separate domains with commas. Subdomai
+      #
+      #   @param enrich_profiles [Boolean] Add each user's full profile to follower_explorer, following_explorer, verified_
       #
       #   @param exact_phrase [String] Exact phrase to match (tweet_search_extractor)
       #
@@ -657,6 +718,8 @@ module XTwitterScraper
       #
       #   @param hashtags [String] Hashtags separated by spaces, commas, or lines. (tweet_search_extractor)
       #
+      #   @param has_email [Boolean] Require an email the profile publishes.
+      #
       #   @param has_location [Boolean] Require a profile location.
       #
       #   @param has_media_only [Boolean] Return only replies with media.
@@ -668,6 +731,8 @@ module XTwitterScraper
       #   @param include_search_terms [Boolean] Add matching search terms to collection metadata.
       #
       #   @param include_target_metadata [Boolean] Add source target metadata to each result.
+      #
+      #   @param image_shows [String] Keep only the posts whose photos show this. Use charts, screenshots, product_pho
       #
       #   @param in_reply_to_tweet_id [String] Only replies to this tweet ID (tweet_search_extractor)
       #
@@ -793,7 +858,11 @@ module XTwitterScraper
       #
       #   @param target_usernames [Array<String>] Usernames processed as one collection job.
       #
+      #   @param text_only_terms [String] Collects a post only when 1 of these words or quoted phrases is in its text, a l
+      #
       #   @param to_user [String] Filter replies sent to a username (tweet_search_extractor)
+      #
+      #   @param topic [String] Keep only the posts about this topic, such as "the Rust programming language". E
       #
       #   @param until_date [Date] End date YYYY-MM-DD (tweet_search_extractor)
       #

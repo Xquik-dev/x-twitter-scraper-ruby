@@ -16,6 +16,7 @@ module XTwitterScraper
           params(
             event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
             query: String,
+            name: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::Monitors::KeywordCreateResponse)
         end
@@ -24,6 +25,8 @@ module XTwitterScraper
           event_types:,
           # X search query to monitor. Whitespace is normalized.
           query:,
+          # Your own label for the keyword monitor. Its events carry it as monitorName.
+          name: nil,
           request_options: {}
         )
         end
@@ -48,6 +51,7 @@ module XTwitterScraper
             id: String,
             event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
             is_active: T::Boolean,
+            name: T.nilable(String),
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::Monitors::KeywordUpdateResponse)
         end
@@ -57,6 +61,8 @@ module XTwitterScraper
           # Array of event types to subscribe to.
           event_types: nil,
           is_active: nil,
+          # New label for the keyword monitor. Send null to remove it.
+          name: nil,
           request_options: {}
         )
         end

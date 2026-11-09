@@ -6,17 +6,26 @@ module XTwitterScraper
   module Models
     module X
       type account_bulk_retry_params =
-        {  } & XTwitterScraper::Internal::Type::request_parameters
+        { account_ids: ::Array[String] }
+        & XTwitterScraper::Internal::Type::request_parameters
 
       class AccountBulkRetryParams < XTwitterScraper::Internal::Type::BaseModel
         extend XTwitterScraper::Internal::Type::RequestParameters::Converter
         include XTwitterScraper::Internal::Type::RequestParameters
 
+        attr_reader account_ids: ::Array[String]?
+
+        def account_ids=: (::Array[String]) -> ::Array[String]
+
         def initialize: (
+          ?account_ids: ::Array[String],
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
-        def to_hash: -> { request_options: XTwitterScraper::RequestOptions }
+        def to_hash: -> {
+          account_ids: ::Array[String],
+          request_options: XTwitterScraper::RequestOptions
+        }
       end
     end
   end

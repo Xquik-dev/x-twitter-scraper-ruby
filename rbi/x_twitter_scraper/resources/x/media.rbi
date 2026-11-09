@@ -11,6 +11,7 @@ module XTwitterScraper
         # Download images & videos from tweets
         sig do
           params(
+            image_shows: String,
             tweet_id: String,
             tweet_ids: T::Array[String],
             tweet_input: String,
@@ -19,6 +20,13 @@ module XTwitterScraper
           ).returns(XTwitterScraper::Models::X::MediaDownloadResponse)
         end
         def download(
+          # Save only posts whose photos show this. Send charts, screenshots,
+          # product_photos, memes or people, or describe it in words, such as a rocket.
+          # AI-powered analysis checks posts with photos X doesn't mark sensitive & keeps
+          # scores of 0.5 or more. Each post saved costs 2 credits, the AI analysis price,
+          # on top of its save price, & a post the filter drops costs nothing. imageFilter
+          # states the cutoff & counts.
+          image_shows: nil,
           # Numeric tweet ID alias for tweetInput
           tweet_id: nil,
           # Array of tweet URLs or IDs (bulk, max 50 string items)
@@ -37,6 +45,7 @@ module XTwitterScraper
             account: String,
             url: String,
             idempotency_key: String,
+            is_long_video: T::Boolean,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::Models::X::MediaUploadResponse)
         end
@@ -50,6 +59,8 @@ module XTwitterScraper
           # returns the original action. Reusing it with different input returns 409. Replay
           # protection remains active for at least 90 days.
           idempotency_key:,
+          # Set true only for video/mp4 multipart uploads longer than 140 seconds.
+          is_long_video: nil,
           request_options: {}
         )
         end

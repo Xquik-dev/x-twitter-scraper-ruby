@@ -13,11 +13,13 @@ module XTwitterScraper
         # every 1 second and cost 30 credits per hour. Events and webhook deliveries are
         # included. Creation requires available credits for the first hourly charge.
         #
-        # @overload create(event_types:, query:, request_options: {})
+        # @overload create(event_types:, query:, name: nil, request_options: {})
         #
         # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
         #
         # @param query [String] X search query to monitor. Whitespace is normalized.
+        #
+        # @param name [String] Your own label for the keyword monitor. Its events carry it as monitorName.
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -57,13 +59,15 @@ module XTwitterScraper
 
         # Update keyword monitor
         #
-        # @overload update(id, event_types: nil, is_active: nil, request_options: {})
+        # @overload update(id, event_types: nil, is_active: nil, name: nil, request_options: {})
         #
         # @param id [String] Resource ID returned by the matching create or list endpoint.
         #
         # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
         #
         # @param is_active [Boolean]
+        #
+        # @param name [String, nil] New label for the keyword monitor. Send null to remove it.
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

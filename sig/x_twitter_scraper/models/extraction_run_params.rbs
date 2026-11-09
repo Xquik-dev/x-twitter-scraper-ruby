@@ -13,12 +13,15 @@ module XTwitterScraper
         bio_contains: String,
         blue_verified_only: bool,
         bounding_box: String,
+        business_email_only: bool,
         card_name: String,
         cashtags: String,
         collection_strategy: XTwitterScraper::Models::ExtractionRunParams::collection_strategy,
         conversation_id: String,
         dedupe_across_targets: bool,
         dedupe_mode: XTwitterScraper::Models::ExtractionRunParams::dedupe_mode,
+        email_domains: String,
+        enrich_profiles: bool,
         exact_phrase: String,
         exclude_original_author: bool,
         exclude_source: String,
@@ -26,12 +29,14 @@ module XTwitterScraper
         from_user: String,
         geocode: String,
         hashtags: String,
+        has_email: bool,
         has_location: bool,
         has_media_only: bool,
         has_website: bool,
         include_original_post: bool,
         include_search_terms: bool,
         include_target_metadata: bool,
+        image_shows: String,
         in_reply_to_tweet_id: String,
         language: String,
         list_id: String,
@@ -94,7 +99,9 @@ module XTwitterScraper
         target_tweet_ids: ::Array[String],
         target_username: String,
         target_usernames: ::Array[String],
+        text_only_terms: String,
         to_user: String,
+        topic: String,
         until_date: Date,
         until_time: XTwitterScraper::Models::ExtractionRunParams::until_time,
         url: String,
@@ -136,6 +143,10 @@ module XTwitterScraper
 
       def bounding_box=: (String) -> String
 
+      attr_reader business_email_only: bool?
+
+      def business_email_only=: (bool) -> bool
+
       attr_reader card_name: String?
 
       def card_name=: (String) -> String
@@ -163,6 +174,14 @@ module XTwitterScraper
       def dedupe_mode=: (
         XTwitterScraper::Models::ExtractionRunParams::dedupe_mode
       ) -> XTwitterScraper::Models::ExtractionRunParams::dedupe_mode
+
+      attr_reader email_domains: String?
+
+      def email_domains=: (String) -> String
+
+      attr_reader enrich_profiles: bool?
+
+      def enrich_profiles=: (bool) -> bool
 
       attr_reader exact_phrase: String?
 
@@ -192,6 +211,10 @@ module XTwitterScraper
 
       def hashtags=: (String) -> String
 
+      attr_reader has_email: bool?
+
+      def has_email=: (bool) -> bool
+
       attr_reader has_location: bool?
 
       def has_location=: (bool) -> bool
@@ -215,6 +238,10 @@ module XTwitterScraper
       attr_reader include_target_metadata: bool?
 
       def include_target_metadata=: (bool) -> bool
+
+      attr_reader image_shows: String?
+
+      def image_shows=: (String) -> String
 
       attr_reader in_reply_to_tweet_id: String?
 
@@ -484,9 +511,17 @@ module XTwitterScraper
 
       def target_usernames=: (::Array[String]) -> ::Array[String]
 
+      attr_reader text_only_terms: String?
+
+      def text_only_terms=: (String) -> String
+
       attr_reader to_user: String?
 
       def to_user=: (String) -> String
+
+      attr_reader topic: String?
+
+      def topic=: (String) -> String
 
       attr_reader until_date: Date?
 
@@ -530,12 +565,15 @@ module XTwitterScraper
         ?bio_contains: String,
         ?blue_verified_only: bool,
         ?bounding_box: String,
+        ?business_email_only: bool,
         ?card_name: String,
         ?cashtags: String,
         ?collection_strategy: XTwitterScraper::Models::ExtractionRunParams::collection_strategy,
         ?conversation_id: String,
         ?dedupe_across_targets: bool,
         ?dedupe_mode: XTwitterScraper::Models::ExtractionRunParams::dedupe_mode,
+        ?email_domains: String,
+        ?enrich_profiles: bool,
         ?exact_phrase: String,
         ?exclude_original_author: bool,
         ?exclude_source: String,
@@ -543,12 +581,14 @@ module XTwitterScraper
         ?from_user: String,
         ?geocode: String,
         ?hashtags: String,
+        ?has_email: bool,
         ?has_location: bool,
         ?has_media_only: bool,
         ?has_website: bool,
         ?include_original_post: bool,
         ?include_search_terms: bool,
         ?include_target_metadata: bool,
+        ?image_shows: String,
         ?in_reply_to_tweet_id: String,
         ?language: String,
         ?list_id: String,
@@ -611,7 +651,9 @@ module XTwitterScraper
         ?target_tweet_ids: ::Array[String],
         ?target_username: String,
         ?target_usernames: ::Array[String],
+        ?text_only_terms: String,
         ?to_user: String,
+        ?topic: String,
         ?until_date: Date,
         ?until_time: XTwitterScraper::Models::ExtractionRunParams::until_time,
         ?url: String,
@@ -631,12 +673,15 @@ module XTwitterScraper
         bio_contains: String,
         blue_verified_only: bool,
         bounding_box: String,
+        business_email_only: bool,
         card_name: String,
         cashtags: String,
         collection_strategy: XTwitterScraper::Models::ExtractionRunParams::collection_strategy,
         conversation_id: String,
         dedupe_across_targets: bool,
         dedupe_mode: XTwitterScraper::Models::ExtractionRunParams::dedupe_mode,
+        email_domains: String,
+        enrich_profiles: bool,
         exact_phrase: String,
         exclude_original_author: bool,
         exclude_source: String,
@@ -644,12 +689,14 @@ module XTwitterScraper
         from_user: String,
         geocode: String,
         hashtags: String,
+        has_email: bool,
         has_location: bool,
         has_media_only: bool,
         has_website: bool,
         include_original_post: bool,
         include_search_terms: bool,
         include_target_metadata: bool,
+        image_shows: String,
         in_reply_to_tweet_id: String,
         language: String,
         list_id: String,
@@ -712,7 +759,9 @@ module XTwitterScraper
         target_tweet_ids: ::Array[String],
         target_username: String,
         target_usernames: ::Array[String],
+        text_only_terms: String,
         to_user: String,
+        topic: String,
         until_date: Date,
         until_time: XTwitterScraper::Models::ExtractionRunParams::until_time,
         url: String,

@@ -29,12 +29,20 @@ module XTwitterScraper
       #   @return [Boolean, nil]
       optional :is_active, XTwitterScraper::Internal::Type::Boolean, api_name: :isActive
 
-      # @!method initialize(id:, event_types: nil, is_active: nil, request_options: {})
+      # @!attribute name
+      #   New label for the account monitor. Send null to remove the label.
+      #
+      #   @return [String, nil]
+      optional :name, String, nil?: true
+
+      # @!method initialize(id:, event_types: nil, is_active: nil, name: nil, request_options: {})
       #   @param id [String]
       #
       #   @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
       #
       #   @param is_active [Boolean]
+      #
+      #   @param name [String, nil] New label for the account monitor. Send null to remove the label.
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
     end

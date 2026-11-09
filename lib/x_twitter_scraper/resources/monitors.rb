@@ -17,11 +17,13 @@ module XTwitterScraper
       # included. Creation requires available credits for the first hourly charge and
       # username lookup.
       #
-      # @overload create(event_types:, username:, request_options: {})
+      # @overload create(event_types:, username:, name: nil, request_options: {})
       #
       # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
       #
       # @param username [String] X username (without @)
+      #
+      # @param name [String] Your label for the monitor. Its events carry it as monitorName. Xquik normalizes
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -61,13 +63,15 @@ module XTwitterScraper
 
       # Update monitor
       #
-      # @overload update(id, event_types: nil, is_active: nil, request_options: {})
+      # @overload update(id, event_types: nil, is_active: nil, name: nil, request_options: {})
       #
       # @param id [String] Resource ID returned by the matching create or list endpoint.
       #
       # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
       #
       # @param is_active [Boolean]
+      #
+      # @param name [String, nil] New label for the account monitor. Send null to remove the label.
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #

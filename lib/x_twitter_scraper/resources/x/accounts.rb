@@ -107,7 +107,9 @@ module XTwitterScraper
         # Clears loginFailedAt and loginFailureReason for all accounts with transient or
         # automated failure reasons, making them eligible for retry on next use.
         #
-        # @overload bulk_retry(request_options: {})
+        # @overload bulk_retry(account_ids: nil, request_options: {})
+        #
+        # @param account_ids [Array<String>] IDs of the X accounts to retry. Accounts that failed for another reason, or belo
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

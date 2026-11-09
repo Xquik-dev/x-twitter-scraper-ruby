@@ -8,7 +8,8 @@ module XTwitterScraper
       type keyword_create_params =
         {
           event_types: ::Array[XTwitterScraper::Models::event_type],
-          query: String
+          query: String,
+          name: String
         }
         & XTwitterScraper::Internal::Type::request_parameters
 
@@ -20,15 +21,21 @@ module XTwitterScraper
 
         attr_accessor query: String
 
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
         def initialize: (
           event_types: ::Array[XTwitterScraper::Models::event_type],
           query: String,
+          ?name: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
         def to_hash: -> {
           event_types: ::Array[XTwitterScraper::Models::event_type],
           query: String,
+          name: String,
           request_options: XTwitterScraper::RequestOptions
         }
       end
