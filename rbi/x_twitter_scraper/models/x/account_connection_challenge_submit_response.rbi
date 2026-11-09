@@ -19,44 +19,68 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :id
 
-        sig { returns(Time) }
-        attr_accessor :created_at
+        sig { returns(T.nilable(Time)) }
+        attr_reader :created_at
+
+        sig { params(created_at: Time).void }
+        attr_writer :created_at
 
         sig do
           returns(
-            XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Health::TaggedSymbol
+            T.nilable(
+              XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Health::TaggedSymbol
+            )
           )
         end
-        attr_accessor :health
+        attr_reader :health
 
-        sig { returns(Symbol) }
+        sig do
+          params(
+            health:
+              XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Health::OrSymbol
+          ).void
+        end
+        attr_writer :health
+
+        sig do
+          returns(
+            XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Status::TaggedSymbol
+          )
+        end
         attr_accessor :status
 
-        sig { returns(String) }
-        attr_accessor :x_user_id
+        sig { returns(T.nilable(String)) }
+        attr_reader :x_user_id
 
-        sig { returns(String) }
-        attr_accessor :x_username
+        sig { params(x_user_id: String).void }
+        attr_writer :x_user_id
+
+        sig { returns(T.nilable(String)) }
+        attr_reader :x_username
+
+        sig { params(x_username: String).void }
+        attr_writer :x_username
 
         # Sanitized X account summary returned by connect and reauth.
         sig do
           params(
             id: String,
+            status:
+              XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Status::OrSymbol,
             created_at: Time,
             health:
               XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Health::OrSymbol,
             x_user_id: String,
-            x_username: String,
-            status: Symbol
+            x_username: String
           ).returns(T.attached_class)
         end
         def self.new(
           id:,
-          created_at:,
-          health:,
-          x_user_id:,
-          x_username:,
-          status: :active
+          status:,
+          created_at: nil,
+          health: nil,
+          x_user_id: nil,
+          x_username: nil
         )
         end
 
@@ -67,7 +91,8 @@ module XTwitterScraper
               created_at: Time,
               health:
                 XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Health::TaggedSymbol,
-              status: Symbol,
+              status:
+                XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Status::TaggedSymbol,
               x_user_id: String,
               x_username: String
             }
@@ -123,6 +148,40 @@ module XTwitterScraper
             override.returns(
               T::Array[
                 XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Health::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        module Status
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Status
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          ACTIVE =
+            T.let(
+              :active,
+              XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Status::TaggedSymbol
+            )
+          REQUIRES_EMAIL_CODE =
+            T.let(
+              :requires_email_code,
+              XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Status::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::Status::TaggedSymbol
               ]
             )
           end

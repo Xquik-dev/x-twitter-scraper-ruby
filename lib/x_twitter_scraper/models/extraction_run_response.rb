@@ -10,35 +10,35 @@ module XTwitterScraper
     class ExtractionRunResponse < XTwitterScraper::Internal::Type::BaseModel
       # @!attribute allowed
       #
-      #   @return [Boolean]
-      required :allowed, XTwitterScraper::Internal::Type::Boolean
+      #   @return [Boolean, nil]
+      optional :allowed, XTwitterScraper::Internal::Type::Boolean
 
       # @!attribute credits_available
       #
-      #   @return [String]
-      required :credits_available, String, api_name: :creditsAvailable
+      #   @return [String, nil]
+      optional :credits_available, String, api_name: :creditsAvailable
 
       # @!attribute credits_required
       #
-      #   @return [String]
-      required :credits_required, String, api_name: :creditsRequired
+      #   @return [String, nil]
+      optional :credits_required, String, api_name: :creditsRequired
 
       # @!attribute estimated_results
       #
-      #   @return [Integer]
-      required :estimated_results, Integer, api_name: :estimatedResults
+      #   @return [Integer, nil]
+      optional :estimated_results, Integer, api_name: :estimatedResults
 
       # @!attribute source
       #
-      #   @return [String]
-      required :source, String
+      #   @return [String, nil]
+      optional :source, String
 
       # @!attribute resolved_x_user_id
       #
       #   @return [String, nil]
       optional :resolved_x_user_id, String, api_name: :resolvedXUserId
 
-      # @!method initialize(allowed:, credits_available:, credits_required:, estimated_results:, source:, resolved_x_user_id: nil)
+      # @!method initialize(allowed: nil, credits_available: nil, credits_required: nil, estimated_results: nil, source: nil, resolved_x_user_id: nil)
       #   @param allowed [Boolean]
       #   @param credits_available [String]
       #   @param credits_required [String]

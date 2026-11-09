@@ -10,7 +10,7 @@ module XTwitterScraper
           id: String,
           created_at: Time,
           health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health,
-          status: :active,
+          status: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::status,
           x_user_id: String,
           x_username: String
         }
@@ -18,30 +18,40 @@ module XTwitterScraper
       class AccountConnectionChallengeSubmitResponse < XTwitterScraper::Internal::Type::BaseModel
         attr_accessor id: String
 
-        attr_accessor created_at: Time
+        attr_reader created_at: Time?
 
-        attr_accessor health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health
+        def created_at=: (Time) -> Time
 
-        attr_accessor status: :active
+        attr_reader health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health?
 
-        attr_accessor x_user_id: String
+        def health=: (
+          XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health
+        ) -> XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health
 
-        attr_accessor x_username: String
+        attr_accessor status: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::status
+
+        attr_reader x_user_id: String?
+
+        def x_user_id=: (String) -> String
+
+        attr_reader x_username: String?
+
+        def x_username=: (String) -> String
 
         def initialize: (
           id: String,
-          created_at: Time,
-          health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health,
-          x_user_id: String,
-          x_username: String,
-          ?status: :active
+          status: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::status,
+          ?created_at: Time,
+          ?health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health,
+          ?x_user_id: String,
+          ?x_username: String
         ) -> void
 
         def to_hash: -> {
           id: String,
           created_at: Time,
           health: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health,
-          status: :active,
+          status: XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::status,
           x_user_id: String,
           x_username: String
         }
@@ -65,6 +75,17 @@ module XTwitterScraper
           TEMPORARY_ISSUE: :temporaryIssue
 
           def self?.values: -> ::Array[XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::health]
+        end
+
+        type status = :active | :requires_email_code
+
+        module Status
+          extend XTwitterScraper::Internal::Type::Enum
+
+          ACTIVE: :active
+          REQUIRES_EMAIL_CODE: :requires_email_code
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::AccountConnectionChallengeSubmitResponse::status]
         end
       end
     end

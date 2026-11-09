@@ -2724,12 +2724,6 @@
     ]
   },
   {
-    "reason": "The SDK's enum lists other values than the spec here. The SDK returns a value its enum does not list as the API sent it, so each one still reaches the caller.",
-    "differences": [
-      "POST /api/v1/x/account-connection-challenges/{id}/submit response enum status"
-    ]
-  },
-  {
     "reason": "The SDK's types mark these fields required and the spec does not. The SDK enforces neither when it sends a request, so this shows only in its type signatures.",
     "differences": [
       "POST /api/v1/x/media request required url"
@@ -2751,16 +2745,7 @@
       "GET /api/v1/x/users/{id}/following response required has_next_page",
       "GET /api/v1/x/users/{id}/following response required next_cursor",
       "GET /api/v1/x/users/{id}/verified-followers response required has_next_page",
-      "GET /api/v1/x/users/{id}/verified-followers response required next_cursor",
-      "POST /api/v1/extractions response required allowed",
-      "POST /api/v1/extractions response required creditsAvailable",
-      "POST /api/v1/extractions response required creditsRequired",
-      "POST /api/v1/extractions response required estimatedResults",
-      "POST /api/v1/extractions response required source",
-      "POST /api/v1/x/account-connection-challenges/{id}/submit response required createdAt",
-      "POST /api/v1/x/account-connection-challenges/{id}/submit response required health",
-      "POST /api/v1/x/account-connection-challenges/{id}/submit response required xUserId",
-      "POST /api/v1/x/account-connection-challenges/{id}/submit response required xUsername"
+      "GET /api/v1/x/users/{id}/verified-followers response required next_cursor"
     ]
   }
 ]
