@@ -131,10 +131,16 @@ module XTwitterScraper
           #   @return [Array<String>, nil]
           optional :search_tags, XTwitterScraper::Internal::Type::ArrayOf[String], api_name: :searchTags
 
-          # @!method initialize(id:, admin: nil, banner: nil, banner_url: nil, created_at: nil, creator: nil, description: nil, invites_policy: nil, is_nsfw:, join_policy: nil, member_count:, members_facepile: nil, moderator_count: nil, name:, primary_topic: nil, question: nil, rules: nil, search_tags: nil)
+          # @!method initialize(id:, is_nsfw:, member_count:, name:, admin: nil, banner: nil, banner_url: nil, created_at: nil, creator: nil, description: nil, invites_policy: nil, join_policy: nil, members_facepile: nil, moderator_count: nil, primary_topic: nil, question: nil, rules: nil, search_tags: nil)
           #   Community info object
           #
           #   @param id [String] Unique community identifier
+          #
+          #   @param is_nsfw [Boolean] Whether the community is marked sensitive
+          #
+          #   @param member_count [Integer] Total member count
+          #
+          #   @param name [String] Display name of the community
           #
           #   @param admin [XTwitterScraper::Models::UserProfile]
           #
@@ -150,17 +156,11 @@ module XTwitterScraper
           #
           #   @param invites_policy [String] Invitation policy
           #
-          #   @param is_nsfw [Boolean] Whether the community is marked sensitive
-          #
           #   @param join_policy [String] Join policy (open or restricted)
-          #
-          #   @param member_count [Integer] Total member count
           #
           #   @param members_facepile [Array<XTwitterScraper::Models::UserProfile, XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::MembersFacepile::CommunityMemberPreview>] The members X previews beside the member count. A keyword or topic result gives
           #
           #   @param moderator_count [Integer] Total moderator count
-          #
-          #   @param name [String] Display name of the community
           #
           #   @param primary_topic [XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic] Primary topic
           #
@@ -211,11 +211,11 @@ module XTwitterScraper
             #   @return [String]
             required :name, String
 
-            # @!method initialize(id: nil, name:)
+            # @!method initialize(name:, id: nil)
             #   Primary topic
             #
-            #   @param id [String]
             #   @param name [String]
+            #   @param id [String]
           end
 
           class Rule < XTwitterScraper::Internal::Type::BaseModel

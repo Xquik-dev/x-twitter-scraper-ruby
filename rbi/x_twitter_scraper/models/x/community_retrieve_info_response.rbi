@@ -248,6 +248,9 @@ module XTwitterScraper
           sig do
             params(
               id: String,
+              is_nsfw: T::Boolean,
+              member_count: Integer,
+              name: String,
               admin: XTwitterScraper::Models::UserProfile::OrHash,
               banner:
                 XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Banner::OrHash,
@@ -257,9 +260,7 @@ module XTwitterScraper
                 XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator::OrHash,
               description: String,
               invites_policy: String,
-              is_nsfw: T::Boolean,
               join_policy: String,
-              member_count: Integer,
               members_facepile:
                 T::Array[
                   T.any(
@@ -268,7 +269,6 @@ module XTwitterScraper
                   )
                 ],
               moderator_count: Integer,
-              name: String,
               primary_topic:
                 XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic::OrHash,
               question: String,
@@ -282,6 +282,12 @@ module XTwitterScraper
           def self.new(
             # Unique community identifier
             id:,
+            # Whether the community is marked sensitive
+            is_nsfw:,
+            # Total member count
+            member_count:,
+            # Display name of the community
+            name:,
             admin: nil,
             banner: nil,
             # Community banner image URL
@@ -293,19 +299,13 @@ module XTwitterScraper
             description: nil,
             # Invitation policy
             invites_policy: nil,
-            # Whether the community is marked sensitive
-            is_nsfw:,
             # Join policy (open or restricted)
             join_policy: nil,
-            # Total member count
-            member_count:,
             # The members X previews beside the member count. A keyword or topic result gives
             # each member's ID & picture only.
             members_facepile: nil,
             # Total moderator count
             moderator_count: nil,
-            # Display name of the community
-            name:,
             # Primary topic
             primary_topic: nil,
             # What the community asks a user who joins
@@ -421,8 +421,8 @@ module XTwitterScraper
             attr_accessor :name
 
             # Primary topic
-            sig { params(id: String, name: String).returns(T.attached_class) }
-            def self.new(id: nil, name:)
+            sig { params(name: String, id: String).returns(T.attached_class) }
+            def self.new(name:, id: nil)
             end
 
             sig { override.returns({ id: String, name: String }) }
