@@ -9,23 +9,23 @@ module XTwitterScraper
     class TweetPoint < XTwitterScraper::Internal::Type::BaseModel
       attr_accessor coordinates: ::Array[Float]
 
-      attr_accessor type: XTwitterScraper::Models::TweetPoint::type
+      attr_accessor type: XTwitterScraper::Models::TweetPoint::type_
 
       def initialize: (
         coordinates: ::Array[Float],
-        type: XTwitterScraper::Models::TweetPoint::type
+        type: XTwitterScraper::Models::TweetPoint::type_
       ) -> void
 
       def to_hash: -> ::Hash[Symbol, top]
 
-      type type = :Point
+      type type_ = :Point
 
       module Type
         extend XTwitterScraper::Internal::Type::Enum
 
         POINT: :Point
 
-        def self?.values: -> ::Array[XTwitterScraper::Models::TweetPoint::type]
+        def self?.values: -> ::Array[XTwitterScraper::Models::TweetPoint::type_]
       end
     end
   end

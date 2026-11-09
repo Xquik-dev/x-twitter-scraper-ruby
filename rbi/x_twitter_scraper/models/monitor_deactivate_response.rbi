@@ -27,15 +27,15 @@ module XTwitterScraper
 
       sig do
         params(
-          deletion_status: Symbol,
           status_url: String,
+          deletion_status: Symbol,
           success: T::Boolean
         ).returns(T.attached_class)
       end
       def self.new(
-        deletion_status: :deleting,
         # Poll this monitor URL until it returns 404.
         status_url:,
+        deletion_status: :deleting,
         success: true
       )
       end
