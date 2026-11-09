@@ -46,6 +46,8 @@ module XTwitterScraper
     mod.define_sorbet_constant!(const) { T.type_alias { mod.to_sorbet_type } }
   end
 
+  AccountBasedIn = XTwitterScraper::Models::AccountBasedIn
+
   AccountRetrieveParams = XTwitterScraper::Models::AccountRetrieveParams
 
   AccountSetXUsernameParams = XTwitterScraper::Models::AccountSetXUsernameParams
@@ -142,6 +144,8 @@ module XTwitterScraper
 
   PaginatedUsers = XTwitterScraper::Models::PaginatedUsers
 
+  ProfileContactInfo = XTwitterScraper::Models::ProfileContactInfo
+
   RadarItem = XTwitterScraper::Models::RadarItem
 
   RadarRetrieveTrendingTopicsParams = XTwitterScraper::Models::RadarRetrieveTrendingTopicsParams
@@ -175,6 +179,8 @@ module XTwitterScraper
   TweetMedia = XTwitterScraper::Models::TweetMedia
 
   UserProfile = XTwitterScraper::Models::UserProfile
+
+  UserTipJar = XTwitterScraper::Models::UserTipJar
 
   Webhook = XTwitterScraper::Models::Webhook
 

@@ -1,0 +1,61 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type user_tip_jar = ::Hash[Symbol, top]
+
+    class UserTipJar < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader bandcamp_handle: String?
+
+      def bandcamp_handle=: (String) -> String
+
+      attr_reader bitcoin_handle: String?
+
+      def bitcoin_handle=: (String) -> String
+
+      attr_reader cash_app_handle: String?
+
+      def cash_app_handle=: (String) -> String
+
+      attr_reader ethereum_handle: String?
+
+      def ethereum_handle=: (String) -> String
+
+      attr_reader gofundme_handle: String?
+
+      def gofundme_handle=: (String) -> String
+
+      attr_reader is_enabled: bool?
+
+      def is_enabled=: (bool) -> bool
+
+      attr_reader patreon_handle: String?
+
+      def patreon_handle=: (String) -> String
+
+      attr_reader pay_pal_handle: String?
+
+      def pay_pal_handle=: (String) -> String
+
+      attr_reader venmo_handle: String?
+
+      def venmo_handle=: (String) -> String
+
+      def initialize: (
+        ?bandcamp_handle: String,
+        ?bitcoin_handle: String,
+        ?cash_app_handle: String,
+        ?ethereum_handle: String,
+        ?gofundme_handle: String,
+        ?is_enabled: bool,
+        ?patreon_handle: String,
+        ?pay_pal_handle: String,
+        ?venmo_handle: String
+      ) -> void
+
+      def to_hash: -> ::Hash[Symbol, top]
+    end
+  end
+end
