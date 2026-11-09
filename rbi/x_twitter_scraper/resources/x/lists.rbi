@@ -30,7 +30,9 @@ module XTwitterScraper
             verified_only: T::Boolean,
             verified_type: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::PaginatedUsers)
+          ).returns(
+            XTwitterScraper::Models::X::ListRetrieveFollowersResponse::Variants
+          )
         end
         def retrieve_followers(
           # List ID
@@ -94,7 +96,9 @@ module XTwitterScraper
             verified_only: T::Boolean,
             verified_type: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
-          ).returns(XTwitterScraper::PaginatedUsers)
+          ).returns(
+            XTwitterScraper::Models::X::ListRetrieveMembersResponse::Variants
+          )
         end
         def retrieve_members(
           # List ID for member lookup

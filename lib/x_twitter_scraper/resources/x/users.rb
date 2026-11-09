@@ -129,7 +129,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::PaginatedUsers, XTwitterScraper::Models::X::UserRetrieveFollowersResponse::UserListCoverageResponse]
+        # @return [XTwitterScraper::Models::UserListPage, XTwitterScraper::Models::X::UserRetrieveFollowersResponse::UserListCoverageResponse]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveFollowersParams
         def retrieve_followers(id, params = {})
@@ -277,7 +277,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::PaginatedUsers, XTwitterScraper::Models::X::UserRetrieveFollowingResponse::UserListCoverageResponse]
+        # @return [XTwitterScraper::Models::UserListPage, XTwitterScraper::Models::X::UserRetrieveFollowingResponse::UserListCoverageResponse]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveFollowingParams
         def retrieve_following(id, params = {})
@@ -1175,7 +1175,7 @@ module XTwitterScraper
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [XTwitterScraper::Models::PaginatedUsers, XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse]
+        # @return [XTwitterScraper::Models::UserListPage, XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersResponse::UserListCoverageResponse]
         #
         # @see XTwitterScraper::Models::X::UserRetrieveVerifiedFollowersParams
         def retrieve_verified_followers(id, params = {})
