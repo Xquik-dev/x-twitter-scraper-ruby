@@ -24,11 +24,14 @@ module XTwitterScraper
         #
         # @see XTwitterScraper::Models::X::UserRetrieveParams
         def retrieve(id, params = {})
+          parsed, options = XTwitterScraper::X::UserRetrieveParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: ["x/users/%1$s", id],
+            query: query,
             model: XTwitterScraper::UserProfile,
-            options: params[:request_options]
+            options: options
           )
         end
 

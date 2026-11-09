@@ -64,11 +64,14 @@ module XTwitterScraper
       #
       # @see XTwitterScraper::Models::StyleListParams
       def list(params = {})
+        parsed, options = XTwitterScraper::StyleListParams.dump_request(params)
+        query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "styles",
+          query: query,
           model: XTwitterScraper::Models::StyleListResponse,
-          options: params[:request_options]
+          options: options
         )
       end
 

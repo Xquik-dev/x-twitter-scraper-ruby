@@ -69,11 +69,14 @@ module XTwitterScraper
         #
         # @see XTwitterScraper::Models::X::AccountListParams
         def list(params = {})
+          parsed, options = XTwitterScraper::X::AccountListParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: "x/accounts",
+            query: query,
             model: XTwitterScraper::Models::X::AccountListResponse,
-            options: params[:request_options]
+            options: options
           )
         end
 
@@ -108,11 +111,13 @@ module XTwitterScraper
         #
         # @see XTwitterScraper::Models::X::AccountBulkRetryParams
         def bulk_retry(params = {})
+          parsed, options = XTwitterScraper::X::AccountBulkRetryParams.dump_request(params)
           @client.request(
             method: :post,
             path: "x/accounts/bulk-retry",
+            body: parsed,
             model: XTwitterScraper::Models::X::AccountBulkRetryResponse,
-            options: params[:request_options]
+            options: options
           )
         end
 

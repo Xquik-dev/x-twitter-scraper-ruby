@@ -95,11 +95,14 @@ module XTwitterScraper
       #
       # @see XTwitterScraper::Models::MonitorListParams
       def list(params = {})
+        parsed, options = XTwitterScraper::MonitorListParams.dump_request(params)
+        query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "monitors",
+          query: query,
           model: XTwitterScraper::Models::MonitorListResponse,
-          options: params[:request_options]
+          options: options
         )
       end
 

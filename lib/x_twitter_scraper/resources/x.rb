@@ -67,11 +67,14 @@ module XTwitterScraper
       #
       # @see XTwitterScraper::Models::XGetArticleParams
       def get_article(tweet_id, params = {})
+        parsed, options = XTwitterScraper::XGetArticleParams.dump_request(params)
+        query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["x/articles/%1$s", tweet_id],
+          query: query,
           model: XTwitterScraper::Models::XGetArticleResponse,
-          options: params[:request_options]
+          options: options
         )
       end
 

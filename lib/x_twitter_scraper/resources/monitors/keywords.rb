@@ -91,11 +91,14 @@ module XTwitterScraper
         #
         # @see XTwitterScraper::Models::Monitors::KeywordListParams
         def list(params = {})
+          parsed, options = XTwitterScraper::Monitors::KeywordListParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: "monitors/keywords",
+            query: query,
             model: XTwitterScraper::Models::Monitors::KeywordListResponse,
-            options: params[:request_options]
+            options: options
           )
         end
 
