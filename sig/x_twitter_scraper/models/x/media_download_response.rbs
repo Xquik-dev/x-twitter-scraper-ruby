@@ -9,9 +9,12 @@ module XTwitterScraper
         {
           cache_hit: bool,
           gallery_url: String,
+          image_filter: XTwitterScraper::ImageFilterSummary,
+          items: ::Array[XTwitterScraper::X::MediaDownloadResponse::Item],
           total_media: Integer,
           total_tweets: Integer,
-          tweet_id: String
+          tweet_id: String,
+          unprocessed_tweet_ids: ::Array[String]
         }
 
       class MediaDownloadResponse < XTwitterScraper::Internal::Type::BaseModel
@@ -22,6 +25,18 @@ module XTwitterScraper
         attr_reader gallery_url: String?
 
         def gallery_url=: (String) -> String
+
+        attr_reader image_filter: XTwitterScraper::ImageFilterSummary?
+
+        def image_filter=: (
+          XTwitterScraper::ImageFilterSummary | ::Hash[Symbol, top]
+        ) -> XTwitterScraper::ImageFilterSummary
+
+        attr_reader items: ::Array[XTwitterScraper::X::MediaDownloadResponse::Item]?
+
+        def items=: (
+          ::Array[XTwitterScraper::X::MediaDownloadResponse::Item | ::Hash[Symbol, top]]
+        ) -> ::Array[XTwitterScraper::X::MediaDownloadResponse::Item]
 
         attr_reader total_media: Integer?
 
@@ -35,21 +50,118 @@ module XTwitterScraper
 
         def tweet_id=: (String) -> String
 
+        attr_reader unprocessed_tweet_ids: ::Array[String]?
+
+        def unprocessed_tweet_ids=: (::Array[String]) -> ::Array[String]
+
         def initialize: (
           ?cache_hit: bool,
           ?gallery_url: String,
+          ?image_filter: XTwitterScraper::ImageFilterSummary | ::Hash[Symbol, top],
+          ?items: ::Array[XTwitterScraper::X::MediaDownloadResponse::Item | ::Hash[Symbol, top]],
           ?total_media: Integer,
           ?total_tweets: Integer,
-          ?tweet_id: String
+          ?tweet_id: String,
+          ?unprocessed_tweet_ids: ::Array[String]
         ) -> void
 
         def to_hash: -> {
           cache_hit: bool,
           gallery_url: String,
+          image_filter: XTwitterScraper::ImageFilterSummary,
+          items: ::Array[XTwitterScraper::X::MediaDownloadResponse::Item],
           total_media: Integer,
           total_tweets: Integer,
-          tweet_id: String
+          tweet_id: String,
+          unprocessed_tweet_ids: ::Array[String]
         }
+
+        type item = ::Hash[Symbol, top]
+
+        class Item < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor tweet_id: String
+
+          attr_accessor media_type: XTwitterScraper::Models::X::MediaDownloadResponse::Item::media_type
+
+          attr_accessor media_url: String
+
+          attr_accessor poster_url: String?
+
+          attr_accessor qualities: ::Array[XTwitterScraper::X::MediaDownloadResponse::Item::Quality]
+
+          attr_accessor file_size: String?
+
+          attr_accessor created_at: Time
+
+          attr_accessor author_username: String
+
+          attr_accessor author_display_name: String
+
+          attr_accessor author_avatar: String?
+
+          attr_accessor tweet_text: String
+
+          attr_accessor likes: Integer?
+
+          attr_accessor retweets: Integer?
+
+          attr_accessor views: Integer?
+
+          def initialize: (
+            id: String,
+            tweet_id: String,
+            media_type: XTwitterScraper::Models::X::MediaDownloadResponse::Item::media_type,
+            media_url: String,
+            poster_url: String?,
+            qualities: ::Array[XTwitterScraper::X::MediaDownloadResponse::Item::Quality | ::Hash[Symbol, top]],
+            file_size: String?,
+            created_at: Time,
+            author_username: String,
+            author_display_name: String,
+            author_avatar: String?,
+            tweet_text: String,
+            likes: Integer?,
+            retweets: Integer?,
+            views: Integer?
+          ) -> void
+
+          def to_hash: -> ::Hash[Symbol, top]
+
+          type media_type = :photo | :video | :animated_gif
+
+          module MediaType
+            extend XTwitterScraper::Internal::Type::Enum
+
+            PHOTO: :photo
+            VIDEO: :video
+            ANIMATED_GIF: :animated_gif
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::MediaDownloadResponse::Item::media_type]
+          end
+
+          type quality = ::Hash[Symbol, top]
+
+          class Quality < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor bitrate: Integer
+
+            attr_accessor height: Integer
+
+            attr_accessor url: String
+
+            attr_accessor width: Integer
+
+            def initialize: (
+              bitrate: Integer,
+              height: Integer,
+              url: String,
+              width: Integer
+            ) -> void
+
+            def to_hash: -> ::Hash[Symbol, top]
+          end
+        end
       end
     end
   end
