@@ -91,16 +91,16 @@ module XTwitterScraper
 
           def initialize: (
             id: String,
+            is_nsfw: bool,
+            member_count: Integer,
+            name: String,
             ?banner_url: String,
             ?created_at: String,
             ?creator: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator,
             ?description: String,
             ?invites_policy: String,
-            is_nsfw: bool,
             ?join_policy: String,
-            member_count: Integer,
             ?moderator_count: Integer,
-            name: String,
             ?primary_topic: XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic,
             ?rules: ::Array[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule]
           ) -> void
@@ -159,7 +159,7 @@ module XTwitterScraper
 
             attr_accessor name: String
 
-            def initialize: (?id: String, name: String) -> void
+            def initialize: (name: String, ?id: String) -> void
 
             def to_hash: -> { id: String, name: String }
           end

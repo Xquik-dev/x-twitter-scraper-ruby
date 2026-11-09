@@ -99,10 +99,16 @@ module XTwitterScraper
           optional :rules,
                    -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Rule] }
 
-          # @!method initialize(id:, banner_url: nil, created_at: nil, creator: nil, description: nil, invites_policy: nil, is_nsfw:, join_policy: nil, member_count:, moderator_count: nil, name:, primary_topic: nil, rules: nil)
+          # @!method initialize(id:, is_nsfw:, member_count:, name:, banner_url: nil, created_at: nil, creator: nil, description: nil, invites_policy: nil, join_policy: nil, moderator_count: nil, primary_topic: nil, rules: nil)
           #   Community info object
           #
           #   @param id [String] Unique community identifier
+          #
+          #   @param is_nsfw [Boolean] Whether the community is marked sensitive
+          #
+          #   @param member_count [Integer] Total member count
+          #
+          #   @param name [String] Display name of the community
           #
           #   @param banner_url [String] Community banner image URL
           #
@@ -114,15 +120,9 @@ module XTwitterScraper
           #
           #   @param invites_policy [String] Invitation policy
           #
-          #   @param is_nsfw [Boolean] Whether the community is marked sensitive
-          #
           #   @param join_policy [String] Join policy (open or restricted)
           #
-          #   @param member_count [Integer] Total member count
-          #
           #   @param moderator_count [Integer] Total moderator count
-          #
-          #   @param name [String] Display name of the community
           #
           #   @param primary_topic [XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic] Primary topic
           #
@@ -169,11 +169,11 @@ module XTwitterScraper
             #   @return [String]
             required :name, String
 
-            # @!method initialize(id: nil, name:)
+            # @!method initialize(name:, id: nil)
             #   Primary topic
             #
-            #   @param id [String]
             #   @param name [String]
+            #   @param id [String]
           end
 
           class Rule < XTwitterScraper::Internal::Type::BaseModel

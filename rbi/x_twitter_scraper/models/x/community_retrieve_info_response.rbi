@@ -183,17 +183,17 @@ module XTwitterScraper
           sig do
             params(
               id: String,
+              is_nsfw: T::Boolean,
+              member_count: Integer,
+              name: String,
               banner_url: String,
               created_at: String,
               creator:
                 XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::Creator::OrHash,
               description: String,
               invites_policy: String,
-              is_nsfw: T::Boolean,
               join_policy: String,
-              member_count: Integer,
               moderator_count: Integer,
-              name: String,
               primary_topic:
                 XTwitterScraper::Models::X::CommunityRetrieveInfoResponse::Community::PrimaryTopic::OrHash,
               rules:
@@ -205,6 +205,12 @@ module XTwitterScraper
           def self.new(
             # Unique community identifier
             id:,
+            # Whether the community is marked sensitive
+            is_nsfw:,
+            # Total member count
+            member_count:,
+            # Display name of the community
+            name:,
             # Community banner image URL
             banner_url: nil,
             # Community creation timestamp
@@ -214,16 +220,10 @@ module XTwitterScraper
             description: nil,
             # Invitation policy
             invites_policy: nil,
-            # Whether the community is marked sensitive
-            is_nsfw:,
             # Join policy (open or restricted)
             join_policy: nil,
-            # Total member count
-            member_count:,
             # Total moderator count
             moderator_count: nil,
-            # Display name of the community
-            name:,
             # Primary topic
             primary_topic: nil,
             # Community rules
@@ -326,8 +326,8 @@ module XTwitterScraper
             attr_accessor :name
 
             # Primary topic
-            sig { params(id: String, name: String).returns(T.attached_class) }
-            def self.new(id: nil, name:)
+            sig { params(name: String, id: String).returns(T.attached_class) }
+            def self.new(name:, id: nil)
             end
 
             sig { override.returns({ id: String, name: String }) }
