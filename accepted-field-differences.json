@@ -56,8 +56,6 @@
       "GET /api/v1/x/communities/{id}/info response missing community.membersFacepile",
       "GET /api/v1/x/communities/{id}/info response missing community.question",
       "GET /api/v1/x/communities/{id}/info response missing community.searchTags",
-      "GET /api/v1/x/followers/check response missing sourceId",
-      "GET /api/v1/x/followers/check response missing targetId",
       "GET /api/v1/x/lists/{id}/followers response missing diagnostic",
       "GET /api/v1/x/lists/{id}/followers response missing scanLimit",
       "GET /api/v1/x/lists/{id}/members response missing diagnostic",
