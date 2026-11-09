@@ -194,6 +194,12 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :selftext, String
 
+        # @!attribute sentiment
+        #   Tone of an English post title, from the VADER word list.
+        #
+        #   @return [Symbol, XTwitterScraper::Models::RadarItem::Metadata::Sentiment, nil]
+        optional :sentiment, enum: -> { XTwitterScraper::Models::RadarItem::Metadata::Sentiment }
+
         # @!attribute source_format
         #   Current items use html. json and rss are retained for legacy rows.
         #
@@ -212,7 +218,15 @@ module XTwitterScraper
         #   @return [Float, nil]
         optional :upvote_ratio, Float, api_name: :upvoteRatio
 
-        # @!method initialize(author: nil, content_url: nil, estimated_downvotes: nil, estimated_upvotes: nil, number_comments: nil, score: nil, selftext: nil, source_format: nil, subreddit: nil, upvote_ratio: nil)
+        # @!attribute windows
+        #   Reddit lists the post ranks in. now is the popular feed, and the rest are top
+        #   lists of that window.
+        #
+        #   @return [Array<Symbol, XTwitterScraper::Models::RadarItem::Metadata::Window>, nil]
+        optional :windows,
+                 -> { XTwitterScraper::Internal::Type::ArrayOf[enum: XTwitterScraper::Models::RadarItem::Metadata::Window] }
+
+        # @!method initialize(author: nil, content_url: nil, estimated_downvotes: nil, estimated_upvotes: nil, number_comments: nil, score: nil, selftext: nil, sentiment: nil, source_format: nil, subreddit: nil, upvote_ratio: nil, windows: nil)
         #   Source-specific fields. Shape varies per source:
         #
         #   - reddit: { author, authorId?, subreddit, subredditId?, subredditSubscribers?,
@@ -255,11 +269,15 @@ module XTwitterScraper
         #
         #   @param selftext [String]
         #
+        #   @param sentiment [Symbol, XTwitterScraper::Models::RadarItem::Metadata::Sentiment] Tone of an English post title, from the VADER word list.
+        #
         #   @param source_format [Symbol, XTwitterScraper::Models::RadarItem::Metadata::SourceFormat] Current items use html. json and rss are retained for legacy rows.
         #
         #   @param subreddit [String]
         #
         #   @param upvote_ratio [Float]
+        #
+        #   @param windows [Array<Symbol, XTwitterScraper::Models::RadarItem::Metadata::Window>] Reddit lists the post ranks in. now is the popular feed, and the rest are top li
 
         # Current items use html. json and rss are retained for legacy rows.
         #
@@ -270,6 +288,35 @@ module XTwitterScraper
           HTML = :html
           JSON = :json
           RSS = :rss
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # Tone of an English post title, from the VADER word list.
+        #
+        # @see XTwitterScraper::Models::RadarItem::Metadata#sentiment
+        module Sentiment
+          extend XTwitterScraper::Internal::Type::Enum
+
+          POSITIVE = :positive
+          NEUTRAL = :neutral
+          NEGATIVE = :negative
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # @see XTwitterScraper::Models::RadarItem::Metadata#windows
+        module Window
+          extend XTwitterScraper::Internal::Type::Enum
+
+          NOW = :now
+          HOUR = :hour
+          DAY = :day
+          WEEK = :week
+          MONTH = :month
+          YEAR = :year
 
           # @!method self.values
           #   @return [Array<Symbol>]

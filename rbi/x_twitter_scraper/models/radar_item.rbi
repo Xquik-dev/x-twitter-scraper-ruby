@@ -276,6 +276,24 @@ module XTwitterScraper
         sig { params(selftext: String).void }
         attr_writer :selftext
 
+        # Tone of an English post title, from the VADER word list.
+        sig do
+          returns(
+            T.nilable(
+              XTwitterScraper::Models::RadarItem::Metadata::Sentiment::TaggedSymbol
+            )
+          )
+        end
+        attr_reader :sentiment
+
+        sig do
+          params(
+            sentiment:
+              XTwitterScraper::Models::RadarItem::Metadata::Sentiment::OrSymbol
+          ).void
+        end
+        attr_writer :sentiment
+
         # Current items use html. json and rss are retained for legacy rows.
         sig do
           returns(
@@ -305,6 +323,29 @@ module XTwitterScraper
 
         sig { params(upvote_ratio: Float).void }
         attr_writer :upvote_ratio
+
+        # Reddit lists the post ranks in. now is the popular feed, and the rest are top
+        # lists of that window.
+        sig do
+          returns(
+            T.nilable(
+              T::Array[
+                XTwitterScraper::Models::RadarItem::Metadata::Window::TaggedSymbol
+              ]
+            )
+          )
+        end
+        attr_reader :windows
+
+        sig do
+          params(
+            windows:
+              T::Array[
+                XTwitterScraper::Models::RadarItem::Metadata::Window::OrSymbol
+              ]
+          ).void
+        end
+        attr_writer :windows
 
         # Source-specific fields. Shape varies per source:
         #
@@ -342,10 +383,16 @@ module XTwitterScraper
             number_comments: Integer,
             score: Integer,
             selftext: String,
+            sentiment:
+              XTwitterScraper::Models::RadarItem::Metadata::Sentiment::OrSymbol,
             source_format:
               XTwitterScraper::RadarItem::Metadata::SourceFormat::OrSymbol,
             subreddit: String,
-            upvote_ratio: Float
+            upvote_ratio: Float,
+            windows:
+              T::Array[
+                XTwitterScraper::Models::RadarItem::Metadata::Window::OrSymbol
+              ]
           ).returns(T.attached_class)
         end
         def self.new(
@@ -356,10 +403,15 @@ module XTwitterScraper
           number_comments: nil,
           score: nil,
           selftext: nil,
+          # Tone of an English post title, from the VADER word list.
+          sentiment: nil,
           # Current items use html. json and rss are retained for legacy rows.
           source_format: nil,
           subreddit: nil,
-          upvote_ratio: nil
+          upvote_ratio: nil,
+          # Reddit lists the post ranks in. now is the popular feed, and the rest are top
+          # lists of that window.
+          windows: nil
         )
         end
 
@@ -373,10 +425,16 @@ module XTwitterScraper
               number_comments: Integer,
               score: Integer,
               selftext: String,
+              sentiment:
+                XTwitterScraper::Models::RadarItem::Metadata::Sentiment::TaggedSymbol,
               source_format:
                 XTwitterScraper::RadarItem::Metadata::SourceFormat::TaggedSymbol,
               subreddit: String,
-              upvote_ratio: Float
+              upvote_ratio: Float,
+              windows:
+                T::Array[
+                  XTwitterScraper::Models::RadarItem::Metadata::Window::TaggedSymbol
+                ]
             }
           )
         end
@@ -413,6 +471,100 @@ module XTwitterScraper
             override.returns(
               T::Array[
                 XTwitterScraper::RadarItem::Metadata::SourceFormat::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        # Tone of an English post title, from the VADER word list.
+        module Sentiment
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                XTwitterScraper::Models::RadarItem::Metadata::Sentiment
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          POSITIVE =
+            T.let(
+              :positive,
+              XTwitterScraper::Models::RadarItem::Metadata::Sentiment::TaggedSymbol
+            )
+          NEUTRAL =
+            T.let(
+              :neutral,
+              XTwitterScraper::Models::RadarItem::Metadata::Sentiment::TaggedSymbol
+            )
+          NEGATIVE =
+            T.let(
+              :negative,
+              XTwitterScraper::Models::RadarItem::Metadata::Sentiment::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::Models::RadarItem::Metadata::Sentiment::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        module Window
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                XTwitterScraper::Models::RadarItem::Metadata::Window
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          NOW =
+            T.let(
+              :now,
+              XTwitterScraper::Models::RadarItem::Metadata::Window::TaggedSymbol
+            )
+          HOUR =
+            T.let(
+              :hour,
+              XTwitterScraper::Models::RadarItem::Metadata::Window::TaggedSymbol
+            )
+          DAY =
+            T.let(
+              :day,
+              XTwitterScraper::Models::RadarItem::Metadata::Window::TaggedSymbol
+            )
+          WEEK =
+            T.let(
+              :week,
+              XTwitterScraper::Models::RadarItem::Metadata::Window::TaggedSymbol
+            )
+          MONTH =
+            T.let(
+              :month,
+              XTwitterScraper::Models::RadarItem::Metadata::Window::TaggedSymbol
+            )
+          YEAR =
+            T.let(
+              :year,
+              XTwitterScraper::Models::RadarItem::Metadata::Window::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::Models::RadarItem::Metadata::Window::TaggedSymbol
               ]
             )
           end
