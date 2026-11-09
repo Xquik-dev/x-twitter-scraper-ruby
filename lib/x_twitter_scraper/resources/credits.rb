@@ -76,9 +76,11 @@ module XTwitterScraper
       # Create a hosted checkout only after the user confirms. The request never
       # completes payment or adds credits.
       #
-      # @overload topup_balance(dollars:, locale: nil, return_path: nil, request_options: {})
+      # @overload topup_balance(dollars:, currency: nil, locale: nil, return_path: nil, request_options: {})
       #
       # @param dollars [Integer] Amount to top up in US dollars. Minimum 10.
+      #
+      # @param currency [Symbol, XTwitterScraper::Models::CreditTopupBalanceParams::Currency] ISO 4217 code of a currency Xquik charges in.
       #
       # @param locale [String] Optional checkout locale. Defaults to en.
       #

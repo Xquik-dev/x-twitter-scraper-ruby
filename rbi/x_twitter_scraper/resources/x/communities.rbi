@@ -297,6 +297,8 @@ module XTwitterScraper
             max_quotes: Integer,
             max_replies: Integer,
             max_retweets: Integer,
+            media_type:
+              XTwitterScraper::X::CommunityRetrieveSearchParams::MediaType::OrSymbol,
             mentioning: String,
             min_bookmarks: Integer,
             min_likes: Integer,
@@ -309,7 +311,13 @@ module XTwitterScraper
             page_size: Integer,
             query_type:
               XTwitterScraper::X::CommunityRetrieveSearchParams::QueryType::OrSymbol,
+            quotes:
+              XTwitterScraper::X::CommunityRetrieveSearchParams::Quotes::OrSymbol,
             quotes_of_tweet_id: String,
+            replies:
+              XTwitterScraper::X::CommunityRetrieveSearchParams::Replies::OrSymbol,
+            retweets:
+              XTwitterScraper::X::CommunityRetrieveSearchParams::Retweets::OrSymbol,
             retweets_of_tweet_id: String,
             since_date: Date,
             since_id: String,
@@ -369,6 +377,8 @@ module XTwitterScraper
           max_replies: nil,
           # Maximum retweets threshold.
           max_retweets: nil,
+          # Filter media. Its aliases are has_video & has_media.
+          media_type: nil,
           # Filter tweets mentioning a username.
           mentioning: nil,
           # Minimum bookmark count threshold.
@@ -395,8 +405,14 @@ module XTwitterScraper
           page_size: nil,
           # Sort order (Latest or Top)
           query_type: nil,
+          # Only when the caller requests a quote mode.
+          quotes: nil,
           # Only quotes of this tweet ID.
           quotes_of_tweet_id: nil,
+          # Reply mode. Exclude keeps own-thread replies.
+          replies: nil,
+          # Only when the caller requests a repost mode.
+          retweets: nil,
           # Only retweets of this tweet ID.
           retweets_of_tweet_id: nil,
           # Start date in YYYY-MM-DD format, as a UTC day. A date means one thing in any

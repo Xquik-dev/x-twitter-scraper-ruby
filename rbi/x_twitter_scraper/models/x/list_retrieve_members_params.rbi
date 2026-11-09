@@ -168,6 +168,24 @@ module XTwitterScraper
         sig { params(min_statuses: Integer).void }
         attr_writer :min_statuses
 
+        # Omit mode for resumable maximum coverage. Standard keeps legacy pagination.
+        # Coverage returns diagnostics once and rejects cursors.
+        sig do
+          returns(
+            T.nilable(
+              XTwitterScraper::X::ListRetrieveMembersParams::Mode::OrSymbol
+            )
+          )
+        end
+        attr_reader :mode
+
+        sig do
+          params(
+            mode: XTwitterScraper::X::ListRetrieveMembersParams::Mode::OrSymbol
+          ).void
+        end
+        attr_writer :mode
+
         # Fields to drop from each row, comma-separated. It takes the same names as
         # fields. With fields, it drops from the kept fields. A longer URL fails at the
         # edge before Xquik reads it.
@@ -227,6 +245,7 @@ module XTwitterScraper
             min_followers: Integer,
             min_following: Integer,
             min_statuses: Integer,
+            mode: XTwitterScraper::X::ListRetrieveMembersParams::Mode::OrSymbol,
             omit: String,
             page_size: Integer,
             username_contains: String,
@@ -288,6 +307,9 @@ module XTwitterScraper
           min_following: nil,
           # Minimum post count. minPosts is also accepted.
           min_statuses: nil,
+          # Omit mode for resumable maximum coverage. Standard keeps legacy pagination.
+          # Coverage returns diagnostics once and rejects cursors.
+          mode: nil,
           # Fields to drop from each row, comma-separated. It takes the same names as
           # fields. With fields, it drops from the kept fields. A longer URL fails at the
           # edge before Xquik reads it.
@@ -327,6 +349,8 @@ module XTwitterScraper
               min_followers: Integer,
               min_following: Integer,
               min_statuses: Integer,
+              mode:
+                XTwitterScraper::X::ListRetrieveMembersParams::Mode::OrSymbol,
               omit: String,
               page_size: Integer,
               username_contains: String,
@@ -337,6 +361,39 @@ module XTwitterScraper
           )
         end
         def to_hash
+        end
+
+        # Omit mode for resumable maximum coverage. Standard keeps legacy pagination.
+        # Coverage returns diagnostics once and rejects cursors.
+        module Mode
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, XTwitterScraper::X::ListRetrieveMembersParams::Mode)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          STANDARD =
+            T.let(
+              :standard,
+              XTwitterScraper::X::ListRetrieveMembersParams::Mode::TaggedSymbol
+            )
+          COVERAGE =
+            T.let(
+              :coverage,
+              XTwitterScraper::X::ListRetrieveMembersParams::Mode::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                XTwitterScraper::X::ListRetrieveMembersParams::Mode::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
     end

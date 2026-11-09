@@ -11,7 +11,9 @@ module XTwitterScraper
       # Create a subscription checkout or billing-management URL only after the user
       # confirms. The request never completes payment by itself.
       #
-      # @overload create(tier: nil, request_options: {})
+      # @overload create(currency: nil, tier: nil, request_options: {})
+      #
+      # @param currency [Symbol, XTwitterScraper::Models::SubscribeCreateParams::Currency] ISO 4217 code of a currency Xquik charges in.
       #
       # @param tier [Symbol, XTwitterScraper::Models::SubscribeCreateParams::Tier] Subscription tier to pre-select.
       #

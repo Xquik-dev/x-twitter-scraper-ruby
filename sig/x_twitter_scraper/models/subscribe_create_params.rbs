@@ -5,12 +5,21 @@
 module XTwitterScraper
   module Models
     type subscribe_create_params =
-      { tier: XTwitterScraper::Models::SubscribeCreateParams::tier }
+      {
+        currency: XTwitterScraper::Models::SubscribeCreateParams::currency,
+        tier: XTwitterScraper::Models::SubscribeCreateParams::tier
+      }
       & XTwitterScraper::Internal::Type::request_parameters
 
     class SubscribeCreateParams < XTwitterScraper::Internal::Type::BaseModel
       extend XTwitterScraper::Internal::Type::RequestParameters::Converter
       include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_reader currency: XTwitterScraper::Models::SubscribeCreateParams::currency?
+
+      def currency=: (
+        XTwitterScraper::Models::SubscribeCreateParams::currency
+      ) -> XTwitterScraper::Models::SubscribeCreateParams::currency
 
       attr_reader tier: XTwitterScraper::Models::SubscribeCreateParams::tier?
 
@@ -19,11 +28,13 @@ module XTwitterScraper
       ) -> XTwitterScraper::Models::SubscribeCreateParams::tier
 
       def initialize: (
+        ?currency: XTwitterScraper::Models::SubscribeCreateParams::currency,
         ?tier: XTwitterScraper::Models::SubscribeCreateParams::tier,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
       def to_hash: -> {
+        currency: XTwitterScraper::Models::SubscribeCreateParams::currency,
         tier: XTwitterScraper::Models::SubscribeCreateParams::tier,
         request_options: XTwitterScraper::RequestOptions
       }
@@ -38,6 +49,79 @@ module XTwitterScraper
         BUSINESS: :business
 
         def self?.values: -> ::Array[XTwitterScraper::Models::SubscribeCreateParams::tier]
+      end
+
+      type currency =
+        :USD
+        | :EUR
+        | :GBP
+        | :TRY
+        | :JPY
+        | :CNY
+        | :KRW
+        | :CAD
+        | :AUD
+        | :MXN
+        | :AED
+        | :BRL
+        | :CHF
+        | :CZK
+        | :DKK
+        | :HKD
+        | :HUF
+        | :IDR
+        | :ILS
+        | :INR
+        | :MYR
+        | :NOK
+        | :NZD
+        | :PHP
+        | :PLN
+        | :QAR
+        | :RON
+        | :SAR
+        | :SEK
+        | :SGD
+        | :THB
+        | :ZAR
+
+      module Currency
+        extend XTwitterScraper::Internal::Type::Enum
+
+        USD: :USD
+        EUR: :EUR
+        GBP: :GBP
+        TRY: :TRY
+        JPY: :JPY
+        CNY: :CNY
+        KRW: :KRW
+        CAD: :CAD
+        AUD: :AUD
+        MXN: :MXN
+        AED: :AED
+        BRL: :BRL
+        CHF: :CHF
+        CZK: :CZK
+        DKK: :DKK
+        HKD: :HKD
+        HUF: :HUF
+        IDR: :IDR
+        ILS: :ILS
+        INR: :INR
+        MYR: :MYR
+        NOK: :NOK
+        NZD: :NZD
+        PHP: :PHP
+        PLN: :PLN
+        QAR: :QAR
+        RON: :RON
+        SAR: :SAR
+        SEK: :SEK
+        SGD: :SGD
+        THB: :THB
+        ZAR: :ZAR
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::SubscribeCreateParams::currency]
       end
     end
   end

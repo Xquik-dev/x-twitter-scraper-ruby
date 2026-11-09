@@ -32,6 +32,8 @@ module XTwitterScraper
               max_quotes: Integer,
               max_replies: Integer,
               max_retweets: Integer,
+              media_type:
+                XTwitterScraper::X::Communities::TweetListParams::MediaType::OrSymbol,
               mentioning: String,
               min_bookmarks: Integer,
               min_likes: Integer,
@@ -44,7 +46,13 @@ module XTwitterScraper
               page_size: Integer,
               query_type:
                 XTwitterScraper::X::Communities::TweetListParams::QueryType::OrSymbol,
+              quotes:
+                XTwitterScraper::X::Communities::TweetListParams::Quotes::OrSymbol,
               quotes_of_tweet_id: String,
+              replies:
+                XTwitterScraper::X::Communities::TweetListParams::Replies::OrSymbol,
+              retweets:
+                XTwitterScraper::X::Communities::TweetListParams::Retweets::OrSymbol,
               retweets_of_tweet_id: String,
               since_date: Date,
               since_id: String,
@@ -104,6 +112,8 @@ module XTwitterScraper
             max_replies: nil,
             # Maximum retweets threshold.
             max_retweets: nil,
+            # Filter media. Its aliases are has_video & has_media.
+            media_type: nil,
             # Filter tweets mentioning a username.
             mentioning: nil,
             # Minimum bookmark count threshold.
@@ -130,8 +140,14 @@ module XTwitterScraper
             page_size: nil,
             # Sort order for community results (Latest or Top)
             query_type: nil,
+            # Only when the caller requests a quote mode.
+            quotes: nil,
             # Only quotes of this tweet ID.
             quotes_of_tweet_id: nil,
+            # Reply mode. Exclude keeps own-thread replies.
+            replies: nil,
+            # Only when the caller requests a repost mode.
+            retweets: nil,
             # Only retweets of this tweet ID.
             retweets_of_tweet_id: nil,
             # Start date in YYYY-MM-DD format, as a UTC day. A date means one thing in any
@@ -176,6 +192,8 @@ module XTwitterScraper
               max_quotes: Integer,
               max_replies: Integer,
               max_retweets: Integer,
+              media_type:
+                XTwitterScraper::X::Communities::TweetListByCommunityParams::MediaType::OrSymbol,
               mentioning: String,
               min_bookmarks: Integer,
               min_likes: Integer,
@@ -186,7 +204,15 @@ module XTwitterScraper
               native_retweets: T::Boolean,
               omit: String,
               page_size: Integer,
+              query_type:
+                XTwitterScraper::X::Communities::TweetListByCommunityParams::QueryType::OrSymbol,
+              quotes:
+                XTwitterScraper::X::Communities::TweetListByCommunityParams::Quotes::OrSymbol,
               quotes_of_tweet_id: String,
+              replies:
+                XTwitterScraper::X::Communities::TweetListByCommunityParams::Replies::OrSymbol,
+              retweets:
+                XTwitterScraper::X::Communities::TweetListByCommunityParams::Retweets::OrSymbol,
               retweets_of_tweet_id: String,
               since_date: Date,
               since_id: String,
@@ -244,6 +270,8 @@ module XTwitterScraper
             max_replies: nil,
             # Maximum retweets threshold.
             max_retweets: nil,
+            # Filter media. Its aliases are has_video & has_media.
+            media_type: nil,
             # Filter tweets mentioning a username.
             mentioning: nil,
             # Minimum bookmark count threshold.
@@ -268,8 +296,18 @@ module XTwitterScraper
             # results. Continue while has_next_page is true. Deprecated limit and count
             # aliases remain accepted.
             page_size: nil,
+            # Latest for newest first, or Top for the posts X ranks highest. Any case works.
+            # Aliases ranking & sort, which also take Recency & Relevance. Send the same value
+            # with each cursor.
+            query_type: nil,
+            # Only when the caller requests a quote mode.
+            quotes: nil,
             # Only quotes of this tweet ID.
             quotes_of_tweet_id: nil,
+            # Reply mode. Exclude keeps own-thread replies.
+            replies: nil,
+            # Only when the caller requests a repost mode.
+            retweets: nil,
             # Only retweets of this tweet ID.
             retweets_of_tweet_id: nil,
             # Start date in YYYY-MM-DD format, as a UTC day. A date means one thing in any

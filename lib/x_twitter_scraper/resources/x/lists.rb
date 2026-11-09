@@ -11,7 +11,7 @@ module XTwitterScraper
       class Lists
         # List followers of an X List
         #
-        # @overload retrieve_followers(id, after: nil, bio_contains: nil, blue_verified_only: nil, business_email_only: nil, cursor: nil, email_domains: nil, fields: nil, has_email: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_scan: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, omit: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
+        # @overload retrieve_followers(id, after: nil, bio_contains: nil, blue_verified_only: nil, business_email_only: nil, cursor: nil, email_domains: nil, fields: nil, has_email: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_scan: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, mode: nil, omit: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
         #
         # @param id [String] List ID
         #
@@ -52,6 +52,8 @@ module XTwitterScraper
         # @param min_following [Integer] Minimum following count.
         #
         # @param min_statuses [Integer] Minimum post count. minPosts is also accepted.
+        #
+        # @param mode [Symbol, XTwitterScraper::Models::X::ListRetrieveFollowersParams::Mode] Omit mode for resumable maximum coverage. Standard keeps legacy pagination. Cove
         #
         # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
@@ -103,7 +105,7 @@ module XTwitterScraper
 
         # List members of an X List
         #
-        # @overload retrieve_members(id, after: nil, bio_contains: nil, blue_verified_only: nil, business_email_only: nil, cursor: nil, email_domains: nil, fields: nil, has_email: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_scan: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, omit: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
+        # @overload retrieve_members(id, after: nil, bio_contains: nil, blue_verified_only: nil, business_email_only: nil, cursor: nil, email_domains: nil, fields: nil, has_email: nil, has_location: nil, has_website: nil, location_contains: nil, max_followers: nil, max_following: nil, max_scan: nil, max_statuses: nil, min_account_age_days: nil, min_followers: nil, min_following: nil, min_statuses: nil, mode: nil, omit: nil, page_size: nil, username_contains: nil, verified_only: nil, verified_type: nil, request_options: {})
         #
         # @param id [String] List ID for member lookup
         #
@@ -144,6 +146,8 @@ module XTwitterScraper
         # @param min_following [Integer] Minimum following count.
         #
         # @param min_statuses [Integer] Minimum post count. minPosts is also accepted.
+        #
+        # @param mode [Symbol, XTwitterScraper::Models::X::ListRetrieveMembersParams::Mode] Omit mode for resumable maximum coverage. Standard keeps legacy pagination. Cove
         #
         # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
@@ -195,7 +199,7 @@ module XTwitterScraper
 
         # List tweets from an X List
         #
-        # @overload retrieve_tweets(id, advanced_query: nil, after: nil, any_words: nil, blue_verified_only: nil, bounding_box: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, fields: nil, from_user: nil, geocode: nil, hashtags: nil, in_reply_to_tweet_id: nil, include_replies: nil, keywords: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, mentioning: nil, min_bookmarks: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, near: nil, news: nil, omit: nil, page_size: nil, place: nil, place_country: nil, point_radius: nil, quotes_of_tweet_id: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, since_time: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
+        # @overload retrieve_tweets(id, advanced_query: nil, after: nil, any_words: nil, blue_verified_only: nil, bounding_box: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, fields: nil, from_user: nil, geocode: nil, hashtags: nil, in_reply_to_tweet_id: nil, include_replies: nil, keywords: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, mode: nil, native_retweets: nil, near: nil, news: nil, omit: nil, page_size: nil, place: nil, place_country: nil, point_radius: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, since_time: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
         #
         # @param id [String] List ID for tweet lookup
         #
@@ -249,6 +253,8 @@ module XTwitterScraper
         #
         # @param max_retweets [Integer] Maximum retweets threshold.
         #
+        # @param media_type [Symbol, XTwitterScraper::Models::X::ListRetrieveTweetsParams::MediaType] Filter media. Its aliases are has_video & has_media.
+        #
         # @param mentioning [String] Filter tweets mentioning a username.
         #
         # @param min_bookmarks [Integer] Minimum bookmark count threshold.
@@ -262,6 +268,8 @@ module XTwitterScraper
         # @param min_retweets [Integer] Minimum retweets threshold.
         #
         # @param min_views [Integer] Minimum view count threshold.
+        #
+        # @param mode [Symbol, XTwitterScraper::Models::X::ListRetrieveTweetsParams::Mode] Omit mode for resumable maximum coverage. Standard keeps legacy pagination. Cove
         #
         # @param native_retweets [Boolean] Only return native reposts.
         #
@@ -279,7 +287,13 @@ module XTwitterScraper
         #
         # @param point_radius [String] Geo point radius, such as -73.99 40.73 25mi.
         #
+        # @param quotes [Symbol, XTwitterScraper::Models::X::ListRetrieveTweetsParams::Quotes] Only when the caller requests a quote mode.
+        #
         # @param quotes_of_tweet_id [String] Only quotes of this tweet ID.
+        #
+        # @param replies [Symbol, XTwitterScraper::Models::X::ListRetrieveTweetsParams::Replies] Reply mode. Exclude keeps own-thread replies.
+        #
+        # @param retweets [Symbol, XTwitterScraper::Models::X::ListRetrieveTweetsParams::Retweets] Only when the caller requests a repost mode.
         #
         # @param retweets_of_tweet_id [String] Only retweets of this tweet ID.
         #
@@ -336,6 +350,7 @@ module XTwitterScraper
               max_quotes: "maxQuotes",
               max_replies: "maxReplies",
               max_retweets: "maxRetweets",
+              media_type: "mediaType",
               min_bookmarks: "minBookmarks",
               min_likes: "minLikes",
               min_quotes: "minQuotes",

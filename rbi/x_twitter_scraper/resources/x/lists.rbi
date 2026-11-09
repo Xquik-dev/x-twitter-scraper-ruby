@@ -32,6 +32,8 @@ module XTwitterScraper
             min_followers: Integer,
             min_following: Integer,
             min_statuses: Integer,
+            mode:
+              XTwitterScraper::X::ListRetrieveFollowersParams::Mode::OrSymbol,
             omit: String,
             page_size: Integer,
             username_contains: String,
@@ -94,6 +96,9 @@ module XTwitterScraper
           min_following: nil,
           # Minimum post count. minPosts is also accepted.
           min_statuses: nil,
+          # Omit mode for resumable maximum coverage. Standard keeps legacy pagination.
+          # Coverage returns diagnostics once and rejects cursors.
+          mode: nil,
           # Fields to drop from each row, comma-separated. It takes the same names as
           # fields. With fields, it drops from the kept fields. A longer URL fails at the
           # edge before Xquik reads it.
@@ -135,6 +140,7 @@ module XTwitterScraper
             min_followers: Integer,
             min_following: Integer,
             min_statuses: Integer,
+            mode: XTwitterScraper::X::ListRetrieveMembersParams::Mode::OrSymbol,
             omit: String,
             page_size: Integer,
             username_contains: String,
@@ -197,6 +203,9 @@ module XTwitterScraper
           min_following: nil,
           # Minimum post count. minPosts is also accepted.
           min_statuses: nil,
+          # Omit mode for resumable maximum coverage. Standard keeps legacy pagination.
+          # Coverage returns diagnostics once and rejects cursors.
+          mode: nil,
           # Fields to drop from each row, comma-separated. It takes the same names as
           # fields. With fields, it drops from the kept fields. A longer URL fails at the
           # edge before Xquik reads it.
@@ -242,6 +251,8 @@ module XTwitterScraper
             max_quotes: Integer,
             max_replies: Integer,
             max_retweets: Integer,
+            media_type:
+              XTwitterScraper::X::ListRetrieveTweetsParams::MediaType::OrSymbol,
             mentioning: String,
             min_bookmarks: Integer,
             min_likes: Integer,
@@ -249,6 +260,7 @@ module XTwitterScraper
             min_replies: Integer,
             min_retweets: Integer,
             min_views: Integer,
+            mode: XTwitterScraper::X::ListRetrieveTweetsParams::Mode::OrSymbol,
             native_retweets: T::Boolean,
             near: String,
             news: T::Boolean,
@@ -257,7 +269,13 @@ module XTwitterScraper
             place: String,
             place_country: String,
             point_radius: String,
+            quotes:
+              XTwitterScraper::X::ListRetrieveTweetsParams::Quotes::OrSymbol,
             quotes_of_tweet_id: String,
+            replies:
+              XTwitterScraper::X::ListRetrieveTweetsParams::Replies::OrSymbol,
+            retweets:
+              XTwitterScraper::X::ListRetrieveTweetsParams::Retweets::OrSymbol,
             retweets_of_tweet_id: String,
             safe: T::Boolean,
             since_date: Date,
@@ -338,6 +356,8 @@ module XTwitterScraper
           max_replies: nil,
           # Maximum retweets threshold.
           max_retweets: nil,
+          # Filter media. Its aliases are has_video & has_media.
+          media_type: nil,
           # Filter tweets mentioning a username.
           mentioning: nil,
           # Minimum bookmark count threshold.
@@ -352,6 +372,9 @@ module XTwitterScraper
           min_retweets: nil,
           # Minimum view count threshold.
           min_views: nil,
+          # Omit mode for resumable maximum coverage. Standard keeps legacy pagination.
+          # Coverage returns diagnostics once and rejects cursors.
+          mode: nil,
           # Only return native reposts.
           native_retweets: nil,
           # A place name, such as a city or a country. Matching Tweets are tagged in or
@@ -373,8 +396,14 @@ module XTwitterScraper
           place_country: nil,
           # Geo point radius, such as -73.99 40.73 25mi.
           point_radius: nil,
+          # Only when the caller requests a quote mode.
+          quotes: nil,
           # Only quotes of this tweet ID.
           quotes_of_tweet_id: nil,
+          # Reply mode. Exclude keeps own-thread replies.
+          replies: nil,
+          # Only when the caller requests a repost mode.
+          retweets: nil,
           # Only retweets of this tweet ID.
           retweets_of_tweet_id: nil,
           # Enable the safe-search filter.

@@ -135,6 +135,12 @@ module XTwitterScraper
         #   @return [Integer, nil]
         optional :max_retweets, Integer
 
+        # @!attribute media_type
+        #   Filter media. Its aliases are has_video & has_media.
+        #
+        #   @return [Symbol, XTwitterScraper::Models::X::CommunityRetrieveSearchParams::MediaType, nil]
+        optional :media_type, enum: -> { XTwitterScraper::X::CommunityRetrieveSearchParams::MediaType }
+
         # @!attribute mentioning
         #   Filter tweets mentioning a username.
         #
@@ -205,11 +211,29 @@ module XTwitterScraper
         #   @return [Symbol, XTwitterScraper::Models::X::CommunityRetrieveSearchParams::QueryType, nil]
         optional :query_type, enum: -> { XTwitterScraper::X::CommunityRetrieveSearchParams::QueryType }
 
+        # @!attribute quotes
+        #   Only when the caller requests a quote mode.
+        #
+        #   @return [Symbol, XTwitterScraper::Models::X::CommunityRetrieveSearchParams::Quotes, nil]
+        optional :quotes, enum: -> { XTwitterScraper::X::CommunityRetrieveSearchParams::Quotes }
+
         # @!attribute quotes_of_tweet_id
         #   Only quotes of this tweet ID.
         #
         #   @return [String, nil]
         optional :quotes_of_tweet_id, String
+
+        # @!attribute replies
+        #   Reply mode. Exclude keeps own-thread replies.
+        #
+        #   @return [Symbol, XTwitterScraper::Models::X::CommunityRetrieveSearchParams::Replies, nil]
+        optional :replies, enum: -> { XTwitterScraper::X::CommunityRetrieveSearchParams::Replies }
+
+        # @!attribute retweets
+        #   Only when the caller requests a repost mode.
+        #
+        #   @return [Symbol, XTwitterScraper::Models::X::CommunityRetrieveSearchParams::Retweets, nil]
+        optional :retweets, enum: -> { XTwitterScraper::X::CommunityRetrieveSearchParams::Retweets }
 
         # @!attribute retweets_of_tweet_id
         #   Only retweets of this tweet ID.
@@ -262,7 +286,7 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :within_time, String
 
-        # @!method initialize(community_id:, q:, any_words: nil, blue_verified_only: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, fields: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, mentioning: nil, min_bookmarks: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, omit: nil, page_size: nil, query_type: nil, quotes_of_tweet_id: nil, retweets_of_tweet_id: nil, since_date: nil, since_id: nil, to_user: nil, until_date: nil, url: nil, verified_only: nil, within_time: nil, request_options: {})
+        # @!method initialize(community_id:, q:, any_words: nil, blue_verified_only: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, fields: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, omit: nil, page_size: nil, query_type: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, since_id: nil, to_user: nil, until_date: nil, url: nil, verified_only: nil, within_time: nil, request_options: {})
         #   @param community_id [String] Numeric ID of the community whose posts to search
         #
         #   @param q [String] Search query
@@ -301,6 +325,8 @@ module XTwitterScraper
         #
         #   @param max_retweets [Integer] Maximum retweets threshold.
         #
+        #   @param media_type [Symbol, XTwitterScraper::Models::X::CommunityRetrieveSearchParams::MediaType] Filter media. Its aliases are has_video & has_media.
+        #
         #   @param mentioning [String] Filter tweets mentioning a username.
         #
         #   @param min_bookmarks [Integer] Minimum bookmark count threshold.
@@ -323,7 +349,13 @@ module XTwitterScraper
         #
         #   @param query_type [Symbol, XTwitterScraper::Models::X::CommunityRetrieveSearchParams::QueryType] Sort order (Latest or Top)
         #
+        #   @param quotes [Symbol, XTwitterScraper::Models::X::CommunityRetrieveSearchParams::Quotes] Only when the caller requests a quote mode.
+        #
         #   @param quotes_of_tweet_id [String] Only quotes of this tweet ID.
+        #
+        #   @param replies [Symbol, XTwitterScraper::Models::X::CommunityRetrieveSearchParams::Replies] Reply mode. Exclude keeps own-thread replies.
+        #
+        #   @param retweets [Symbol, XTwitterScraper::Models::X::CommunityRetrieveSearchParams::Retweets] Only when the caller requests a repost mode.
         #
         #   @param retweets_of_tweet_id [String] Only retweets of this tweet ID.
         #
@@ -349,6 +381,57 @@ module XTwitterScraper
 
           LATEST = :Latest
           TOP = :Top
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # Filter media. Its aliases are has_video & has_media.
+        module MediaType
+          extend XTwitterScraper::Internal::Type::Enum
+
+          IMAGES = :images
+          VIDEOS = :videos
+          GIFS = :gifs
+          MEDIA = :media
+          LINKS = :links
+          NONE = :none
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # Only when the caller requests a quote mode.
+        module Quotes
+          extend XTwitterScraper::Internal::Type::Enum
+
+          INCLUDE = :include
+          EXCLUDE = :exclude
+          ONLY = :only
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # Reply mode. Exclude keeps own-thread replies.
+        module Replies
+          extend XTwitterScraper::Internal::Type::Enum
+
+          INCLUDE = :include
+          EXCLUDE = :exclude
+          ONLY = :only
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # Only when the caller requests a repost mode.
+        module Retweets
+          extend XTwitterScraper::Internal::Type::Enum
+
+          INCLUDE = :include
+          EXCLUDE = :exclude
+          ONLY = :only
 
           # @!method self.values
           #   @return [Array<Symbol>]

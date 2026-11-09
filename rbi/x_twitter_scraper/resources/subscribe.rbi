@@ -12,11 +12,14 @@ module XTwitterScraper
       # confirms. The request never completes payment by itself.
       sig do
         params(
+          currency: XTwitterScraper::SubscribeCreateParams::Currency::OrSymbol,
           tier: XTwitterScraper::SubscribeCreateParams::Tier::OrSymbol,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Models::SubscribeCreateResponse)
       end
       def create(
+        # ISO 4217 code of a currency Xquik charges in.
+        currency: nil,
         # Subscription tier to pre-select.
         tier: nil,
         request_options: {}

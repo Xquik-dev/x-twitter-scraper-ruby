@@ -433,6 +433,8 @@ module XTwitterScraper
           format_:
             XTwitterScraper::ExtractionExportResultsParams::Format::OrSymbol,
           business_email_only: T::Boolean,
+          change:
+            XTwitterScraper::ExtractionExportResultsParams::Change::OrSymbol,
           compare: String,
           email_domains: String,
           has_description: T::Boolean,
@@ -470,6 +472,10 @@ module XTwitterScraper
         format_:,
         # Require an email outside free webmail, such as Gmail, in the row's Email column.
         business_email_only: nil,
+        # With compare, `added` keeps this run's new rows and `removed` keeps the earlier
+        # run's rows that this run lacks. The default is `added`. A run of another account
+        # ignores it.
+        change: nil,
         # ID of another run of this tool. For an earlier whole run of the same account,
         # the export holds only the rows that differ. For a run of another account, it
         # holds only this run's rows that the other run also lists.

@@ -21,6 +21,7 @@ module XTwitterScraper
 
       def topup_balance: (
         dollars: Integer,
+        ?currency: XTwitterScraper::Models::CreditTopupBalanceParams::currency,
         ?locale: String,
         ?return_path: String,
         ?request_options: XTwitterScraper::request_opts

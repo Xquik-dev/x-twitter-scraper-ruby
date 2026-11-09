@@ -27,6 +27,7 @@ module XTwitterScraper
             max_quotes: Integer,
             max_replies: Integer,
             max_retweets: Integer,
+            media_type: XTwitterScraper::Models::X::Communities::TweetListParams::media_type,
             mentioning: String,
             min_bookmarks: Integer,
             min_likes: Integer,
@@ -38,7 +39,10 @@ module XTwitterScraper
             omit: String,
             page_size: Integer,
             query_type: XTwitterScraper::Models::X::Communities::TweetListParams::query_type,
+            quotes: XTwitterScraper::Models::X::Communities::TweetListParams::quotes,
             quotes_of_tweet_id: String,
+            replies: XTwitterScraper::Models::X::Communities::TweetListParams::replies,
+            retweets: XTwitterScraper::Models::X::Communities::TweetListParams::retweets,
             retweets_of_tweet_id: String,
             since_date: Date,
             since_id: String,
@@ -126,6 +130,12 @@ module XTwitterScraper
 
           def max_retweets=: (Integer) -> Integer
 
+          attr_reader media_type: XTwitterScraper::Models::X::Communities::TweetListParams::media_type?
+
+          def media_type=: (
+            XTwitterScraper::Models::X::Communities::TweetListParams::media_type
+          ) -> XTwitterScraper::Models::X::Communities::TweetListParams::media_type
+
           attr_reader mentioning: String?
 
           def mentioning=: (String) -> String
@@ -172,9 +182,27 @@ module XTwitterScraper
             XTwitterScraper::Models::X::Communities::TweetListParams::query_type
           ) -> XTwitterScraper::Models::X::Communities::TweetListParams::query_type
 
+          attr_reader quotes: XTwitterScraper::Models::X::Communities::TweetListParams::quotes?
+
+          def quotes=: (
+            XTwitterScraper::Models::X::Communities::TweetListParams::quotes
+          ) -> XTwitterScraper::Models::X::Communities::TweetListParams::quotes
+
           attr_reader quotes_of_tweet_id: String?
 
           def quotes_of_tweet_id=: (String) -> String
+
+          attr_reader replies: XTwitterScraper::Models::X::Communities::TweetListParams::replies?
+
+          def replies=: (
+            XTwitterScraper::Models::X::Communities::TweetListParams::replies
+          ) -> XTwitterScraper::Models::X::Communities::TweetListParams::replies
+
+          attr_reader retweets: XTwitterScraper::Models::X::Communities::TweetListParams::retweets?
+
+          def retweets=: (
+            XTwitterScraper::Models::X::Communities::TweetListParams::retweets
+          ) -> XTwitterScraper::Models::X::Communities::TweetListParams::retweets
 
           attr_reader retweets_of_tweet_id: String?
 
@@ -228,6 +256,7 @@ module XTwitterScraper
             ?max_quotes: Integer,
             ?max_replies: Integer,
             ?max_retweets: Integer,
+            ?media_type: XTwitterScraper::Models::X::Communities::TweetListParams::media_type,
             ?mentioning: String,
             ?min_bookmarks: Integer,
             ?min_likes: Integer,
@@ -239,7 +268,10 @@ module XTwitterScraper
             ?omit: String,
             ?page_size: Integer,
             ?query_type: XTwitterScraper::Models::X::Communities::TweetListParams::query_type,
+            ?quotes: XTwitterScraper::Models::X::Communities::TweetListParams::quotes,
             ?quotes_of_tweet_id: String,
+            ?replies: XTwitterScraper::Models::X::Communities::TweetListParams::replies,
+            ?retweets: XTwitterScraper::Models::X::Communities::TweetListParams::retweets,
             ?retweets_of_tweet_id: String,
             ?since_date: Date,
             ?since_id: String,
@@ -271,6 +303,7 @@ module XTwitterScraper
             max_quotes: Integer,
             max_replies: Integer,
             max_retweets: Integer,
+            media_type: XTwitterScraper::Models::X::Communities::TweetListParams::media_type,
             mentioning: String,
             min_bookmarks: Integer,
             min_likes: Integer,
@@ -282,7 +315,10 @@ module XTwitterScraper
             omit: String,
             page_size: Integer,
             query_type: XTwitterScraper::Models::X::Communities::TweetListParams::query_type,
+            quotes: XTwitterScraper::Models::X::Communities::TweetListParams::quotes,
             quotes_of_tweet_id: String,
+            replies: XTwitterScraper::Models::X::Communities::TweetListParams::replies,
+            retweets: XTwitterScraper::Models::X::Communities::TweetListParams::retweets,
             retweets_of_tweet_id: String,
             since_date: Date,
             since_id: String,
@@ -303,6 +339,57 @@ module XTwitterScraper
             TOP: :Top
 
             def self?.values: -> ::Array[XTwitterScraper::Models::X::Communities::TweetListParams::query_type]
+          end
+
+          type media_type = :images | :videos | :gifs | :media | :links | :none
+
+          module MediaType
+            extend XTwitterScraper::Internal::Type::Enum
+
+            IMAGES: :images
+            VIDEOS: :videos
+            GIFS: :gifs
+            MEDIA: :media
+            LINKS: :links
+            NONE: :none
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::Communities::TweetListParams::media_type]
+          end
+
+          type quotes = :include | :exclude | :only
+
+          module Quotes
+            extend XTwitterScraper::Internal::Type::Enum
+
+            INCLUDE: :include
+            EXCLUDE: :exclude
+            ONLY: :only
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::Communities::TweetListParams::quotes]
+          end
+
+          type replies = :include | :exclude | :only
+
+          module Replies
+            extend XTwitterScraper::Internal::Type::Enum
+
+            INCLUDE: :include
+            EXCLUDE: :exclude
+            ONLY: :only
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::Communities::TweetListParams::replies]
+          end
+
+          type retweets = :include | :exclude | :only
+
+          module Retweets
+            extend XTwitterScraper::Internal::Type::Enum
+
+            INCLUDE: :include
+            EXCLUDE: :exclude
+            ONLY: :only
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::Communities::TweetListParams::retweets]
           end
         end
       end

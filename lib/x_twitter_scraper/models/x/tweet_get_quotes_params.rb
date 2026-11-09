@@ -228,6 +228,13 @@ module XTwitterScraper
         #   @return [Integer, nil]
         optional :min_views, Integer
 
+        # @!attribute mode
+        #   Optional legacy pagination override. Filters such as keywords don't apply with
+        #   it.
+        #
+        #   @return [Symbol, XTwitterScraper::Models::X::TweetGetQuotesParams::Mode, nil]
+        optional :mode, enum: -> { XTwitterScraper::X::TweetGetQuotesParams::Mode }
+
         # @!attribute native_retweets
         #   Only return native reposts.
         #
@@ -279,6 +286,16 @@ module XTwitterScraper
         #
         #   @return [String, nil]
         optional :point_radius, String
+
+        # @!attribute query_type
+        #   Latest for newest first, or Top for the quotes X ranks highest. A later Latest
+        #   page can hold a newer quote. Top is X's ranking, not a count order, & a later
+        #   page can hold a quote X ranks higher. Any case works. Alias sort, which also
+        #   takes Recency & Relevance. Send the same value with each cursor. Standard pages
+        #   list Latest.
+        #
+        #   @return [Symbol, XTwitterScraper::Models::X::TweetGetQuotesParams::QueryType, nil]
+        optional :query_type, enum: -> { XTwitterScraper::X::TweetGetQuotesParams::QueryType }
 
         # @!attribute quotes
         #   Quote mode.
@@ -382,7 +399,7 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :within_time, String
 
-        # @!method initialize(id:, advanced_query: nil, any_words: nil, blue_verified_only: nil, bounding_box: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, fields: nil, from_user: nil, geocode: nil, hashtags: nil, include_replies: nil, in_reply_to_tweet_id: nil, keywords: nil, language: nil, list_id: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, near: nil, news: nil, omit: nil, page_size: nil, place: nil, place_country: nil, point_radius: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, since_time: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
+        # @!method initialize(id:, advanced_query: nil, any_words: nil, blue_verified_only: nil, bounding_box: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, fields: nil, from_user: nil, geocode: nil, hashtags: nil, include_replies: nil, in_reply_to_tweet_id: nil, keywords: nil, language: nil, list_id: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, mode: nil, native_retweets: nil, near: nil, news: nil, omit: nil, page_size: nil, place: nil, place_country: nil, point_radius: nil, query_type: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, since_time: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
         #   @param id [String]
         #
         #   @param advanced_query [String] Raw advanced search query appended as-is.
@@ -453,6 +470,8 @@ module XTwitterScraper
         #
         #   @param min_views [Integer] Minimum view count threshold.
         #
+        #   @param mode [Symbol, XTwitterScraper::Models::X::TweetGetQuotesParams::Mode] Optional legacy pagination override. Filters such as keywords don't apply with i
+        #
         #   @param native_retweets [Boolean] Only return native reposts.
         #
         #   @param near [String] Match a place name.
@@ -468,6 +487,8 @@ module XTwitterScraper
         #   @param place_country [String] Search within a country code.
         #
         #   @param point_radius [String] Geo point radius, such as -73.99 40.73 25mi.
+        #
+        #   @param query_type [Symbol, XTwitterScraper::Models::X::TweetGetQuotesParams::QueryType] Latest for newest first, or Top for the quotes X ranks highest. A later Latest p
         #
         #   @param quotes [Symbol, XTwitterScraper::Models::X::TweetGetQuotesParams::Quotes] Quote mode.
         #
@@ -551,6 +572,32 @@ module XTwitterScraper
           INCLUDE = :include
           EXCLUDE = :exclude
           ONLY = :only
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # Optional legacy pagination override. Filters such as keywords don't apply with
+        # it.
+        module Mode
+          extend XTwitterScraper::Internal::Type::Enum
+
+          STANDARD = :standard
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # Latest for newest first, or Top for the quotes X ranks highest. A later Latest
+        # page can hold a newer quote. Top is X's ranking, not a count order, & a later
+        # page can hold a quote X ranks higher. Any case works. Alias sort, which also
+        # takes Recency & Relevance. Send the same value with each cursor. Standard pages
+        # list Latest.
+        module QueryType
+          extend XTwitterScraper::Internal::Type::Enum
+
+          LATEST = :Latest
+          TOP = :Top
 
           # @!method self.values
           #   @return [Array<Symbol>]

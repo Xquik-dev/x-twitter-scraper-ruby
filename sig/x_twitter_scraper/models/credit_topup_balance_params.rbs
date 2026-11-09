@@ -5,7 +5,12 @@
 module XTwitterScraper
   module Models
     type credit_topup_balance_params =
-      { dollars: Integer, locale: String, return_path: String }
+      {
+        dollars: Integer,
+        currency: XTwitterScraper::Models::CreditTopupBalanceParams::currency,
+        locale: String,
+        return_path: String
+      }
       & XTwitterScraper::Internal::Type::request_parameters
 
     class CreditTopupBalanceParams < XTwitterScraper::Internal::Type::BaseModel
@@ -13,6 +18,12 @@ module XTwitterScraper
       include XTwitterScraper::Internal::Type::RequestParameters
 
       attr_accessor dollars: Integer
+
+      attr_reader currency: XTwitterScraper::Models::CreditTopupBalanceParams::currency?
+
+      def currency=: (
+        XTwitterScraper::Models::CreditTopupBalanceParams::currency
+      ) -> XTwitterScraper::Models::CreditTopupBalanceParams::currency
 
       attr_reader locale: String?
 
@@ -24,6 +35,7 @@ module XTwitterScraper
 
       def initialize: (
         dollars: Integer,
+        ?currency: XTwitterScraper::Models::CreditTopupBalanceParams::currency,
         ?locale: String,
         ?return_path: String,
         ?request_options: XTwitterScraper::request_opts
@@ -31,10 +43,84 @@ module XTwitterScraper
 
       def to_hash: -> {
         dollars: Integer,
+        currency: XTwitterScraper::Models::CreditTopupBalanceParams::currency,
         locale: String,
         return_path: String,
         request_options: XTwitterScraper::RequestOptions
       }
+
+      type currency =
+        :USD
+        | :EUR
+        | :GBP
+        | :TRY
+        | :JPY
+        | :CNY
+        | :KRW
+        | :CAD
+        | :AUD
+        | :MXN
+        | :AED
+        | :BRL
+        | :CHF
+        | :CZK
+        | :DKK
+        | :HKD
+        | :HUF
+        | :IDR
+        | :ILS
+        | :INR
+        | :MYR
+        | :NOK
+        | :NZD
+        | :PHP
+        | :PLN
+        | :QAR
+        | :RON
+        | :SAR
+        | :SEK
+        | :SGD
+        | :THB
+        | :ZAR
+
+      module Currency
+        extend XTwitterScraper::Internal::Type::Enum
+
+        USD: :USD
+        EUR: :EUR
+        GBP: :GBP
+        TRY: :TRY
+        JPY: :JPY
+        CNY: :CNY
+        KRW: :KRW
+        CAD: :CAD
+        AUD: :AUD
+        MXN: :MXN
+        AED: :AED
+        BRL: :BRL
+        CHF: :CHF
+        CZK: :CZK
+        DKK: :DKK
+        HKD: :HKD
+        HUF: :HUF
+        IDR: :IDR
+        ILS: :ILS
+        INR: :INR
+        MYR: :MYR
+        NOK: :NOK
+        NZD: :NZD
+        PHP: :PHP
+        PLN: :PLN
+        QAR: :QAR
+        RON: :RON
+        SAR: :SAR
+        SEK: :SEK
+        SGD: :SGD
+        THB: :THB
+        ZAR: :ZAR
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::CreditTopupBalanceParams::currency]
+      end
     end
   end
 end
