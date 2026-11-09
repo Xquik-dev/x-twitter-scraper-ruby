@@ -9,7 +9,8 @@ module XTwitterScraper
         {
           id: String,
           event_types: ::Array[XTwitterScraper::Models::event_type],
-          is_active: bool
+          is_active: bool,
+          name: String?
         }
         & XTwitterScraper::Internal::Type::request_parameters
 
@@ -29,10 +30,13 @@ module XTwitterScraper
 
         def is_active=: (bool) -> bool
 
+        attr_accessor name: String?
+
         def initialize: (
           id: String,
           ?event_types: ::Array[XTwitterScraper::Models::event_type],
           ?is_active: bool,
+          ?name: String?,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
@@ -40,6 +44,7 @@ module XTwitterScraper
           id: String,
           event_types: ::Array[XTwitterScraper::Models::event_type],
           is_active: bool,
+          name: String?,
           request_options: XTwitterScraper::RequestOptions
         }
       end

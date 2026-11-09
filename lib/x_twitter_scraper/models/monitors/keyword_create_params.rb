@@ -26,10 +26,18 @@ module XTwitterScraper
         #   @return [String]
         required :query, String
 
-        # @!method initialize(event_types:, query:, request_options: {})
+        # @!attribute name
+        #   Your own label for the keyword monitor. Its events carry it as monitorName.
+        #
+        #   @return [String, nil]
+        optional :name, String
+
+        # @!method initialize(event_types:, query:, name: nil, request_options: {})
         #   @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
         #
         #   @param query [String] X search query to monitor. Whitespace is normalized.
+        #
+        #   @param name [String] Your own label for the keyword monitor. Its events carry it as monitorName.
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end

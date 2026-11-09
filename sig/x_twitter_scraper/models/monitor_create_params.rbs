@@ -7,7 +7,8 @@ module XTwitterScraper
     type monitor_create_params =
       {
         event_types: ::Array[XTwitterScraper::Models::event_type],
-        username: String
+        username: String,
+        name: String
       }
       & XTwitterScraper::Internal::Type::request_parameters
 
@@ -19,15 +20,21 @@ module XTwitterScraper
 
       attr_accessor username: String
 
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
       def initialize: (
         event_types: ::Array[XTwitterScraper::Models::event_type],
         username: String,
+        ?name: String,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
       def to_hash: -> {
         event_types: ::Array[XTwitterScraper::Models::event_type],
         username: String,
+        name: String,
         request_options: XTwitterScraper::RequestOptions
       }
     end

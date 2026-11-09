@@ -7,6 +7,7 @@ module XTwitterScraper
     class X
       class Media
         def download: (
+          ?image_shows: String,
           ?tweet_id: String,
           ?tweet_ids: ::Array[String],
           ?tweet_input: String,
@@ -18,6 +19,7 @@ module XTwitterScraper
           account: String,
           url: String,
           idempotency_key: String,
+          ?is_long_video: bool,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::MediaUploadResponse
 

@@ -9,6 +9,7 @@ module XTwitterScraper
         def create: (
           event_types: ::Array[XTwitterScraper::Models::event_type],
           query: String,
+          ?name: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::Monitors::KeywordCreateResponse
 
@@ -21,6 +22,7 @@ module XTwitterScraper
           String id,
           ?event_types: ::Array[XTwitterScraper::Models::event_type],
           ?is_active: bool,
+          ?name: String?,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::Monitors::KeywordUpdateResponse
 

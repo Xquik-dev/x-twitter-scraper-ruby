@@ -6,7 +6,12 @@ module XTwitterScraper
   module Models
     module X
       type media_upload_params =
-        { account: String, url: String, idempotency_key: String }
+        {
+          account: String,
+          url: String,
+          idempotency_key: String,
+          is_long_video: bool
+        }
         & XTwitterScraper::Internal::Type::request_parameters
 
       class MediaUploadParams < XTwitterScraper::Internal::Type::BaseModel
@@ -19,10 +24,15 @@ module XTwitterScraper
 
         attr_accessor idempotency_key: String
 
+        attr_reader is_long_video: bool?
+
+        def is_long_video=: (bool) -> bool
+
         def initialize: (
           account: String,
           url: String,
           idempotency_key: String,
+          ?is_long_video: bool,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
@@ -30,6 +40,7 @@ module XTwitterScraper
           account: String,
           url: String,
           idempotency_key: String,
+          is_long_video: bool,
           request_options: XTwitterScraper::RequestOptions
         }
       end

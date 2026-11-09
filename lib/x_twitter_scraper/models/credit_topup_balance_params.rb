@@ -23,10 +23,19 @@ module XTwitterScraper
       #   @return [String, nil]
       optional :locale, String
 
-      # @!method initialize(dollars:, locale: nil, request_options: {})
+      # @!attribute return_path
+      #   Optional Xquik tool page to return to after Checkout, such as
+      #   /en/x-article-reader.
+      #
+      #   @return [String, nil]
+      optional :return_path, String, api_name: :returnPath
+
+      # @!method initialize(dollars:, locale: nil, return_path: nil, request_options: {})
       #   @param dollars [Integer] Amount to top up in US dollars. Minimum 10.
       #
       #   @param locale [String] Optional checkout locale. Defaults to en.
+      #
+      #   @param return_path [String] Optional Xquik tool page to return to after Checkout, such as /en/x-article-read
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
     end

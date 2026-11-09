@@ -30,11 +30,19 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :idempotency_key
 
+        # Set true only for video/mp4 multipart uploads longer than 140 seconds.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :is_long_video
+
+        sig { params(is_long_video: T::Boolean).void }
+        attr_writer :is_long_video
+
         sig do
           params(
             account: String,
             url: String,
             idempotency_key: String,
+            is_long_video: T::Boolean,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -44,6 +52,8 @@ module XTwitterScraper
           # HTTPS URL to download and upload as media
           url:,
           idempotency_key:,
+          # Set true only for video/mp4 multipart uploads longer than 140 seconds.
+          is_long_video: nil,
           request_options: {}
         )
         end
@@ -54,6 +64,7 @@ module XTwitterScraper
               account: String,
               url: String,
               idempotency_key: String,
+              is_long_video: T::Boolean,
               request_options: XTwitterScraper::RequestOptions
             }
           )

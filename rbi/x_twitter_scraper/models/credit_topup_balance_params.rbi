@@ -29,10 +29,19 @@ module XTwitterScraper
       sig { params(locale: String).void }
       attr_writer :locale
 
+      # Optional Xquik tool page to return to after Checkout, such as
+      # /en/x-article-reader.
+      sig { returns(T.nilable(String)) }
+      attr_reader :return_path
+
+      sig { params(return_path: String).void }
+      attr_writer :return_path
+
       sig do
         params(
           dollars: Integer,
           locale: String,
+          return_path: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -41,6 +50,9 @@ module XTwitterScraper
         dollars:,
         # Optional checkout locale. Defaults to en.
         locale: nil,
+        # Optional Xquik tool page to return to after Checkout, such as
+        # /en/x-article-reader.
+        return_path: nil,
         request_options: {}
       )
       end
@@ -50,6 +62,7 @@ module XTwitterScraper
           {
             dollars: Integer,
             locale: String,
+            return_path: String,
             request_options: XTwitterScraper::RequestOptions
           }
         )

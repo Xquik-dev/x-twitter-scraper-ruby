@@ -10,7 +10,9 @@ module XTwitterScraper
       class Media
         # Download images & videos from tweets
         #
-        # @overload download(tweet_id: nil, tweet_ids: nil, tweet_input: nil, tweet_url: nil, request_options: {})
+        # @overload download(image_shows: nil, tweet_id: nil, tweet_ids: nil, tweet_input: nil, tweet_url: nil, request_options: {})
+        #
+        # @param image_shows [String] Save only posts whose photos show this. Send charts, screenshots, product_photos
         #
         # @param tweet_id [String] Numeric tweet ID alias for tweetInput
         #
@@ -38,13 +40,15 @@ module XTwitterScraper
 
         # Upload media
         #
-        # @overload upload(account:, url:, idempotency_key:, request_options: {})
+        # @overload upload(account:, url:, idempotency_key:, is_long_video: nil, request_options: {})
         #
         # @param account [String] Body param: X account (@username or ID) uploading media from URL
         #
         # @param url [String] Body param: HTTPS URL to download and upload as media
         #
         # @param idempotency_key [String] Header param: Generate one unique value for each intended write. Reuse it only w
+        #
+        # @param is_long_video [Boolean] Set true only for video/mp4 multipart uploads longer than 140 seconds.
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #

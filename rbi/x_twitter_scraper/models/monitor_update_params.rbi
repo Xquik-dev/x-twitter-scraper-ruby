@@ -36,11 +36,16 @@ module XTwitterScraper
       sig { params(is_active: T::Boolean).void }
       attr_writer :is_active
 
+      # New label for the account monitor. Send null to remove the label.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :name
+
       sig do
         params(
           id: String,
           event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           is_active: T::Boolean,
+          name: T.nilable(String),
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -49,6 +54,8 @@ module XTwitterScraper
         # Array of event types to subscribe to.
         event_types: nil,
         is_active: nil,
+        # New label for the account monitor. Send null to remove the label.
+        name: nil,
         request_options: {}
       )
       end
@@ -59,6 +66,7 @@ module XTwitterScraper
             id: String,
             event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
             is_active: T::Boolean,
+            name: T.nilable(String),
             request_options: XTwitterScraper::RequestOptions
           }
         )

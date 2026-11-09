@@ -26,10 +26,19 @@ module XTwitterScraper
       sig { returns(String) }
       attr_accessor :username
 
+      # Your label for the monitor. Its events carry it as monitorName. Xquik normalizes
+      # whitespace.
+      sig { returns(T.nilable(String)) }
+      attr_reader :name
+
+      sig { params(name: String).void }
+      attr_writer :name
+
       sig do
         params(
           event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
           username: String,
+          name: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -38,6 +47,9 @@ module XTwitterScraper
         event_types:,
         # X username (without @)
         username:,
+        # Your label for the monitor. Its events carry it as monitorName. Xquik normalizes
+        # whitespace.
+        name: nil,
         request_options: {}
       )
       end
@@ -47,6 +59,7 @@ module XTwitterScraper
           {
             event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
             username: String,
+            name: String,
             request_options: XTwitterScraper::RequestOptions
           }
         )

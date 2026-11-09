@@ -19,16 +19,35 @@ module XTwitterScraper
             )
           end
 
+        # IDs of the X accounts to retry. Accounts that failed for another reason, or
+        # belong to someone else, stay as they are.
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_reader :account_ids
+
+        sig { params(account_ids: T::Array[String]).void }
+        attr_writer :account_ids
+
         sig do
           params(
+            account_ids: T::Array[String],
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
-        def self.new(request_options: {})
+        def self.new(
+          # IDs of the X accounts to retry. Accounts that failed for another reason, or
+          # belong to someone else, stay as they are.
+          account_ids: nil,
+          request_options: {}
+        )
         end
 
         sig do
-          override.returns({ request_options: XTwitterScraper::RequestOptions })
+          override.returns(
+            {
+              account_ids: T::Array[String],
+              request_options: XTwitterScraper::RequestOptions
+            }
+          )
         end
         def to_hash
         end

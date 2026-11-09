@@ -27,10 +27,18 @@ module XTwitterScraper
         sig { returns(String) }
         attr_accessor :query
 
+        # Your own label for the keyword monitor. Its events carry it as monitorName.
+        sig { returns(T.nilable(String)) }
+        attr_reader :name
+
+        sig { params(name: String).void }
+        attr_writer :name
+
         sig do
           params(
             event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
             query: String,
+            name: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -39,6 +47,8 @@ module XTwitterScraper
           event_types:,
           # X search query to monitor. Whitespace is normalized.
           query:,
+          # Your own label for the keyword monitor. Its events carry it as monitorName.
+          name: nil,
           request_options: {}
         )
         end
@@ -48,6 +58,7 @@ module XTwitterScraper
             {
               event_types: T::Array[XTwitterScraper::EventType::OrSymbol],
               query: String,
+              name: String,
               request_options: XTwitterScraper::RequestOptions
             }
           )

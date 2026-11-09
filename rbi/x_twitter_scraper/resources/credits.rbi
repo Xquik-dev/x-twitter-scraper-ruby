@@ -51,6 +51,7 @@ module XTwitterScraper
         params(
           dollars: Integer,
           locale: String,
+          return_path: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::Models::CreditTopupBalanceResponse)
       end
@@ -59,6 +60,9 @@ module XTwitterScraper
         dollars:,
         # Optional checkout locale. Defaults to en.
         locale: nil,
+        # Optional Xquik tool page to return to after Checkout, such as
+        # /en/x-article-reader.
+        return_path: nil,
         request_options: {}
       )
       end
