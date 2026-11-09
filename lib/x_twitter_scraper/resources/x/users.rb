@@ -438,15 +438,13 @@ module XTwitterScraper
 
         # List tweets liked by a user
         #
-        # @overload retrieve_likes(id, any_words: nil, blue_verified_only: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, fields: nil, from_user: nil, geocode: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, near: nil, news: nil, omit: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, source: nil, to_user: nil, until_date: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
+        # @overload retrieve_likes(id, any_words: nil, blue_verified_only: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, fields: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, omit: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, since_id: nil, to_user: nil, until_date: nil, url: nil, verified_only: nil, within_time: nil, request_options: {})
         #
         # @param id [String] User ID or username
         #
         # @param any_words [String] Words or quoted phrases where any one can match. Separate with spaces, commas, o
         #
         # @param blue_verified_only [Boolean] Only return tweets from Blue-verified authors.
-        #
-        # @param card_name [String] Match the Tweet card name.
         #
         # @param cashtags [String] Cashtags separated by spaces, commas, or lines.
         #
@@ -456,15 +454,11 @@ module XTwitterScraper
         #
         # @param exact_phrase [String] Exact phrase to match.
         #
-        # @param exclude_source [String] Exclude a source application.
-        #
         # @param exclude_words [String] Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
         #
         # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
         #
         # @param from_user [String] Filter by author username.
-        #
-        # @param geocode [String] Match latitude, longitude, and radius.
         #
         # @param hashtags [String] Hashtags separated by spaces, commas, or lines.
         #
@@ -502,10 +496,6 @@ module XTwitterScraper
         #
         # @param native_retweets [Boolean] Only return native reposts.
         #
-        # @param near [String] Match a place name.
-        #
-        # @param news [Boolean] Only return news results.
-        #
         # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
@@ -520,13 +510,9 @@ module XTwitterScraper
         #
         # @param retweets_of_tweet_id [String] Only retweets of this tweet ID.
         #
-        # @param safe [Boolean] Enable the safe-search filter.
-        #
         # @param since_date [Date] Start date in YYYY-MM-DD format.
         #
         # @param since_id [String] Return Tweets newer than this Tweet ID.
-        #
-        # @param source [String] Match the source application.
         #
         # @param to_user [String] Filter replies sent to a username.
         #
@@ -535,8 +521,6 @@ module XTwitterScraper
         # @param url [String] URL substring or domain filter.
         #
         # @param verified_only [Boolean] Only return tweets from verified authors.
-        #
-        # @param within [String] Set the radius for the near filter.
         #
         # @param within_time [String] Match Tweets inside a recent time window.
         #
@@ -554,10 +538,8 @@ module XTwitterScraper
             query: query.transform_keys(
               any_words: "anyWords",
               blue_verified_only: "blueVerifiedOnly",
-              card_name: "cardName",
               conversation_id: "conversationId",
               exact_phrase: "exactPhrase",
-              exclude_source: "excludeSource",
               exclude_words: "excludeWords",
               from_user: "fromUser",
               in_reply_to_tweet_id: "inReplyToTweetId",
@@ -592,15 +574,13 @@ module XTwitterScraper
 
         # List media tweets posted by a user
         #
-        # @overload retrieve_media(id, any_words: nil, blue_verified_only: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, fields: nil, from_user: nil, geocode: nil, hashtags: nil, image_shows: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, near: nil, news: nil, omit: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, source: nil, to_user: nil, topic: nil, until_date: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
+        # @overload retrieve_media(id, any_words: nil, blue_verified_only: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, fields: nil, from_user: nil, hashtags: nil, image_shows: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, omit: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, since_id: nil, to_user: nil, topic: nil, until_date: nil, url: nil, verified_only: nil, within_time: nil, request_options: {})
         #
         # @param id [String] User ID or username for media lookup
         #
         # @param any_words [String] Words or quoted phrases where any one can match. Separate with spaces, commas, o
         #
         # @param blue_verified_only [Boolean] Only return tweets from Blue-verified authors.
-        #
-        # @param card_name [String] Match the Tweet card name.
         #
         # @param cashtags [String] Cashtags separated by spaces, commas, or lines.
         #
@@ -610,15 +590,11 @@ module XTwitterScraper
         #
         # @param exact_phrase [String] Exact phrase to match.
         #
-        # @param exclude_source [String] Exclude a source application.
-        #
         # @param exclude_words [String] Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
         #
         # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
         #
         # @param from_user [String] Filter by author username.
-        #
-        # @param geocode [String] Match latitude, longitude, and radius.
         #
         # @param hashtags [String] Hashtags separated by spaces, commas, or lines.
         #
@@ -658,10 +634,6 @@ module XTwitterScraper
         #
         # @param native_retweets [Boolean] Only return native reposts.
         #
-        # @param near [String] Match a place name.
-        #
-        # @param news [Boolean] Only return news results.
-        #
         # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
@@ -676,13 +648,9 @@ module XTwitterScraper
         #
         # @param retweets_of_tweet_id [String] Only retweets of this tweet ID.
         #
-        # @param safe [Boolean] Enable the safe-search filter.
-        #
         # @param since_date [Date] Start date in YYYY-MM-DD format.
         #
         # @param since_id [String] Return Tweets newer than this Tweet ID.
-        #
-        # @param source [String] Match the source application.
         #
         # @param to_user [String] Filter replies sent to a username.
         #
@@ -693,8 +661,6 @@ module XTwitterScraper
         # @param url [String] URL substring or domain filter.
         #
         # @param verified_only [Boolean] Only return tweets from verified authors.
-        #
-        # @param within [String] Set the radius for the near filter.
         #
         # @param within_time [String] Match Tweets inside a recent time window.
         #
@@ -712,10 +678,8 @@ module XTwitterScraper
             query: query.transform_keys(
               any_words: "anyWords",
               blue_verified_only: "blueVerifiedOnly",
-              card_name: "cardName",
               conversation_id: "conversationId",
               exact_phrase: "exactPhrase",
-              exclude_source: "excludeSource",
               exclude_words: "excludeWords",
               from_user: "fromUser",
               image_shows: "imageShows",
@@ -751,15 +715,13 @@ module XTwitterScraper
 
         # List tweets mentioning a user
         #
-        # @overload retrieve_mentions(id, any_words: nil, blue_verified_only: nil, card_name: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_source: nil, exclude_words: nil, fields: nil, from_user: nil, geocode: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, near: nil, news: nil, omit: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, safe: nil, since_date: nil, since_id: nil, since_time: nil, source: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within: nil, within_time: nil, request_options: {})
+        # @overload retrieve_mentions(id, any_words: nil, blue_verified_only: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, fields: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, omit: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, since_id: nil, since_time: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within_time: nil, request_options: {})
         #
         # @param id [String] User ID or username for mentions lookup
         #
         # @param any_words [String] Words or quoted phrases where any one can match. Separate with spaces, commas, o
         #
         # @param blue_verified_only [Boolean] Only return tweets from Blue-verified authors.
-        #
-        # @param card_name [String] Match the Tweet card name.
         #
         # @param cashtags [String] Cashtags separated by spaces, commas, or lines.
         #
@@ -769,15 +731,11 @@ module XTwitterScraper
         #
         # @param exact_phrase [String] Exact phrase to match.
         #
-        # @param exclude_source [String] Exclude a source application.
-        #
         # @param exclude_words [String] Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
         #
         # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as
         #
         # @param from_user [String] Filter by author username.
-        #
-        # @param geocode [String] Match latitude, longitude, and radius.
         #
         # @param hashtags [String] Hashtags separated by spaces, commas, or lines.
         #
@@ -815,10 +773,6 @@ module XTwitterScraper
         #
         # @param native_retweets [Boolean] Only return native reposts.
         #
-        # @param near [String] Match a place name.
-        #
-        # @param news [Boolean] Only return news results.
-        #
         # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
         #
         # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
@@ -833,15 +787,11 @@ module XTwitterScraper
         #
         # @param retweets_of_tweet_id [String] Only retweets of this tweet ID.
         #
-        # @param safe [Boolean] Enable the safe-search filter.
-        #
         # @param since_date [Date] Start date in YYYY-MM-DD format.
         #
         # @param since_id [String] Return Tweets newer than this Tweet ID.
         #
         # @param since_time [String] Unix timestamp - return mentions after this time
-        #
-        # @param source [String] Match the source application.
         #
         # @param to_user [String] Filter replies sent to a username.
         #
@@ -852,8 +802,6 @@ module XTwitterScraper
         # @param url [String] URL substring or domain filter.
         #
         # @param verified_only [Boolean] Only return tweets from verified authors.
-        #
-        # @param within [String] Set the radius for the near filter.
         #
         # @param within_time [String] Match Tweets inside a recent time window.
         #
@@ -871,10 +819,8 @@ module XTwitterScraper
             query: query.transform_keys(
               any_words: "anyWords",
               blue_verified_only: "blueVerifiedOnly",
-              card_name: "cardName",
               conversation_id: "conversationId",
               exact_phrase: "exactPhrase",
-              exclude_source: "excludeSource",
               exclude_words: "excludeWords",
               from_user: "fromUser",
               in_reply_to_tweet_id: "inReplyToTweetId",
