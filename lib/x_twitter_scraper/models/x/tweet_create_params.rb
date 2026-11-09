@@ -41,6 +41,14 @@ module XTwitterScraper
         #   @return [Array<String>, nil]
         optional :media, XTwitterScraper::Internal::Type::ArrayOf[String]
 
+        # @!attribute media_ids
+        #   Media IDs from `POST /x/media`, uploaded with this account. IDs last 24 hours.
+        #   Send up to 4 image IDs or exactly 1 video ID. Send `media` or `media_ids`, not
+        #   both. Media adds 2 credits per started MB across all files.
+        #
+        #   @return [Array<String>, nil]
+        optional :media_ids, XTwitterScraper::Internal::Type::ArrayOf[String]
+
         # @!attribute reply_to_tweet_id
         #
         #   @return [String, nil]
@@ -52,7 +60,7 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :text, String
 
-        # @!method initialize(account:, idempotency_key:, community_id: nil, is_note_tweet: nil, media: nil, reply_to_tweet_id: nil, text: nil, request_options: {})
+        # @!method initialize(account:, idempotency_key:, community_id: nil, is_note_tweet: nil, media: nil, media_ids: nil, reply_to_tweet_id: nil, text: nil, request_options: {})
         #   @param account [String] X account (@username or account ID)
         #
         #   @param idempotency_key [String]
@@ -62,6 +70,8 @@ module XTwitterScraper
         #   @param is_note_tweet [Boolean]
         #
         #   @param media [Array<String>] Array of public media URLs to attach. Supports up to 4 images or exactly 1 MP4 v
+        #
+        #   @param media_ids [Array<String>] Media IDs from `POST /x/media`, uploaded with this account. IDs last 24 hours. S
         #
         #   @param reply_to_tweet_id [String]
         #

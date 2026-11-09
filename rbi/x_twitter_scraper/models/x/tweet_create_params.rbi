@@ -47,6 +47,15 @@ module XTwitterScraper
         sig { params(media: T::Array[String]).void }
         attr_writer :media
 
+        # Media IDs from `POST /x/media`, uploaded with this account. IDs last 24 hours.
+        # Send up to 4 image IDs or exactly 1 video ID. Send `media` or `media_ids`, not
+        # both. Media adds 2 credits per started MB across all files.
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_reader :media_ids
+
+        sig { params(media_ids: T::Array[String]).void }
+        attr_writer :media_ids
+
         sig { returns(T.nilable(String)) }
         attr_reader :reply_to_tweet_id
 
@@ -67,6 +76,7 @@ module XTwitterScraper
             community_id: String,
             is_note_tweet: T::Boolean,
             media: T::Array[String],
+            media_ids: T::Array[String],
             reply_to_tweet_id: String,
             text: String,
             request_options: XTwitterScraper::RequestOptions::OrHash
@@ -82,6 +92,10 @@ module XTwitterScraper
           # video up to 100 MB. Each URL must be publicly reachable. Attached media adds 2
           # credits per started MB across all files.
           media: nil,
+          # Media IDs from `POST /x/media`, uploaded with this account. IDs last 24 hours.
+          # Send up to 4 image IDs or exactly 1 video ID. Send `media` or `media_ids`, not
+          # both. Media adds 2 credits per started MB across all files.
+          media_ids: nil,
           reply_to_tweet_id: nil,
           # Tweet text (optional when media is provided)
           text: nil,
@@ -97,6 +111,7 @@ module XTwitterScraper
               community_id: String,
               is_note_tweet: T::Boolean,
               media: T::Array[String],
+              media_ids: T::Array[String],
               reply_to_tweet_id: String,
               text: String,
               request_options: XTwitterScraper::RequestOptions
