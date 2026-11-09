@@ -18,7 +18,7 @@ module XTwitterScraper
 
         # Create tweet
         #
-        # @overload create(account:, idempotency_key:, community_id: nil, is_note_tweet: nil, media: nil, reply_to_tweet_id: nil, text: nil, request_options: {})
+        # @overload create(account:, idempotency_key:, community_id: nil, is_note_tweet: nil, media: nil, media_ids: nil, reply_to_tweet_id: nil, text: nil, request_options: {})
         #
         # @param account [String] Body param: X account (@username or account ID)
         #
@@ -29,6 +29,8 @@ module XTwitterScraper
         # @param is_note_tweet [Boolean] Body param
         #
         # @param media [Array<String>] Body param: Array of public media URLs to attach. Supports up to 4 images or exa
+        #
+        # @param media_ids [Array<String>] Body param: Media IDs from `POST /x/media`, uploaded with this account. IDs last 24 hours. S
         #
         # @param reply_to_tweet_id [String] Body param
         #
