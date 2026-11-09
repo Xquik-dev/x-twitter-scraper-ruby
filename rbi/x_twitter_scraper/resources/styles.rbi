@@ -26,18 +26,18 @@ module XTwitterScraper
       sig do
         params(
           id: String,
-          label: String,
           tweets: T::Array[XTwitterScraper::StyleUpdateParams::Tweet::OrHash],
+          label: String,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(XTwitterScraper::StyleProfile)
       end
       def update(
         # Style profile ID or X username
         id,
-        # Display label for the style
-        label: nil,
         # Array of tweet objects
         tweets:,
+        # Display label for the style
+        label: nil,
         request_options: {}
       )
       end

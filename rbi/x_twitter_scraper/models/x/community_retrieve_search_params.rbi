@@ -390,8 +390,8 @@ module XTwitterScraper
 
         sig do
           params(
-            community_id: String,
             q: String,
+            community_id: String,
             any_words: String,
             blue_verified_only: T::Boolean,
             cashtags: String,
@@ -442,10 +442,10 @@ module XTwitterScraper
           ).returns(T.attached_class)
         end
         def self.new(
-          # Numeric ID of the community whose posts to search
-          community_id: nil,
           # Search query
           q:,
+          # Numeric ID of the community whose posts to search
+          community_id: nil,
           # Words or quoted phrases where any one can match. Separate with spaces, commas,
           # or lines.
           any_words: nil,
