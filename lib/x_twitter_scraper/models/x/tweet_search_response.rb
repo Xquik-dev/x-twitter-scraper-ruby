@@ -12,6 +12,12 @@ module XTwitterScraper
       module TweetSearchResponse
         extend XTwitterScraper::Internal::Type::Union
 
+        # Posts kept by the topic filter. Each kept post carries its topicScore. Follow next_cursor to check the next posts.
+        variant -> { XTwitterScraper::TopicFilteredTweets }
+
+        # Posts kept by the image filter. Each kept post carries its imageScore. Follow next_cursor to check the next posts.
+        variant -> { XTwitterScraper::ImageFilteredTweets }
+
         # No-mode search, user Tweet, user reply, and direct reply reads use automatic coverage. Shape, filters, aliases, and billing stay compatible. Unprefixed cursors remain legacy. Follow next_cursor while has_next_page is true. An empty filtered page can still have has_next_page true.
         variant -> { XTwitterScraper::PaginatedTweets }
 
@@ -292,7 +298,7 @@ module XTwitterScraper
         end
 
         # @!method self.variants
-        #   @return [Array(XTwitterScraper::Models::PaginatedTweets, XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse)]
+        #   @return [Array(XTwitterScraper::Models::TopicFilteredTweets, XTwitterScraper::Models::ImageFilteredTweets, XTwitterScraper::Models::PaginatedTweets, XTwitterScraper::Models::X::TweetSearchResponse::TweetSearchCoverageResponse)]
       end
     end
   end

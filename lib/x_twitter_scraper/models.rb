@@ -130,6 +130,8 @@ module XTwitterScraper
 
   ImageFilterSummary = XTwitterScraper::Models::ImageFilterSummary
 
+  ImageFilteredTweets = XTwitterScraper::Models::ImageFilteredTweets
+
   Monitor = XTwitterScraper::Models::Monitor
 
   MonitorCreateParams = XTwitterScraper::Models::MonitorCreateParams
@@ -179,6 +181,10 @@ module XTwitterScraper
   SubscribeCreateParams = XTwitterScraper::Models::SubscribeCreateParams
 
   Support = XTwitterScraper::Models::Support
+
+  TopicFilterSummary = XTwitterScraper::Models::TopicFilterSummary
+
+  TopicFilteredTweets = XTwitterScraper::Models::TopicFilteredTweets
 
   TrendListParams = XTwitterScraper::Models::TrendListParams
 

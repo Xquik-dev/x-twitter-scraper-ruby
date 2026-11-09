@@ -194,7 +194,7 @@ module XTwitterScraper
           ?within: String,
           ?within_time: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::PaginatedTweets
+        ) -> XTwitterScraper::Models::X::user_retrieve_media_response
 
         def retrieve_mentions: (
           String id,
@@ -299,7 +299,7 @@ module XTwitterScraper
           ?within: String,
           ?within_time: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::PaginatedTweets
+        ) -> XTwitterScraper::Models::X::user_retrieve_replies_response
 
         def retrieve_search: (
           q: String,
@@ -372,7 +372,7 @@ module XTwitterScraper
           ?within: String,
           ?within_time: String,
           ?request_options: XTwitterScraper::request_opts
-        ) -> XTwitterScraper::PaginatedTweets
+        ) -> XTwitterScraper::Models::X::user_retrieve_tweets_response
 
         def retrieve_verified_followers: (
           String id,

@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type user_retrieve_replies_response =
+        XTwitterScraper::TopicFilteredTweets
+        | XTwitterScraper::ImageFilteredTweets
+        | XTwitterScraper::PaginatedTweets
+
+      module UserRetrieveRepliesResponse
+        extend XTwitterScraper::Internal::Type::Union
+
+        def self?.variants: -> ::Array[XTwitterScraper::Models::X::user_retrieve_replies_response]
+      end
+    end
+  end
+end
