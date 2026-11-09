@@ -15,24 +15,40 @@ module XTwitterScraper
           )
         end
 
+      sig { returns(T::Boolean) }
+      attr_accessor :has_more
+
       sig { returns(T::Array[XTwitterScraper::Monitor]) }
       attr_accessor :monitors
 
       sig { returns(Integer) }
       attr_accessor :total
 
+      sig { returns(T.nilable(String)) }
+      attr_reader :next_cursor
+
+      sig { params(next_cursor: String).void }
+      attr_writer :next_cursor
+
       sig do
         params(
+          has_more: T::Boolean,
           monitors: T::Array[XTwitterScraper::Monitor::OrHash],
-          total: Integer
+          total: Integer,
+          next_cursor: String
         ).returns(T.attached_class)
       end
-      def self.new(monitors:, total:)
+      def self.new(has_more:, monitors:, total:, next_cursor: nil)
       end
 
       sig do
         override.returns(
-          { monitors: T::Array[XTwitterScraper::Monitor], total: Integer }
+          {
+            has_more: T::Boolean,
+            monitors: T::Array[XTwitterScraper::Monitor],
+            total: Integer,
+            next_cursor: String
+          }
         )
       end
       def to_hash

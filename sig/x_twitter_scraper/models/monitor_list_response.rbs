@@ -5,21 +5,36 @@
 module XTwitterScraper
   module Models
     type monitor_list_response =
-      { monitors: ::Array[XTwitterScraper::Monitor], total: Integer }
+      {
+        has_more: bool,
+        monitors: ::Array[XTwitterScraper::Monitor],
+        total: Integer,
+        next_cursor: String
+      }
 
     class MonitorListResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor has_more: bool
+
       attr_accessor monitors: ::Array[XTwitterScraper::Monitor]
 
       attr_accessor total: Integer
 
+      attr_reader next_cursor: String?
+
+      def next_cursor=: (String) -> String
+
       def initialize: (
+        has_more: bool,
         monitors: ::Array[XTwitterScraper::Monitor],
-        total: Integer
+        total: Integer,
+        ?next_cursor: String
       ) -> void
 
       def to_hash: -> {
+        has_more: bool,
         monitors: ::Array[XTwitterScraper::Monitor],
-        total: Integer
+        total: Integer,
+        next_cursor: String
       }
     end
   end
