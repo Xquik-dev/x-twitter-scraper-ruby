@@ -164,6 +164,8 @@ Use `extra_query`, `extra_body`, or `extra_headers` under `request_options`.
 Matching `extra_` values override documented parameters.
 
 ```ruby
+value = "readme-example"
+
 account =
   x_twitter_scraper.account.retrieve(
     request_options: {
@@ -176,16 +178,17 @@ account =
 puts(account[:my_undocumented_property])
 ```
 
-Use `client.request` for undocumented endpoints. It keeps authentication and retries.
+Use `request` for undocumented endpoints. It keeps authentication and retries.
 
 ```ruby
-response = client.request(
-  method: :post,
-  path: '/undocumented/endpoint',
-  query: {my_query_parameter: "value"},
-  headers: {"my-header": "value"},
-  body: {my_body_parameter: "value"}
+response = x_twitter_scraper.request(
+  method: :get,
+  path: "x/tweets/search",
+  query: {q: "from:NASA", limit: 1},
+  headers: {"my-header": "value"}
 )
+
+puts(response[:tweets].length)
 ```
 
 ## Concurrency & connection pooling
@@ -216,10 +219,9 @@ Tagged symbols replace [`T::Enum`](https://sorbet.org/docs/tenum) and remain run
 ```ruby
 # :en
 puts(XTwitterScraper::AccountUpdateLocaleParams::Locale::EN)
-
-# Revealed type: `T.all(XTwitterScraper::AccountUpdateLocaleParams::Locale, Symbol)`
-T.reveal_type(XTwitterScraper::AccountUpdateLocaleParams::Locale::EN)
 ```
+
+Sorbet types the constant as `T.all(XTwitterScraper::AccountUpdateLocaleParams::Locale, Symbol)`.
 
 Enum parameters accept constants or literal values.
 
