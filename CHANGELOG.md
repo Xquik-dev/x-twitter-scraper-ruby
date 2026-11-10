@@ -9,6 +9,8 @@
 
 ### Features
 
+* `x.bookmarks.list` and `x.get_home_timeline` take `page_size`, 1 to 100 items per page.
+* `MediaDownloadResponse` returns `no_media_tweet_ids`, the posts with no media to save, and `failed_tweet_ids`, the posts Xquik couldn't read. Neither is charged.
 * Params types name 343 optional query fields the API accepts on 32 methods, such as `min_likes` on the tweet list methods and `post_monitor_id` on `events.list`. Each is sent under its API name.
 * Extraction tool types gain `:user_affiliates`.
 * `x.accounts.create` and `x.accounts.reauth` take a `connection_attempt_id` you generate. Read the attempt's status with it, even if the response never reaches you.

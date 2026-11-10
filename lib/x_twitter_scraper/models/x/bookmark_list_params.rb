@@ -24,10 +24,18 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :folder_id, String
 
-        # @!method initialize(cursor: nil, folder_id: nil, request_options: {})
+        # @!attribute page_size
+        #   Items per page, 1 to 100, default 20. Source, filters or credits can return fewer. Follow next_cursor for more pages.
+        #
+        #   @return [Integer, nil]
+        optional :page_size, Integer, api_name: :pageSize
+
+        # @!method initialize(cursor: nil, folder_id: nil, page_size: nil, request_options: {})
         #   @param cursor [String] Pagination cursor for bookmarks
         #
         #   @param folder_id [String] Optional bookmark folder ID
+        #
+        #   @param page_size [Integer] Items per page, 1 to 100, default 20. Source, filters or credits can return fewer. Follow next_cursor for more pages.
         #
         #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
       end

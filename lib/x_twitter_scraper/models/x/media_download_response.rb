@@ -55,7 +55,19 @@ module XTwitterScraper
                  XTwitterScraper::Internal::Type::ArrayOf[String],
                  api_name: :unprocessedTweetIds
 
-        # @!method initialize(cache_hit: nil, gallery_url: nil, image_filter: nil, items: nil, total_media: nil, total_tweets: nil, tweet_id: nil, unprocessed_tweet_ids: nil)
+        # @!attribute no_media_tweet_ids
+        #   Posts with no media to save, at no charge.
+        #
+        #   @return [XTwitterScraper::Internal::Type::ArrayOf[String], nil]
+        optional :no_media_tweet_ids, XTwitterScraper::Internal::Type::ArrayOf[String], api_name: :noMediaTweetIds
+
+        # @!attribute failed_tweet_ids
+        #   Posts Xquik couldn't read, at no charge. Send them again.
+        #
+        #   @return [XTwitterScraper::Internal::Type::ArrayOf[String], nil]
+        optional :failed_tweet_ids, XTwitterScraper::Internal::Type::ArrayOf[String], api_name: :failedTweetIds
+
+        # @!method initialize(cache_hit: nil, gallery_url: nil, image_filter: nil, items: nil, total_media: nil, total_tweets: nil, tweet_id: nil, unprocessed_tweet_ids: nil, no_media_tweet_ids: nil, failed_tweet_ids: nil)
         #   @param cache_hit [Boolean]
         #   @param gallery_url [String]
         #   @param image_filter [XTwitterScraper::Models::ImageFilterSummary]
@@ -64,6 +76,10 @@ module XTwitterScraper
         #   @param total_tweets [Integer]
         #   @param tweet_id [String]
         #   @param unprocessed_tweet_ids [Array<String>] Posts Xquik had no time to read, at no charge. Send them again.
+        #
+        #   @param no_media_tweet_ids [XTwitterScraper::Internal::Type::ArrayOf[String]] Posts with no media to save, at no charge.
+        #
+        #   @param failed_tweet_ids [XTwitterScraper::Internal::Type::ArrayOf[String]] Posts Xquik couldn't read, at no charge. Send them again.
 
         # @see XTwitterScraper::Models::X::MediaDownloadResponse#items
         class Item < XTwitterScraper::Internal::Type::BaseModel

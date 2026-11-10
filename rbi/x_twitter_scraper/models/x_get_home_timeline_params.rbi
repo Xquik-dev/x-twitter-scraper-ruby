@@ -32,10 +32,18 @@ module XTwitterScraper
       sig { params(seen_tweet_ids: String).void }
       attr_writer :seen_tweet_ids
 
+      # Items per page, 1 to 100, default 20. Source, filters or credits can return fewer. Follow next_cursor for more pages.
+      sig { returns(T.nilable(Integer)) }
+      attr_reader :page_size
+
+      sig { params(page_size: Integer).void }
+      attr_writer :page_size
+
       sig do
         params(
           cursor: String,
           seen_tweet_ids: String,
+          page_size: Integer,
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -44,6 +52,8 @@ module XTwitterScraper
         cursor: nil,
         # Comma-separated tweet IDs to exclude from results. Empty entries are ignored.
         seen_tweet_ids: nil,
+        # Items per page, 1 to 100, default 20. Source, filters or credits can return fewer. Follow next_cursor for more pages.
+        page_size: nil,
         request_options: {}
       )
       end
@@ -53,6 +63,7 @@ module XTwitterScraper
           {
             cursor: String,
             seen_tweet_ids: String,
+            page_size: Integer,
             request_options: XTwitterScraper::RequestOptions
           }
         )

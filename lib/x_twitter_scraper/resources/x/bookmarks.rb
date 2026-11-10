@@ -11,11 +11,13 @@ module XTwitterScraper
       class Bookmarks
         # Get bookmarked tweets
         #
-        # @overload list(cursor: nil, folder_id: nil, request_options: {})
+        # @overload list(cursor: nil, folder_id: nil, page_size: nil, request_options: {})
         #
         # @param cursor [String] Pagination cursor for bookmarks
         #
         # @param folder_id [String] Optional bookmark folder ID
+        #
+        # @param page_size [Integer] Items per page, 1 to 100, default 20. Source, filters or credits can return fewer. Follow next_cursor for more pages.
         #
         # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -28,7 +30,7 @@ module XTwitterScraper
           @client.request(
             method: :get,
             path: "x/bookmarks",
-            query: query.transform_keys(folder_id: "folderId"),
+            query: query.transform_keys(page_size: "pageSize", folder_id: "folderId"),
             model: XTwitterScraper::PaginatedTweets,
             options: options
           )
