@@ -20,15 +20,21 @@ module XTwitterScraper
 
       def seen_tweet_ids=: (String) -> String
 
+      attr_reader page_size: Integer?
+
+      def page_size=: (Integer) -> Integer
+
       def initialize: (
         ?cursor: String,
         ?seen_tweet_ids: String,
+        ?page_size: Integer,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
       def to_hash: -> {
         cursor: String,
         seen_tweet_ids: String,
+        page_size: Integer,
         request_options: XTwitterScraper::RequestOptions
       }
     end

@@ -21,15 +21,21 @@ module XTwitterScraper
 
         def folder_id=: (String) -> String
 
+        attr_reader page_size: Integer?
+
+        def page_size=: (Integer) -> Integer
+
         def initialize: (
           ?cursor: String,
           ?folder_id: String,
+          ?page_size: Integer,
           ?request_options: XTwitterScraper::request_opts
         ) -> void
 
         def to_hash: -> {
           cursor: String,
           folder_id: String,
+          page_size: Integer,
           request_options: XTwitterScraper::RequestOptions
         }
       end

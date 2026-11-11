@@ -84,11 +84,13 @@ module XTwitterScraper
 
       # Get home timeline
       #
-      # @overload get_home_timeline(cursor: nil, seen_tweet_ids: nil, request_options: {})
+      # @overload get_home_timeline(cursor: nil, seen_tweet_ids: nil, page_size: nil, request_options: {})
       #
       # @param cursor [String] Pagination cursor for timeline
       #
       # @param seen_tweet_ids [String] Comma-separated tweet IDs to exclude from results. Empty entries are ignored.
+      #
+      # @param page_size [Integer] Items per page, 1 to 100, default 20. Source, filters or credits can return fewer. Follow next_cursor for more pages.
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -101,7 +103,7 @@ module XTwitterScraper
         @client.request(
           method: :get,
           path: "x/timeline",
-          query: query.transform_keys(seen_tweet_ids: "seenTweetIds"),
+          query: query.transform_keys(page_size: "pageSize", seen_tweet_ids: "seenTweetIds"),
           model: XTwitterScraper::PaginatedTweets,
           options: options
         )

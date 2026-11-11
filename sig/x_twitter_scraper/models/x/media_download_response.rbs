@@ -14,7 +14,9 @@ module XTwitterScraper
           total_media: Integer,
           total_tweets: Integer,
           tweet_id: String,
-          unprocessed_tweet_ids: ::Array[String]
+          unprocessed_tweet_ids: ::Array[String],
+          no_media_tweet_ids: ::Array[String],
+          failed_tweet_ids: ::Array[String]
         }
 
       class MediaDownloadResponse < XTwitterScraper::Internal::Type::BaseModel
@@ -54,6 +56,14 @@ module XTwitterScraper
 
         def unprocessed_tweet_ids=: (::Array[String]) -> ::Array[String]
 
+        attr_reader no_media_tweet_ids: ::Array[String]?
+
+        def no_media_tweet_ids=: (::Array[String]) -> ::Array[String]
+
+        attr_reader failed_tweet_ids: ::Array[String]?
+
+        def failed_tweet_ids=: (::Array[String]) -> ::Array[String]
+
         def initialize: (
           ?cache_hit: bool,
           ?gallery_url: String,
@@ -62,7 +72,9 @@ module XTwitterScraper
           ?total_media: Integer,
           ?total_tweets: Integer,
           ?tweet_id: String,
-          ?unprocessed_tweet_ids: ::Array[String]
+          ?unprocessed_tweet_ids: ::Array[String],
+          ?no_media_tweet_ids: ::Array[String],
+          ?failed_tweet_ids: ::Array[String]
         ) -> void
 
         def to_hash: -> {
@@ -73,7 +85,9 @@ module XTwitterScraper
           total_media: Integer,
           total_tweets: Integer,
           tweet_id: String,
-          unprocessed_tweet_ids: ::Array[String]
+          unprocessed_tweet_ids: ::Array[String],
+          no_media_tweet_ids: ::Array[String],
+          failed_tweet_ids: ::Array[String]
         }
 
         type item = ::Hash[Symbol, top]

@@ -14,6 +14,7 @@ module XTwitterScraper
           params(
             cursor: String,
             folder_id: String,
+            page_size: Integer,
             request_options: XTwitterScraper::RequestOptions::OrHash
           ).returns(XTwitterScraper::PaginatedTweets)
         end
@@ -22,6 +23,8 @@ module XTwitterScraper
           cursor: nil,
           # Optional bookmark folder ID
           folder_id: nil,
+          # Items per page, 1 to 100, default 20. Source, filters or credits can return fewer. Follow next_cursor for more pages.
+          page_size: nil,
           request_options: {}
         )
         end

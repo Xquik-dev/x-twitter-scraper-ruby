@@ -78,6 +78,20 @@ module XTwitterScraper
         sig { params(unprocessed_tweet_ids: T::Array[String]).void }
         attr_writer :unprocessed_tweet_ids
 
+        # Posts with no media to save, at no charge.
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_reader :no_media_tweet_ids
+
+        sig { params(no_media_tweet_ids: T::Array[String]).void }
+        attr_writer :no_media_tweet_ids
+
+        # Posts Xquik couldn't read, at no charge. Send them again.
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_reader :failed_tweet_ids
+
+        sig { params(failed_tweet_ids: T::Array[String]).void }
+        attr_writer :failed_tweet_ids
+
         sig do
           params(
             cache_hit: T::Boolean,
@@ -88,7 +102,9 @@ module XTwitterScraper
             total_media: Integer,
             total_tweets: Integer,
             tweet_id: String,
-            unprocessed_tweet_ids: T::Array[String]
+            unprocessed_tweet_ids: T::Array[String],
+            no_media_tweet_ids: T::Array[String],
+            failed_tweet_ids: T::Array[String]
           ).returns(T.attached_class)
         end
         def self.new(
@@ -102,7 +118,11 @@ module XTwitterScraper
           total_tweets: nil,
           tweet_id: nil,
           # Posts Xquik had no time to read, at no charge. Send them again.
-          unprocessed_tweet_ids: nil
+          unprocessed_tweet_ids: nil,
+          # Posts with no media to save, at no charge.
+          no_media_tweet_ids: nil,
+          # Posts Xquik couldn't read, at no charge. Send them again.
+          failed_tweet_ids: nil
         )
         end
 
@@ -116,7 +136,9 @@ module XTwitterScraper
               total_media: Integer,
               total_tweets: Integer,
               tweet_id: String,
-              unprocessed_tweet_ids: T::Array[String]
+              unprocessed_tweet_ids: T::Array[String],
+              no_media_tweet_ids: T::Array[String],
+              failed_tweet_ids: T::Array[String]
             }
           )
         end
