@@ -41,6 +41,7 @@ module XTwitterScraper
       def get_home_timeline: (
         ?cursor: String,
         ?seen_tweet_ids: String,
+        ?page_size: Integer,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::PaginatedTweets
 

@@ -9,6 +9,7 @@ module XTwitterScraper
         def list: (
           ?cursor: String,
           ?folder_id: String,
+          ?page_size: Integer,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::PaginatedTweets
 
