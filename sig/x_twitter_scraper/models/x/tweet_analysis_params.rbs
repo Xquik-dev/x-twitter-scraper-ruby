@@ -1,0 +1,396 @@
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_analysis_params =
+        {
+          tweet_ids: ::Array[String],
+          query: String,
+          username: String,
+          list_id: String,
+          quotes_of: String,
+          replies_to: String,
+          since_time: XTwitterScraper::Models::X::TweetAnalysisParams::since_time,
+          until_time: XTwitterScraper::Models::X::TweetAnalysisParams::until_time,
+          query_type: XTwitterScraper::Models::X::TweetAnalysisParams::query_type,
+          limit: Integer,
+          cursor: String,
+          texts: ::Array[String],
+          topic: String,
+          image_shows: String,
+          analysis: XTwitterScraper::X::TweetAnalysisParams::Analysis,
+          baseline: ::Array[XTwitterScraper::X::TweetAnalysisParams::Baseline]
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class TweetAnalysisParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_reader tweet_ids: ::Array[String]?
+
+        def tweet_ids=: (::Array[String]) -> ::Array[String]
+
+        attr_reader query: String?
+
+        def query=: (String) -> String
+
+        attr_reader username: String?
+
+        def username=: (String) -> String
+
+        attr_reader list_id: String?
+
+        def list_id=: (String) -> String
+
+        attr_reader quotes_of: String?
+
+        def quotes_of=: (String) -> String
+
+        attr_reader replies_to: String?
+
+        def replies_to=: (String) -> String
+
+        attr_reader since_time: XTwitterScraper::Models::X::TweetAnalysisParams::since_time?
+
+        def since_time=: (
+          XTwitterScraper::Models::X::TweetAnalysisParams::since_time
+        ) -> XTwitterScraper::Models::X::TweetAnalysisParams::since_time
+
+        attr_reader until_time: XTwitterScraper::Models::X::TweetAnalysisParams::until_time?
+
+        def until_time=: (
+          XTwitterScraper::Models::X::TweetAnalysisParams::until_time
+        ) -> XTwitterScraper::Models::X::TweetAnalysisParams::until_time
+
+        attr_reader query_type: XTwitterScraper::Models::X::TweetAnalysisParams::query_type?
+
+        def query_type=: (
+          XTwitterScraper::Models::X::TweetAnalysisParams::query_type
+        ) -> XTwitterScraper::Models::X::TweetAnalysisParams::query_type
+
+        attr_reader limit: Integer?
+
+        def limit=: (Integer) -> Integer
+
+        attr_reader cursor: String?
+
+        def cursor=: (String) -> String
+
+        attr_reader texts: ::Array[String]?
+
+        def texts=: (::Array[String]) -> ::Array[String]
+
+        attr_reader topic: String?
+
+        def topic=: (String) -> String
+
+        attr_reader image_shows: String?
+
+        def image_shows=: (String) -> String
+
+        attr_reader analysis: XTwitterScraper::X::TweetAnalysisParams::Analysis?
+
+        def analysis=: (
+          XTwitterScraper::X::TweetAnalysisParams::Analysis
+          | ::Hash[Symbol, top]
+        ) -> XTwitterScraper::X::TweetAnalysisParams::Analysis
+
+        attr_reader baseline: ::Array[XTwitterScraper::X::TweetAnalysisParams::Baseline]?
+
+        def baseline=: (
+          ::Array[XTwitterScraper::X::TweetAnalysisParams::Baseline]
+        ) -> ::Array[XTwitterScraper::X::TweetAnalysisParams::Baseline]
+
+        def initialize: (
+          ?tweet_ids: ::Array[String],
+          ?query: String,
+          ?username: String,
+          ?list_id: String,
+          ?quotes_of: String,
+          ?replies_to: String,
+          ?since_time: XTwitterScraper::Models::X::TweetAnalysisParams::since_time,
+          ?until_time: XTwitterScraper::Models::X::TweetAnalysisParams::until_time,
+          ?query_type: XTwitterScraper::Models::X::TweetAnalysisParams::query_type,
+          ?limit: Integer,
+          ?cursor: String,
+          ?texts: ::Array[String],
+          ?topic: String,
+          ?image_shows: String,
+          ?analysis: XTwitterScraper::X::TweetAnalysisParams::Analysis
+          | ::Hash[Symbol, top],
+          ?baseline: ::Array[XTwitterScraper::X::TweetAnalysisParams::Baseline],
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          tweet_ids: ::Array[String],
+          query: String,
+          username: String,
+          list_id: String,
+          quotes_of: String,
+          replies_to: String,
+          since_time: XTwitterScraper::Models::X::TweetAnalysisParams::since_time,
+          until_time: XTwitterScraper::Models::X::TweetAnalysisParams::until_time,
+          query_type: XTwitterScraper::Models::X::TweetAnalysisParams::query_type,
+          limit: Integer,
+          cursor: String,
+          texts: ::Array[String],
+          topic: String,
+          image_shows: String,
+          analysis: XTwitterScraper::X::TweetAnalysisParams::Analysis,
+          baseline: ::Array[XTwitterScraper::X::TweetAnalysisParams::Baseline],
+          request_options: XTwitterScraper::RequestOptions
+        }
+
+        type since_time = String | Integer
+
+        module SinceTime
+          extend XTwitterScraper::Internal::Type::Union
+
+          def self?.variants: -> ::Array[XTwitterScraper::Models::X::TweetAnalysisParams::since_time]
+        end
+
+        type until_time = String | Integer
+
+        module UntilTime
+          extend XTwitterScraper::Internal::Type::Union
+
+          def self?.variants: -> ::Array[XTwitterScraper::Models::X::TweetAnalysisParams::until_time]
+        end
+
+        type query_type = :Top | :Latest
+
+        module QueryType
+          extend XTwitterScraper::Internal::Type::Enum
+
+          TOP: :Top
+          LATEST: :Latest
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetAnalysisParams::query_type]
+        end
+
+        type analysis = ::Hash[Symbol, top]
+
+        class Analysis < XTwitterScraper::Internal::Type::BaseModel
+          attr_reader questions: ::Array[XTwitterScraper::X::TweetAnalysisParams::Analysis::Question]?
+
+          def questions=: (
+            ::Array[XTwitterScraper::X::TweetAnalysisParams::Analysis::Question]
+          ) -> ::Array[XTwitterScraper::X::TweetAnalysisParams::Analysis::Question]
+
+          attr_reader preset: XTwitterScraper::Models::X::TweetAnalysisParams::Analysis::preset?
+
+          def preset=: (
+            XTwitterScraper::Models::X::TweetAnalysisParams::Analysis::preset
+          ) -> XTwitterScraper::Models::X::TweetAnalysisParams::Analysis::preset
+
+          attr_reader targets: ::Array[XTwitterScraper::X::TweetAnalysisParams::Analysis::Target]?
+
+          def targets=: (
+            ::Array[XTwitterScraper::X::TweetAnalysisParams::Analysis::Target]
+          ) -> ::Array[XTwitterScraper::X::TweetAnalysisParams::Analysis::Target]
+
+          attr_reader context: String?
+
+          def context=: (String) -> String
+
+          attr_reader max_context_bytes: Integer?
+
+          def max_context_bytes=: (Integer) -> Integer
+
+          attr_reader concurrency: Integer?
+
+          def concurrency=: (Integer) -> Integer
+
+          attr_reader images: bool?
+
+          def images=: (bool) -> bool
+
+          def initialize: (
+            ?questions: ::Array[XTwitterScraper::X::TweetAnalysisParams::Analysis::Question],
+            ?preset: XTwitterScraper::Models::X::TweetAnalysisParams::Analysis::preset,
+            ?targets: ::Array[XTwitterScraper::X::TweetAnalysisParams::Analysis::Target],
+            ?context: String,
+            ?max_context_bytes: Integer,
+            ?concurrency: Integer,
+            ?images: bool
+          ) -> void
+
+          def to_hash: -> ::Hash[Symbol, top]
+
+          type question = ::Hash[Symbol, top]
+
+          class Question < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor id: String
+
+            attr_accessor type: XTwitterScraper::Models::X::TweetAnalysisParams::Analysis::Question::type_
+
+            attr_accessor version: String
+
+            attr_accessor instructions: String
+
+            attr_reader categories: ::Hash[Symbol, String?]?
+
+            def categories=: (
+              ::Hash[Symbol, String?]
+            ) -> ::Hash[Symbol, String?]
+
+            attr_reader levels: ::Array[String]?
+
+            def levels=: (::Array[String]) -> ::Array[String]
+
+            attr_reader criteria: XTwitterScraper::X::TweetAnalysisParams::Analysis::Question::Criteria?
+
+            def criteria=: (
+              XTwitterScraper::X::TweetAnalysisParams::Analysis::Question::Criteria
+              | ::Hash[Symbol, top]
+            ) -> XTwitterScraper::X::TweetAnalysisParams::Analysis::Question::Criteria
+
+            def initialize: (
+              id: String,
+              type: XTwitterScraper::Models::X::TweetAnalysisParams::Analysis::Question::type_,
+              version: String,
+              instructions: String,
+              ?categories: ::Hash[Symbol, String?],
+              ?levels: ::Array[String],
+              ?criteria: XTwitterScraper::X::TweetAnalysisParams::Analysis::Question::Criteria
+              | ::Hash[Symbol, top]
+            ) -> void
+
+            def to_hash: -> ::Hash[Symbol, top]
+
+            type type_ = :choice | :score | :probability
+
+            module Type
+              extend XTwitterScraper::Internal::Type::Enum
+
+              CHOICE: :choice
+              SCORE: :score
+              PROBABILITY: :probability
+
+              def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetAnalysisParams::Analysis::Question::type_]
+            end
+
+            type criteria = ::Hash[Symbol, top]
+
+            class Criteria < XTwitterScraper::Internal::Type::BaseModel
+              attr_accessor yes: String
+
+              attr_accessor no: String
+
+              def initialize: (yes: String, no: String) -> void
+
+              def to_hash: -> ::Hash[Symbol, top]
+            end
+          end
+
+          type preset =
+            :brand
+            | :complaints
+            | :competitors
+            | :purchase_intent
+            | :product_feedback
+            | :news
+            | :sentiment
+            | :market
+            | :viral_lite
+
+          module Preset
+            extend XTwitterScraper::Internal::Type::Enum
+
+            BRAND: :brand
+            COMPLAINTS: :complaints
+            COMPETITORS: :competitors
+            PURCHASE_INTENT: :purchase_intent
+            PRODUCT_FEEDBACK: :product_feedback
+            NEWS: :news
+            SENTIMENT: :sentiment
+            MARKET: :market
+            VIRAL_LITE: :viral_lite
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetAnalysisParams::Analysis::preset]
+          end
+
+          type target = ::Hash[Symbol, top]
+
+          class Target < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor name: String
+
+            attr_reader aliases: ::Array[String]?
+
+            def aliases=: (::Array[String]) -> ::Array[String]
+
+            def initialize: (name: String, ?aliases: ::Array[String]) -> void
+
+            def to_hash: -> ::Hash[Symbol, top]
+          end
+        end
+
+        type baseline = ::Hash[Symbol, top]
+
+        class Baseline < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor answers: ::Hash[Symbol, XTwitterScraper::Models::X::TweetAnalysisParams::Baseline::answer]
+
+          attr_reader id: String?
+
+          def id=: (String) -> String
+
+          attr_reader tweet: XTwitterScraper::X::TweetAnalysisParams::Baseline::Tweet?
+
+          def tweet=: (
+            XTwitterScraper::X::TweetAnalysisParams::Baseline::Tweet
+            | ::Hash[Symbol, top]
+          ) -> XTwitterScraper::X::TweetAnalysisParams::Baseline::Tweet
+
+          attr_reader monitor: XTwitterScraper::X::TweetAnalysisParams::Baseline::Monitor?
+
+          def monitor=: (
+            XTwitterScraper::X::TweetAnalysisParams::Baseline::Monitor
+            | ::Hash[Symbol, top]
+          ) -> XTwitterScraper::X::TweetAnalysisParams::Baseline::Monitor
+
+          def initialize: (
+            answers: ::Hash[Symbol, XTwitterScraper::Models::X::TweetAnalysisParams::Baseline::answer],
+            ?id: String,
+            ?tweet: XTwitterScraper::X::TweetAnalysisParams::Baseline::Tweet
+            | ::Hash[Symbol, top],
+            ?monitor: XTwitterScraper::X::TweetAnalysisParams::Baseline::Monitor
+            | ::Hash[Symbol, top]
+          ) -> void
+
+          def to_hash: -> ::Hash[Symbol, top]
+
+          type answer = String | Float
+
+          module Answer
+            extend XTwitterScraper::Internal::Type::Union
+
+            def self?.variants: -> ::Array[XTwitterScraper::Models::X::TweetAnalysisParams::Baseline::answer]
+          end
+
+          type tweet = ::Hash[Symbol, top]
+
+          class Tweet < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor id: String
+
+            def initialize: (id: String) -> void
+
+            def to_hash: -> ::Hash[Symbol, top]
+          end
+
+          type monitor = ::Hash[Symbol, top]
+
+          class Monitor < XTwitterScraper::Internal::Type::BaseModel
+            attr_reader configuration_fingerprint: String?
+
+            def configuration_fingerprint=: (String) -> String
+
+            def initialize: (?configuration_fingerprint: String) -> void
+
+            def to_hash: -> ::Hash[Symbol, top]
+          end
+        end
+      end
+    end
+  end
+end
