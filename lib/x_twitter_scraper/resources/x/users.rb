@@ -715,7 +715,7 @@ module XTwitterScraper
 
         # List tweets mentioning a user
         #
-        # @overload retrieve_mentions(id, any_words: nil, blue_verified_only: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, fields: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, omit: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, since_id: nil, since_time: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within_time: nil, request_options: {})
+        # @overload retrieve_mentions(id, any_words: nil, blue_verified_only: nil, cashtags: nil, conversation_id: nil, cursor: nil, exact_phrase: nil, exclude_words: nil, fields: nil, from_user: nil, hashtags: nil, in_reply_to_tweet_id: nil, language: nil, max_faves: nil, max_id: nil, max_quotes: nil, max_replies: nil, max_retweets: nil, media_type: nil, mentioning: nil, min_bookmarks: nil, min_faves: nil, min_likes: nil, min_quotes: nil, min_replies: nil, min_retweets: nil, min_views: nil, native_retweets: nil, omit: nil, own_threads: nil, page_size: nil, quotes: nil, quotes_of_tweet_id: nil, replies: nil, retweets: nil, retweets_of_tweet_id: nil, since_date: nil, since_id: nil, since_time: nil, to_user: nil, until_date: nil, until_time: nil, url: nil, verified_only: nil, within_time: nil, request_options: {})
         #
         # @param id [String] User ID or username for mentions lookup
         #
@@ -774,6 +774,8 @@ module XTwitterScraper
         # @param native_retweets [Boolean] Only return native reposts.
         #
         # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields
+        #
+        # @param own_threads [String] With replies=exclude, also leaves out replies to the author's own posts, so the search skips every reply.
         #
         # @param page_size [Integer] Maximum page items (1-100, default 20). Source, filters, or credits can reduce r
         #
@@ -838,6 +840,7 @@ module XTwitterScraper
               min_retweets: "minRetweets",
               min_views: "minViews",
               native_retweets: "nativeRetweets",
+              own_threads: "ownThreads",
               page_size: "pageSize",
               quotes_of_tweet_id: "quotesOfTweetId",
               retweets_of_tweet_id: "retweetsOfTweetId",

@@ -36,6 +36,7 @@ module XTwitterScraper
           min_views: Integer,
           native_retweets: bool,
           omit: String,
+          own_threads: String,
           page_size: Integer,
           quotes: XTwitterScraper::Models::X::UserRetrieveMentionsParams::quotes,
           quotes_of_tweet_id: String,
@@ -174,6 +175,10 @@ module XTwitterScraper
 
         def omit=: (String) -> String
 
+        attr_reader own_threads: String?
+
+        def own_threads=: (String) -> String
+
         attr_reader page_size: Integer?
 
         def page_size=: (Integer) -> Integer
@@ -270,6 +275,7 @@ module XTwitterScraper
           ?min_views: Integer,
           ?native_retweets: bool,
           ?omit: String,
+          ?own_threads: String,
           ?page_size: Integer,
           ?quotes: XTwitterScraper::Models::X::UserRetrieveMentionsParams::quotes,
           ?quotes_of_tweet_id: String,
@@ -318,6 +324,7 @@ module XTwitterScraper
           min_views: Integer,
           native_retweets: bool,
           omit: String,
+          own_threads: String,
           page_size: Integer,
           quotes: XTwitterScraper::Models::X::UserRetrieveMentionsParams::quotes,
           quotes_of_tweet_id: String,
