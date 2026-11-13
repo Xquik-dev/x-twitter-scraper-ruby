@@ -73,6 +73,8 @@ module XTwitterScraper
 
   class TopicFilteredTweets = XTwitterScraper::Models::TopicFilteredTweets
 
+  class TweetAnalysisPage = XTwitterScraper::Models::TweetAnalysisPage
+
   class TweetAuthorUnavailable = XTwitterScraper::Models::TweetAuthorUnavailable
 
   class TweetExclusiveContent = XTwitterScraper::Models::TweetExclusiveContent

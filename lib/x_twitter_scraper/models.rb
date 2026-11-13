@@ -190,6 +190,8 @@ module XTwitterScraper
 
   TrendListParams = XTwitterScraper::Models::TrendListParams
 
+  TweetAnalysisPage = XTwitterScraper::Models::TweetAnalysisPage
+
   TweetAuthorUnavailable = XTwitterScraper::Models::TweetAuthorUnavailable
 
   TweetExclusiveContent = XTwitterScraper::Models::TweetExclusiveContent

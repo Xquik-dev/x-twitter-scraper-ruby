@@ -1,0 +1,129 @@
+module XTwitterScraper
+  module Resources
+    class X
+      class Analysis
+        def brand: (
+          ?tweet_ids: ::Array[String],
+          ?query: String,
+          ?username: String,
+          ?list_id: String,
+          ?quotes_of: String,
+          ?replies_to: String,
+          ?since_time: XTwitterScraper::Models::X::TweetAnalysisParams::since_time,
+          ?until_time: XTwitterScraper::Models::X::TweetAnalysisParams::until_time,
+          ?query_type: XTwitterScraper::Models::X::TweetAnalysisParams::query_type,
+          ?limit: Integer,
+          ?cursor: String,
+          ?texts: ::Array[String],
+          ?topic: String,
+          ?image_shows: String,
+          ?analysis: XTwitterScraper::X::TweetAnalysisParams::Analysis,
+          ?baseline: ::Array[XTwitterScraper::X::TweetAnalysisParams::Baseline],
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::TweetAnalysisPage
+
+        def classify: (
+          ?tweet_ids: ::Array[String],
+          ?query: String,
+          ?username: String,
+          ?list_id: String,
+          ?quotes_of: String,
+          ?replies_to: String,
+          ?since_time: XTwitterScraper::Models::X::TweetAnalysisParams::since_time,
+          ?until_time: XTwitterScraper::Models::X::TweetAnalysisParams::until_time,
+          ?query_type: XTwitterScraper::Models::X::TweetAnalysisParams::query_type,
+          ?limit: Integer,
+          ?cursor: String,
+          ?texts: ::Array[String],
+          ?topic: String,
+          ?image_shows: String,
+          ?analysis: XTwitterScraper::X::TweetAnalysisParams::Analysis,
+          ?baseline: ::Array[XTwitterScraper::X::TweetAnalysisParams::Baseline],
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::TweetAnalysisPage
+
+        def market_signals: (
+          ?tweet_ids: ::Array[String],
+          ?query: String,
+          ?username: String,
+          ?list_id: String,
+          ?quotes_of: String,
+          ?replies_to: String,
+          ?since_time: XTwitterScraper::Models::X::TweetAnalysisParams::since_time,
+          ?until_time: XTwitterScraper::Models::X::TweetAnalysisParams::until_time,
+          ?query_type: XTwitterScraper::Models::X::TweetAnalysisParams::query_type,
+          ?limit: Integer,
+          ?cursor: String,
+          ?texts: ::Array[String],
+          ?topic: String,
+          ?image_shows: String,
+          ?analysis: XTwitterScraper::X::TweetAnalysisParams::Analysis,
+          ?baseline: ::Array[XTwitterScraper::X::TweetAnalysisParams::Baseline],
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::TweetAnalysisPage
+
+        def news: (
+          ?tweet_ids: ::Array[String],
+          ?query: String,
+          ?username: String,
+          ?list_id: String,
+          ?quotes_of: String,
+          ?replies_to: String,
+          ?since_time: XTwitterScraper::Models::X::TweetAnalysisParams::since_time,
+          ?until_time: XTwitterScraper::Models::X::TweetAnalysisParams::until_time,
+          ?query_type: XTwitterScraper::Models::X::TweetAnalysisParams::query_type,
+          ?limit: Integer,
+          ?cursor: String,
+          ?texts: ::Array[String],
+          ?topic: String,
+          ?image_shows: String,
+          ?analysis: XTwitterScraper::X::TweetAnalysisParams::Analysis,
+          ?baseline: ::Array[XTwitterScraper::X::TweetAnalysisParams::Baseline],
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::TweetAnalysisPage
+
+        def sentiment: (
+          ?tweet_ids: ::Array[String],
+          ?query: String,
+          ?username: String,
+          ?list_id: String,
+          ?quotes_of: String,
+          ?replies_to: String,
+          ?since_time: XTwitterScraper::Models::X::TweetAnalysisParams::since_time,
+          ?until_time: XTwitterScraper::Models::X::TweetAnalysisParams::until_time,
+          ?query_type: XTwitterScraper::Models::X::TweetAnalysisParams::query_type,
+          ?limit: Integer,
+          ?cursor: String,
+          ?texts: ::Array[String],
+          ?topic: String,
+          ?image_shows: String,
+          ?analysis: XTwitterScraper::X::TweetAnalysisParams::Analysis,
+          ?baseline: ::Array[XTwitterScraper::X::TweetAnalysisParams::Baseline],
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::TweetAnalysisPage
+
+        def viral_score: (
+          ?tweet_ids: ::Array[String],
+          ?query: String,
+          ?username: String,
+          ?list_id: String,
+          ?quotes_of: String,
+          ?replies_to: String,
+          ?since_time: XTwitterScraper::Models::X::TweetAnalysisParams::since_time,
+          ?until_time: XTwitterScraper::Models::X::TweetAnalysisParams::until_time,
+          ?query_type: XTwitterScraper::Models::X::TweetAnalysisParams::query_type,
+          ?limit: Integer,
+          ?cursor: String,
+          ?texts: ::Array[String],
+          ?topic: String,
+          ?image_shows: String,
+          ?analysis: XTwitterScraper::X::TweetAnalysisParams::Analysis,
+          ?baseline: ::Array[XTwitterScraper::X::TweetAnalysisParams::Baseline],
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::TweetAnalysisPage
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

@@ -31,6 +31,8 @@ module XTwitterScraper
 
       attr_reader lists: XTwitterScraper::Resources::X::Lists
 
+      attr_reader analysis: XTwitterScraper::Resources::X::Analysis
+
       def get_article: (
         String tweet_id,
         ?fields: String,

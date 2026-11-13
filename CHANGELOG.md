@@ -9,6 +9,7 @@
 
 ### Features
 
+* `x.analysis` adds the 6 AI analysis methods, `brand`, `classify`, `market_signals`, `news`, `sentiment` and `viral_score`. Each takes `TweetAnalysisParams`, with post IDs, your own texts or a search, and returns `TweetAnalysisPage` with each post's answers and their totals. `topic` keeps only posts about a topic and `image_shows` keeps only posts whose photos show something. The page reports either filter's cutoff and counts in `topic_filter` or `image_filter`. Send 1 of the 2 per call.
 * `PaginatedTweets` adds `hidden_timeline`, present on an empty last page when X shows the account's timeline to nobody, so the page doesn't mean the account posted nothing.
 * Follower, following, verified follower, list member and list follower pages add `window_complete`, present on the last page of an empty list whose profile counts 0 accounts in it.
 * A community info creator always carries `verified`, also when it is a full profile.

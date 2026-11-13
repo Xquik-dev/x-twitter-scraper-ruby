@@ -1,0 +1,581 @@
+module XTwitterScraper
+  module Models
+    type tweet_analysis_page =
+      {
+        results: ::Array[XTwitterScraper::TweetAnalysisPage::Result],
+        unanalyzed: ::Array[XTwitterScraper::TweetAnalysisPage::Unanalyzed],
+        analysis_summary: XTwitterScraper::TweetAnalysisPage::AnalysisSummary,
+        has_next_page: bool,
+        next_cursor: String,
+        topic_filter: XTwitterScraper::TopicFilterSummary,
+        image_filter: XTwitterScraper::ImageFilterSummary
+      }
+
+    class TweetAnalysisPage < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor results: ::Array[XTwitterScraper::TweetAnalysisPage::Result]
+
+      attr_accessor unanalyzed: ::Array[XTwitterScraper::TweetAnalysisPage::Unanalyzed]
+
+      attr_accessor analysis_summary: XTwitterScraper::TweetAnalysisPage::AnalysisSummary
+
+      attr_accessor has_next_page: bool
+
+      attr_accessor next_cursor: String
+
+      attr_reader topic_filter: XTwitterScraper::TopicFilterSummary?
+
+      def topic_filter=: (
+        XTwitterScraper::TopicFilterSummary | ::Hash[Symbol, top]
+      ) -> XTwitterScraper::TopicFilterSummary
+
+      attr_reader image_filter: XTwitterScraper::ImageFilterSummary?
+
+      def image_filter=: (
+        XTwitterScraper::ImageFilterSummary | ::Hash[Symbol, top]
+      ) -> XTwitterScraper::ImageFilterSummary
+
+      def initialize: (
+        results: ::Array[XTwitterScraper::TweetAnalysisPage::Result],
+        unanalyzed: ::Array[XTwitterScraper::TweetAnalysisPage::Unanalyzed],
+        analysis_summary: XTwitterScraper::TweetAnalysisPage::AnalysisSummary
+        | ::Hash[Symbol, top],
+        has_next_page: bool,
+        next_cursor: String,
+        ?topic_filter: XTwitterScraper::TopicFilterSummary
+        | ::Hash[Symbol, top],
+        ?image_filter: XTwitterScraper::ImageFilterSummary | ::Hash[Symbol, top]
+      ) -> void
+
+      def to_hash: -> {
+        results: ::Array[XTwitterScraper::TweetAnalysisPage::Result],
+        unanalyzed: ::Array[XTwitterScraper::TweetAnalysisPage::Unanalyzed],
+        analysis_summary: XTwitterScraper::TweetAnalysisPage::AnalysisSummary,
+        has_next_page: bool,
+        next_cursor: String,
+        topic_filter: XTwitterScraper::TopicFilterSummary,
+        image_filter: XTwitterScraper::ImageFilterSummary
+      }
+
+      type answer_value = String | Float
+
+      module AnswerValue
+        extend XTwitterScraper::Internal::Type::Union
+
+        def self?.variants: -> ::Array[XTwitterScraper::Models::TweetAnalysisPage::answer_value]
+      end
+
+      type change = ::Hash[Symbol, top]
+
+      class Change < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor question_id: String
+
+        attr_accessor previous: String
+
+        attr_accessor current: String
+
+        def initialize: (
+          question_id: String,
+          previous: String,
+          current: String
+        ) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
+      end
+
+      type result = ::Hash[Symbol, top]
+
+      class Result < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor tweet: XTwitterScraper::SearchTweet
+
+        attr_accessor analysis: XTwitterScraper::TweetAnalysisPage::Result::Analysis
+
+        attr_accessor answers: ::Hash[Symbol, XTwitterScraper::Models::TweetAnalysisPage::answer_value]
+
+        attr_accessor source_domains: ::Array[String]
+
+        attr_accessor cashtags: ::Array[String]
+
+        attr_accessor viral_score: Integer?
+
+        attr_accessor viral_verdict: XTwitterScraper::Models::TweetAnalysisPage::Result::viral_verdict?
+
+        attr_accessor viral_algorithm_score: Float?
+
+        attr_accessor viral_actual_engagement_rate: Float?
+
+        attr_reader viral: ::Hash[Symbol, top]?
+
+        def viral=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_accessor monitor: XTwitterScraper::TweetAnalysisPage::Result::Monitor
+
+        def initialize: (
+          tweet: XTwitterScraper::SearchTweet | ::Hash[Symbol, top],
+          analysis: XTwitterScraper::TweetAnalysisPage::Result::Analysis
+          | ::Hash[Symbol, top],
+          answers: ::Hash[Symbol, XTwitterScraper::Models::TweetAnalysisPage::answer_value],
+          source_domains: ::Array[String],
+          cashtags: ::Array[String],
+          monitor: XTwitterScraper::TweetAnalysisPage::Result::Monitor
+          | ::Hash[Symbol, top],
+          ?viral_score: Integer?,
+          ?viral_verdict: XTwitterScraper::Models::TweetAnalysisPage::Result::viral_verdict?,
+          ?viral_algorithm_score: Float?,
+          ?viral_actual_engagement_rate: Float?,
+          ?viral: ::Hash[Symbol, top]
+        ) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
+
+        type analysis = ::Hash[Symbol, top]
+
+        class Analysis < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor status: Symbol
+
+          attr_accessor answers: ::Array[XTwitterScraper::TweetAnalysisPage::Result::Analysis::Answer]
+
+          attr_accessor questions: ::Array[XTwitterScraper::TweetAnalysisPage::Result::Analysis::Question]
+
+          attr_accessor context_bytes: Integer
+
+          attr_accessor context_availability: XTwitterScraper::TweetAnalysisPage::Result::Analysis::ContextAvailability
+
+          def initialize: (
+            answers: ::Array[XTwitterScraper::TweetAnalysisPage::Result::Analysis::Answer],
+            questions: ::Array[XTwitterScraper::TweetAnalysisPage::Result::Analysis::Question],
+            context_bytes: Integer,
+            context_availability: XTwitterScraper::TweetAnalysisPage::Result::Analysis::ContextAvailability
+            | ::Hash[Symbol, top],
+            ?status: :succeeded
+          ) -> void
+
+          def to_hash: -> ::Hash[Symbol, top]
+
+          type answer = ::Hash[Symbol, top]
+
+          class Answer < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor question_id: String
+
+            attr_accessor question_version: String
+
+            attr_accessor type: XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::Answer::type_
+
+            attr_reader value: XTwitterScraper::Models::TweetAnalysisPage::answer_value?
+
+            def value=: (
+              XTwitterScraper::Models::TweetAnalysisPage::answer_value
+            ) -> XTwitterScraper::Models::TweetAnalysisPage::answer_value
+
+            attr_reader confidence: Float?
+
+            def confidence=: (Float) -> Float
+
+            attr_reader probabilities: ::Hash[Symbol, Float]?
+
+            def probabilities=: (::Hash[Symbol, Float]) -> ::Hash[Symbol, Float]
+
+            attr_reader levels: ::Array[String]?
+
+            def levels=: (::Array[String]) -> ::Array[String]
+
+            attr_reader probability: Float?
+
+            def probability=: (Float) -> Float
+
+            def initialize: (
+              question_id: String,
+              question_version: String,
+              type: XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::Answer::type_,
+              ?value: XTwitterScraper::Models::TweetAnalysisPage::answer_value,
+              ?confidence: Float,
+              ?probabilities: ::Hash[Symbol, Float],
+              ?levels: ::Array[String],
+              ?probability: Float
+            ) -> void
+
+            def to_hash: -> ::Hash[Symbol, top]
+
+            type type_ = :choice | :score | :probability
+
+            module Type
+              extend XTwitterScraper::Internal::Type::Enum
+
+              CHOICE: :choice
+              SCORE: :score
+              PROBABILITY: :probability
+
+              def self?.values: -> ::Array[XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::Answer::type_]
+            end
+          end
+
+          type question = ::Hash[Symbol, top]
+
+          class Question < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor id: String
+
+            attr_accessor version: String
+
+            def initialize: (id: String, version: String) -> void
+
+            def to_hash: -> ::Hash[Symbol, top]
+          end
+
+          type context_availability = ::Hash[Symbol, top]
+
+          class ContextAvailability < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor quote: XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::quote
+
+            attr_accessor reply: XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::reply
+
+            attr_accessor author: XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::author
+
+            attr_accessor media: XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::media
+
+            attr_accessor article: XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::article
+
+            attr_accessor post_text: XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::post_text
+
+            def initialize: (
+              quote: XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::quote,
+              reply: XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::reply,
+              author: XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::author,
+              media: XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::media,
+              article: XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::article,
+              post_text: XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::post_text
+            ) -> void
+
+            def to_hash: -> ::Hash[Symbol, top]
+
+            type quote = :available | :missing | :not_applicable
+
+            module Quote
+              extend XTwitterScraper::Internal::Type::Enum
+
+              AVAILABLE: :available
+              MISSING: :missing
+              NOT_APPLICABLE: :not_applicable
+
+              def self?.values: -> ::Array[XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::quote]
+            end
+
+            type reply = :available | :missing | :not_applicable
+
+            module Reply
+              extend XTwitterScraper::Internal::Type::Enum
+
+              AVAILABLE: :available
+              MISSING: :missing
+              NOT_APPLICABLE: :not_applicable
+
+              def self?.values: -> ::Array[XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::reply]
+            end
+
+            type author = :available | :missing
+
+            module Author
+              extend XTwitterScraper::Internal::Type::Enum
+
+              AVAILABLE: :available
+              MISSING: :missing
+
+              def self?.values: -> ::Array[XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::author]
+            end
+
+            type media = :text_descriptions_only | :not_supplied | :images
+
+            module Media
+              extend XTwitterScraper::Internal::Type::Enum
+
+              TEXT_DESCRIPTIONS_ONLY: :text_descriptions_only
+              NOT_SUPPLIED: :not_supplied
+              IMAGES: :images
+
+              def self?.values: -> ::Array[XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::media]
+            end
+
+            type article = :not_supplied | :text_blocks | :summary
+
+            module Article
+              extend XTwitterScraper::Internal::Type::Enum
+
+              NOT_SUPPLIED: :not_supplied
+              TEXT_BLOCKS: :text_blocks
+              SUMMARY: :summary
+
+              def self?.values: -> ::Array[XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::article]
+            end
+
+            type post_text = :full | :truncated
+
+            module PostText
+              extend XTwitterScraper::Internal::Type::Enum
+
+              FULL: :full
+              TRUNCATED: :truncated
+
+              def self?.values: -> ::Array[XTwitterScraper::Models::TweetAnalysisPage::Result::Analysis::ContextAvailability::post_text]
+            end
+          end
+        end
+
+        type viral_verdict = :send_it | :edit_first | :sleep_on_it
+
+        module ViralVerdict
+          extend XTwitterScraper::Internal::Type::Enum
+
+          SEND_IT: :send_it
+          EDIT_FIRST: :edit_first
+          SLEEP_ON_IT: :sleep_on_it
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::TweetAnalysisPage::Result::viral_verdict]
+        end
+
+        type monitor = ::Hash[Symbol, top]
+
+        class Monitor < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor configuration_fingerprint: String
+
+          attr_accessor baseline_dataset_id: nil
+
+          attr_accessor status: XTwitterScraper::Models::TweetAnalysisPage::Result::Monitor::status
+
+          attr_accessor changed_question_ids: ::Array[String]
+
+          attr_accessor changes: ::Array[XTwitterScraper::TweetAnalysisPage::Change]
+
+          def initialize: (
+            configuration_fingerprint: String,
+            baseline_dataset_id: nil,
+            status: XTwitterScraper::Models::TweetAnalysisPage::Result::Monitor::status,
+            changed_question_ids: ::Array[String],
+            changes: ::Array[XTwitterScraper::TweetAnalysisPage::Change]
+          ) -> void
+
+          def to_hash: -> ::Hash[Symbol, top]
+
+          type status =
+            :not_comparable
+            | :analysis_unavailable
+            | :first_run
+            | :new_to_baseline
+            | :unchanged
+            | :changed
+
+          module Status
+            extend XTwitterScraper::Internal::Type::Enum
+
+            NOT_COMPARABLE: :not_comparable
+            ANALYSIS_UNAVAILABLE: :analysis_unavailable
+            FIRST_RUN: :first_run
+            NEW_TO_BASELINE: :new_to_baseline
+            UNCHANGED: :unchanged
+            CHANGED: :changed
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::TweetAnalysisPage::Result::Monitor::status]
+          end
+        end
+      end
+
+      type unanalyzed = ::Hash[Symbol, top]
+
+      class Unanalyzed < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor status: XTwitterScraper::Models::TweetAnalysisPage::Unanalyzed::status
+
+        attr_accessor reason: String
+
+        def initialize: (
+          id: String,
+          status: XTwitterScraper::Models::TweetAnalysisPage::Unanalyzed::status,
+          reason: String
+        ) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
+
+        type status = :failed | :skipped
+
+        module Status
+          extend XTwitterScraper::Internal::Type::Enum
+
+          FAILED: :failed
+          SKIPPED: :skipped
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::TweetAnalysisPage::Unanalyzed::status]
+        end
+      end
+
+      type analysis_summary = ::Hash[Symbol, top]
+
+      class AnalysisSummary < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor schema_version: Integer
+
+        attr_accessor rows: XTwitterScraper::TweetAnalysisPage::AnalysisSummary::Rows
+
+        attr_accessor engagement: Integer
+
+        attr_accessor questions: ::Hash[Symbol, ::Hash[Symbol, top]]
+
+        attr_accessor targets: ::Array[XTwitterScraper::TweetAnalysisPage::AnalysisSummary::Target]
+
+        attr_accessor cashtags: ::Array[XTwitterScraper::TweetAnalysisPage::AnalysisSummary::Cashtag]
+
+        attr_accessor source_domains: ::Array[XTwitterScraper::TweetAnalysisPage::AnalysisSummary::SourceDomain]
+
+        attr_reader viral: ::Hash[Symbol, top]?
+
+        def viral=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_accessor monitor: XTwitterScraper::TweetAnalysisPage::AnalysisSummary::Monitor?
+
+        def initialize: (
+          schema_version: Integer,
+          rows: XTwitterScraper::TweetAnalysisPage::AnalysisSummary::Rows
+          | ::Hash[Symbol, top],
+          engagement: Integer,
+          questions: ::Hash[Symbol, ::Hash[Symbol, top]],
+          targets: ::Array[XTwitterScraper::TweetAnalysisPage::AnalysisSummary::Target],
+          cashtags: ::Array[XTwitterScraper::TweetAnalysisPage::AnalysisSummary::Cashtag],
+          source_domains: ::Array[XTwitterScraper::TweetAnalysisPage::AnalysisSummary::SourceDomain],
+          monitor: (XTwitterScraper::TweetAnalysisPage::AnalysisSummary::Monitor
+          | ::Hash[Symbol, top])?,
+          ?viral: ::Hash[Symbol, top]
+        ) -> void
+
+        def to_hash: -> ::Hash[Symbol, top]
+
+        type rows = ::Hash[Symbol, top]
+
+        class Rows < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor analyzed: Integer
+
+          attr_accessor failed: Integer
+
+          attr_accessor skipped: Integer
+
+          def initialize: (
+            analyzed: Integer,
+            failed: Integer,
+            skipped: Integer
+          ) -> void
+
+          def to_hash: -> ::Hash[Symbol, top]
+        end
+
+        type target = ::Hash[Symbol, top]
+
+        class Target < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor name: String
+
+          attr_accessor mentions: Integer
+
+          attr_accessor share: Float
+
+          attr_accessor engagement: Integer
+
+          attr_accessor choices: ::Hash[Symbol, top]
+
+          attr_accessor top: ::Hash[Symbol, top]
+
+          def initialize: (
+            name: String,
+            mentions: Integer,
+            share: Float,
+            engagement: Integer,
+            choices: ::Hash[Symbol, top],
+            top: ::Hash[Symbol, top]
+          ) -> void
+
+          def to_hash: -> ::Hash[Symbol, top]
+        end
+
+        type cashtag = ::Hash[Symbol, top]
+
+        class Cashtag < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor cashtag: String
+
+          attr_accessor rows: Integer
+
+          attr_accessor choices: ::Hash[Symbol, top]
+
+          attr_reader signal: XTwitterScraper::TweetAnalysisPage::AnalysisSummary::Cashtag::Signal?
+
+          def signal=: (
+            XTwitterScraper::TweetAnalysisPage::AnalysisSummary::Cashtag::Signal
+            | ::Hash[Symbol, top]
+          ) -> XTwitterScraper::TweetAnalysisPage::AnalysisSummary::Cashtag::Signal
+
+          def initialize: (
+            cashtag: String,
+            rows: Integer,
+            choices: ::Hash[Symbol, top],
+            ?signal: XTwitterScraper::TweetAnalysisPage::AnalysisSummary::Cashtag::Signal
+            | ::Hash[Symbol, top]
+          ) -> void
+
+          def to_hash: -> ::Hash[Symbol, top]
+
+          type signal = ::Hash[Symbol, top]
+
+          class Signal < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor bullish: Integer
+
+            attr_accessor bearish: Integer
+
+            attr_accessor score: Float
+
+            def initialize: (
+              bullish: Integer,
+              bearish: Integer,
+              score: Float
+            ) -> void
+
+            def to_hash: -> ::Hash[Symbol, top]
+          end
+        end
+
+        type source_domain = ::Hash[Symbol, top]
+
+        class SourceDomain < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor domain: String
+
+          attr_accessor posts: Integer
+
+          def initialize: (domain: String, posts: Integer) -> void
+
+          def to_hash: -> ::Hash[Symbol, top]
+        end
+
+        type monitor = ::Hash[Symbol, top]
+
+        class Monitor < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor statuses: ::Hash[Symbol, Integer]
+
+          attr_accessor changed_rows: ::Array[XTwitterScraper::TweetAnalysisPage::AnalysisSummary::Monitor::ChangedRow]
+
+          def initialize: (
+            statuses: ::Hash[Symbol, Integer],
+            changed_rows: ::Array[XTwitterScraper::TweetAnalysisPage::AnalysisSummary::Monitor::ChangedRow]
+          ) -> void
+
+          def to_hash: -> ::Hash[Symbol, top]
+
+          type changed_row = ::Hash[Symbol, top]
+
+          class ChangedRow < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor tweet_id: String
+
+            attr_accessor changes: ::Array[XTwitterScraper::TweetAnalysisPage::Change]
+
+            def initialize: (
+              tweet_id: String,
+              changes: ::Array[XTwitterScraper::TweetAnalysisPage::Change]
+            ) -> void
+
+            def to_hash: -> ::Hash[Symbol, top]
+          end
+        end
+      end
+    end
+  end
+end

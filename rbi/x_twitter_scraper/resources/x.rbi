@@ -56,6 +56,10 @@ module XTwitterScraper
       sig { returns(XTwitterScraper::Resources::X::Lists) }
       attr_reader :lists
 
+      # AI analysis of posts, at 2 credits per analyzed post
+      sig { returns(XTwitterScraper::Resources::X::Analysis) }
+      attr_reader :analysis
+
       # Retrieve the full content of an X Article (long-form post) by numeric tweet ID.
       # Returns article_not_found when the tweet is valid but is not an X Article.
       sig do
