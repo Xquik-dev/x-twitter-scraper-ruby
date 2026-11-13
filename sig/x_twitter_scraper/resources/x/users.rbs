@@ -263,6 +263,7 @@ module XTwitterScraper
           ?min_views: Integer,
           ?native_retweets: bool,
           ?omit: String,
+          ?own_threads: String,
           ?page_size: Integer,
           ?quotes: XTwitterScraper::Models::X::UserRetrieveMentionsParams::quotes,
           ?quotes_of_tweet_id: String,

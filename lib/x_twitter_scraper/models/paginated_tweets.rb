@@ -56,7 +56,15 @@ module XTwitterScraper
       #   @return [Boolean, nil]
       optional :window_complete, XTwitterScraper::Internal::Type::Boolean, api_name: :windowComplete
 
-      # @!method initialize(has_next_page:, next_cursor:, tweets:, filtered_count: nil, read_back_to: nil, search_context: nil, searched_query: nil, window_complete: nil)
+      # @!attribute hidden_timeline
+      #   Present on an empty last page when X shows this account's timeline to nobody.
+      #   The page is empty because of that, so it doesn't mean the account posted
+      #   nothing. A retry returns the same page.
+      #
+      #   @return [Boolean, nil]
+      optional :hidden_timeline, XTwitterScraper::Internal::Type::Boolean, api_name: :hiddenTimeline
+
+      # @!method initialize(has_next_page:, next_cursor:, tweets:, filtered_count: nil, read_back_to: nil, search_context: nil, searched_query: nil, window_complete: nil, hidden_timeline: nil)
       #   No-mode search, user Tweet, user reply, and direct reply reads use automatic
       #   coverage. Shape, filters, aliases, and billing stay compatible. Unprefixed
       #   cursors remain legacy. Follow next_cursor while has_next_page is true. An empty
@@ -70,6 +78,7 @@ module XTwitterScraper
       #   @param search_context [XTwitterScraper::Models::PaginatedTweets::SearchContext] What X shows beside a search's posts, the same for everyone. Present on a search
       #   @param searched_query [String] The query that ran, when it differs from your q.
       #   @param window_complete [Boolean] Present on a last page whose sources all read past its start time.
+      #   @param hidden_timeline [Boolean] Present on an empty last page when X shows this account's timeline to nobody. The page is empty because of that, so it doesn't mean the account posted nothing. A retry returns the same page.
 
       # @see XTwitterScraper::Models::PaginatedTweets#search_context
       class SearchContext < XTwitterScraper::Internal::Type::BaseModel
