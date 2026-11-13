@@ -438,6 +438,7 @@ module XTwitterScraper
               PAGE_CAP = :page_cap
               REPEATED_CURSOR = :repeated_cursor
               PARTIAL_VIEW = :partial_view
+              REPORTED_HELD = :reported_held
               WINDOW_COVERED = :window_covered
               WINDOW_PASSED = :window_passed
 

@@ -9,6 +9,9 @@
 
 ### Features
 
+* `PaginatedTweets` adds `hidden_timeline`, present on an empty last page when X shows the account's timeline to nobody, so the page doesn't mean the account posted nothing.
+* Follower, following, verified follower, list member and list follower pages add `window_complete`, present on the last page of an empty list whose profile counts 0 accounts in it.
+* Replies diagnostics add the `REPORTED_HELD` stop reason, which a strategy returns once the read holds every reply X reports.
 * `x.bookmarks.list` and `x.get_home_timeline` take `page_size`, 1 to 100 items per page.
 * `MediaDownloadResponse` returns `no_media_tweet_ids`, the posts with no media to save, and `failed_tweet_ids`, the posts Xquik couldn't read. Neither is charged.
 * Params types name 343 optional query fields the API accepts on 32 methods, such as `min_likes` on the tweet list methods and `post_monitor_id` on `events.list`. Each is sent under its API name.

@@ -68,6 +68,15 @@ module XTwitterScraper
       sig { params(window_complete: T::Boolean).void }
       attr_writer :window_complete
 
+      # Present on an empty last page when X shows this account's timeline to nobody.
+      # The page is empty because of that, so it doesn't mean the account posted
+      # nothing. A retry returns the same page.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :hidden_timeline
+
+      sig { params(hidden_timeline: T::Boolean).void }
+      attr_writer :hidden_timeline
+
       # No-mode search, user Tweet, user reply, and direct reply reads use automatic
       # coverage. Shape, filters, aliases, and billing stay compatible. Unprefixed
       # cursors remain legacy. Follow next_cursor while has_next_page is true. An empty
@@ -82,7 +91,8 @@ module XTwitterScraper
           search_context:
             XTwitterScraper::PaginatedTweets::SearchContext::OrHash,
           searched_query: String,
-          window_complete: T::Boolean
+          window_complete: T::Boolean,
+          hidden_timeline: T::Boolean
         ).returns(T.attached_class)
       end
       def self.new(
@@ -100,7 +110,11 @@ module XTwitterScraper
         # The query that ran, when it differs from your q.
         searched_query: nil,
         # Present on a last page whose sources all read past its start time.
-        window_complete: nil
+        window_complete: nil,
+        # Present on an empty last page when X shows this account's timeline to nobody.
+        # The page is empty because of that, so it doesn't mean the account posted
+        # nothing. A retry returns the same page.
+        hidden_timeline: nil
       )
       end
 
@@ -114,7 +128,8 @@ module XTwitterScraper
             read_back_to: Time,
             search_context: XTwitterScraper::PaginatedTweets::SearchContext,
             searched_query: String,
-            window_complete: T::Boolean
+            window_complete: T::Boolean,
+            hidden_timeline: T::Boolean
           }
         )
       end

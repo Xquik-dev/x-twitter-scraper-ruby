@@ -649,6 +649,11 @@ module XTwitterScraper
                   :partial_view,
                   XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::StopReason::TaggedSymbol
                 )
+              REPORTED_HELD =
+                T.let(
+                  :reported_held,
+                  XTwitterScraper::Models::X::TweetGetRepliesResponse::Diagnostic::StrategiesAttempted::StopReason::TaggedSymbol
+                )
               WINDOW_COVERED =
                 T.let(
                   :window_covered,
