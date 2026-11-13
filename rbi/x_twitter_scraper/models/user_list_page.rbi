@@ -30,24 +30,39 @@ module XTwitterScraper
       end
       attr_writer :scan_limit
 
+      # Present on the last page of an empty list whose profile counts 0 accounts in
+      # it.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :window_complete
+
+      sig { params(window_complete: T::Boolean).void }
+      attr_writer :window_complete
+
       # A relationship page. A filtered read's last page may name the scan limit that
       # ended it.
       sig do
         params(
-          scan_limit: XTwitterScraper::Models::UserListPage::ScanLimit::OrHash
+          scan_limit: XTwitterScraper::Models::UserListPage::ScanLimit::OrHash,
+          window_complete: T::Boolean
         ).returns(T.attached_class)
       end
       def self.new(
         # Present on the last page of a filtered automatic read that sent no maxScan, once
         # the list scanned 100,000 profiles across its pages. That page is the list's
         # last.
-        scan_limit: nil
+        scan_limit: nil,
+        # Present on the last page of an empty list whose profile counts 0 accounts in
+        # it.
+        window_complete: nil
       )
       end
 
       sig do
         override.returns(
-          { scan_limit: XTwitterScraper::Models::UserListPage::ScanLimit }
+          {
+            scan_limit: XTwitterScraper::Models::UserListPage::ScanLimit,
+            window_complete: T::Boolean
+          }
         )
       end
       def to_hash

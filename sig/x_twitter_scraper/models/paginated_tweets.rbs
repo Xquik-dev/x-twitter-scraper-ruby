@@ -13,7 +13,8 @@ module XTwitterScraper
         read_back_to: Time,
         search_context: XTwitterScraper::PaginatedTweets::SearchContext,
         searched_query: String,
-        window_complete: bool
+        window_complete: bool,
+        hidden_timeline: bool
       }
 
     class PaginatedTweets < XTwitterScraper::Internal::Type::BaseModel
@@ -45,6 +46,10 @@ module XTwitterScraper
 
       def window_complete=: (bool) -> bool
 
+      attr_reader hidden_timeline: bool?
+
+      def hidden_timeline=: (bool) -> bool
+
       def initialize: (
         has_next_page: bool,
         next_cursor: String,
@@ -53,7 +58,8 @@ module XTwitterScraper
         ?read_back_to: Time,
         ?search_context: XTwitterScraper::PaginatedTweets::SearchContext | ::Hash[Symbol, top],
         ?searched_query: String,
-        ?window_complete: bool
+        ?window_complete: bool,
+        ?hidden_timeline: bool
       ) -> void
 
       def to_hash: -> {
@@ -64,7 +70,8 @@ module XTwitterScraper
         read_back_to: Time,
         search_context: XTwitterScraper::PaginatedTweets::SearchContext,
         searched_query: String,
-        window_complete: bool
+        window_complete: bool,
+        hidden_timeline: bool
       }
 
       type search_context = ::Hash[Symbol, top]

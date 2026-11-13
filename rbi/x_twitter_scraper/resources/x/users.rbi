@@ -835,6 +835,7 @@ module XTwitterScraper
             min_views: Integer,
             native_retweets: T::Boolean,
             omit: String,
+            own_threads: String,
             page_size: Integer,
             quotes:
               XTwitterScraper::X::UserRetrieveMentionsParams::Quotes::OrSymbol,
@@ -924,6 +925,9 @@ module XTwitterScraper
           # fields. With fields, it drops from the kept fields. A longer URL fails at the
           # edge before Xquik reads it.
           omit: nil,
+          # With replies=exclude, also leaves out replies to the author's own posts, so
+          # the search skips every reply.
+          own_threads: nil,
           # Maximum page items (1-100, default 20). Source, filters, or credits can reduce
           # results. Continue while has_next_page is true. Deprecated limit and count
           # aliases remain accepted.

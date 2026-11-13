@@ -170,7 +170,9 @@ module XTwitterScraper
 
             attr_accessor username: String
 
-            attr_reader verified: bool?
+            # UserProfile keeps verified optional and the creator requires it, so it
+            # declares no instance variable.
+            def verified: () -> bool
 
             def verified=: (bool) -> bool
 
@@ -183,7 +185,7 @@ module XTwitterScraper
             def initialize: (
               id: String,
               username: String,
-              ?verified: bool,
+              verified: bool,
               ?name: String
             ) -> void
 

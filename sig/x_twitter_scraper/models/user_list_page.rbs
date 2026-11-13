@@ -4,7 +4,11 @@
 
 module XTwitterScraper
   module Models
-    type user_list_page = { scan_limit: XTwitterScraper::Models::UserListPage::ScanLimit }
+    type user_list_page =
+      {
+        scan_limit: XTwitterScraper::Models::UserListPage::ScanLimit,
+        window_complete: bool
+      }
 
     class UserListPage < XTwitterScraper::Models::PaginatedUsers
       attr_reader scan_limit: XTwitterScraper::Models::UserListPage::ScanLimit?
@@ -13,9 +17,19 @@ module XTwitterScraper
         XTwitterScraper::Models::UserListPage::ScanLimit
       ) -> XTwitterScraper::Models::UserListPage::ScanLimit
 
-      def initialize: (?scan_limit: XTwitterScraper::Models::UserListPage::ScanLimit) -> void
+      attr_reader window_complete: bool?
 
-      def to_hash: -> { scan_limit: XTwitterScraper::Models::UserListPage::ScanLimit }
+      def window_complete=: (bool) -> bool
+
+      def initialize: (
+        ?scan_limit: XTwitterScraper::Models::UserListPage::ScanLimit,
+        ?window_complete: bool
+      ) -> void
+
+      def to_hash: -> {
+        scan_limit: XTwitterScraper::Models::UserListPage::ScanLimit,
+        window_complete: bool
+      }
 
       type scan_limit = { limit: 100000, message: String, rows_read: Integer }
 

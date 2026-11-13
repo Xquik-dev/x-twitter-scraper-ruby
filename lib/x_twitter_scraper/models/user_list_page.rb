@@ -15,11 +15,19 @@ module XTwitterScraper
       #   @return [XTwitterScraper::Models::UserListPage::ScanLimit, nil]
       optional :scan_limit, -> { XTwitterScraper::Models::UserListPage::ScanLimit }, api_name: :scanLimit
 
-      # @!method initialize(scan_limit: nil)
+      # @!attribute window_complete
+      #   Present on the last page of an empty list whose profile counts 0 accounts in
+      #   it.
+      #
+      #   @return [Boolean, nil]
+      optional :window_complete, XTwitterScraper::Internal::Type::Boolean, api_name: :windowComplete
+
+      # @!method initialize(scan_limit: nil, window_complete: nil)
       #   A relationship page. A filtered read's last page may name the scan limit that
       #   ended it.
       #
       #   @param scan_limit [XTwitterScraper::Models::UserListPage::ScanLimit] Present on the last page of a filtered automatic read that sent no maxScan, once
+      #   @param window_complete [Boolean] Present on the last page of an empty list whose profile counts 0 accounts in it.
 
       # @see XTwitterScraper::Models::UserListPage#scan_limit
       class ScanLimit < XTwitterScraper::Internal::Type::BaseModel
