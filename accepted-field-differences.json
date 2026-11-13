@@ -1,8 +1,1 @@
-[
-  {
-    "reason": "The API and the SDK disagree on whether this field is required. A community's creator is a union whose full profile variant keeps verified optional on the shared profile model, so making it required here would change that model for every profile.",
-    "differences": [
-      "GET /api/v1/x/communities/{id}/info response required community.creator.verified"
-    ]
-  }
-]
+[]
