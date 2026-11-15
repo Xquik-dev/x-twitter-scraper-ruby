@@ -13,7 +13,7 @@ module XTwitterScraper
         # the author's relationship with it. Name the brand in analysis.targets. Each
         # analyzed post costs 2 credits.
         #
-        # @overload brand(tweet_ids: nil, query: nil, username: nil, list_id: nil, quotes_of: nil, replies_to: nil, since_time: nil, until_time: nil, query_type: nil, limit: nil, cursor: nil, texts: nil, topic: nil, image_shows: nil, analysis: nil, baseline: nil, request_options: {})
+        # @overload brand(tweet_ids: nil, query: nil, username: nil, list_id: nil, quotes_of: nil, replies_to: nil, queries: nil, usernames: nil, list_ids: nil, thread_of: nil, replies_by: nil, media_by: nil, liked_by: nil, since_time: nil, until_time: nil, query_type: nil, limit: nil, cursor: nil, texts: nil, topic: nil, image_shows: nil, analysis: nil, baseline: nil, request_options: {})
         #
         # @param tweet_ids [Array<String>] Post IDs or post URLs to analyze, up to 100.
         #
@@ -26,6 +26,20 @@ module XTwitterScraper
         # @param quotes_of [String] Analyze the quotes of 1 post. Send its ID or URL.
         #
         # @param replies_to [String] Analyze the replies in 1 post's conversation. Send its ID or URL.
+        #
+        # @param queries [Array<String>] X searches to analyze as 1 search. A post matching any of them counts. Each takes the operators of query. query, when sent, joins them. X searches up to 512 characters, counted with the other search fields.
+        #
+        # @param usernames [Array<String>] Analyze the posts of several accounts in 1 search. Send handles, with or without @, or profile URLs. username, when sent, joins them.
+        #
+        # @param list_ids [Array<String>] Analyze the posts of several public Lists in 1 search. Send their IDs or URLs. listId, when sent, joins them.
+        #
+        # @param thread_of [String] Analyze 1 post's thread, as /x/tweets/{id}/thread reads it. Send the post's ID or URL. Send no other posts or search with it.
+        #
+        # @param replies_by [String] Analyze 1 account's posts & replies, as its Replies tab shows them. /x/users/{id}/replies reads the same posts. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
+        #
+        # @param media_by [String] Analyze 1 account's posts with photos or videos, as its Media tab shows them. /x/users/{id}/media reads the same posts. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
+        #
+        # @param liked_by [String] Analyze the posts 1 account liked, as /x/users/{id}/likes reads them. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
         #
         # @param since_time [String, Integer] Inclusive start of the search, such as 2026-09-25T00:00:00Z. Unix seconds also
         #
@@ -68,7 +82,7 @@ module XTwitterScraper
         # no. Without questions it answers the sentiment questions. Each analyzed post
         # costs 2 credits.
         #
-        # @overload classify(tweet_ids: nil, query: nil, username: nil, list_id: nil, quotes_of: nil, replies_to: nil, since_time: nil, until_time: nil, query_type: nil, limit: nil, cursor: nil, texts: nil, topic: nil, image_shows: nil, analysis: nil, baseline: nil, request_options: {})
+        # @overload classify(tweet_ids: nil, query: nil, username: nil, list_id: nil, quotes_of: nil, replies_to: nil, queries: nil, usernames: nil, list_ids: nil, thread_of: nil, replies_by: nil, media_by: nil, liked_by: nil, since_time: nil, until_time: nil, query_type: nil, limit: nil, cursor: nil, texts: nil, topic: nil, image_shows: nil, analysis: nil, baseline: nil, request_options: {})
         #
         # @param tweet_ids [Array<String>] Post IDs or post URLs to analyze, up to 100.
         #
@@ -81,6 +95,20 @@ module XTwitterScraper
         # @param quotes_of [String] Analyze the quotes of 1 post. Send its ID or URL.
         #
         # @param replies_to [String] Analyze the replies in 1 post's conversation. Send its ID or URL.
+        #
+        # @param queries [Array<String>] X searches to analyze as 1 search. A post matching any of them counts. Each takes the operators of query. query, when sent, joins them. X searches up to 512 characters, counted with the other search fields.
+        #
+        # @param usernames [Array<String>] Analyze the posts of several accounts in 1 search. Send handles, with or without @, or profile URLs. username, when sent, joins them.
+        #
+        # @param list_ids [Array<String>] Analyze the posts of several public Lists in 1 search. Send their IDs or URLs. listId, when sent, joins them.
+        #
+        # @param thread_of [String] Analyze 1 post's thread, as /x/tweets/{id}/thread reads it. Send the post's ID or URL. Send no other posts or search with it.
+        #
+        # @param replies_by [String] Analyze 1 account's posts & replies, as its Replies tab shows them. /x/users/{id}/replies reads the same posts. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
+        #
+        # @param media_by [String] Analyze 1 account's posts with photos or videos, as its Media tab shows them. /x/users/{id}/media reads the same posts. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
+        #
+        # @param liked_by [String] Analyze the posts 1 account liked, as /x/users/{id}/likes reads them. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
         #
         # @param since_time [String, Integer] Inclusive start of the search, such as 2026-09-25T00:00:00Z. Unix seconds also
         #
@@ -122,7 +150,7 @@ module XTwitterScraper
         # relevance. The summary counts bullish & bearish posts per cashtag. Name the
         # asset in analysis.targets. Each analyzed post costs 2 credits.
         #
-        # @overload market_signals(tweet_ids: nil, query: nil, username: nil, list_id: nil, quotes_of: nil, replies_to: nil, since_time: nil, until_time: nil, query_type: nil, limit: nil, cursor: nil, texts: nil, topic: nil, image_shows: nil, analysis: nil, baseline: nil, request_options: {})
+        # @overload market_signals(tweet_ids: nil, query: nil, username: nil, list_id: nil, quotes_of: nil, replies_to: nil, queries: nil, usernames: nil, list_ids: nil, thread_of: nil, replies_by: nil, media_by: nil, liked_by: nil, since_time: nil, until_time: nil, query_type: nil, limit: nil, cursor: nil, texts: nil, topic: nil, image_shows: nil, analysis: nil, baseline: nil, request_options: {})
         #
         # @param tweet_ids [Array<String>] Post IDs or post URLs to analyze, up to 100.
         #
@@ -135,6 +163,20 @@ module XTwitterScraper
         # @param quotes_of [String] Analyze the quotes of 1 post. Send its ID or URL.
         #
         # @param replies_to [String] Analyze the replies in 1 post's conversation. Send its ID or URL.
+        #
+        # @param queries [Array<String>] X searches to analyze as 1 search. A post matching any of them counts. Each takes the operators of query. query, when sent, joins them. X searches up to 512 characters, counted with the other search fields.
+        #
+        # @param usernames [Array<String>] Analyze the posts of several accounts in 1 search. Send handles, with or without @, or profile URLs. username, when sent, joins them.
+        #
+        # @param list_ids [Array<String>] Analyze the posts of several public Lists in 1 search. Send their IDs or URLs. listId, when sent, joins them.
+        #
+        # @param thread_of [String] Analyze 1 post's thread, as /x/tweets/{id}/thread reads it. Send the post's ID or URL. Send no other posts or search with it.
+        #
+        # @param replies_by [String] Analyze 1 account's posts & replies, as its Replies tab shows them. /x/users/{id}/replies reads the same posts. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
+        #
+        # @param media_by [String] Analyze 1 account's posts with photos or videos, as its Media tab shows them. /x/users/{id}/media reads the same posts. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
+        #
+        # @param liked_by [String] Analyze the posts 1 account liked, as /x/users/{id}/likes reads them. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
         #
         # @param since_time [String, Integer] Inclusive start of the search, such as 2026-09-25T00:00:00Z. Unix seconds also
         #
@@ -176,7 +218,7 @@ module XTwitterScraper
         # source attribution & its relevance to your topic. Name the topic in
         # analysis.targets. Each analyzed post costs 2 credits.
         #
-        # @overload news(tweet_ids: nil, query: nil, username: nil, list_id: nil, quotes_of: nil, replies_to: nil, since_time: nil, until_time: nil, query_type: nil, limit: nil, cursor: nil, texts: nil, topic: nil, image_shows: nil, analysis: nil, baseline: nil, request_options: {})
+        # @overload news(tweet_ids: nil, query: nil, username: nil, list_id: nil, quotes_of: nil, replies_to: nil, queries: nil, usernames: nil, list_ids: nil, thread_of: nil, replies_by: nil, media_by: nil, liked_by: nil, since_time: nil, until_time: nil, query_type: nil, limit: nil, cursor: nil, texts: nil, topic: nil, image_shows: nil, analysis: nil, baseline: nil, request_options: {})
         #
         # @param tweet_ids [Array<String>] Post IDs or post URLs to analyze, up to 100.
         #
@@ -189,6 +231,20 @@ module XTwitterScraper
         # @param quotes_of [String] Analyze the quotes of 1 post. Send its ID or URL.
         #
         # @param replies_to [String] Analyze the replies in 1 post's conversation. Send its ID or URL.
+        #
+        # @param queries [Array<String>] X searches to analyze as 1 search. A post matching any of them counts. Each takes the operators of query. query, when sent, joins them. X searches up to 512 characters, counted with the other search fields.
+        #
+        # @param usernames [Array<String>] Analyze the posts of several accounts in 1 search. Send handles, with or without @, or profile URLs. username, when sent, joins them.
+        #
+        # @param list_ids [Array<String>] Analyze the posts of several public Lists in 1 search. Send their IDs or URLs. listId, when sent, joins them.
+        #
+        # @param thread_of [String] Analyze 1 post's thread, as /x/tweets/{id}/thread reads it. Send the post's ID or URL. Send no other posts or search with it.
+        #
+        # @param replies_by [String] Analyze 1 account's posts & replies, as its Replies tab shows them. /x/users/{id}/replies reads the same posts. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
+        #
+        # @param media_by [String] Analyze 1 account's posts with photos or videos, as its Media tab shows them. /x/users/{id}/media reads the same posts. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
+        #
+        # @param liked_by [String] Analyze the posts 1 account liked, as /x/users/{id}/likes reads them. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
         #
         # @param since_time [String, Integer] Inclusive start of the search, such as 2026-09-25T00:00:00Z. Unix seconds also
         #
@@ -231,7 +287,7 @@ module XTwitterScraper
         # X search, an account, a List, a post's replies or quotes, or your own texts.
         # Each analyzed post costs 2 credits. A post without an analysis costs nothing.
         #
-        # @overload sentiment(tweet_ids: nil, query: nil, username: nil, list_id: nil, quotes_of: nil, replies_to: nil, since_time: nil, until_time: nil, query_type: nil, limit: nil, cursor: nil, texts: nil, topic: nil, image_shows: nil, analysis: nil, baseline: nil, request_options: {})
+        # @overload sentiment(tweet_ids: nil, query: nil, username: nil, list_id: nil, quotes_of: nil, replies_to: nil, queries: nil, usernames: nil, list_ids: nil, thread_of: nil, replies_by: nil, media_by: nil, liked_by: nil, since_time: nil, until_time: nil, query_type: nil, limit: nil, cursor: nil, texts: nil, topic: nil, image_shows: nil, analysis: nil, baseline: nil, request_options: {})
         #
         # @param tweet_ids [Array<String>] Post IDs or post URLs to analyze, up to 100.
         #
@@ -244,6 +300,20 @@ module XTwitterScraper
         # @param quotes_of [String] Analyze the quotes of 1 post. Send its ID or URL.
         #
         # @param replies_to [String] Analyze the replies in 1 post's conversation. Send its ID or URL.
+        #
+        # @param queries [Array<String>] X searches to analyze as 1 search. A post matching any of them counts. Each takes the operators of query. query, when sent, joins them. X searches up to 512 characters, counted with the other search fields.
+        #
+        # @param usernames [Array<String>] Analyze the posts of several accounts in 1 search. Send handles, with or without @, or profile URLs. username, when sent, joins them.
+        #
+        # @param list_ids [Array<String>] Analyze the posts of several public Lists in 1 search. Send their IDs or URLs. listId, when sent, joins them.
+        #
+        # @param thread_of [String] Analyze 1 post's thread, as /x/tweets/{id}/thread reads it. Send the post's ID or URL. Send no other posts or search with it.
+        #
+        # @param replies_by [String] Analyze 1 account's posts & replies, as its Replies tab shows them. /x/users/{id}/replies reads the same posts. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
+        #
+        # @param media_by [String] Analyze 1 account's posts with photos or videos, as its Media tab shows them. /x/users/{id}/media reads the same posts. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
+        #
+        # @param liked_by [String] Analyze the posts 1 account liked, as /x/users/{id}/likes reads them. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
         #
         # @param since_time [String, Integer] Inclusive start of the search, such as 2026-09-25T00:00:00Z. Unix seconds also
         #
@@ -287,7 +357,7 @@ module XTwitterScraper
         # posting. Each analyzed post costs 2 credits. `viralAlgorithmScore` turns a
         # post's public counts into 1 comparable number.
         #
-        # @overload viral_score(tweet_ids: nil, query: nil, username: nil, list_id: nil, quotes_of: nil, replies_to: nil, since_time: nil, until_time: nil, query_type: nil, limit: nil, cursor: nil, texts: nil, topic: nil, image_shows: nil, analysis: nil, baseline: nil, request_options: {})
+        # @overload viral_score(tweet_ids: nil, query: nil, username: nil, list_id: nil, quotes_of: nil, replies_to: nil, queries: nil, usernames: nil, list_ids: nil, thread_of: nil, replies_by: nil, media_by: nil, liked_by: nil, since_time: nil, until_time: nil, query_type: nil, limit: nil, cursor: nil, texts: nil, topic: nil, image_shows: nil, analysis: nil, baseline: nil, request_options: {})
         #
         # @param tweet_ids [Array<String>] Post IDs or post URLs to analyze, up to 100.
         #
@@ -300,6 +370,20 @@ module XTwitterScraper
         # @param quotes_of [String] Analyze the quotes of 1 post. Send its ID or URL.
         #
         # @param replies_to [String] Analyze the replies in 1 post's conversation. Send its ID or URL.
+        #
+        # @param queries [Array<String>] X searches to analyze as 1 search. A post matching any of them counts. Each takes the operators of query. query, when sent, joins them. X searches up to 512 characters, counted with the other search fields.
+        #
+        # @param usernames [Array<String>] Analyze the posts of several accounts in 1 search. Send handles, with or without @, or profile URLs. username, when sent, joins them.
+        #
+        # @param list_ids [Array<String>] Analyze the posts of several public Lists in 1 search. Send their IDs or URLs. listId, when sent, joins them.
+        #
+        # @param thread_of [String] Analyze 1 post's thread, as /x/tweets/{id}/thread reads it. Send the post's ID or URL. Send no other posts or search with it.
+        #
+        # @param replies_by [String] Analyze 1 account's posts & replies, as its Replies tab shows them. /x/users/{id}/replies reads the same posts. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
+        #
+        # @param media_by [String] Analyze 1 account's posts with photos or videos, as its Media tab shows them. /x/users/{id}/media reads the same posts. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
+        #
+        # @param liked_by [String] Analyze the posts 1 account liked, as /x/users/{id}/likes reads them. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
         #
         # @param since_time [String, Integer] Inclusive start of the search, such as 2026-09-25T00:00:00Z. Unix seconds also
         #
