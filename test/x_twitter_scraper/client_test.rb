@@ -169,6 +169,15 @@ class XTwitterScraperTest < Minitest::Test
     assert_equal(1.3, Thread.current.thread_variable_get(:mock_sleep).last)
   end
 
+  def test_every_request_names_the_ruby_sdk_for_xquik
+    stub_request(:get, "http://localhost/account").to_return_json(status: 200, body: {})
+
+    x_twitter_scraper = XTwitterScraper::Client.new(base_url: "http://localhost", api_key: "My API Key")
+    x_twitter_scraper.account.retrieve
+
+    assert_requested(:any, /./, headers: {"x-xquik-sdk" => "ruby", "x-stainless-lang" => "ruby"})
+  end
+
   def test_retry_count_header
     stub_request(:get, "http://localhost/account").to_return_json(status: 500, body: {})
 

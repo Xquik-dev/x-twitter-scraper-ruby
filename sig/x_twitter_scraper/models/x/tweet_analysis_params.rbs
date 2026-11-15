@@ -9,6 +9,13 @@ module XTwitterScraper
           list_id: String,
           quotes_of: String,
           replies_to: String,
+          queries: ::Array[String],
+          usernames: ::Array[String],
+          list_ids: ::Array[String],
+          thread_of: String,
+          replies_by: String,
+          media_by: String,
+          liked_by: String,
           since_time: XTwitterScraper::Models::X::TweetAnalysisParams::since_time,
           until_time: XTwitterScraper::Models::X::TweetAnalysisParams::until_time,
           query_type: XTwitterScraper::Models::X::TweetAnalysisParams::query_type,
@@ -49,6 +56,34 @@ module XTwitterScraper
         attr_reader replies_to: String?
 
         def replies_to=: (String) -> String
+
+        attr_reader queries: ::Array[String]?
+
+        def queries=: (::Array[String]) -> ::Array[String]
+
+        attr_reader usernames: ::Array[String]?
+
+        def usernames=: (::Array[String]) -> ::Array[String]
+
+        attr_reader list_ids: ::Array[String]?
+
+        def list_ids=: (::Array[String]) -> ::Array[String]
+
+        attr_reader thread_of: String?
+
+        def thread_of=: (String) -> String
+
+        attr_reader replies_by: String?
+
+        def replies_by=: (String) -> String
+
+        attr_reader media_by: String?
+
+        def media_by=: (String) -> String
+
+        attr_reader liked_by: String?
+
+        def liked_by=: (String) -> String
 
         attr_reader since_time: XTwitterScraper::Models::X::TweetAnalysisParams::since_time?
 
@@ -108,6 +143,13 @@ module XTwitterScraper
           ?list_id: String,
           ?quotes_of: String,
           ?replies_to: String,
+          ?queries: ::Array[String],
+          ?usernames: ::Array[String],
+          ?list_ids: ::Array[String],
+          ?thread_of: String,
+          ?replies_by: String,
+          ?media_by: String,
+          ?liked_by: String,
           ?since_time: XTwitterScraper::Models::X::TweetAnalysisParams::since_time,
           ?until_time: XTwitterScraper::Models::X::TweetAnalysisParams::until_time,
           ?query_type: XTwitterScraper::Models::X::TweetAnalysisParams::query_type,
@@ -129,6 +171,13 @@ module XTwitterScraper
           list_id: String,
           quotes_of: String,
           replies_to: String,
+          queries: ::Array[String],
+          usernames: ::Array[String],
+          list_ids: ::Array[String],
+          thread_of: String,
+          replies_by: String,
+          media_by: String,
+          liked_by: String,
           since_time: XTwitterScraper::Models::X::TweetAnalysisParams::since_time,
           until_time: XTwitterScraper::Models::X::TweetAnalysisParams::until_time,
           query_type: XTwitterScraper::Models::X::TweetAnalysisParams::query_type,

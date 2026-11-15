@@ -52,6 +52,60 @@ module XTwitterScraper
         #   @return [String, nil]
         optional :replies_to, String, api_name: :repliesTo
 
+        # @!attribute queries
+        #   X searches to analyze as 1 search. A post matching any of them counts. Each
+        #   takes the operators of query. query, when sent, joins them. X searches up to
+        #   512 characters, counted with the other search fields.
+        #
+        #   @return [Array<String>, nil]
+        optional :queries, XTwitterScraper::Internal::Type::ArrayOf[String]
+
+        # @!attribute usernames
+        #   Analyze the posts of several accounts in 1 search. Send handles, with or
+        #   without @, or profile URLs. username, when sent, joins them.
+        #
+        #   @return [Array<String>, nil]
+        optional :usernames, XTwitterScraper::Internal::Type::ArrayOf[String]
+
+        # @!attribute list_ids
+        #   Analyze the posts of several public Lists in 1 search. Send their IDs or
+        #   URLs. listId, when sent, joins them.
+        #
+        #   @return [Array<String>, nil]
+        optional :list_ids, XTwitterScraper::Internal::Type::ArrayOf[String], api_name: :listIds
+
+        # @!attribute thread_of
+        #   Analyze 1 post's thread, as /x/tweets/{id}/thread reads it. Send the post's
+        #   ID or URL. Send no other posts or search with it.
+        #
+        #   @return [String, nil]
+        optional :thread_of, String, api_name: :threadOf
+
+        # @!attribute replies_by
+        #   Analyze 1 account's posts & replies, as its Replies tab shows them.
+        #   /x/users/{id}/replies reads the same posts. Send a handle, with or without
+        #   @, a user ID or a profile URL. Send no other posts or search with it.
+        #
+        #   @return [String, nil]
+        optional :replies_by, String, api_name: :repliesBy
+
+        # @!attribute media_by
+        #   Analyze 1 account's posts with photos or videos, as its Media tab shows
+        #   them. /x/users/{id}/media reads the same posts. Send a handle, with or
+        #   without @, a user ID or a profile URL. Send no other posts or search with
+        #   it.
+        #
+        #   @return [String, nil]
+        optional :media_by, String, api_name: :mediaBy
+
+        # @!attribute liked_by
+        #   Analyze the posts 1 account liked, as /x/users/{id}/likes reads them. Send a
+        #   handle, with or without @, a user ID or a profile URL. Send no other posts
+        #   or search with it.
+        #
+        #   @return [String, nil]
+        optional :liked_by, String, api_name: :likedBy
+
         # @!attribute since_time
         #   Inclusive start of the search, such as 2026-09-25T00:00:00Z. Unix seconds also
         #   work. A time without an offset is UTC.
@@ -131,7 +185,7 @@ module XTwitterScraper
         optional :baseline,
                  -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::X::TweetAnalysisParams::Baseline] }
 
-        # @!method initialize(tweet_ids: nil, query: nil, username: nil, list_id: nil, quotes_of: nil, replies_to: nil, since_time: nil, until_time: nil, query_type: nil, limit: nil, cursor: nil, texts: nil, topic: nil, image_shows: nil, analysis: nil, baseline: nil, request_options: {})
+        # @!method initialize(tweet_ids: nil, query: nil, username: nil, list_id: nil, quotes_of: nil, replies_to: nil, queries: nil, usernames: nil, list_ids: nil, thread_of: nil, replies_by: nil, media_by: nil, liked_by: nil, since_time: nil, until_time: nil, query_type: nil, limit: nil, cursor: nil, texts: nil, topic: nil, image_shows: nil, analysis: nil, baseline: nil, request_options: {})
         #   Posts to analyze & optional analysis settings. Send tweetIds, texts, or a
         #   search, never more than 1. A search is query, username, listId, quotesOf or
         #   repliesTo, alone or together, & sinceTime & untilTime narrow it.
@@ -147,6 +201,20 @@ module XTwitterScraper
         #   @param quotes_of [String] Analyze the quotes of 1 post. Send its ID or URL.
         #
         #   @param replies_to [String] Analyze the replies in 1 post's conversation. Send its ID or URL.
+        #
+        #   @param queries [Array<String>] X searches to analyze as 1 search. A post matching any of them counts. Each takes the operators of query. query, when sent, joins them. X searches up to 512 characters, counted with the other search fields.
+        #
+        #   @param usernames [Array<String>] Analyze the posts of several accounts in 1 search. Send handles, with or without @, or profile URLs. username, when sent, joins them.
+        #
+        #   @param list_ids [Array<String>] Analyze the posts of several public Lists in 1 search. Send their IDs or URLs. listId, when sent, joins them.
+        #
+        #   @param thread_of [String] Analyze 1 post's thread, as /x/tweets/{id}/thread reads it. Send the post's ID or URL. Send no other posts or search with it.
+        #
+        #   @param replies_by [String] Analyze 1 account's posts & replies, as its Replies tab shows them. /x/users/{id}/replies reads the same posts. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
+        #
+        #   @param media_by [String] Analyze 1 account's posts with photos or videos, as its Media tab shows them. /x/users/{id}/media reads the same posts. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
+        #
+        #   @param liked_by [String] Analyze the posts 1 account liked, as /x/users/{id}/likes reads them. Send a handle, with or without @, a user ID or a profile URL. Send no other posts or search with it.
         #
         #   @param since_time [String, Integer] Inclusive start of the search, such as 2026-09-25T00:00:00Z. Unix seconds also
         #
