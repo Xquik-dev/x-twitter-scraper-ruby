@@ -134,6 +134,39 @@ class XTwitterScraper::Test::AnalysisWireTest < Minitest::Test
     end
   end
 
+  SOURCES = {
+    queries: ["from:nasa", "from:esa"],
+    usernames: ["@NASA", "@ESA"],
+    list_ids: ["4143408"],
+    thread_of: "2102882545427714266",
+    replies_by: "@NASA",
+    media_by: "@NASA",
+    liked_by: "@NASA"
+  }.freeze
+
+  ROUTES.each do |method, route|
+    define_method(:"test_#{method}_sends_the_search_and_page_sources_under_their_api_names") do
+      url = "http://localhost/x/analysis/#{route}"
+      stub_request(:post, url).to_return_json(body: PAGE)
+
+      client.x.analysis.public_send(method, **SOURCES)
+
+      assert_requested(
+        :post,
+        url,
+        body: {
+          queries: ["from:nasa", "from:esa"],
+          usernames: ["@NASA", "@ESA"],
+          listIds: ["4143408"],
+          threadOf: "2102882545427714266",
+          repliesBy: "@NASA",
+          mediaBy: "@NASA",
+          likedBy: "@NASA"
+        }
+      )
+    end
+  end
+
   def assert_route_sends_both_inputs_and_reads_both_filters(method, route)
     url = "http://localhost/x/analysis/#{route}"
     stub_request(:post, url).to_return_json(body: PAGE)
