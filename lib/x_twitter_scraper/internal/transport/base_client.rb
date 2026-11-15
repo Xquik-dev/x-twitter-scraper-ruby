@@ -20,7 +20,8 @@ module XTwitterScraper
             "x-stainless-os" => XTwitterScraper::Internal::Util.os,
             "x-stainless-package-version" => XTwitterScraper::VERSION,
             "x-stainless-runtime" => ::RUBY_ENGINE,
-            "x-stainless-runtime-version" => ::RUBY_ENGINE_VERSION
+            "x-stainless-runtime-version" => ::RUBY_ENGINE_VERSION,
+            "x-xquik-sdk" => "ruby"
           }
 
         class << self

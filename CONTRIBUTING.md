@@ -12,14 +12,30 @@ Install `.ruby-version` through rbenv or asdf, then run the bootstrap script.
 
 Run `bundle exec rake` to list every task.
 
-## Generated code
+## Change the SDK by hand
 
-The API generator owns most SDK files. Direct edits can conflict later.
-The generator never changes `lib/x_twitter_scraper/helpers/` or `examples/`.
+Maintainers write and review every file in this repository by hand.
+No code generator runs.
+
+When the API changes, the [API fields](#api-fields) check fails.
+Each failure names the field that the SDK lacks.
+Add each one in the style of the code around it.
+
+1. Add the method to its resource in `lib/x_twitter_scraper/resources`.
+2. Add its params and response models in `lib/x_twitter_scraper/models`.
+3. Add their types in `rbi/` and `sig/`.
+4. Add its tests in `test/x_twitter_scraper/resources`.
+5. Add a line to the `Unreleased` section of `CHANGELOG.md`.
+
+Keep every change additive.
+Never remove or rename a public method, parameter, model, attribute, or the `x_twitter_scraper` gem.
+To rename something, add the new name beside the old one and keep the old one working.
+
+Each request sends `X-Xquik-SDK: ruby`, which Xquik reads to count SDK requests.
 
 ## Add examples
 
-Files under `examples/` remain handwritten.
+Each example is a Ruby script under `examples/`.
 
 ```ruby
 #!/usr/bin/env ruby
