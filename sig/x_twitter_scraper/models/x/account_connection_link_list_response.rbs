@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type account_connection_link_list_response =
+        {
+          links: ::Array[XTwitterScraper::X::XAccountConnectionLink],
+          has_more: bool,
+          next_cursor: String
+        }
+
+      class AccountConnectionLinkListResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor links: ::Array[XTwitterScraper::X::XAccountConnectionLink]
+
+        attr_accessor has_more: bool
+
+        attr_reader next_cursor: String?
+
+        def next_cursor=: (String) -> String
+
+        def initialize: (
+          links: ::Array[XTwitterScraper::X::XAccountConnectionLink],
+          has_more: bool,
+          ?next_cursor: String
+        ) -> void
+
+        def to_hash: -> {
+          links: ::Array[XTwitterScraper::X::XAccountConnectionLink],
+          has_more: bool,
+          next_cursor: String
+        }
+      end
+    end
+  end
+end

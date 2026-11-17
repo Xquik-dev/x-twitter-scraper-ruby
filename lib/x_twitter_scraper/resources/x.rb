@@ -46,6 +46,10 @@ module XTwitterScraper
       # @return [XTwitterScraper::Resources::X::AccountConnectionAttempts]
       attr_reader :account_connection_attempts
 
+      # Connected X account management
+      # @return [XTwitterScraper::Resources::X::AccountConnectionLinks]
+      attr_reader :account_connection_links
+
       # Look up, search, and analyze individual tweets
       # @return [XTwitterScraper::Resources::X::Bookmarks]
       attr_reader :bookmarks
@@ -191,6 +195,7 @@ module XTwitterScraper
           XTwitterScraper::Resources::X::AccountConnectionChallenges.new(client: client)
         @account_connection_attempts =
           XTwitterScraper::Resources::X::AccountConnectionAttempts.new(client: client)
+        @account_connection_links = XTwitterScraper::Resources::X::AccountConnectionLinks.new(client: client)
         @bookmarks = XTwitterScraper::Resources::X::Bookmarks.new(client: client)
         @lists = XTwitterScraper::Resources::X::Lists.new(client: client)
         @analysis = XTwitterScraper::Resources::X::Analysis.new(client: client)

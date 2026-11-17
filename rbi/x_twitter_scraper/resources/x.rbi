@@ -48,6 +48,10 @@ module XTwitterScraper
       sig { returns(XTwitterScraper::Resources::X::AccountConnectionAttempts) }
       attr_reader :account_connection_attempts
 
+      # Connected X account management
+      sig { returns(XTwitterScraper::Resources::X::AccountConnectionLinks) }
+      attr_reader :account_connection_links
+
       # Look up, search, and analyze individual tweets
       sig { returns(XTwitterScraper::Resources::X::Bookmarks) }
       attr_reader :bookmarks
