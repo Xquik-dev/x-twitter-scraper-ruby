@@ -83,8 +83,8 @@ class CheckLocalScriptTest < Minitest::Test
     super
   end
 
-  API_FIELDS_NEXT_STEP = "Fix each field it lists in the SDK, " \
-                         "or list it in accepted-field-differences.json with a reason."
+  API_FIELDS_NEXT_STEP = "Fix each line it lists in the SDK, or list a field in accepted-field-differences.json " \
+                         "or an operation in excluded-operations.json with a reason."
   EXTRACTION_DIAGNOSTICS = %w[rb/diagnostics/extraction-errors rb/diagnostics/extraction-warnings].freeze
 
   def sarif(unread: {}, diagnostics: EXTRACTION_DIAGNOSTICS)
