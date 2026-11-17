@@ -34,7 +34,7 @@ module XTwitterScraper
         end
 
         # Reads what happened on a link. `status` reads `connected` once the person
-        # finishes, with `x_user_id`, `x_username` and `health`. It never holds the token.
+        # finishes, with `x_user_id`, `x_username` and `health`. It never holds the token. Takes a Full access API key holding `connectsXAccounts`.
         sig do
           params(
             id: String,
@@ -48,7 +48,7 @@ module XTwitterScraper
         )
         end
 
-        # Stops a link working. An account it already connected stays connected.
+        # Stops a link working. An account it already connected stays connected. Takes a Full access API key holding `connectsXAccounts`.
         sig do
           params(
             id: String,
@@ -64,7 +64,7 @@ module XTwitterScraper
 
         # Lists your connect links, newest first, with `api_key_id` naming the API key that
         # made each one, or nil for a dashboard session. Use it to find and revoke the
-        # links a leaked key made. It never holds a token.
+        # links a leaked key made. It never holds a token. Takes a Full access API key holding `connectsXAccounts`.
         sig do
           params(
             cursor: String,

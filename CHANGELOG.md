@@ -13,7 +13,7 @@ This release adds connect links, which you can list with the API key that made e
 
 ### Features
 
-* `x.account_connection_links` creates, reads, revokes and lists connect links, pages where a person connects an X account with no Xquik signup. Each `XAccountConnectionLink` carries `api_key_id`, the API key that made it, or nil when a dashboard session made it. With `list`, find the links a leaked key made and revoke them.
+* `x.account_connection_links` creates, reads, revokes and lists connect links, pages where a person connects an X account with no Xquik signup. Each call takes a Full access API key holding `connectsXAccounts`. Each `XAccountConnectionLink` carries `api_key_id`, the API key that made it, or nil when a dashboard session made it. With `list`, find the links a leaked key made and revoke them.
 * `PaginatedTweets` and `PaginatedUsers` carry `end_reason`, a `CoverageEndReason` present on a last page that X cut short. `:stalled` means X returned no new results 2 times in a row, so the list may hold more. Read it again later without `cursor`.
 * `TweetAnalysisPage` carries `unprocessed_ids`, the IDs of the posts or texts the time ran out for. Send them again in `tweet_ids`, or those texts in `texts`. They cost nothing.
 * Every request sends `X-Xquik-SDK: ruby` beside the existing headers, so Xquik can count Ruby SDK requests.
@@ -37,7 +37,6 @@ This release adds connect links, which you can list with the API key that made e
 ### Bug fixes
 
 * `min_faves` on the 9 tweet list methods, such as `x.tweets.search` and `x.users.retrieve_tweets`, is sent as `minLikes`, the name the API documents. It stays as a deprecated alias of `min_likes`, so calls that pass it keep working. When a call passes both, the later one wins.
-* The community creator's `verified` from `x.communities.retrieve_info` is optional in the model, Sorbet and RBS signatures. The API leaves it out of a full creator profile when X sends no badge state for it, as the API spec says.
 
 ## 0.10.6 (2026-10-14)
 
