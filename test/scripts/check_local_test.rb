@@ -263,9 +263,9 @@ class CheckLocalScriptTest < Minitest::Test
     assert_equal(CODEQL_FAILURE_STATUS, run.fetch(:statuses).last)
   end
 
-  def runner_project(here:)
+  def runner_project(here:, runner_exit: 0)
     runner = File.join(@root, "runner")
-    write_command(runner, "#!/bin/sh\nprintf '%s\\n' \"$@\" >\"$FAKE_RUNNER_LOG\"\n")
+    write_command(runner, "#!/bin/sh\nprintf '%s\\n' \"$@\" >\"$FAKE_RUNNER_LOG\"\nexit #{runner_exit}\n")
     env = environment(ScriptSupport.environment.fetch("PATH"), "Audit passed.", 0, 0).merge(
       "FAKE_RUNNER_LOG" => File.join(@root, "runner.log"),
       "CHECK_LOCAL_HERE" => here ? "1" : ""
@@ -283,6 +283,13 @@ class CheckLocalScriptTest < Minitest::Test
     assert_equal(0, result.status, result.output)
     assert_equal([File.realpath(@project), "--no-status"], runner_arguments)
     refute_includes(result.stdout, "==> API fields")
+  end
+
+  def test_a_failing_runner_fails_check_local_with_its_exit_status
+    result, runner_arguments = runner_project(here: false, runner_exit: 7)
+
+    assert_equal(7, result.status, result.output)
+    assert_equal([File.realpath(@project), "--no-status"], runner_arguments)
   end
 
   def test_check_local_here_runs_the_checks_despite_a_configured_runner
