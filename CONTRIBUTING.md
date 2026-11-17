@@ -18,7 +18,7 @@ Maintainers write and review every file in this repository by hand.
 No code generator runs.
 
 When the API changes, the [API fields](#api-fields) check fails.
-Each failure names the field that the SDK lacks.
+Each failure names the operation or field that the SDK lacks.
 Add each one in the style of the code around it.
 
 1. Add the method to its resource in `lib/x_twitter_scraper/resources`.
@@ -103,9 +103,9 @@ bundle exec rake docs:preview PORT=8808
 
 ## API fields
 
-The check right after the gem check fails when the SDK's fields differ from the
-API spec. A change the API serves therefore fails `bin/check-local` before the
-longer checks start.
+The check right after the gem check fails when the SDK lacks an API operation
+or its fields differ from the API spec. A change the API serves therefore fails
+`bin/check-local` before the longer checks start.
 
 For each operation both the API spec and the SDK have, it compares the query
 parameters and JSON or multipart body fields of the request, and the JSON body
@@ -115,6 +115,11 @@ response models each `@client.request` call in
 `lib/x_twitter_scraper/resources` names. Path and header parameters, free-form
 objects and fields under an object that allows extra properties stay out. A
 field missing on 1 side counts once, at its top position.
+
+An operation the spec has and the SDK lacks fails with a line such as
+`GET /api/v1/monitors is in the API but not in the SDK.`, unless
+`excluded-operations.json` lists it. Operations only the SDK has are not
+compared.
 
 Each difference prints as 1 line with the method, the full path, `request` or
 `response`, a kind and the field's JSON path.
@@ -151,6 +156,20 @@ catches up.
   {
     "reason": "Filters the current spec no longer lists on these routes. The SDK keeps them, so code written for earlier versions keeps working.",
     "differences": ["GET /api/v1/x/users/{id}/mentions request extra near"]
+  }
+]
+```
+
+`excluded-operations.json` holds the reviewed operations the SDK leaves out, in
+groups with a non-empty `reason`, each with at least 1 method and path. An
+operation appears at most once. An entry fails as stale once the API no longer
+has the operation or the SDK implements it, so remove it from the file.
+
+```json
+[
+  {
+    "reason": "Needs a dashboard sign-in cookie, which API keys and bearer tokens cannot use.",
+    "operations": ["GET /api/v1/api-keys", "POST /api/v1/api-keys"]
   }
 ]
 ```

@@ -19,6 +19,7 @@ module ApiFieldsCheck
   DEFAULT_SPEC = "https://xquik.com/openapi.json"
   SPEC_VARIABLE = "XQUIK_OPENAPI_SPEC"
   ACCEPTED_FILE = "accepted-field-differences.json"
+  EXCLUDED_FILE = "excluded-operations.json"
   ACCEPTED_CEILING = 0
   HTTP_METHODS = %w[get put post delete options head patch trace].freeze
   BODY_TYPES = %w[application/json multipart/form-data application/x-www-form-urlencoded].freeze
@@ -31,6 +32,8 @@ module ApiFieldsCheck
   DIFFERENCE = %r{\A(?:#{METHOD_NAMES}) /\S* (?:request|response) (?:#{KIND_NAMES}) \S+\z}
   DIFFERENCE_EXAMPLE = "Write a method, a path, request or response, a kind and a field, such as " \
                        "GET /api/v1/monitors/{id} response extra pausedAt."
+  OPERATION = %r{\A(?:#{METHOD_NAMES}) /\S*\z}
+  OPERATION_EXAMPLE = "Write a method and a path, such as GET /api/v1/api-keys."
   REQUEST_KEYS = [:method, :path, :query, :body, :headers, :model, :options, :security].freeze
   UNTYPED_RESPONSES = [NilClass, StringIO].freeze
   SCALARS = [String, Symbol, Integer, Float, Time, Date, TrueClass, FalseClass].freeze
@@ -40,8 +43,9 @@ module ApiFieldsCheck
                             "and pass model."
   UNREADABLE_TYPE_NEXT = "Name the params and response types the SDK defines, " \
                          "or teach scripts/check_api_fields.rb the new type."
-  FIX_NEXT = "Fix each field above in the SDK, or list it in #{ACCEPTED_FILE} with a reason.".freeze
-  REMOVE_NEXT = "Remove each difference above from #{ACCEPTED_FILE}.".freeze
+  FIX_NEXT = "Fix each line above in the SDK, list a field in #{ACCEPTED_FILE} " \
+             "or an operation in #{EXCLUDED_FILE} with a reason.".freeze
+  REMOVE_NEXT = "Remove each entry above from its file."
   GROWN_NEXT = "Fix each new difference in the SDK instead of accepting it. " \
                "ACCEPTED_CEILING in scripts/check_api_fields.rb only falls."
 
@@ -73,6 +77,10 @@ module ApiFieldsCheck
   Prop = Data.define(:node, :required, :nullable)
   Fields = Data.define(:props, :open)
   Shape = Data.define(:query, :body, :response, :hidden)
+  ReviewedList = Data.define(:file, :entry, :pattern, :example)
+
+  ACCEPTED = ReviewedList.new(file: ACCEPTED_FILE, entry: "difference", pattern: DIFFERENCE, example: DIFFERENCE_EXAMPLE)
+  EXCLUDED = ReviewedList.new(file: EXCLUDED_FILE, entry: "operation", pattern: OPERATION, example: OPERATION_EXAMPLE)
 
   UNKNOWN = Unknown.new
   FREE_FORM = FreeForm.new
@@ -792,57 +800,62 @@ module ApiFieldsCheck
     raise unexpected_spec(source)
   end
 
-  def invalid_accepted(problem)
+  def invalid_list(list, problem)
     Failure.new(
-      "#{ACCEPTED_FILE} is not valid. #{problem}",
-      "Fix #{ACCEPTED_FILE} in the format CONTRIBUTING.md shows under API fields."
+      "#{list.file} is not valid. #{problem}",
+      "Fix #{list.file} in the format CONTRIBUTING.md shows under API fields."
     )
   end
 
-  def read_accepted(root)
+  def read_list(root, list)
     groups = begin
-      JSON.parse(File.binread(File.join(root, ACCEPTED_FILE)))
+      JSON.parse(File.binread(File.join(root, list.file)))
     rescue SystemCallError, IOError
-      raise invalid_accepted("The file cannot be read.")
+      raise invalid_list(list, "The file cannot be read.")
     rescue JSON::ParserError, EncodingError
-      raise invalid_accepted("It breaks the JSON syntax.")
+      raise invalid_list(list, "It breaks the JSON syntax.")
     end
     unless groups.is_a?(Array)
-      raise invalid_accepted("It must be a list of groups, each with a reason and differences.")
+      raise invalid_list(list, "It must be a list of groups, each with a reason and #{list.entry}s.")
     end
 
-    groups.each.with_index(1).with_object({}) do |(group, number), accepted|
-      group_entries(group, number).each do |entry|
-        key = difference_key(entry)
-        raise invalid_accepted("#{entry} appears more than once.") if accepted.key?(key)
+    groups.each.with_index(1).with_object({}) do |(group, number), listed|
+      group_entries(list, group, number).each do |entry|
+        key = entry_key(entry)
+        raise invalid_list(list, "#{entry} appears more than once.") if listed.key?(key)
 
-        accepted[key] = entry
+        listed[key] = entry
       end
     end
   end
 
-  def group_entries(group, number)
+  def read_accepted(root) = read_list(root, ACCEPTED)
+
+  def read_excluded(root) = read_list(root, EXCLUDED)
+
+  def group_entries(list, group, number)
+    entries = "#{list.entry}s"
     fields = group.is_a?(Hash) ? group : {}
-    unless fields.keys.sort == %w[differences reason]
-      raise invalid_accepted("Group #{number} must hold a reason and differences, and nothing else.")
+    unless fields.keys.sort == [entries, "reason"].sort
+      raise invalid_list(list, "Group #{number} must hold a reason and #{entries}, and nothing else.")
     end
 
-    reason, listed = fields.values_at("reason", "differences")
+    reason, listed = fields.values_at("reason", entries)
     unless reason.is_a?(String) && !reason.strip.empty?
-      raise invalid_accepted("Group #{number} needs a non-empty reason.")
+      raise invalid_list(list, "Group #{number} needs a non-empty reason.")
     end
     unless listed.is_a?(Array) && !listed.empty?
-      raise invalid_accepted("Group #{number} needs at least 1 difference.")
+      raise invalid_list(list, "Group #{number} needs at least 1 #{list.entry}.")
     end
 
     listed.each do |entry|
-      next if entry.is_a?(String) && DIFFERENCE.match?(entry)
+      next if entry.is_a?(String) && list.pattern.match?(entry)
 
-      raise invalid_accepted("Group #{number} lists #{JSON.generate(entry)}. #{DIFFERENCE_EXAMPLE}")
+      raise invalid_list(list, "Group #{number} lists #{JSON.generate(entry)}. #{list.example}")
     end
   end
 
-  def difference_key(line)
+  def entry_key(line)
     method, path, *rest = line.split
     [operation_key(method, path), *rest].join(" ")
   end
@@ -856,16 +869,35 @@ module ApiFieldsCheck
       label, spec_shape = spec.fetch(key)
       Comparison.differences(spec_shape, sdk.fetch(key)).each do |side, kind, path|
         line = "#{label} #{side} #{kind} #{path}"
-        found[difference_key(line)] = line
+        found[entry_key(line)] = line
       end
     end
   end
 
   def count(number, noun) = number == 1 ? "1 #{noun}" : "#{number} #{noun}s"
 
+  def uncovered_operations(spec, sdk, excluded)
+    (spec.keys - sdk.keys - excluded.keys).map { "#{spec.fetch(_1).first} is in the API but not in the SDK." }.sort
+  end
+
+  def stale_entries(accepted, found, excluded, spec, sdk)
+    acceptances = accepted.except(*found.keys).values.sort.map do |entry|
+      "#{ACCEPTED_FILE} lists #{entry}, which the check no longer finds. Remove it."
+    end
+    exclusions = excluded.sort_by(&:last).filter_map do |key, entry|
+      if !spec.key?(key)
+        "#{EXCLUDED_FILE} lists #{entry}, which the API no longer has. Remove it."
+      elsif sdk.key?(key)
+        "#{EXCLUDED_FILE} lists #{entry}, which the SDK already implements. Remove it."
+      end
+    end
+    [*acceptances, *exclusions]
+  end
+
   def check(source:, root:, resources:, ceiling:)
     spec = spec_shapes(load_spec(source), source)
     accepted = read_accepted(root)
+    excluded = read_excluded(root)
     if accepted.length > ceiling
       listed = count(accepted.length, "accepted difference")
       raise Failure.new("#{ACCEPTED_FILE} lists #{listed}, more than the #{ceiling} it may hold.", GROWN_NEXT)
@@ -880,14 +912,13 @@ module ApiFieldsCheck
     end
 
     found = found_differences(spec, sdk, compared)
-    unaccepted = found.except(*accepted.keys).values.sort
-    stale = accepted.except(*found.keys).values.sort.map do |entry|
-      "#{ACCEPTED_FILE} lists #{entry}, which the check no longer finds. Remove it."
-    end
-    raise Failure.new(*unaccepted, *stale, FIX_NEXT) unless unaccepted.empty?
+    unfixed = [*uncovered_operations(spec, sdk, excluded), *found.except(*accepted.keys).values.sort]
+    stale = stale_entries(accepted, found, excluded, spec, sdk)
+    raise Failure.new(*unfixed, *stale, FIX_NEXT) unless unfixed.empty?
     raise Failure.new(*stale, REMOVE_NEXT) unless stale.empty?
 
     "The SDK's fields match the API for #{count(compared.length, 'operation')}, " \
+      "#{EXCLUDED_FILE} lists the other #{count(excluded.length, 'operation')}, " \
       "and #{ACCEPTED_FILE} lists #{count(accepted.length, 'accepted difference')}."
   end
 
