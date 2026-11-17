@@ -77,6 +77,11 @@ audits gems, runs the tests and enforces coverage. It then runs the CodeQL
 that CodeQL cannot parse. Last, it runs [REUSE](https://reuse.software) 6.2.0
 through `uvx`. It stops at the first failure and names the failed check.
 
+When `git config checklocal.runner` names a command, `bin/check-local` runs that
+command with the checkout path and its own arguments instead, so a maintainer can
+run the checks on another machine. `bin/release-local` runs its checks the same
+way. Set `CHECK_LOCAL_HERE=1` to run them here anyway.
+
 CodeQL and uv are required. Install them with `brew install --cask codeql` and
 `brew install uv`. REUSE needs no install, because uv runs the pinned version.
 
