@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type account_connection_link_create_params =
+        { reference: String, return_url: String, account_id: String }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class AccountConnectionLinkCreateParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_reader reference: String?
+
+        def reference=: (String) -> String
+
+        attr_reader return_url: String?
+
+        def return_url=: (String) -> String
+
+        attr_reader account_id: String?
+
+        def account_id=: (String) -> String
+
+        def initialize: (
+          ?reference: String,
+          ?return_url: String,
+          ?account_id: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          reference: String,
+          return_url: String,
+          account_id: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

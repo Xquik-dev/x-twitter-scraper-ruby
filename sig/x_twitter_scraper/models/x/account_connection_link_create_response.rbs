@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type account_connection_link_create_response = { url: String }
+
+      class AccountConnectionLinkCreateResponse < XTwitterScraper::Models::X::XAccountConnectionLink
+        def url: -> String
+
+        def url=: (String _) -> String
+
+        def initialize: (url: String) -> void
+
+        def to_hash: -> { url: String }
+      end
+    end
+  end
+end
