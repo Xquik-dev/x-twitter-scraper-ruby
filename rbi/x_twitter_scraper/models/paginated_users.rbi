@@ -31,6 +31,21 @@ module XTwitterScraper
       sig { params(filtered_count: Integer).void }
       attr_writer :filtered_count
 
+      # Present on a last page that X cut short. `stalled` means X returned no new
+      # results 2 times in a row, 30 s apart. The list may hold more. Read it again
+      # later without cursor.
+      sig do
+        returns(T.nilable(XTwitterScraper::Models::CoverageEndReason::TaggedSymbol))
+      end
+      attr_reader :end_reason
+
+      sig do
+        params(
+          end_reason: XTwitterScraper::Models::CoverageEndReason::OrSymbol
+        ).void
+      end
+      attr_writer :end_reason
+
       # Paginated user profiles. No-mode follower, following, and verified follower
       # requests merge independent views automatically. Response fields, page size,
       # aliases, filters, and per-returned-profile billing stay unchanged. Existing
@@ -41,7 +56,8 @@ module XTwitterScraper
           has_next_page: T::Boolean,
           next_cursor: String,
           users: T::Array[XTwitterScraper::UserProfile::OrHash],
-          filtered_count: Integer
+          filtered_count: Integer,
+          end_reason: XTwitterScraper::Models::CoverageEndReason::OrSymbol
         ).returns(T.attached_class)
       end
       def self.new(
@@ -49,7 +65,11 @@ module XTwitterScraper
         next_cursor:,
         users:,
         # Whole number from 0.
-        filtered_count: nil
+        filtered_count: nil,
+        # Present on a last page that X cut short. `stalled` means X returned no new
+        # results 2 times in a row, 30 s apart. The list may hold more. Read it again
+        # later without cursor.
+        end_reason: nil
       )
       end
 
@@ -59,7 +79,8 @@ module XTwitterScraper
             has_next_page: T::Boolean,
             next_cursor: String,
             users: T::Array[XTwitterScraper::UserProfile],
-            filtered_count: Integer
+            filtered_count: Integer,
+            end_reason: XTwitterScraper::Models::CoverageEndReason::TaggedSymbol
           }
         )
       end

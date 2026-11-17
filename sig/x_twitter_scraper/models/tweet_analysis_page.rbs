@@ -4,6 +4,7 @@ module XTwitterScraper
       {
         results: ::Array[XTwitterScraper::TweetAnalysisPage::Result],
         unanalyzed: ::Array[XTwitterScraper::TweetAnalysisPage::Unanalyzed],
+        unprocessed_ids: ::Array[String],
         analysis_summary: XTwitterScraper::TweetAnalysisPage::AnalysisSummary,
         has_next_page: bool,
         next_cursor: String,
@@ -15,6 +16,8 @@ module XTwitterScraper
       attr_accessor results: ::Array[XTwitterScraper::TweetAnalysisPage::Result]
 
       attr_accessor unanalyzed: ::Array[XTwitterScraper::TweetAnalysisPage::Unanalyzed]
+
+      attr_accessor unprocessed_ids: ::Array[String]
 
       attr_accessor analysis_summary: XTwitterScraper::TweetAnalysisPage::AnalysisSummary
 
@@ -37,6 +40,7 @@ module XTwitterScraper
       def initialize: (
         results: ::Array[XTwitterScraper::TweetAnalysisPage::Result],
         unanalyzed: ::Array[XTwitterScraper::TweetAnalysisPage::Unanalyzed],
+        unprocessed_ids: ::Array[String],
         analysis_summary: XTwitterScraper::TweetAnalysisPage::AnalysisSummary
         | ::Hash[Symbol, top],
         has_next_page: bool,
@@ -49,6 +53,7 @@ module XTwitterScraper
       def to_hash: -> {
         results: ::Array[XTwitterScraper::TweetAnalysisPage::Result],
         unanalyzed: ::Array[XTwitterScraper::TweetAnalysisPage::Unanalyzed],
+        unprocessed_ids: ::Array[String],
         analysis_summary: XTwitterScraper::TweetAnalysisPage::AnalysisSummary,
         has_next_page: bool,
         next_cursor: String,

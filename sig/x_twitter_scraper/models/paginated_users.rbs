@@ -9,7 +9,8 @@ module XTwitterScraper
         has_next_page: bool,
         next_cursor: String,
         users: ::Array[XTwitterScraper::UserProfile],
-        filtered_count: Integer
+        filtered_count: Integer,
+        end_reason: XTwitterScraper::Models::coverage_end_reason
       }
 
     class PaginatedUsers < XTwitterScraper::Internal::Type::BaseModel
@@ -23,18 +24,26 @@ module XTwitterScraper
 
       def filtered_count=: (Integer) -> Integer
 
+      attr_reader end_reason: XTwitterScraper::Models::coverage_end_reason?
+
+      def end_reason=: (
+        XTwitterScraper::Models::coverage_end_reason
+      ) -> XTwitterScraper::Models::coverage_end_reason
+
       def initialize: (
         has_next_page: bool,
         next_cursor: String,
         users: ::Array[XTwitterScraper::UserProfile],
-        ?filtered_count: Integer
+        ?filtered_count: Integer,
+        ?end_reason: XTwitterScraper::Models::coverage_end_reason
       ) -> void
 
       def to_hash: -> {
         has_next_page: bool,
         next_cursor: String,
         users: ::Array[XTwitterScraper::UserProfile],
-        filtered_count: Integer
+        filtered_count: Integer,
+        end_reason: XTwitterScraper::Models::coverage_end_reason
       }
     end
   end
