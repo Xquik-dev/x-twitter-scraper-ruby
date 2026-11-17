@@ -4,7 +4,7 @@
 
 [Full changelog from v0.10.6 to v0.11.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.6...v0.11.0)
 
-This release adds connect links and the fields the API added since 0.10.6. Each connect link names the API key that made it, so you can list the links a leaked key made and revoke them. The 7 breaking changes below rename 1 attribute, widen what `x.accounts.reauth` returns, move events and webhooks to a new event type enum, make 10 response readers nilable, and remove 1 field, 1 enum value and 8 request filters the API never served.
+This release adds connect links and the fields the API added since 0.10.6. Each connect link names the API key that made it, so you can list the links a leaked key made and revoke them. The 8 breaking changes below rename 1 attribute, widen what `x.accounts.reauth` returns, move events and webhooks to a new event type enum, make 10 response readers nilable, narrow 2 compose score readers, and remove 1 field, 1 enum value and 8 request filters the API never served.
 
 ### Breaking changes
 
@@ -12,6 +12,7 @@ This release adds connect links and the fields the API added since 0.10.6. Each 
 * `x.accounts.reauth` returns the same 3 shapes as `x.accounts.create`. You get a `SanitizedXAccount` once sign-in ends, an `XAccountConnectionAttemptPending` while it runs, or an `XAccountConnectionChallenge` when X asks for an email code. `AccountReauthResponse::Health` still names the health values. Code that checked `is_a?(AccountReauthResponse)` should match on the 3 variants.
 * The tweets in `styles.get_performance` no longer name `created_at`, which the API never served on that route.
 * The cost estimate sources list `:likeCount` in place of `:posts`, as the API returns.
+* The compose score readers match what the API returns. `ComposeScoreResult#total_checks` is typed as 1 in place of 9, and `EngagementMultiplier#multiplier` reads "Source default. Production value can vary." in place of "Production weight not published by X".
 * `x.tweets.get_replies`, `x.users.retrieve_likes`, `x.users.retrieve_media` and `x.users.retrieve_mentions` no longer take `card_name`, `exclude_source`, `geocode`, `near`, `news`, `safe`, `source` or `within`, which the API ignored on those reads. A call that still passes one keeps working, but Sorbet and RBS checks now refuse it.
 * Events and webhooks use `StreamEventType`, a 40-value enum that adds the 10 `post.*` types, in place of `EventType`. `Event#type`, `EventDetail#type`, `Webhook#event_types` and `WebhookCreateResponse#event_types` return its values, and `events.list(event_type:)`, `webhooks.create(event_types:)` and `webhooks.update(event_types:)` take them.
 * 10 response readers can now return nil. 9 come from routes that answer in 2 shapes. A dry run of `extractions.run` answers with the estimate and a real run with the job, so `ExtractionRunResponse` `allowed`, `credits_available`, `credits_required`, `estimated_results` and `source` are nilable. A challenge submit answers with the account, or with `requires_email_code` and no account fields, so `AccountConnectionChallengeSubmitResponse` `created_at`, `health`, `x_user_id` and `x_username` are nilable and `status` adds `:requires_email_code`. `BookmarkRetrieveFoldersResponse::Folder#name` is nilable because the API spec makes it optional.
