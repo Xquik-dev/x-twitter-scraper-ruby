@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased
+## 0.11.0 (2026-11-17)
+
+[Full changelog from v0.10.6 to v0.11.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.6...v0.11.0)
+
+This release adds connect links, which you can list with the API key that made each one, and the fields the API added since 0.10.6. The 2 breaking changes below rename 1 attribute and widen what `x.accounts.reauth` returns.
 
 ### Breaking changes
 
