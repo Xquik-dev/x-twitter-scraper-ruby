@@ -167,6 +167,19 @@ class XTwitterScraper::Test::AnalysisWireTest < Minitest::Test
     end
   end
 
+  UNPROCESSED_IDS = %w[2102882545427714269 2102882545427714270].freeze
+
+  ROUTES.each do |method, route|
+    define_method(:"test_#{method}_reads_the_ids_the_time_ran_out_for") do
+      url = "http://localhost/x/analysis/#{route}"
+      stub_request(:post, url).to_return_json(body: PAGE.merge(unprocessed_ids: UNPROCESSED_IDS))
+
+      page = client.x.analysis.public_send(method, tweet_ids: ["2102882545427714266", *UNPROCESSED_IDS])
+
+      assert_equal(UNPROCESSED_IDS, page.unprocessed_ids)
+    end
+  end
+
   def assert_route_sends_both_inputs_and_reads_both_filters(method, route)
     url = "http://localhost/x/analysis/#{route}"
     stub_request(:post, url).to_return_json(body: PAGE)
