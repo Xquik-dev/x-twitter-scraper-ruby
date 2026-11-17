@@ -77,6 +77,21 @@ module XTwitterScraper
       sig { params(hidden_timeline: T::Boolean).void }
       attr_writer :hidden_timeline
 
+      # Present on a last page that X cut short. `stalled` means X returned no new
+      # results 2 times in a row, 30 s apart. The list may hold more. Read it again
+      # later without cursor.
+      sig do
+        returns(T.nilable(XTwitterScraper::Models::CoverageEndReason::TaggedSymbol))
+      end
+      attr_reader :end_reason
+
+      sig do
+        params(
+          end_reason: XTwitterScraper::Models::CoverageEndReason::OrSymbol
+        ).void
+      end
+      attr_writer :end_reason
+
       # No-mode search, user Tweet, user reply, and direct reply reads use automatic
       # coverage. Shape, filters, aliases, and billing stay compatible. Unprefixed
       # cursors remain legacy. Follow next_cursor while has_next_page is true. An empty
@@ -92,7 +107,8 @@ module XTwitterScraper
             XTwitterScraper::PaginatedTweets::SearchContext::OrHash,
           searched_query: String,
           window_complete: T::Boolean,
-          hidden_timeline: T::Boolean
+          hidden_timeline: T::Boolean,
+          end_reason: XTwitterScraper::Models::CoverageEndReason::OrSymbol
         ).returns(T.attached_class)
       end
       def self.new(
@@ -114,7 +130,11 @@ module XTwitterScraper
         # Present on an empty last page when X shows this account's timeline to nobody.
         # The page is empty because of that, so it doesn't mean the account posted
         # nothing. A retry returns the same page.
-        hidden_timeline: nil
+        hidden_timeline: nil,
+        # Present on a last page that X cut short. `stalled` means X returned no new
+        # results 2 times in a row, 30 s apart. The list may hold more. Read it again
+        # later without cursor.
+        end_reason: nil
       )
       end
 
@@ -129,7 +149,8 @@ module XTwitterScraper
             search_context: XTwitterScraper::PaginatedTweets::SearchContext,
             searched_query: String,
             window_complete: T::Boolean,
-            hidden_timeline: T::Boolean
+            hidden_timeline: T::Boolean,
+            end_reason: XTwitterScraper::Models::CoverageEndReason::TaggedSymbol
           }
         )
       end

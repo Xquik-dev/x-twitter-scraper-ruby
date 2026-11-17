@@ -14,7 +14,8 @@ module XTwitterScraper
         search_context: XTwitterScraper::PaginatedTweets::SearchContext,
         searched_query: String,
         window_complete: bool,
-        hidden_timeline: bool
+        hidden_timeline: bool,
+        end_reason: XTwitterScraper::Models::coverage_end_reason
       }
 
     class PaginatedTweets < XTwitterScraper::Internal::Type::BaseModel
@@ -50,6 +51,12 @@ module XTwitterScraper
 
       def hidden_timeline=: (bool) -> bool
 
+      attr_reader end_reason: XTwitterScraper::Models::coverage_end_reason?
+
+      def end_reason=: (
+        XTwitterScraper::Models::coverage_end_reason
+      ) -> XTwitterScraper::Models::coverage_end_reason
+
       def initialize: (
         has_next_page: bool,
         next_cursor: String,
@@ -59,7 +66,8 @@ module XTwitterScraper
         ?search_context: XTwitterScraper::PaginatedTweets::SearchContext | ::Hash[Symbol, top],
         ?searched_query: String,
         ?window_complete: bool,
-        ?hidden_timeline: bool
+        ?hidden_timeline: bool,
+        ?end_reason: XTwitterScraper::Models::coverage_end_reason
       ) -> void
 
       def to_hash: -> {
@@ -71,7 +79,8 @@ module XTwitterScraper
         search_context: XTwitterScraper::PaginatedTweets::SearchContext,
         searched_query: String,
         window_complete: bool,
-        hidden_timeline: bool
+        hidden_timeline: bool,
+        end_reason: XTwitterScraper::Models::coverage_end_reason
       }
 
       type search_context = ::Hash[Symbol, top]

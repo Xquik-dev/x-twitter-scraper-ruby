@@ -17,6 +17,8 @@ module XTwitterScraper
 
   ContentDisclosure = XTwitterScraper::Models::ContentDisclosure
 
+  CoverageEndReason = XTwitterScraper::Models::CoverageEndReason
+
   CreditRedirectTopupCheckoutParams =
     XTwitterScraper::Models::CreditRedirectTopupCheckoutParams
 

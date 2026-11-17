@@ -28,7 +28,15 @@ module XTwitterScraper
       #   @return [Integer, nil]
       optional :filtered_count, Integer
 
-      # @!method initialize(has_next_page:, next_cursor:, users:, filtered_count: nil)
+      # @!attribute end_reason
+      #   Present on a last page that X cut short. `stalled` means X returned no new
+      #   results 2 times in a row, 30 s apart. The list may hold more. Read it again
+      #   later without cursor.
+      #
+      #   @return [Symbol, XTwitterScraper::Models::CoverageEndReason, nil]
+      optional :end_reason, enum: -> { XTwitterScraper::Models::CoverageEndReason }, api_name: :endReason
+
+      # @!method initialize(has_next_page:, next_cursor:, users:, filtered_count: nil, end_reason: nil)
       #   Paginated user profiles. No-mode follower, following, and verified follower
       #   requests merge independent views automatically. Response fields, page size,
       #   aliases, filters, and per-returned-profile billing stay unchanged. Existing
@@ -39,6 +47,7 @@ module XTwitterScraper
       #   @param next_cursor [String]
       #   @param users [Array<XTwitterScraper::Models::UserProfile>]
       #   @param filtered_count [Integer] Whole number from 0.
+      #   @param end_reason [Symbol, XTwitterScraper::Models::CoverageEndReason] Present on a last page that X cut short. `stalled` means X returned no new results 2 times in a row, 30 s apart. The list may hold more. Read it again later without cursor.
     end
   end
 end

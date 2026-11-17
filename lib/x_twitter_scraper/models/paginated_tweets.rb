@@ -64,7 +64,15 @@ module XTwitterScraper
       #   @return [Boolean, nil]
       optional :hidden_timeline, XTwitterScraper::Internal::Type::Boolean, api_name: :hiddenTimeline
 
-      # @!method initialize(has_next_page:, next_cursor:, tweets:, filtered_count: nil, read_back_to: nil, search_context: nil, searched_query: nil, window_complete: nil, hidden_timeline: nil)
+      # @!attribute end_reason
+      #   Present on a last page that X cut short. `stalled` means X returned no new
+      #   results 2 times in a row, 30 s apart. The list may hold more. Read it again
+      #   later without cursor.
+      #
+      #   @return [Symbol, XTwitterScraper::Models::CoverageEndReason, nil]
+      optional :end_reason, enum: -> { XTwitterScraper::Models::CoverageEndReason }, api_name: :endReason
+
+      # @!method initialize(has_next_page:, next_cursor:, tweets:, filtered_count: nil, read_back_to: nil, search_context: nil, searched_query: nil, window_complete: nil, hidden_timeline: nil, end_reason: nil)
       #   No-mode search, user Tweet, user reply, and direct reply reads use automatic
       #   coverage. Shape, filters, aliases, and billing stay compatible. Unprefixed
       #   cursors remain legacy. Follow next_cursor while has_next_page is true. An empty
@@ -79,6 +87,7 @@ module XTwitterScraper
       #   @param searched_query [String] The query that ran, when it differs from your q.
       #   @param window_complete [Boolean] Present on a last page whose sources all read past its start time.
       #   @param hidden_timeline [Boolean] Present on an empty last page when X shows this account's timeline to nobody. The page is empty because of that, so it doesn't mean the account posted nothing. A retry returns the same page.
+      #   @param end_reason [Symbol, XTwitterScraper::Models::CoverageEndReason] Present on a last page that X cut short. `stalled` means X returned no new results 2 times in a row, 30 s apart. The list may hold more. Read it again later without cursor.
 
       # @see XTwitterScraper::Models::PaginatedTweets#search_context
       class SearchContext < XTwitterScraper::Internal::Type::BaseModel

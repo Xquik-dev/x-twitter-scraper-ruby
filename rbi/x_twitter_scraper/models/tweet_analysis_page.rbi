@@ -23,6 +23,11 @@ module XTwitterScraper
       sig { returns(T::Array[XTwitterScraper::TweetAnalysisPage::Unanalyzed]) }
       attr_accessor :unanalyzed
 
+      # IDs of the posts or texts the time ran out for. Send them again in tweet_ids,
+      # or those texts in texts. They cost nothing.
+      sig { returns(T::Array[String]) }
+      attr_accessor :unprocessed_ids
+
       # Totals of the answers across the analyzed posts.
       sig { returns(XTwitterScraper::TweetAnalysisPage::AnalysisSummary) }
       attr_accessor :analysis_summary
@@ -62,6 +67,7 @@ module XTwitterScraper
           results: T::Array[XTwitterScraper::TweetAnalysisPage::Result::OrHash],
           unanalyzed:
             T::Array[XTwitterScraper::TweetAnalysisPage::Unanalyzed::OrHash],
+          unprocessed_ids: T::Array[String],
           analysis_summary:
             XTwitterScraper::TweetAnalysisPage::AnalysisSummary::OrHash,
           has_next_page: T::Boolean,
@@ -75,6 +81,9 @@ module XTwitterScraper
         results:,
         # Each post without an analysis, by ID & reason. These cost nothing.
         unanalyzed:,
+        # IDs of the posts or texts the time ran out for. Send them again in tweet_ids,
+        # or those texts in texts. They cost nothing.
+        unprocessed_ids:,
         # Totals of the answers across the analyzed posts.
         analysis_summary:,
         # Whether the search has more posts. Send next_cursor as cursor.
@@ -96,6 +105,7 @@ module XTwitterScraper
             results: T::Array[XTwitterScraper::TweetAnalysisPage::Result],
             unanalyzed:
               T::Array[XTwitterScraper::TweetAnalysisPage::Unanalyzed],
+            unprocessed_ids: T::Array[String],
             analysis_summary:
               XTwitterScraper::TweetAnalysisPage::AnalysisSummary,
             has_next_page: T::Boolean,

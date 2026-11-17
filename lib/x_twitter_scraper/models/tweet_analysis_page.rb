@@ -20,6 +20,13 @@ module XTwitterScraper
       required :unanalyzed,
                -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::TweetAnalysisPage::Unanalyzed] }
 
+      # @!attribute unprocessed_ids
+      #   IDs of the posts or texts the time ran out for. Send them again in tweet_ids,
+      #   or those texts in texts. They cost nothing.
+      #
+      #   @return [Array<String>]
+      required :unprocessed_ids, XTwitterScraper::Internal::Type::ArrayOf[String]
+
       # @!attribute analysis_summary
       #   Totals of the answers across the analyzed posts.
       #
@@ -54,13 +61,15 @@ module XTwitterScraper
       #   @return [XTwitterScraper::Models::ImageFilterSummary, nil]
       optional :image_filter, -> { XTwitterScraper::ImageFilterSummary }, api_name: :imageFilter
 
-      # @!method initialize(results:, unanalyzed:, analysis_summary:, has_next_page:, next_cursor:, topic_filter: nil, image_filter: nil)
+      # @!method initialize(results:, unanalyzed:, unprocessed_ids:, analysis_summary:, has_next_page:, next_cursor:, topic_filter: nil, image_filter: nil)
       #   Analyzed posts, the posts without an analysis & the totals of the answers. Each
       #   row in results costs 2 credits.
       #
       #   @param results [Array<XTwitterScraper::Models::TweetAnalysisPage::Result>] Each analyzed post with its answers.
       #
       #   @param unanalyzed [Array<XTwitterScraper::Models::TweetAnalysisPage::Unanalyzed>] Each post without an analysis, by ID & reason. These cost nothing.
+      #
+      #   @param unprocessed_ids [Array<String>] IDs of the posts or texts the time ran out for. Send them again in tweet_ids, or those texts in texts. They cost nothing.
       #
       #   @param analysis_summary [XTwitterScraper::Models::TweetAnalysisPage::AnalysisSummary] Totals of the answers across the analyzed posts.
       #

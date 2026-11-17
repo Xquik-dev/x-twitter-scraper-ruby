@@ -91,6 +91,8 @@ module XTwitterScraper
 
   class UserTipJar = XTwitterScraper::Models::UserTipJar
 
+  module CoverageEndReason = XTwitterScraper::Models::CoverageEndReason
+
   module Currency = XTwitterScraper::Models::Currency
 
   module EventType = XTwitterScraper::Models::EventType

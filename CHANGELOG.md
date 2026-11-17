@@ -10,6 +10,8 @@
 ### Features
 
 * `x.account_connection_links` creates, reads, revokes and lists connect links, pages where a person connects an X account with no Xquik signup. Each `XAccountConnectionLink` carries `api_key_id`, the API key that made it, or nil when a dashboard session made it. With `list`, find the links a leaked key made and revoke them.
+* `PaginatedTweets` and `PaginatedUsers` carry `end_reason`, a `CoverageEndReason` present on a last page that X cut short. `:stalled` means X returned no new results 2 times in a row, so the list may hold more. Read it again later without `cursor`.
+* `TweetAnalysisPage` carries `unprocessed_ids`, the IDs of the posts or texts the time ran out for. Send them again in `tweet_ids`, or those texts in `texts`. They cost nothing.
 * Every request sends `X-Xquik-SDK: ruby` beside the existing headers, so Xquik can count Ruby SDK requests.
 * `TweetAnalysisParams` and the 6 `x.analysis` methods take `queries`, `usernames` and `list_ids`, which join several searches, accounts or Lists into 1 search, and `thread_of`, `replies_by`, `media_by` and `liked_by`, which analyze 1 post's thread or 1 account's replies, media or likes.
 * `x.analysis` adds the 6 AI analysis methods, `brand`, `classify`, `market_signals`, `news`, `sentiment` and `viral_score`. Each takes `TweetAnalysisParams`, with post IDs, your own texts or a search, and returns `TweetAnalysisPage` with each post's answers and their totals. `topic` keeps only posts about a topic and `image_shows` keeps only posts whose photos show something. The page reports either filter's cutoff and counts in `topic_filter` or `image_filter`. Send 1 of the 2 per call.
