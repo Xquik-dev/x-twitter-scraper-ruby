@@ -83,9 +83,9 @@ class XTwitterScraper::Test::Resources::X::AccountConnectionLinksTest < XTwitter
   end
 
   def test_the_enums_name_every_purpose_and_status
-    assert_equal(%i[connect reconnect], XTwitterScraper::X::XAccountConnectionLink::Purpose.values)
+    assert_equal([:connect, :reconnect], XTwitterScraper::X::XAccountConnectionLink::Purpose.values)
     assert_equal(
-      %i[pending connecting requires_email_code connected failed expired revoked],
+      [:pending, :connecting, :requires_email_code, :connected, :failed, :expired, :revoked],
       XTwitterScraper::X::XAccountConnectionLink::Status.values
     )
   end
