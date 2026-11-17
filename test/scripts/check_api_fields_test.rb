@@ -64,13 +64,17 @@ class CheckApiFieldsTest < Minitest::Test
 
   SCRIPT = File.join(ScriptSupport::ROOT, "scripts", "check_api_fields.rb")
   OPERATION = "PUT /api/v1/items/{itemId}"
-  FIX_NEXT = ApiFieldsCheck::FIX_NEXT
-  REMOVE_NEXT = ApiFieldsCheck::REMOVE_NEXT
+  FIX_NEXT = "Fix each line above in the SDK, list a field in accepted-field-differences.json " \
+             "or an operation in excluded-operations.json with a reason."
+  REMOVE_NEXT = "Remove each entry above from its file."
   TYPE_NEXT = ApiFieldsCheck::UNREADABLE_TYPE_NEXT
   REQUEST_NEXT = ApiFieldsCheck::UNREADABLE_REQUEST_NEXT
   ACCEPTED_FILE = ApiFieldsCheck::ACCEPTED_FILE
+  EXCLUDED_FILE = "excluded-operations.json"
+  SPEC_ONLY = "GET /api/v1/only-in-spec"
   FIXTURE_LIST_CEILING = 1
   ACCEPTED_INVALID_NEXT = "Fix #{ACCEPTED_FILE} in the format CONTRIBUTING.md shows under API fields.".freeze
+  EXCLUDED_INVALID_NEXT = "Fix #{EXCLUDED_FILE} in the format CONTRIBUTING.md shows under API fields.".freeze
   STALE_SORT = "#{ACCEPTED_FILE} lists #{OPERATION} request missing sort, " \
                "which the check no longer finds. Remove it.".freeze
 
@@ -144,6 +148,7 @@ class CheckApiFieldsTest < Minitest::Test
     @resources = File.join(@root, "resources")
     write_resource(RESOURCE)
     write_accepted([])
+    write_excluded([{"reason" => "Only the spec has it.", "operations" => [SPEC_ONLY]}])
   end
 
   def teardown
@@ -212,6 +217,10 @@ class CheckApiFieldsTest < Minitest::Test
     write_file(File.join(@root, ACCEPTED_FILE), JSON.generate(groups))
   end
 
+  def write_excluded(groups)
+    write_file(File.join(@root, EXCLUDED_FILE), JSON.generate(groups))
+  end
+
   def run_check(spec = document, source: nil, resources: @resources, ceiling: FIXTURE_LIST_CEILING)
     write_file(@spec_path, JSON.generate(spec))
     status = nil
@@ -252,15 +261,70 @@ class CheckApiFieldsTest < Minitest::Test
     assert_equal([1, "", [*expected, FIX_NEXT]], [status, stdout, lines])
   end
 
-  def test_the_matching_spec_passes_and_counts_only_shared_operations
+  def test_the_matching_spec_passes_and_counts_compared_and_excluded_operations
     status, stdout, lines = run_check
 
     assert_equal(0, status, lines.join("\n"))
     assert_equal(
-      "The SDK's fields match the API for 1 operation, and #{ACCEPTED_FILE} lists 0 accepted differences.\n",
+      "The SDK's fields match the API for 1 operation, #{EXCLUDED_FILE} lists the other 1 operation, " \
+      "and #{ACCEPTED_FILE} lists 0 accepted differences.\n",
       stdout
     )
     assert_empty(lines)
+  end
+
+  def test_an_operation_only_the_spec_has_fails_sorted_before_the_field_lines
+    write_excluded([])
+    spec = edited do
+      _1["paths"]["/api/v1/also-new"] = {"post" => {"responses" => {}}}
+      item(_1)["properties"]["score"] = {"type" => "integer"}
+    end
+
+    assert_differences(
+      [
+        "#{SPEC_ONLY} is in the API but not in the SDK.",
+        "POST /api/v1/also-new is in the API but not in the SDK.",
+        "#{OPERATION} response missing score"
+      ],
+      spec
+    )
+  end
+
+  def test_an_excluded_operation_matches_under_any_path_parameter_name
+    write_excluded([{"reason" => "Not yet.", "operations" => [SPEC_ONLY, "DELETE /api/v1/items/{other}"]}])
+    spec = edited { _1["paths"]["/api/v1/items/{itemId}"]["delete"] = {"responses" => {}} }
+    status, stdout, lines = run_check(spec)
+
+    assert_equal(0, status, lines.join("\n"))
+    assert_includes(stdout, "#{EXCLUDED_FILE} lists the other 2 operations")
+  end
+
+  def test_an_exclusion_the_api_no_longer_has_fails_as_stale
+    spec = edited { _1["paths"].delete("/api/v1/only-in-spec") }
+    status, stdout, lines = run_check(spec)
+
+    stale = "#{EXCLUDED_FILE} lists #{SPEC_ONLY}, which the API no longer has. Remove it."
+    assert_equal([1, "", [stale, REMOVE_NEXT]], [status, stdout, lines])
+  end
+
+  def test_an_exclusion_the_sdk_implements_fails_as_stale
+    write_excluded([{"reason" => "Not yet.", "operations" => [SPEC_ONLY, "PUT /api/v1/items/{other}"]}])
+    status, stdout, lines = run_check
+
+    stale = "#{EXCLUDED_FILE} lists PUT /api/v1/items/{other}, which the SDK already implements. Remove it."
+    assert_equal([1, "", [stale, REMOVE_NEXT]], [status, stdout, lines])
+  end
+
+  def test_a_missing_operation_and_a_stale_exclusion_show_together
+    write_excluded([{"reason" => "Not yet.", "operations" => ["GET /api/v1/gone"]}])
+
+    assert_differences(
+      [
+        "#{SPEC_ONLY} is in the API but not in the SDK.",
+        "#{EXCLUDED_FILE} lists GET /api/v1/gone, which the API no longer has. Remove it."
+      ],
+      document
+    )
   end
 
   DIFFERENCES = {
@@ -476,6 +540,41 @@ class CheckApiFieldsTest < Minitest::Test
     )
   end
 
+  OPERATION_EXAMPLE = "Write a method and a path, such as GET /api/v1/api-keys."
+
+  INVALID_EXCLUDED = {
+    "It must be a list of groups, each with a reason and operations." => {"reason" => "x"},
+    "Group 1 must hold a reason and operations, and nothing else." => [
+      {"reason" => "x", "differences" => [SPEC_ONLY]}
+    ],
+    "Group 1 needs a non-empty reason." => [{"reason" => "", "operations" => [SPEC_ONLY]}],
+    "Group 1 needs at least 1 operation." => [{"reason" => "x", "operations" => []}],
+    "Group 1 lists \"GET items\". #{OPERATION_EXAMPLE}" => [{"reason" => "x", "operations" => ["GET items"]}],
+    "Group 1 lists \"#{SPEC_ONLY} response missing a\". #{OPERATION_EXAMPLE}" => [
+      {"reason" => "x", "operations" => ["#{SPEC_ONLY} response missing a"]}
+    ],
+    "GET /a/{y} appears more than once." => [{"reason" => "x", "operations" => ["GET /a/{x}", "GET /a/{y}"]}]
+  }.freeze
+
+  def test_an_invalid_excluded_file_names_its_problem
+    INVALID_EXCLUDED.each do |problem, groups|
+      write_excluded(groups)
+      status, _, lines = run_check
+
+      assert_equal([1, ["#{EXCLUDED_FILE} is not valid. #{problem}", EXCLUDED_INVALID_NEXT]], [status, lines], problem)
+    end
+  end
+
+  def test_a_missing_excluded_file_fails
+    FileUtils.remove_entry(File.join(@root, EXCLUDED_FILE))
+    status, _, lines = run_check
+
+    assert_equal(
+      [1, ["#{EXCLUDED_FILE} is not valid. The file cannot be read.", EXCLUDED_INVALID_NEXT]],
+      [status, lines]
+    )
+  end
+
   def test_a_missing_spec_fails_with_how_to_set_one
     missing = File.join(@root, "absent.json")
     status, _, lines = run_check(source: missing)
@@ -585,6 +684,7 @@ class CheckApiFieldsTest < Minitest::Test
   end
 
   def real_differences(spec)
+    write_excluded([])
     _, _, lines = run_check(spec, resources: File.join(ScriptSupport::ROOT, ApiFieldsCheck::RESOURCES))
     lines
   end
@@ -663,6 +763,13 @@ class CheckApiFieldsTest < Minitest::Test
 
     assert_kind_of(Hash, accepted)
     assert_empty(accepted.values.grep_v(ApiFieldsCheck::DIFFERENCE))
+  end
+
+  def test_the_repository_list_of_excluded_operations_is_valid
+    excluded = ApiFieldsCheck.read_excluded(ScriptSupport::ROOT)
+
+    refute_empty(excluded)
+    assert_empty(excluded.values.grep_v(%r{\A[A-Z]+ /\S*\z}))
   end
 
   def test_the_ceiling_falls_with_the_repository_list
