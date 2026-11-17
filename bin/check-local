@@ -167,7 +167,7 @@ run_check "Installed gems" "" \
   bundle check
 
 run_check "API fields" "API fields" \
-  "Fix each line it lists in the SDK, or list a field in accepted-field-differences.json or an operation in excluded-operations.json with a reason." \
+  "Fix each line in the SDK, or list it in accepted-field-differences.json or excluded-operations.json." \
   bundle exec ruby scripts/check_api_fields.rb
 
 run_check "Reproducible gem build" "reproducible build" \
