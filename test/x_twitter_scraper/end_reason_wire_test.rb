@@ -11,7 +11,7 @@ class XTwitterScraper::Test::EndReasonWireTest < Minitest::Test
   include WebMock::API
 
   TWEET_PAGES = {
-    "x/timeline" => ->(x) { x.get_home_timeline },
+    "x/timeline" => lambda(&:get_home_timeline),
     "x/bookmarks" => ->(x) { x.bookmarks.list },
     "x/tweets/1/quotes" => ->(x) { x.tweets.get_quotes("1") },
     "x/tweets/1/replies" => ->(x) { x.tweets.get_replies("1") },
