@@ -4,12 +4,15 @@
 
 [Full changelog from v0.10.6 to v0.11.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.6...v0.11.0)
 
-This release adds connect links, which you can list with the API key that made each one, and the fields the API added since 0.10.6. The 2 breaking changes below rename 1 attribute and widen what `x.accounts.reauth` returns.
+This release adds connect links and the fields the API added since 0.10.6. Each connect link names the API key that made it, so you can list the links a leaked key made and revoke them. The 5 breaking changes below rename 1 attribute, widen what `x.accounts.reauth` returns, and remove 1 field, 1 enum value and 8 request filters the API never served.
 
 ### Breaking changes
 
 * `XAccount` and `XAccountDetail` name `connected_at`, the connection time the API documents, in place of the earlier timestamp attribute. The Python, Go, TypeScript, Java and Kotlin SDKs already name it. Read `connected_at` instead.
 * `x.accounts.reauth` returns the same 3 shapes as `x.accounts.create`. You get a `SanitizedXAccount` once sign-in ends, an `XAccountConnectionAttemptPending` while it runs, or an `XAccountConnectionChallenge` when X asks for an email code. `AccountReauthResponse::Health` still names the health values. Code that checked `is_a?(AccountReauthResponse)` should match on the 3 variants.
+* The tweets in `styles.get_performance` no longer name `created_at`, which the API never served on that route.
+* The cost estimate sources list `:likeCount` in place of `:posts`, as the API returns.
+* `x.tweets.get_replies`, `x.users.retrieve_likes`, `x.users.retrieve_media` and `x.users.retrieve_mentions` no longer take `card_name`, `exclude_source`, `geocode`, `near`, `news`, `safe`, `source` or `within`, which the API ignored on those reads. A call that still passes one keeps working, but Sorbet and RBS checks now refuse it.
 
 ### Features
 
