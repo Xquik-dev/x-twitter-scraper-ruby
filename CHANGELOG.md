@@ -1,5 +1,27 @@
 # Changelog
 
+## Unreleased
+
+This release adds the 76 operations the API served and the Ruby SDK lacked, so the SDK now covers every operation it can reach with an API key. `scripts/scaffold_operations.rb` wrote each one from the API spec.
+
+### Breaking changes
+
+* `UserRetrieveBatchResponse.new` requires `not_found_ids:` and `suspended_ids:`, which the API now always returns. Code that builds one by hand must pass both. Reading a response keeps working.
+
+### Features
+
+* `client.activity` lists the account's activity log, reads 1 activity's full record and exports the log as a CSV, Excel, JSON, Markdown, PDF or text file. `export` returns the file as a `StringIO`.
+* `events.stream` reads the account's monitor events as server-sent events. It returns an `XTwitterScraper::Internal::Stream` that yields 1 `Event` per message and skips the idle comments. Pass `last_event_id` to resume after an event, and `look_back: true` to also get events saved late.
+* `monitors.posts` creates, reads, updates, lists and deletes post monitors, and `retrieve_metrics` returns a post monitor's hourly numbers. `monitors.upsert_by_username` creates an account monitor or updates the one that exists.
+* `extractions.cancel` stops an active extraction without charging or saving rows. `webhooks.create_telegram_link` returns a link that connects a Telegram chat to the account's monitor events.
+* `x.tweets.bookmark`, `x.users.block` and `x.users.mute` add and remove bookmarks, blocks and mutes through a connected account. `x.dm.delete_message` deletes a direct message.
+* `x.spaces`, `x.sports`, `x.jobs`, `x.broadcasts` and `x.community_notes` read Spaces, football games, job listings, broadcasts and Community Notes contributors.
+* `x.communities` adds `find`, `list_popular`, `list_suggested`, `list_topics`, `retrieve_analytics` and `search_members`, and `x.communities.media` lists a community's media posts.
+* `x.tweets` adds `list_top`, `embed`, `get_hidden_replies`, `get_insights`, `get_retweeter_ids`, `check_repost`, `get_subtitles`, `translate` and `resolve_links`.
+* `x.users` adds `retrieve_batch_tweets`, `retrieve_affiliates`, `retrieve_articles`, `retrieve_follower_audit`, `retrieve_follower_ids`, `retrieve_following_ids`, `retrieve_highlights`, `retrieve_insights`, `retrieve_list_memberships`, `retrieve_lists`, `retrieve_live`, `retrieve_shadowban`, `retrieve_similar`, `retrieve_subscriptions` and `translate_bio`.
+* `x.lists` adds `retrieve` and `retrieve_search`, and `x` adds `get_hashflags`, `get_news_story_versions`, `search_places`, `autocomplete_search`, `get_trends_history` and `get_trend_locations`.
+* `UserRetrieveBatchResponse` and `BatchUserTweets` split `unavailable_ids` into `not_found_ids` and `suspended_ids`, by what X answered for each account. `BatchUserTweets` also names `protected_ids`.
+
 ## 0.11.0 (2026-11-17)
 
 [Full changelog from v0.10.6 to v0.11.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.10.6...v0.11.0)
