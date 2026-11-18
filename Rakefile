@@ -87,6 +87,8 @@ end
 desc("Format `*.rbs`")
 multitask(:"format:rbs") do
   files = filtered["rbs", %w[./sig]]
+  paths = ENV.key?(FILES_ENV) ? File.readlines(ENV.fetch(FILES_ENV), chomp: true) : Dir.glob("./sig/**/*.rbs")
+  headers = paths.grep(/\.rbs$/).to_h { [_1, File.read(_1)[/\A(?:#[^\n]*\n)+\n*/]] }.compact
   inplace = /darwin|bsd/ =~ RUBY_PLATFORM ? ["-i", ""] : %w[-i]
   uuid = SecureRandom.uuid
 
@@ -112,6 +114,10 @@ multitask(:"format:rbs") do
     success = _1
   end
   sh("#{files.shelljoin} | #{norm_lines} | #{pst.shelljoin}")
+  headers.each do |path, header|
+    text = File.read(path)
+    File.write(path, header + text) unless text.start_with?(header)
+  end
 
   fail unless success
 end
