@@ -45,6 +45,15 @@ module XTwitterScraper
         sig { returns(T::Array[String]) }
         attr_accessor :unavailable_ids
 
+        # The unavailable IDs no account holds, as X answers for an account that was
+        # deactivated or deleted, in first-seen request order.
+        sig { returns(T::Array[String]) }
+        attr_accessor :not_found_ids
+
+        # The unavailable IDs of accounts X suspended, in first-seen request order.
+        sig { returns(T::Array[String]) }
+        attr_accessor :suspended_ids
+
         # Requested IDs skipped because available credits limited processing. Retry these
         # IDs after adding credits.
         sig { returns(T::Array[String]) }
@@ -71,6 +80,8 @@ module XTwitterScraper
             requested_count: Integer,
             returned_count: Integer,
             unavailable_ids: T::Array[String],
+            not_found_ids: T::Array[String],
+            suspended_ids: T::Array[String],
             unprocessed_ids: T::Array[String],
             users: T::Array[XTwitterScraper::UserProfile::OrHash],
             failed_ids: T::Array[String],
@@ -89,6 +100,11 @@ module XTwitterScraper
           returned_count:,
           # Processed IDs with no returned profile, in first-seen request order.
           unavailable_ids:,
+          # The unavailable IDs no account holds, as X answers for an account that was
+          # deactivated or deleted, in first-seen request order.
+          not_found_ids:,
+          # The unavailable IDs of accounts X suspended, in first-seen request order.
+          suspended_ids:,
           # Requested IDs skipped because available credits limited processing. Retry these
           # IDs after adding credits.
           unprocessed_ids:,
@@ -113,6 +129,8 @@ module XTwitterScraper
               requested_count: Integer,
               returned_count: Integer,
               unavailable_ids: T::Array[String],
+              not_found_ids: T::Array[String],
+              suspended_ids: T::Array[String],
               unprocessed_ids: T::Array[String],
               users: T::Array[XTwitterScraper::UserProfile],
               filtered_count: Integer
