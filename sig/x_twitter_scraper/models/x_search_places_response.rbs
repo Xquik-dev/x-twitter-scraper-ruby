@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type x_search_places_response =
+      {
+        places: ::Array[XTwitterScraper::Models::PlaceSearchResult],
+        count: Integer,
+        total: Integer,
+        message: String
+      }
+
+    class XSearchPlacesResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor places: ::Array[XTwitterScraper::Models::PlaceSearchResult]
+
+      attr_accessor count: Integer
+
+      attr_accessor total: Integer
+
+      attr_reader message: String?
+
+      def message=: (String) -> String
+
+      def initialize: (
+        places: ::Array[XTwitterScraper::Models::PlaceSearchResult],
+        count: Integer,
+        total: Integer,
+        ?message: String
+      ) -> void
+
+      def to_hash: -> {
+        places: ::Array[XTwitterScraper::Models::PlaceSearchResult],
+        count: Integer,
+        total: Integer,
+        message: String
+      }
+    end
+  end
+end

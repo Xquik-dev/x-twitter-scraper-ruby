@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_quarter =
+      {
+        id: String?,
+        number: Integer?,
+        sequence: Integer?,
+        drives: ::Array[XTwitterScraper::Models::FootballDrive]
+      }
+
+    class FootballQuarter < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String?
+
+      attr_accessor number: Integer?
+
+      attr_accessor sequence: Integer?
+
+      attr_accessor drives: ::Array[XTwitterScraper::Models::FootballDrive]
+
+      def initialize: (
+        id: String?,
+        number: Integer?,
+        sequence: Integer?,
+        drives: ::Array[XTwitterScraper::Models::FootballDrive]
+      ) -> void
+
+      def to_hash: -> {
+        id: String?,
+        number: Integer?,
+        sequence: Integer?,
+        drives: ::Array[XTwitterScraper::Models::FootballDrive]
+      }
+    end
+  end
+end

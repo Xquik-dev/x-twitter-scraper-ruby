@@ -1,0 +1,63 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type community_notes_contributor =
+      {
+        alias_: String,
+        is_top_writer: bool,
+        is_api_contributor: bool,
+        deleted_notes_count: Integer,
+        notes_count: XTwitterScraper::Models::CommunityNotesNoteCounts,
+        ratings_count: XTwitterScraper::Models::CommunityNotesRatingCounts
+      }
+
+    class CommunityNotesContributor < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor alias_: String
+
+      attr_reader is_top_writer: bool?
+
+      def is_top_writer=: (bool) -> bool
+
+      attr_reader is_api_contributor: bool?
+
+      def is_api_contributor=: (bool) -> bool
+
+      attr_reader deleted_notes_count: Integer?
+
+      def deleted_notes_count=: (Integer) -> Integer
+
+      attr_reader notes_count: XTwitterScraper::Models::CommunityNotesNoteCounts?
+
+      def notes_count=: (
+        XTwitterScraper::Models::CommunityNotesNoteCounts
+      ) -> XTwitterScraper::Models::CommunityNotesNoteCounts
+
+      attr_reader ratings_count: XTwitterScraper::Models::CommunityNotesRatingCounts?
+
+      def ratings_count=: (
+        XTwitterScraper::Models::CommunityNotesRatingCounts
+      ) -> XTwitterScraper::Models::CommunityNotesRatingCounts
+
+      def initialize: (
+        alias_: String,
+        ?is_top_writer: bool,
+        ?is_api_contributor: bool,
+        ?deleted_notes_count: Integer,
+        ?notes_count: XTwitterScraper::Models::CommunityNotesNoteCounts,
+        ?ratings_count: XTwitterScraper::Models::CommunityNotesRatingCounts
+      ) -> void
+
+      def to_hash: -> {
+        alias_: String,
+        is_top_writer: bool,
+        is_api_contributor: bool,
+        deleted_notes_count: Integer,
+        notes_count: XTwitterScraper::Models::CommunityNotesNoteCounts,
+        ratings_count: XTwitterScraper::Models::CommunityNotesRatingCounts
+      }
+    end
+  end
+end

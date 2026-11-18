@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type user_identity_verification =
+      {
+        description: String,
+        is_identity_verified: bool,
+        override_verified_year: Integer,
+        verified_since_msec: String
+      }
+
+    class UserIdentityVerification < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader description: String?
+
+      def description=: (String) -> String
+
+      attr_reader is_identity_verified: bool?
+
+      def is_identity_verified=: (bool) -> bool
+
+      attr_reader override_verified_year: Integer?
+
+      def override_verified_year=: (Integer) -> Integer
+
+      attr_reader verified_since_msec: String?
+
+      def verified_since_msec=: (String) -> String
+
+      def initialize: (
+        ?description: String,
+        ?is_identity_verified: bool,
+        ?override_verified_year: Integer,
+        ?verified_since_msec: String
+      ) -> void
+
+      def to_hash: -> {
+        description: String,
+        is_identity_verified: bool,
+        override_verified_year: Integer,
+        verified_since_msec: String
+      }
+    end
+  end
+end

@@ -1,0 +1,730 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type shadowban_report =
+      {
+        username: String?,
+        user_id: String?,
+        account: XTwitterScraper::Models::ShadowbanReport::account,
+        checked_at: Time,
+        overall: XTwitterScraper::Models::ShadowbanReport::overall,
+        checks: XTwitterScraper::Models::ShadowbanReport::Checks
+      }
+
+    class ShadowbanReport < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor username: String?
+
+      attr_accessor user_id: String?
+
+      attr_accessor account: XTwitterScraper::Models::ShadowbanReport::account
+
+      attr_accessor checked_at: Time
+
+      attr_accessor overall: XTwitterScraper::Models::ShadowbanReport::overall
+
+      attr_accessor checks: XTwitterScraper::Models::ShadowbanReport::Checks
+
+      def initialize: (
+        username: String?,
+        user_id: String?,
+        account: XTwitterScraper::Models::ShadowbanReport::account,
+        checked_at: Time,
+        overall: XTwitterScraper::Models::ShadowbanReport::overall,
+        checks: XTwitterScraper::Models::ShadowbanReport::Checks
+      ) -> void
+
+      def to_hash: -> {
+        username: String?,
+        user_id: String?,
+        account: XTwitterScraper::Models::ShadowbanReport::account,
+        checked_at: Time,
+        overall: XTwitterScraper::Models::ShadowbanReport::overall,
+        checks: XTwitterScraper::Models::ShadowbanReport::Checks
+      }
+
+      type account = :active | :protected | :suspended
+
+      module Account
+        extend XTwitterScraper::Internal::Type::Enum
+
+        ACTIVE: :active
+        PROTECTED: :protected
+        SUSPENDED: :suspended
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ShadowbanReport::account]
+      end
+
+      type overall = :clear | :limited | :unclear | :suspended
+
+      module Overall
+        extend XTwitterScraper::Internal::Type::Enum
+
+        CLEAR: :clear
+        LIMITED: :limited
+        UNCLEAR: :unclear
+        SUSPENDED: :suspended
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ShadowbanReport::overall]
+      end
+
+      type checks =
+        {
+          account: XTwitterScraper::Models::ShadowbanReport::Checks::Account,
+          search: XTwitterScraper::Models::ShadowbanReport::Checks::Search,
+          suggestion: XTwitterScraper::Models::ShadowbanReport::Checks::Suggestion,
+          replies: XTwitterScraper::Models::ShadowbanReport::Checks::Replies,
+          reply_lock: XTwitterScraper::Models::ShadowbanReport::Checks::ReplyLock,
+          timeline: XTwitterScraper::Models::ShadowbanReport::Checks::Timeline,
+          engagement: XTwitterScraper::Models::ShadowbanReport::Checks::Engagement,
+          sensitive: XTwitterScraper::Models::ShadowbanReport::Checks::Sensitive,
+          withheld: XTwitterScraper::Models::ShadowbanReport::Checks::Withheld
+        }
+
+      class Checks < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor account: XTwitterScraper::Models::ShadowbanReport::Checks::Account
+
+        attr_accessor search: XTwitterScraper::Models::ShadowbanReport::Checks::Search
+
+        attr_accessor suggestion: XTwitterScraper::Models::ShadowbanReport::Checks::Suggestion
+
+        attr_accessor replies: XTwitterScraper::Models::ShadowbanReport::Checks::Replies
+
+        attr_accessor reply_lock: XTwitterScraper::Models::ShadowbanReport::Checks::ReplyLock
+
+        attr_accessor timeline: XTwitterScraper::Models::ShadowbanReport::Checks::Timeline
+
+        attr_accessor engagement: XTwitterScraper::Models::ShadowbanReport::Checks::Engagement
+
+        attr_accessor sensitive: XTwitterScraper::Models::ShadowbanReport::Checks::Sensitive
+
+        attr_accessor withheld: XTwitterScraper::Models::ShadowbanReport::Checks::Withheld
+
+        def initialize: (
+          account: XTwitterScraper::Models::ShadowbanReport::Checks::Account,
+          search: XTwitterScraper::Models::ShadowbanReport::Checks::Search,
+          suggestion: XTwitterScraper::Models::ShadowbanReport::Checks::Suggestion,
+          replies: XTwitterScraper::Models::ShadowbanReport::Checks::Replies,
+          reply_lock: XTwitterScraper::Models::ShadowbanReport::Checks::ReplyLock,
+          timeline: XTwitterScraper::Models::ShadowbanReport::Checks::Timeline,
+          engagement: XTwitterScraper::Models::ShadowbanReport::Checks::Engagement,
+          sensitive: XTwitterScraper::Models::ShadowbanReport::Checks::Sensitive,
+          withheld: XTwitterScraper::Models::ShadowbanReport::Checks::Withheld
+        ) -> void
+
+        def to_hash: -> {
+          account: XTwitterScraper::Models::ShadowbanReport::Checks::Account,
+          search: XTwitterScraper::Models::ShadowbanReport::Checks::Search,
+          suggestion: XTwitterScraper::Models::ShadowbanReport::Checks::Suggestion,
+          replies: XTwitterScraper::Models::ShadowbanReport::Checks::Replies,
+          reply_lock: XTwitterScraper::Models::ShadowbanReport::Checks::ReplyLock,
+          timeline: XTwitterScraper::Models::ShadowbanReport::Checks::Timeline,
+          engagement: XTwitterScraper::Models::ShadowbanReport::Checks::Engagement,
+          sensitive: XTwitterScraper::Models::ShadowbanReport::Checks::Sensitive,
+          withheld: XTwitterScraper::Models::ShadowbanReport::Checks::Withheld
+        }
+
+        type account =
+          {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Account::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Account::Evidence
+          }
+
+        class Account < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor verdict: XTwitterScraper::Models::shadowban_verdict
+
+          attr_accessor reason: XTwitterScraper::Models::ShadowbanReport::Checks::Account::reason
+
+          attr_accessor evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Account::Evidence
+
+          def initialize: (
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Account::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Account::Evidence
+          ) -> void
+
+          def to_hash: -> {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Account::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Account::Evidence
+          }
+
+          type reason = :active | :protected | :suspended
+
+          module Reason
+            extend XTwitterScraper::Internal::Type::Enum
+
+            ACTIVE: :active
+            PROTECTED: :protected
+            SUSPENDED: :suspended
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::ShadowbanReport::Checks::Account::reason]
+          end
+
+          type evidence = { profile_url: String }
+
+          class Evidence < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor profile_url: String
+
+            def initialize: (profile_url: String) -> void
+
+            def to_hash: -> { profile_url: String }
+          end
+        end
+
+        type search =
+          {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Search::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Search::Evidence?
+          }
+
+        class Search < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor verdict: XTwitterScraper::Models::shadowban_verdict
+
+          attr_accessor reason: XTwitterScraper::Models::ShadowbanReport::Checks::Search::reason
+
+          attr_accessor evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Search::Evidence?
+
+          def initialize: (
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Search::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Search::Evidence?
+          ) -> void
+
+          def to_hash: -> {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Search::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Search::Evidence?
+          }
+
+          type reason =
+            :listed
+            | :missing
+            | :no_recent_posts
+            | :unavailable
+            | :protected
+            | :suspended
+
+          module Reason
+            extend XTwitterScraper::Internal::Type::Enum
+
+            LISTED: :listed
+            MISSING: :missing
+            NO_RECENT_POSTS: :no_recent_posts
+            UNAVAILABLE: :unavailable
+            PROTECTED: :protected
+            SUSPENDED: :suspended
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::ShadowbanReport::Checks::Search::reason]
+          end
+
+          type evidence =
+            {
+              query: String,
+              search_url: String,
+              recent_post_ids: ::Array[String],
+              found_post_ids: ::Array[String]
+            }
+
+          class Evidence < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor query: String
+
+            attr_accessor search_url: String
+
+            attr_accessor recent_post_ids: ::Array[String]
+
+            attr_accessor found_post_ids: ::Array[String]
+
+            def initialize: (
+              query: String,
+              search_url: String,
+              recent_post_ids: ::Array[String],
+              found_post_ids: ::Array[String]
+            ) -> void
+
+            def to_hash: -> {
+              query: String,
+              search_url: String,
+              recent_post_ids: ::Array[String],
+              found_post_ids: ::Array[String]
+            }
+          end
+        end
+
+        type suggestion =
+          {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Suggestion::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Suggestion::Evidence?
+          }
+
+        class Suggestion < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor verdict: XTwitterScraper::Models::shadowban_verdict
+
+          attr_accessor reason: XTwitterScraper::Models::ShadowbanReport::Checks::Suggestion::reason
+
+          attr_accessor evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Suggestion::Evidence?
+
+          def initialize: (
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Suggestion::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Suggestion::Evidence?
+          ) -> void
+
+          def to_hash: -> {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Suggestion::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Suggestion::Evidence?
+          }
+
+          type reason = :suggested | :not_suggested | :unavailable | :suspended
+
+          module Reason
+            extend XTwitterScraper::Internal::Type::Enum
+
+            SUGGESTED: :suggested
+            NOT_SUGGESTED: :not_suggested
+            UNAVAILABLE: :unavailable
+            SUSPENDED: :suspended
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::ShadowbanReport::Checks::Suggestion::reason]
+          end
+
+          type evidence =
+            { query: String, suggested_usernames: ::Array[String] }
+
+          class Evidence < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor query: String
+
+            attr_accessor suggested_usernames: ::Array[String]
+
+            def initialize: (
+              query: String,
+              suggested_usernames: ::Array[String]
+            ) -> void
+
+            def to_hash: -> {
+              query: String,
+              suggested_usernames: ::Array[String]
+            }
+          end
+        end
+
+        type replies =
+          {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Replies::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Replies::Evidence?
+          }
+
+        class Replies < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor verdict: XTwitterScraper::Models::shadowban_verdict
+
+          attr_accessor reason: XTwitterScraper::Models::ShadowbanReport::Checks::Replies::reason
+
+          attr_accessor evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Replies::Evidence?
+
+          def initialize: (
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Replies::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Replies::Evidence?
+          ) -> void
+
+          def to_hash: -> {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Replies::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Replies::Evidence?
+          }
+
+          type reason =
+            :in_thread
+            | :more_replies
+            | :no_recent_replies
+            | :not_found
+            | :unavailable
+            | :protected
+            | :suspended
+
+          module Reason
+            extend XTwitterScraper::Internal::Type::Enum
+
+            IN_THREAD: :in_thread
+            MORE_REPLIES: :more_replies
+            NO_RECENT_REPLIES: :no_recent_replies
+            NOT_FOUND: :not_found
+            UNAVAILABLE: :unavailable
+            PROTECTED: :protected
+            SUSPENDED: :suspended
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::ShadowbanReport::Checks::Replies::reason]
+          end
+
+          type evidence =
+            {
+              replies: ::Array[XTwitterScraper::Models::ShadowbanReport::Checks::Replies::Evidence::Reply]
+            }
+
+          class Evidence < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor replies: ::Array[XTwitterScraper::Models::ShadowbanReport::Checks::Replies::Evidence::Reply]
+
+            def initialize: (
+              replies: ::Array[XTwitterScraper::Models::ShadowbanReport::Checks::Replies::Evidence::Reply]
+            ) -> void
+
+            def to_hash: -> {
+              replies: ::Array[XTwitterScraper::Models::ShadowbanReport::Checks::Replies::Evidence::Reply]
+            }
+
+            type reply =
+              {
+                reply_id: String,
+                reply_url: String,
+                parent_id: String,
+                parent_url: String,
+                placement: XTwitterScraper::Models::ShadowbanReport::Checks::Replies::Evidence::Reply::placement
+              }
+
+            class Reply < XTwitterScraper::Internal::Type::BaseModel
+              attr_accessor reply_id: String
+
+              attr_accessor reply_url: String
+
+              attr_accessor parent_id: String
+
+              attr_accessor parent_url: String
+
+              attr_accessor placement: XTwitterScraper::Models::ShadowbanReport::Checks::Replies::Evidence::Reply::placement
+
+              def initialize: (
+                reply_id: String,
+                reply_url: String,
+                parent_id: String,
+                parent_url: String,
+                placement: XTwitterScraper::Models::ShadowbanReport::Checks::Replies::Evidence::Reply::placement
+              ) -> void
+
+              def to_hash: -> {
+                reply_id: String,
+                reply_url: String,
+                parent_id: String,
+                parent_url: String,
+                placement: XTwitterScraper::Models::ShadowbanReport::Checks::Replies::Evidence::Reply::placement
+              }
+
+              type placement = :thread | :more_replies | :not_found
+
+              module Placement
+                extend XTwitterScraper::Internal::Type::Enum
+
+                THREAD: :thread
+                MORE_REPLIES: :more_replies
+                NOT_FOUND: :not_found
+
+                def self?.values: -> ::Array[XTwitterScraper::Models::ShadowbanReport::Checks::Replies::Evidence::Reply::placement]
+              end
+            end
+          end
+        end
+
+        type reply_lock =
+          {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::ReplyLock::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::ReplyLock::Evidence?
+          }
+
+        class ReplyLock < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor verdict: XTwitterScraper::Models::shadowban_verdict
+
+          attr_accessor reason: XTwitterScraper::Models::ShadowbanReport::Checks::ReplyLock::reason
+
+          attr_accessor evidence: XTwitterScraper::Models::ShadowbanReport::Checks::ReplyLock::Evidence?
+
+          def initialize: (
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::ReplyLock::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::ReplyLock::Evidence?
+          ) -> void
+
+          def to_hash: -> {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::ReplyLock::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::ReplyLock::Evidence?
+          }
+
+          type reason =
+            :replies_show
+            | :replies_missing
+            | :no_recent_replies
+            | :unavailable
+            | :protected
+            | :suspended
+
+          module Reason
+            extend XTwitterScraper::Internal::Type::Enum
+
+            REPLIES_SHOW: :replies_show
+            REPLIES_MISSING: :replies_missing
+            NO_RECENT_REPLIES: :no_recent_replies
+            UNAVAILABLE: :unavailable
+            PROTECTED: :protected
+            SUSPENDED: :suspended
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::ShadowbanReport::Checks::ReplyLock::reason]
+          end
+
+          type evidence = { checked_replies: Integer, shown_replies: Integer }
+
+          class Evidence < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor checked_replies: Integer
+
+            attr_accessor shown_replies: Integer
+
+            def initialize: (
+              checked_replies: Integer,
+              shown_replies: Integer
+            ) -> void
+
+            def to_hash: -> { checked_replies: Integer, shown_replies: Integer }
+          end
+        end
+
+        type timeline =
+          {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Timeline::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Timeline::Evidence?
+          }
+
+        class Timeline < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor verdict: XTwitterScraper::Models::shadowban_verdict
+
+          attr_accessor reason: XTwitterScraper::Models::ShadowbanReport::Checks::Timeline::reason
+
+          attr_accessor evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Timeline::Evidence?
+
+          def initialize: (
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Timeline::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Timeline::Evidence?
+          ) -> void
+
+          def to_hash: -> {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Timeline::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Timeline::Evidence?
+          }
+
+          type reason =
+            :visible
+            | :hidden
+            | :no_posts
+            | :unavailable
+            | :protected
+            | :suspended
+
+          module Reason
+            extend XTwitterScraper::Internal::Type::Enum
+
+            VISIBLE: :visible
+            HIDDEN: :hidden
+            NO_POSTS: :no_posts
+            UNAVAILABLE: :unavailable
+            PROTECTED: :protected
+            SUSPENDED: :suspended
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::ShadowbanReport::Checks::Timeline::reason]
+          end
+
+          type evidence = { post_count: Integer?, timeline_posts: Integer }
+
+          class Evidence < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor post_count: Integer?
+
+            attr_accessor timeline_posts: Integer
+
+            def initialize: (
+              post_count: Integer?,
+              timeline_posts: Integer
+            ) -> void
+
+            def to_hash: -> { post_count: Integer?, timeline_posts: Integer }
+          end
+        end
+
+        type engagement =
+          {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Engagement::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Engagement::Evidence?
+          }
+
+        class Engagement < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor verdict: XTwitterScraper::Models::shadowban_verdict
+
+          attr_accessor reason: XTwitterScraper::Models::ShadowbanReport::Checks::Engagement::reason
+
+          attr_accessor evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Engagement::Evidence?
+
+          def initialize: (
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Engagement::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Engagement::Evidence?
+          ) -> void
+
+          def to_hash: -> {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Engagement::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Engagement::Evidence?
+          }
+
+          type reason =
+            :typical
+            | :low
+            | :too_few_posts
+            | :unavailable
+            | :protected
+            | :suspended
+
+          module Reason
+            extend XTwitterScraper::Internal::Type::Enum
+
+            TYPICAL: :typical
+            LOW: :low
+            TOO_FEW_POSTS: :too_few_posts
+            UNAVAILABLE: :unavailable
+            PROTECTED: :protected
+            SUSPENDED: :suspended
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::ShadowbanReport::Checks::Engagement::reason]
+          end
+
+          type evidence =
+            {
+              newest_median: Float,
+              newest_posts: Integer,
+              earlier_median: Float,
+              earlier_posts: Integer
+            }
+
+          class Evidence < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor newest_median: Float
+
+            attr_accessor newest_posts: Integer
+
+            attr_accessor earlier_median: Float
+
+            attr_accessor earlier_posts: Integer
+
+            def initialize: (
+              newest_median: Float,
+              newest_posts: Integer,
+              earlier_median: Float,
+              earlier_posts: Integer
+            ) -> void
+
+            def to_hash: -> {
+              newest_median: Float,
+              newest_posts: Integer,
+              earlier_median: Float,
+              earlier_posts: Integer
+            }
+          end
+        end
+
+        type sensitive =
+          {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Sensitive::reason,
+            evidence: top?
+          }
+
+        class Sensitive < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor verdict: XTwitterScraper::Models::shadowban_verdict
+
+          attr_accessor reason: XTwitterScraper::Models::ShadowbanReport::Checks::Sensitive::reason
+
+          attr_accessor evidence: top?
+
+          def initialize: (
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Sensitive::reason,
+            evidence: top?
+          ) -> void
+
+          def to_hash: -> {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Sensitive::reason,
+            evidence: top?
+          }
+
+          type reason = :not_flagged | :flagged | :unknown | :suspended
+
+          module Reason
+            extend XTwitterScraper::Internal::Type::Enum
+
+            NOT_FLAGGED: :not_flagged
+            FLAGGED: :flagged
+            UNKNOWN: :unknown
+            SUSPENDED: :suspended
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::ShadowbanReport::Checks::Sensitive::reason]
+          end
+        end
+
+        type withheld =
+          {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Withheld::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Withheld::Evidence?
+          }
+
+        class Withheld < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor verdict: XTwitterScraper::Models::shadowban_verdict
+
+          attr_accessor reason: XTwitterScraper::Models::ShadowbanReport::Checks::Withheld::reason
+
+          attr_accessor evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Withheld::Evidence?
+
+          def initialize: (
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Withheld::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Withheld::Evidence?
+          ) -> void
+
+          def to_hash: -> {
+            verdict: XTwitterScraper::Models::shadowban_verdict,
+            reason: XTwitterScraper::Models::ShadowbanReport::Checks::Withheld::reason,
+            evidence: XTwitterScraper::Models::ShadowbanReport::Checks::Withheld::Evidence?
+          }
+
+          type reason = :none | :countries | :suspended
+
+          module Reason
+            extend XTwitterScraper::Internal::Type::Enum
+
+            NONE: :none
+            COUNTRIES: :countries
+            SUSPENDED: :suspended
+
+            def self?.values: -> ::Array[XTwitterScraper::Models::ShadowbanReport::Checks::Withheld::reason]
+          end
+
+          type evidence = { countries: ::Array[String] }
+
+          class Evidence < XTwitterScraper::Internal::Type::BaseModel
+            attr_accessor countries: ::Array[String]
+
+            def initialize: (countries: ::Array[String]) -> void
+
+            def to_hash: -> { countries: ::Array[String] }
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,127 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# typed: strong
+
+module XTwitterScraper
+  module Models
+    module X
+      class UserRetrieveBatchTweetsParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        OrHash =
+          T.type_alias do
+            T.any(
+              XTwitterScraper::Models::X::UserRetrieveBatchTweetsParams,
+              XTwitterScraper::Internal::AnyHash
+            )
+          end
+
+        # Comma-separated numeric IDs of the users to read posts from. Xquik reads any
+        # other entry as a username, with or without @, so IDs and usernames can mix.
+        # Xquik ignores duplicates and keeps the first-seen order, IDs before usernames. A
+        # longer URL fails at the edge before Xquik reads it.
+        sig { returns(T.nilable(String)) }
+        attr_reader :ids
+
+        sig { params(ids: String).void }
+        attr_writer :ids
+
+        # Comma-separated X usernames, with or without @, or profile links such as
+        # x.com/nasa, in place of ids. A name in another case is the same account. A
+        # number is a user ID. A longer URL fails at the edge before Xquik reads it.
+        sig { returns(T.nilable(String)) }
+        attr_reader :usernames
+
+        sig { params(usernames: String).void }
+        attr_writer :usernames
+
+        # Posts per user (1-300, default 20). A low credit balance can return fewer. Its
+        # aliases are limit, count, max_results, maxItems, max_items & per_page.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :page_size
+
+        sig { params(page_size: Integer).void }
+        attr_writer :page_size
+
+        # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+        # author.username. A list keeps the field in each item. Case & underscores do not
+        # matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+        # always stay. An unknown name answers 400 unknown_field with the valid names,
+        # before any read. The price stays the same. SDK row types then hold only the
+        # named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+        # the fields you need with `fields` & `omit`.
+        sig { returns(T.nilable(String)) }
+        attr_reader :fields
+
+        sig { params(fields: String).void }
+        attr_writer :fields
+
+        # Fields to drop from each row, comma-separated. It takes the same names as
+        # fields. With fields, it drops from the kept fields. A longer URL fails at the
+        # edge before Xquik reads it.
+        sig { returns(T.nilable(String)) }
+        attr_reader :omit
+
+        sig { params(omit: String).void }
+        attr_writer :omit
+
+        sig do
+          params(
+            ids: String,
+            usernames: String,
+            page_size: Integer,
+            fields: String,
+            omit: String,
+            request_options: XTwitterScraper::RequestOptions::OrHash
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Comma-separated numeric IDs of the users to read posts from. Xquik reads any
+          # other entry as a username, with or without @, so IDs and usernames can mix.
+          # Xquik ignores duplicates and keeps the first-seen order, IDs before usernames. A
+          # longer URL fails at the edge before Xquik reads it.
+          ids: nil,
+          # Comma-separated X usernames, with or without @, or profile links such as
+          # x.com/nasa, in place of ids. A name in another case is the same account. A
+          # number is a user ID. A longer URL fails at the edge before Xquik reads it.
+          usernames: nil,
+          # Posts per user (1-300, default 20). A low credit balance can return fewer. Its
+          # aliases are limit, count, max_results, maxItems, max_items & per_page.
+          page_size: nil,
+          # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+          # author.username. A list keeps the field in each item. Case & underscores do not
+          # matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+          # always stay. An unknown name answers 400 unknown_field with the valid names,
+          # before any read. The price stays the same. SDK row types then hold only the
+          # named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+          # the fields you need with `fields` & `omit`.
+          fields: nil,
+          # Fields to drop from each row, comma-separated. It takes the same names as
+          # fields. With fields, it drops from the kept fields. A longer URL fails at the
+          # edge before Xquik reads it.
+          omit: nil,
+          request_options: {}
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              ids: String,
+              usernames: String,
+              page_size: Integer,
+              fields: String,
+              omit: String,
+              request_options: XTwitterScraper::RequestOptions
+            }
+          )
+        end
+        def to_hash
+        end
+      end
+    end
+  end
+end

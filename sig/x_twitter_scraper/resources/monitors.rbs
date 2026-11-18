@@ -7,6 +7,8 @@ module XTwitterScraper
     class Monitors
       attr_reader keywords: XTwitterScraper::Resources::Monitors::Keywords
 
+      attr_reader posts: XTwitterScraper::Resources::Monitors::Posts
+
       def create: (
         event_types: ::Array[XTwitterScraper::Models::event_type],
         username: String,
@@ -37,6 +39,13 @@ module XTwitterScraper
         String id,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::MonitorDeactivateResponse
+
+      def upsert_by_username: (
+        String username,
+        event_types: ::Array[XTwitterScraper::Models::event_type],
+        ?name: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::MonitorUpsertByUsernameResponse
 
       def initialize: (client: XTwitterScraper::Client) -> void
     end

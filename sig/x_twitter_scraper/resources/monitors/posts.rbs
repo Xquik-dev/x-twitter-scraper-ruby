@@ -1,0 +1,51 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Resources
+    class Monitors
+      class Posts
+        def delete: (
+          String id,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::Monitors::PostDeleteResponse
+
+        def list: (
+          ?limit: Integer,
+          ?cursor: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::Monitors::PostListResponse
+
+        def retrieve: (
+          String id,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::PostMonitor
+
+        def retrieve_metrics: (
+          String id,
+          ?hours: Integer,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::PostMonitorMetrics
+
+        def update: (
+          String id,
+          ?event_types: ::Array[XTwitterScraper::Models::post_event_type],
+          ?is_active: bool,
+          ?name: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::PostMonitor
+
+        def create: (
+          post: String,
+          ?name: String,
+          ?event_types: ::Array[XTwitterScraper::Models::post_event_type],
+          ?is_active: bool,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::PostMonitor
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

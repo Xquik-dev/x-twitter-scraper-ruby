@@ -66,6 +66,48 @@ module XTwitterScraper
         )
       end
 
+      # Streams the account's monitor events as server-sent events, each named by its
+      # event type and numbered by its event ID. A reconnect that sends Last-Event-ID
+      # first gets every event after that one from the last 30 days, then each new
+      # event. Set lookBack to also get events saved late. A connection lasts up to 30
+      # minutes and sends a comment every 15 seconds while idle. Keep up to 200 streams
+      # open per account. Events and streams cost no credits. Add include=post_metrics
+      # to also get post.metrics frames. The first poll sends 1 for each post monitor
+      # with a check or a pause. After that, a frame comes when a monitor's saved
+      # numbers or status change. These frames carry no ID, so Last-Event-ID never
+      # moves.
+      #
+      # @overload stream(include: nil, look_back: nil, last_event_id: nil, request_options: {})
+      #
+      # @param include [Symbol, XTwitterScraper::Models::EventStreamParams::Include] Set to post_metrics to also get each post monitor's saved numbers. Any other value is refused.
+      #
+      # @param look_back [Boolean] Set to true to resume 30 seconds before Last-Event-ID. Events saved late then still arrive. Events you have can arrive again, so skip IDs you've seen. An ID the stream can't find starts 5 minutes back, not 30 days.
+      #
+      # @param last_event_id [String] The last event ID the client got. The stream first sends every event after it. A value that is not an event ID counts as no header.
+      #
+      # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [XTwitterScraper::Internal::Stream<XTwitterScraper::Models::Event>]
+      #
+      # @see XTwitterScraper::Models::EventStreamParams
+      def stream(params = {})
+        parsed, options = XTwitterScraper::Models::EventStreamParams.dump_request(params)
+        header_params = {last_event_id: "last-event-id"}
+        query = XTwitterScraper::Internal::Util.encode_query_params(parsed.except(*header_params.keys))
+        @client.request(
+          method: :get,
+          path: "events/stream",
+          query: query,
+          headers: {
+            "accept" => "text/event-stream",
+            **parsed.slice(*header_params.keys).transform_keys(header_params)
+          },
+          stream: XTwitterScraper::Internal::Stream,
+          model: XTwitterScraper::Models::Event,
+          options: options
+        )
+      end
+
       # @api private
       #
       # @param client [XTwitterScraper::Client]

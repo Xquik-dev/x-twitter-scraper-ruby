@@ -1,0 +1,157 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type x_list_banner =
+      {
+        url: String,
+        width: Integer,
+        height: Integer,
+        salient_rect: XTwitterScraper::Models::XListBanner::SalientRect,
+        media_id: String,
+        media_key: String,
+        palette: ::Array[XTwitterScraper::Models::XListBanner::Palette]
+      }
+
+    class XListBanner < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor url: String
+
+      attr_reader width: Integer?
+
+      def width=: (Integer) -> Integer
+
+      attr_reader height: Integer?
+
+      def height=: (Integer) -> Integer
+
+      attr_reader salient_rect: XTwitterScraper::Models::XListBanner::SalientRect?
+
+      def salient_rect=: (
+        XTwitterScraper::Models::XListBanner::SalientRect
+      ) -> XTwitterScraper::Models::XListBanner::SalientRect
+
+      attr_reader media_id: String?
+
+      def media_id=: (String) -> String
+
+      attr_reader media_key: String?
+
+      def media_key=: (String) -> String
+
+      attr_reader palette: ::Array[XTwitterScraper::Models::XListBanner::Palette]?
+
+      def palette=: (
+        ::Array[XTwitterScraper::Models::XListBanner::Palette]
+      ) -> ::Array[XTwitterScraper::Models::XListBanner::Palette]
+
+      def initialize: (
+        url: String,
+        ?width: Integer,
+        ?height: Integer,
+        ?salient_rect: XTwitterScraper::Models::XListBanner::SalientRect,
+        ?media_id: String,
+        ?media_key: String,
+        ?palette: ::Array[XTwitterScraper::Models::XListBanner::Palette]
+      ) -> void
+
+      def to_hash: -> {
+        url: String,
+        width: Integer,
+        height: Integer,
+        salient_rect: XTwitterScraper::Models::XListBanner::SalientRect,
+        media_id: String,
+        media_key: String,
+        palette: ::Array[XTwitterScraper::Models::XListBanner::Palette]
+      }
+
+      type salient_rect =
+        { left: Integer, top: Integer, width: Integer, height: Integer }
+
+      class SalientRect < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader left: Integer?
+
+        def left=: (Integer) -> Integer
+
+        attr_reader top: Integer?
+
+        def top=: (Integer) -> Integer
+
+        attr_reader width: Integer?
+
+        def width=: (Integer) -> Integer
+
+        attr_reader height: Integer?
+
+        def height=: (Integer) -> Integer
+
+        def initialize: (
+          ?left: Integer,
+          ?top: Integer,
+          ?width: Integer,
+          ?height: Integer
+        ) -> void
+
+        def to_hash: -> {
+          left: Integer,
+          top: Integer,
+          width: Integer,
+          height: Integer
+        }
+      end
+
+      type palette =
+        {
+          percentage: Float,
+          rgb: XTwitterScraper::Models::XListBanner::Palette::Rgb
+        }
+
+      class Palette < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader percentage: Float?
+
+        def percentage=: (Float) -> Float
+
+        attr_reader rgb: XTwitterScraper::Models::XListBanner::Palette::Rgb?
+
+        def rgb=: (
+          XTwitterScraper::Models::XListBanner::Palette::Rgb
+        ) -> XTwitterScraper::Models::XListBanner::Palette::Rgb
+
+        def initialize: (
+          ?percentage: Float,
+          ?rgb: XTwitterScraper::Models::XListBanner::Palette::Rgb
+        ) -> void
+
+        def to_hash: -> {
+          percentage: Float,
+          rgb: XTwitterScraper::Models::XListBanner::Palette::Rgb
+        }
+
+        type rgb = { red: Integer, green: Integer, blue: Integer }
+
+        class Rgb < XTwitterScraper::Internal::Type::BaseModel
+          attr_reader red: Integer?
+
+          def red=: (Integer) -> Integer
+
+          attr_reader green: Integer?
+
+          def green=: (Integer) -> Integer
+
+          attr_reader blue: Integer?
+
+          def blue=: (Integer) -> Integer
+
+          def initialize: (
+            ?red: Integer,
+            ?green: Integer,
+            ?blue: Integer
+          ) -> void
+
+          def to_hash: -> { red: Integer, green: Integer, blue: Integer }
+        end
+      end
+    end
+  end
+end

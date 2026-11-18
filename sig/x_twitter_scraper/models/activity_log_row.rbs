@@ -1,0 +1,95 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type activity_log_row =
+      {
+        time: String,
+        category: String,
+        type: String,
+        activity: String,
+        status: String,
+        source: String,
+        target: String,
+        results: XTwitterScraper::Models::ActivityLogRow::results,
+        credits: XTwitterScraper::Models::ActivityLogRow::credits,
+        details: String,
+        id: String,
+        link: String
+      }
+
+    class ActivityLogRow < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor time: String
+
+      attr_accessor category: String
+
+      attr_accessor type: String
+
+      attr_accessor activity: String
+
+      attr_accessor status: String
+
+      attr_accessor source: String
+
+      attr_accessor target: String
+
+      attr_accessor results: XTwitterScraper::Models::ActivityLogRow::results
+
+      attr_accessor credits: XTwitterScraper::Models::ActivityLogRow::credits
+
+      attr_accessor details: String
+
+      attr_accessor id: String
+
+      attr_accessor link: String
+
+      def initialize: (
+        time: String,
+        category: String,
+        type: String,
+        activity: String,
+        status: String,
+        source: String,
+        target: String,
+        results: XTwitterScraper::Models::ActivityLogRow::results,
+        credits: XTwitterScraper::Models::ActivityLogRow::credits,
+        details: String,
+        id: String,
+        link: String
+      ) -> void
+
+      def to_hash: -> {
+        time: String,
+        category: String,
+        type: String,
+        activity: String,
+        status: String,
+        source: String,
+        target: String,
+        results: XTwitterScraper::Models::ActivityLogRow::results,
+        credits: XTwitterScraper::Models::ActivityLogRow::credits,
+        details: String,
+        id: String,
+        link: String
+      }
+
+      type results = Integer | String
+
+      module Results
+        extend XTwitterScraper::Internal::Type::Union
+
+        def self?.variants: -> ::Array[XTwitterScraper::Models::ActivityLogRow::results]
+      end
+
+      type credits = Integer | String
+
+      module Credits
+        extend XTwitterScraper::Internal::Type::Union
+
+        def self?.variants: -> ::Array[XTwitterScraper::Models::ActivityLogRow::credits]
+      end
+    end
+  end
+end

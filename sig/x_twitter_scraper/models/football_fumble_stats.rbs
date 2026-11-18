@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_fumble_stats =
+      {
+        lost: Integer?,
+        opponent_recovery_touchdowns: Integer?,
+        own_recovery_touchdowns: Integer?
+      }
+
+    class FootballFumbleStats < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor lost: Integer?
+
+      attr_accessor opponent_recovery_touchdowns: Integer?
+
+      attr_accessor own_recovery_touchdowns: Integer?
+
+      def initialize: (
+        lost: Integer?,
+        opponent_recovery_touchdowns: Integer?,
+        own_recovery_touchdowns: Integer?
+      ) -> void
+
+      def to_hash: -> {
+        lost: Integer?,
+        opponent_recovery_touchdowns: Integer?,
+        own_recovery_touchdowns: Integer?
+      }
+    end
+  end
+end

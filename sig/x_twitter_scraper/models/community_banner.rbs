@@ -1,0 +1,118 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type community_banner =
+      {
+        url: String,
+        width: Integer,
+        height: Integer,
+        colors: ::Array[XTwitterScraper::Models::CommunityBanner::Color],
+        focus: XTwitterScraper::Models::CommunityBanner::Focus
+      }
+
+    class CommunityBanner < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor url: String
+
+      attr_reader width: Integer?
+
+      def width=: (Integer) -> Integer
+
+      attr_reader height: Integer?
+
+      def height=: (Integer) -> Integer
+
+      attr_reader colors: ::Array[XTwitterScraper::Models::CommunityBanner::Color]?
+
+      def colors=: (
+        ::Array[XTwitterScraper::Models::CommunityBanner::Color]
+      ) -> ::Array[XTwitterScraper::Models::CommunityBanner::Color]
+
+      attr_reader focus: XTwitterScraper::Models::CommunityBanner::Focus?
+
+      def focus=: (
+        XTwitterScraper::Models::CommunityBanner::Focus
+      ) -> XTwitterScraper::Models::CommunityBanner::Focus
+
+      def initialize: (
+        url: String,
+        ?width: Integer,
+        ?height: Integer,
+        ?colors: ::Array[XTwitterScraper::Models::CommunityBanner::Color],
+        ?focus: XTwitterScraper::Models::CommunityBanner::Focus
+      ) -> void
+
+      def to_hash: -> {
+        url: String,
+        width: Integer,
+        height: Integer,
+        colors: ::Array[XTwitterScraper::Models::CommunityBanner::Color],
+        focus: XTwitterScraper::Models::CommunityBanner::Focus
+      }
+
+      type color =
+        { percentage: Float, red: Integer, green: Integer, blue: Integer }
+
+      class Color < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor percentage: Float
+
+        attr_accessor red: Integer
+
+        attr_accessor green: Integer
+
+        attr_accessor blue: Integer
+
+        def initialize: (
+          percentage: Float,
+          red: Integer,
+          green: Integer,
+          blue: Integer
+        ) -> void
+
+        def to_hash: -> {
+          percentage: Float,
+          red: Integer,
+          green: Integer,
+          blue: Integer
+        }
+      end
+
+      type focus =
+        { left: Integer, top: Integer, width: Integer, height: Integer }
+
+      class Focus < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader left: Integer?
+
+        def left=: (Integer) -> Integer
+
+        attr_reader top: Integer?
+
+        def top=: (Integer) -> Integer
+
+        attr_reader width: Integer?
+
+        def width=: (Integer) -> Integer
+
+        attr_reader height: Integer?
+
+        def height=: (Integer) -> Integer
+
+        def initialize: (
+          ?left: Integer,
+          ?top: Integer,
+          ?width: Integer,
+          ?height: Integer
+        ) -> void
+
+        def to_hash: -> {
+          left: Integer,
+          top: Integer,
+          width: Integer,
+          height: Integer
+        }
+      end
+    end
+  end
+end

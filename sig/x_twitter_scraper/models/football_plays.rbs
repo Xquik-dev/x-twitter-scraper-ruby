@@ -1,0 +1,65 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_plays =
+      {
+        id: String,
+        league: XTwitterScraper::Models::FootballPlays::league,
+        home_team_id: String?,
+        away_team_id: String?,
+        quarters: ::Array[XTwitterScraper::Models::FootballQuarter],
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam],
+        players: ::Hash[Symbol, XTwitterScraper::Models::FootballPlayer]
+      }
+
+    class FootballPlays < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor league: XTwitterScraper::Models::FootballPlays::league
+
+      attr_accessor home_team_id: String?
+
+      attr_accessor away_team_id: String?
+
+      attr_accessor quarters: ::Array[XTwitterScraper::Models::FootballQuarter]
+
+      attr_accessor teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam]
+
+      attr_accessor players: ::Hash[Symbol, XTwitterScraper::Models::FootballPlayer]
+
+      def initialize: (
+        id: String,
+        league: XTwitterScraper::Models::FootballPlays::league,
+        home_team_id: String?,
+        away_team_id: String?,
+        quarters: ::Array[XTwitterScraper::Models::FootballQuarter],
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam],
+        players: ::Hash[Symbol, XTwitterScraper::Models::FootballPlayer]
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        league: XTwitterScraper::Models::FootballPlays::league,
+        home_team_id: String?,
+        away_team_id: String?,
+        quarters: ::Array[XTwitterScraper::Models::FootballQuarter],
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam],
+        players: ::Hash[Symbol, XTwitterScraper::Models::FootballPlayer]
+      }
+
+      type league = :nfl | :ncaafb
+
+      module League
+        extend XTwitterScraper::Internal::Type::Enum
+
+        NFL: :nfl
+        NCAAFB: :ncaafb
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::FootballPlays::league]
+      end
+    end
+  end
+end

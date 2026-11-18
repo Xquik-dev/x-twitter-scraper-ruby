@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type community_analytics_metric = { count: Integer, change_percent: Float }
+
+    class CommunityAnalyticsMetric < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor count: Integer
+
+      attr_accessor change_percent: Float
+
+      def initialize: (count: Integer, change_percent: Float) -> void
+
+      def to_hash: -> { count: Integer, change_percent: Float }
+    end
+  end
+end

@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_team_box =
+      {
+        team_id: String?,
+        totals: XTwitterScraper::Models::FootballTeamTotals?,
+        players: ::Array[XTwitterScraper::Models::FootballPlayerStats]
+      }
+
+    class FootballTeamBox < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor team_id: String?
+
+      attr_accessor totals: XTwitterScraper::Models::FootballTeamTotals?
+
+      attr_accessor players: ::Array[XTwitterScraper::Models::FootballPlayerStats]
+
+      def initialize: (
+        team_id: String?,
+        totals: XTwitterScraper::Models::FootballTeamTotals?,
+        players: ::Array[XTwitterScraper::Models::FootballPlayerStats]
+      ) -> void
+
+      def to_hash: -> {
+        team_id: String?,
+        totals: XTwitterScraper::Models::FootballTeamTotals?,
+        players: ::Array[XTwitterScraper::Models::FootballPlayerStats]
+      }
+    end
+  end
+end

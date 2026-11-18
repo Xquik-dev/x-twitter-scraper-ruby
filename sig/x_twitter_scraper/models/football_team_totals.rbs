@@ -1,0 +1,88 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_team_totals =
+      {
+        first_downs: Integer?,
+        third_downs: XTwitterScraper::Models::FootballTeamTotals::ThirdDowns?,
+        fumbles: XTwitterScraper::Models::FootballFumbleStats?,
+        passing: XTwitterScraper::Models::FootballPassingStats?,
+        penalties: XTwitterScraper::Models::FootballTeamTotals::Penalties?,
+        rushing: XTwitterScraper::Models::FootballRushingStats?,
+        time_of_possession_seconds: Integer?,
+        total_yards: Integer?,
+        turnovers: Integer?
+      }
+
+    class FootballTeamTotals < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor first_downs: Integer?
+
+      attr_accessor third_downs: XTwitterScraper::Models::FootballTeamTotals::ThirdDowns?
+
+      attr_accessor fumbles: XTwitterScraper::Models::FootballFumbleStats?
+
+      attr_accessor passing: XTwitterScraper::Models::FootballPassingStats?
+
+      attr_accessor penalties: XTwitterScraper::Models::FootballTeamTotals::Penalties?
+
+      attr_accessor rushing: XTwitterScraper::Models::FootballRushingStats?
+
+      attr_accessor time_of_possession_seconds: Integer?
+
+      attr_accessor total_yards: Integer?
+
+      attr_accessor turnovers: Integer?
+
+      def initialize: (
+        first_downs: Integer?,
+        third_downs: XTwitterScraper::Models::FootballTeamTotals::ThirdDowns?,
+        fumbles: XTwitterScraper::Models::FootballFumbleStats?,
+        passing: XTwitterScraper::Models::FootballPassingStats?,
+        penalties: XTwitterScraper::Models::FootballTeamTotals::Penalties?,
+        rushing: XTwitterScraper::Models::FootballRushingStats?,
+        time_of_possession_seconds: Integer?,
+        total_yards: Integer?,
+        turnovers: Integer?
+      ) -> void
+
+      def to_hash: -> {
+        first_downs: Integer?,
+        third_downs: XTwitterScraper::Models::FootballTeamTotals::ThirdDowns?,
+        fumbles: XTwitterScraper::Models::FootballFumbleStats?,
+        passing: XTwitterScraper::Models::FootballPassingStats?,
+        penalties: XTwitterScraper::Models::FootballTeamTotals::Penalties?,
+        rushing: XTwitterScraper::Models::FootballRushingStats?,
+        time_of_possession_seconds: Integer?,
+        total_yards: Integer?,
+        turnovers: Integer?
+      }
+
+      type third_downs = { attempts: Integer?, successes: Integer? }
+
+      class ThirdDowns < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor attempts: Integer?
+
+        attr_accessor successes: Integer?
+
+        def initialize: (attempts: Integer?, successes: Integer?) -> void
+
+        def to_hash: -> { attempts: Integer?, successes: Integer? }
+      end
+
+      type penalties = { count: Integer?, yards: Integer? }
+
+      class Penalties < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor count: Integer?
+
+        attr_accessor yards: Integer?
+
+        def initialize: (count: Integer?, yards: Integer?) -> void
+
+        def to_hash: -> { count: Integer?, yards: Integer? }
+      end
+    end
+  end
+end

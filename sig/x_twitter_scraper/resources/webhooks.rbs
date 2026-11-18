@@ -47,6 +47,11 @@ module XTwitterScraper
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::WebhookTestResponse
 
+      def create_telegram_link: (
+        ?event_types: ::Array[XTwitterScraper::Models::event_type],
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::WebhookCreateTelegramLinkResponse
+
       def initialize: (client: XTwitterScraper::Client) -> void
     end
   end

@@ -1,0 +1,83 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type subtitle_track =
+      {
+        media_key: String,
+        language: String,
+        name: String,
+        auto_generated: bool,
+        url: String,
+        text: String,
+        truncated: bool,
+        cues: ::Array[XTwitterScraper::Models::SubtitleTrack::Cue]
+      }
+
+    class SubtitleTrack < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader media_key: String?
+
+      def media_key=: (String) -> String
+
+      attr_reader language: String?
+
+      def language=: (String) -> String
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_accessor auto_generated: bool
+
+      attr_accessor url: String
+
+      attr_accessor text: String
+
+      attr_accessor truncated: bool
+
+      attr_accessor cues: ::Array[XTwitterScraper::Models::SubtitleTrack::Cue]
+
+      def initialize: (
+        auto_generated: bool,
+        url: String,
+        text: String,
+        truncated: bool,
+        cues: ::Array[XTwitterScraper::Models::SubtitleTrack::Cue],
+        ?media_key: String,
+        ?language: String,
+        ?name: String
+      ) -> void
+
+      def to_hash: -> {
+        media_key: String,
+        language: String,
+        name: String,
+        auto_generated: bool,
+        url: String,
+        text: String,
+        truncated: bool,
+        cues: ::Array[XTwitterScraper::Models::SubtitleTrack::Cue]
+      }
+
+      type cue = { start_ms: Integer, end_ms: Integer, text: String }
+
+      class Cue < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor start_ms: Integer
+
+        attr_accessor end_ms: Integer
+
+        attr_accessor text: String
+
+        def initialize: (
+          start_ms: Integer,
+          end_ms: Integer,
+          text: String
+        ) -> void
+
+        def to_hash: -> { start_ms: Integer, end_ms: Integer, text: String }
+      end
+    end
+  end
+end

@@ -1,0 +1,59 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type sports_team_game =
+      {
+        id: String,
+        starts_at: Time?,
+        venue: String?,
+        status: String?,
+        clock: String?,
+        quarter: Integer?,
+        home: XTwitterScraper::Models::FootballTeamScore,
+        away: XTwitterScraper::Models::FootballTeamScore
+      }
+
+    class SportsTeamGame < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor starts_at: Time?
+
+      attr_accessor venue: String?
+
+      attr_accessor status: String?
+
+      attr_accessor clock: String?
+
+      attr_accessor quarter: Integer?
+
+      attr_accessor home: XTwitterScraper::Models::FootballTeamScore
+
+      attr_accessor away: XTwitterScraper::Models::FootballTeamScore
+
+      def initialize: (
+        id: String,
+        starts_at: Time?,
+        venue: String?,
+        status: String?,
+        clock: String?,
+        quarter: Integer?,
+        home: XTwitterScraper::Models::FootballTeamScore,
+        away: XTwitterScraper::Models::FootballTeamScore
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        starts_at: Time?,
+        venue: String?,
+        status: String?,
+        clock: String?,
+        quarter: Integer?,
+        home: XTwitterScraper::Models::FootballTeamScore,
+        away: XTwitterScraper::Models::FootballTeamScore
+      }
+    end
+  end
+end

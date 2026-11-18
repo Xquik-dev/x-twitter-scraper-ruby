@@ -1,0 +1,95 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type monitor_upsert_by_username_response =
+      {
+        id: String,
+        username: String,
+        x_user_id: String,
+        name: String,
+        event_types: ::Array[XTwitterScraper::Models::event_type],
+        is_active: bool,
+        created_at: Time,
+        next_billing_at: Time,
+        paused_reason: XTwitterScraper::Models::MonitorUpsertByUsernameResponse::paused_reason,
+        paused_at: Time,
+        created: bool
+      }
+
+    class MonitorUpsertByUsernameResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor username: String
+
+      attr_accessor x_user_id: String
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_accessor event_types: ::Array[XTwitterScraper::Models::event_type]
+
+      attr_accessor is_active: bool
+
+      attr_accessor created_at: Time
+
+      attr_accessor next_billing_at: Time
+
+      attr_reader paused_reason: XTwitterScraper::Models::MonitorUpsertByUsernameResponse::paused_reason?
+
+      def paused_reason=: (
+        XTwitterScraper::Models::MonitorUpsertByUsernameResponse::paused_reason
+      ) -> XTwitterScraper::Models::MonitorUpsertByUsernameResponse::paused_reason
+
+      attr_reader paused_at: Time?
+
+      def paused_at=: (Time) -> Time
+
+      attr_accessor created: bool
+
+      def initialize: (
+        id: String,
+        username: String,
+        x_user_id: String,
+        event_types: ::Array[XTwitterScraper::Models::event_type],
+        is_active: bool,
+        created_at: Time,
+        next_billing_at: Time,
+        created: bool,
+        ?name: String,
+        ?paused_reason: XTwitterScraper::Models::MonitorUpsertByUsernameResponse::paused_reason,
+        ?paused_at: Time
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        username: String,
+        x_user_id: String,
+        name: String,
+        event_types: ::Array[XTwitterScraper::Models::event_type],
+        is_active: bool,
+        created_at: Time,
+        next_billing_at: Time,
+        paused_reason: XTwitterScraper::Models::MonitorUpsertByUsernameResponse::paused_reason,
+        paused_at: Time,
+        created: bool
+      }
+
+      type paused_reason =
+        :insufficient_credits | :x_account_protected | :x_user_not_found
+
+      module PausedReason
+        extend XTwitterScraper::Internal::Type::Enum
+
+        INSUFFICIENT_CREDITS: :insufficient_credits
+        X_ACCOUNT_PROTECTED: :x_account_protected
+        X_USER_NOT_FOUND: :x_user_not_found
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::MonitorUpsertByUsernameResponse::paused_reason]
+      end
+    end
+  end
+end

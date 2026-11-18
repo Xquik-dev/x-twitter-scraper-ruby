@@ -16,6 +16,9 @@ module XTwitterScraper
         # @return [XTwitterScraper::Resources::X::Communities::Tweets]
         attr_reader :tweets
 
+        # @return [XTwitterScraper::Resources::X::Communities::Media]
+        attr_reader :media
+
         # Create community
         #
         # @overload create(account:, name:, idempotency_key:, description: nil, request_options: {})
@@ -413,6 +416,228 @@ module XTwitterScraper
           )
         end
 
+        # Returns the communities X finds for a keyword, in X's order. Each community
+        # costs 1 credit. To search the tweets in Communities, use /x/communities/search.
+        #
+        # @overload find(q:, cursor: nil, page_size: nil, fields: nil, omit: nil, request_options: {})
+        #
+        # @param q [String] Keyword to find communities by, such as ai. Alias query. Xquik's cap is 4,096 characters.
+        #
+        # @param cursor [String] Pagination cursor for collection results. Also read as next_cursor, next_token, pagination_token or continuation_token.
+        #
+        # @param page_size [Integer] Items per page (1-100, default 20). Source, filters or credits can return fewer. Follow next_cursor for more pages. Its aliases are limit, count, max_results, maxItems, max_items & per_page.
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as author.username. A list keeps the field in each item. Case & underscores do not matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics always stay. An unknown name answers 400 unknown_field with the valid names, before any read. The price stays the same. SDK row types then hold only the named fields. A longer URL fails at the edge before Xquik reads it. Pick only the fields you need with `fields` & `omit`.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields. With fields, it drops from the kept fields. A longer URL fails at the edge before Xquik reads it.
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::CommunityPage]
+        #
+        # @see XTwitterScraper::Models::X::CommunityFindParams
+        def find(params)
+          parsed, options = XTwitterScraper::Models::X::CommunityFindParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: "x/communities/find",
+            query: query,
+            model: XTwitterScraper::Models::CommunityPage,
+            options: options
+          )
+        end
+
+        # Returns the communities X ranks highest under a topic or subtopic. Name it by
+        # topicId or by topic name from /x/communities/topics. Each community costs 1
+        # credit. A missing or unknown topic returns invalid_community_topic & lists the
+        # topic names.
+        #
+        # @overload list_popular(topic_id: nil, topic: nil, cursor: nil, page_size: nil, fields: nil, omit: nil, request_options: {})
+        #
+        # @param topic_id [String] Topic or subtopic ID from /x/communities/topics, such as 301. Wins over topic. X can add topics, so Xquik takes up to 280 characters, the most a post holds.
+        #
+        # @param topic [String] Topic or subtopic name in any case, such as technology. Send this or topicId. X can add topics, so Xquik takes up to 280 characters, the most a post holds.
+        #
+        # @param cursor [String] Pagination cursor for collection results. Also read as next_cursor, next_token, pagination_token or continuation_token.
+        #
+        # @param page_size [Integer] Items per page (1-100, default 20). Source, filters or credits can return fewer. Follow next_cursor for more pages. Its aliases are limit, count, max_results, maxItems, max_items & per_page.
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as author.username. A list keeps the field in each item. Case & underscores do not matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics always stay. An unknown name answers 400 unknown_field with the valid names, before any read. The price stays the same. SDK row types then hold only the named fields. A longer URL fails at the edge before Xquik reads it. Pick only the fields you need with `fields` & `omit`.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields. With fields, it drops from the kept fields. A longer URL fails at the edge before Xquik reads it.
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::CommunityPage]
+        #
+        # @see XTwitterScraper::Models::X::CommunityListPopularParams
+        def list_popular(params = {})
+          parsed, options = XTwitterScraper::Models::X::CommunityListPopularParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: "x/communities/popular",
+            query: query,
+            model: XTwitterScraper::Models::CommunityPage,
+            options: options
+          )
+        end
+
+        # Returns the communities X suggests, with their full public fields. X picks them
+        # per request, so 2 calls can differ. An empty list is free. Each community costs
+        # 1 credit.
+        #
+        # @overload list_suggested(limit: nil, fields: nil, omit: nil, request_options: {})
+        #
+        # @param limit [Integer] Maximum communities to return. Omit it for every suggestion. A low credit balance can return fewer. Aliases pageSize, count, max_results, maxItems, max_items & per_page.
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as author.username. A list keeps the field in each item. Case & underscores do not matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics always stay. An unknown name answers 400 unknown_field with the valid names, before any read. The price stays the same. SDK row types then hold only the named fields. A longer URL fails at the edge before Xquik reads it. Pick only the fields you need with `fields` & `omit`.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields. With fields, it drops from the kept fields. A longer URL fails at the edge before Xquik reads it.
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::CommunityListSuggestedResponse]
+        #
+        # @see XTwitterScraper::Models::X::CommunityListSuggestedParams
+        def list_suggested(params = {})
+          parsed, options = XTwitterScraper::Models::X::CommunityListSuggestedParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: "x/communities/suggested",
+            query: query,
+            model: XTwitterScraper::Models::X::CommunityListSuggestedResponse,
+            options: options
+          )
+        end
+
+        # Returns the community topics with their subtopics. Pass an ID as topicId, or a
+        # name as topic, to /x/communities/popular. Each top-level topic costs 1 credit,
+        # its subtopics included.
+        #
+        # @overload list_topics(limit: nil, fields: nil, omit: nil, request_options: {})
+        #
+        # @param limit [Integer] Maximum topics to return. Omit it for every topic. A low credit balance can return fewer. Aliases pageSize, count, max_results, maxItems, max_items & per_page.
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as author.username. A list keeps the field in each item. Case & underscores do not matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics always stay. An unknown name answers 400 unknown_field with the valid names, before any read. The price stays the same. SDK row types then hold only the named fields. A longer URL fails at the edge before Xquik reads it. Pick only the fields you need with `fields` & `omit`.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields. With fields, it drops from the kept fields. A longer URL fails at the edge before Xquik reads it.
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::CommunityListTopicsResponse]
+        #
+        # @see XTwitterScraper::Models::X::CommunityListTopicsParams
+        def list_topics(params = {})
+          parsed, options = XTwitterScraper::Models::X::CommunityListTopicsParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: "x/communities/topics",
+            query: query,
+            model: XTwitterScraper::Models::X::CommunityListTopicsResponse,
+            options: options
+          )
+        end
+
+        # Returns community activity for X's latest period. Includes likes, new members,
+        # posts, replies & unique posters. Each metric has a count and a changePercent.
+        # Each request costs 1 credit.
+        #
+        # @overload retrieve_analytics(id, fields: nil, omit: nil, request_options: {})
+        #
+        # @param id [String] X Community ID, or the URL-encoded Community link, such as x.com/i/communities/1500000000000000000. Another value gets a free 400 `invalid_community_id` before X is read.
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as author.username. A list keeps the field in each item. Case & underscores do not matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics always stay. An unknown name answers 400 unknown_field with the valid names, before any read. The price stays the same. SDK row types then hold only the named fields. A longer URL fails at the edge before Xquik reads it. Pick only the fields you need with `fields` & `omit`.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields. With fields, it drops from the kept fields. A longer URL fails at the edge before Xquik reads it.
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::CommunityAnalytics]
+        #
+        # @see XTwitterScraper::Models::X::CommunityRetrieveAnalyticsParams
+        def retrieve_analytics(id, params = {})
+          parsed, options = XTwitterScraper::Models::X::CommunityRetrieveAnalyticsParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: ["x/communities/%1$s/analytics", id],
+            query: query,
+            model: XTwitterScraper::Models::CommunityAnalytics,
+            options: options
+          )
+        end
+
+        # Finds a community's members by name or username, each with its role. An answer
+        # holds up to 10 members. Each member costs 1 credit. An answer without members is
+        # free.
+        #
+        # @overload search_members(id, q:, min_followers: nil, max_followers: nil, min_following: nil, max_following: nil, min_statuses: nil, max_statuses: nil, min_account_age_days: nil, verified_only: nil, blue_verified_only: nil, verified_type: nil, has_website: nil, has_location: nil, has_email: nil, business_email_only: nil, email_domains: nil, bio_contains: nil, location_contains: nil, username_contains: nil, fields: nil, omit: nil, request_options: {})
+        #
+        # @param id [String] X Community ID, or the URL-encoded Community link, such as x.com/i/communities/1500000000000000000. Another value gets a free 400 `invalid_community_id` before X is read.
+        #
+        # @param q [String] Name or username to find members by, such as marckohlbrugge. A leading @ is dropped. Alias query. Xquik's cap is 4,096 characters.
+        #
+        # @param min_followers [Integer] Minimum follower count. Profiles the filter drops cost nothing.
+        #
+        # @param max_followers [Integer] Maximum follower count. A profile without a count passes.
+        #
+        # @param min_following [Integer] Profiles must follow at least this many accounts.
+        #
+        # @param max_following [Integer] Profiles may follow at most this many accounts.
+        #
+        # @param min_statuses [Integer] Minimum post count. minPosts is also accepted.
+        #
+        # @param max_statuses [Integer] Maximum post count. maxPosts is also accepted.
+        #
+        # @param min_account_age_days [Integer] Minimum account age in whole days.
+        #
+        # @param verified_only [Boolean] Only return verified profiles.
+        #
+        # @param blue_verified_only [Boolean] Only return profiles X marks as blue verified. X marks many business & government accounts blue too. Use verifiedType for 1 badge type.
+        #
+        # @param verified_type [String] Match the verification type exactly, ignoring case.
+        #
+        # @param has_website [Boolean] Only return profiles with a website.
+        #
+        # @param has_location [Boolean] Only return profiles with a location.
+        #
+        # @param has_email [Boolean] Only return profiles that publish an email.
+        #
+        # @param business_email_only [Boolean] Only return profiles that publish an email outside free webmail, such as Gmail.
+        #
+        # @param email_domains [String] Only return profiles with an email at one of these domains. Separate domains with commas. Subdomains match.
+        #
+        # @param bio_contains [String] Match any comma-separated or line-separated bio term, ignoring case.
+        #
+        # @param location_contains [String] Match a location substring, ignoring case.
+        #
+        # @param username_contains [String] Match a username substring, ignoring case.
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as author.username. A list keeps the field in each item. Case & underscores do not matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics always stay. An unknown name answers 400 unknown_field with the valid names, before any read. The price stays the same. SDK row types then hold only the named fields. A longer URL fails at the edge before Xquik reads it. Pick only the fields you need with `fields` & `omit`.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields. With fields, it drops from the kept fields. A longer URL fails at the edge before Xquik reads it.
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::PaginatedUsers]
+        #
+        # @see XTwitterScraper::Models::X::CommunitySearchMembersParams
+        def search_members(id, params)
+          parsed, options = XTwitterScraper::Models::X::CommunitySearchMembersParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: ["x/communities/%1$s/members/search", id],
+            query: query,
+            model: XTwitterScraper::Models::PaginatedUsers,
+            options: options
+          )
+        end
+
         # @api private
         #
         # @param client [XTwitterScraper::Client]
@@ -420,6 +645,7 @@ module XTwitterScraper
           @client = client
           @join = XTwitterScraper::Resources::X::Communities::Join.new(client: client)
           @tweets = XTwitterScraper::Resources::X::Communities::Tweets.new(client: client)
+          @media = XTwitterScraper::Resources::X::Communities::Media.new(client: client)
         end
       end
     end

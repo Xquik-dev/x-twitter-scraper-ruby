@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_odds =
+      { money_line: String?, spread: String?, total: String? }
+
+    class FootballOdds < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor money_line: String?
+
+      attr_accessor spread: String?
+
+      attr_accessor total: String?
+
+      def initialize: (
+        money_line: String?,
+        spread: String?,
+        total: String?
+      ) -> void
+
+      def to_hash: -> { money_line: String?, spread: String?, total: String? }
+    end
+  end
+end

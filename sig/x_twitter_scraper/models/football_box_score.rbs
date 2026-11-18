@@ -1,0 +1,60 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_box_score =
+      {
+        id: String,
+        league: XTwitterScraper::Models::FootballBoxScore::league,
+        home: XTwitterScraper::Models::FootballTeamBox,
+        away: XTwitterScraper::Models::FootballTeamBox,
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam],
+        players: ::Hash[Symbol, XTwitterScraper::Models::FootballPlayer]
+      }
+
+    class FootballBoxScore < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor league: XTwitterScraper::Models::FootballBoxScore::league
+
+      attr_accessor home: XTwitterScraper::Models::FootballTeamBox
+
+      attr_accessor away: XTwitterScraper::Models::FootballTeamBox
+
+      attr_accessor teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam]
+
+      attr_accessor players: ::Hash[Symbol, XTwitterScraper::Models::FootballPlayer]
+
+      def initialize: (
+        id: String,
+        league: XTwitterScraper::Models::FootballBoxScore::league,
+        home: XTwitterScraper::Models::FootballTeamBox,
+        away: XTwitterScraper::Models::FootballTeamBox,
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam],
+        players: ::Hash[Symbol, XTwitterScraper::Models::FootballPlayer]
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        league: XTwitterScraper::Models::FootballBoxScore::league,
+        home: XTwitterScraper::Models::FootballTeamBox,
+        away: XTwitterScraper::Models::FootballTeamBox,
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam],
+        players: ::Hash[Symbol, XTwitterScraper::Models::FootballPlayer]
+      }
+
+      type league = :nfl | :ncaafb
+
+      module League
+        extend XTwitterScraper::Internal::Type::Enum
+
+        NFL: :nfl
+        NCAAFB: :ncaafb
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::FootballBoxScore::league]
+      end
+    end
+  end
+end

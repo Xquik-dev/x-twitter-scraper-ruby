@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type tweet_translation =
+      {
+        tweet_id: String,
+        language: String,
+        source_language: String,
+        text: String,
+        entities: XTwitterScraper::Models::TweetEntities
+      }
+
+    class TweetTranslation < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor tweet_id: String
+
+      attr_accessor language: String
+
+      attr_reader source_language: String?
+
+      def source_language=: (String) -> String
+
+      attr_accessor text: String
+
+      attr_accessor entities: XTwitterScraper::Models::TweetEntities
+
+      def initialize: (
+        tweet_id: String,
+        language: String,
+        text: String,
+        entities: XTwitterScraper::Models::TweetEntities,
+        ?source_language: String
+      ) -> void
+
+      def to_hash: -> {
+        tweet_id: String,
+        language: String,
+        source_language: String,
+        text: String,
+        entities: XTwitterScraper::Models::TweetEntities
+      }
+    end
+  end
+end

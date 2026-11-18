@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type community_member_preview =
+      { id: String, profile_picture: String, profile_picture_original: String }
+
+    class CommunityMemberPreview < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_reader profile_picture: String?
+
+      def profile_picture=: (String) -> String
+
+      attr_reader profile_picture_original: String?
+
+      def profile_picture_original=: (String) -> String
+
+      def initialize: (
+        id: String,
+        ?profile_picture: String,
+        ?profile_picture_original: String
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        profile_picture: String,
+        profile_picture_original: String
+      }
+    end
+  end
+end

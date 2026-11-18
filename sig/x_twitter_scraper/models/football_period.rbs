@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_period =
+      {
+        type: String?,
+        number: Integer?,
+        sequence: Integer?,
+        home_points: Integer?,
+        away_points: Integer?
+      }
+
+    class FootballPeriod < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor type: String?
+
+      attr_accessor number: Integer?
+
+      attr_accessor sequence: Integer?
+
+      attr_accessor home_points: Integer?
+
+      attr_accessor away_points: Integer?
+
+      def initialize: (
+        type: String?,
+        number: Integer?,
+        sequence: Integer?,
+        home_points: Integer?,
+        away_points: Integer?
+      ) -> void
+
+      def to_hash: -> {
+        type: String?,
+        number: Integer?,
+        sequence: Integer?,
+        home_points: Integer?,
+        away_points: Integer?
+      }
+    end
+  end
+end

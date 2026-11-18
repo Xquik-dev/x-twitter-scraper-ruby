@@ -1,0 +1,186 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type user_retrieve_subscriptions_params =
+        {
+          id: String,
+          cursor: String,
+          page_size: Integer,
+          min_followers: Integer,
+          max_followers: Integer,
+          min_following: Integer,
+          max_following: Integer,
+          min_statuses: Integer,
+          max_statuses: Integer,
+          min_account_age_days: Integer,
+          verified_only: bool,
+          blue_verified_only: bool,
+          verified_type: String,
+          has_website: bool,
+          has_location: bool,
+          has_email: bool,
+          business_email_only: bool,
+          email_domains: String,
+          bio_contains: String,
+          location_contains: String,
+          username_contains: String,
+          fields: String,
+          omit: String
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class UserRetrieveSubscriptionsParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_reader cursor: String?
+
+        def cursor=: (String) -> String
+
+        attr_reader page_size: Integer?
+
+        def page_size=: (Integer) -> Integer
+
+        attr_reader min_followers: Integer?
+
+        def min_followers=: (Integer) -> Integer
+
+        attr_reader max_followers: Integer?
+
+        def max_followers=: (Integer) -> Integer
+
+        attr_reader min_following: Integer?
+
+        def min_following=: (Integer) -> Integer
+
+        attr_reader max_following: Integer?
+
+        def max_following=: (Integer) -> Integer
+
+        attr_reader min_statuses: Integer?
+
+        def min_statuses=: (Integer) -> Integer
+
+        attr_reader max_statuses: Integer?
+
+        def max_statuses=: (Integer) -> Integer
+
+        attr_reader min_account_age_days: Integer?
+
+        def min_account_age_days=: (Integer) -> Integer
+
+        attr_reader verified_only: bool?
+
+        def verified_only=: (bool) -> bool
+
+        attr_reader blue_verified_only: bool?
+
+        def blue_verified_only=: (bool) -> bool
+
+        attr_reader verified_type: String?
+
+        def verified_type=: (String) -> String
+
+        attr_reader has_website: bool?
+
+        def has_website=: (bool) -> bool
+
+        attr_reader has_location: bool?
+
+        def has_location=: (bool) -> bool
+
+        attr_reader has_email: bool?
+
+        def has_email=: (bool) -> bool
+
+        attr_reader business_email_only: bool?
+
+        def business_email_only=: (bool) -> bool
+
+        attr_reader email_domains: String?
+
+        def email_domains=: (String) -> String
+
+        attr_reader bio_contains: String?
+
+        def bio_contains=: (String) -> String
+
+        attr_reader location_contains: String?
+
+        def location_contains=: (String) -> String
+
+        attr_reader username_contains: String?
+
+        def username_contains=: (String) -> String
+
+        attr_reader fields: String?
+
+        def fields=: (String) -> String
+
+        attr_reader omit: String?
+
+        def omit=: (String) -> String
+
+        def initialize: (
+          id: String,
+          ?cursor: String,
+          ?page_size: Integer,
+          ?min_followers: Integer,
+          ?max_followers: Integer,
+          ?min_following: Integer,
+          ?max_following: Integer,
+          ?min_statuses: Integer,
+          ?max_statuses: Integer,
+          ?min_account_age_days: Integer,
+          ?verified_only: bool,
+          ?blue_verified_only: bool,
+          ?verified_type: String,
+          ?has_website: bool,
+          ?has_location: bool,
+          ?has_email: bool,
+          ?business_email_only: bool,
+          ?email_domains: String,
+          ?bio_contains: String,
+          ?location_contains: String,
+          ?username_contains: String,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          cursor: String,
+          page_size: Integer,
+          min_followers: Integer,
+          max_followers: Integer,
+          min_following: Integer,
+          max_following: Integer,
+          min_statuses: Integer,
+          max_statuses: Integer,
+          min_account_age_days: Integer,
+          verified_only: bool,
+          blue_verified_only: bool,
+          verified_type: String,
+          has_website: bool,
+          has_location: bool,
+          has_email: bool,
+          business_email_only: bool,
+          email_domains: String,
+          bio_contains: String,
+          location_contains: String,
+          username_contains: String,
+          fields: String,
+          omit: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type paginated_lists =
+      {
+        lists: ::Array[XTwitterScraper::Models::XList],
+        has_next_page: bool,
+        next_cursor: String
+      }
+
+    class PaginatedLists < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor lists: ::Array[XTwitterScraper::Models::XList]
+
+      attr_accessor has_next_page: bool
+
+      attr_accessor next_cursor: String
+
+      def initialize: (
+        lists: ::Array[XTwitterScraper::Models::XList],
+        has_next_page: bool,
+        next_cursor: String
+      ) -> void
+
+      def to_hash: -> {
+        lists: ::Array[XTwitterScraper::Models::XList],
+        has_next_page: bool,
+        next_cursor: String
+      }
+    end
+  end
+end

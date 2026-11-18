@@ -1,0 +1,62 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type sport_retrieve_box_score_params =
+        {
+          league: XTwitterScraper::Models::X::SportRetrieveBoxScoreParams::league,
+          id: String,
+          fields: String,
+          omit: String
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class SportRetrieveBoxScoreParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor league: XTwitterScraper::Models::X::SportRetrieveBoxScoreParams::league
+
+        attr_accessor id: String
+
+        attr_reader fields: String?
+
+        def fields=: (String) -> String
+
+        attr_reader omit: String?
+
+        def omit=: (String) -> String
+
+        def initialize: (
+          league: XTwitterScraper::Models::X::SportRetrieveBoxScoreParams::league,
+          id: String,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          league: XTwitterScraper::Models::X::SportRetrieveBoxScoreParams::league,
+          id: String,
+          fields: String,
+          omit: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+
+        type league = :nfl | :ncaafb
+
+        module League
+          extend XTwitterScraper::Internal::Type::Enum
+
+          NFL: :nfl
+          NCAAFB: :ncaafb
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::SportRetrieveBoxScoreParams::league]
+        end
+      end
+    end
+  end
+end

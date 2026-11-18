@@ -1,0 +1,220 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type space =
+      {
+        id: String,
+        title: String,
+        state: String,
+        created_at: Time,
+        scheduled_start: Time,
+        started_at: Time,
+        ended_at: Time,
+        updated_at: Time,
+        total_live_listeners: Integer,
+        total_replay_watched: Integer,
+        participant_count: Integer,
+        is_available_for_replay: bool,
+        is_available_for_clipping: bool,
+        is_locked: bool,
+        is_employee_only: bool,
+        disallow_join: bool,
+        no_incognito: bool,
+        content_type: String,
+        conversation_controls: Integer,
+        max_admin_capacity: Integer,
+        media_key: String,
+        mentioned_user_ids: ::Array[String],
+        tweet_id: String,
+        tweet: XTwitterScraper::Models::SearchTweet,
+        creator: XTwitterScraper::Models::UserProfile,
+        admins: ::Array[XTwitterScraper::Models::SpaceParticipant],
+        speakers: ::Array[XTwitterScraper::Models::SpaceParticipant],
+        listeners: ::Array[XTwitterScraper::Models::SpaceParticipant],
+        sharings: ::Array[XTwitterScraper::Models::SpaceSharing]
+      }
+
+    class Space < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_reader title: String?
+
+      def title=: (String) -> String
+
+      attr_reader state: String?
+
+      def state=: (String) -> String
+
+      attr_reader created_at: Time?
+
+      def created_at=: (Time) -> Time
+
+      attr_reader scheduled_start: Time?
+
+      def scheduled_start=: (Time) -> Time
+
+      attr_reader started_at: Time?
+
+      def started_at=: (Time) -> Time
+
+      attr_reader ended_at: Time?
+
+      def ended_at=: (Time) -> Time
+
+      attr_reader updated_at: Time?
+
+      def updated_at=: (Time) -> Time
+
+      attr_reader total_live_listeners: Integer?
+
+      def total_live_listeners=: (Integer) -> Integer
+
+      attr_reader total_replay_watched: Integer?
+
+      def total_replay_watched=: (Integer) -> Integer
+
+      attr_reader participant_count: Integer?
+
+      def participant_count=: (Integer) -> Integer
+
+      attr_reader is_available_for_replay: bool?
+
+      def is_available_for_replay=: (bool) -> bool
+
+      attr_reader is_available_for_clipping: bool?
+
+      def is_available_for_clipping=: (bool) -> bool
+
+      attr_reader is_locked: bool?
+
+      def is_locked=: (bool) -> bool
+
+      attr_reader is_employee_only: bool?
+
+      def is_employee_only=: (bool) -> bool
+
+      attr_reader disallow_join: bool?
+
+      def disallow_join=: (bool) -> bool
+
+      attr_reader no_incognito: bool?
+
+      def no_incognito=: (bool) -> bool
+
+      attr_reader content_type: String?
+
+      def content_type=: (String) -> String
+
+      attr_reader conversation_controls: Integer?
+
+      def conversation_controls=: (Integer) -> Integer
+
+      attr_reader max_admin_capacity: Integer?
+
+      def max_admin_capacity=: (Integer) -> Integer
+
+      attr_reader media_key: String?
+
+      def media_key=: (String) -> String
+
+      attr_reader mentioned_user_ids: ::Array[String]?
+
+      def mentioned_user_ids=: (::Array[String]) -> ::Array[String]
+
+      attr_reader tweet_id: String?
+
+      def tweet_id=: (String) -> String
+
+      attr_reader tweet: XTwitterScraper::Models::SearchTweet?
+
+      def tweet=: (
+        XTwitterScraper::Models::SearchTweet
+      ) -> XTwitterScraper::Models::SearchTweet
+
+      attr_reader creator: XTwitterScraper::Models::UserProfile?
+
+      def creator=: (
+        XTwitterScraper::Models::UserProfile
+      ) -> XTwitterScraper::Models::UserProfile
+
+      attr_accessor admins: ::Array[XTwitterScraper::Models::SpaceParticipant]
+
+      attr_accessor speakers: ::Array[XTwitterScraper::Models::SpaceParticipant]
+
+      attr_accessor listeners: ::Array[XTwitterScraper::Models::SpaceParticipant]
+
+      attr_reader sharings: ::Array[XTwitterScraper::Models::SpaceSharing]?
+
+      def sharings=: (
+        ::Array[XTwitterScraper::Models::SpaceSharing]
+      ) -> ::Array[XTwitterScraper::Models::SpaceSharing]
+
+      def initialize: (
+        id: String,
+        admins: ::Array[XTwitterScraper::Models::SpaceParticipant],
+        speakers: ::Array[XTwitterScraper::Models::SpaceParticipant],
+        listeners: ::Array[XTwitterScraper::Models::SpaceParticipant],
+        ?title: String,
+        ?state: String,
+        ?created_at: Time,
+        ?scheduled_start: Time,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?updated_at: Time,
+        ?total_live_listeners: Integer,
+        ?total_replay_watched: Integer,
+        ?participant_count: Integer,
+        ?is_available_for_replay: bool,
+        ?is_available_for_clipping: bool,
+        ?is_locked: bool,
+        ?is_employee_only: bool,
+        ?disallow_join: bool,
+        ?no_incognito: bool,
+        ?content_type: String,
+        ?conversation_controls: Integer,
+        ?max_admin_capacity: Integer,
+        ?media_key: String,
+        ?mentioned_user_ids: ::Array[String],
+        ?tweet_id: String,
+        ?tweet: XTwitterScraper::Models::SearchTweet,
+        ?creator: XTwitterScraper::Models::UserProfile,
+        ?sharings: ::Array[XTwitterScraper::Models::SpaceSharing]
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        title: String,
+        state: String,
+        created_at: Time,
+        scheduled_start: Time,
+        started_at: Time,
+        ended_at: Time,
+        updated_at: Time,
+        total_live_listeners: Integer,
+        total_replay_watched: Integer,
+        participant_count: Integer,
+        is_available_for_replay: bool,
+        is_available_for_clipping: bool,
+        is_locked: bool,
+        is_employee_only: bool,
+        disallow_join: bool,
+        no_incognito: bool,
+        content_type: String,
+        conversation_controls: Integer,
+        max_admin_capacity: Integer,
+        media_key: String,
+        mentioned_user_ids: ::Array[String],
+        tweet_id: String,
+        tweet: XTwitterScraper::Models::SearchTweet,
+        creator: XTwitterScraper::Models::UserProfile,
+        admins: ::Array[XTwitterScraper::Models::SpaceParticipant],
+        speakers: ::Array[XTwitterScraper::Models::SpaceParticipant],
+        listeners: ::Array[XTwitterScraper::Models::SpaceParticipant],
+        sharings: ::Array[XTwitterScraper::Models::SpaceSharing]
+      }
+    end
+  end
+end

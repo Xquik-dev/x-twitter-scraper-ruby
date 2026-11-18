@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type space_retrieve_replay_response =
+        {
+          replay: XTwitterScraper::Models::X::SpaceRetrieveReplayResponse::Replay
+        }
+
+      class SpaceRetrieveReplayResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor replay: XTwitterScraper::Models::X::SpaceRetrieveReplayResponse::Replay
+
+        def initialize: (
+          replay: XTwitterScraper::Models::X::SpaceRetrieveReplayResponse::Replay
+        ) -> void
+
+        def to_hash: -> {
+          replay: XTwitterScraper::Models::X::SpaceRetrieveReplayResponse::Replay
+        }
+
+        type replay = { url: String, stream_type: String, status: String }
+
+        class Replay < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor url: String
+
+          attr_reader stream_type: String?
+
+          def stream_type=: (String) -> String
+
+          attr_reader status: String?
+
+          def status=: (String) -> String
+
+          def initialize: (
+            url: String,
+            ?stream_type: String,
+            ?status: String
+          ) -> void
+
+          def to_hash: -> { url: String, stream_type: String, status: String }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type post_metric_reading = { current: Integer?, gain: Integer? }
+
+    class PostMetricReading < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor current: Integer?
+
+      attr_accessor gain: Integer?
+
+      def initialize: (current: Integer?, gain: Integer?) -> void
+
+      def to_hash: -> { current: Integer?, gain: Integer? }
+    end
+  end
+end

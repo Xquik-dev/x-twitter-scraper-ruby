@@ -1,0 +1,95 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type audited_follower =
+      {
+        class_: XTwitterScraper::Models::follower_class,
+        followers: Integer,
+        following: Integer,
+        id: String,
+        joined_at_ms: Integer,
+        likes: Integer,
+        name: String,
+        owner: String,
+        picture_url: String,
+        position: Integer,
+        posts: Integer,
+        score: Integer,
+        signals: ::Array[String],
+        user_name: String
+      }
+
+    class AuditedFollower < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor class_: XTwitterScraper::Models::follower_class
+
+      attr_accessor followers: Integer
+
+      attr_accessor following: Integer
+
+      attr_accessor id: String
+
+      attr_reader joined_at_ms: Integer?
+
+      def joined_at_ms=: (Integer) -> Integer
+
+      attr_accessor likes: Integer
+
+      attr_accessor name: String
+
+      attr_reader owner: String?
+
+      def owner=: (String) -> String
+
+      attr_reader picture_url: String?
+
+      def picture_url=: (String) -> String
+
+      attr_accessor position: Integer
+
+      attr_accessor posts: Integer
+
+      attr_accessor score: Integer
+
+      attr_accessor signals: ::Array[String]
+
+      attr_accessor user_name: String
+
+      def initialize: (
+        class_: XTwitterScraper::Models::follower_class,
+        followers: Integer,
+        following: Integer,
+        id: String,
+        likes: Integer,
+        name: String,
+        position: Integer,
+        posts: Integer,
+        score: Integer,
+        signals: ::Array[String],
+        user_name: String,
+        ?joined_at_ms: Integer,
+        ?owner: String,
+        ?picture_url: String
+      ) -> void
+
+      def to_hash: -> {
+        class_: XTwitterScraper::Models::follower_class,
+        followers: Integer,
+        following: Integer,
+        id: String,
+        joined_at_ms: Integer,
+        likes: Integer,
+        name: String,
+        owner: String,
+        picture_url: String,
+        position: Integer,
+        posts: Integer,
+        score: Integer,
+        signals: ::Array[String],
+        user_name: String
+      }
+    end
+  end
+end

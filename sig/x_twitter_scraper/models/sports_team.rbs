@@ -1,0 +1,124 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type sports_team =
+      {
+        id: String,
+        name: String?,
+        short_name: String?,
+        abbreviation: String?,
+        alternate_id: String?,
+        location: String?,
+        colors: ::Array[XTwitterScraper::Models::SportsTeam::Color],
+        logos: XTwitterScraper::Models::SportsTeam::Logos,
+        x_user_id: String?,
+        record: XTwitterScraper::Models::SportsTeam::Record?,
+        recent_games: ::Array[XTwitterScraper::Models::SportsTeamGame]
+      }
+
+    class SportsTeam < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor name: String?
+
+      attr_accessor short_name: String?
+
+      attr_accessor abbreviation: String?
+
+      attr_accessor alternate_id: String?
+
+      attr_accessor location: String?
+
+      attr_accessor colors: ::Array[XTwitterScraper::Models::SportsTeam::Color]
+
+      attr_accessor logos: XTwitterScraper::Models::SportsTeam::Logos
+
+      attr_accessor x_user_id: String?
+
+      attr_accessor record: XTwitterScraper::Models::SportsTeam::Record?
+
+      attr_accessor recent_games: ::Array[XTwitterScraper::Models::SportsTeamGame]
+
+      def initialize: (
+        id: String,
+        name: String?,
+        short_name: String?,
+        abbreviation: String?,
+        alternate_id: String?,
+        location: String?,
+        colors: ::Array[XTwitterScraper::Models::SportsTeam::Color],
+        logos: XTwitterScraper::Models::SportsTeam::Logos,
+        x_user_id: String?,
+        record: XTwitterScraper::Models::SportsTeam::Record?,
+        recent_games: ::Array[XTwitterScraper::Models::SportsTeamGame]
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        name: String?,
+        short_name: String?,
+        abbreviation: String?,
+        alternate_id: String?,
+        location: String?,
+        colors: ::Array[XTwitterScraper::Models::SportsTeam::Color],
+        logos: XTwitterScraper::Models::SportsTeam::Logos,
+        x_user_id: String?,
+        record: XTwitterScraper::Models::SportsTeam::Record?,
+        recent_games: ::Array[XTwitterScraper::Models::SportsTeamGame]
+      }
+
+      type color = { r: Integer?, g: Integer?, b: Integer? }
+
+      class Color < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor r: Integer?
+
+        attr_accessor g: Integer?
+
+        attr_accessor b: Integer?
+
+        def initialize: (r: Integer?, g: Integer?, b: Integer?) -> void
+
+        def to_hash: -> { r: Integer?, g: Integer?, b: Integer? }
+      end
+
+      type logos = { default: String?, light: String?, dark: String? }
+
+      class Logos < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor default: String?
+
+        attr_accessor light: String?
+
+        attr_accessor dark: String?
+
+        def initialize: (
+          default: String?,
+          light: String?,
+          dark: String?
+        ) -> void
+
+        def to_hash: -> { default: String?, light: String?, dark: String? }
+      end
+
+      type record = { wins: Integer?, losses: Integer?, ties: Integer? }
+
+      class Record < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor wins: Integer?
+
+        attr_accessor losses: Integer?
+
+        attr_accessor ties: Integer?
+
+        def initialize: (
+          wins: Integer?,
+          losses: Integer?,
+          ties: Integer?
+        ) -> void
+
+        def to_hash: -> { wins: Integer?, losses: Integer?, ties: Integer? }
+      end
+    end
+  end
+end

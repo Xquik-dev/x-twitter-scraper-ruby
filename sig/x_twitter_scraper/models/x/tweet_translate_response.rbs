@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_translate_response =
+        { translation: XTwitterScraper::Models::TweetTranslation }
+
+      class TweetTranslateResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor translation: XTwitterScraper::Models::TweetTranslation
+
+        def initialize: (
+          translation: XTwitterScraper::Models::TweetTranslation
+        ) -> void
+
+        def to_hash: -> {
+          translation: XTwitterScraper::Models::TweetTranslation
+        }
+      end
+    end
+  end
+end

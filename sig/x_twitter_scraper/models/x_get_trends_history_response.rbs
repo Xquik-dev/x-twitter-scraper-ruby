@@ -1,0 +1,149 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type x_get_trends_history_response =
+      {
+        from_time: Time,
+        to_time: Time,
+        snapshots: ::Array[XTwitterScraper::Models::XGetTrendsHistoryResponse::Snapshot],
+        count: Integer,
+        woeid: Integer,
+        location: XTwitterScraper::Models::TrendLocation,
+        has_next_page: bool,
+        next_cursor: String
+      }
+
+    class XGetTrendsHistoryResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor from_time: Time
+
+      attr_accessor to_time: Time
+
+      attr_accessor snapshots: ::Array[XTwitterScraper::Models::XGetTrendsHistoryResponse::Snapshot]
+
+      attr_accessor count: Integer
+
+      attr_accessor woeid: Integer
+
+      attr_reader location: XTwitterScraper::Models::TrendLocation?
+
+      def location=: (
+        XTwitterScraper::Models::TrendLocation
+      ) -> XTwitterScraper::Models::TrendLocation
+
+      attr_accessor has_next_page: bool
+
+      attr_accessor next_cursor: String
+
+      def initialize: (
+        from_time: Time,
+        to_time: Time,
+        snapshots: ::Array[XTwitterScraper::Models::XGetTrendsHistoryResponse::Snapshot],
+        count: Integer,
+        woeid: Integer,
+        has_next_page: bool,
+        next_cursor: String,
+        ?location: XTwitterScraper::Models::TrendLocation
+      ) -> void
+
+      def to_hash: -> {
+        from_time: Time,
+        to_time: Time,
+        snapshots: ::Array[XTwitterScraper::Models::XGetTrendsHistoryResponse::Snapshot],
+        count: Integer,
+        woeid: Integer,
+        location: XTwitterScraper::Models::TrendLocation,
+        has_next_page: bool,
+        next_cursor: String
+      }
+
+      type snapshot =
+        {
+          captured_at: Time,
+          count: Integer,
+          trends: ::Array[XTwitterScraper::Models::XGetTrendsHistoryResponse::Snapshot::Trend]
+        }
+
+      class Snapshot < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor captured_at: Time
+
+        attr_accessor count: Integer
+
+        attr_accessor trends: ::Array[XTwitterScraper::Models::XGetTrendsHistoryResponse::Snapshot::Trend]
+
+        def initialize: (
+          captured_at: Time,
+          count: Integer,
+          trends: ::Array[XTwitterScraper::Models::XGetTrendsHistoryResponse::Snapshot::Trend]
+        ) -> void
+
+        def to_hash: -> {
+          captured_at: Time,
+          count: Integer,
+          trends: ::Array[XTwitterScraper::Models::XGetTrendsHistoryResponse::Snapshot::Trend]
+        }
+
+        type trend =
+          {
+            name: String,
+            description: String,
+            query: String,
+            promoted_content: String,
+            rank: Integer,
+            tweet_volume: Integer,
+            url: String
+          }
+
+        class Trend < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor name: String
+
+          attr_reader description: String?
+
+          def description=: (String) -> String
+
+          attr_reader query: String?
+
+          def query=: (String) -> String
+
+          attr_reader promoted_content: String?
+
+          def promoted_content=: (String?) -> String?
+
+          attr_reader rank: Integer?
+
+          def rank=: (Integer) -> Integer
+
+          attr_reader tweet_volume: Integer?
+
+          def tweet_volume=: (Integer?) -> Integer?
+
+          attr_reader url: String?
+
+          def url=: (String) -> String
+
+          def initialize: (
+            name: String,
+            ?description: String,
+            ?query: String,
+            ?promoted_content: String?,
+            ?rank: Integer,
+            ?tweet_volume: Integer?,
+            ?url: String
+          ) -> void
+
+          def to_hash: -> {
+            name: String,
+            description: String,
+            query: String,
+            promoted_content: String,
+            rank: Integer,
+            tweet_volume: Integer,
+            url: String
+          }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type paginated_user_ids =
+      { ids: ::Array[String], has_next_page: bool, next_cursor: String }
+
+    class PaginatedUserIds < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor ids: ::Array[String]
+
+      attr_accessor has_next_page: bool
+
+      attr_accessor next_cursor: String
+
+      def initialize: (
+        ids: ::Array[String],
+        has_next_page: bool,
+        next_cursor: String
+      ) -> void
+
+      def to_hash: -> {
+        ids: ::Array[String],
+        has_next_page: bool,
+        next_cursor: String
+      }
+    end
+  end
+end

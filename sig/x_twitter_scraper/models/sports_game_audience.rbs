@@ -1,0 +1,151 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type sports_game_audience =
+      {
+        id: String,
+        league: XTwitterScraper::Models::SportsGameAudience::league,
+        viewers: XTwitterScraper::Models::SportsGameAudience::Viewers?,
+        team_picks: XTwitterScraper::Models::SportsGameAudience::TeamPicks,
+        chat: XTwitterScraper::Models::SportsGameAudience::Chat,
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam]
+      }
+
+    class SportsGameAudience < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor league: XTwitterScraper::Models::SportsGameAudience::league
+
+      attr_accessor viewers: XTwitterScraper::Models::SportsGameAudience::Viewers?
+
+      attr_accessor team_picks: XTwitterScraper::Models::SportsGameAudience::TeamPicks
+
+      attr_accessor chat: XTwitterScraper::Models::SportsGameAudience::Chat
+
+      attr_accessor teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam]
+
+      def initialize: (
+        id: String,
+        league: XTwitterScraper::Models::SportsGameAudience::league,
+        viewers: XTwitterScraper::Models::SportsGameAudience::Viewers?,
+        team_picks: XTwitterScraper::Models::SportsGameAudience::TeamPicks,
+        chat: XTwitterScraper::Models::SportsGameAudience::Chat,
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam]
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        league: XTwitterScraper::Models::SportsGameAudience::league,
+        viewers: XTwitterScraper::Models::SportsGameAudience::Viewers?,
+        team_picks: XTwitterScraper::Models::SportsGameAudience::TeamPicks,
+        chat: XTwitterScraper::Models::SportsGameAudience::Chat,
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam]
+      }
+
+      type league = :nfl | :ncaafb
+
+      module League
+        extend XTwitterScraper::Internal::Type::Enum
+
+        NFL: :nfl
+        NCAAFB: :ncaafb
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::SportsGameAudience::league]
+      end
+
+      type viewers = { count: Integer, as_of: Time }
+
+      class Viewers < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor count: Integer
+
+        attr_accessor as_of: Time
+
+        def initialize: (count: Integer, as_of: Time) -> void
+
+        def to_hash: -> { count: Integer, as_of: Time }
+      end
+
+      type team_picks =
+        {
+          total: Integer?,
+          teams: ::Array[XTwitterScraper::Models::SportsGameAudience::TeamPicks::Team]
+        }
+
+      class TeamPicks < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor total: Integer?
+
+        attr_accessor teams: ::Array[XTwitterScraper::Models::SportsGameAudience::TeamPicks::Team]
+
+        def initialize: (
+          total: Integer?,
+          teams: ::Array[XTwitterScraper::Models::SportsGameAudience::TeamPicks::Team]
+        ) -> void
+
+        def to_hash: -> {
+          total: Integer?,
+          teams: ::Array[XTwitterScraper::Models::SportsGameAudience::TeamPicks::Team]
+        }
+
+        type team = { team_id: String, count: Integer? }
+
+        class Team < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor team_id: String
+
+          attr_accessor count: Integer?
+
+          def initialize: (team_id: String, count: Integer?) -> void
+
+          def to_hash: -> { team_id: String, count: Integer? }
+        end
+      end
+
+      type chat =
+        {
+          available: bool?,
+          broadcast_id: String?,
+          opens_in: XTwitterScraper::Models::SportsGameAudience::Chat::OpensIn?
+        }
+
+      class Chat < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor available: bool?
+
+        attr_accessor broadcast_id: String?
+
+        attr_accessor opens_in: XTwitterScraper::Models::SportsGameAudience::Chat::OpensIn?
+
+        def initialize: (
+          available: bool?,
+          broadcast_id: String?,
+          opens_in: XTwitterScraper::Models::SportsGameAudience::Chat::OpensIn?
+        ) -> void
+
+        def to_hash: -> {
+          available: bool?,
+          broadcast_id: String?,
+          opens_in: XTwitterScraper::Models::SportsGameAudience::Chat::OpensIn?
+        }
+
+        type opens_in = { days: Integer?, hours: Integer?, minutes: Integer? }
+
+        class OpensIn < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor days: Integer?
+
+          attr_accessor hours: Integer?
+
+          attr_accessor minutes: Integer?
+
+          def initialize: (
+            days: Integer?,
+            hours: Integer?,
+            minutes: Integer?
+          ) -> void
+
+          def to_hash: -> { days: Integer?, hours: Integer?, minutes: Integer? }
+        end
+      end
+    end
+  end
+end

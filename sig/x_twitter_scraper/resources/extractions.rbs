@@ -275,6 +275,11 @@ module XTwitterScraper
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::ExtractionRunResponse
 
+      def cancel: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::ExtractionCancelResponse
+
       def initialize: (client: XTwitterScraper::Client) -> void
     end
   end

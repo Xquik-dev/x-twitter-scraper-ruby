@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type tweet_subtitles =
+      {
+        tweet_id: String,
+        tracks: ::Array[XTwitterScraper::Models::SubtitleTrack]
+      }
+
+    class TweetSubtitles < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor tweet_id: String
+
+      attr_accessor tracks: ::Array[XTwitterScraper::Models::SubtitleTrack]
+
+      def initialize: (
+        tweet_id: String,
+        tracks: ::Array[XTwitterScraper::Models::SubtitleTrack]
+      ) -> void
+
+      def to_hash: -> {
+        tweet_id: String,
+        tracks: ::Array[XTwitterScraper::Models::SubtitleTrack]
+      }
+    end
+  end
+end

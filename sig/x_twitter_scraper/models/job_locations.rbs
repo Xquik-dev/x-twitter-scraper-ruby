@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type job_locations =
+      {
+        locations: ::Array[XTwitterScraper::Models::JobLocation],
+        count: Integer
+      }
+
+    class JobLocations < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor locations: ::Array[XTwitterScraper::Models::JobLocation]
+
+      attr_accessor count: Integer
+
+      def initialize: (
+        locations: ::Array[XTwitterScraper::Models::JobLocation],
+        count: Integer
+      ) -> void
+
+      def to_hash: -> {
+        locations: ::Array[XTwitterScraper::Models::JobLocation],
+        count: Integer
+      }
+    end
+  end
+end

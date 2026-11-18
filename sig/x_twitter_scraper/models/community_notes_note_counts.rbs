@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type community_notes_note_counts =
+      {
+        awaiting_more_ratings: Integer,
+        currently_rated_helpful: Integer,
+        currently_rated_not_helpful: Integer,
+        updated_at: Time
+      }
+
+    class CommunityNotesNoteCounts < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader awaiting_more_ratings: Integer?
+
+      def awaiting_more_ratings=: (Integer) -> Integer
+
+      attr_reader currently_rated_helpful: Integer?
+
+      def currently_rated_helpful=: (Integer) -> Integer
+
+      attr_reader currently_rated_not_helpful: Integer?
+
+      def currently_rated_not_helpful=: (Integer) -> Integer
+
+      attr_reader updated_at: Time?
+
+      def updated_at=: (Time) -> Time
+
+      def initialize: (
+        ?awaiting_more_ratings: Integer,
+        ?currently_rated_helpful: Integer,
+        ?currently_rated_not_helpful: Integer,
+        ?updated_at: Time
+      ) -> void
+
+      def to_hash: -> {
+        awaiting_more_ratings: Integer,
+        currently_rated_helpful: Integer,
+        currently_rated_not_helpful: Integer,
+        updated_at: Time
+      }
+    end
+  end
+end

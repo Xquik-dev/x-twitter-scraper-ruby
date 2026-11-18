@@ -1,0 +1,87 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_embed_params =
+        {
+          id: String,
+          theme: XTwitterScraper::Models::X::TweetEmbedParams::theme,
+          hide_media: bool,
+          hide_thread: bool,
+          omit_script: bool,
+          fields: String,
+          omit: String
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class TweetEmbedParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_reader theme: XTwitterScraper::Models::X::TweetEmbedParams::theme?
+
+        def theme=: (
+          XTwitterScraper::Models::X::TweetEmbedParams::theme
+        ) -> XTwitterScraper::Models::X::TweetEmbedParams::theme
+
+        attr_reader hide_media: bool?
+
+        def hide_media=: (bool) -> bool
+
+        attr_reader hide_thread: bool?
+
+        def hide_thread=: (bool) -> bool
+
+        attr_reader omit_script: bool?
+
+        def omit_script=: (bool) -> bool
+
+        attr_reader fields: String?
+
+        def fields=: (String) -> String
+
+        attr_reader omit: String?
+
+        def omit=: (String) -> String
+
+        def initialize: (
+          id: String,
+          ?theme: XTwitterScraper::Models::X::TweetEmbedParams::theme,
+          ?hide_media: bool,
+          ?hide_thread: bool,
+          ?omit_script: bool,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          theme: XTwitterScraper::Models::X::TweetEmbedParams::theme,
+          hide_media: bool,
+          hide_thread: bool,
+          omit_script: bool,
+          fields: String,
+          omit: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+
+        type theme = :light | :dark
+
+        module Theme
+          extend XTwitterScraper::Internal::Type::Enum
+
+          LIGHT: :light
+          DARK: :dark
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetEmbedParams::theme]
+        end
+      end
+    end
+  end
+end

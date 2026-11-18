@@ -1,0 +1,264 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type follower_audit =
+      {
+        account: XTwitterScraper::Models::UserInsights,
+        coverage: XTwitterScraper::Models::FollowerAudit::Coverage,
+        quality: XTwitterScraper::Models::FollowerAudit::Quality,
+        classes: ::Array[XTwitterScraper::Models::FollowerAudit::Classe],
+        signals: ::Array[XTwitterScraper::Models::FollowerAudit::Signal],
+        arrival_bands: ::Array[XTwitterScraper::Models::FollowerAudit::ArrivalBand],
+        cohorts: ::Array[XTwitterScraper::Models::FollowerAudit::Cohort],
+        languages: ::Array[XTwitterScraper::Models::FollowerValueCount],
+        places: ::Array[XTwitterScraper::Models::FollowerValueCount],
+        verified: XTwitterScraper::Models::FollowerAudit::Verified,
+        followers: ::Array[XTwitterScraper::Models::AuditedFollower],
+        top_followers: ::Array[XTwitterScraper::Models::AuditedFollower]
+      }
+
+    class FollowerAudit < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor account: XTwitterScraper::Models::UserInsights
+
+      attr_accessor coverage: XTwitterScraper::Models::FollowerAudit::Coverage
+
+      attr_accessor quality: XTwitterScraper::Models::FollowerAudit::Quality
+
+      attr_accessor classes: ::Array[XTwitterScraper::Models::FollowerAudit::Classe]
+
+      attr_accessor signals: ::Array[XTwitterScraper::Models::FollowerAudit::Signal]
+
+      attr_accessor arrival_bands: ::Array[XTwitterScraper::Models::FollowerAudit::ArrivalBand]
+
+      attr_accessor cohorts: ::Array[XTwitterScraper::Models::FollowerAudit::Cohort]
+
+      attr_accessor languages: ::Array[XTwitterScraper::Models::FollowerValueCount]
+
+      attr_accessor places: ::Array[XTwitterScraper::Models::FollowerValueCount]
+
+      attr_accessor verified: XTwitterScraper::Models::FollowerAudit::Verified
+
+      attr_accessor followers: ::Array[XTwitterScraper::Models::AuditedFollower]
+
+      attr_accessor top_followers: ::Array[XTwitterScraper::Models::AuditedFollower]
+
+      def initialize: (
+        account: XTwitterScraper::Models::UserInsights,
+        coverage: XTwitterScraper::Models::FollowerAudit::Coverage,
+        quality: XTwitterScraper::Models::FollowerAudit::Quality,
+        classes: ::Array[XTwitterScraper::Models::FollowerAudit::Classe],
+        signals: ::Array[XTwitterScraper::Models::FollowerAudit::Signal],
+        arrival_bands: ::Array[XTwitterScraper::Models::FollowerAudit::ArrivalBand],
+        cohorts: ::Array[XTwitterScraper::Models::FollowerAudit::Cohort],
+        languages: ::Array[XTwitterScraper::Models::FollowerValueCount],
+        places: ::Array[XTwitterScraper::Models::FollowerValueCount],
+        verified: XTwitterScraper::Models::FollowerAudit::Verified,
+        followers: ::Array[XTwitterScraper::Models::AuditedFollower],
+        top_followers: ::Array[XTwitterScraper::Models::AuditedFollower]
+      ) -> void
+
+      def to_hash: -> {
+        account: XTwitterScraper::Models::UserInsights,
+        coverage: XTwitterScraper::Models::FollowerAudit::Coverage,
+        quality: XTwitterScraper::Models::FollowerAudit::Quality,
+        classes: ::Array[XTwitterScraper::Models::FollowerAudit::Classe],
+        signals: ::Array[XTwitterScraper::Models::FollowerAudit::Signal],
+        arrival_bands: ::Array[XTwitterScraper::Models::FollowerAudit::ArrivalBand],
+        cohorts: ::Array[XTwitterScraper::Models::FollowerAudit::Cohort],
+        languages: ::Array[XTwitterScraper::Models::FollowerValueCount],
+        places: ::Array[XTwitterScraper::Models::FollowerValueCount],
+        verified: XTwitterScraper::Models::FollowerAudit::Verified,
+        followers: ::Array[XTwitterScraper::Models::AuditedFollower],
+        top_followers: ::Array[XTwitterScraper::Models::AuditedFollower]
+      }
+
+      type coverage = { percent: Float, read: Integer, total: Integer }
+
+      class Coverage < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor percent: Float
+
+        attr_accessor read: Integer
+
+        attr_accessor total: Integer
+
+        def initialize: (percent: Float, read: Integer, total: Integer) -> void
+
+        def to_hash: -> { percent: Float, read: Integer, total: Integer }
+      end
+
+      type quality =
+        {
+          grade: XTwitterScraper::Models::FollowerAudit::Quality::grade,
+          score: Integer
+        }
+
+      class Quality < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor grade: XTwitterScraper::Models::FollowerAudit::Quality::grade
+
+        attr_accessor score: Integer
+
+        def initialize: (
+          grade: XTwitterScraper::Models::FollowerAudit::Quality::grade,
+          score: Integer
+        ) -> void
+
+        def to_hash: -> {
+          grade: XTwitterScraper::Models::FollowerAudit::Quality::grade,
+          score: Integer
+        }
+
+        type grade = :A | :B | :C | :D | :F
+
+        module Grade
+          extend XTwitterScraper::Internal::Type::Enum
+
+          A: :A
+          B: :B
+          C: :C
+          D: :D
+          F: :F
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::FollowerAudit::Quality::grade]
+        end
+      end
+
+      type classe =
+        {
+          class_: XTwitterScraper::Models::follower_class,
+          count: Integer,
+          percent: Float
+        }
+
+      class Classe < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor class_: XTwitterScraper::Models::follower_class
+
+        attr_accessor count: Integer
+
+        attr_accessor percent: Float
+
+        def initialize: (
+          class_: XTwitterScraper::Models::follower_class,
+          count: Integer,
+          percent: Float
+        ) -> void
+
+        def to_hash: -> {
+          class_: XTwitterScraper::Models::follower_class,
+          count: Integer,
+          percent: Float
+        }
+      end
+
+      type signal =
+        { count: Integer, id: String, percent: Float, points: Integer }
+
+      class Signal < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor count: Integer
+
+        attr_accessor id: String
+
+        attr_accessor percent: Float
+
+        attr_accessor points: Integer
+
+        def initialize: (
+          count: Integer,
+          id: String,
+          percent: Float,
+          points: Integer
+        ) -> void
+
+        def to_hash: -> {
+          count: Integer,
+          id: String,
+          percent: Float,
+          points: Integer
+        }
+      end
+
+      type arrival_band =
+        {
+          count: Integer,
+          from: Integer,
+          percent: Float,
+          read: Integer,
+          to: Integer
+        }
+
+      class ArrivalBand < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor count: Integer
+
+        attr_accessor from: Integer
+
+        attr_accessor percent: Float
+
+        attr_accessor read: Integer
+
+        attr_accessor to: Integer
+
+        def initialize: (
+          count: Integer,
+          from: Integer,
+          percent: Float,
+          read: Integer,
+          to: Integer
+        ) -> void
+
+        def to_hash: -> {
+          count: Integer,
+          from: Integer,
+          percent: Float,
+          read: Integer,
+          to: Integer
+        }
+      end
+
+      type cohort =
+        {
+          count: Integer,
+          likely_fake: Integer,
+          percent: Float,
+          week_start_ms: Integer
+        }
+
+      class Cohort < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor count: Integer
+
+        attr_accessor likely_fake: Integer
+
+        attr_accessor percent: Float
+
+        attr_accessor week_start_ms: Integer
+
+        def initialize: (
+          count: Integer,
+          likely_fake: Integer,
+          percent: Float,
+          week_start_ms: Integer
+        ) -> void
+
+        def to_hash: -> {
+          count: Integer,
+          likely_fake: Integer,
+          percent: Float,
+          week_start_ms: Integer
+        }
+      end
+
+      type verified = { count: Integer, percent: Float }
+
+      class Verified < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor count: Integer
+
+        attr_accessor percent: Float
+
+        def initialize: (count: Integer, percent: Float) -> void
+
+        def to_hash: -> { count: Integer, percent: Float }
+      end
+    end
+  end
+end

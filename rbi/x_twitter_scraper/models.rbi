@@ -13,6 +13,50 @@ module XTwitterScraper
 
   AccountUpdateLocaleParams = XTwitterScraper::Models::AccountUpdateLocaleParams
 
+  ActivityExportParams = XTwitterScraper::Models::ActivityExportParams
+
+  ActivityListParams = XTwitterScraper::Models::ActivityListParams
+
+  ActivityLogRow = XTwitterScraper::Models::ActivityLogRow
+
+  ActivityRecord = XTwitterScraper::Models::ActivityRecord
+
+  ActivityRetrieveParams = XTwitterScraper::Models::ActivityRetrieveParams
+
+  AuditedFollower = XTwitterScraper::Models::AuditedFollower
+
+  BatchUserTweets = XTwitterScraper::Models::BatchUserTweets
+
+  Broadcast = XTwitterScraper::Models::Broadcast
+
+  Community = XTwitterScraper::Models::Community
+
+  CommunityAnalytics = XTwitterScraper::Models::CommunityAnalytics
+
+  CommunityAnalyticsMetric = XTwitterScraper::Models::CommunityAnalyticsMetric
+
+  CommunityBanner = XTwitterScraper::Models::CommunityBanner
+
+  CommunityMemberPreview = XTwitterScraper::Models::CommunityMemberPreview
+
+  CommunityNote = XTwitterScraper::Models::CommunityNote
+
+  CommunityNoteEntity = XTwitterScraper::Models::CommunityNoteEntity
+
+  CommunityNotesContributor = XTwitterScraper::Models::CommunityNotesContributor
+
+  CommunityNotesNoteCounts = XTwitterScraper::Models::CommunityNotesNoteCounts
+
+  CommunityNotesRatingCounts =
+    XTwitterScraper::Models::CommunityNotesRatingCounts
+
+  CommunityNotesRatingOutcome =
+    XTwitterScraper::Models::CommunityNotesRatingOutcome
+
+  CommunityPage = XTwitterScraper::Models::CommunityPage
+
+  CommunityTopic = XTwitterScraper::Models::CommunityTopic
+
   ComposeCreateParams = XTwitterScraper::Models::ComposeCreateParams
 
   ContentDisclosure = XTwitterScraper::Models::ContentDisclosure
@@ -70,7 +114,11 @@ module XTwitterScraper
 
   EventRetrieveParams = XTwitterScraper::Models::EventRetrieveParams
 
+  EventStreamParams = XTwitterScraper::Models::EventStreamParams
+
   EventType = XTwitterScraper::Models::EventType
+
+  ExtractionCancelParams = XTwitterScraper::Models::ExtractionCancelParams
 
   ExtractionEstimateCostParams =
     XTwitterScraper::Models::ExtractionEstimateCostParams
@@ -86,6 +134,66 @@ module XTwitterScraper
 
   ExtractionRunParams = XTwitterScraper::Models::ExtractionRunParams
 
+  FollowerAudit = XTwitterScraper::Models::FollowerAudit
+
+  FollowerClass = XTwitterScraper::Models::FollowerClass
+
+  FollowerValueCount = XTwitterScraper::Models::FollowerValueCount
+
+  FootballBoxScore = XTwitterScraper::Models::FootballBoxScore
+
+  FootballDrive = XTwitterScraper::Models::FootballDrive
+
+  FootballFumbleStats = XTwitterScraper::Models::FootballFumbleStats
+
+  FootballOdds = XTwitterScraper::Models::FootballOdds
+
+  FootballPassingStats = XTwitterScraper::Models::FootballPassingStats
+
+  FootballPeriod = XTwitterScraper::Models::FootballPeriod
+
+  FootballPlay = XTwitterScraper::Models::FootballPlay
+
+  FootballPlayDetail = XTwitterScraper::Models::FootballPlayDetail
+
+  FootballPlayer = XTwitterScraper::Models::FootballPlayer
+
+  FootballPlayerProp = XTwitterScraper::Models::FootballPlayerProp
+
+  FootballPlayerStats = XTwitterScraper::Models::FootballPlayerStats
+
+  FootballPlays = XTwitterScraper::Models::FootballPlays
+
+  FootballPropCategory = XTwitterScraper::Models::FootballPropCategory
+
+  FootballProps = XTwitterScraper::Models::FootballProps
+
+  FootballQuarter = XTwitterScraper::Models::FootballQuarter
+
+  FootballReturnStats = XTwitterScraper::Models::FootballReturnStats
+
+  FootballRoster = XTwitterScraper::Models::FootballRoster
+
+  FootballRosterTeam = XTwitterScraper::Models::FootballRosterTeam
+
+  FootballRushingStats = XTwitterScraper::Models::FootballRushingStats
+
+  FootballSchedule = XTwitterScraper::Models::FootballSchedule
+
+  FootballScheduleGame = XTwitterScraper::Models::FootballScheduleGame
+
+  FootballSchedulePeriod = XTwitterScraper::Models::FootballSchedulePeriod
+
+  FootballScoreboard = XTwitterScraper::Models::FootballScoreboard
+
+  FootballSide = XTwitterScraper::Models::FootballSide
+
+  FootballTeamBox = XTwitterScraper::Models::FootballTeamBox
+
+  FootballTeamScore = XTwitterScraper::Models::FootballTeamScore
+
+  FootballTeamTotals = XTwitterScraper::Models::FootballTeamTotals
+
   GuestWalletAmount = XTwitterScraper::Models::GuestWalletAmount
 
   GuestWalletCreateParams = XTwitterScraper::Models::GuestWalletCreateParams
@@ -95,9 +203,21 @@ module XTwitterScraper
 
   GuestWalletTopupParams = XTwitterScraper::Models::GuestWalletTopupParams
 
+  Hashflag = XTwitterScraper::Models::Hashflag
+
   ImageFilterSummary = XTwitterScraper::Models::ImageFilterSummary
 
   ImageFilteredTweets = XTwitterScraper::Models::ImageFilteredTweets
+
+  Job = XTwitterScraper::Models::Job
+
+  JobAccount = XTwitterScraper::Models::JobAccount
+
+  JobCompany = XTwitterScraper::Models::JobCompany
+
+  JobLocation = XTwitterScraper::Models::JobLocation
+
+  JobLocations = XTwitterScraper::Models::JobLocations
 
   Monitor = XTwitterScraper::Models::Monitor
 
@@ -113,11 +233,44 @@ module XTwitterScraper
 
   MonitorUpdateParams = XTwitterScraper::Models::MonitorUpdateParams
 
+  MonitorUpsertByUsernameParams =
+    XTwitterScraper::Models::MonitorUpsertByUsernameParams
+
+  NewsVersion = XTwitterScraper::Models::NewsVersion
+
+  PaginatedCommunityNotes = XTwitterScraper::Models::PaginatedCommunityNotes
+
+  PaginatedJobs = XTwitterScraper::Models::PaginatedJobs
+
+  PaginatedLists = XTwitterScraper::Models::PaginatedLists
+
   PaginatedTweets = XTwitterScraper::Models::PaginatedTweets
+
+  PaginatedUserIds = XTwitterScraper::Models::PaginatedUserIds
 
   PaginatedUsers = XTwitterScraper::Models::PaginatedUsers
 
+  Place = XTwitterScraper::Models::Place
+
+  PlaceSearchResult = XTwitterScraper::Models::PlaceSearchResult
+
+  PostEngagementMetrics = XTwitterScraper::Models::PostEngagementMetrics
+
+  PostEventType = XTwitterScraper::Models::PostEventType
+
+  PostMetricPoint = XTwitterScraper::Models::PostMetricPoint
+
+  PostMetricReading = XTwitterScraper::Models::PostMetricReading
+
+  PostMetrics = XTwitterScraper::Models::PostMetrics
+
+  PostMonitor = XTwitterScraper::Models::PostMonitor
+
+  PostMonitorMetrics = XTwitterScraper::Models::PostMonitorMetrics
+
   ProfileContactInfo = XTwitterScraper::Models::ProfileContactInfo
+
+  ProfileTranslation = XTwitterScraper::Models::ProfileTranslation
 
   RadarItem = XTwitterScraper::Models::RadarItem
 
@@ -126,7 +279,37 @@ module XTwitterScraper
 
   ReplyTweet = XTwitterScraper::Models::ReplyTweet
 
+  ResolvedLink = XTwitterScraper::Models::ResolvedLink
+
+  SearchSuggestionCashtag = XTwitterScraper::Models::SearchSuggestionCashtag
+
+  SearchSuggestionHashtag = XTwitterScraper::Models::SearchSuggestionHashtag
+
+  SearchSuggestions = XTwitterScraper::Models::SearchSuggestions
+
+  SearchSuggestionTopic = XTwitterScraper::Models::SearchSuggestionTopic
+
+  SearchSuggestionUser = XTwitterScraper::Models::SearchSuggestionUser
+
   SearchTweet = XTwitterScraper::Models::SearchTweet
+
+  ShadowbanReport = XTwitterScraper::Models::ShadowbanReport
+
+  ShadowbanVerdict = XTwitterScraper::Models::ShadowbanVerdict
+
+  Space = XTwitterScraper::Models::Space
+
+  SpaceParticipant = XTwitterScraper::Models::SpaceParticipant
+
+  SpaceSharing = XTwitterScraper::Models::SpaceSharing
+
+  SportsGameAudience = XTwitterScraper::Models::SportsGameAudience
+
+  SportsGamePosts = XTwitterScraper::Models::SportsGamePosts
+
+  SportsTeam = XTwitterScraper::Models::SportsTeam
+
+  SportsTeamGame = XTwitterScraper::Models::SportsTeamGame
 
   StreamEventType = XTwitterScraper::Models::StreamEventType
 
@@ -150,6 +333,8 @@ module XTwitterScraper
 
   SubscribeCreateParams = XTwitterScraper::Models::SubscribeCreateParams
 
+  SubtitleTrack = XTwitterScraper::Models::SubtitleTrack
+
   Support = XTwitterScraper::Models::Support
 
   TopicFilterSummary = XTwitterScraper::Models::TopicFilterSummary
@@ -158,11 +343,21 @@ module XTwitterScraper
 
   TrendListParams = XTwitterScraper::Models::TrendListParams
 
+  TrendLocation = XTwitterScraper::Models::TrendLocation
+
   TweetAnalysisPage = XTwitterScraper::Models::TweetAnalysisPage
 
   TweetAuthorUnavailable = XTwitterScraper::Models::TweetAuthorUnavailable
 
+  TweetEmbed = XTwitterScraper::Models::TweetEmbed
+
+  TweetEntities = XTwitterScraper::Models::TweetEntities
+
   TweetExclusiveContent = XTwitterScraper::Models::TweetExclusiveContent
+
+  TweetHashtag = XTwitterScraper::Models::TweetHashtag
+
+  TweetInsights = XTwitterScraper::Models::TweetInsights
 
   TweetInterstitial = XTwitterScraper::Models::TweetInterstitial
 
@@ -170,11 +365,35 @@ module XTwitterScraper
 
   TweetPoint = XTwitterScraper::Models::TweetPoint
 
+  TweetSmartTag = XTwitterScraper::Models::TweetSmartTag
+
   TweetSubscriberBadge = XTwitterScraper::Models::TweetSubscriberBadge
+
+  TweetSubtitles = XTwitterScraper::Models::TweetSubtitles
+
+  TweetSymbol = XTwitterScraper::Models::TweetSymbol
 
   TweetTombstone = XTwitterScraper::Models::TweetTombstone
 
+  TweetTranslation = XTwitterScraper::Models::TweetTranslation
+
+  TweetUrlEntity = XTwitterScraper::Models::TweetUrlEntity
+
+  TweetUserMention = XTwitterScraper::Models::TweetUserMention
+
+  UserAffiliateLabel = XTwitterScraper::Models::UserAffiliateLabel
+
+  UserAuxiliaryLabel = XTwitterScraper::Models::UserAuxiliaryLabel
+
+  UserHighlightsInfo = XTwitterScraper::Models::UserHighlightsInfo
+
+  UserIdentityVerification = XTwitterScraper::Models::UserIdentityVerification
+
+  UserInsights = XTwitterScraper::Models::UserInsights
+
   UserListPage = XTwitterScraper::Models::UserListPage
+
+  UserLiveStatus = XTwitterScraper::Models::UserLiveStatus
 
   UserProfile = XTwitterScraper::Models::UserProfile
 
@@ -183,6 +402,9 @@ module XTwitterScraper
   Webhook = XTwitterScraper::Models::Webhook
 
   WebhookCreateParams = XTwitterScraper::Models::WebhookCreateParams
+
+  WebhookCreateTelegramLinkParams =
+    XTwitterScraper::Models::WebhookCreateTelegramLinkParams
 
   WebhookDeactivateParams = XTwitterScraper::Models::WebhookDeactivateParams
 
@@ -201,11 +423,28 @@ module XTwitterScraper
 
   X = XTwitterScraper::Models::X
 
+  XAutocompleteSearchParams = XTwitterScraper::Models::XAutocompleteSearchParams
+
   XGetArticleParams = XTwitterScraper::Models::XGetArticleParams
+
+  XGetHashflagsParams = XTwitterScraper::Models::XGetHashflagsParams
 
   XGetHomeTimelineParams = XTwitterScraper::Models::XGetHomeTimelineParams
 
+  XGetNewsStoryVersionsParams =
+    XTwitterScraper::Models::XGetNewsStoryVersionsParams
+
   XGetNotificationsParams = XTwitterScraper::Models::XGetNotificationsParams
 
+  XGetTrendLocationsParams = XTwitterScraper::Models::XGetTrendLocationsParams
+
+  XGetTrendsHistoryParams = XTwitterScraper::Models::XGetTrendsHistoryParams
+
   XGetTrendsParams = XTwitterScraper::Models::XGetTrendsParams
+
+  XList = XTwitterScraper::Models::XList
+
+  XListBanner = XTwitterScraper::Models::XListBanner
+
+  XSearchPlacesParams = XTwitterScraper::Models::XSearchPlacesParams
 end

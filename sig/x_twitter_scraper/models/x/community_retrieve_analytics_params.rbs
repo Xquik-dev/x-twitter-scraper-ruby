@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type community_retrieve_analytics_params =
+        { id: String, fields: String, omit: String }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class CommunityRetrieveAnalyticsParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_reader fields: String?
+
+        def fields=: (String) -> String
+
+        attr_reader omit: String?
+
+        def omit=: (String) -> String
+
+        def initialize: (
+          id: String,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          fields: String,
+          omit: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

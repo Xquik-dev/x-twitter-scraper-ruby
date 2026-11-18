@@ -1,0 +1,60 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type x_get_hashflags_params =
+      {
+        q: String,
+        active_only: bool,
+        limit: Integer,
+        fields: String,
+        omit: String
+      }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class XGetHashflagsParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_reader q: String?
+
+      def q=: (String) -> String
+
+      attr_reader active_only: bool?
+
+      def active_only=: (bool) -> bool
+
+      attr_reader limit: Integer?
+
+      def limit=: (Integer) -> Integer
+
+      attr_reader fields: String?
+
+      def fields=: (String) -> String
+
+      attr_reader omit: String?
+
+      def omit=: (String) -> String
+
+      def initialize: (
+        ?q: String,
+        ?active_only: bool,
+        ?limit: Integer,
+        ?fields: String,
+        ?omit: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        q: String,
+        active_only: bool,
+        limit: Integer,
+        fields: String,
+        omit: String,
+        request_options: XTwitterScraper::RequestOptions
+      }
+    end
+  end
+end

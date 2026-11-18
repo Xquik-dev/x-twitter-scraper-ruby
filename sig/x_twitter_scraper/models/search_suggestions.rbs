@@ -1,0 +1,49 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type search_suggestions =
+      {
+        query: String,
+        users: ::Array[XTwitterScraper::Models::SearchSuggestionUser],
+        topics: ::Array[XTwitterScraper::Models::SearchSuggestionTopic],
+        hashtags: ::Array[XTwitterScraper::Models::SearchSuggestionHashtag],
+        cashtags: ::Array[XTwitterScraper::Models::SearchSuggestionCashtag],
+        count: Integer
+      }
+
+    class SearchSuggestions < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor query: String
+
+      attr_accessor users: ::Array[XTwitterScraper::Models::SearchSuggestionUser]
+
+      attr_accessor topics: ::Array[XTwitterScraper::Models::SearchSuggestionTopic]
+
+      attr_accessor hashtags: ::Array[XTwitterScraper::Models::SearchSuggestionHashtag]
+
+      attr_accessor cashtags: ::Array[XTwitterScraper::Models::SearchSuggestionCashtag]
+
+      attr_accessor count: Integer
+
+      def initialize: (
+        query: String,
+        users: ::Array[XTwitterScraper::Models::SearchSuggestionUser],
+        topics: ::Array[XTwitterScraper::Models::SearchSuggestionTopic],
+        hashtags: ::Array[XTwitterScraper::Models::SearchSuggestionHashtag],
+        cashtags: ::Array[XTwitterScraper::Models::SearchSuggestionCashtag],
+        count: Integer
+      ) -> void
+
+      def to_hash: -> {
+        query: String,
+        users: ::Array[XTwitterScraper::Models::SearchSuggestionUser],
+        topics: ::Array[XTwitterScraper::Models::SearchSuggestionTopic],
+        hashtags: ::Array[XTwitterScraper::Models::SearchSuggestionHashtag],
+        cashtags: ::Array[XTwitterScraper::Models::SearchSuggestionCashtag],
+        count: Integer
+      }
+    end
+  end
+end

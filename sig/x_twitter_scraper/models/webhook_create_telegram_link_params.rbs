@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type webhook_create_telegram_link_params =
+      { event_types: ::Array[XTwitterScraper::Models::event_type] }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class WebhookCreateTelegramLinkParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_reader event_types: ::Array[XTwitterScraper::Models::event_type]?
+
+      def event_types=: (
+        ::Array[XTwitterScraper::Models::event_type]
+      ) -> ::Array[XTwitterScraper::Models::event_type]
+
+      def initialize: (
+        ?event_types: ::Array[XTwitterScraper::Models::event_type],
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        event_types: ::Array[XTwitterScraper::Models::event_type],
+        request_options: XTwitterScraper::RequestOptions
+      }
+    end
+  end
+end

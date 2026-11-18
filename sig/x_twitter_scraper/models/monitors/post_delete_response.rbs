@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module Monitors
+      type post_delete_response =
+        { deletion_status: :deleting, status_url: String, success: bool }
+
+      class PostDeleteResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor deletion_status: :deleting
+
+        attr_accessor status_url: String
+
+        attr_accessor success: bool
+
+        def initialize: (
+          status_url: String,
+          success: bool,
+          ?deletion_status: :deleting
+        ) -> void
+
+        def to_hash: -> {
+          deletion_status: :deleting,
+          status_url: String,
+          success: bool
+        }
+      end
+    end
+  end
+end

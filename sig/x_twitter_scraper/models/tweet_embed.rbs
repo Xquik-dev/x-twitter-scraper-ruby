@@ -1,0 +1,58 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type tweet_embed =
+      {
+        tweet_id: String,
+        url: String,
+        author_name: String,
+        author_url: String,
+        html: String,
+        width: Integer,
+        height: Integer
+      }
+
+    class TweetEmbed < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor tweet_id: String
+
+      attr_accessor url: String
+
+      attr_accessor author_name: String
+
+      attr_accessor author_url: String
+
+      attr_accessor html: String
+
+      attr_reader width: Integer?
+
+      def width=: (Integer) -> Integer
+
+      attr_reader height: Integer?
+
+      def height=: (Integer) -> Integer
+
+      def initialize: (
+        tweet_id: String,
+        url: String,
+        author_name: String,
+        author_url: String,
+        html: String,
+        ?width: Integer,
+        ?height: Integer
+      ) -> void
+
+      def to_hash: -> {
+        tweet_id: String,
+        url: String,
+        author_name: String,
+        author_url: String,
+        html: String,
+        width: Integer,
+        height: Integer
+      }
+    end
+  end
+end

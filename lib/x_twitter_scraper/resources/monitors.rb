@@ -12,6 +12,9 @@ module XTwitterScraper
       # @return [XTwitterScraper::Resources::Monitors::Keywords]
       attr_reader :keywords
 
+      # @return [XTwitterScraper::Resources::Monitors::Posts]
+      attr_reader :posts
+
       # Creates an account monitor. Monitors are unlimited. Active monitors check every
       # 1 second and cost 30 credits per hour. Events and webhook deliveries are
       # included. Creation requires available credits for the first hourly charge and
@@ -134,12 +137,44 @@ module XTwitterScraper
         )
       end
 
+      # Creates the monitor if it does not exist, or updates it if it does. Send the
+      # same call twice & you still have 1 monitor. A new monitor answers 201 & an
+      # update answers 200. Both carry `created`, so you know which one ran. Creating
+      # needs the credits of the first hour, then costs 30 credits an hour. A stopped
+      # monitor turns back on & counts as created. Updating is free & replaces the event
+      # types. It changes the name only when you send one.
+      #
+      # @overload upsert_by_username(username, event_types:, name: nil, request_options: {})
+      #
+      # @param username [String] The account's X username, with or without @, or its numeric user ID. A number is a user ID, so this call matches the account even after a rename.
+      #
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
+      #
+      # @param name [String] Your label for the monitor. Its events carry it as monitorName. Leave it out to keep the current label, or send null to remove it.
+      #
+      # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [XTwitterScraper::Models::MonitorUpsertByUsernameResponse]
+      #
+      # @see XTwitterScraper::Models::MonitorUpsertByUsernameParams
+      def upsert_by_username(username, params)
+        parsed, options = XTwitterScraper::Models::MonitorUpsertByUsernameParams.dump_request(params)
+        @client.request(
+          method: :put,
+          path: ["monitors/username/%1$s", username],
+          body: parsed,
+          model: XTwitterScraper::Models::MonitorUpsertByUsernameResponse,
+          options: options
+        )
+      end
+
       # @api private
       #
       # @param client [XTwitterScraper::Client]
       def initialize(client:)
         @client = client
         @keywords = XTwitterScraper::Resources::Monitors::Keywords.new(client: client)
+        @posts = XTwitterScraper::Resources::Monitors::Posts.new(client: client)
       end
     end
   end

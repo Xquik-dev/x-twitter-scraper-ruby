@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type user_highlights_info =
+      { can_highlight_tweets: bool, highlighted_tweets: String }
+
+    class UserHighlightsInfo < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader can_highlight_tweets: bool?
+
+      def can_highlight_tweets=: (bool) -> bool
+
+      attr_reader highlighted_tweets: String?
+
+      def highlighted_tweets=: (String) -> String
+
+      def initialize: (
+        ?can_highlight_tweets: bool,
+        ?highlighted_tweets: String
+      ) -> void
+
+      def to_hash: -> { can_highlight_tweets: bool, highlighted_tweets: String }
+    end
+  end
+end

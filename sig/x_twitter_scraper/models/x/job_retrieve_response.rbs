@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type job_retrieve_response = { job: XTwitterScraper::Models::Job }
+
+      class JobRetrieveResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor job: XTwitterScraper::Models::Job
+
+        def initialize: (job: XTwitterScraper::Models::Job) -> void
+
+        def to_hash: -> { job: XTwitterScraper::Models::Job }
+      end
+    end
+  end
+end

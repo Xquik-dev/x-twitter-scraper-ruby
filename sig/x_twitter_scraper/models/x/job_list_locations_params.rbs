@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type job_list_locations_params =
+        { q: String, limit: Integer, fields: String, omit: String }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class JobListLocationsParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor q: String
+
+        attr_reader limit: Integer?
+
+        def limit=: (Integer) -> Integer
+
+        attr_reader fields: String?
+
+        def fields=: (String) -> String
+
+        attr_reader omit: String?
+
+        def omit=: (String) -> String
+
+        def initialize: (
+          q: String,
+          ?limit: Integer,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          q: String,
+          limit: Integer,
+          fields: String,
+          omit: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

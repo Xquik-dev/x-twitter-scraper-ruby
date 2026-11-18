@@ -1,0 +1,131 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type sports_game_posts =
+      {
+        filtered_count: Integer,
+        tweets: ::Array[XTwitterScraper::Models::SearchTweet],
+        has_next_page: bool,
+        next_cursor: String,
+        end_reason: XTwitterScraper::Models::coverage_end_reason,
+        read_back_to: Time,
+        window_complete: bool,
+        hidden_timeline: bool,
+        searched_query: String,
+        search_context: XTwitterScraper::Models::SportsGamePosts::SearchContext,
+        query: String?
+      }
+
+    class SportsGamePosts < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader filtered_count: Integer?
+
+      def filtered_count=: (Integer) -> Integer
+
+      attr_accessor tweets: ::Array[XTwitterScraper::Models::SearchTweet]
+
+      attr_accessor has_next_page: bool
+
+      attr_accessor next_cursor: String
+
+      attr_reader end_reason: XTwitterScraper::Models::coverage_end_reason?
+
+      def end_reason=: (
+        XTwitterScraper::Models::coverage_end_reason
+      ) -> XTwitterScraper::Models::coverage_end_reason
+
+      attr_reader read_back_to: Time?
+
+      def read_back_to=: (Time) -> Time
+
+      attr_reader window_complete: bool?
+
+      def window_complete=: (bool) -> bool
+
+      attr_reader hidden_timeline: bool?
+
+      def hidden_timeline=: (bool) -> bool
+
+      attr_reader searched_query: String?
+
+      def searched_query=: (String) -> String
+
+      attr_reader search_context: XTwitterScraper::Models::SportsGamePosts::SearchContext?
+
+      def search_context=: (
+        XTwitterScraper::Models::SportsGamePosts::SearchContext
+      ) -> XTwitterScraper::Models::SportsGamePosts::SearchContext
+
+      attr_accessor query: String?
+
+      def initialize: (
+        tweets: ::Array[XTwitterScraper::Models::SearchTweet],
+        has_next_page: bool,
+        next_cursor: String,
+        query: String?,
+        ?filtered_count: Integer,
+        ?end_reason: XTwitterScraper::Models::coverage_end_reason,
+        ?read_back_to: Time,
+        ?window_complete: bool,
+        ?hidden_timeline: bool,
+        ?searched_query: String,
+        ?search_context: XTwitterScraper::Models::SportsGamePosts::SearchContext
+      ) -> void
+
+      def to_hash: -> {
+        filtered_count: Integer,
+        tweets: ::Array[XTwitterScraper::Models::SearchTweet],
+        has_next_page: bool,
+        next_cursor: String,
+        end_reason: XTwitterScraper::Models::coverage_end_reason,
+        read_back_to: Time,
+        window_complete: bool,
+        hidden_timeline: bool,
+        searched_query: String,
+        search_context: XTwitterScraper::Models::SportsGamePosts::SearchContext,
+        query: String?
+      }
+
+      type search_context =
+        {
+          smart_tag: XTwitterScraper::Models::SportsGamePosts::SearchContext::SmartTag
+        }
+
+      class SearchContext < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor smart_tag: XTwitterScraper::Models::SportsGamePosts::SearchContext::SmartTag
+
+        def initialize: (
+          smart_tag: XTwitterScraper::Models::SportsGamePosts::SearchContext::SmartTag
+        ) -> void
+
+        def to_hash: -> {
+          smart_tag: XTwitterScraper::Models::SportsGamePosts::SearchContext::SmartTag
+        }
+
+        type smart_tag = { id: String, active: bool, supports_ohlc: bool }
+
+        class SmartTag < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_reader active: bool?
+
+          def active=: (bool) -> bool
+
+          attr_reader supports_ohlc: bool?
+
+          def supports_ohlc=: (bool) -> bool
+
+          def initialize: (
+            id: String,
+            ?active: bool,
+            ?supports_ohlc: bool
+          ) -> void
+
+          def to_hash: -> { id: String, active: bool, supports_ohlc: bool }
+        end
+      end
+    end
+  end
+end

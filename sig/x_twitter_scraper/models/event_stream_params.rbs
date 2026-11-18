@@ -1,0 +1,58 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type event_stream_params =
+      {
+        include: XTwitterScraper::Models::EventStreamParams::include_,
+        look_back: bool,
+        last_event_id: String
+      }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class EventStreamParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_reader include: XTwitterScraper::Models::EventStreamParams::include_?
+
+      def include=: (
+        XTwitterScraper::Models::EventStreamParams::include_
+      ) -> XTwitterScraper::Models::EventStreamParams::include_
+
+      attr_reader look_back: bool?
+
+      def look_back=: (bool) -> bool
+
+      attr_reader last_event_id: String?
+
+      def last_event_id=: (String) -> String
+
+      def initialize: (
+        ?include: XTwitterScraper::Models::EventStreamParams::include_,
+        ?look_back: bool,
+        ?last_event_id: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        include: XTwitterScraper::Models::EventStreamParams::include_,
+        look_back: bool,
+        last_event_id: String,
+        request_options: XTwitterScraper::RequestOptions
+      }
+
+      type include_ = :post_metrics
+
+      module Include
+        extend XTwitterScraper::Internal::Type::Enum
+
+        POST_METRICS: :post_metrics
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::EventStreamParams::include_]
+      end
+    end
+  end
+end

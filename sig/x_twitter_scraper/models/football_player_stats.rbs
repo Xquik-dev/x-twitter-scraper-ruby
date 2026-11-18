@@ -1,0 +1,330 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_player_stats =
+      {
+        player_id: String?,
+        passing: XTwitterScraper::Models::FootballPassingStats,
+        rushing: XTwitterScraper::Models::FootballRushingStats,
+        receiving: XTwitterScraper::Models::FootballPlayerStats::Receiving,
+        defense: XTwitterScraper::Models::FootballPlayerStats::Defense,
+        fumbles: XTwitterScraper::Models::FootballFumbleStats,
+        kick_returns: XTwitterScraper::Models::FootballReturnStats,
+        punt_returns: XTwitterScraper::Models::FootballReturnStats,
+        interception_returns: XTwitterScraper::Models::FootballReturnStats,
+        punts: XTwitterScraper::Models::FootballPlayerStats::Punts,
+        field_goals: XTwitterScraper::Models::FootballPlayerStats::FieldGoals,
+        extra_points: XTwitterScraper::Models::FootballPlayerStats::ExtraPoints,
+        conversions: XTwitterScraper::Models::FootballPlayerStats::Conversions
+      }
+
+    class FootballPlayerStats < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor player_id: String?
+
+      attr_reader passing: XTwitterScraper::Models::FootballPassingStats?
+
+      def passing=: (
+        XTwitterScraper::Models::FootballPassingStats
+      ) -> XTwitterScraper::Models::FootballPassingStats
+
+      attr_reader rushing: XTwitterScraper::Models::FootballRushingStats?
+
+      def rushing=: (
+        XTwitterScraper::Models::FootballRushingStats
+      ) -> XTwitterScraper::Models::FootballRushingStats
+
+      attr_reader receiving: XTwitterScraper::Models::FootballPlayerStats::Receiving?
+
+      def receiving=: (
+        XTwitterScraper::Models::FootballPlayerStats::Receiving
+      ) -> XTwitterScraper::Models::FootballPlayerStats::Receiving
+
+      attr_reader defense: XTwitterScraper::Models::FootballPlayerStats::Defense?
+
+      def defense=: (
+        XTwitterScraper::Models::FootballPlayerStats::Defense
+      ) -> XTwitterScraper::Models::FootballPlayerStats::Defense
+
+      attr_reader fumbles: XTwitterScraper::Models::FootballFumbleStats?
+
+      def fumbles=: (
+        XTwitterScraper::Models::FootballFumbleStats
+      ) -> XTwitterScraper::Models::FootballFumbleStats
+
+      attr_reader kick_returns: XTwitterScraper::Models::FootballReturnStats?
+
+      def kick_returns=: (
+        XTwitterScraper::Models::FootballReturnStats
+      ) -> XTwitterScraper::Models::FootballReturnStats
+
+      attr_reader punt_returns: XTwitterScraper::Models::FootballReturnStats?
+
+      def punt_returns=: (
+        XTwitterScraper::Models::FootballReturnStats
+      ) -> XTwitterScraper::Models::FootballReturnStats
+
+      attr_reader interception_returns: XTwitterScraper::Models::FootballReturnStats?
+
+      def interception_returns=: (
+        XTwitterScraper::Models::FootballReturnStats
+      ) -> XTwitterScraper::Models::FootballReturnStats
+
+      attr_reader punts: XTwitterScraper::Models::FootballPlayerStats::Punts?
+
+      def punts=: (
+        XTwitterScraper::Models::FootballPlayerStats::Punts
+      ) -> XTwitterScraper::Models::FootballPlayerStats::Punts
+
+      attr_reader field_goals: XTwitterScraper::Models::FootballPlayerStats::FieldGoals?
+
+      def field_goals=: (
+        XTwitterScraper::Models::FootballPlayerStats::FieldGoals
+      ) -> XTwitterScraper::Models::FootballPlayerStats::FieldGoals
+
+      attr_reader extra_points: XTwitterScraper::Models::FootballPlayerStats::ExtraPoints?
+
+      def extra_points=: (
+        XTwitterScraper::Models::FootballPlayerStats::ExtraPoints
+      ) -> XTwitterScraper::Models::FootballPlayerStats::ExtraPoints
+
+      attr_reader conversions: XTwitterScraper::Models::FootballPlayerStats::Conversions?
+
+      def conversions=: (
+        XTwitterScraper::Models::FootballPlayerStats::Conversions
+      ) -> XTwitterScraper::Models::FootballPlayerStats::Conversions
+
+      def initialize: (
+        player_id: String?,
+        ?passing: XTwitterScraper::Models::FootballPassingStats,
+        ?rushing: XTwitterScraper::Models::FootballRushingStats,
+        ?receiving: XTwitterScraper::Models::FootballPlayerStats::Receiving,
+        ?defense: XTwitterScraper::Models::FootballPlayerStats::Defense,
+        ?fumbles: XTwitterScraper::Models::FootballFumbleStats,
+        ?kick_returns: XTwitterScraper::Models::FootballReturnStats,
+        ?punt_returns: XTwitterScraper::Models::FootballReturnStats,
+        ?interception_returns: XTwitterScraper::Models::FootballReturnStats,
+        ?punts: XTwitterScraper::Models::FootballPlayerStats::Punts,
+        ?field_goals: XTwitterScraper::Models::FootballPlayerStats::FieldGoals,
+        ?extra_points: XTwitterScraper::Models::FootballPlayerStats::ExtraPoints,
+        ?conversions: XTwitterScraper::Models::FootballPlayerStats::Conversions
+      ) -> void
+
+      def to_hash: -> {
+        player_id: String?,
+        passing: XTwitterScraper::Models::FootballPassingStats,
+        rushing: XTwitterScraper::Models::FootballRushingStats,
+        receiving: XTwitterScraper::Models::FootballPlayerStats::Receiving,
+        defense: XTwitterScraper::Models::FootballPlayerStats::Defense,
+        fumbles: XTwitterScraper::Models::FootballFumbleStats,
+        kick_returns: XTwitterScraper::Models::FootballReturnStats,
+        punt_returns: XTwitterScraper::Models::FootballReturnStats,
+        interception_returns: XTwitterScraper::Models::FootballReturnStats,
+        punts: XTwitterScraper::Models::FootballPlayerStats::Punts,
+        field_goals: XTwitterScraper::Models::FootballPlayerStats::FieldGoals,
+        extra_points: XTwitterScraper::Models::FootballPlayerStats::ExtraPoints,
+        conversions: XTwitterScraper::Models::FootballPlayerStats::Conversions
+      }
+
+      type receiving =
+        {
+          avg_yards: Float?,
+          longest: Integer?,
+          receptions: Integer?,
+          targets: Integer?,
+          touchdowns: Integer?,
+          yards: Integer?
+        }
+
+      class Receiving < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor avg_yards: Float?
+
+        attr_accessor longest: Integer?
+
+        attr_accessor receptions: Integer?
+
+        attr_accessor targets: Integer?
+
+        attr_accessor touchdowns: Integer?
+
+        attr_accessor yards: Integer?
+
+        def initialize: (
+          avg_yards: Float?,
+          longest: Integer?,
+          receptions: Integer?,
+          targets: Integer?,
+          touchdowns: Integer?,
+          yards: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          avg_yards: Float?,
+          longest: Integer?,
+          receptions: Integer?,
+          targets: Integer?,
+          touchdowns: Integer?,
+          yards: Integer?
+        }
+      end
+
+      type defense =
+        {
+          combined: Float?,
+          forced_fumbles: Integer?,
+          interceptions: Integer?,
+          passes_defended: Integer?,
+          sacks: Float?,
+          tackles: Float?,
+          tackles_for_loss: Float?
+        }
+
+      class Defense < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor combined: Float?
+
+        attr_accessor forced_fumbles: Integer?
+
+        attr_accessor interceptions: Integer?
+
+        attr_accessor passes_defended: Integer?
+
+        attr_accessor sacks: Float?
+
+        attr_accessor tackles: Float?
+
+        attr_accessor tackles_for_loss: Float?
+
+        def initialize: (
+          combined: Float?,
+          forced_fumbles: Integer?,
+          interceptions: Integer?,
+          passes_defended: Integer?,
+          sacks: Float?,
+          tackles: Float?,
+          tackles_for_loss: Float?
+        ) -> void
+
+        def to_hash: -> {
+          combined: Float?,
+          forced_fumbles: Integer?,
+          interceptions: Integer?,
+          passes_defended: Integer?,
+          sacks: Float?,
+          tackles: Float?,
+          tackles_for_loss: Float?
+        }
+      end
+
+      type punts =
+        {
+          attempts: Integer?,
+          avg_net_yards: Float?,
+          avg_yards: Float?,
+          :inside20 => Integer?,
+          longest: Integer?,
+          yards: Integer?
+        }
+
+      class Punts < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor attempts: Integer?
+
+        attr_accessor avg_net_yards: Float?
+
+        attr_accessor avg_yards: Float?
+
+        attr_accessor inside20: Integer?
+
+        attr_accessor longest: Integer?
+
+        attr_accessor yards: Integer?
+
+        def initialize: (
+          attempts: Integer?,
+          avg_net_yards: Float?,
+          avg_yards: Float?,
+          inside20: Integer?,
+          longest: Integer?,
+          yards: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          attempts: Integer?,
+          avg_net_yards: Float?,
+          avg_yards: Float?,
+          :inside20 => Integer?,
+          longest: Integer?,
+          yards: Integer?
+        }
+      end
+
+      type field_goals =
+        { attempts: Integer?, longest: Integer?, made: Integer? }
+
+      class FieldGoals < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor attempts: Integer?
+
+        attr_accessor longest: Integer?
+
+        attr_accessor made: Integer?
+
+        def initialize: (
+          attempts: Integer?,
+          longest: Integer?,
+          made: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          attempts: Integer?,
+          longest: Integer?,
+          made: Integer?
+        }
+      end
+
+      type extra_points = { attempts: Integer?, made: Integer? }
+
+      class ExtraPoints < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor attempts: Integer?
+
+        attr_accessor made: Integer?
+
+        def initialize: (attempts: Integer?, made: Integer?) -> void
+
+        def to_hash: -> { attempts: Integer?, made: Integer? }
+      end
+
+      type conversions =
+        {
+          defense_successes: Integer?,
+          pass_successes: Integer?,
+          rush_successes: Integer?,
+          turnover_successes: Integer?
+        }
+
+      class Conversions < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor defense_successes: Integer?
+
+        attr_accessor pass_successes: Integer?
+
+        attr_accessor rush_successes: Integer?
+
+        attr_accessor turnover_successes: Integer?
+
+        def initialize: (
+          defense_successes: Integer?,
+          pass_successes: Integer?,
+          rush_successes: Integer?,
+          turnover_successes: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          defense_successes: Integer?,
+          pass_successes: Integer?,
+          rush_successes: Integer?,
+          turnover_successes: Integer?
+        }
+      end
+    end
+  end
+end

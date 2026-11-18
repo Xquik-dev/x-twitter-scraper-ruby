@@ -1,0 +1,103 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_play_detail =
+      {
+        sequence: Integer?,
+        category: String?,
+        description: String?,
+        direction: String?,
+        yards: Integer?,
+        players: ::Array[XTwitterScraper::Models::FootballPlayDetail::Player],
+        penalty: XTwitterScraper::Models::FootballPlayDetail::Penalty?
+      }
+
+    class FootballPlayDetail < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor sequence: Integer?
+
+      attr_accessor category: String?
+
+      attr_accessor description: String?
+
+      attr_accessor direction: String?
+
+      attr_accessor yards: Integer?
+
+      attr_accessor players: ::Array[XTwitterScraper::Models::FootballPlayDetail::Player]
+
+      attr_accessor penalty: XTwitterScraper::Models::FootballPlayDetail::Penalty?
+
+      def initialize: (
+        sequence: Integer?,
+        category: String?,
+        description: String?,
+        direction: String?,
+        yards: Integer?,
+        players: ::Array[XTwitterScraper::Models::FootballPlayDetail::Player],
+        penalty: XTwitterScraper::Models::FootballPlayDetail::Penalty?
+      ) -> void
+
+      def to_hash: -> {
+        sequence: Integer?,
+        category: String?,
+        description: String?,
+        direction: String?,
+        yards: Integer?,
+        players: ::Array[XTwitterScraper::Models::FootballPlayDetail::Player],
+        penalty: XTwitterScraper::Models::FootballPlayDetail::Penalty?
+      }
+
+      type player = { player_id: String?, player_role: String? }
+
+      class Player < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor player_id: String?
+
+        attr_accessor player_role: String?
+
+        def initialize: (player_id: String?, player_role: String?) -> void
+
+        def to_hash: -> { player_id: String?, player_role: String? }
+      end
+
+      type penalty =
+        {
+          description: String?,
+          next_down: String?,
+          result: String?,
+          team_id: String?,
+          yards: Integer?
+        }
+
+      class Penalty < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor description: String?
+
+        attr_accessor next_down: String?
+
+        attr_accessor result: String?
+
+        attr_accessor team_id: String?
+
+        attr_accessor yards: Integer?
+
+        def initialize: (
+          description: String?,
+          next_down: String?,
+          result: String?,
+          team_id: String?,
+          yards: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          description: String?,
+          next_down: String?,
+          result: String?,
+          team_id: String?,
+          yards: Integer?
+        }
+      end
+    end
+  end
+end

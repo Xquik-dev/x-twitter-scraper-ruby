@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type post_event_type =
+      :"post.reply.new"
+      | :"post.quote.new"
+      | :"post.likes.changed"
+      | :"post.retweets.changed"
+      | :"post.replies.changed"
+      | :"post.quotes.changed"
+      | :"post.bookmarks.changed"
+      | :"post.views.changed"
+      | :"post.edited"
+      | :"post.deleted"
+
+    module PostEventType
+      extend XTwitterScraper::Internal::Type::Enum
+
+      POST_REPLY_NEW: :"post.reply.new"
+      POST_QUOTE_NEW: :"post.quote.new"
+      POST_LIKES_CHANGED: :"post.likes.changed"
+      POST_RETWEETS_CHANGED: :"post.retweets.changed"
+      POST_REPLIES_CHANGED: :"post.replies.changed"
+      POST_QUOTES_CHANGED: :"post.quotes.changed"
+      POST_BOOKMARKS_CHANGED: :"post.bookmarks.changed"
+      POST_VIEWS_CHANGED: :"post.views.changed"
+      POST_EDITED: :"post.edited"
+      POST_DELETED: :"post.deleted"
+
+      def self?.values: -> ::Array[XTwitterScraper::Models::post_event_type]
+    end
+  end
+end

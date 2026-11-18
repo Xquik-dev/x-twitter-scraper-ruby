@@ -1,0 +1,69 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type community_list_popular_params =
+        {
+          topic_id: String,
+          topic: String,
+          cursor: String,
+          page_size: Integer,
+          fields: String,
+          omit: String
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class CommunityListPopularParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_reader topic_id: String?
+
+        def topic_id=: (String) -> String
+
+        attr_reader topic: String?
+
+        def topic=: (String) -> String
+
+        attr_reader cursor: String?
+
+        def cursor=: (String) -> String
+
+        attr_reader page_size: Integer?
+
+        def page_size=: (Integer) -> Integer
+
+        attr_reader fields: String?
+
+        def fields=: (String) -> String
+
+        attr_reader omit: String?
+
+        def omit=: (String) -> String
+
+        def initialize: (
+          ?topic_id: String,
+          ?topic: String,
+          ?cursor: String,
+          ?page_size: Integer,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          topic_id: String,
+          topic: String,
+          cursor: String,
+          page_size: Integer,
+          fields: String,
+          omit: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

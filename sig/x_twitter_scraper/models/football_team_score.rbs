@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_team_score = { team_id: String?, points: Integer? }
+
+    class FootballTeamScore < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor team_id: String?
+
+      attr_accessor points: Integer?
+
+      def initialize: (team_id: String?, points: Integer?) -> void
+
+      def to_hash: -> { team_id: String?, points: Integer? }
+    end
+  end
+end

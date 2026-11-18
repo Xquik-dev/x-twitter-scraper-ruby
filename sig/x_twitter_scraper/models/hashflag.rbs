@@ -1,0 +1,71 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type hashflag =
+      {
+        hashtag: String,
+        asset_url: String,
+        starts_at: Time,
+        ends_at: Time,
+        is_hashfetti_enabled: bool,
+        animations: ::Array[XTwitterScraper::Models::Hashflag::Animation]
+      }
+
+    class Hashflag < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor hashtag: String
+
+      attr_accessor asset_url: String
+
+      attr_accessor starts_at: Time
+
+      attr_accessor ends_at: Time
+
+      attr_accessor is_hashfetti_enabled: bool
+
+      attr_accessor animations: ::Array[XTwitterScraper::Models::Hashflag::Animation]
+
+      def initialize: (
+        hashtag: String,
+        asset_url: String,
+        starts_at: Time,
+        ends_at: Time,
+        is_hashfetti_enabled: bool,
+        animations: ::Array[XTwitterScraper::Models::Hashflag::Animation]
+      ) -> void
+
+      def to_hash: -> {
+        hashtag: String,
+        asset_url: String,
+        starts_at: Time,
+        ends_at: Time,
+        is_hashfetti_enabled: bool,
+        animations: ::Array[XTwitterScraper::Models::Hashflag::Animation]
+      }
+
+      type animation = { context: String?, asset_url: String, priority: Float? }
+
+      class Animation < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor context: String?
+
+        attr_accessor asset_url: String
+
+        attr_accessor priority: Float?
+
+        def initialize: (
+          context: String?,
+          asset_url: String,
+          priority: Float?
+        ) -> void
+
+        def to_hash: -> {
+          context: String?,
+          asset_url: String,
+          priority: Float?
+        }
+      end
+    end
+  end
+end

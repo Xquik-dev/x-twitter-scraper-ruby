@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type tweet_user_mention =
+      {
+        id_str: String,
+        indices: ::Array[Integer],
+        name: String,
+        screen_name: String
+      }
+
+    class TweetUserMention < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader id_str: String?
+
+      def id_str=: (String) -> String
+
+      attr_reader indices: ::Array[Integer]?
+
+      def indices=: (::Array[Integer]) -> ::Array[Integer]
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_accessor screen_name: String
+
+      def initialize: (
+        screen_name: String,
+        ?id_str: String,
+        ?indices: ::Array[Integer],
+        ?name: String
+      ) -> void
+
+      def to_hash: -> {
+        id_str: String,
+        indices: ::Array[Integer],
+        name: String,
+        screen_name: String
+      }
+    end
+  end
+end

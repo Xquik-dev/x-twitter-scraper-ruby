@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type job_location = { id: String, name: String }
+
+    class JobLocation < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor name: String
+
+      def initialize: (id: String, name: String) -> void
+
+      def to_hash: -> { id: String, name: String }
+    end
+  end
+end

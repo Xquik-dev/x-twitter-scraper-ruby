@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type resolved_link = { url: String, resolved_url: String }
+
+    class ResolvedLink < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor url: String
+
+      attr_reader resolved_url: String?
+
+      def resolved_url=: (String) -> String
+
+      def initialize: (url: String, ?resolved_url: String) -> void
+
+      def to_hash: -> { url: String, resolved_url: String }
+    end
+  end
+end

@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module Monitors
+      type post_list_response =
+        {
+          monitors: ::Array[XTwitterScraper::Models::PostMonitor],
+          total: Integer,
+          has_more: bool,
+          next_cursor: String
+        }
+
+      class PostListResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor monitors: ::Array[XTwitterScraper::Models::PostMonitor]
+
+        attr_accessor total: Integer
+
+        attr_accessor has_more: bool
+
+        attr_reader next_cursor: String?
+
+        def next_cursor=: (String) -> String
+
+        def initialize: (
+          monitors: ::Array[XTwitterScraper::Models::PostMonitor],
+          total: Integer,
+          has_more: bool,
+          ?next_cursor: String
+        ) -> void
+
+        def to_hash: -> {
+          monitors: ::Array[XTwitterScraper::Models::PostMonitor],
+          total: Integer,
+          has_more: bool,
+          next_cursor: String
+        }
+      end
+    end
+  end
+end

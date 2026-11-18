@@ -1,0 +1,73 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type tweet_entities =
+      {
+        hashtags: ::Array[XTwitterScraper::Models::TweetHashtag],
+        smarttags: ::Array[XTwitterScraper::Models::TweetSymbol],
+        symbols: ::Array[XTwitterScraper::Models::TweetSymbol],
+        timestamps: ::Array[XTwitterScraper::Models::TweetSymbol],
+        urls: ::Array[XTwitterScraper::Models::TweetUrlEntity],
+        user_mentions: ::Array[XTwitterScraper::Models::TweetUserMention]
+      }
+
+    class TweetEntities < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader hashtags: ::Array[XTwitterScraper::Models::TweetHashtag]?
+
+      def hashtags=: (
+        ::Array[XTwitterScraper::Models::TweetHashtag]
+      ) -> ::Array[XTwitterScraper::Models::TweetHashtag]
+
+      attr_reader smarttags: ::Array[XTwitterScraper::Models::TweetSymbol]?
+
+      def smarttags=: (
+        ::Array[XTwitterScraper::Models::TweetSymbol]
+      ) -> ::Array[XTwitterScraper::Models::TweetSymbol]
+
+      attr_reader symbols: ::Array[XTwitterScraper::Models::TweetSymbol]?
+
+      def symbols=: (
+        ::Array[XTwitterScraper::Models::TweetSymbol]
+      ) -> ::Array[XTwitterScraper::Models::TweetSymbol]
+
+      attr_reader timestamps: ::Array[XTwitterScraper::Models::TweetSymbol]?
+
+      def timestamps=: (
+        ::Array[XTwitterScraper::Models::TweetSymbol]
+      ) -> ::Array[XTwitterScraper::Models::TweetSymbol]
+
+      attr_reader urls: ::Array[XTwitterScraper::Models::TweetUrlEntity]?
+
+      def urls=: (
+        ::Array[XTwitterScraper::Models::TweetUrlEntity]
+      ) -> ::Array[XTwitterScraper::Models::TweetUrlEntity]
+
+      attr_reader user_mentions: ::Array[XTwitterScraper::Models::TweetUserMention]?
+
+      def user_mentions=: (
+        ::Array[XTwitterScraper::Models::TweetUserMention]
+      ) -> ::Array[XTwitterScraper::Models::TweetUserMention]
+
+      def initialize: (
+        ?hashtags: ::Array[XTwitterScraper::Models::TweetHashtag],
+        ?smarttags: ::Array[XTwitterScraper::Models::TweetSymbol],
+        ?symbols: ::Array[XTwitterScraper::Models::TweetSymbol],
+        ?timestamps: ::Array[XTwitterScraper::Models::TweetSymbol],
+        ?urls: ::Array[XTwitterScraper::Models::TweetUrlEntity],
+        ?user_mentions: ::Array[XTwitterScraper::Models::TweetUserMention]
+      ) -> void
+
+      def to_hash: -> {
+        hashtags: ::Array[XTwitterScraper::Models::TweetHashtag],
+        smarttags: ::Array[XTwitterScraper::Models::TweetSymbol],
+        symbols: ::Array[XTwitterScraper::Models::TweetSymbol],
+        timestamps: ::Array[XTwitterScraper::Models::TweetSymbol],
+        urls: ::Array[XTwitterScraper::Models::TweetUrlEntity],
+        user_mentions: ::Array[XTwitterScraper::Models::TweetUserMention]
+      }
+    end
+  end
+end

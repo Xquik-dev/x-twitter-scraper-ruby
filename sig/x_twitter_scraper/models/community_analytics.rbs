@@ -1,0 +1,71 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type community_analytics =
+      {
+        id: String,
+        period_ends_at: Time,
+        metrics: XTwitterScraper::Models::CommunityAnalytics::Metrics
+      }
+
+    class CommunityAnalytics < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor period_ends_at: Time
+
+      attr_accessor metrics: XTwitterScraper::Models::CommunityAnalytics::Metrics
+
+      def initialize: (
+        id: String,
+        period_ends_at: Time,
+        metrics: XTwitterScraper::Models::CommunityAnalytics::Metrics
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        period_ends_at: Time,
+        metrics: XTwitterScraper::Models::CommunityAnalytics::Metrics
+      }
+
+      type metrics =
+        {
+          likes: XTwitterScraper::Models::CommunityAnalyticsMetric,
+          new_members: XTwitterScraper::Models::CommunityAnalyticsMetric,
+          posts: XTwitterScraper::Models::CommunityAnalyticsMetric,
+          replies: XTwitterScraper::Models::CommunityAnalyticsMetric,
+          unique_posters: XTwitterScraper::Models::CommunityAnalyticsMetric
+        }
+
+      class Metrics < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor likes: XTwitterScraper::Models::CommunityAnalyticsMetric
+
+        attr_accessor new_members: XTwitterScraper::Models::CommunityAnalyticsMetric
+
+        attr_accessor posts: XTwitterScraper::Models::CommunityAnalyticsMetric
+
+        attr_accessor replies: XTwitterScraper::Models::CommunityAnalyticsMetric
+
+        attr_accessor unique_posters: XTwitterScraper::Models::CommunityAnalyticsMetric
+
+        def initialize: (
+          likes: XTwitterScraper::Models::CommunityAnalyticsMetric,
+          new_members: XTwitterScraper::Models::CommunityAnalyticsMetric,
+          posts: XTwitterScraper::Models::CommunityAnalyticsMetric,
+          replies: XTwitterScraper::Models::CommunityAnalyticsMetric,
+          unique_posters: XTwitterScraper::Models::CommunityAnalyticsMetric
+        ) -> void
+
+        def to_hash: -> {
+          likes: XTwitterScraper::Models::CommunityAnalyticsMetric,
+          new_members: XTwitterScraper::Models::CommunityAnalyticsMetric,
+          posts: XTwitterScraper::Models::CommunityAnalyticsMetric,
+          replies: XTwitterScraper::Models::CommunityAnalyticsMetric,
+          unique_posters: XTwitterScraper::Models::CommunityAnalyticsMetric
+        }
+      end
+    end
+  end
+end

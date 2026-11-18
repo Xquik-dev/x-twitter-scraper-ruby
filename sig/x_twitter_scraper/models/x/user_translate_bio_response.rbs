@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type user_translate_bio_response =
+        {
+          translation: XTwitterScraper::Models::ProfileTranslation?,
+          message: String
+        }
+
+      class UserTranslateBioResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor translation: XTwitterScraper::Models::ProfileTranslation?
+
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        def initialize: (
+          translation: XTwitterScraper::Models::ProfileTranslation?,
+          ?message: String
+        ) -> void
+
+        def to_hash: -> {
+          translation: XTwitterScraper::Models::ProfileTranslation?,
+          message: String
+        }
+      end
+    end
+  end
+end

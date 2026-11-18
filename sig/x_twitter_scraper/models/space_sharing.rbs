@@ -1,0 +1,58 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type space_sharing =
+      {
+        id: String,
+        shared_at: Time,
+        updated_at: Time,
+        shared_by: XTwitterScraper::Models::UserProfile,
+        tweet: XTwitterScraper::Models::SearchTweet
+      }
+
+    class SpaceSharing < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader shared_at: Time?
+
+      def shared_at=: (Time) -> Time
+
+      attr_reader updated_at: Time?
+
+      def updated_at=: (Time) -> Time
+
+      attr_reader shared_by: XTwitterScraper::Models::UserProfile?
+
+      def shared_by=: (
+        XTwitterScraper::Models::UserProfile
+      ) -> XTwitterScraper::Models::UserProfile
+
+      attr_reader tweet: XTwitterScraper::Models::SearchTweet?
+
+      def tweet=: (
+        XTwitterScraper::Models::SearchTweet
+      ) -> XTwitterScraper::Models::SearchTweet
+
+      def initialize: (
+        ?id: String,
+        ?shared_at: Time,
+        ?updated_at: Time,
+        ?shared_by: XTwitterScraper::Models::UserProfile,
+        ?tweet: XTwitterScraper::Models::SearchTweet
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        shared_at: Time,
+        updated_at: Time,
+        shared_by: XTwitterScraper::Models::UserProfile,
+        tweet: XTwitterScraper::Models::SearchTweet
+      }
+    end
+  end
+end

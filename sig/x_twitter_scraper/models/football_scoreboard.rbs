@@ -1,0 +1,152 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_scoreboard =
+      {
+        id: String,
+        league: XTwitterScraper::Models::FootballScoreboard::league,
+        season_id: String?,
+        season_type: String?,
+        week: Integer?,
+        starts_at: Time?,
+        venue: String?,
+        status: String?,
+        clock: String?,
+        quarter: Integer?,
+        situation: XTwitterScraper::Models::FootballScoreboard::Situation?,
+        home: XTwitterScraper::Models::FootballSide,
+        away: XTwitterScraper::Models::FootballSide,
+        periods: ::Array[XTwitterScraper::Models::FootballPeriod],
+        last_play: XTwitterScraper::Models::FootballPlay?,
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam],
+        players: ::Hash[Symbol, XTwitterScraper::Models::FootballPlayer]
+      }
+
+    class FootballScoreboard < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor league: XTwitterScraper::Models::FootballScoreboard::league
+
+      attr_accessor season_id: String?
+
+      attr_accessor season_type: String?
+
+      attr_accessor week: Integer?
+
+      attr_accessor starts_at: Time?
+
+      attr_accessor venue: String?
+
+      attr_accessor status: String?
+
+      attr_accessor clock: String?
+
+      attr_accessor quarter: Integer?
+
+      attr_accessor situation: XTwitterScraper::Models::FootballScoreboard::Situation?
+
+      attr_accessor home: XTwitterScraper::Models::FootballSide
+
+      attr_accessor away: XTwitterScraper::Models::FootballSide
+
+      attr_accessor periods: ::Array[XTwitterScraper::Models::FootballPeriod]
+
+      attr_accessor last_play: XTwitterScraper::Models::FootballPlay?
+
+      attr_accessor teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam]
+
+      attr_accessor players: ::Hash[Symbol, XTwitterScraper::Models::FootballPlayer]
+
+      def initialize: (
+        id: String,
+        league: XTwitterScraper::Models::FootballScoreboard::league,
+        season_id: String?,
+        season_type: String?,
+        week: Integer?,
+        starts_at: Time?,
+        venue: String?,
+        status: String?,
+        clock: String?,
+        quarter: Integer?,
+        situation: XTwitterScraper::Models::FootballScoreboard::Situation?,
+        home: XTwitterScraper::Models::FootballSide,
+        away: XTwitterScraper::Models::FootballSide,
+        periods: ::Array[XTwitterScraper::Models::FootballPeriod],
+        last_play: XTwitterScraper::Models::FootballPlay?,
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam],
+        players: ::Hash[Symbol, XTwitterScraper::Models::FootballPlayer]
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        league: XTwitterScraper::Models::FootballScoreboard::league,
+        season_id: String?,
+        season_type: String?,
+        week: Integer?,
+        starts_at: Time?,
+        venue: String?,
+        status: String?,
+        clock: String?,
+        quarter: Integer?,
+        situation: XTwitterScraper::Models::FootballScoreboard::Situation?,
+        home: XTwitterScraper::Models::FootballSide,
+        away: XTwitterScraper::Models::FootballSide,
+        periods: ::Array[XTwitterScraper::Models::FootballPeriod],
+        last_play: XTwitterScraper::Models::FootballPlay?,
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam],
+        players: ::Hash[Symbol, XTwitterScraper::Models::FootballPlayer]
+      }
+
+      type league = :nfl | :ncaafb
+
+      module League
+        extend XTwitterScraper::Internal::Type::Enum
+
+        NFL: :nfl
+        NCAAFB: :ncaafb
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::FootballScoreboard::league]
+      end
+
+      type situation =
+        {
+          down: Integer?,
+          yards_to_go: Integer?,
+          yardline: Integer?,
+          yardline_team_id: String?,
+          possession_team_id: String?
+        }
+
+      class Situation < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor down: Integer?
+
+        attr_accessor yards_to_go: Integer?
+
+        attr_accessor yardline: Integer?
+
+        attr_accessor yardline_team_id: String?
+
+        attr_accessor possession_team_id: String?
+
+        def initialize: (
+          down: Integer?,
+          yards_to_go: Integer?,
+          yardline: Integer?,
+          yardline_team_id: String?,
+          possession_team_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          down: Integer?,
+          yards_to_go: Integer?,
+          yardline: Integer?,
+          yardline_team_id: String?,
+          possession_team_id: String?
+        }
+      end
+    end
+  end
+end

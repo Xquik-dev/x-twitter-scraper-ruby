@@ -1,0 +1,79 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type tweet_insights =
+      {
+        tweet_id: String,
+        author_id: String?,
+        author_user_name: String?,
+        created_at: Time?,
+        age_hours: Float?,
+        metrics: XTwitterScraper::Models::PostEngagementMetrics,
+        engagements: Float,
+        engagements_per_hour: Float?,
+        engagement_per_view: Float?,
+        engagement_rate: Float?,
+        amplification: Float?,
+        conversation: Float?
+      }
+
+    class TweetInsights < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor tweet_id: String
+
+      attr_accessor author_id: String?
+
+      attr_accessor author_user_name: String?
+
+      attr_accessor created_at: Time?
+
+      attr_accessor age_hours: Float?
+
+      attr_accessor metrics: XTwitterScraper::Models::PostEngagementMetrics
+
+      attr_accessor engagements: Float
+
+      attr_accessor engagements_per_hour: Float?
+
+      attr_accessor engagement_per_view: Float?
+
+      attr_accessor engagement_rate: Float?
+
+      attr_accessor amplification: Float?
+
+      attr_accessor conversation: Float?
+
+      def initialize: (
+        tweet_id: String,
+        author_id: String?,
+        author_user_name: String?,
+        created_at: Time?,
+        age_hours: Float?,
+        metrics: XTwitterScraper::Models::PostEngagementMetrics,
+        engagements: Float,
+        engagements_per_hour: Float?,
+        engagement_per_view: Float?,
+        engagement_rate: Float?,
+        amplification: Float?,
+        conversation: Float?
+      ) -> void
+
+      def to_hash: -> {
+        tweet_id: String,
+        author_id: String?,
+        author_user_name: String?,
+        created_at: Time?,
+        age_hours: Float?,
+        metrics: XTwitterScraper::Models::PostEngagementMetrics,
+        engagements: Float,
+        engagements_per_hour: Float?,
+        engagement_per_view: Float?,
+        engagement_rate: Float?,
+        amplification: Float?,
+        conversation: Float?
+      }
+    end
+  end
+end

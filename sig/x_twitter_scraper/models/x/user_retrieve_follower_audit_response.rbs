@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type user_retrieve_follower_audit_response =
+        { audit: XTwitterScraper::Models::FollowerAudit }
+
+      class UserRetrieveFollowerAuditResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor audit: XTwitterScraper::Models::FollowerAudit
+
+        def initialize: (audit: XTwitterScraper::Models::FollowerAudit) -> void
+
+        def to_hash: -> { audit: XTwitterScraper::Models::FollowerAudit }
+      end
+    end
+  end
+end
