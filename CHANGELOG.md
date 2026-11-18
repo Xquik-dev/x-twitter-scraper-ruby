@@ -7,10 +7,11 @@ This release adds the 76 operations the API served and the Ruby SDK lacked, so t
 ### Breaking changes
 
 * `UserRetrieveBatchResponse.new` requires `not_found_ids:` and `suspended_ids:`, which the API now always returns. Code that builds one by hand must pass both. Reading a response keeps working.
+* `Model#to_yaml` writes a `Time` field as an ISO 8601 string, as `to_json` and each request now do, in place of a YAML timestamp.
 
 ### Features
 
-* `client.activity` lists the account's activity log, reads 1 activity's full record and exports the log as a CSV, Excel, JSON, Markdown, PDF or text file. `export` returns the file as a `StringIO`.
+* `client.activity` lists the account's activity log, reads 1 activity's full record and exports the log as a CSV, Excel, JSON, Markdown, PDF or text file. `export` returns the file as a `StringIO`. `since` and `until_` take a `Time` or an ISO 8601 `String`, as Python takes a `datetime` or a `str`.
 * `events.stream` reads the account's monitor events as server-sent events. It returns an `XTwitterScraper::Internal::Stream` that yields 1 `Event` per message and skips the idle comments. Pass `last_event_id` to resume after an event, and `look_back: true` to also get events saved late.
 * `monitors.posts` creates, reads, updates, lists and deletes post monitors, and `retrieve_metrics` returns a post monitor's hourly numbers. `monitors.upsert_by_username` creates an account monitor or updates the one that exists.
 * `extractions.cancel` stops an active extraction without charging or saving rows. `webhooks.create_telegram_link` returns a link that connects a Telegram chat to the account's monitor events.
@@ -20,7 +21,13 @@ This release adds the 76 operations the API served and the Ruby SDK lacked, so t
 * `x.tweets` adds `list_top`, `embed`, `get_hidden_replies`, `get_insights`, `get_retweeter_ids`, `check_repost`, `get_subtitles`, `translate` and `resolve_links`.
 * `x.users` adds `retrieve_batch_tweets`, `retrieve_affiliates`, `retrieve_articles`, `retrieve_follower_audit`, `retrieve_follower_ids`, `retrieve_following_ids`, `retrieve_highlights`, `retrieve_insights`, `retrieve_list_memberships`, `retrieve_lists`, `retrieve_live`, `retrieve_shadowban`, `retrieve_similar`, `retrieve_subscriptions` and `translate_bio`.
 * `x.lists` adds `retrieve` and `retrieve_search`, and `x` adds `get_hashflags`, `get_news_story_versions`, `search_places`, `autocomplete_search`, `get_trends_history` and `get_trend_locations`.
-* `UserRetrieveBatchResponse` and `BatchUserTweets` split `unavailable_ids` into `not_found_ids` and `suspended_ids`, by what X answered for each account. `BatchUserTweets` also names `protected_ids`.
+* `UserRetrieveBatchResponse` and `BatchUserTweets` keep `unavailable_ids` and add `not_found_ids` and `suspended_ids`, which name the subsets of it that X answered as deleted or suspended. `BatchUserTweets` also adds `protected_ids`, the subset whose posts only approved followers see.
+
+### Bug fixes
+
+* A union field reads the value the API sent when an earlier variant can't take it. An `activity.list` row whose `results` or `credits` is an empty or non-numeric string no longer raises `ConversionError`, and neither does `since_time` or `until_time` on the extraction params when set to Unix seconds.
+* A nested model whose last field fails to parse no longer fails the field that holds it. Reading the failed field still raises.
+* A `Time` in a query or a JSON body goes out as ISO 8601, such as `2026-10-21T00:00:00Z`, which the API reads. The client sent `2026-10-21 00:00:00 UTC` before, which the API refused for `sinceTime` on extractions and dropped for `since` on the activity log.
 
 ## 0.11.0 (2026-11-17)
 
