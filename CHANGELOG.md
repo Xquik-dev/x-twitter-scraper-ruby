@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.12.0 (2026-11-18)
+
+[Full changelog from v0.11.0 to v0.12.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.11.0...v0.12.0)
 
 This release adds the 76 operations the API served and the Ruby SDK lacked, so the SDK now covers every operation it can reach with an API key. `scripts/scaffold_operations.rb` wrote each one from the API spec.
 
