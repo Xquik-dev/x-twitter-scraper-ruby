@@ -1,0 +1,423 @@
+{
+  "reuse": {
+    "AccountBasedIn": "XTwitterScraper::Models::AccountBasedIn",
+    "ContentDisclosure": "XTwitterScraper::Models::ContentDisclosure",
+    "CoverageEndReason": "XTwitterScraper::Models::CoverageEndReason",
+    "EmbeddedTweet": "XTwitterScraper::Models::EmbeddedTweet",
+    "Event": "XTwitterScraper::Models::Event",
+    "EventType": "XTwitterScraper::Models::EventType",
+    "Monitor": "XTwitterScraper::Models::Monitor",
+    "PaginatedTweets": "XTwitterScraper::Models::PaginatedTweets",
+    "PaginatedUsers": "XTwitterScraper::Models::PaginatedUsers",
+    "ProfileContactInfo": "XTwitterScraper::Models::ProfileContactInfo",
+    "SearchTweet": "XTwitterScraper::Models::SearchTweet",
+    "TweetAuthorUnavailable": "XTwitterScraper::Models::TweetAuthorUnavailable",
+    "TweetExclusiveContent": "XTwitterScraper::Models::TweetExclusiveContent",
+    "TweetInterstitial": "XTwitterScraper::Models::TweetInterstitial",
+    "TweetMedia": "XTwitterScraper::Models::TweetMedia",
+    "TweetPoint": "XTwitterScraper::Models::TweetPoint",
+    "TweetSubscriberBadge": "XTwitterScraper::Models::TweetSubscriberBadge",
+    "TweetTombstone": "XTwitterScraper::Models::TweetTombstone",
+    "UserProfile": "XTwitterScraper::Models::UserProfile",
+    "UserTipJar": "XTwitterScraper::Models::UserTipJar",
+    "XWriteAction": "XTwitterScraper::Models::X::WriteActionRetrieveResponse"
+  },
+  "operations": [
+    {
+      "operation": "DELETE /api/v1/extractions/{id}",
+      "resource": "extractions",
+      "method": "cancel"
+    },
+    {
+      "operation": "DELETE /api/v1/monitors/posts/{id}",
+      "resource": "monitors.posts",
+      "method": "delete"
+    },
+    {
+      "operation": "DELETE /api/v1/x/dm/{userId}/messages/{messageId}",
+      "resource": "x.dm",
+      "method": "delete_message"
+    },
+    {
+      "operation": "DELETE /api/v1/x/tweets/{id}/bookmark",
+      "resource": "x.tweets.bookmark",
+      "method": "delete"
+    },
+    {
+      "operation": "DELETE /api/v1/x/users/{id}/block",
+      "resource": "x.users.block",
+      "method": "delete"
+    },
+    {
+      "operation": "DELETE /api/v1/x/users/{id}/mute",
+      "resource": "x.users.mute",
+      "method": "delete"
+    },
+    {
+      "operation": "GET /api/v1/activity",
+      "resource": "activity",
+      "method": "list",
+      "narrow": {
+        "format": [
+          "json"
+        ]
+      }
+    },
+    {
+      "operation": "GET /api/v1/activity",
+      "resource": "activity",
+      "method": "export",
+      "response": "binary",
+      "require": [
+        "format"
+      ]
+    },
+    {
+      "operation": "GET /api/v1/activity/{id}",
+      "resource": "activity",
+      "method": "retrieve"
+    },
+    {
+      "operation": "GET /api/v1/events/stream",
+      "resource": "events",
+      "method": "stream",
+      "response": "stream",
+      "items": "Event"
+    },
+    {
+      "operation": "GET /api/v1/monitors/posts",
+      "resource": "monitors.posts",
+      "method": "list"
+    },
+    {
+      "operation": "GET /api/v1/monitors/posts/{id}",
+      "resource": "monitors.posts",
+      "method": "retrieve"
+    },
+    {
+      "operation": "GET /api/v1/monitors/posts/{id}/metrics",
+      "resource": "monitors.posts",
+      "method": "retrieve_metrics"
+    },
+    {
+      "operation": "GET /api/v1/x/broadcasts/{id}",
+      "resource": "x.broadcasts",
+      "method": "retrieve"
+    },
+    {
+      "operation": "GET /api/v1/x/communities/find",
+      "resource": "x.communities",
+      "method": "find"
+    },
+    {
+      "operation": "GET /api/v1/x/communities/popular",
+      "resource": "x.communities",
+      "method": "list_popular"
+    },
+    {
+      "operation": "GET /api/v1/x/communities/suggested",
+      "resource": "x.communities",
+      "method": "list_suggested"
+    },
+    {
+      "operation": "GET /api/v1/x/communities/topics",
+      "resource": "x.communities",
+      "method": "list_topics"
+    },
+    {
+      "operation": "GET /api/v1/x/communities/{id}/analytics",
+      "resource": "x.communities",
+      "method": "retrieve_analytics"
+    },
+    {
+      "operation": "GET /api/v1/x/communities/{id}/media",
+      "resource": "x.communities.media",
+      "method": "list"
+    },
+    {
+      "operation": "GET /api/v1/x/communities/{id}/members/search",
+      "resource": "x.communities",
+      "method": "search_members"
+    },
+    {
+      "operation": "GET /api/v1/x/community-notes/contributors/{alias}",
+      "resource": "x.community_notes",
+      "method": "retrieve_contributor"
+    },
+    {
+      "operation": "GET /api/v1/x/community-notes/contributors/{alias}/deleted-notes",
+      "resource": "x.community_notes",
+      "method": "list_contributor_deleted_notes"
+    },
+    {
+      "operation": "GET /api/v1/x/community-notes/contributors/{alias}/notes",
+      "resource": "x.community_notes",
+      "method": "list_contributor_notes"
+    },
+    {
+      "operation": "GET /api/v1/x/hashflags",
+      "resource": "x",
+      "method": "get_hashflags"
+    },
+    {
+      "operation": "GET /api/v1/x/jobs/locations",
+      "resource": "x.jobs",
+      "method": "list_locations"
+    },
+    {
+      "operation": "GET /api/v1/x/jobs/search",
+      "resource": "x.jobs",
+      "method": "search"
+    },
+    {
+      "operation": "GET /api/v1/x/jobs/{id}",
+      "resource": "x.jobs",
+      "method": "retrieve"
+    },
+    {
+      "operation": "GET /api/v1/x/links/resolve",
+      "resource": "x.tweets",
+      "method": "resolve_links"
+    },
+    {
+      "operation": "GET /api/v1/x/lists/search",
+      "resource": "x.lists",
+      "method": "retrieve_search"
+    },
+    {
+      "operation": "GET /api/v1/x/lists/{id}",
+      "resource": "x.lists",
+      "method": "retrieve"
+    },
+    {
+      "operation": "GET /api/v1/x/news/{id}/versions",
+      "resource": "x",
+      "method": "get_news_story_versions"
+    },
+    {
+      "operation": "GET /api/v1/x/places/search",
+      "resource": "x",
+      "method": "search_places"
+    },
+    {
+      "operation": "GET /api/v1/x/search/autocomplete",
+      "resource": "x",
+      "method": "autocomplete_search"
+    },
+    {
+      "operation": "GET /api/v1/x/spaces/search",
+      "resource": "x.spaces",
+      "method": "search"
+    },
+    {
+      "operation": "GET /api/v1/x/spaces/{id}",
+      "resource": "x.spaces",
+      "method": "retrieve"
+    },
+    {
+      "operation": "GET /api/v1/x/spaces/{id}/replay",
+      "resource": "x.spaces",
+      "method": "retrieve_replay"
+    },
+    {
+      "operation": "GET /api/v1/x/sports/{league}/games",
+      "resource": "x.sports",
+      "method": "list_games"
+    },
+    {
+      "operation": "GET /api/v1/x/sports/{league}/games/{id}",
+      "resource": "x.sports",
+      "method": "retrieve_scoreboard"
+    },
+    {
+      "operation": "GET /api/v1/x/sports/{league}/games/{id}/audience",
+      "resource": "x.sports",
+      "method": "retrieve_audience"
+    },
+    {
+      "operation": "GET /api/v1/x/sports/{league}/games/{id}/box-score",
+      "resource": "x.sports",
+      "method": "retrieve_box_score"
+    },
+    {
+      "operation": "GET /api/v1/x/sports/{league}/games/{id}/player-props",
+      "resource": "x.sports",
+      "method": "retrieve_player_props"
+    },
+    {
+      "operation": "GET /api/v1/x/sports/{league}/games/{id}/plays",
+      "resource": "x.sports",
+      "method": "retrieve_plays"
+    },
+    {
+      "operation": "GET /api/v1/x/sports/{league}/games/{id}/posts",
+      "resource": "x.sports",
+      "method": "list_posts"
+    },
+    {
+      "operation": "GET /api/v1/x/sports/{league}/games/{id}/roster",
+      "resource": "x.sports",
+      "method": "retrieve_roster"
+    },
+    {
+      "operation": "GET /api/v1/x/trends/history",
+      "resource": "x",
+      "method": "get_trends_history"
+    },
+    {
+      "operation": "GET /api/v1/x/trends/locations",
+      "resource": "x",
+      "method": "get_trend_locations"
+    },
+    {
+      "operation": "GET /api/v1/x/tweets/top",
+      "resource": "x.tweets",
+      "method": "list_top"
+    },
+    {
+      "operation": "GET /api/v1/x/tweets/{id}/embed",
+      "resource": "x.tweets",
+      "method": "embed"
+    },
+    {
+      "operation": "GET /api/v1/x/tweets/{id}/hidden-replies",
+      "resource": "x.tweets",
+      "method": "get_hidden_replies"
+    },
+    {
+      "operation": "GET /api/v1/x/tweets/{id}/insights",
+      "resource": "x.tweets",
+      "method": "get_insights"
+    },
+    {
+      "operation": "GET /api/v1/x/tweets/{id}/retweeter-ids",
+      "resource": "x.tweets",
+      "method": "get_retweeter_ids"
+    },
+    {
+      "operation": "GET /api/v1/x/tweets/{id}/retweeters/check",
+      "resource": "x.tweets",
+      "method": "check_repost"
+    },
+    {
+      "operation": "GET /api/v1/x/tweets/{id}/subtitles",
+      "resource": "x.tweets",
+      "method": "get_subtitles"
+    },
+    {
+      "operation": "GET /api/v1/x/tweets/{id}/translation",
+      "resource": "x.tweets",
+      "method": "translate"
+    },
+    {
+      "operation": "GET /api/v1/x/users/batch/tweets",
+      "resource": "x.users",
+      "method": "retrieve_batch_tweets"
+    },
+    {
+      "operation": "GET /api/v1/x/users/{id}/affiliates",
+      "resource": "x.users",
+      "method": "retrieve_affiliates"
+    },
+    {
+      "operation": "GET /api/v1/x/users/{id}/articles",
+      "resource": "x.users",
+      "method": "retrieve_articles"
+    },
+    {
+      "operation": "GET /api/v1/x/users/{id}/follower-audit",
+      "resource": "x.users",
+      "method": "retrieve_follower_audit"
+    },
+    {
+      "operation": "GET /api/v1/x/users/{id}/follower-ids",
+      "resource": "x.users",
+      "method": "retrieve_follower_ids"
+    },
+    {
+      "operation": "GET /api/v1/x/users/{id}/following-ids",
+      "resource": "x.users",
+      "method": "retrieve_following_ids"
+    },
+    {
+      "operation": "GET /api/v1/x/users/{id}/highlights",
+      "resource": "x.users",
+      "method": "retrieve_highlights"
+    },
+    {
+      "operation": "GET /api/v1/x/users/{id}/insights",
+      "resource": "x.users",
+      "method": "retrieve_insights"
+    },
+    {
+      "operation": "GET /api/v1/x/users/{id}/list-memberships",
+      "resource": "x.users",
+      "method": "retrieve_list_memberships"
+    },
+    {
+      "operation": "GET /api/v1/x/users/{id}/lists",
+      "resource": "x.users",
+      "method": "retrieve_lists"
+    },
+    {
+      "operation": "GET /api/v1/x/users/{id}/live",
+      "resource": "x.users",
+      "method": "retrieve_live"
+    },
+    {
+      "operation": "GET /api/v1/x/users/{id}/shadowban",
+      "resource": "x.users",
+      "method": "retrieve_shadowban"
+    },
+    {
+      "operation": "GET /api/v1/x/users/{id}/similar",
+      "resource": "x.users",
+      "method": "retrieve_similar"
+    },
+    {
+      "operation": "GET /api/v1/x/users/{id}/subscriptions",
+      "resource": "x.users",
+      "method": "retrieve_subscriptions"
+    },
+    {
+      "operation": "GET /api/v1/x/users/{id}/translation",
+      "resource": "x.users",
+      "method": "translate_bio"
+    },
+    {
+      "operation": "PATCH /api/v1/monitors/posts/{id}",
+      "resource": "monitors.posts",
+      "method": "update"
+    },
+    {
+      "operation": "POST /api/v1/monitors/posts",
+      "resource": "monitors.posts",
+      "method": "create"
+    },
+    {
+      "operation": "POST /api/v1/webhooks/telegram",
+      "resource": "webhooks",
+      "method": "create_telegram_link"
+    },
+    {
+      "operation": "POST /api/v1/x/tweets/{id}/bookmark",
+      "resource": "x.tweets.bookmark",
+      "method": "create"
+    },
+    {
+      "operation": "POST /api/v1/x/users/{id}/block",
+      "resource": "x.users.block",
+      "method": "create"
+    },
+    {
+      "operation": "POST /api/v1/x/users/{id}/mute",
+      "resource": "x.users.mute",
+      "method": "create"
+    },
+    {
+      "operation": "PUT /api/v1/monitors/username/{username}",
+      "resource": "monitors",
+      "method": "upsert_by_username"
+    }
+  ]
+}
