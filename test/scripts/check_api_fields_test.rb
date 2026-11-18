@@ -382,6 +382,13 @@ class CheckApiFieldsTest < Minitest::Test
     assert_includes(lines, "#{OPERATION} response missing kind")
   end
 
+  def test_a_streamed_response_compares_no_body
+    write_resource(RESOURCE.sub("model: ApiFieldsFixture::Item", "stream: Enumerator, model: ApiFieldsFixture::Item"))
+    status, _, lines = run_check(edited { operation(_1)["responses"].delete("200") })
+
+    assert_equal(0, status, lines.join("\n"))
+  end
+
   def test_a_typed_response_the_spec_does_not_list_prints_each_field
     spec = edited { operation(_1)["responses"].delete("200") }
     _, _, lines = run_check(spec)
@@ -561,7 +568,11 @@ class CheckApiFieldsTest < Minitest::Test
       write_excluded(groups)
       status, _, lines = run_check
 
-      assert_equal([1, ["#{EXCLUDED_FILE} is not valid. #{problem}", EXCLUDED_INVALID_NEXT]], [status, lines], problem)
+      assert_equal(
+        [1, ["#{EXCLUDED_FILE} is not valid. #{problem}", EXCLUDED_INVALID_NEXT]],
+        [status, lines],
+        problem
+      )
     end
   end
 

@@ -34,7 +34,7 @@ module ApiFieldsCheck
                        "GET /api/v1/monitors/{id} response extra pausedAt."
   OPERATION = %r{\A(?:#{METHOD_NAMES}) /\S*\z}
   OPERATION_EXAMPLE = "Write a method and a path, such as GET /api/v1/api-keys."
-  REQUEST_KEYS = [:method, :path, :query, :body, :headers, :model, :options, :security].freeze
+  REQUEST_KEYS = [:method, :path, :query, :body, :headers, :model, :stream, :options, :security].freeze
   UNTYPED_RESPONSES = [NilClass, StringIO].freeze
   SCALARS = [String, Symbol, Integer, Float, Time, Date, TrueClass, FalseClass].freeze
   INTERNAL_TYPES = XTwitterScraper::Internal::Type
@@ -450,7 +450,7 @@ module ApiFieldsCheck
       Shape.new(
         query: Fields.new(props: query, open: false),
         body: arguments.key?(:body) ? body(arguments[:body], locals) : nil,
-        response: response(arguments[:model]),
+        response: arguments.key?(:stream) ? nil : response(arguments[:model]),
         hidden: Set.new
       )
     end
