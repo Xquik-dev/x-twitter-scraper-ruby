@@ -1,0 +1,54 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_roster =
+      {
+        id: String,
+        league: XTwitterScraper::Models::FootballRoster::league,
+        rosters: ::Array[XTwitterScraper::Models::FootballRosterTeam],
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam],
+        players: ::Hash[Symbol, XTwitterScraper::Models::FootballPlayer]
+      }
+
+    class FootballRoster < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor league: XTwitterScraper::Models::FootballRoster::league
+
+      attr_accessor rosters: ::Array[XTwitterScraper::Models::FootballRosterTeam]
+
+      attr_accessor teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam]
+
+      attr_accessor players: ::Hash[Symbol, XTwitterScraper::Models::FootballPlayer]
+
+      def initialize: (
+        id: String,
+        league: XTwitterScraper::Models::FootballRoster::league,
+        rosters: ::Array[XTwitterScraper::Models::FootballRosterTeam],
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam],
+        players: ::Hash[Symbol, XTwitterScraper::Models::FootballPlayer]
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        league: XTwitterScraper::Models::FootballRoster::league,
+        rosters: ::Array[XTwitterScraper::Models::FootballRosterTeam],
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam],
+        players: ::Hash[Symbol, XTwitterScraper::Models::FootballPlayer]
+      }
+
+      type league = :nfl
+
+      module League
+        extend XTwitterScraper::Internal::Type::Enum
+
+        NFL: :nfl
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::FootballRoster::league]
+      end
+    end
+  end
+end

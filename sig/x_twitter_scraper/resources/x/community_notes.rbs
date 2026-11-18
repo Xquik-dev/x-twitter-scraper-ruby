@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Resources
+    class X
+      class CommunityNotes
+        def retrieve_contributor: (
+          String alias_,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::CommunityNoteRetrieveContributorResponse
+
+        def list_contributor_deleted_notes: (
+          String alias_,
+          ?cursor: String,
+          ?page_size: Integer,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::PaginatedCommunityNotes
+
+        def list_contributor_notes: (
+          String alias_,
+          ?cursor: String,
+          ?page_size: Integer,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::PaginatedCommunityNotes
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

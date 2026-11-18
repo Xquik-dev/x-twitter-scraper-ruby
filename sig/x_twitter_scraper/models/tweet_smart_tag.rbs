@@ -1,0 +1,74 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type tweet_smart_tag =
+      { id: String, info: XTwitterScraper::Models::TweetSmartTag::Info }
+
+    class TweetSmartTag < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader info: XTwitterScraper::Models::TweetSmartTag::Info?
+
+      def info=: (
+        XTwitterScraper::Models::TweetSmartTag::Info
+      ) -> XTwitterScraper::Models::TweetSmartTag::Info
+
+      def initialize: (
+        ?id: String,
+        ?info: XTwitterScraper::Models::TweetSmartTag::Info
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        info: XTwitterScraper::Models::TweetSmartTag::Info
+      }
+
+      type info = { info: XTwitterScraper::Models::TweetSmartTag::Info::Info }
+
+      class Info < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader info: XTwitterScraper::Models::TweetSmartTag::Info::Info?
+
+        def info=: (
+          XTwitterScraper::Models::TweetSmartTag::Info::Info
+        ) -> XTwitterScraper::Models::TweetSmartTag::Info::Info
+
+        def initialize: (
+          ?info: XTwitterScraper::Models::TweetSmartTag::Info::Info
+        ) -> void
+
+        def to_hash: -> {
+          info: XTwitterScraper::Models::TweetSmartTag::Info::Info
+        }
+
+        type info = { active: bool, name: String, ticker: String }
+
+        class Info < XTwitterScraper::Internal::Type::BaseModel
+          attr_reader active: bool?
+
+          def active=: (bool) -> bool
+
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          attr_reader ticker: String?
+
+          def ticker=: (String) -> String
+
+          def initialize: (
+            ?active: bool,
+            ?name: String,
+            ?ticker: String
+          ) -> void
+
+          def to_hash: -> { active: bool, name: String, ticker: String }
+        end
+      end
+    end
+  end
+end

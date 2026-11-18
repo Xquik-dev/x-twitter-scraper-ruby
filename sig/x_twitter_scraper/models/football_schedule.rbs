@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_schedule =
+      {
+        league: XTwitterScraper::Models::FootballSchedule::league,
+        games: ::Array[XTwitterScraper::Models::FootballScheduleGame],
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam]
+      }
+
+    class FootballSchedule < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor league: XTwitterScraper::Models::FootballSchedule::league
+
+      attr_accessor games: ::Array[XTwitterScraper::Models::FootballScheduleGame]
+
+      attr_accessor teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam]
+
+      def initialize: (
+        league: XTwitterScraper::Models::FootballSchedule::league,
+        games: ::Array[XTwitterScraper::Models::FootballScheduleGame],
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam]
+      ) -> void
+
+      def to_hash: -> {
+        league: XTwitterScraper::Models::FootballSchedule::league,
+        games: ::Array[XTwitterScraper::Models::FootballScheduleGame],
+        teams: ::Hash[Symbol, XTwitterScraper::Models::SportsTeam]
+      }
+
+      type league = :nfl | :ncaafb
+
+      module League
+        extend XTwitterScraper::Internal::Type::Enum
+
+        NFL: :nfl
+        NCAAFB: :ncaafb
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::FootballSchedule::league]
+      end
+    end
+  end
+end

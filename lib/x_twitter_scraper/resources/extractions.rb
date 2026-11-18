@@ -645,6 +645,26 @@ module XTwitterScraper
         )
       end
 
+      # Cancels an active extraction without charging or saving rows.
+      #
+      # @overload cancel(id, request_options: {})
+      #
+      # @param id [String] Extraction ID returned by `POST /extractions` or the extraction list. Another shape gets 400 `invalid_id`.
+      #
+      # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [XTwitterScraper::Models::ExtractionCancelResponse]
+      #
+      # @see XTwitterScraper::Models::ExtractionCancelParams
+      def cancel(id, params = {})
+        @client.request(
+          method: :delete,
+          path: ["extractions/%1$s", id],
+          model: XTwitterScraper::Models::ExtractionCancelResponse,
+          options: params[:request_options]
+        )
+      end
+
       # @api private
       #
       # @param client [XTwitterScraper::Client]

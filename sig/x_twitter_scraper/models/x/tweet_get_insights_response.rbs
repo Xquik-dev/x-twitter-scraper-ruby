@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_get_insights_response =
+        { insights: XTwitterScraper::Models::TweetInsights }
+
+      class TweetGetInsightsResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor insights: XTwitterScraper::Models::TweetInsights
+
+        def initialize: (
+          insights: XTwitterScraper::Models::TweetInsights
+        ) -> void
+
+        def to_hash: -> { insights: XTwitterScraper::Models::TweetInsights }
+      end
+    end
+  end
+end

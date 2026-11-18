@@ -12,6 +12,9 @@ module XTwitterScraper
       sig { returns(XTwitterScraper::Resources::Monitors::Keywords) }
       attr_reader :keywords
 
+      sig { returns(XTwitterScraper::Resources::Monitors::Posts) }
+      attr_reader :posts
+
       # Creates an account monitor. Monitors are unlimited. Active monitors check every
       # 1 second and cost 30 credits per hour. Events and webhook deliveries are
       # included. Creation requires available credits for the first hourly charge and
@@ -101,6 +104,33 @@ module XTwitterScraper
       def deactivate(
         # Resource ID returned by the matching create or list endpoint.
         id,
+        request_options: {}
+      )
+      end
+
+      # Creates the monitor if it does not exist, or updates it if it does. Send the
+      # same call twice & you still have 1 monitor. A new monitor answers 201 & an
+      # update answers 200. Both carry `created`, so you know which one ran. Creating
+      # needs the credits of the first hour, then costs 30 credits an hour. A stopped
+      # monitor turns back on & counts as created. Updating is free & replaces the event
+      # types. It changes the name only when you send one.
+      sig do
+        params(
+          username: String,
+          event_types: T::Array[XTwitterScraper::Models::EventType::OrSymbol],
+          name: String,
+          request_options: XTwitterScraper::RequestOptions::OrHash
+        ).returns(XTwitterScraper::Models::MonitorUpsertByUsernameResponse)
+      end
+      def upsert_by_username(
+        # The account's X username, with or without @, or its numeric user ID. A number is
+        # a user ID, so this call matches the account even after a rename.
+        username,
+        # Array of event types to subscribe to.
+        event_types:,
+        # Your label for the monitor. Its events carry it as monitorName. Leave it out to
+        # keep the current label, or send null to remove it.
+        name: nil,
         request_options: {}
       )
       end

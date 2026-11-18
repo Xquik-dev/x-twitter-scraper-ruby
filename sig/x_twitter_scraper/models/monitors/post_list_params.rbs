@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module Monitors
+      type post_list_params =
+        { limit: Integer, cursor: String }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class PostListParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_reader limit: Integer?
+
+        def limit=: (Integer) -> Integer
+
+        attr_reader cursor: String?
+
+        def cursor=: (String) -> String
+
+        def initialize: (
+          ?limit: Integer,
+          ?cursor: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          limit: Integer,
+          cursor: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

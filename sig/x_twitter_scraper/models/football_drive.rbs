@@ -1,0 +1,84 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_drive =
+      {
+        id: String?,
+        sequence: Integer?,
+        offense: String?,
+        defense: String?,
+        start_clock: String?,
+        end_clock: String?,
+        start_reason: String?,
+        end_reason: String?,
+        play_count: Integer?,
+        first_downs: Integer?,
+        net_yards: Integer?,
+        scoring: bool?,
+        plays: ::Array[XTwitterScraper::Models::FootballPlay]
+      }
+
+    class FootballDrive < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String?
+
+      attr_accessor sequence: Integer?
+
+      attr_accessor offense: String?
+
+      attr_accessor defense: String?
+
+      attr_accessor start_clock: String?
+
+      attr_accessor end_clock: String?
+
+      attr_accessor start_reason: String?
+
+      attr_accessor end_reason: String?
+
+      attr_accessor play_count: Integer?
+
+      attr_accessor first_downs: Integer?
+
+      attr_accessor net_yards: Integer?
+
+      attr_accessor scoring: bool?
+
+      attr_accessor plays: ::Array[XTwitterScraper::Models::FootballPlay]
+
+      def initialize: (
+        id: String?,
+        sequence: Integer?,
+        offense: String?,
+        defense: String?,
+        start_clock: String?,
+        end_clock: String?,
+        start_reason: String?,
+        end_reason: String?,
+        play_count: Integer?,
+        first_downs: Integer?,
+        net_yards: Integer?,
+        scoring: bool?,
+        plays: ::Array[XTwitterScraper::Models::FootballPlay]
+      ) -> void
+
+      def to_hash: -> {
+        id: String?,
+        sequence: Integer?,
+        offense: String?,
+        defense: String?,
+        start_clock: String?,
+        end_clock: String?,
+        start_reason: String?,
+        end_reason: String?,
+        play_count: Integer?,
+        first_downs: Integer?,
+        net_yards: Integer?,
+        scoring: bool?,
+        plays: ::Array[XTwitterScraper::Models::FootballPlay]
+      }
+    end
+  end
+end

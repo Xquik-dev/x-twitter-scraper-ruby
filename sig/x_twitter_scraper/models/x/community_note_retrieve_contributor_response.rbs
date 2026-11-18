@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type community_note_retrieve_contributor_response =
+        { contributor: XTwitterScraper::Models::CommunityNotesContributor }
+
+      class CommunityNoteRetrieveContributorResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor contributor: XTwitterScraper::Models::CommunityNotesContributor
+
+        def initialize: (
+          contributor: XTwitterScraper::Models::CommunityNotesContributor
+        ) -> void
+
+        def to_hash: -> {
+          contributor: XTwitterScraper::Models::CommunityNotesContributor
+        }
+      end
+    end
+  end
+end

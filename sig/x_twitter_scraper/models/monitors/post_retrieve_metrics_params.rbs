@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module Monitors
+      type post_retrieve_metrics_params =
+        { id: String, hours: Integer }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class PostRetrieveMetricsParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor id: String
+
+        attr_reader hours: Integer?
+
+        def hours=: (Integer) -> Integer
+
+        def initialize: (
+          id: String,
+          ?hours: Integer,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          hours: Integer,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

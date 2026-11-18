@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type community_list_topics_response =
+        {
+          topics: ::Array[XTwitterScraper::Models::CommunityTopic],
+          count: Integer,
+          message: String
+        }
+
+      class CommunityListTopicsResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor topics: ::Array[XTwitterScraper::Models::CommunityTopic]
+
+        attr_accessor count: Integer
+
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        def initialize: (
+          topics: ::Array[XTwitterScraper::Models::CommunityTopic],
+          count: Integer,
+          ?message: String
+        ) -> void
+
+        def to_hash: -> {
+          topics: ::Array[XTwitterScraper::Models::CommunityTopic],
+          count: Integer,
+          message: String
+        }
+      end
+    end
+  end
+end

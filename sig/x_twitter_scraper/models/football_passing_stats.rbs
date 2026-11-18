@@ -1,0 +1,69 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_passing_stats =
+      {
+        attempts: Integer?,
+        avg_yards: Float?,
+        completions: Integer?,
+        interceptions: Integer?,
+        net_yards: Integer?,
+        rating: Float?,
+        sack_yards: Integer?,
+        sacks: Integer?,
+        touchdowns: Integer?,
+        yards: Integer?
+      }
+
+    class FootballPassingStats < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor attempts: Integer?
+
+      attr_accessor avg_yards: Float?
+
+      attr_accessor completions: Integer?
+
+      attr_accessor interceptions: Integer?
+
+      attr_accessor net_yards: Integer?
+
+      attr_accessor rating: Float?
+
+      attr_accessor sack_yards: Integer?
+
+      attr_accessor sacks: Integer?
+
+      attr_accessor touchdowns: Integer?
+
+      attr_accessor yards: Integer?
+
+      def initialize: (
+        attempts: Integer?,
+        avg_yards: Float?,
+        completions: Integer?,
+        interceptions: Integer?,
+        net_yards: Integer?,
+        rating: Float?,
+        sack_yards: Integer?,
+        sacks: Integer?,
+        touchdowns: Integer?,
+        yards: Integer?
+      ) -> void
+
+      def to_hash: -> {
+        attempts: Integer?,
+        avg_yards: Float?,
+        completions: Integer?,
+        interceptions: Integer?,
+        net_yards: Integer?,
+        rating: Float?,
+        sack_yards: Integer?,
+        sacks: Integer?,
+        touchdowns: Integer?,
+        yards: Integer?
+      }
+    end
+  end
+end

@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_prop_category =
+      {
+        key: String?,
+        name: String?,
+        rank: Float?,
+        props: ::Array[XTwitterScraper::Models::FootballPlayerProp]
+      }
+
+    class FootballPropCategory < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor key: String?
+
+      attr_accessor name: String?
+
+      attr_accessor rank: Float?
+
+      attr_accessor props: ::Array[XTwitterScraper::Models::FootballPlayerProp]
+
+      def initialize: (
+        key: String?,
+        name: String?,
+        rank: Float?,
+        props: ::Array[XTwitterScraper::Models::FootballPlayerProp]
+      ) -> void
+
+      def to_hash: -> {
+        key: String?,
+        name: String?,
+        rank: Float?,
+        props: ::Array[XTwitterScraper::Models::FootballPlayerProp]
+      }
+    end
+  end
+end

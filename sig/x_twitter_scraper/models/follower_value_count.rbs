@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type follower_value_count =
+      { count: Integer, percent: Float, value: String }
+
+    class FollowerValueCount < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor count: Integer
+
+      attr_accessor percent: Float
+
+      attr_accessor value: String
+
+      def initialize: (count: Integer, percent: Float, value: String) -> void
+
+      def to_hash: -> { count: Integer, percent: Float, value: String }
+    end
+  end
+end

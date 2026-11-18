@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type shadowban_verdict = :pass | :fail | :unknown
+
+    module ShadowbanVerdict
+      extend XTwitterScraper::Internal::Type::Enum
+
+      PASS: :pass
+      FAIL: :fail
+      UNKNOWN: :unknown
+
+      def self?.values: -> ::Array[XTwitterScraper::Models::shadowban_verdict]
+    end
+  end
+end

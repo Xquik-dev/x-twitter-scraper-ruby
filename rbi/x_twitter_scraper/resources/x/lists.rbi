@@ -442,6 +442,76 @@ module XTwitterScraper
         )
         end
 
+        # Returns 1 page of public Lists with member counts, banners & owner profiles. X
+        # may rank the Lists differently per request. Pass next_cursor as cursor for the
+        # next page.
+        sig do
+          params(
+            q: String,
+            cursor: String,
+            page_size: Integer,
+            fields: String,
+            omit: String,
+            request_options: XTwitterScraper::RequestOptions::OrHash
+          ).returns(XTwitterScraper::Models::PaginatedLists)
+        end
+        def retrieve_search(
+          # Keywords to find Lists by, such as a topic. Alias query. Xquik's cap is 4,096
+          # characters.
+          q:,
+          # Pagination cursor for collection results. Also read as next_cursor, next_token,
+          # pagination_token or continuation_token.
+          cursor: nil,
+          # Items per page (1-100, default 20). Source, filters or credits can return fewer.
+          # Follow next_cursor for more pages. Its aliases are limit, count, max_results,
+          # maxItems, max_items & per_page.
+          page_size: nil,
+          # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+          # author.username. A list keeps the field in each item. Case & underscores do not
+          # matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+          # always stay. An unknown name answers 400 unknown_field with the valid names,
+          # before any read. The price stays the same. SDK row types then hold only the
+          # named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+          # the fields you need with `fields` & `omit`.
+          fields: nil,
+          # Fields to drop from each row, comma-separated. It takes the same names as
+          # fields. With fields, it drops from the kept fields. A longer URL fails at the
+          # edge before Xquik reads it.
+          omit: nil,
+          request_options: {}
+        )
+        end
+
+        # Returns 1 public X List as its page on X shows it. Accepts the List ID or the
+        # URL-encoded List URL, such as x.com/i/lists/4143408. A private List answers 404
+        # list_not_found.
+        sig do
+          params(
+            id: String,
+            fields: String,
+            omit: String,
+            request_options: XTwitterScraper::RequestOptions::OrHash
+          ).returns(XTwitterScraper::Models::X::ListRetrieveResponse)
+        end
+        def retrieve(
+          # X List ID, or the URL-encoded List link, such as x.com/i/lists/4143408.
+          id,
+          # Fields to keep in each row, comma-separated. Use dots for nested fields, such as
+          # author.username. A list keeps the field in each item. Case & underscores do not
+          # matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics
+          # always stay. An unknown name answers 400 unknown_field with the valid names,
+          # before any read. The price stays the same. SDK row types then hold only the
+          # named fields. A longer URL fails at the edge before Xquik reads it. Pick only
+          # the fields you need with `fields` & `omit`.
+          fields: nil,
+          # Fields to drop from each row, comma-separated. It takes the same names as
+          # fields. With fields, it drops from the kept fields. A longer URL fails at the
+          # edge before Xquik reads it.
+          omit: nil,
+          request_options: {}
+        )
+        end
+
         # @api private
         sig do
           params(client: XTwitterScraper::Client).returns(T.attached_class)

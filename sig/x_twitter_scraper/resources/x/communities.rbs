@@ -10,6 +10,8 @@ module XTwitterScraper
 
         attr_reader tweets: XTwitterScraper::Resources::X::Communities::Tweets
 
+        attr_reader media: XTwitterScraper::Resources::X::Communities::Media
+
         def create: (
           account: String,
           name: String,
@@ -132,6 +134,72 @@ module XTwitterScraper
           ?within_time: String,
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::PaginatedTweets
+
+        def find: (
+          q: String,
+          ?cursor: String,
+          ?page_size: Integer,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::CommunityPage
+
+        def list_popular: (
+          ?topic_id: String,
+          ?topic: String,
+          ?cursor: String,
+          ?page_size: Integer,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::CommunityPage
+
+        def list_suggested: (
+          ?limit: Integer,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::CommunityListSuggestedResponse
+
+        def list_topics: (
+          ?limit: Integer,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::CommunityListTopicsResponse
+
+        def retrieve_analytics: (
+          String id,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::CommunityAnalytics
+
+        def search_members: (
+          String id,
+          q: String,
+          ?min_followers: Integer,
+          ?max_followers: Integer,
+          ?min_following: Integer,
+          ?max_following: Integer,
+          ?min_statuses: Integer,
+          ?max_statuses: Integer,
+          ?min_account_age_days: Integer,
+          ?verified_only: bool,
+          ?blue_verified_only: bool,
+          ?verified_type: String,
+          ?has_website: bool,
+          ?has_location: bool,
+          ?has_email: bool,
+          ?business_email_only: bool,
+          ?email_domains: String,
+          ?bio_contains: String,
+          ?location_contains: String,
+          ?username_contains: String,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::PaginatedUsers
 
         def initialize: (client: XTwitterScraper::Client) -> void
       end

@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type tweet_hashtag =
+      {
+        indices: ::Array[Integer],
+        tag: XTwitterScraper::Models::TweetSmartTag,
+        text: String
+      }
+
+    class TweetHashtag < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader indices: ::Array[Integer]?
+
+      def indices=: (::Array[Integer]) -> ::Array[Integer]
+
+      attr_reader tag: XTwitterScraper::Models::TweetSmartTag?
+
+      def tag=: (
+        XTwitterScraper::Models::TweetSmartTag
+      ) -> XTwitterScraper::Models::TweetSmartTag
+
+      attr_accessor text: String
+
+      def initialize: (
+        text: String,
+        ?indices: ::Array[Integer],
+        ?tag: XTwitterScraper::Models::TweetSmartTag
+      ) -> void
+
+      def to_hash: -> {
+        indices: ::Array[Integer],
+        tag: XTwitterScraper::Models::TweetSmartTag,
+        text: String
+      }
+    end
+  end
+end

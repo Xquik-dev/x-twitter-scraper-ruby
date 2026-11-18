@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type search_suggestion_topic =
+      { topic: String, score: Float, tokens: ::Array[String], inline: bool }
+
+    class SearchSuggestionTopic < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor topic: String
+
+      attr_reader score: Float?
+
+      def score=: (Float) -> Float
+
+      attr_reader tokens: ::Array[String]?
+
+      def tokens=: (::Array[String]) -> ::Array[String]
+
+      attr_reader inline: bool?
+
+      def inline=: (bool) -> bool
+
+      def initialize: (
+        topic: String,
+        ?score: Float,
+        ?tokens: ::Array[String],
+        ?inline: bool
+      ) -> void
+
+      def to_hash: -> {
+        topic: String,
+        score: Float,
+        tokens: ::Array[String],
+        inline: bool
+      }
+    end
+  end
+end

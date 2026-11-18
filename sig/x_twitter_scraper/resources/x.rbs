@@ -35,6 +35,16 @@ module XTwitterScraper
 
       attr_reader analysis: XTwitterScraper::Resources::X::Analysis
 
+      attr_reader broadcasts: XTwitterScraper::Resources::X::Broadcasts
+
+      attr_reader community_notes: XTwitterScraper::Resources::X::CommunityNotes
+
+      attr_reader jobs: XTwitterScraper::Resources::X::Jobs
+
+      attr_reader spaces: XTwitterScraper::Resources::X::Spaces
+
+      attr_reader sports: XTwitterScraper::Resources::X::Sports
+
       def get_article: (
         String tweet_id,
         ?fields: String,
@@ -65,6 +75,64 @@ module XTwitterScraper
         ?woeid: Integer,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::XGetTrendsResponse
+
+      def get_hashflags: (
+        ?q: String,
+        ?active_only: bool,
+        ?limit: Integer,
+        ?fields: String,
+        ?omit: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::XGetHashflagsResponse
+
+      def get_news_story_versions: (
+        String id,
+        ?fields: String,
+        ?omit: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::XGetNewsStoryVersionsResponse
+
+      def search_places: (
+        q: String,
+        ?limit: Integer,
+        ?fields: String,
+        ?omit: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::XSearchPlacesResponse
+
+      def autocomplete_search: (
+        q: String,
+        ?types: String,
+        ?limit: Integer,
+        ?fields: String,
+        ?omit: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::SearchSuggestions
+
+      def get_trends_history: (
+        ?woeid: Integer,
+        ?country: String,
+        ?location: String,
+        ?from: String,
+        ?to: String,
+        ?every: String,
+        ?count: Integer,
+        ?limit: Integer,
+        ?cursor: String,
+        ?fields: String,
+        ?omit: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::XGetTrendsHistoryResponse
+
+      def get_trend_locations: (
+        ?country: String,
+        ?place_type: XTwitterScraper::Models::XGetTrendLocationsParams::place_type,
+        ?q: String,
+        ?limit: Integer,
+        ?fields: String,
+        ?omit: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::XGetTrendLocationsResponse
 
       def initialize: (client: XTwitterScraper::Client) -> void
     end

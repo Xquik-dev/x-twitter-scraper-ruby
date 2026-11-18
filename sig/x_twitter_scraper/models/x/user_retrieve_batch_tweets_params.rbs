@@ -1,0 +1,62 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type user_retrieve_batch_tweets_params =
+        {
+          ids: String,
+          usernames: String,
+          page_size: Integer,
+          fields: String,
+          omit: String
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class UserRetrieveBatchTweetsParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_reader ids: String?
+
+        def ids=: (String) -> String
+
+        attr_reader usernames: String?
+
+        def usernames=: (String) -> String
+
+        attr_reader page_size: Integer?
+
+        def page_size=: (Integer) -> Integer
+
+        attr_reader fields: String?
+
+        def fields=: (String) -> String
+
+        attr_reader omit: String?
+
+        def omit=: (String) -> String
+
+        def initialize: (
+          ?ids: String,
+          ?usernames: String,
+          ?page_size: Integer,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          ids: String,
+          usernames: String,
+          page_size: Integer,
+          fields: String,
+          omit: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

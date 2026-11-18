@@ -1,0 +1,101 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_schedule_game =
+      {
+        id: String,
+        season_type: String?,
+        week: Integer?,
+        starts_at: Time?,
+        status: String?,
+        clock: String?,
+        quarter: Integer?,
+        home: XTwitterScraper::Models::FootballTeamScore,
+        away: XTwitterScraper::Models::FootballTeamScore,
+        team_ids: ::Array[String],
+        periods: ::Array[XTwitterScraper::Models::FootballSchedulePeriod],
+        odds: XTwitterScraper::Models::FootballScheduleGame::Odds?
+      }
+
+    class FootballScheduleGame < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor season_type: String?
+
+      attr_accessor week: Integer?
+
+      attr_accessor starts_at: Time?
+
+      attr_accessor status: String?
+
+      attr_accessor clock: String?
+
+      attr_accessor quarter: Integer?
+
+      attr_accessor home: XTwitterScraper::Models::FootballTeamScore
+
+      attr_accessor away: XTwitterScraper::Models::FootballTeamScore
+
+      attr_accessor team_ids: ::Array[String]
+
+      attr_accessor periods: ::Array[XTwitterScraper::Models::FootballSchedulePeriod]
+
+      attr_accessor odds: XTwitterScraper::Models::FootballScheduleGame::Odds?
+
+      def initialize: (
+        id: String,
+        season_type: String?,
+        week: Integer?,
+        starts_at: Time?,
+        status: String?,
+        clock: String?,
+        quarter: Integer?,
+        home: XTwitterScraper::Models::FootballTeamScore,
+        away: XTwitterScraper::Models::FootballTeamScore,
+        team_ids: ::Array[String],
+        periods: ::Array[XTwitterScraper::Models::FootballSchedulePeriod],
+        odds: XTwitterScraper::Models::FootballScheduleGame::Odds?
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        season_type: String?,
+        week: Integer?,
+        starts_at: Time?,
+        status: String?,
+        clock: String?,
+        quarter: Integer?,
+        home: XTwitterScraper::Models::FootballTeamScore,
+        away: XTwitterScraper::Models::FootballTeamScore,
+        team_ids: ::Array[String],
+        periods: ::Array[XTwitterScraper::Models::FootballSchedulePeriod],
+        odds: XTwitterScraper::Models::FootballScheduleGame::Odds?
+      }
+
+      type odds =
+        {
+          home: XTwitterScraper::Models::FootballOdds,
+          away: XTwitterScraper::Models::FootballOdds
+        }
+
+      class Odds < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor home: XTwitterScraper::Models::FootballOdds
+
+        attr_accessor away: XTwitterScraper::Models::FootballOdds
+
+        def initialize: (
+          home: XTwitterScraper::Models::FootballOdds,
+          away: XTwitterScraper::Models::FootballOdds
+        ) -> void
+
+        def to_hash: -> {
+          home: XTwitterScraper::Models::FootballOdds,
+          away: XTwitterScraper::Models::FootballOdds
+        }
+      end
+    end
+  end
+end

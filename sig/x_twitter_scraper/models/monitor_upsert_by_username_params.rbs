@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type monitor_upsert_by_username_params =
+      {
+        username: String,
+        event_types: ::Array[XTwitterScraper::Models::event_type],
+        name: String
+      }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class MonitorUpsertByUsernameParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor username: String
+
+      attr_accessor event_types: ::Array[XTwitterScraper::Models::event_type]
+
+      attr_reader name: String?
+
+      def name=: (String?) -> String?
+
+      def initialize: (
+        username: String,
+        event_types: ::Array[XTwitterScraper::Models::event_type],
+        ?name: String?,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        username: String,
+        event_types: ::Array[XTwitterScraper::Models::event_type],
+        name: String,
+        request_options: XTwitterScraper::RequestOptions
+      }
+    end
+  end
+end

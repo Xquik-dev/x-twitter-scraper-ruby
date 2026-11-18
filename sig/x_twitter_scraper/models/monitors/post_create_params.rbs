@@ -1,0 +1,55 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module Monitors
+      type post_create_params =
+        {
+          post: String,
+          name: String,
+          event_types: ::Array[XTwitterScraper::Models::post_event_type],
+          is_active: bool
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class PostCreateParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor post: String
+
+        attr_reader name: String?
+
+        def name=: (String?) -> String?
+
+        attr_reader event_types: ::Array[XTwitterScraper::Models::post_event_type]?
+
+        def event_types=: (
+          ::Array[XTwitterScraper::Models::post_event_type]
+        ) -> ::Array[XTwitterScraper::Models::post_event_type]
+
+        attr_reader is_active: bool?
+
+        def is_active=: (bool) -> bool
+
+        def initialize: (
+          post: String,
+          ?name: String?,
+          ?event_types: ::Array[XTwitterScraper::Models::post_event_type],
+          ?is_active: bool,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          post: String,
+          name: String,
+          event_types: ::Array[XTwitterScraper::Models::post_event_type],
+          is_active: bool,
+          request_options: XTwitterScraper::RequestOptions
+        }
+      end
+    end
+  end
+end

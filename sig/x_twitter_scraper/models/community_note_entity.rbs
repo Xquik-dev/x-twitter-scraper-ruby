@@ -1,0 +1,89 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type community_note_entity =
+      {
+        from_index: Integer,
+        to_index: Integer,
+        ref: XTwitterScraper::Models::CommunityNoteEntity::Ref
+      }
+
+    class CommunityNoteEntity < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader from_index: Integer?
+
+      def from_index=: (Integer) -> Integer
+
+      attr_reader to_index: Integer?
+
+      def to_index=: (Integer) -> Integer
+
+      attr_reader ref: XTwitterScraper::Models::CommunityNoteEntity::Ref?
+
+      def ref=: (
+        XTwitterScraper::Models::CommunityNoteEntity::Ref
+      ) -> XTwitterScraper::Models::CommunityNoteEntity::Ref
+
+      def initialize: (
+        ?from_index: Integer,
+        ?to_index: Integer,
+        ?ref: XTwitterScraper::Models::CommunityNoteEntity::Ref
+      ) -> void
+
+      def to_hash: -> {
+        from_index: Integer,
+        to_index: Integer,
+        ref: XTwitterScraper::Models::CommunityNoteEntity::Ref
+      }
+
+      type ref =
+        {
+          type: String,
+          url: String,
+          url_type: String,
+          text: String,
+          screen_name: String
+        }
+
+      class Ref < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader type: String?
+
+        def type=: (String) -> String
+
+        attr_reader url: String?
+
+        def url=: (String) -> String
+
+        attr_reader url_type: String?
+
+        def url_type=: (String) -> String
+
+        attr_reader text: String?
+
+        def text=: (String) -> String
+
+        attr_reader screen_name: String?
+
+        def screen_name=: (String) -> String
+
+        def initialize: (
+          ?type: String,
+          ?url: String,
+          ?url_type: String,
+          ?text: String,
+          ?screen_name: String
+        ) -> void
+
+        def to_hash: -> {
+          type: String,
+          url: String,
+          url_type: String,
+          text: String,
+          screen_name: String
+        }
+      end
+    end
+  end
+end

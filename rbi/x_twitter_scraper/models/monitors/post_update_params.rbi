@@ -1,0 +1,98 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# typed: strong
+
+module XTwitterScraper
+  module Models
+    module Monitors
+      class PostUpdateParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        OrHash =
+          T.type_alias do
+            T.any(
+              XTwitterScraper::Models::Monitors::PostUpdateParams,
+              XTwitterScraper::Internal::AnyHash
+            )
+          end
+
+        # Resource ID returned by the matching create or list endpoint.
+        sig { returns(String) }
+        attr_accessor :id
+
+        # Post event types to send. Without it, a monitor sends new replies, new quotes,
+        # like & retweet changes, edits & deletion.
+        sig do
+          returns(
+            T.nilable(
+              T::Array[XTwitterScraper::Models::PostEventType::TaggedSymbol]
+            )
+          )
+        end
+        attr_reader :event_types
+
+        sig do
+          params(
+            event_types:
+              T::Array[XTwitterScraper::Models::PostEventType::OrSymbol]
+          ).void
+        end
+        attr_writer :event_types
+
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :is_active
+
+        sig { params(is_active: T::Boolean).void }
+        attr_writer :is_active
+
+        # New label for the post monitor. Send null to remove it.
+        sig { returns(T.nilable(String)) }
+        attr_reader :name
+
+        sig { params(name: T.nilable(String)).void }
+        attr_writer :name
+
+        sig do
+          params(
+            id: String,
+            event_types:
+              T::Array[XTwitterScraper::Models::PostEventType::OrSymbol],
+            is_active: T::Boolean,
+            name: T.nilable(String),
+            request_options: XTwitterScraper::RequestOptions::OrHash
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Resource ID returned by the matching create or list endpoint.
+          id:,
+          # Post event types to send. Without it, a monitor sends new replies, new quotes,
+          # like & retweet changes, edits & deletion.
+          event_types: nil,
+          is_active: nil,
+          # New label for the post monitor. Send null to remove it.
+          name: nil,
+          request_options: {}
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              id: String,
+              event_types:
+                T::Array[XTwitterScraper::Models::PostEventType::TaggedSymbol],
+              is_active: T::Boolean,
+              name: String,
+              request_options: XTwitterScraper::RequestOptions
+            }
+          )
+        end
+        def to_hash
+        end
+      end
+    end
+  end
+end

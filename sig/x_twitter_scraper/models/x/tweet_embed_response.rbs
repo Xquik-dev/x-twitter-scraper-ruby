@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_embed_response = { embed: XTwitterScraper::Models::TweetEmbed }
+
+      class TweetEmbedResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor embed: XTwitterScraper::Models::TweetEmbed
+
+        def initialize: (embed: XTwitterScraper::Models::TweetEmbed) -> void
+
+        def to_hash: -> { embed: XTwitterScraper::Models::TweetEmbed }
+      end
+    end
+  end
+end

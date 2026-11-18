@@ -1,0 +1,78 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type job_account =
+      {
+        id: String,
+        username: String,
+        name: String,
+        verified: bool,
+        verified_type: String,
+        description: String,
+        profile_picture: String,
+        profile_picture_original: String,
+        profile_image_shape: String
+      }
+
+    class JobAccount < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_reader username: String?
+
+      def username=: (String) -> String
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_accessor verified: bool
+
+      attr_reader verified_type: String?
+
+      def verified_type=: (String) -> String
+
+      attr_reader description: String?
+
+      def description=: (String) -> String
+
+      attr_reader profile_picture: String?
+
+      def profile_picture=: (String) -> String
+
+      attr_reader profile_picture_original: String?
+
+      def profile_picture_original=: (String) -> String
+
+      attr_reader profile_image_shape: String?
+
+      def profile_image_shape=: (String) -> String
+
+      def initialize: (
+        id: String,
+        verified: bool,
+        ?username: String,
+        ?name: String,
+        ?verified_type: String,
+        ?description: String,
+        ?profile_picture: String,
+        ?profile_picture_original: String,
+        ?profile_image_shape: String
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        username: String,
+        name: String,
+        verified: bool,
+        verified_type: String,
+        description: String,
+        profile_picture: String,
+        profile_picture_original: String,
+        profile_image_shape: String
+      }
+    end
+  end
+end

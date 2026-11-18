@@ -1,0 +1,94 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type search_suggestion_cashtag =
+      {
+        ticker: String,
+        name: String,
+        smart_tag: String,
+        currency: String,
+        price: String,
+        market_cap: String,
+        daily_change_percent: Float,
+        logo_url: String,
+        exchange_short_name: String,
+        contract_address: String,
+        chain_logo_url: String
+      }
+
+    class SearchSuggestionCashtag < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor ticker: String
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader smart_tag: String?
+
+      def smart_tag=: (String) -> String
+
+      attr_reader currency: String?
+
+      def currency=: (String) -> String
+
+      attr_reader price: String?
+
+      def price=: (String) -> String
+
+      attr_reader market_cap: String?
+
+      def market_cap=: (String) -> String
+
+      attr_reader daily_change_percent: Float?
+
+      def daily_change_percent=: (Float) -> Float
+
+      attr_reader logo_url: String?
+
+      def logo_url=: (String) -> String
+
+      attr_reader exchange_short_name: String?
+
+      def exchange_short_name=: (String) -> String
+
+      attr_reader contract_address: String?
+
+      def contract_address=: (String) -> String
+
+      attr_reader chain_logo_url: String?
+
+      def chain_logo_url=: (String) -> String
+
+      def initialize: (
+        ticker: String,
+        ?name: String,
+        ?smart_tag: String,
+        ?currency: String,
+        ?price: String,
+        ?market_cap: String,
+        ?daily_change_percent: Float,
+        ?logo_url: String,
+        ?exchange_short_name: String,
+        ?contract_address: String,
+        ?chain_logo_url: String
+      ) -> void
+
+      def to_hash: -> {
+        ticker: String,
+        name: String,
+        smart_tag: String,
+        currency: String,
+        price: String,
+        market_cap: String,
+        daily_change_percent: Float,
+        logo_url: String,
+        exchange_short_name: String,
+        contract_address: String,
+        chain_logo_url: String
+      }
+    end
+  end
+end

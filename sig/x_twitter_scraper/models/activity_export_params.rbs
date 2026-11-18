@@ -1,0 +1,88 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type activity_export_params =
+      {
+        format_: XTwitterScraper::Models::ActivityExportParams::format_,
+        limit: Integer,
+        category: String,
+        status: String,
+        q: String,
+        since: String,
+        until_: String
+      }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class ActivityExportParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_accessor format_: XTwitterScraper::Models::ActivityExportParams::format_
+
+      attr_reader limit: Integer?
+
+      def limit=: (Integer) -> Integer
+
+      attr_reader category: String?
+
+      def category=: (String) -> String
+
+      attr_reader status: String?
+
+      def status=: (String) -> String
+
+      attr_reader q: String?
+
+      def q=: (String) -> String
+
+      attr_reader since: String?
+
+      def since=: (String) -> String
+
+      attr_reader until_: String?
+
+      def until_=: (String) -> String
+
+      def initialize: (
+        format_: XTwitterScraper::Models::ActivityExportParams::format_,
+        ?limit: Integer,
+        ?category: String,
+        ?status: String,
+        ?q: String,
+        ?since: String,
+        ?until_: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        format_: XTwitterScraper::Models::ActivityExportParams::format_,
+        limit: Integer,
+        category: String,
+        status: String,
+        q: String,
+        since: String,
+        until_: String,
+        request_options: XTwitterScraper::RequestOptions
+      }
+
+      type format_ = :json | :csv | :xlsx | :md | :"md-document" | :pdf | :txt
+
+      module Format
+        extend XTwitterScraper::Internal::Type::Enum
+
+        JSON: :json
+        CSV: :csv
+        XLSX: :xlsx
+        MD: :md
+        MD_DOCUMENT: :"md-document"
+        PDF: :pdf
+        TXT: :txt
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ActivityExportParams::format_]
+      end
+    end
+  end
+end

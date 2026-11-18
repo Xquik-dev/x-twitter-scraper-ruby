@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type x_get_news_story_versions_response =
+      {
+        id: String,
+        count: Integer,
+        versions: ::Array[XTwitterScraper::Models::NewsVersion]
+      }
+
+    class XGetNewsStoryVersionsResponse < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor count: Integer
+
+      attr_accessor versions: ::Array[XTwitterScraper::Models::NewsVersion]
+
+      def initialize: (
+        id: String,
+        count: Integer,
+        versions: ::Array[XTwitterScraper::Models::NewsVersion]
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        count: Integer,
+        versions: ::Array[XTwitterScraper::Models::NewsVersion]
+      }
+    end
+  end
+end

@@ -1,0 +1,49 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type post_engagement_metrics =
+      {
+        likes: Float,
+        replies: Float,
+        reposts: Float,
+        quotes: Float,
+        bookmarks: Float,
+        views: Float
+      }
+
+    class PostEngagementMetrics < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor likes: Float
+
+      attr_accessor replies: Float
+
+      attr_accessor reposts: Float
+
+      attr_accessor quotes: Float
+
+      attr_accessor bookmarks: Float
+
+      attr_accessor views: Float
+
+      def initialize: (
+        likes: Float,
+        replies: Float,
+        reposts: Float,
+        quotes: Float,
+        bookmarks: Float,
+        views: Float
+      ) -> void
+
+      def to_hash: -> {
+        likes: Float,
+        replies: Float,
+        reposts: Float,
+        quotes: Float,
+        bookmarks: Float,
+        views: Float
+      }
+    end
+  end
+end

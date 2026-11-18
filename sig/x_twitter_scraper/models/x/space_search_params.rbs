@@ -1,0 +1,82 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type space_search_params =
+        {
+          q: String,
+          query_type: XTwitterScraper::Models::X::SpaceSearchParams::query_type,
+          cursor: String,
+          page_size: Integer,
+          fields: String,
+          omit: String
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class SpaceSearchParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_accessor q: String
+
+        attr_reader query_type: XTwitterScraper::Models::X::SpaceSearchParams::query_type?
+
+        def query_type=: (
+          XTwitterScraper::Models::X::SpaceSearchParams::query_type
+        ) -> XTwitterScraper::Models::X::SpaceSearchParams::query_type
+
+        attr_reader cursor: String?
+
+        def cursor=: (String) -> String
+
+        attr_reader page_size: Integer?
+
+        def page_size=: (Integer) -> Integer
+
+        attr_reader fields: String?
+
+        def fields=: (String) -> String
+
+        attr_reader omit: String?
+
+        def omit=: (String) -> String
+
+        def initialize: (
+          q: String,
+          ?query_type: XTwitterScraper::Models::X::SpaceSearchParams::query_type,
+          ?cursor: String,
+          ?page_size: Integer,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          q: String,
+          query_type: XTwitterScraper::Models::X::SpaceSearchParams::query_type,
+          cursor: String,
+          page_size: Integer,
+          fields: String,
+          omit: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+
+        type query_type = :Latest | :Top | :Live | :Upcoming
+
+        module QueryType
+          extend XTwitterScraper::Internal::Type::Enum
+
+          LATEST: :Latest
+          TOP: :Top
+          LIVE: :Live
+          UPCOMING: :Upcoming
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::SpaceSearchParams::query_type]
+        end
+      end
+    end
+  end
+end

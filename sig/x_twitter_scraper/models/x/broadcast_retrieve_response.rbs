@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type broadcast_retrieve_response =
+        { broadcast: XTwitterScraper::Models::Broadcast }
+
+      class BroadcastRetrieveResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor broadcast: XTwitterScraper::Models::Broadcast
+
+        def initialize: (broadcast: XTwitterScraper::Models::Broadcast) -> void
+
+        def to_hash: -> { broadcast: XTwitterScraper::Models::Broadcast }
+      end
+    end
+  end
+end

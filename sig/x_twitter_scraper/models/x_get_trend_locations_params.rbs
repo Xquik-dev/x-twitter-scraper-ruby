@@ -1,0 +1,82 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type x_get_trend_locations_params =
+      {
+        country: String,
+        place_type: XTwitterScraper::Models::XGetTrendLocationsParams::place_type,
+        q: String,
+        limit: Integer,
+        fields: String,
+        omit: String
+      }
+      & XTwitterScraper::Internal::Type::request_parameters
+
+    class XGetTrendLocationsParams < XTwitterScraper::Internal::Type::BaseModel
+      extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+      include XTwitterScraper::Internal::Type::RequestParameters
+
+      attr_reader country: String?
+
+      def country=: (String) -> String
+
+      attr_reader place_type: XTwitterScraper::Models::XGetTrendLocationsParams::place_type?
+
+      def place_type=: (
+        XTwitterScraper::Models::XGetTrendLocationsParams::place_type
+      ) -> XTwitterScraper::Models::XGetTrendLocationsParams::place_type
+
+      attr_reader q: String?
+
+      def q=: (String) -> String
+
+      attr_reader limit: Integer?
+
+      def limit=: (Integer) -> Integer
+
+      attr_reader fields: String?
+
+      def fields=: (String) -> String
+
+      attr_reader omit: String?
+
+      def omit=: (String) -> String
+
+      def initialize: (
+        ?country: String,
+        ?place_type: XTwitterScraper::Models::XGetTrendLocationsParams::place_type,
+        ?q: String,
+        ?limit: Integer,
+        ?fields: String,
+        ?omit: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        country: String,
+        place_type: XTwitterScraper::Models::XGetTrendLocationsParams::place_type,
+        q: String,
+        limit: Integer,
+        fields: String,
+        omit: String,
+        request_options: XTwitterScraper::RequestOptions
+      }
+
+      type place_type = :country | :town | :worldwide | :unknown
+
+      module PlaceType
+        extend XTwitterScraper::Internal::Type::Enum
+
+        COUNTRY: :country
+        TOWN: :town
+        WORLDWIDE: :worldwide
+        UNKNOWN: :unknown
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::XGetTrendLocationsParams::place_type]
+      end
+    end
+  end
+end

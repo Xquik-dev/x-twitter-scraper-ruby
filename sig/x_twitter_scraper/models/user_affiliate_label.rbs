@@ -1,0 +1,77 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type user_affiliate_label =
+      {
+        auxiliary_labels: ::Array[XTwitterScraper::Models::UserAuxiliaryLabel],
+        badge_url: String,
+        description: String,
+        long_description: ::Hash[Symbol, top],
+        url: String,
+        url_type: String,
+        user_label_display_type: String,
+        user_label_type: String
+      }
+
+    class UserAffiliateLabel < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader auxiliary_labels: ::Array[XTwitterScraper::Models::UserAuxiliaryLabel]?
+
+      def auxiliary_labels=: (
+        ::Array[XTwitterScraper::Models::UserAuxiliaryLabel]
+      ) -> ::Array[XTwitterScraper::Models::UserAuxiliaryLabel]
+
+      attr_reader badge_url: String?
+
+      def badge_url=: (String) -> String
+
+      attr_reader description: String?
+
+      def description=: (String) -> String
+
+      attr_reader long_description: ::Hash[Symbol, top]?
+
+      def long_description=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader url: String?
+
+      def url=: (String) -> String
+
+      attr_reader url_type: String?
+
+      def url_type=: (String) -> String
+
+      attr_reader user_label_display_type: String?
+
+      def user_label_display_type=: (String) -> String
+
+      attr_reader user_label_type: String?
+
+      def user_label_type=: (String) -> String
+
+      def initialize: (
+        ?auxiliary_labels: ::Array[XTwitterScraper::Models::UserAuxiliaryLabel],
+        ?badge_url: String,
+        ?description: String,
+        ?long_description: ::Hash[Symbol, top],
+        ?url: String,
+        ?url_type: String,
+        ?user_label_display_type: String,
+        ?user_label_type: String
+      ) -> void
+
+      def to_hash: -> {
+        auxiliary_labels: ::Array[XTwitterScraper::Models::UserAuxiliaryLabel],
+        badge_url: String,
+        description: String,
+        long_description: ::Hash[Symbol, top],
+        url: String,
+        url_type: String,
+        user_label_display_type: String,
+        user_label_type: String
+      }
+    end
+  end
+end

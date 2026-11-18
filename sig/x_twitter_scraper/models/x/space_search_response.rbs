@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type space_search_response =
+        {
+          spaces: ::Array[XTwitterScraper::Models::Space],
+          has_next_page: bool,
+          next_cursor: String
+        }
+
+      class SpaceSearchResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor spaces: ::Array[XTwitterScraper::Models::Space]
+
+        attr_accessor has_next_page: bool
+
+        attr_accessor next_cursor: String
+
+        def initialize: (
+          spaces: ::Array[XTwitterScraper::Models::Space],
+          has_next_page: bool,
+          next_cursor: String
+        ) -> void
+
+        def to_hash: -> {
+          spaces: ::Array[XTwitterScraper::Models::Space],
+          has_next_page: bool,
+          next_cursor: String
+        }
+      end
+    end
+  end
+end

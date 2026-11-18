@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type tweet_url_entity =
+      {
+        display_url: String,
+        expanded_url: String,
+        indices: ::Array[Integer],
+        url: String
+      }
+
+    class TweetUrlEntity < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader display_url: String?
+
+      def display_url=: (String) -> String
+
+      attr_reader expanded_url: String?
+
+      def expanded_url=: (String) -> String
+
+      attr_reader indices: ::Array[Integer]?
+
+      def indices=: (::Array[Integer]) -> ::Array[Integer]
+
+      attr_reader url: String?
+
+      def url=: (String) -> String
+
+      def initialize: (
+        ?display_url: String,
+        ?expanded_url: String,
+        ?indices: ::Array[Integer],
+        ?url: String
+      ) -> void
+
+      def to_hash: -> {
+        display_url: String,
+        expanded_url: String,
+        indices: ::Array[Integer],
+        url: String
+      }
+    end
+  end
+end

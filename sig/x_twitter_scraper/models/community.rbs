@@ -1,0 +1,868 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type community =
+      {
+        id: String,
+        name: String,
+        description: String,
+        member_count: Integer,
+        moderator_count: Integer,
+        is_nsfw: bool,
+        primary_topic: XTwitterScraper::Models::Community::PrimaryTopic,
+        created_at: String,
+        join_policy: String,
+        invites_policy: String,
+        question: String,
+        rules: ::Array[XTwitterScraper::Models::Community::Rule],
+        search_tags: ::Array[String],
+        creator: XTwitterScraper::Models::Community::Creator,
+        admin: XTwitterScraper::Models::UserProfile,
+        members_facepile: ::Array[XTwitterScraper::Models::Community::members_facepile],
+        banner_url: String,
+        banner: XTwitterScraper::Models::CommunityBanner
+      }
+
+    class Community < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor name: String
+
+      attr_reader description: String?
+
+      def description=: (String) -> String
+
+      attr_accessor member_count: Integer
+
+      attr_reader moderator_count: Integer?
+
+      def moderator_count=: (Integer) -> Integer
+
+      attr_accessor is_nsfw: bool
+
+      attr_reader primary_topic: XTwitterScraper::Models::Community::PrimaryTopic?
+
+      def primary_topic=: (
+        XTwitterScraper::Models::Community::PrimaryTopic
+      ) -> XTwitterScraper::Models::Community::PrimaryTopic
+
+      attr_reader created_at: String?
+
+      def created_at=: (String) -> String
+
+      attr_reader join_policy: String?
+
+      def join_policy=: (String) -> String
+
+      attr_reader invites_policy: String?
+
+      def invites_policy=: (String) -> String
+
+      attr_reader question: String?
+
+      def question=: (String) -> String
+
+      attr_reader rules: ::Array[XTwitterScraper::Models::Community::Rule]?
+
+      def rules=: (
+        ::Array[XTwitterScraper::Models::Community::Rule]
+      ) -> ::Array[XTwitterScraper::Models::Community::Rule]
+
+      attr_reader search_tags: ::Array[String]?
+
+      def search_tags=: (::Array[String]) -> ::Array[String]
+
+      attr_reader creator: XTwitterScraper::Models::Community::Creator?
+
+      def creator=: (
+        XTwitterScraper::Models::Community::Creator
+      ) -> XTwitterScraper::Models::Community::Creator
+
+      attr_reader admin: XTwitterScraper::Models::UserProfile?
+
+      def admin=: (
+        XTwitterScraper::Models::UserProfile
+      ) -> XTwitterScraper::Models::UserProfile
+
+      attr_reader members_facepile: ::Array[XTwitterScraper::Models::Community::members_facepile]?
+
+      def members_facepile=: (
+        ::Array[XTwitterScraper::Models::Community::members_facepile]
+      ) -> ::Array[XTwitterScraper::Models::Community::members_facepile]
+
+      attr_reader banner_url: String?
+
+      def banner_url=: (String) -> String
+
+      attr_reader banner: XTwitterScraper::Models::CommunityBanner?
+
+      def banner=: (
+        XTwitterScraper::Models::CommunityBanner
+      ) -> XTwitterScraper::Models::CommunityBanner
+
+      def initialize: (
+        id: String,
+        name: String,
+        member_count: Integer,
+        is_nsfw: bool,
+        ?description: String,
+        ?moderator_count: Integer,
+        ?primary_topic: XTwitterScraper::Models::Community::PrimaryTopic,
+        ?created_at: String,
+        ?join_policy: String,
+        ?invites_policy: String,
+        ?question: String,
+        ?rules: ::Array[XTwitterScraper::Models::Community::Rule],
+        ?search_tags: ::Array[String],
+        ?creator: XTwitterScraper::Models::Community::Creator,
+        ?admin: XTwitterScraper::Models::UserProfile,
+        ?members_facepile: ::Array[XTwitterScraper::Models::Community::members_facepile],
+        ?banner_url: String,
+        ?banner: XTwitterScraper::Models::CommunityBanner
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        name: String,
+        description: String,
+        member_count: Integer,
+        moderator_count: Integer,
+        is_nsfw: bool,
+        primary_topic: XTwitterScraper::Models::Community::PrimaryTopic,
+        created_at: String,
+        join_policy: String,
+        invites_policy: String,
+        question: String,
+        rules: ::Array[XTwitterScraper::Models::Community::Rule],
+        search_tags: ::Array[String],
+        creator: XTwitterScraper::Models::Community::Creator,
+        admin: XTwitterScraper::Models::UserProfile,
+        members_facepile: ::Array[XTwitterScraper::Models::Community::members_facepile],
+        banner_url: String,
+        banner: XTwitterScraper::Models::CommunityBanner
+      }
+
+      type primary_topic = { id: String, name: String }
+
+      class PrimaryTopic < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_accessor name: String
+
+        def initialize: (name: String, ?id: String) -> void
+
+        def to_hash: -> { id: String, name: String }
+      end
+
+      type rule = { id: String, name: String, description: String }
+
+      class Rule < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        def initialize: (
+          ?id: String,
+          ?name: String,
+          ?description: String
+        ) -> void
+
+        def to_hash: -> { id: String, name: String, description: String }
+      end
+
+      type creator =
+        {
+          id: String,
+          username: String,
+          name: String,
+          description: String,
+          followers: Integer,
+          following: Integer,
+          verified: bool,
+          is_blue_verified: bool,
+          is_verified: bool,
+          profile_picture: String,
+          profile_picture_original: String,
+          cover_picture: String,
+          profile_banner_url: String,
+          location: String,
+          account_based_in: XTwitterScraper::Models::AccountBasedIn,
+          account_based_in_unavailable: bool,
+          account_based_in_accurate: bool,
+          connected_via: String,
+          connected_via_accurate: bool,
+          affiliate_username: String,
+          email: String,
+          contact_info: XTwitterScraper::Models::ProfileContactInfo,
+          username_changes: XTwitterScraper::Models::Community::Creator::UsernameChanges,
+          birthdate: XTwitterScraper::Models::Community::Creator::Birthdate,
+          retweeted_at: Time,
+          created_at: String,
+          statuses_count: Integer,
+          media_count: Integer,
+          protected: bool,
+          url: String,
+          favourites_count: Integer,
+          has_custom_timelines: bool,
+          is_translator: bool,
+          withheld_in_countries: ::Array[String],
+          withheld_scope: String,
+          possibly_sensitive: bool,
+          professional: ::Hash[Symbol, top],
+          grok_translated_bio: ::Hash[Symbol, top],
+          pinned_tweet_ids: ::Array[String],
+          is_automated: bool,
+          automated_by: String,
+          unavailable: bool,
+          unavailable_reason: String,
+          verified_type: String,
+          affiliates_highlighted_label: XTwitterScraper::Models::UserAffiliateLabel,
+          business_account_affiliates_count: Integer,
+          creator_subscriptions_count: Integer,
+          has_graduated_access: bool,
+          has_hidden_subscriptions_on_profile: bool,
+          highlights_info: XTwitterScraper::Models::UserHighlightsInfo,
+          identity_verification: XTwitterScraper::Models::UserIdentityVerification,
+          is_profile_translatable: bool,
+          parody_commentary_fan_label: String,
+          profile_description_language: String,
+          profile_image_shape: String,
+          profile_interstitial_type: String,
+          profile_sort_enabled: bool,
+          profile_translator_type: String,
+          redirects_to_username: String,
+          super_follow_eligible: bool,
+          super_follows_user_profile_active: bool,
+          tip_jar: XTwitterScraper::Models::UserTipJar,
+          listed_count: Integer,
+          fast_followers_count: Integer,
+          normal_followers_count: Integer,
+          default_profile: bool,
+          default_profile_image: bool,
+          has_extended_profile: bool,
+          is_translation_enabled: bool,
+          geo_enabled: bool,
+          advertiser_account_type: String,
+          advertiser_account_service_levels: ::Array[String],
+          business_profile_state: String,
+          subscribers_count: Integer,
+          verification_reason: XTwitterScraper::Models::Community::Creator::VerificationReason,
+          community_role: String,
+          profile_bio: ::Hash[Symbol, top]
+        }
+
+      class Creator < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor username: String
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        attr_reader followers: Integer?
+
+        def followers=: (Integer) -> Integer
+
+        attr_reader following: Integer?
+
+        def following=: (Integer) -> Integer
+
+        attr_accessor verified: bool
+
+        attr_reader is_blue_verified: bool?
+
+        def is_blue_verified=: (bool) -> bool
+
+        attr_reader is_verified: bool?
+
+        def is_verified=: (bool) -> bool
+
+        attr_reader profile_picture: String?
+
+        def profile_picture=: (String) -> String
+
+        attr_reader profile_picture_original: String?
+
+        def profile_picture_original=: (String) -> String
+
+        attr_reader cover_picture: String?
+
+        def cover_picture=: (String) -> String
+
+        attr_reader profile_banner_url: String?
+
+        def profile_banner_url=: (String) -> String
+
+        attr_reader location: String?
+
+        def location=: (String) -> String
+
+        attr_reader account_based_in: XTwitterScraper::Models::AccountBasedIn?
+
+        def account_based_in=: (
+          XTwitterScraper::Models::AccountBasedIn?
+        ) -> XTwitterScraper::Models::AccountBasedIn?
+
+        attr_reader account_based_in_unavailable: bool?
+
+        def account_based_in_unavailable=: (bool) -> bool
+
+        attr_reader account_based_in_accurate: bool?
+
+        def account_based_in_accurate=: (bool) -> bool
+
+        attr_reader connected_via: String?
+
+        def connected_via=: (String) -> String
+
+        attr_reader connected_via_accurate: bool?
+
+        def connected_via_accurate=: (bool) -> bool
+
+        attr_reader affiliate_username: String?
+
+        def affiliate_username=: (String) -> String
+
+        attr_reader email: String?
+
+        def email=: (String) -> String
+
+        attr_reader contact_info: XTwitterScraper::Models::ProfileContactInfo?
+
+        def contact_info=: (
+          XTwitterScraper::Models::ProfileContactInfo
+        ) -> XTwitterScraper::Models::ProfileContactInfo
+
+        attr_reader username_changes: XTwitterScraper::Models::Community::Creator::UsernameChanges?
+
+        def username_changes=: (
+          XTwitterScraper::Models::Community::Creator::UsernameChanges
+        ) -> XTwitterScraper::Models::Community::Creator::UsernameChanges
+
+        attr_reader birthdate: XTwitterScraper::Models::Community::Creator::Birthdate?
+
+        def birthdate=: (
+          XTwitterScraper::Models::Community::Creator::Birthdate
+        ) -> XTwitterScraper::Models::Community::Creator::Birthdate
+
+        attr_reader retweeted_at: Time?
+
+        def retweeted_at=: (Time?) -> Time?
+
+        attr_reader created_at: String?
+
+        def created_at=: (String) -> String
+
+        attr_reader statuses_count: Integer?
+
+        def statuses_count=: (Integer) -> Integer
+
+        attr_reader media_count: Integer?
+
+        def media_count=: (Integer) -> Integer
+
+        attr_reader protected: bool?
+
+        def protected=: (bool) -> bool
+
+        attr_reader url: String?
+
+        def url=: (String) -> String
+
+        attr_reader favourites_count: Integer?
+
+        def favourites_count=: (Integer) -> Integer
+
+        attr_reader has_custom_timelines: bool?
+
+        def has_custom_timelines=: (bool) -> bool
+
+        attr_reader is_translator: bool?
+
+        def is_translator=: (bool) -> bool
+
+        attr_reader withheld_in_countries: ::Array[String]?
+
+        def withheld_in_countries=: (::Array[String]) -> ::Array[String]
+
+        attr_reader withheld_scope: String?
+
+        def withheld_scope=: (String) -> String
+
+        attr_reader possibly_sensitive: bool?
+
+        def possibly_sensitive=: (bool) -> bool
+
+        attr_reader professional: ::Hash[Symbol, top]?
+
+        def professional=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader grok_translated_bio: ::Hash[Symbol, top]?
+
+        def grok_translated_bio=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader pinned_tweet_ids: ::Array[String]?
+
+        def pinned_tweet_ids=: (::Array[String]) -> ::Array[String]
+
+        attr_reader is_automated: bool?
+
+        def is_automated=: (bool) -> bool
+
+        attr_reader automated_by: String?
+
+        def automated_by=: (String) -> String
+
+        attr_reader unavailable: bool?
+
+        def unavailable=: (bool) -> bool
+
+        attr_reader unavailable_reason: String?
+
+        def unavailable_reason=: (String) -> String
+
+        attr_reader verified_type: String?
+
+        def verified_type=: (String) -> String
+
+        attr_reader affiliates_highlighted_label: XTwitterScraper::Models::UserAffiliateLabel?
+
+        def affiliates_highlighted_label=: (
+          XTwitterScraper::Models::UserAffiliateLabel
+        ) -> XTwitterScraper::Models::UserAffiliateLabel
+
+        attr_reader business_account_affiliates_count: Integer?
+
+        def business_account_affiliates_count=: (Integer) -> Integer
+
+        attr_reader creator_subscriptions_count: Integer?
+
+        def creator_subscriptions_count=: (Integer) -> Integer
+
+        attr_reader has_graduated_access: bool?
+
+        def has_graduated_access=: (bool) -> bool
+
+        attr_reader has_hidden_subscriptions_on_profile: bool?
+
+        def has_hidden_subscriptions_on_profile=: (bool) -> bool
+
+        attr_reader highlights_info: XTwitterScraper::Models::UserHighlightsInfo?
+
+        def highlights_info=: (
+          XTwitterScraper::Models::UserHighlightsInfo
+        ) -> XTwitterScraper::Models::UserHighlightsInfo
+
+        attr_reader identity_verification: XTwitterScraper::Models::UserIdentityVerification?
+
+        def identity_verification=: (
+          XTwitterScraper::Models::UserIdentityVerification
+        ) -> XTwitterScraper::Models::UserIdentityVerification
+
+        attr_reader is_profile_translatable: bool?
+
+        def is_profile_translatable=: (bool) -> bool
+
+        attr_reader parody_commentary_fan_label: String?
+
+        def parody_commentary_fan_label=: (String) -> String
+
+        attr_reader profile_description_language: String?
+
+        def profile_description_language=: (String) -> String
+
+        attr_reader profile_image_shape: String?
+
+        def profile_image_shape=: (String) -> String
+
+        attr_reader profile_interstitial_type: String?
+
+        def profile_interstitial_type=: (String) -> String
+
+        attr_reader profile_sort_enabled: bool?
+
+        def profile_sort_enabled=: (bool) -> bool
+
+        attr_reader profile_translator_type: String?
+
+        def profile_translator_type=: (String) -> String
+
+        attr_reader redirects_to_username: String?
+
+        def redirects_to_username=: (String) -> String
+
+        attr_reader super_follow_eligible: bool?
+
+        def super_follow_eligible=: (bool) -> bool
+
+        attr_reader super_follows_user_profile_active: bool?
+
+        def super_follows_user_profile_active=: (bool) -> bool
+
+        attr_reader tip_jar: XTwitterScraper::Models::UserTipJar?
+
+        def tip_jar=: (
+          XTwitterScraper::Models::UserTipJar
+        ) -> XTwitterScraper::Models::UserTipJar
+
+        attr_reader listed_count: Integer?
+
+        def listed_count=: (Integer) -> Integer
+
+        attr_reader fast_followers_count: Integer?
+
+        def fast_followers_count=: (Integer) -> Integer
+
+        attr_reader normal_followers_count: Integer?
+
+        def normal_followers_count=: (Integer) -> Integer
+
+        attr_reader default_profile: bool?
+
+        def default_profile=: (bool) -> bool
+
+        attr_reader default_profile_image: bool?
+
+        def default_profile_image=: (bool) -> bool
+
+        attr_reader has_extended_profile: bool?
+
+        def has_extended_profile=: (bool) -> bool
+
+        attr_reader is_translation_enabled: bool?
+
+        def is_translation_enabled=: (bool) -> bool
+
+        attr_reader geo_enabled: bool?
+
+        def geo_enabled=: (bool) -> bool
+
+        attr_reader advertiser_account_type: String?
+
+        def advertiser_account_type=: (String) -> String
+
+        attr_reader advertiser_account_service_levels: ::Array[String]?
+
+        def advertiser_account_service_levels=: (
+          ::Array[String]
+        ) -> ::Array[String]
+
+        attr_reader business_profile_state: String?
+
+        def business_profile_state=: (String) -> String
+
+        attr_reader subscribers_count: Integer?
+
+        def subscribers_count=: (Integer) -> Integer
+
+        attr_reader verification_reason: XTwitterScraper::Models::Community::Creator::VerificationReason?
+
+        def verification_reason=: (
+          XTwitterScraper::Models::Community::Creator::VerificationReason
+        ) -> XTwitterScraper::Models::Community::Creator::VerificationReason
+
+        attr_reader community_role: String?
+
+        def community_role=: (String) -> String
+
+        attr_reader profile_bio: ::Hash[Symbol, top]?
+
+        def profile_bio=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        def initialize: (
+          id: String,
+          username: String,
+          verified: bool,
+          ?name: String,
+          ?description: String,
+          ?followers: Integer,
+          ?following: Integer,
+          ?is_blue_verified: bool,
+          ?is_verified: bool,
+          ?profile_picture: String,
+          ?profile_picture_original: String,
+          ?cover_picture: String,
+          ?profile_banner_url: String,
+          ?location: String,
+          ?account_based_in: XTwitterScraper::Models::AccountBasedIn?,
+          ?account_based_in_unavailable: bool,
+          ?account_based_in_accurate: bool,
+          ?connected_via: String,
+          ?connected_via_accurate: bool,
+          ?affiliate_username: String,
+          ?email: String,
+          ?contact_info: XTwitterScraper::Models::ProfileContactInfo,
+          ?username_changes: XTwitterScraper::Models::Community::Creator::UsernameChanges,
+          ?birthdate: XTwitterScraper::Models::Community::Creator::Birthdate,
+          ?retweeted_at: Time?,
+          ?created_at: String,
+          ?statuses_count: Integer,
+          ?media_count: Integer,
+          ?protected: bool,
+          ?url: String,
+          ?favourites_count: Integer,
+          ?has_custom_timelines: bool,
+          ?is_translator: bool,
+          ?withheld_in_countries: ::Array[String],
+          ?withheld_scope: String,
+          ?possibly_sensitive: bool,
+          ?professional: ::Hash[Symbol, top],
+          ?grok_translated_bio: ::Hash[Symbol, top],
+          ?pinned_tweet_ids: ::Array[String],
+          ?is_automated: bool,
+          ?automated_by: String,
+          ?unavailable: bool,
+          ?unavailable_reason: String,
+          ?verified_type: String,
+          ?affiliates_highlighted_label: XTwitterScraper::Models::UserAffiliateLabel,
+          ?business_account_affiliates_count: Integer,
+          ?creator_subscriptions_count: Integer,
+          ?has_graduated_access: bool,
+          ?has_hidden_subscriptions_on_profile: bool,
+          ?highlights_info: XTwitterScraper::Models::UserHighlightsInfo,
+          ?identity_verification: XTwitterScraper::Models::UserIdentityVerification,
+          ?is_profile_translatable: bool,
+          ?parody_commentary_fan_label: String,
+          ?profile_description_language: String,
+          ?profile_image_shape: String,
+          ?profile_interstitial_type: String,
+          ?profile_sort_enabled: bool,
+          ?profile_translator_type: String,
+          ?redirects_to_username: String,
+          ?super_follow_eligible: bool,
+          ?super_follows_user_profile_active: bool,
+          ?tip_jar: XTwitterScraper::Models::UserTipJar,
+          ?listed_count: Integer,
+          ?fast_followers_count: Integer,
+          ?normal_followers_count: Integer,
+          ?default_profile: bool,
+          ?default_profile_image: bool,
+          ?has_extended_profile: bool,
+          ?is_translation_enabled: bool,
+          ?geo_enabled: bool,
+          ?advertiser_account_type: String,
+          ?advertiser_account_service_levels: ::Array[String],
+          ?business_profile_state: String,
+          ?subscribers_count: Integer,
+          ?verification_reason: XTwitterScraper::Models::Community::Creator::VerificationReason,
+          ?community_role: String,
+          ?profile_bio: ::Hash[Symbol, top]
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          username: String,
+          name: String,
+          description: String,
+          followers: Integer,
+          following: Integer,
+          verified: bool,
+          is_blue_verified: bool,
+          is_verified: bool,
+          profile_picture: String,
+          profile_picture_original: String,
+          cover_picture: String,
+          profile_banner_url: String,
+          location: String,
+          account_based_in: XTwitterScraper::Models::AccountBasedIn,
+          account_based_in_unavailable: bool,
+          account_based_in_accurate: bool,
+          connected_via: String,
+          connected_via_accurate: bool,
+          affiliate_username: String,
+          email: String,
+          contact_info: XTwitterScraper::Models::ProfileContactInfo,
+          username_changes: XTwitterScraper::Models::Community::Creator::UsernameChanges,
+          birthdate: XTwitterScraper::Models::Community::Creator::Birthdate,
+          retweeted_at: Time,
+          created_at: String,
+          statuses_count: Integer,
+          media_count: Integer,
+          protected: bool,
+          url: String,
+          favourites_count: Integer,
+          has_custom_timelines: bool,
+          is_translator: bool,
+          withheld_in_countries: ::Array[String],
+          withheld_scope: String,
+          possibly_sensitive: bool,
+          professional: ::Hash[Symbol, top],
+          grok_translated_bio: ::Hash[Symbol, top],
+          pinned_tweet_ids: ::Array[String],
+          is_automated: bool,
+          automated_by: String,
+          unavailable: bool,
+          unavailable_reason: String,
+          verified_type: String,
+          affiliates_highlighted_label: XTwitterScraper::Models::UserAffiliateLabel,
+          business_account_affiliates_count: Integer,
+          creator_subscriptions_count: Integer,
+          has_graduated_access: bool,
+          has_hidden_subscriptions_on_profile: bool,
+          highlights_info: XTwitterScraper::Models::UserHighlightsInfo,
+          identity_verification: XTwitterScraper::Models::UserIdentityVerification,
+          is_profile_translatable: bool,
+          parody_commentary_fan_label: String,
+          profile_description_language: String,
+          profile_image_shape: String,
+          profile_interstitial_type: String,
+          profile_sort_enabled: bool,
+          profile_translator_type: String,
+          redirects_to_username: String,
+          super_follow_eligible: bool,
+          super_follows_user_profile_active: bool,
+          tip_jar: XTwitterScraper::Models::UserTipJar,
+          listed_count: Integer,
+          fast_followers_count: Integer,
+          normal_followers_count: Integer,
+          default_profile: bool,
+          default_profile_image: bool,
+          has_extended_profile: bool,
+          is_translation_enabled: bool,
+          geo_enabled: bool,
+          advertiser_account_type: String,
+          advertiser_account_service_levels: ::Array[String],
+          business_profile_state: String,
+          subscribers_count: Integer,
+          verification_reason: XTwitterScraper::Models::Community::Creator::VerificationReason,
+          community_role: String,
+          profile_bio: ::Hash[Symbol, top]
+        }
+
+        type username_changes = { count: Integer, last_changed_at: Time }
+
+        class UsernameChanges < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor count: Integer
+
+          attr_reader last_changed_at: Time?
+
+          def last_changed_at=: (Time) -> Time
+
+          def initialize: (count: Integer, ?last_changed_at: Time) -> void
+
+          def to_hash: -> { count: Integer, last_changed_at: Time }
+        end
+
+        type birthdate = { day: Integer, month: Integer, year: Integer }
+
+        class Birthdate < XTwitterScraper::Internal::Type::BaseModel
+          attr_reader day: Integer?
+
+          def day=: (Integer) -> Integer
+
+          attr_reader month: Integer?
+
+          def month=: (Integer) -> Integer
+
+          attr_reader year: Integer?
+
+          def year=: (Integer) -> Integer
+
+          def initialize: (
+            ?day: Integer,
+            ?month: Integer,
+            ?year: Integer
+          ) -> void
+
+          def to_hash: -> { day: Integer, month: Integer, year: Integer }
+        end
+
+        type verification_reason =
+          {
+            text: String,
+            entities: ::Array[XTwitterScraper::Models::Community::Creator::VerificationReason::Entity]
+          }
+
+        class VerificationReason < XTwitterScraper::Internal::Type::BaseModel
+          attr_reader text: String?
+
+          def text=: (String) -> String
+
+          attr_reader entities: ::Array[XTwitterScraper::Models::Community::Creator::VerificationReason::Entity]?
+
+          def entities=: (
+            ::Array[XTwitterScraper::Models::Community::Creator::VerificationReason::Entity]
+          ) -> ::Array[XTwitterScraper::Models::Community::Creator::VerificationReason::Entity]
+
+          def initialize: (
+            ?text: String,
+            ?entities: ::Array[XTwitterScraper::Models::Community::Creator::VerificationReason::Entity]
+          ) -> void
+
+          def to_hash: -> {
+            text: String,
+            entities: ::Array[XTwitterScraper::Models::Community::Creator::VerificationReason::Entity]
+          }
+
+          type entity =
+            {
+              from_index: Integer,
+              to_index: Integer,
+              url: String,
+              url_type: String
+            }
+
+          class Entity < XTwitterScraper::Internal::Type::BaseModel
+            attr_reader from_index: Integer?
+
+            def from_index=: (Integer) -> Integer
+
+            attr_reader to_index: Integer?
+
+            def to_index=: (Integer) -> Integer
+
+            attr_reader url: String?
+
+            def url=: (String) -> String
+
+            attr_reader url_type: String?
+
+            def url_type=: (String) -> String
+
+            def initialize: (
+              ?from_index: Integer,
+              ?to_index: Integer,
+              ?url: String,
+              ?url_type: String
+            ) -> void
+
+            def to_hash: -> {
+              from_index: Integer,
+              to_index: Integer,
+              url: String,
+              url_type: String
+            }
+          end
+        end
+      end
+
+      type members_facepile =
+        XTwitterScraper::Models::UserProfile
+        | XTwitterScraper::Models::CommunityMemberPreview
+
+      module MembersFacepile
+        extend XTwitterScraper::Internal::Type::Union
+
+        def self?.variants: -> ::Array[XTwitterScraper::Models::Community::members_facepile]
+      end
+    end
+  end
+end

@@ -1,0 +1,51 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      module Users
+        type block_create_params =
+          {
+            id: String,
+            account: String,
+            idempotency_key: String,
+            prefer: String
+          }
+          & XTwitterScraper::Internal::Type::request_parameters
+
+        class BlockCreateParams < XTwitterScraper::Internal::Type::BaseModel
+          extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+          include XTwitterScraper::Internal::Type::RequestParameters
+
+          attr_accessor id: String
+
+          attr_accessor account: String
+
+          attr_accessor idempotency_key: String
+
+          attr_reader prefer: String?
+
+          def prefer=: (String) -> String
+
+          def initialize: (
+            id: String,
+            account: String,
+            idempotency_key: String,
+            ?prefer: String,
+            ?request_options: XTwitterScraper::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            account: String,
+            idempotency_key: String,
+            prefer: String,
+            request_options: XTwitterScraper::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

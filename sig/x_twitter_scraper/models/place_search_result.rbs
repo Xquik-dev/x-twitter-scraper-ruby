@@ -1,0 +1,93 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type place_search_result =
+      {
+        id: String,
+        name: String,
+        full_name: String?,
+        country: String?,
+        country_code: String?,
+        place_type: String?,
+        url: String?,
+        centroid: ::Array[Float]?,
+        bounding_box: XTwitterScraper::Models::PlaceSearchResult::BoundingBox?,
+        attributes: ::Hash[Symbol, top],
+        contained_within: ::Array[XTwitterScraper::Models::Place]
+      }
+
+    class PlaceSearchResult < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor name: String
+
+      attr_accessor full_name: String?
+
+      attr_accessor country: String?
+
+      attr_accessor country_code: String?
+
+      attr_accessor place_type: String?
+
+      attr_accessor url: String?
+
+      attr_accessor centroid: ::Array[Float]?
+
+      attr_accessor bounding_box: XTwitterScraper::Models::PlaceSearchResult::BoundingBox?
+
+      attr_accessor attributes: ::Hash[Symbol, top]
+
+      attr_accessor contained_within: ::Array[XTwitterScraper::Models::Place]
+
+      def initialize: (
+        id: String,
+        name: String,
+        full_name: String?,
+        country: String?,
+        country_code: String?,
+        place_type: String?,
+        url: String?,
+        centroid: ::Array[Float]?,
+        bounding_box: XTwitterScraper::Models::PlaceSearchResult::BoundingBox?,
+        attributes: ::Hash[Symbol, top],
+        contained_within: ::Array[XTwitterScraper::Models::Place]
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        name: String,
+        full_name: String?,
+        country: String?,
+        country_code: String?,
+        place_type: String?,
+        url: String?,
+        centroid: ::Array[Float]?,
+        bounding_box: XTwitterScraper::Models::PlaceSearchResult::BoundingBox?,
+        attributes: ::Hash[Symbol, top],
+        contained_within: ::Array[XTwitterScraper::Models::Place]
+      }
+
+      type bounding_box =
+        { type: String, coordinates: ::Array[::Array[::Array[Float]]] }
+
+      class BoundingBox < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor type: String
+
+        attr_accessor coordinates: ::Array[::Array[::Array[Float]]]
+
+        def initialize: (
+          type: String,
+          coordinates: ::Array[::Array[::Array[Float]]]
+        ) -> void
+
+        def to_hash: -> {
+          type: String,
+          coordinates: ::Array[::Array[::Array[Float]]]
+        }
+      end
+    end
+  end
+end

@@ -1,0 +1,173 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type job =
+      {
+        id: String,
+        title: String,
+        url: String,
+        apply_url: String,
+        location: String,
+        location_type: String,
+        employment_type: String,
+        seniority_level: String,
+        job_function: String,
+        team: String,
+        posted_at: Time,
+        formatted_salary: String,
+        salary_min: Float,
+        salary_max: Float,
+        salary_currency_code: String,
+        salary_interval: String,
+        featured: bool,
+        short_description: String,
+        description: String,
+        description_markdown: String,
+        company: XTwitterScraper::Models::JobCompany,
+        account: XTwitterScraper::Models::JobAccount
+      }
+
+    class Job < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_reader title: String?
+
+      def title=: (String) -> String
+
+      attr_accessor url: String
+
+      attr_reader apply_url: String?
+
+      def apply_url=: (String) -> String
+
+      attr_reader location: String?
+
+      def location=: (String) -> String
+
+      attr_reader location_type: String?
+
+      def location_type=: (String) -> String
+
+      attr_reader employment_type: String?
+
+      def employment_type=: (String) -> String
+
+      attr_reader seniority_level: String?
+
+      def seniority_level=: (String) -> String
+
+      attr_reader job_function: String?
+
+      def job_function=: (String) -> String
+
+      attr_reader team: String?
+
+      def team=: (String) -> String
+
+      attr_reader posted_at: Time?
+
+      def posted_at=: (Time) -> Time
+
+      attr_reader formatted_salary: String?
+
+      def formatted_salary=: (String) -> String
+
+      attr_reader salary_min: Float?
+
+      def salary_min=: (Float) -> Float
+
+      attr_reader salary_max: Float?
+
+      def salary_max=: (Float) -> Float
+
+      attr_reader salary_currency_code: String?
+
+      def salary_currency_code=: (String) -> String
+
+      attr_reader salary_interval: String?
+
+      def salary_interval=: (String) -> String
+
+      attr_reader featured: bool?
+
+      def featured=: (bool) -> bool
+
+      attr_reader short_description: String?
+
+      def short_description=: (String) -> String
+
+      attr_reader description: String?
+
+      def description=: (String) -> String
+
+      attr_reader description_markdown: String?
+
+      def description_markdown=: (String) -> String
+
+      attr_reader company: XTwitterScraper::Models::JobCompany?
+
+      def company=: (
+        XTwitterScraper::Models::JobCompany
+      ) -> XTwitterScraper::Models::JobCompany
+
+      attr_reader account: XTwitterScraper::Models::JobAccount?
+
+      def account=: (
+        XTwitterScraper::Models::JobAccount
+      ) -> XTwitterScraper::Models::JobAccount
+
+      def initialize: (
+        id: String,
+        url: String,
+        ?title: String,
+        ?apply_url: String,
+        ?location: String,
+        ?location_type: String,
+        ?employment_type: String,
+        ?seniority_level: String,
+        ?job_function: String,
+        ?team: String,
+        ?posted_at: Time,
+        ?formatted_salary: String,
+        ?salary_min: Float,
+        ?salary_max: Float,
+        ?salary_currency_code: String,
+        ?salary_interval: String,
+        ?featured: bool,
+        ?short_description: String,
+        ?description: String,
+        ?description_markdown: String,
+        ?company: XTwitterScraper::Models::JobCompany,
+        ?account: XTwitterScraper::Models::JobAccount
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        title: String,
+        url: String,
+        apply_url: String,
+        location: String,
+        location_type: String,
+        employment_type: String,
+        seniority_level: String,
+        job_function: String,
+        team: String,
+        posted_at: Time,
+        formatted_salary: String,
+        salary_min: Float,
+        salary_max: Float,
+        salary_currency_code: String,
+        salary_interval: String,
+        featured: bool,
+        short_description: String,
+        description: String,
+        description_markdown: String,
+        company: XTwitterScraper::Models::JobCompany,
+        account: XTwitterScraper::Models::JobAccount
+      }
+    end
+  end
+end

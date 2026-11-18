@@ -1,0 +1,115 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_list_top_params =
+        {
+          metric: XTwitterScraper::Models::X::TweetListTopParams::metric,
+          window: XTwitterScraper::Models::X::TweetListTopParams::window,
+          country: String,
+          language: String,
+          cursor: String,
+          page_size: Integer,
+          fields: String,
+          omit: String
+        }
+        & XTwitterScraper::Internal::Type::request_parameters
+
+      class TweetListTopParams < XTwitterScraper::Internal::Type::BaseModel
+        extend XTwitterScraper::Internal::Type::RequestParameters::Converter
+        include XTwitterScraper::Internal::Type::RequestParameters
+
+        attr_reader metric: XTwitterScraper::Models::X::TweetListTopParams::metric?
+
+        def metric=: (
+          XTwitterScraper::Models::X::TweetListTopParams::metric
+        ) -> XTwitterScraper::Models::X::TweetListTopParams::metric
+
+        attr_reader window: XTwitterScraper::Models::X::TweetListTopParams::window?
+
+        def window=: (
+          XTwitterScraper::Models::X::TweetListTopParams::window
+        ) -> XTwitterScraper::Models::X::TweetListTopParams::window
+
+        attr_reader country: String?
+
+        def country=: (String) -> String
+
+        attr_reader language: String?
+
+        def language=: (String) -> String
+
+        attr_reader cursor: String?
+
+        def cursor=: (String) -> String
+
+        attr_reader page_size: Integer?
+
+        def page_size=: (Integer) -> Integer
+
+        attr_reader fields: String?
+
+        def fields=: (String) -> String
+
+        attr_reader omit: String?
+
+        def omit=: (String) -> String
+
+        def initialize: (
+          ?metric: XTwitterScraper::Models::X::TweetListTopParams::metric,
+          ?window: XTwitterScraper::Models::X::TweetListTopParams::window,
+          ?country: String,
+          ?language: String,
+          ?cursor: String,
+          ?page_size: Integer,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          metric: XTwitterScraper::Models::X::TweetListTopParams::metric,
+          window: XTwitterScraper::Models::X::TweetListTopParams::window,
+          country: String,
+          language: String,
+          cursor: String,
+          page_size: Integer,
+          fields: String,
+          omit: String,
+          request_options: XTwitterScraper::RequestOptions
+        }
+
+        type metric =
+          :likes | :replies | :quotes | :bookmarks | :shares | :views
+
+        module Metric
+          extend XTwitterScraper::Internal::Type::Enum
+
+          LIKES: :likes
+          REPLIES: :replies
+          QUOTES: :quotes
+          BOOKMARKS: :bookmarks
+          SHARES: :shares
+          VIEWS: :views
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetListTopParams::metric]
+        end
+
+        type window = :day | :week | :month
+
+        module Window
+          extend XTwitterScraper::Internal::Type::Enum
+
+          DAY: :day
+          WEEK: :week
+          MONTH: :month
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::X::TweetListTopParams::window]
+        end
+      end
+    end
+  end
+end

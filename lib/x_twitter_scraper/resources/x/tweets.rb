@@ -16,6 +16,9 @@ module XTwitterScraper
         # @return [XTwitterScraper::Resources::X::Tweets::Retweet]
         attr_reader :retweet
 
+        # @return [XTwitterScraper::Resources::X::Tweets::Bookmark]
+        attr_reader :bookmark
+
         # Create tweet
         #
         # @overload create(account:, idempotency_key:, community_id: nil, is_note_tweet: nil, media: nil, media_ids: nil, reply_to_tweet_id: nil, text: nil, request_options: {})
@@ -1003,6 +1006,365 @@ module XTwitterScraper
           )
         end
 
+        # Returns where each t.co link leads, as X's own redirect says. Xquik reads the
+        # redirect and never visits the target site. A link t.co does not have comes back
+        # without `resolvedUrl` and costs nothing. A link X does not answer for in time
+        # comes back in `unprocessedUrls`, free. Each resolved link costs 1 credit.
+        #
+        # @overload resolve_links(urls:, fields: nil, omit: nil, request_options: {})
+        #
+        # @param urls [String] Links of the form `https://t.co/Xe1nm2pkSX`, separated by commas, as many as the URL holds. Any other link is refused. A link sent twice counts once. A longer URL fails at the edge before Xquik reads it.
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as author.username. A list keeps the field in each item. Case & underscores do not matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics always stay. An unknown name answers 400 unknown_field with the valid names, before any read. The price stays the same. SDK row types then hold only the named fields. A longer URL fails at the edge before Xquik reads it. Pick only the fields you need with `fields` & `omit`.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields. With fields, it drops from the kept fields. A longer URL fails at the edge before Xquik reads it.
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::TweetResolveLinksResponse]
+        #
+        # @see XTwitterScraper::Models::X::TweetResolveLinksParams
+        def resolve_links(params)
+          parsed, options = XTwitterScraper::Models::X::TweetResolveLinksParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: "x/links/resolve",
+            query: query,
+            model: XTwitterScraper::Models::X::TweetResolveLinksResponse,
+            options: options
+          )
+        end
+
+        # Returns the tweets X ranks highest by 1 metric over the last day, week or month.
+        # Covers all of X unless you pick a country or a language. Pages hold up to 20
+        # tweets, and the list ends at 100. Each tweet costs 1 credit. Top tweet lists
+        # come back reliably.
+        #
+        # @overload list_top(metric: nil, window: nil, country: nil, language: nil, cursor: nil, page_size: nil, fields: nil, omit: nil, request_options: {})
+        #
+        # @param metric [Symbol, XTwitterScraper::Models::X::TweetListTopParams::Metric] What to rank tweets by. Defaults to likes. Singular names work too, such as like.
+        #
+        # @param window [Symbol, XTwitterScraper::Models::X::TweetListTopParams::Window] How far back to look. Defaults to day. Also takes 24h, 7d, 30d, daily, weekly and monthly.
+        #
+        # @param country [String] Only tweets from 1 country, as a 2- or 3-letter ISO 3166 code, such as US or USA. Send country or language, not both.
+        #
+        # @param language [String] Only tweets in 1 language, as a 2-letter code, such as en. Send country or language, not both.
+        #
+        # @param cursor [String] Pagination cursor for collection results. Also read as next_cursor, next_token, pagination_token or continuation_token.
+        #
+        # @param page_size [Integer] Items per page (1-100, default 20). Source, filters or credits can return fewer. Follow next_cursor for more pages. Its aliases are limit, count, max_results, maxItems, max_items & per_page.
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as author.username. A list keeps the field in each item. Case & underscores do not matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics always stay. An unknown name answers 400 unknown_field with the valid names, before any read. The price stays the same. SDK row types then hold only the named fields. A longer URL fails at the edge before Xquik reads it. Pick only the fields you need with `fields` & `omit`.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields. With fields, it drops from the kept fields. A longer URL fails at the edge before Xquik reads it.
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::PaginatedTweets]
+        #
+        # @see XTwitterScraper::Models::X::TweetListTopParams
+        def list_top(params = {})
+          parsed, options = XTwitterScraper::Models::X::TweetListTopParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: "x/tweets/top",
+            query: query,
+            model: XTwitterScraper::Models::PaginatedTweets,
+            options: options
+          )
+        end
+
+        # Returns the HTML that X gives websites to embed 1 public tweet, with the tweet's
+        # link and author.
+        #
+        # @overload embed(id, theme: nil, hide_media: nil, hide_thread: nil, omit_script: nil, fields: nil, omit: nil, request_options: {})
+        #
+        # @param id [String] Tweet ID or URL-encoded tweet URL, such as x.com/nasa/status/20. Takes x.com & twitter.com links with or without https://, www., mobile., a query or a fragment, & /i/status or /i/web/status links. Anything else gets 400 `invalid_tweet_id`.
+        #
+        # @param theme [Symbol, XTwitterScraper::Models::X::TweetEmbedParams::Theme] Color theme of the embed. X uses light when left out.
+        #
+        # @param hide_media [Boolean] Set `true` to leave photos, videos, and link cards out.
+        #
+        # @param hide_thread [Boolean] Set `true` to leave the tweet this one replies to out.
+        #
+        # @param omit_script [Boolean] Set `true` to leave the widget script tag out, for pages that load it once themselves.
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as author.username. A list keeps the field in each item. Case & underscores do not matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics always stay. An unknown name answers 400 unknown_field with the valid names, before any read. The price stays the same. SDK row types then hold only the named fields. A longer URL fails at the edge before Xquik reads it. Pick only the fields you need with `fields` & `omit`.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields. With fields, it drops from the kept fields. A longer URL fails at the edge before Xquik reads it.
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::TweetEmbedResponse]
+        #
+        # @see XTwitterScraper::Models::X::TweetEmbedParams
+        def embed(id, params = {})
+          parsed, options = XTwitterScraper::Models::X::TweetEmbedParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: ["x/tweets/%1$s/embed", id],
+            query: query,
+            model: XTwitterScraper::Models::X::TweetEmbedResponse,
+            options: options
+          )
+        end
+
+        # Returns the replies the post's author hid, oldest first, with the replies to
+        # them. A post without hidden replies returns an empty list.
+        #
+        # @overload get_hidden_replies(id, cursor: nil, page_size: nil, from_user: nil, to_user: nil, mentioning: nil, language: nil, since_date: nil, until_date: nil, media_type: nil, min_likes: nil, min_retweets: nil, min_replies: nil, min_quotes: nil, min_views: nil, min_bookmarks: nil, max_faves: nil, max_retweets: nil, max_replies: nil, max_quotes: nil, blue_verified_only: nil, since_id: nil, max_id: nil, within_time: nil, native_retweets: nil, verified_only: nil, replies: nil, retweets: nil, quotes: nil, exact_phrase: nil, exclude_words: nil, any_words: nil, hashtags: nil, cashtags: nil, url: nil, conversation_id: nil, in_reply_to_tweet_id: nil, quotes_of_tweet_id: nil, retweets_of_tweet_id: nil, fields: nil, omit: nil, request_options: {})
+        #
+        # @param id [String]
+        #
+        # @param cursor [String] Pagination cursor for collection results. Also read as next_cursor, next_token, pagination_token or continuation_token.
+        #
+        # @param page_size [Integer] Items per page. A page holds up to 10,000, so a larger pageSize gets the largest page. Default 20. Source, filters or credits can return fewer. Follow next_cursor for more pages. Its aliases are limit, count, max_results, maxItems, max_items & per_page.
+        #
+        # @param from_user [String] Filter by author username. Account searches include all of the account's posts & reposts.
+        #
+        # @param to_user [String] Filter replies sent to a username.
+        #
+        # @param mentioning [String] Filter tweets mentioning a username.
+        #
+        # @param language [String] Filter by language. Its alias is `lang`. Language filters work for every language X tags.
+        #
+        # @param since_date [Date] Start date in YYYY-MM-DD format, as a UTC day. A date means one thing in any common form.
+        #
+        # @param until_date [Date] End date in YYYY-MM-DD format, as a UTC day, inclusive, so its own posts count.
+        #
+        # @param media_type [Symbol, XTwitterScraper::Models::X::TweetGetHiddenRepliesParams::MediaType] Filter media. Its aliases are has_video & has_media.
+        #
+        # @param min_likes [Integer] Minimum likes. Its aliases are minFaves, min_likes & min_faves.
+        #
+        # @param min_retweets [Integer] Minimum retweets threshold.
+        #
+        # @param min_replies [Integer] Minimum replies threshold.
+        #
+        # @param min_quotes [Integer] Minimum quote count threshold.
+        #
+        # @param min_views [Integer] Minimum view count threshold.
+        #
+        # @param min_bookmarks [Integer] Minimum bookmark count threshold.
+        #
+        # @param max_faves [Integer] Maximum likes threshold. maxLikes & max_likes also work.
+        #
+        # @param max_retweets [Integer] Maximum retweets threshold.
+        #
+        # @param max_replies [Integer] Maximum replies threshold.
+        #
+        # @param max_quotes [Integer] Maximum quotes threshold.
+        #
+        # @param blue_verified_only [Boolean] Only return tweets from Blue-verified authors.
+        #
+        # @param since_id [String] Return Tweets whose IDs exceed this ID. Searches accept `since_id` & `max_id` bounds.
+        #
+        # @param max_id [String] Return Tweets at or below this ID.
+        #
+        # @param within_time [String] Keeps Tweets from a recent window, such as 90m or 7d. Use a whole number & s, m, h or d.
+        #
+        # @param native_retweets [Boolean] Only return native reposts.
+        #
+        # @param verified_only [Boolean] Only return tweets from verified authors.
+        #
+        # @param replies [Symbol, XTwitterScraper::Models::X::TweetGetHiddenRepliesParams::Replies] Reply mode. Exclude keeps own-thread replies.
+        #
+        # @param retweets [Symbol, XTwitterScraper::Models::X::TweetGetHiddenRepliesParams::Retweets] Only when the caller requests a repost mode.
+        #
+        # @param quotes [Symbol, XTwitterScraper::Models::X::TweetGetHiddenRepliesParams::Quotes] Only when the caller requests a quote mode.
+        #
+        # @param exact_phrase [String] Match this exact phrase, word for word.
+        #
+        # @param exclude_words [String] Words or quoted phrases to exclude. Separate with spaces, commas, or lines.
+        #
+        # @param any_words [String] Words or quoted phrases where any one can match. Separate with spaces, commas, or lines.
+        #
+        # @param hashtags [String] Hashtags separated by spaces, commas, or lines.
+        #
+        # @param cashtags [String] Cashtags separated by spaces, commas, or lines.
+        #
+        # @param url [String] URL substring or domain filter.
+        #
+        # @param conversation_id [String] Conversation ID filter.
+        #
+        # @param in_reply_to_tweet_id [String] Only replies to this tweet ID.
+        #
+        # @param quotes_of_tweet_id [String] Only quotes of this tweet ID.
+        #
+        # @param retweets_of_tweet_id [String] Only retweets of this tweet ID.
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as author.username. A list keeps the field in each item. Case & underscores do not matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics always stay. An unknown name answers 400 unknown_field with the valid names, before any read. The price stays the same. SDK row types then hold only the named fields. A longer URL fails at the edge before Xquik reads it. Pick only the fields you need with `fields` & `omit`.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields. With fields, it drops from the kept fields. A longer URL fails at the edge before Xquik reads it.
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::PaginatedTweets]
+        #
+        # @see XTwitterScraper::Models::X::TweetGetHiddenRepliesParams
+        def get_hidden_replies(id, params = {})
+          parsed, options = XTwitterScraper::Models::X::TweetGetHiddenRepliesParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: ["x/tweets/%1$s/hidden-replies", id],
+            query: query,
+            model: XTwitterScraper::Models::PaginatedTweets,
+            options: options
+          )
+        end
+
+        # Returns engagement insights for 1 tweet. They are engagements per hour since it
+        # went up, per view and per follower of its author, and how far it spread. Each
+        # report costs 1 credit, whatever it reads.
+        #
+        # @overload get_insights(id, fields: nil, omit: nil, request_options: {})
+        #
+        # @param id [String] Tweet ID or URL-encoded tweet URL, such as x.com/nasa/status/20. Takes x.com & twitter.com links with or without https://, www., mobile., a query or a fragment, & /i/status or /i/web/status links. Anything else gets 400 `invalid_tweet_id`.
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as author.username. A list keeps the field in each item. Case & underscores do not matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics always stay. An unknown name answers 400 unknown_field with the valid names, before any read. The price stays the same. SDK row types then hold only the named fields. A longer URL fails at the edge before Xquik reads it. Pick only the fields you need with `fields` & `omit`.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields. With fields, it drops from the kept fields. A longer URL fails at the edge before Xquik reads it.
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::TweetGetInsightsResponse]
+        #
+        # @see XTwitterScraper::Models::X::TweetGetInsightsParams
+        def get_insights(id, params = {})
+          parsed, options = XTwitterScraper::Models::X::TweetGetInsightsParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: ["x/tweets/%1$s/insights", id],
+            query: query,
+            model: XTwitterScraper::Models::X::TweetGetInsightsResponse,
+            options: options
+          )
+        end
+
+        # Returns the user IDs of a post's reposters, in the order & pages of
+        # /x/tweets/{id}/retweeters. Use it when you need IDs only. Each ID costs 1
+        # credit. A post nobody reposted returns an empty list for free.
+        #
+        # @overload get_retweeter_ids(id, cursor: nil, page_size: nil, request_options: {})
+        #
+        # @param id [String] Tweet ID or URL-encoded tweet URL, such as x.com/nasa/status/20. Takes x.com & twitter.com links with or without https://, www., mobile., a query or a fragment, & /i/status or /i/web/status links. Anything else gets 400 `invalid_tweet_id`.
+        #
+        # @param cursor [String] Pagination cursor for collection results. Also read as next_cursor, next_token, pagination_token or continuation_token.
+        #
+        # @param page_size [Integer] Profiles to request from this page. A page holds up to 10,000, so a larger pageSize gets the largest page. Default 200. Source, filters or credits can return fewer. Follow next_cursor for more pages. Its aliases are limit, count, max_results, maxItems, max_items & per_page.
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::PaginatedUserIds]
+        #
+        # @see XTwitterScraper::Models::X::TweetGetRetweeterIdsParams
+        def get_retweeter_ids(id, params = {})
+          parsed, options = XTwitterScraper::Models::X::TweetGetRetweeterIdsParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: ["x/tweets/%1$s/retweeter-ids", id],
+            query: query,
+            model: XTwitterScraper::Models::PaginatedUserIds,
+            options: options
+          )
+        end
+
+        # Returns whether 1 account reposted the post. It finds recent reposts. An older
+        # repost can return false, with complete false. Each check costs 1 credit.
+        #
+        # @overload check_repost(id, user:, fields: nil, omit: nil, request_options: {})
+        #
+        # @param id [String]
+        #
+        # @param user [String] User ID, username with or without @, or profile URL.
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as author.username. A list keeps the field in each item. Case & underscores do not matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics always stay. An unknown name answers 400 unknown_field with the valid names, before any read. The price stays the same. SDK row types then hold only the named fields. A longer URL fails at the edge before Xquik reads it. Pick only the fields you need with `fields` & `omit`.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields. With fields, it drops from the kept fields. A longer URL fails at the edge before Xquik reads it.
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::TweetCheckRepostResponse]
+        #
+        # @see XTwitterScraper::Models::X::TweetCheckRepostParams
+        def check_repost(id, params)
+          parsed, options = XTwitterScraper::Models::X::TweetCheckRepostParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: ["x/tweets/%1$s/retweeters/check", id],
+            query: query,
+            model: XTwitterScraper::Models::X::TweetCheckRepostResponse,
+            options: options
+          )
+        end
+
+        # Returns the caption tracks of 1 public tweet's videos. Each track has its
+        # language, name, timed cues, and full text. A tweet without video, or a video
+        # without captions, returns no track and costs nothing. Video subtitles come with
+        # timed cues.
+        #
+        # @overload get_subtitles(id, fields: nil, omit: nil, request_options: {})
+        #
+        # @param id [String] Tweet ID or URL-encoded tweet URL, such as x.com/nasa/status/20. Takes x.com & twitter.com links with or without https://, www., mobile., a query or a fragment, & /i/status or /i/web/status links. Anything else gets 400 `invalid_tweet_id`.
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as author.username. A list keeps the field in each item. Case & underscores do not matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics always stay. An unknown name answers 400 unknown_field with the valid names, before any read. The price stays the same. SDK row types then hold only the named fields. A longer URL fails at the edge before Xquik reads it. Pick only the fields you need with `fields` & `omit`.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields. With fields, it drops from the kept fields. A longer URL fails at the edge before Xquik reads it.
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::TweetGetSubtitlesResponse]
+        #
+        # @see XTwitterScraper::Models::X::TweetGetSubtitlesParams
+        def get_subtitles(id, params = {})
+          parsed, options = XTwitterScraper::Models::X::TweetGetSubtitlesParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: ["x/tweets/%1$s/subtitles", id],
+            query: query,
+            model: XTwitterScraper::Models::X::TweetGetSubtitlesResponse,
+            options: options
+          )
+        end
+
+        # Returns X's own translation of 1 public tweet into the language you pick, with
+        # the links, mentions, and tags X places in the translated text. Posts & bios can
+        # be translated into your language.
+        #
+        # @overload translate(id, language:, fields: nil, omit: nil, request_options: {})
+        #
+        # @param id [String] Tweet ID or URL-encoded tweet URL, such as x.com/nasa/status/20. Takes x.com & twitter.com links with or without https://, www., mobile., a query or a fragment, & /i/status or /i/web/status links. Anything else gets 400 `invalid_tweet_id`.
+        #
+        # @param language [String] Language code to translate into, such as `en`, `tr`, `pt-br`, or `zh-tw`. Upper and lower case both work.
+        #
+        # @param fields [String] Fields to keep in each row, comma-separated. Use dots for nested fields, such as author.username. A list keeps the field in each item. Case & underscores do not matter. A row that lacks a field leaves it out. Cursors, counts & diagnostics always stay. An unknown name answers 400 unknown_field with the valid names, before any read. The price stays the same. SDK row types then hold only the named fields. A longer URL fails at the edge before Xquik reads it. Pick only the fields you need with `fields` & `omit`.
+        #
+        # @param omit [String] Fields to drop from each row, comma-separated. It takes the same names as fields. With fields, it drops from the kept fields. A longer URL fails at the edge before Xquik reads it.
+        #
+        # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+        #
+        # @return [XTwitterScraper::Models::X::TweetTranslateResponse]
+        #
+        # @see XTwitterScraper::Models::X::TweetTranslateParams
+        def translate(id, params)
+          parsed, options = XTwitterScraper::Models::X::TweetTranslateParams.dump_request(params)
+          query = XTwitterScraper::Internal::Util.encode_query_params(parsed)
+          @client.request(
+            method: :get,
+            path: ["x/tweets/%1$s/translation", id],
+            query: query,
+            model: XTwitterScraper::Models::X::TweetTranslateResponse,
+            options: options
+          )
+        end
+
         # @api private
         #
         # @param client [XTwitterScraper::Client]
@@ -1010,6 +1372,7 @@ module XTwitterScraper
           @client = client
           @like = XTwitterScraper::Resources::X::Tweets::Like.new(client: client)
           @retweet = XTwitterScraper::Resources::X::Tweets::Retweet.new(client: client)
+          @bookmark = XTwitterScraper::Resources::X::Tweets::Bookmark.new(client: client)
         end
       end
     end

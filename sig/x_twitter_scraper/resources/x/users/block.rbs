@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Resources
+    class X
+      class Users
+        class Block
+          def delete: (
+            String id,
+            account: String,
+            idempotency_key: String,
+            ?prefer: String,
+            ?request_options: XTwitterScraper::request_opts
+          ) -> XTwitterScraper::Models::X::WriteActionRetrieveResponse
+
+          def create: (
+            String id,
+            account: String,
+            idempotency_key: String,
+            ?prefer: String,
+            ?request_options: XTwitterScraper::request_opts
+          ) -> XTwitterScraper::Models::X::WriteActionRetrieveResponse
+
+          def initialize: (client: XTwitterScraper::Client) -> void
+        end
+      end
+    end
+  end
+end

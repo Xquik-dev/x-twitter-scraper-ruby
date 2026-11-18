@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type community_notes_rating_outcome =
+      { helpful_count: Integer, not_helpful_count: Integer, total: Integer }
+
+    class CommunityNotesRatingOutcome < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader helpful_count: Integer?
+
+      def helpful_count=: (Integer) -> Integer
+
+      attr_reader not_helpful_count: Integer?
+
+      def not_helpful_count=: (Integer) -> Integer
+
+      attr_reader total: Integer?
+
+      def total=: (Integer) -> Integer
+
+      def initialize: (
+        ?helpful_count: Integer,
+        ?not_helpful_count: Integer,
+        ?total: Integer
+      ) -> void
+
+      def to_hash: -> {
+        helpful_count: Integer,
+        not_helpful_count: Integer,
+        total: Integer
+      }
+    end
+  end
+end

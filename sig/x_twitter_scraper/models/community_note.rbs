@@ -1,0 +1,231 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type community_note =
+      {
+        id: String,
+        created_at: Time,
+        language: String,
+        classification: String,
+        text: String,
+        contributor: XTwitterScraper::Models::CommunityNotesContributor,
+        entities: ::Array[XTwitterScraper::Models::CommunityNoteEntity],
+        rating_status: String,
+        helpful_tags: ::Array[String],
+        not_helpful_tags: ::Array[String],
+        decided_by: String,
+        fully_visible_model: bool,
+        above_pcrh_threshold: bool,
+        appeal_status: String,
+        deleted: bool,
+        tombstone: String,
+        is_api_author: bool,
+        is_media_note: bool,
+        media_note_match_count: Integer,
+        is_url_note: bool,
+        display_url: String,
+        is_translatable: bool,
+        time_to_helpful_from_note_ms: Integer,
+        time_to_helpful_from_post_ms: Integer,
+        impression_count: Integer,
+        post_id: String,
+        post: XTwitterScraper::Models::SearchTweet,
+        post_unavailable: XTwitterScraper::Models::CommunityNote::PostUnavailable
+      }
+
+    class CommunityNote < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_reader created_at: Time?
+
+      def created_at=: (Time) -> Time
+
+      attr_reader language: String?
+
+      def language=: (String) -> String
+
+      attr_reader classification: String?
+
+      def classification=: (String) -> String
+
+      attr_reader text: String?
+
+      def text=: (String) -> String
+
+      attr_reader contributor: XTwitterScraper::Models::CommunityNotesContributor?
+
+      def contributor=: (
+        XTwitterScraper::Models::CommunityNotesContributor
+      ) -> XTwitterScraper::Models::CommunityNotesContributor
+
+      attr_reader entities: ::Array[XTwitterScraper::Models::CommunityNoteEntity]?
+
+      def entities=: (
+        ::Array[XTwitterScraper::Models::CommunityNoteEntity]
+      ) -> ::Array[XTwitterScraper::Models::CommunityNoteEntity]
+
+      attr_reader rating_status: String?
+
+      def rating_status=: (String) -> String
+
+      attr_reader helpful_tags: ::Array[String]?
+
+      def helpful_tags=: (::Array[String]) -> ::Array[String]
+
+      attr_reader not_helpful_tags: ::Array[String]?
+
+      def not_helpful_tags=: (::Array[String]) -> ::Array[String]
+
+      attr_reader decided_by: String?
+
+      def decided_by=: (String) -> String
+
+      attr_reader fully_visible_model: bool?
+
+      def fully_visible_model=: (bool) -> bool
+
+      attr_reader above_pcrh_threshold: bool?
+
+      def above_pcrh_threshold=: (bool) -> bool
+
+      attr_reader appeal_status: String?
+
+      def appeal_status=: (String) -> String
+
+      attr_reader deleted: bool?
+
+      def deleted=: (bool) -> bool
+
+      attr_reader tombstone: String?
+
+      def tombstone=: (String) -> String
+
+      attr_reader is_api_author: bool?
+
+      def is_api_author=: (bool) -> bool
+
+      attr_reader is_media_note: bool?
+
+      def is_media_note=: (bool) -> bool
+
+      attr_reader media_note_match_count: Integer?
+
+      def media_note_match_count=: (Integer) -> Integer
+
+      attr_reader is_url_note: bool?
+
+      def is_url_note=: (bool) -> bool
+
+      attr_reader display_url: String?
+
+      def display_url=: (String) -> String
+
+      attr_reader is_translatable: bool?
+
+      def is_translatable=: (bool) -> bool
+
+      attr_reader time_to_helpful_from_note_ms: Integer?
+
+      def time_to_helpful_from_note_ms=: (Integer) -> Integer
+
+      attr_reader time_to_helpful_from_post_ms: Integer?
+
+      def time_to_helpful_from_post_ms=: (Integer) -> Integer
+
+      attr_reader impression_count: Integer?
+
+      def impression_count=: (Integer) -> Integer
+
+      attr_reader post_id: String?
+
+      def post_id=: (String) -> String
+
+      attr_reader post: XTwitterScraper::Models::SearchTweet?
+
+      def post=: (
+        XTwitterScraper::Models::SearchTweet?
+      ) -> XTwitterScraper::Models::SearchTweet?
+
+      attr_reader post_unavailable: XTwitterScraper::Models::CommunityNote::PostUnavailable?
+
+      def post_unavailable=: (
+        XTwitterScraper::Models::CommunityNote::PostUnavailable
+      ) -> XTwitterScraper::Models::CommunityNote::PostUnavailable
+
+      def initialize: (
+        id: String,
+        ?created_at: Time,
+        ?language: String,
+        ?classification: String,
+        ?text: String,
+        ?contributor: XTwitterScraper::Models::CommunityNotesContributor,
+        ?entities: ::Array[XTwitterScraper::Models::CommunityNoteEntity],
+        ?rating_status: String,
+        ?helpful_tags: ::Array[String],
+        ?not_helpful_tags: ::Array[String],
+        ?decided_by: String,
+        ?fully_visible_model: bool,
+        ?above_pcrh_threshold: bool,
+        ?appeal_status: String,
+        ?deleted: bool,
+        ?tombstone: String,
+        ?is_api_author: bool,
+        ?is_media_note: bool,
+        ?media_note_match_count: Integer,
+        ?is_url_note: bool,
+        ?display_url: String,
+        ?is_translatable: bool,
+        ?time_to_helpful_from_note_ms: Integer,
+        ?time_to_helpful_from_post_ms: Integer,
+        ?impression_count: Integer,
+        ?post_id: String,
+        ?post: XTwitterScraper::Models::SearchTweet?,
+        ?post_unavailable: XTwitterScraper::Models::CommunityNote::PostUnavailable
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        created_at: Time,
+        language: String,
+        classification: String,
+        text: String,
+        contributor: XTwitterScraper::Models::CommunityNotesContributor,
+        entities: ::Array[XTwitterScraper::Models::CommunityNoteEntity],
+        rating_status: String,
+        helpful_tags: ::Array[String],
+        not_helpful_tags: ::Array[String],
+        decided_by: String,
+        fully_visible_model: bool,
+        above_pcrh_threshold: bool,
+        appeal_status: String,
+        deleted: bool,
+        tombstone: String,
+        is_api_author: bool,
+        is_media_note: bool,
+        media_note_match_count: Integer,
+        is_url_note: bool,
+        display_url: String,
+        is_translatable: bool,
+        time_to_helpful_from_note_ms: Integer,
+        time_to_helpful_from_post_ms: Integer,
+        impression_count: Integer,
+        post_id: String,
+        post: XTwitterScraper::Models::SearchTweet,
+        post_unavailable: XTwitterScraper::Models::CommunityNote::PostUnavailable
+      }
+
+      type post_unavailable = { reason: String }
+
+      class PostUnavailable < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor reason: String
+
+        def initialize: (reason: String) -> void
+
+        def to_hash: -> { reason: String }
+      end
+    end
+  end
+end

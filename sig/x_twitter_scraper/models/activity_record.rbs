@@ -1,0 +1,448 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type activity_record =
+      {
+        object: XTwitterScraper::Models::ActivityRecord::object_item,
+        id: String,
+        kind: XTwitterScraper::Models::ActivityRecord::kind,
+        type: String,
+        status: XTwitterScraper::Models::ActivityRecord::status,
+        url: String,
+        request_id: String?,
+        timestamps: XTwitterScraper::Models::ActivityRecord::Timestamps,
+        request: XTwitterScraper::Models::ActivityRecord::Request?,
+        caller_: XTwitterScraper::Models::ActivityRecord::Caller,
+        charge: XTwitterScraper::Models::ActivityRecord::Charge?,
+        details: ::Hash[Symbol, top],
+        related: ::Array[XTwitterScraper::Models::ActivityRecord::Related]
+      }
+
+    class ActivityRecord < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor object: XTwitterScraper::Models::ActivityRecord::object_item
+
+      attr_accessor id: String
+
+      attr_accessor kind: XTwitterScraper::Models::ActivityRecord::kind
+
+      attr_accessor type: String
+
+      attr_accessor status: XTwitterScraper::Models::ActivityRecord::status
+
+      attr_accessor url: String
+
+      attr_accessor request_id: String?
+
+      attr_accessor timestamps: XTwitterScraper::Models::ActivityRecord::Timestamps
+
+      attr_accessor request: XTwitterScraper::Models::ActivityRecord::Request?
+
+      attr_accessor caller_: XTwitterScraper::Models::ActivityRecord::Caller
+
+      attr_accessor charge: XTwitterScraper::Models::ActivityRecord::Charge?
+
+      attr_accessor details: ::Hash[Symbol, top]
+
+      attr_accessor related: ::Array[XTwitterScraper::Models::ActivityRecord::Related]
+
+      def initialize: (
+        object: XTwitterScraper::Models::ActivityRecord::object_item,
+        id: String,
+        kind: XTwitterScraper::Models::ActivityRecord::kind,
+        type: String,
+        status: XTwitterScraper::Models::ActivityRecord::status,
+        url: String,
+        request_id: String?,
+        timestamps: XTwitterScraper::Models::ActivityRecord::Timestamps,
+        request: XTwitterScraper::Models::ActivityRecord::Request?,
+        caller_: XTwitterScraper::Models::ActivityRecord::Caller,
+        charge: XTwitterScraper::Models::ActivityRecord::Charge?,
+        details: ::Hash[Symbol, top],
+        related: ::Array[XTwitterScraper::Models::ActivityRecord::Related]
+      ) -> void
+
+      def to_hash: -> {
+        object: XTwitterScraper::Models::ActivityRecord::object_item,
+        id: String,
+        kind: XTwitterScraper::Models::ActivityRecord::kind,
+        type: String,
+        status: XTwitterScraper::Models::ActivityRecord::status,
+        url: String,
+        request_id: String?,
+        timestamps: XTwitterScraper::Models::ActivityRecord::Timestamps,
+        request: XTwitterScraper::Models::ActivityRecord::Request?,
+        caller_: XTwitterScraper::Models::ActivityRecord::Caller,
+        charge: XTwitterScraper::Models::ActivityRecord::Charge?,
+        details: ::Hash[Symbol, top],
+        related: ::Array[XTwitterScraper::Models::ActivityRecord::Related]
+      }
+
+      type object_item = :activity
+
+      module ObjectItem
+        extend XTwitterScraper::Internal::Type::Enum
+
+        ACTIVITY: :activity
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ActivityRecord::object_item]
+      end
+
+      type kind =
+        :write_action
+        | :extraction
+        | :monitor_change
+        | :api_key
+        | :billing
+        | :giveaway_draw
+        | :monitor_event
+        | :media_download
+        | :media_share
+        | :support_ticket
+        | :webhook_delivery
+        | :webhook_endpoint
+        | :x_account_connection
+
+      module Kind
+        extend XTwitterScraper::Internal::Type::Enum
+
+        WRITE_ACTION: :write_action
+        EXTRACTION: :extraction
+        MONITOR_CHANGE: :monitor_change
+        API_KEY: :api_key
+        BILLING: :billing
+        GIVEAWAY_DRAW: :giveaway_draw
+        MONITOR_EVENT: :monitor_event
+        MEDIA_DOWNLOAD: :media_download
+        MEDIA_SHARE: :media_share
+        SUPPORT_TICKET: :support_ticket
+        WEBHOOK_DELIVERY: :webhook_delivery
+        WEBHOOK_ENDPOINT: :webhook_endpoint
+        X_ACCOUNT_CONNECTION: :x_account_connection
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ActivityRecord::kind]
+      end
+
+      type status = :completed | :running | :failed | :canceled
+
+      module Status
+        extend XTwitterScraper::Internal::Type::Enum
+
+        COMPLETED: :completed
+        RUNNING: :running
+        FAILED: :failed
+        CANCELED: :canceled
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::ActivityRecord::status]
+      end
+
+      type timestamps =
+        {
+          created_at: Time,
+          updated_at: Time,
+          completed_at: Time,
+          confirmed_at: Time,
+          expires_at: Time,
+          occurred_at: Time,
+          discovered_at: Time,
+          posted_at: Time,
+          first_attempted_at: Time,
+          delivered_at: Time,
+          next_retry_at: Time,
+          exhausted_at: Time,
+          drawn_at: Time,
+          last_used_at: Time,
+          paused_at: Time
+        }
+
+      class Timestamps < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor created_at: Time
+
+        attr_reader updated_at: Time?
+
+        def updated_at=: (Time) -> Time
+
+        attr_reader completed_at: Time?
+
+        def completed_at=: (Time) -> Time
+
+        attr_reader confirmed_at: Time?
+
+        def confirmed_at=: (Time) -> Time
+
+        attr_reader expires_at: Time?
+
+        def expires_at=: (Time) -> Time
+
+        attr_reader occurred_at: Time?
+
+        def occurred_at=: (Time) -> Time
+
+        attr_reader discovered_at: Time?
+
+        def discovered_at=: (Time) -> Time
+
+        attr_reader posted_at: Time?
+
+        def posted_at=: (Time) -> Time
+
+        attr_reader first_attempted_at: Time?
+
+        def first_attempted_at=: (Time) -> Time
+
+        attr_reader delivered_at: Time?
+
+        def delivered_at=: (Time) -> Time
+
+        attr_reader next_retry_at: Time?
+
+        def next_retry_at=: (Time) -> Time
+
+        attr_reader exhausted_at: Time?
+
+        def exhausted_at=: (Time) -> Time
+
+        attr_reader drawn_at: Time?
+
+        def drawn_at=: (Time) -> Time
+
+        attr_reader last_used_at: Time?
+
+        def last_used_at=: (Time) -> Time
+
+        attr_reader paused_at: Time?
+
+        def paused_at=: (Time) -> Time
+
+        def initialize: (
+          created_at: Time,
+          ?updated_at: Time,
+          ?completed_at: Time,
+          ?confirmed_at: Time,
+          ?expires_at: Time,
+          ?occurred_at: Time,
+          ?discovered_at: Time,
+          ?posted_at: Time,
+          ?first_attempted_at: Time,
+          ?delivered_at: Time,
+          ?next_retry_at: Time,
+          ?exhausted_at: Time,
+          ?drawn_at: Time,
+          ?last_used_at: Time,
+          ?paused_at: Time
+        ) -> void
+
+        def to_hash: -> {
+          created_at: Time,
+          updated_at: Time,
+          completed_at: Time,
+          confirmed_at: Time,
+          expires_at: Time,
+          occurred_at: Time,
+          discovered_at: Time,
+          posted_at: Time,
+          first_attempted_at: Time,
+          delivered_at: Time,
+          next_retry_at: Time,
+          exhausted_at: Time,
+          drawn_at: Time,
+          last_used_at: Time,
+          paused_at: Time
+        }
+      end
+
+      type request =
+        {
+          method_: XTwitterScraper::Models::ActivityRecord::Request::method_,
+          path: String,
+          http_status: Integer,
+          duration_ms: Integer,
+          ip_address: String?,
+          user_agent: String?,
+          at: Time
+        }
+
+      class Request < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor method_: XTwitterScraper::Models::ActivityRecord::Request::method_
+
+        attr_accessor path: String
+
+        attr_accessor http_status: Integer
+
+        attr_accessor duration_ms: Integer
+
+        attr_accessor ip_address: String?
+
+        attr_accessor user_agent: String?
+
+        attr_accessor at: Time
+
+        def initialize: (
+          method_: XTwitterScraper::Models::ActivityRecord::Request::method_,
+          path: String,
+          http_status: Integer,
+          duration_ms: Integer,
+          ip_address: String?,
+          user_agent: String?,
+          at: Time
+        ) -> void
+
+        def to_hash: -> {
+          method_: XTwitterScraper::Models::ActivityRecord::Request::method_,
+          path: String,
+          http_status: Integer,
+          duration_ms: Integer,
+          ip_address: String?,
+          user_agent: String?,
+          at: Time
+        }
+
+        type method_ = :DELETE | :PATCH | :POST | :PUT
+
+        module Method
+          extend XTwitterScraper::Internal::Type::Enum
+
+          DELETE: :DELETE
+          PATCH: :PATCH
+          POST: :POST
+          PUT: :PUT
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::ActivityRecord::Request::method_]
+        end
+      end
+
+      type caller_ =
+        {
+          auth_method: XTwitterScraper::Models::ActivityRecord::Caller::auth_method?,
+          api_key: XTwitterScraper::Models::ActivityRecord::Caller::ApiKey?,
+          oauth_client: XTwitterScraper::Models::ActivityRecord::Caller::OauthClient?
+        }
+
+      class Caller < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor auth_method: XTwitterScraper::Models::ActivityRecord::Caller::auth_method?
+
+        attr_accessor api_key: XTwitterScraper::Models::ActivityRecord::Caller::ApiKey?
+
+        attr_accessor oauth_client: XTwitterScraper::Models::ActivityRecord::Caller::OauthClient?
+
+        def initialize: (
+          auth_method: XTwitterScraper::Models::ActivityRecord::Caller::auth_method?,
+          api_key: XTwitterScraper::Models::ActivityRecord::Caller::ApiKey?,
+          oauth_client: XTwitterScraper::Models::ActivityRecord::Caller::OauthClient?
+        ) -> void
+
+        def to_hash: -> {
+          auth_method: XTwitterScraper::Models::ActivityRecord::Caller::auth_method?,
+          api_key: XTwitterScraper::Models::ActivityRecord::Caller::ApiKey?,
+          oauth_client: XTwitterScraper::Models::ActivityRecord::Caller::OauthClient?
+        }
+
+        type auth_method = :api_key | :oauth | :session
+
+        module AuthMethod
+          extend XTwitterScraper::Internal::Type::Enum
+
+          API_KEY: :api_key
+          OAUTH: :oauth
+          SESSION: :session
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::ActivityRecord::Caller::auth_method]
+        end
+
+        type api_key = { name: String, prefix: String }
+
+        class ApiKey < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor name: String
+
+          attr_accessor prefix: String
+
+          def initialize: (name: String, prefix: String) -> void
+
+          def to_hash: -> { name: String, prefix: String }
+        end
+
+        type oauth_client = { id: String, name: String }
+
+        class OauthClient < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor name: String
+
+          def initialize: (id: String, name: String) -> void
+
+          def to_hash: -> { id: String, name: String }
+        end
+      end
+
+      type charge = { credits: Integer, balance_after: Integer, at: Time }
+
+      class Charge < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor credits: Integer
+
+        attr_accessor balance_after: Integer
+
+        attr_accessor at: Time
+
+        def initialize: (
+          credits: Integer,
+          balance_after: Integer,
+          at: Time
+        ) -> void
+
+        def to_hash: -> { credits: Integer, balance_after: Integer, at: Time }
+      end
+
+      type related =
+        {
+          id: String,
+          type: String,
+          status: XTwitterScraper::Models::ActivityRecord::Related::status,
+          created_at: Time,
+          url: String
+        }
+
+      class Related < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor type: String
+
+        attr_accessor status: XTwitterScraper::Models::ActivityRecord::Related::status
+
+        attr_accessor created_at: Time
+
+        attr_accessor url: String
+
+        def initialize: (
+          id: String,
+          type: String,
+          status: XTwitterScraper::Models::ActivityRecord::Related::status,
+          created_at: Time,
+          url: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          type: String,
+          status: XTwitterScraper::Models::ActivityRecord::Related::status,
+          created_at: Time,
+          url: String
+        }
+
+        type status = :completed | :running | :failed | :canceled
+
+        module Status
+          extend XTwitterScraper::Internal::Type::Enum
+
+          COMPLETED: :completed
+          RUNNING: :running
+          FAILED: :failed
+          CANCELED: :canceled
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::ActivityRecord::Related::status]
+        end
+      end
+    end
+  end
+end

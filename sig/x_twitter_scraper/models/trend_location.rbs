@@ -1,0 +1,59 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type trend_location =
+      {
+        woeid: Integer,
+        name: String,
+        country: String?,
+        country_code: String?,
+        place_type: String?,
+        place_type_code: Integer?,
+        parent_woeid: Integer?,
+        url: String?
+      }
+
+    class TrendLocation < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor woeid: Integer
+
+      attr_accessor name: String
+
+      attr_accessor country: String?
+
+      attr_accessor country_code: String?
+
+      attr_accessor place_type: String?
+
+      attr_accessor place_type_code: Integer?
+
+      attr_accessor parent_woeid: Integer?
+
+      attr_accessor url: String?
+
+      def initialize: (
+        woeid: Integer,
+        name: String,
+        country: String?,
+        country_code: String?,
+        place_type: String?,
+        place_type_code: Integer?,
+        parent_woeid: Integer?,
+        url: String?
+      ) -> void
+
+      def to_hash: -> {
+        woeid: Integer,
+        name: String,
+        country: String?,
+        country_code: String?,
+        place_type: String?,
+        place_type_code: Integer?,
+        parent_woeid: Integer?,
+        url: String?
+      }
+    end
+  end
+end

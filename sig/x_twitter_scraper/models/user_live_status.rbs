@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type user_live_status =
+      {
+        live: bool,
+        broadcast: XTwitterScraper::Models::Broadcast?,
+        user_id: String,
+        user_name: String
+      }
+
+    class UserLiveStatus < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor live: bool
+
+      attr_accessor broadcast: XTwitterScraper::Models::Broadcast?
+
+      attr_accessor user_id: String
+
+      attr_accessor user_name: String
+
+      def initialize: (
+        live: bool,
+        broadcast: XTwitterScraper::Models::Broadcast?,
+        user_id: String,
+        user_name: String
+      ) -> void
+
+      def to_hash: -> {
+        live: bool,
+        broadcast: XTwitterScraper::Models::Broadcast?,
+        user_id: String,
+        user_name: String
+      }
+    end
+  end
+end

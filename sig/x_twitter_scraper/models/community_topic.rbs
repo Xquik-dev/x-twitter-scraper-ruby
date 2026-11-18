@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type community_topic =
+      {
+        id: String,
+        name: String,
+        subtopics: ::Array[XTwitterScraper::Models::CommunityTopic::Subtopic]
+      }
+
+    class CommunityTopic < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor name: String
+
+      attr_accessor subtopics: ::Array[XTwitterScraper::Models::CommunityTopic::Subtopic]
+
+      def initialize: (
+        id: String,
+        name: String,
+        subtopics: ::Array[XTwitterScraper::Models::CommunityTopic::Subtopic]
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        name: String,
+        subtopics: ::Array[XTwitterScraper::Models::CommunityTopic::Subtopic]
+      }
+
+      type subtopic = { id: String, name: String }
+
+      class Subtopic < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor name: String
+
+        def initialize: (id: String, name: String) -> void
+
+        def to_hash: -> { id: String, name: String }
+      end
+    end
+  end
+end

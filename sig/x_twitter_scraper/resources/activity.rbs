@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Resources
+    class Activity
+      def list: (
+        ?format_: XTwitterScraper::Models::ActivityListParams::format_,
+        ?limit: Integer,
+        ?category: String,
+        ?status: String,
+        ?q: String,
+        ?since: String,
+        ?until_: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::activity_list_response
+
+      def export: (
+        format_: XTwitterScraper::Models::ActivityExportParams::format_,
+        ?limit: Integer,
+        ?category: String,
+        ?status: String,
+        ?q: String,
+        ?since: String,
+        ?until_: String,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> StringIO
+
+      def retrieve: (
+        String id,
+        ?request_options: XTwitterScraper::request_opts
+      ) -> XTwitterScraper::Models::ActivityRecord
+
+      def initialize: (client: XTwitterScraper::Client) -> void
+    end
+  end
+end

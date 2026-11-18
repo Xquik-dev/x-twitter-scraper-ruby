@@ -172,6 +172,34 @@ module XTwitterScraper
         )
       end
 
+      # Returns a t.me link to @XquikBot that connects a Telegram chat to the account's
+      # monitor events. Opening it & pressing Start connects the chat, which then gets
+      # each alert as a message. Alerts that wait together come as 1 digest. A busy chat
+      # gets 5 quick messages, then 1 every 30 s. Only 1 message a minute rings. The
+      # link works once, within 15 minutes. The chat appears in the webhook list with
+      # the URL `telegram:<chat ID>`, with deliveries, retries & resume as any webhook.
+      # In the chat, /stop pauses its alerts. It costs no credits.
+      #
+      # @overload create_telegram_link(event_types: nil, request_options: {})
+      #
+      # @param event_types [Array<Symbol, XTwitterScraper::Models::EventType>] Array of event types to subscribe to.
+      #
+      # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [XTwitterScraper::Models::WebhookCreateTelegramLinkResponse]
+      #
+      # @see XTwitterScraper::Models::WebhookCreateTelegramLinkParams
+      def create_telegram_link(params = {})
+        parsed, options = XTwitterScraper::Models::WebhookCreateTelegramLinkParams.dump_request(params)
+        @client.request(
+          method: :post,
+          path: "webhooks/telegram",
+          body: parsed,
+          model: XTwitterScraper::Models::WebhookCreateTelegramLinkResponse,
+          options: options
+        )
+      end
+
       # @api private
       #
       # @param client [XTwitterScraper::Client]

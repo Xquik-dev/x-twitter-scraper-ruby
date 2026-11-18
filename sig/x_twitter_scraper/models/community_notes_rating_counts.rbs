@@ -1,0 +1,58 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type community_notes_rating_counts =
+      {
+        awaiting_more_ratings: Integer,
+        rated_after_decision: Integer,
+        successful: XTwitterScraper::Models::CommunityNotesRatingOutcome,
+        unsuccessful: XTwitterScraper::Models::CommunityNotesRatingOutcome,
+        updated_at: Time
+      }
+
+    class CommunityNotesRatingCounts < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader awaiting_more_ratings: Integer?
+
+      def awaiting_more_ratings=: (Integer) -> Integer
+
+      attr_reader rated_after_decision: Integer?
+
+      def rated_after_decision=: (Integer) -> Integer
+
+      attr_reader successful: XTwitterScraper::Models::CommunityNotesRatingOutcome?
+
+      def successful=: (
+        XTwitterScraper::Models::CommunityNotesRatingOutcome
+      ) -> XTwitterScraper::Models::CommunityNotesRatingOutcome
+
+      attr_reader unsuccessful: XTwitterScraper::Models::CommunityNotesRatingOutcome?
+
+      def unsuccessful=: (
+        XTwitterScraper::Models::CommunityNotesRatingOutcome
+      ) -> XTwitterScraper::Models::CommunityNotesRatingOutcome
+
+      attr_reader updated_at: Time?
+
+      def updated_at=: (Time) -> Time
+
+      def initialize: (
+        ?awaiting_more_ratings: Integer,
+        ?rated_after_decision: Integer,
+        ?successful: XTwitterScraper::Models::CommunityNotesRatingOutcome,
+        ?unsuccessful: XTwitterScraper::Models::CommunityNotesRatingOutcome,
+        ?updated_at: Time
+      ) -> void
+
+      def to_hash: -> {
+        awaiting_more_ratings: Integer,
+        rated_after_decision: Integer,
+        successful: XTwitterScraper::Models::CommunityNotesRatingOutcome,
+        unsuccessful: XTwitterScraper::Models::CommunityNotesRatingOutcome,
+        updated_at: Time
+      }
+    end
+  end
+end

@@ -1,0 +1,56 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_check_repost_response =
+        {
+          is_retweeted: bool,
+          retweeted_at: Time?,
+          retweet_id: String?,
+          tweet_id: String,
+          user_id: String,
+          checked_posts: Integer,
+          complete: bool
+        }
+
+      class TweetCheckRepostResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor is_retweeted: bool
+
+        attr_accessor retweeted_at: Time?
+
+        attr_accessor retweet_id: String?
+
+        attr_accessor tweet_id: String
+
+        attr_accessor user_id: String
+
+        attr_accessor checked_posts: Integer
+
+        attr_accessor complete: bool
+
+        def initialize: (
+          is_retweeted: bool,
+          retweeted_at: Time?,
+          retweet_id: String?,
+          tweet_id: String,
+          user_id: String,
+          checked_posts: Integer,
+          complete: bool
+        ) -> void
+
+        def to_hash: -> {
+          is_retweeted: bool,
+          retweeted_at: Time?,
+          retweet_id: String?,
+          tweet_id: String,
+          user_id: String,
+          checked_posts: Integer,
+          complete: bool
+        }
+      end
+    end
+  end
+end

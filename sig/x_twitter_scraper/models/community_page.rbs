@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type community_page =
+      {
+        communities: ::Array[XTwitterScraper::Models::Community],
+        has_next_page: bool,
+        next_cursor: String
+      }
+
+    class CommunityPage < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor communities: ::Array[XTwitterScraper::Models::Community]
+
+      attr_accessor has_next_page: bool
+
+      attr_accessor next_cursor: String
+
+      def initialize: (
+        communities: ::Array[XTwitterScraper::Models::Community],
+        has_next_page: bool,
+        next_cursor: String
+      ) -> void
+
+      def to_hash: -> {
+        communities: ::Array[XTwitterScraper::Models::Community],
+        has_next_page: bool,
+        next_cursor: String
+      }
+    end
+  end
+end

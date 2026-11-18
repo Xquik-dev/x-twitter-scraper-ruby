@@ -83,6 +83,9 @@ module XTwitterScraper
     sig { returns(XTwitterScraper::Resources::GuestWallets) }
     attr_reader :guest_wallets
 
+    sig { returns(XTwitterScraper::Resources::Activity) }
+    attr_reader :activity
+
     sig do
       override
         .params(

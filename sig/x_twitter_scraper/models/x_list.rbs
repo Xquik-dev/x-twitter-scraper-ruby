@@ -1,0 +1,112 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type x_list =
+      {
+        id: String,
+        name: String,
+        description: String,
+        member_count: Integer,
+        subscriber_count: Integer,
+        owner: XTwitterScraper::Models::UserProfile,
+        url: String,
+        created_at: Time,
+        banner_url: String,
+        custom_banner: XTwitterScraper::Models::XListBanner,
+        default_banner: XTwitterScraper::Models::XListBanner,
+        facepile_urls: ::Array[String],
+        members_context: String
+      }
+
+    class XList < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor name: String
+
+      attr_reader description: String?
+
+      def description=: (String) -> String
+
+      attr_reader member_count: Integer?
+
+      def member_count=: (Integer) -> Integer
+
+      attr_reader subscriber_count: Integer?
+
+      def subscriber_count=: (Integer) -> Integer
+
+      attr_reader owner: XTwitterScraper::Models::UserProfile?
+
+      def owner=: (
+        XTwitterScraper::Models::UserProfile
+      ) -> XTwitterScraper::Models::UserProfile
+
+      attr_reader url: String?
+
+      def url=: (String) -> String
+
+      attr_reader created_at: Time?
+
+      def created_at=: (Time) -> Time
+
+      attr_reader banner_url: String?
+
+      def banner_url=: (String) -> String
+
+      attr_reader custom_banner: XTwitterScraper::Models::XListBanner?
+
+      def custom_banner=: (
+        XTwitterScraper::Models::XListBanner
+      ) -> XTwitterScraper::Models::XListBanner
+
+      attr_reader default_banner: XTwitterScraper::Models::XListBanner?
+
+      def default_banner=: (
+        XTwitterScraper::Models::XListBanner
+      ) -> XTwitterScraper::Models::XListBanner
+
+      attr_reader facepile_urls: ::Array[String]?
+
+      def facepile_urls=: (::Array[String]) -> ::Array[String]
+
+      attr_reader members_context: String?
+
+      def members_context=: (String) -> String
+
+      def initialize: (
+        id: String,
+        name: String,
+        ?description: String,
+        ?member_count: Integer,
+        ?subscriber_count: Integer,
+        ?owner: XTwitterScraper::Models::UserProfile,
+        ?url: String,
+        ?created_at: Time,
+        ?banner_url: String,
+        ?custom_banner: XTwitterScraper::Models::XListBanner,
+        ?default_banner: XTwitterScraper::Models::XListBanner,
+        ?facepile_urls: ::Array[String],
+        ?members_context: String
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        name: String,
+        description: String,
+        member_count: Integer,
+        subscriber_count: Integer,
+        owner: XTwitterScraper::Models::UserProfile,
+        url: String,
+        created_at: Time,
+        banner_url: String,
+        custom_banner: XTwitterScraper::Models::XListBanner,
+        default_banner: XTwitterScraper::Models::XListBanner,
+        facepile_urls: ::Array[String],
+        members_context: String
+      }
+    end
+  end
+end

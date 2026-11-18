@@ -1,0 +1,59 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type batch_user_tweets =
+      {
+        tweets: ::Array[XTwitterScraper::Models::SearchTweet],
+        has_next_page: bool,
+        next_cursor: String,
+        unavailable_ids: ::Array[String],
+        not_found_ids: ::Array[String],
+        suspended_ids: ::Array[String],
+        protected_ids: ::Array[String],
+        unprocessed_ids: ::Array[String]
+      }
+
+    class BatchUserTweets < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor tweets: ::Array[XTwitterScraper::Models::SearchTweet]
+
+      attr_accessor has_next_page: bool
+
+      attr_accessor next_cursor: String
+
+      attr_accessor unavailable_ids: ::Array[String]
+
+      attr_accessor not_found_ids: ::Array[String]
+
+      attr_accessor suspended_ids: ::Array[String]
+
+      attr_accessor protected_ids: ::Array[String]
+
+      attr_accessor unprocessed_ids: ::Array[String]
+
+      def initialize: (
+        tweets: ::Array[XTwitterScraper::Models::SearchTweet],
+        has_next_page: bool,
+        next_cursor: String,
+        unavailable_ids: ::Array[String],
+        not_found_ids: ::Array[String],
+        suspended_ids: ::Array[String],
+        protected_ids: ::Array[String],
+        unprocessed_ids: ::Array[String]
+      ) -> void
+
+      def to_hash: -> {
+        tweets: ::Array[XTwitterScraper::Models::SearchTweet],
+        has_next_page: bool,
+        next_cursor: String,
+        unavailable_ids: ::Array[String],
+        not_found_ids: ::Array[String],
+        suspended_ids: ::Array[String],
+        protected_ids: ::Array[String],
+        unprocessed_ids: ::Array[String]
+      }
+    end
+  end
+end

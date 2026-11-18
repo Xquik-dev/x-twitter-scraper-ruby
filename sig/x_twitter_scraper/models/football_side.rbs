@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_side =
+      { team_id: String?, points: Integer?, timeouts_left: Integer? }
+
+    class FootballSide < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor team_id: String?
+
+      attr_accessor points: Integer?
+
+      attr_accessor timeouts_left: Integer?
+
+      def initialize: (
+        team_id: String?,
+        points: Integer?,
+        timeouts_left: Integer?
+      ) -> void
+
+      def to_hash: -> {
+        team_id: String?,
+        points: Integer?,
+        timeouts_left: Integer?
+      }
+    end
+  end
+end

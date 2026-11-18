@@ -1,0 +1,49 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type post_metrics =
+      {
+        views: XTwitterScraper::Models::PostMetricReading,
+        likes: XTwitterScraper::Models::PostMetricReading,
+        retweets: XTwitterScraper::Models::PostMetricReading,
+        replies: XTwitterScraper::Models::PostMetricReading,
+        quotes: XTwitterScraper::Models::PostMetricReading,
+        bookmarks: XTwitterScraper::Models::PostMetricReading
+      }
+
+    class PostMetrics < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor views: XTwitterScraper::Models::PostMetricReading
+
+      attr_accessor likes: XTwitterScraper::Models::PostMetricReading
+
+      attr_accessor retweets: XTwitterScraper::Models::PostMetricReading
+
+      attr_accessor replies: XTwitterScraper::Models::PostMetricReading
+
+      attr_accessor quotes: XTwitterScraper::Models::PostMetricReading
+
+      attr_accessor bookmarks: XTwitterScraper::Models::PostMetricReading
+
+      def initialize: (
+        views: XTwitterScraper::Models::PostMetricReading,
+        likes: XTwitterScraper::Models::PostMetricReading,
+        retweets: XTwitterScraper::Models::PostMetricReading,
+        replies: XTwitterScraper::Models::PostMetricReading,
+        quotes: XTwitterScraper::Models::PostMetricReading,
+        bookmarks: XTwitterScraper::Models::PostMetricReading
+      ) -> void
+
+      def to_hash: -> {
+        views: XTwitterScraper::Models::PostMetricReading,
+        likes: XTwitterScraper::Models::PostMetricReading,
+        retweets: XTwitterScraper::Models::PostMetricReading,
+        replies: XTwitterScraper::Models::PostMetricReading,
+        quotes: XTwitterScraper::Models::PostMetricReading,
+        bookmarks: XTwitterScraper::Models::PostMetricReading
+      }
+    end
+  end
+end

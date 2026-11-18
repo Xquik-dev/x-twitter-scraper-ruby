@@ -1,0 +1,82 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Resources
+    class X
+      class Sports
+        def list_games: (
+          XTwitterScraper::Models::X::SportListGamesParams::league league,
+          ?from: String,
+          ?to: String,
+          ?team: String,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::FootballSchedule
+
+        def retrieve_scoreboard: (
+          String id,
+          league: XTwitterScraper::Models::X::SportRetrieveScoreboardParams::league,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::FootballScoreboard
+
+        def retrieve_audience: (
+          String id,
+          league: XTwitterScraper::Models::X::SportRetrieveAudienceParams::league,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::SportsGameAudience
+
+        def retrieve_box_score: (
+          String id,
+          league: XTwitterScraper::Models::X::SportRetrieveBoxScoreParams::league,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::FootballBoxScore
+
+        def retrieve_player_props: (
+          String id,
+          league: XTwitterScraper::Models::X::SportRetrievePlayerPropsParams::league,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::FootballProps
+
+        def retrieve_plays: (
+          String id,
+          league: XTwitterScraper::Models::X::SportRetrievePlaysParams::league,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::FootballPlays
+
+        def list_posts: (
+          String id,
+          league: XTwitterScraper::Models::X::SportListPostsParams::league,
+          ?query_type: XTwitterScraper::Models::X::SportListPostsParams::query_type,
+          ?cursor: String,
+          ?page_size: Integer,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::SportsGamePosts
+
+        def retrieve_roster: (
+          String id,
+          league: XTwitterScraper::Models::X::SportRetrieveRosterParams::league,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::FootballRoster
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

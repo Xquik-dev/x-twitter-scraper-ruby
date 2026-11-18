@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_schedule_period = { type: String? }
+
+    class FootballSchedulePeriod < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor type: String?
+
+      def initialize: (type: String?) -> void
+
+      def to_hash: -> { type: String? }
+    end
+  end
+end

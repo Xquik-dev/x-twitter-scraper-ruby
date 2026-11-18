@@ -1,0 +1,106 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type space_participant =
+      {
+        id: String,
+        username: String,
+        name: String,
+        profile_picture: String,
+        profile_picture_original: String,
+        is_verified: bool,
+        is_blue_verified: bool,
+        verified_type: String,
+        affiliates_highlighted_label: XTwitterScraper::Models::UserAffiliateLabel,
+        joined_at: Time,
+        is_muted_by_admin: bool,
+        is_muted_by_guest: bool,
+        periscope_user_id: String
+      }
+
+    class SpaceParticipant < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor username: String
+
+      attr_accessor name: String
+
+      attr_reader profile_picture: String?
+
+      def profile_picture=: (String) -> String
+
+      attr_reader profile_picture_original: String?
+
+      def profile_picture_original=: (String) -> String
+
+      attr_reader is_verified: bool?
+
+      def is_verified=: (bool) -> bool
+
+      attr_reader is_blue_verified: bool?
+
+      def is_blue_verified=: (bool) -> bool
+
+      attr_reader verified_type: String?
+
+      def verified_type=: (String) -> String
+
+      attr_reader affiliates_highlighted_label: XTwitterScraper::Models::UserAffiliateLabel?
+
+      def affiliates_highlighted_label=: (
+        XTwitterScraper::Models::UserAffiliateLabel
+      ) -> XTwitterScraper::Models::UserAffiliateLabel
+
+      attr_reader joined_at: Time?
+
+      def joined_at=: (Time) -> Time
+
+      attr_reader is_muted_by_admin: bool?
+
+      def is_muted_by_admin=: (bool) -> bool
+
+      attr_reader is_muted_by_guest: bool?
+
+      def is_muted_by_guest=: (bool) -> bool
+
+      attr_reader periscope_user_id: String?
+
+      def periscope_user_id=: (String) -> String
+
+      def initialize: (
+        id: String,
+        username: String,
+        name: String,
+        ?profile_picture: String,
+        ?profile_picture_original: String,
+        ?is_verified: bool,
+        ?is_blue_verified: bool,
+        ?verified_type: String,
+        ?affiliates_highlighted_label: XTwitterScraper::Models::UserAffiliateLabel,
+        ?joined_at: Time,
+        ?is_muted_by_admin: bool,
+        ?is_muted_by_guest: bool,
+        ?periscope_user_id: String
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        username: String,
+        name: String,
+        profile_picture: String,
+        profile_picture_original: String,
+        is_verified: bool,
+        is_blue_verified: bool,
+        verified_type: String,
+        affiliates_highlighted_label: XTwitterScraper::Models::UserAffiliateLabel,
+        joined_at: Time,
+        is_muted_by_admin: bool,
+        is_muted_by_guest: bool,
+        periscope_user_id: String
+      }
+    end
+  end
+end

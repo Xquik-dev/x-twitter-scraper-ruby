@@ -1,0 +1,49 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_player_prop =
+      {
+        player_id: String?,
+        rank: Float?,
+        line: Float?,
+        odds: Float?,
+        alternate_odds: Float?,
+        open_for_betting: bool?
+      }
+
+    class FootballPlayerProp < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor player_id: String?
+
+      attr_accessor rank: Float?
+
+      attr_accessor line: Float?
+
+      attr_accessor odds: Float?
+
+      attr_accessor alternate_odds: Float?
+
+      attr_accessor open_for_betting: bool?
+
+      def initialize: (
+        player_id: String?,
+        rank: Float?,
+        line: Float?,
+        odds: Float?,
+        alternate_odds: Float?,
+        open_for_betting: bool?
+      ) -> void
+
+      def to_hash: -> {
+        player_id: String?,
+        rank: Float?,
+        line: Float?,
+        odds: Float?,
+        alternate_odds: Float?,
+        open_for_betting: bool?
+      }
+    end
+  end
+end

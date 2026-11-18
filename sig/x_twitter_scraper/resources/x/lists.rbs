@@ -130,6 +130,22 @@ module XTwitterScraper
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::PaginatedTweets
 
+        def retrieve_search: (
+          q: String,
+          ?cursor: String,
+          ?page_size: Integer,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::PaginatedLists
+
+        def retrieve: (
+          String id,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::ListRetrieveResponse
+
         def initialize: (client: XTwitterScraper::Client) -> void
       end
     end

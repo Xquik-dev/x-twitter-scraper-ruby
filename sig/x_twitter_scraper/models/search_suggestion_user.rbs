@@ -1,0 +1,156 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type search_suggestion_user =
+      {
+        id: String,
+        username: String,
+        name: String,
+        verified: bool,
+        is_blue_verified: bool,
+        is_verified: bool,
+        verified_type: String,
+        protected: bool,
+        location: String,
+        profile_picture: String,
+        profile_picture_original: String,
+        badges: ::Array[XTwitterScraper::Models::SearchSuggestionUser::Badge],
+        is_persona_media_genable: bool,
+        score: Float,
+        tokens: ::Array[String],
+        inline: bool
+      }
+
+    class SearchSuggestionUser < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor username: String
+
+      attr_accessor name: String
+
+      attr_reader verified: bool?
+
+      def verified=: (bool) -> bool
+
+      attr_reader is_blue_verified: bool?
+
+      def is_blue_verified=: (bool) -> bool
+
+      attr_reader is_verified: bool?
+
+      def is_verified=: (bool) -> bool
+
+      attr_reader verified_type: String?
+
+      def verified_type=: (String) -> String
+
+      attr_reader protected: bool?
+
+      def protected=: (bool) -> bool
+
+      attr_reader location: String?
+
+      def location=: (String) -> String
+
+      attr_reader profile_picture: String?
+
+      def profile_picture=: (String) -> String
+
+      attr_reader profile_picture_original: String?
+
+      def profile_picture_original=: (String) -> String
+
+      attr_reader badges: ::Array[XTwitterScraper::Models::SearchSuggestionUser::Badge]?
+
+      def badges=: (
+        ::Array[XTwitterScraper::Models::SearchSuggestionUser::Badge]
+      ) -> ::Array[XTwitterScraper::Models::SearchSuggestionUser::Badge]
+
+      attr_reader is_persona_media_genable: bool?
+
+      def is_persona_media_genable=: (bool) -> bool
+
+      attr_reader score: Float?
+
+      def score=: (Float) -> Float
+
+      attr_reader tokens: ::Array[String]?
+
+      def tokens=: (::Array[String]) -> ::Array[String]
+
+      attr_reader inline: bool?
+
+      def inline=: (bool) -> bool
+
+      def initialize: (
+        id: String,
+        username: String,
+        name: String,
+        ?verified: bool,
+        ?is_blue_verified: bool,
+        ?is_verified: bool,
+        ?verified_type: String,
+        ?protected: bool,
+        ?location: String,
+        ?profile_picture: String,
+        ?profile_picture_original: String,
+        ?badges: ::Array[XTwitterScraper::Models::SearchSuggestionUser::Badge],
+        ?is_persona_media_genable: bool,
+        ?score: Float,
+        ?tokens: ::Array[String],
+        ?inline: bool
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        username: String,
+        name: String,
+        verified: bool,
+        is_blue_verified: bool,
+        is_verified: bool,
+        verified_type: String,
+        protected: bool,
+        location: String,
+        profile_picture: String,
+        profile_picture_original: String,
+        badges: ::Array[XTwitterScraper::Models::SearchSuggestionUser::Badge],
+        is_persona_media_genable: bool,
+        score: Float,
+        tokens: ::Array[String],
+        inline: bool
+      }
+
+      type badge =
+        { badge_type: String, badge_url: String, description: String }
+
+      class Badge < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader badge_type: String?
+
+        def badge_type=: (String) -> String
+
+        attr_reader badge_url: String?
+
+        def badge_url=: (String) -> String
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        def initialize: (
+          ?badge_type: String,
+          ?badge_url: String,
+          ?description: String
+        ) -> void
+
+        def to_hash: -> {
+          badge_type: String,
+          badge_url: String,
+          description: String
+        }
+      end
+    end
+  end
+end

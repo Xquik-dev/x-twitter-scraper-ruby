@@ -1,0 +1,143 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_player =
+      {
+        id: String,
+        team_id: String?,
+        name: String?,
+        short_name: String?,
+        jersey: String?,
+        position: String?,
+        college: String?,
+        birth_place: String?,
+        birth_date: String?,
+        headshots: XTwitterScraper::Models::FootballPlayer::Headshots,
+        x_user: XTwitterScraper::Models::FootballPlayer::XUser?
+      }
+
+    class FootballPlayer < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor team_id: String?
+
+      attr_accessor name: String?
+
+      attr_accessor short_name: String?
+
+      attr_accessor jersey: String?
+
+      attr_accessor position: String?
+
+      attr_accessor college: String?
+
+      attr_accessor birth_place: String?
+
+      attr_accessor birth_date: String?
+
+      attr_accessor headshots: XTwitterScraper::Models::FootballPlayer::Headshots
+
+      attr_accessor x_user: XTwitterScraper::Models::FootballPlayer::XUser?
+
+      def initialize: (
+        id: String,
+        team_id: String?,
+        name: String?,
+        short_name: String?,
+        jersey: String?,
+        position: String?,
+        college: String?,
+        birth_place: String?,
+        birth_date: String?,
+        headshots: XTwitterScraper::Models::FootballPlayer::Headshots,
+        x_user: XTwitterScraper::Models::FootballPlayer::XUser?
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        team_id: String?,
+        name: String?,
+        short_name: String?,
+        jersey: String?,
+        position: String?,
+        college: String?,
+        birth_place: String?,
+        birth_date: String?,
+        headshots: XTwitterScraper::Models::FootballPlayer::Headshots,
+        x_user: XTwitterScraper::Models::FootballPlayer::XUser?
+      }
+
+      type headshots =
+        { original: String?, large: String?, medium: String?, small: String? }
+
+      class Headshots < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor original: String?
+
+        attr_accessor large: String?
+
+        attr_accessor medium: String?
+
+        attr_accessor small: String?
+
+        def initialize: (
+          original: String?,
+          large: String?,
+          medium: String?,
+          small: String?
+        ) -> void
+
+        def to_hash: -> {
+          original: String?,
+          large: String?,
+          medium: String?,
+          small: String?
+        }
+      end
+
+      type x_user =
+        {
+          id: String,
+          username: String?,
+          blue_verified: bool?,
+          protected: bool?,
+          super_follow_eligible: bool?,
+          label_type: String?
+        }
+
+      class XUser < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor username: String?
+
+        attr_accessor blue_verified: bool?
+
+        attr_accessor protected: bool?
+
+        attr_accessor super_follow_eligible: bool?
+
+        attr_accessor label_type: String?
+
+        def initialize: (
+          id: String,
+          username: String?,
+          blue_verified: bool?,
+          protected: bool?,
+          super_follow_eligible: bool?,
+          label_type: String?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          username: String?,
+          blue_verified: bool?,
+          protected: bool?,
+          super_follow_eligible: bool?,
+          label_type: String?
+        }
+      end
+    end
+  end
+end

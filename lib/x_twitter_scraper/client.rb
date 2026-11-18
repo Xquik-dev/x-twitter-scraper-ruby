@@ -88,6 +88,9 @@ module XTwitterScraper
     # @return [XTwitterScraper::Resources::GuestWallets]
     attr_reader :guest_wallets
 
+    # @return [XTwitterScraper::Resources::Activity]
+    attr_reader :activity
+
     private def auth_headers(security:)
       {auth_api_key:, oauth_bearer:}.slice(*security.keys).values.reduce({}, :merge)
     end
@@ -168,6 +171,7 @@ module XTwitterScraper
       @support = XTwitterScraper::Resources::Support.new(client: self)
       @credits = XTwitterScraper::Resources::Credits.new(client: self)
       @guest_wallets = XTwitterScraper::Resources::GuestWallets.new(client: self)
+      @activity = XTwitterScraper::Resources::Activity.new(client: self)
     end
   end
 end

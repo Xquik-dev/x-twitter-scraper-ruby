@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type follower_class =
+      :automated | :inactive | :likelyFake | :likelyReal | :tooNew
+
+    module FollowerClass
+      extend XTwitterScraper::Internal::Type::Enum
+
+      AUTOMATED: :automated
+      INACTIVE: :inactive
+      LIKELYFAKE: :likelyFake
+      LIKELYREAL: :likelyReal
+      TOONEW: :tooNew
+
+      def self?.values: -> ::Array[XTwitterScraper::Models::follower_class]
+    end
+  end
+end

@@ -23,6 +23,15 @@ module XTwitterScraper
           ?request_options: XTwitterScraper::request_opts
         ) -> XTwitterScraper::Models::X::DmSendResponse
 
+        def delete_message: (
+          String message_id,
+          user_id: String,
+          account: String,
+          idempotency_key: String,
+          ?prefer: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::WriteActionRetrieveResponse
+
         def initialize: (client: XTwitterScraper::Client) -> void
       end
     end

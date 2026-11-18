@@ -1,0 +1,203 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type football_play =
+      {
+        id: String?,
+        sequence: Integer?,
+        clock: String?,
+        type: String?,
+        direction: String?,
+        description: String?,
+        scoring: bool?,
+        home_points: Integer?,
+        away_points: Integer?,
+        score: XTwitterScraper::Models::FootballPlay::Score?,
+        start: XTwitterScraper::Models::FootballPlay::Start?,
+        on_field: XTwitterScraper::Models::FootballPlay::OnField?,
+        details: ::Array[XTwitterScraper::Models::FootballPlayDetail],
+        post: XTwitterScraper::Models::FootballPlay::Post?,
+        video_post_id: String?,
+        video_reply_post_id: String?
+      }
+
+    class FootballPlay < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String?
+
+      attr_accessor sequence: Integer?
+
+      attr_accessor clock: String?
+
+      attr_accessor type: String?
+
+      attr_accessor direction: String?
+
+      attr_accessor description: String?
+
+      attr_accessor scoring: bool?
+
+      attr_accessor home_points: Integer?
+
+      attr_accessor away_points: Integer?
+
+      attr_accessor score: XTwitterScraper::Models::FootballPlay::Score?
+
+      attr_accessor start: XTwitterScraper::Models::FootballPlay::Start?
+
+      attr_accessor on_field: XTwitterScraper::Models::FootballPlay::OnField?
+
+      attr_accessor details: ::Array[XTwitterScraper::Models::FootballPlayDetail]
+
+      attr_accessor post: XTwitterScraper::Models::FootballPlay::Post?
+
+      attr_accessor video_post_id: String?
+
+      attr_accessor video_reply_post_id: String?
+
+      def initialize: (
+        id: String?,
+        sequence: Integer?,
+        clock: String?,
+        type: String?,
+        direction: String?,
+        description: String?,
+        scoring: bool?,
+        home_points: Integer?,
+        away_points: Integer?,
+        score: XTwitterScraper::Models::FootballPlay::Score?,
+        start: XTwitterScraper::Models::FootballPlay::Start?,
+        on_field: XTwitterScraper::Models::FootballPlay::OnField?,
+        details: ::Array[XTwitterScraper::Models::FootballPlayDetail],
+        post: XTwitterScraper::Models::FootballPlay::Post?,
+        video_post_id: String?,
+        video_reply_post_id: String?
+      ) -> void
+
+      def to_hash: -> {
+        id: String?,
+        sequence: Integer?,
+        clock: String?,
+        type: String?,
+        direction: String?,
+        description: String?,
+        scoring: bool?,
+        home_points: Integer?,
+        away_points: Integer?,
+        score: XTwitterScraper::Models::FootballPlay::Score?,
+        start: XTwitterScraper::Models::FootballPlay::Start?,
+        on_field: XTwitterScraper::Models::FootballPlay::OnField?,
+        details: ::Array[XTwitterScraper::Models::FootballPlayDetail],
+        post: XTwitterScraper::Models::FootballPlay::Post?,
+        video_post_id: String?,
+        video_reply_post_id: String?
+      }
+
+      type score =
+        { home_points: Integer?, away_points: Integer?, points: Integer? }
+
+      class Score < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor home_points: Integer?
+
+        attr_accessor away_points: Integer?
+
+        attr_accessor points: Integer?
+
+        def initialize: (
+          home_points: Integer?,
+          away_points: Integer?,
+          points: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          home_points: Integer?,
+          away_points: Integer?,
+          points: Integer?
+        }
+      end
+
+      type start =
+        {
+          down: Integer?,
+          yards_to_go: Integer?,
+          yardline: Integer?,
+          yardline_side: String?,
+          possession: String?
+        }
+
+      class Start < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor down: Integer?
+
+        attr_accessor yards_to_go: Integer?
+
+        attr_accessor yardline: Integer?
+
+        attr_accessor yardline_side: String?
+
+        attr_accessor possession: String?
+
+        def initialize: (
+          down: Integer?,
+          yards_to_go: Integer?,
+          yardline: Integer?,
+          yardline_side: String?,
+          possession: String?
+        ) -> void
+
+        def to_hash: -> {
+          down: Integer?,
+          yards_to_go: Integer?,
+          yardline: Integer?,
+          yardline_side: String?,
+          possession: String?
+        }
+      end
+
+      type on_field =
+        {
+          called_back: bool?,
+          penalty_on_field: bool?,
+          timeout: bool?,
+          under_review: bool?
+        }
+
+      class OnField < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor called_back: bool?
+
+        attr_accessor penalty_on_field: bool?
+
+        attr_accessor timeout: bool?
+
+        attr_accessor under_review: bool?
+
+        def initialize: (
+          called_back: bool?,
+          penalty_on_field: bool?,
+          timeout: bool?,
+          under_review: bool?
+        ) -> void
+
+        def to_hash: -> {
+          called_back: bool?,
+          penalty_on_field: bool?,
+          timeout: bool?,
+          under_review: bool?
+        }
+      end
+
+      type post = { id: String, username: String? }
+
+      class Post < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor username: String?
+
+        def initialize: (id: String, username: String?) -> void
+
+        def to_hash: -> { id: String, username: String? }
+      end
+    end
+  end
+end

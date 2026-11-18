@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type activity_list_response =
+      ::Array[XTwitterScraper::Models::ActivityLogRow]
+
+    ActivityListResponse: XTwitterScraper::Internal::Type::Converter
+  end
+end

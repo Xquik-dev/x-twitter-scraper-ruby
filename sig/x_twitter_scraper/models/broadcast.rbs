@@ -1,0 +1,245 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type broadcast =
+      {
+        id: String,
+        title: String,
+        is_title_edited: bool,
+        state: String,
+        scheduled_start: Time,
+        started_at: Time,
+        ended_at: Time,
+        last_ping_at: Time,
+        total_watched: Integer,
+        total_watching: Integer,
+        is_available_for_replay: bool,
+        width: Integer,
+        height: Integer,
+        camera_rotation: Integer,
+        is_high_latency: bool,
+        chat_option: Integer,
+        is_private_chat: bool,
+        source: String,
+        media_key: String,
+        pre_live_slate_url: String,
+        version: Integer,
+        tweet_id: String,
+        tweet: XTwitterScraper::Models::SearchTweet,
+        periscope_user: XTwitterScraper::Models::Broadcast::PeriscopeUser,
+        creator: XTwitterScraper::Models::UserProfile
+      }
+
+    class Broadcast < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_reader title: String?
+
+      def title=: (String) -> String
+
+      attr_reader is_title_edited: bool?
+
+      def is_title_edited=: (bool) -> bool
+
+      attr_reader state: String?
+
+      def state=: (String) -> String
+
+      attr_reader scheduled_start: Time?
+
+      def scheduled_start=: (Time) -> Time
+
+      attr_reader started_at: Time?
+
+      def started_at=: (Time) -> Time
+
+      attr_reader ended_at: Time?
+
+      def ended_at=: (Time) -> Time
+
+      attr_reader last_ping_at: Time?
+
+      def last_ping_at=: (Time) -> Time
+
+      attr_reader total_watched: Integer?
+
+      def total_watched=: (Integer) -> Integer
+
+      attr_reader total_watching: Integer?
+
+      def total_watching=: (Integer) -> Integer
+
+      attr_reader is_available_for_replay: bool?
+
+      def is_available_for_replay=: (bool) -> bool
+
+      attr_reader width: Integer?
+
+      def width=: (Integer) -> Integer
+
+      attr_reader height: Integer?
+
+      def height=: (Integer) -> Integer
+
+      attr_reader camera_rotation: Integer?
+
+      def camera_rotation=: (Integer) -> Integer
+
+      attr_reader is_high_latency: bool?
+
+      def is_high_latency=: (bool) -> bool
+
+      attr_reader chat_option: Integer?
+
+      def chat_option=: (Integer) -> Integer
+
+      attr_reader is_private_chat: bool?
+
+      def is_private_chat=: (bool) -> bool
+
+      attr_reader source: String?
+
+      def source=: (String) -> String
+
+      attr_reader media_key: String?
+
+      def media_key=: (String) -> String
+
+      attr_reader pre_live_slate_url: String?
+
+      def pre_live_slate_url=: (String) -> String
+
+      attr_reader version: Integer?
+
+      def version=: (Integer) -> Integer
+
+      attr_reader tweet_id: String?
+
+      def tweet_id=: (String) -> String
+
+      attr_reader tweet: XTwitterScraper::Models::SearchTweet?
+
+      def tweet=: (
+        XTwitterScraper::Models::SearchTweet
+      ) -> XTwitterScraper::Models::SearchTweet
+
+      attr_reader periscope_user: XTwitterScraper::Models::Broadcast::PeriscopeUser?
+
+      def periscope_user=: (
+        XTwitterScraper::Models::Broadcast::PeriscopeUser
+      ) -> XTwitterScraper::Models::Broadcast::PeriscopeUser
+
+      attr_reader creator: XTwitterScraper::Models::UserProfile?
+
+      def creator=: (
+        XTwitterScraper::Models::UserProfile
+      ) -> XTwitterScraper::Models::UserProfile
+
+      def initialize: (
+        id: String,
+        ?title: String,
+        ?is_title_edited: bool,
+        ?state: String,
+        ?scheduled_start: Time,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?last_ping_at: Time,
+        ?total_watched: Integer,
+        ?total_watching: Integer,
+        ?is_available_for_replay: bool,
+        ?width: Integer,
+        ?height: Integer,
+        ?camera_rotation: Integer,
+        ?is_high_latency: bool,
+        ?chat_option: Integer,
+        ?is_private_chat: bool,
+        ?source: String,
+        ?media_key: String,
+        ?pre_live_slate_url: String,
+        ?version: Integer,
+        ?tweet_id: String,
+        ?tweet: XTwitterScraper::Models::SearchTweet,
+        ?periscope_user: XTwitterScraper::Models::Broadcast::PeriscopeUser,
+        ?creator: XTwitterScraper::Models::UserProfile
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        title: String,
+        is_title_edited: bool,
+        state: String,
+        scheduled_start: Time,
+        started_at: Time,
+        ended_at: Time,
+        last_ping_at: Time,
+        total_watched: Integer,
+        total_watching: Integer,
+        is_available_for_replay: bool,
+        width: Integer,
+        height: Integer,
+        camera_rotation: Integer,
+        is_high_latency: bool,
+        chat_option: Integer,
+        is_private_chat: bool,
+        source: String,
+        media_key: String,
+        pre_live_slate_url: String,
+        version: Integer,
+        tweet_id: String,
+        tweet: XTwitterScraper::Models::SearchTweet,
+        periscope_user: XTwitterScraper::Models::Broadcast::PeriscopeUser,
+        creator: XTwitterScraper::Models::UserProfile
+      }
+
+      type periscope_user =
+        {
+          id: String,
+          username: String,
+          display_name: String,
+          profile_picture: String,
+          profile_picture_original: String
+        }
+
+      class PeriscopeUser < XTwitterScraper::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_reader username: String?
+
+        def username=: (String) -> String
+
+        attr_reader display_name: String?
+
+        def display_name=: (String) -> String
+
+        attr_reader profile_picture: String?
+
+        def profile_picture=: (String) -> String
+
+        attr_reader profile_picture_original: String?
+
+        def profile_picture_original=: (String) -> String
+
+        def initialize: (
+          ?id: String,
+          ?username: String,
+          ?display_name: String,
+          ?profile_picture: String,
+          ?profile_picture_original: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          username: String,
+          display_name: String,
+          profile_picture: String,
+          profile_picture_original: String
+        }
+      end
+    end
+  end
+end

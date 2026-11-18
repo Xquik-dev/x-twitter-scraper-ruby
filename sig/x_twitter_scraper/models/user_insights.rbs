@@ -1,0 +1,163 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type user_insights =
+      {
+        user_id: String,
+        user_name: String,
+        followers: Float,
+        following: Float,
+        posts: Float,
+        account_age_days: Float?,
+        posts_private: bool,
+        sample: XTwitterScraper::Models::UserInsights::Sample,
+        averages: XTwitterScraper::Models::UserInsights::Averages?,
+        median_views: Float?,
+        engagement_rate: Float?,
+        engagement_per_view: Float?,
+        posts_per_day: Float?,
+        top_post_id: String?
+      }
+
+    class UserInsights < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor user_id: String
+
+      attr_accessor user_name: String
+
+      attr_accessor followers: Float
+
+      attr_accessor following: Float
+
+      attr_accessor posts: Float
+
+      attr_accessor account_age_days: Float?
+
+      attr_accessor posts_private: bool
+
+      attr_accessor sample: XTwitterScraper::Models::UserInsights::Sample
+
+      attr_accessor averages: XTwitterScraper::Models::UserInsights::Averages?
+
+      attr_accessor median_views: Float?
+
+      attr_accessor engagement_rate: Float?
+
+      attr_accessor engagement_per_view: Float?
+
+      attr_accessor posts_per_day: Float?
+
+      attr_accessor top_post_id: String?
+
+      def initialize: (
+        user_id: String,
+        user_name: String,
+        followers: Float,
+        following: Float,
+        posts: Float,
+        account_age_days: Float?,
+        posts_private: bool,
+        sample: XTwitterScraper::Models::UserInsights::Sample,
+        averages: XTwitterScraper::Models::UserInsights::Averages?,
+        median_views: Float?,
+        engagement_rate: Float?,
+        engagement_per_view: Float?,
+        posts_per_day: Float?,
+        top_post_id: String?
+      ) -> void
+
+      def to_hash: -> {
+        user_id: String,
+        user_name: String,
+        followers: Float,
+        following: Float,
+        posts: Float,
+        account_age_days: Float?,
+        posts_private: bool,
+        sample: XTwitterScraper::Models::UserInsights::Sample,
+        averages: XTwitterScraper::Models::UserInsights::Averages?,
+        median_views: Float?,
+        engagement_rate: Float?,
+        engagement_per_view: Float?,
+        posts_per_day: Float?,
+        top_post_id: String?
+      }
+
+      type sample =
+        { posts: Float, read: Float, oldest_at: Time?, newest_at: Time? }
+
+      class Sample < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor posts: Float
+
+        attr_accessor read: Float
+
+        attr_accessor oldest_at: Time?
+
+        attr_accessor newest_at: Time?
+
+        def initialize: (
+          posts: Float,
+          read: Float,
+          oldest_at: Time?,
+          newest_at: Time?
+        ) -> void
+
+        def to_hash: -> {
+          posts: Float,
+          read: Float,
+          oldest_at: Time?,
+          newest_at: Time?
+        }
+      end
+
+      type averages =
+        {
+          likes: Float,
+          replies: Float,
+          reposts: Float,
+          quotes: Float,
+          bookmarks: Float,
+          views: Float,
+          engagements: Float
+        }
+
+      class Averages < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor likes: Float
+
+        attr_accessor replies: Float
+
+        attr_accessor reposts: Float
+
+        attr_accessor quotes: Float
+
+        attr_accessor bookmarks: Float
+
+        attr_accessor views: Float
+
+        attr_accessor engagements: Float
+
+        def initialize: (
+          likes: Float,
+          replies: Float,
+          reposts: Float,
+          quotes: Float,
+          bookmarks: Float,
+          views: Float,
+          engagements: Float
+        ) -> void
+
+        def to_hash: -> {
+          likes: Float,
+          replies: Float,
+          reposts: Float,
+          quotes: Float,
+          bookmarks: Float,
+          views: Float,
+          engagements: Float
+        }
+      end
+    end
+  end
+end

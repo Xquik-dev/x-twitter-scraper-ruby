@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type job_company = { id: String, name: String, logo_url: String }
+
+    class JobCompany < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader logo_url: String?
+
+      def logo_url=: (String) -> String
+
+      def initialize: (id: String, ?name: String, ?logo_url: String) -> void
+
+      def to_hash: -> { id: String, name: String, logo_url: String }
+    end
+  end
+end

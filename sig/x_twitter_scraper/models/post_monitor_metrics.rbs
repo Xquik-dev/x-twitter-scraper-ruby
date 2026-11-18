@@ -1,0 +1,93 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type post_monitor_metrics =
+      {
+        hours: Integer,
+        buckets: ::Array[XTwitterScraper::Models::PostMonitorMetrics::Bucket]
+      }
+
+    class PostMonitorMetrics < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor hours: Integer
+
+      attr_accessor buckets: ::Array[XTwitterScraper::Models::PostMonitorMetrics::Bucket]
+
+      def initialize: (
+        hours: Integer,
+        buckets: ::Array[XTwitterScraper::Models::PostMonitorMetrics::Bucket]
+      ) -> void
+
+      def to_hash: -> {
+        hours: Integer,
+        buckets: ::Array[XTwitterScraper::Models::PostMonitorMetrics::Bucket]
+      }
+
+      type bucket =
+        {
+          at: Time,
+          metrics: XTwitterScraper::Models::PostMonitorMetrics::Bucket::Metrics
+        }
+
+      class Bucket < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor at: Time
+
+        attr_accessor metrics: XTwitterScraper::Models::PostMonitorMetrics::Bucket::Metrics
+
+        def initialize: (
+          at: Time,
+          metrics: XTwitterScraper::Models::PostMonitorMetrics::Bucket::Metrics
+        ) -> void
+
+        def to_hash: -> {
+          at: Time,
+          metrics: XTwitterScraper::Models::PostMonitorMetrics::Bucket::Metrics
+        }
+
+        type metrics =
+          {
+            views: XTwitterScraper::Models::PostMetricPoint,
+            likes: XTwitterScraper::Models::PostMetricPoint,
+            retweets: XTwitterScraper::Models::PostMetricPoint,
+            replies: XTwitterScraper::Models::PostMetricPoint,
+            quotes: XTwitterScraper::Models::PostMetricPoint,
+            bookmarks: XTwitterScraper::Models::PostMetricPoint
+          }
+
+        class Metrics < XTwitterScraper::Internal::Type::BaseModel
+          attr_accessor views: XTwitterScraper::Models::PostMetricPoint
+
+          attr_accessor likes: XTwitterScraper::Models::PostMetricPoint
+
+          attr_accessor retweets: XTwitterScraper::Models::PostMetricPoint
+
+          attr_accessor replies: XTwitterScraper::Models::PostMetricPoint
+
+          attr_accessor quotes: XTwitterScraper::Models::PostMetricPoint
+
+          attr_accessor bookmarks: XTwitterScraper::Models::PostMetricPoint
+
+          def initialize: (
+            views: XTwitterScraper::Models::PostMetricPoint,
+            likes: XTwitterScraper::Models::PostMetricPoint,
+            retweets: XTwitterScraper::Models::PostMetricPoint,
+            replies: XTwitterScraper::Models::PostMetricPoint,
+            quotes: XTwitterScraper::Models::PostMetricPoint,
+            bookmarks: XTwitterScraper::Models::PostMetricPoint
+          ) -> void
+
+          def to_hash: -> {
+            views: XTwitterScraper::Models::PostMetricPoint,
+            likes: XTwitterScraper::Models::PostMetricPoint,
+            retweets: XTwitterScraper::Models::PostMetricPoint,
+            replies: XTwitterScraper::Models::PostMetricPoint,
+            quotes: XTwitterScraper::Models::PostMetricPoint,
+            bookmarks: XTwitterScraper::Models::PostMetricPoint
+          }
+        end
+      end
+    end
+  end
+end

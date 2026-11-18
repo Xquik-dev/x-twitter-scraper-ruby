@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Resources
+    class X
+      class Jobs
+        def list_locations: (
+          q: String,
+          ?limit: Integer,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::JobLocations
+
+        def search: (
+          q: String,
+          ?location: String,
+          ?location_id: String,
+          ?location_type: String,
+          ?seniority: String,
+          ?employment_type: String,
+          ?company: String,
+          ?cursor: String,
+          ?page_size: Integer,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::PaginatedJobs
+
+        def retrieve: (
+          String id,
+          ?fields: String,
+          ?omit: String,
+          ?request_options: XTwitterScraper::request_opts
+        ) -> XTwitterScraper::Models::X::JobRetrieveResponse
+
+        def initialize: (client: XTwitterScraper::Client) -> void
+      end
+    end
+  end
+end

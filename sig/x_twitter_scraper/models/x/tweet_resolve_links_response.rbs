@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_resolve_links_response =
+        {
+          links: ::Array[XTwitterScraper::Models::ResolvedLink],
+          unprocessed_urls: ::Array[String]
+        }
+
+      class TweetResolveLinksResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor links: ::Array[XTwitterScraper::Models::ResolvedLink]
+
+        attr_accessor unprocessed_urls: ::Array[String]
+
+        def initialize: (
+          links: ::Array[XTwitterScraper::Models::ResolvedLink],
+          unprocessed_urls: ::Array[String]
+        ) -> void
+
+        def to_hash: -> {
+          links: ::Array[XTwitterScraper::Models::ResolvedLink],
+          unprocessed_urls: ::Array[String]
+        }
+      end
+    end
+  end
+end

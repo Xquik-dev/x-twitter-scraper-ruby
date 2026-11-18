@@ -1,0 +1,54 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type user_auxiliary_label =
+      {
+        badge_url: String,
+        description: String,
+        url: String,
+        user_label_display_type: String,
+        user_label_type: String
+      }
+
+    class UserAuxiliaryLabel < XTwitterScraper::Internal::Type::BaseModel
+      attr_reader badge_url: String?
+
+      def badge_url=: (String) -> String
+
+      attr_reader description: String?
+
+      def description=: (String) -> String
+
+      attr_reader url: String?
+
+      def url=: (String) -> String
+
+      attr_reader user_label_display_type: String?
+
+      def user_label_display_type=: (String) -> String
+
+      attr_reader user_label_type: String?
+
+      def user_label_type=: (String) -> String
+
+      def initialize: (
+        ?badge_url: String,
+        ?description: String,
+        ?url: String,
+        ?user_label_display_type: String,
+        ?user_label_type: String
+      ) -> void
+
+      def to_hash: -> {
+        badge_url: String,
+        description: String,
+        url: String,
+        user_label_display_type: String,
+        user_label_type: String
+      }
+    end
+  end
+end

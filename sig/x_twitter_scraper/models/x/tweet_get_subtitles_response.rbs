@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    module X
+      type tweet_get_subtitles_response =
+        { subtitles: XTwitterScraper::Models::TweetSubtitles }
+
+      class TweetGetSubtitlesResponse < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor subtitles: XTwitterScraper::Models::TweetSubtitles
+
+        def initialize: (
+          subtitles: XTwitterScraper::Models::TweetSubtitles
+        ) -> void
+
+        def to_hash: -> { subtitles: XTwitterScraper::Models::TweetSubtitles }
+      end
+    end
+  end
+end

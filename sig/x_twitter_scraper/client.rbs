@@ -48,6 +48,8 @@ module XTwitterScraper
 
     attr_reader guest_wallets: XTwitterScraper::Resources::GuestWallets
 
+    attr_reader activity: XTwitterScraper::Resources::Activity
+
     private def auth_headers: (
       security: { auth_api_key: bool, oauth_bearer: bool }
     ) -> ::Hash[String, String]

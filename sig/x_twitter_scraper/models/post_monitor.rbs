@@ -1,0 +1,270 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type post_monitor =
+      {
+        id: String,
+        name: String,
+        post_id: String,
+        post_url: String,
+        author_id: String,
+        author_username: String,
+        author_name: String,
+        author_avatar_url: String,
+        author_verified: XTwitterScraper::Models::PostMonitor::author_verified,
+        author_affiliate: XTwitterScraper::Models::PostMonitor::AuthorAffiliate,
+        media: ::Array[XTwitterScraper::Models::PostMonitor::Media],
+        text: String,
+        posted_at: Time,
+        event_types: ::Array[XTwitterScraper::Models::post_event_type],
+        is_active: bool,
+        created_at: Time,
+        next_billing_at: Time,
+        baseline: XTwitterScraper::Models::PostMonitor::Baseline,
+        paused_reason: XTwitterScraper::Models::PostMonitor::paused_reason,
+        paused_at: Time,
+        metrics: XTwitterScraper::Models::PostMetrics
+      }
+
+    class PostMonitor < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_accessor post_id: String
+
+      attr_accessor post_url: String
+
+      attr_accessor author_id: String
+
+      attr_accessor author_username: String
+
+      attr_accessor author_name: String
+
+      attr_reader author_avatar_url: String?
+
+      def author_avatar_url=: (String) -> String
+
+      attr_reader author_verified: XTwitterScraper::Models::PostMonitor::author_verified?
+
+      def author_verified=: (
+        XTwitterScraper::Models::PostMonitor::author_verified
+      ) -> XTwitterScraper::Models::PostMonitor::author_verified
+
+      attr_reader author_affiliate: XTwitterScraper::Models::PostMonitor::AuthorAffiliate?
+
+      def author_affiliate=: (
+        XTwitterScraper::Models::PostMonitor::AuthorAffiliate
+      ) -> XTwitterScraper::Models::PostMonitor::AuthorAffiliate
+
+      attr_accessor media: ::Array[XTwitterScraper::Models::PostMonitor::Media]
+
+      attr_accessor text: String
+
+      attr_accessor posted_at: Time
+
+      attr_accessor event_types: ::Array[XTwitterScraper::Models::post_event_type]
+
+      attr_accessor is_active: bool
+
+      attr_accessor created_at: Time
+
+      attr_accessor next_billing_at: Time
+
+      attr_accessor baseline: XTwitterScraper::Models::PostMonitor::Baseline
+
+      attr_reader paused_reason: XTwitterScraper::Models::PostMonitor::paused_reason?
+
+      def paused_reason=: (
+        XTwitterScraper::Models::PostMonitor::paused_reason
+      ) -> XTwitterScraper::Models::PostMonitor::paused_reason
+
+      attr_reader paused_at: Time?
+
+      def paused_at=: (Time) -> Time
+
+      attr_accessor metrics: XTwitterScraper::Models::PostMetrics
+
+      def initialize: (
+        id: String,
+        post_id: String,
+        post_url: String,
+        author_id: String,
+        author_username: String,
+        author_name: String,
+        media: ::Array[XTwitterScraper::Models::PostMonitor::Media],
+        text: String,
+        posted_at: Time,
+        event_types: ::Array[XTwitterScraper::Models::post_event_type],
+        is_active: bool,
+        created_at: Time,
+        next_billing_at: Time,
+        baseline: XTwitterScraper::Models::PostMonitor::Baseline,
+        metrics: XTwitterScraper::Models::PostMetrics,
+        ?name: String,
+        ?author_avatar_url: String,
+        ?author_verified: XTwitterScraper::Models::PostMonitor::author_verified,
+        ?author_affiliate: XTwitterScraper::Models::PostMonitor::AuthorAffiliate,
+        ?paused_reason: XTwitterScraper::Models::PostMonitor::paused_reason,
+        ?paused_at: Time
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        name: String,
+        post_id: String,
+        post_url: String,
+        author_id: String,
+        author_username: String,
+        author_name: String,
+        author_avatar_url: String,
+        author_verified: XTwitterScraper::Models::PostMonitor::author_verified,
+        author_affiliate: XTwitterScraper::Models::PostMonitor::AuthorAffiliate,
+        media: ::Array[XTwitterScraper::Models::PostMonitor::Media],
+        text: String,
+        posted_at: Time,
+        event_types: ::Array[XTwitterScraper::Models::post_event_type],
+        is_active: bool,
+        created_at: Time,
+        next_billing_at: Time,
+        baseline: XTwitterScraper::Models::PostMonitor::Baseline,
+        paused_reason: XTwitterScraper::Models::PostMonitor::paused_reason,
+        paused_at: Time,
+        metrics: XTwitterScraper::Models::PostMetrics
+      }
+
+      type author_verified = :blue | :business | :government
+
+      module AuthorVerified
+        extend XTwitterScraper::Internal::Type::Enum
+
+        BLUE: :blue
+        BUSINESS: :business
+        GOVERNMENT: :government
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::PostMonitor::author_verified]
+      end
+
+      type author_affiliate =
+        { badge_url: String, description: String, url: String }
+
+      class AuthorAffiliate < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor badge_url: String
+
+        attr_accessor description: String
+
+        attr_reader url: String?
+
+        def url=: (String) -> String
+
+        def initialize: (
+          badge_url: String,
+          description: String,
+          ?url: String
+        ) -> void
+
+        def to_hash: -> { badge_url: String, description: String, url: String }
+      end
+
+      type media =
+        { kind: XTwitterScraper::Models::PostMonitor::Media::kind, url: String }
+
+      class Media < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor kind: XTwitterScraper::Models::PostMonitor::Media::kind
+
+        attr_accessor url: String
+
+        def initialize: (
+          kind: XTwitterScraper::Models::PostMonitor::Media::kind,
+          url: String
+        ) -> void
+
+        def to_hash: -> {
+          kind: XTwitterScraper::Models::PostMonitor::Media::kind,
+          url: String
+        }
+
+        type kind = :gif | :photo | :video
+
+        module Kind
+          extend XTwitterScraper::Internal::Type::Enum
+
+          GIF: :gif
+          PHOTO: :photo
+          VIDEO: :video
+
+          def self?.values: -> ::Array[XTwitterScraper::Models::PostMonitor::Media::kind]
+        end
+      end
+
+      type baseline =
+        {
+          at: Time,
+          views: Integer?,
+          likes: Integer,
+          retweets: Integer,
+          replies: Integer,
+          quotes: Integer,
+          bookmarks: Integer
+        }
+
+      class Baseline < XTwitterScraper::Internal::Type::BaseModel
+        attr_accessor at: Time
+
+        attr_accessor views: Integer?
+
+        attr_accessor likes: Integer
+
+        attr_accessor retweets: Integer
+
+        attr_accessor replies: Integer
+
+        attr_accessor quotes: Integer
+
+        attr_accessor bookmarks: Integer
+
+        def initialize: (
+          at: Time,
+          views: Integer?,
+          likes: Integer,
+          retweets: Integer,
+          replies: Integer,
+          quotes: Integer,
+          bookmarks: Integer
+        ) -> void
+
+        def to_hash: -> {
+          at: Time,
+          views: Integer?,
+          likes: Integer,
+          retweets: Integer,
+          replies: Integer,
+          quotes: Integer,
+          bookmarks: Integer
+        }
+      end
+
+      type paused_reason =
+        :insufficient_credits
+        | :x_post_deleted
+        | :x_post_protected
+        | :x_post_unavailable
+
+      module PausedReason
+        extend XTwitterScraper::Internal::Type::Enum
+
+        INSUFFICIENT_CREDITS: :insufficient_credits
+        X_POST_DELETED: :x_post_deleted
+        X_POST_PROTECTED: :x_post_protected
+        X_POST_UNAVAILABLE: :x_post_unavailable
+
+        def self?.values: -> ::Array[XTwitterScraper::Models::PostMonitor::paused_reason]
+      end
+    end
+  end
+end
