@@ -453,6 +453,27 @@ class XTwitterScraper::Test::BaseModelTest < Minitest::Test
     end
   end
 
+  class M7 < XTwitterScraper::Internal::Type::BaseModel
+    required :inner, M1
+    optional :inners, XTwitterScraper::Internal::Type::ArrayOf[M1]
+  end
+
+  def test_a_nested_model_keeps_its_own_failed_field
+    model = M7.new(inner: {a: "one"}, inners: [{a: "one"}])
+
+    assert_instance_of(M1, model.inner)
+    assert_instance_of(M1, model.inners.first)
+    error = assert_raises(XTwitterScraper::Errors::ConversionError) { model.inner.a }
+    assert_kind_of(ArgumentError, error.cause)
+  end
+
+  def test_a_list_item_that_is_no_model_still_fails_the_list
+    model = M7.new(inner: {a: 1}, inners: [:one, {a: 1}])
+
+    error = assert_raises(XTwitterScraper::Errors::ConversionError) { model.inners }
+    assert_kind_of(TypeError, error.cause)
+  end
+
   def test_inplace_modification
     m1 = M6.new(a: [])
     m1.a << M6.new(a: [])
@@ -550,6 +571,34 @@ class XTwitterScraper::Test::UnionTest < Minitest::Test
 
     variant -> { M3 }
     variant -> { M5 }
+  end
+
+  module U7
+    extend XTwitterScraper::Internal::Type::Union
+
+    variant Integer
+    variant String
+  end
+
+  class M7 < XTwitterScraper::Internal::Type::BaseModel
+    required :count, union: U7
+    optional :counts, XTwitterScraper::Internal::Type::ArrayOf[union: U7]
+  end
+
+  def test_a_later_variant_reads_once_an_earlier_one_fails
+    built = M7.new(count: "", counts: ["abc", 2])
+    parsed = XTwitterScraper::Internal::Type::Converter.coerce(M7, {count: "abc", counts: [""]})
+
+    assert_equal(["", ["abc", 2]], [built.count, built.counts])
+    assert_equal(["abc", [""]], [parsed.count, parsed.counts])
+  end
+
+  def test_a_value_no_variant_takes_still_fails_its_field
+    model = M7.new(count: [], counts: [[], 2])
+
+    error = assert_raises(XTwitterScraper::Errors::ConversionError) { model.count }
+    assert_kind_of(ArgumentError, error.cause)
+    assert_raises(XTwitterScraper::Errors::ConversionError) { model.counts }
   end
 
   def test_accessors
