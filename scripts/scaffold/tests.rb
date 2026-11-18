@@ -128,6 +128,7 @@ module Scaffold
       case type
       when Literal then [@types.symbol(type.value), type.value]
       when Ref
+        return sample(TIME, name) if takes_time?(type)
         raise PlanError, "#{name} takes #{type.constant}, which the test cannot fill" unless type.kind == :enum
 
         value = enum_values(type.constant).first
@@ -146,8 +147,14 @@ module Scaffold
       when :float then ["1.5", 1.5]
       when :boolean then ["true", true]
       when :date then ["Date.new(2026, 1, 2)", "2026-01-02"]
+      when :time then ["Time.utc(2026, 1, 2, 3, 4, 5)", "2026-01-02T03:04:05Z"]
       else raise PlanError, "#{name} takes a #{type.name}, which the test cannot fill"
       end
+    end
+
+    def takes_time?(type)
+      plan = @plans[type.constant]
+      plan.is_a?(Union) && plan.variants.include?(TIME)
     end
 
     def enum_values(constant)

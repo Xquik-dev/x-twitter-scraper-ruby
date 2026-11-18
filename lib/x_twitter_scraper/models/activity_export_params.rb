@@ -46,14 +46,14 @@ module XTwitterScraper
       # @!attribute since
       #   Oldest time, ISO 8601.
       #
-      #   @return [String, nil]
-      optional :since, String
+      #   @return [String, Time, nil]
+      optional :since, union: -> { XTwitterScraper::Models::ActivityExportParams::Since }
 
       # @!attribute until_
       #   Newest time, ISO 8601.
       #
-      #   @return [String, nil]
-      optional :until_, String, api_name: :until
+      #   @return [String, Time, nil]
+      optional :until_, union: -> { XTwitterScraper::Models::ActivityExportParams::Until }, api_name: :until
 
       # @!method initialize(format_:, limit: nil, category: nil, status: nil, q: nil, since: nil, until_: nil, request_options: {})
       #   @param format_ [Symbol, XTwitterScraper::Models::ActivityExportParams::Format] Answer format. JSON by default.
@@ -66,9 +66,9 @@ module XTwitterScraper
       #
       #   @param q [String] Search text.
       #
-      #   @param since [String] Oldest time, ISO 8601.
+      #   @param since [String, Time] Oldest time, ISO 8601.
       #
-      #   @param until_ [String] Newest time, ISO 8601.
+      #   @param until_ [String, Time] Newest time, ISO 8601.
       #
       #   @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}]
 
@@ -85,6 +85,28 @@ module XTwitterScraper
 
         # @!method self.values
         #   @return [Array<Symbol>]
+      end
+
+      module Since
+        extend XTwitterScraper::Internal::Type::Union
+
+        variant String
+
+        variant Time
+
+        # @!method self.variants
+        #   @return [Array(String, Time)]
+      end
+
+      module Until
+        extend XTwitterScraper::Internal::Type::Union
+
+        variant String
+
+        variant Time
+
+        # @!method self.variants
+        #   @return [Array(String, Time)]
       end
     end
   end

@@ -20,8 +20,8 @@ module XTwitterScraper
           category: String,
           status: String,
           q: String,
-          since: String,
-          until_: String,
+          since: T.any(String, Time),
+          until_: T.any(String, Time),
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T::Array[XTwitterScraper::Models::ActivityLogRow])
       end
@@ -59,8 +59,8 @@ module XTwitterScraper
           category: String,
           status: String,
           q: String,
-          since: String,
-          until_: String,
+          since: T.any(String, Time),
+          until_: T.any(String, Time),
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(StringIO)
       end

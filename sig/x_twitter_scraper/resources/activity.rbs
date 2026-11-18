@@ -11,8 +11,8 @@ module XTwitterScraper
         ?category: String,
         ?status: String,
         ?q: String,
-        ?since: String,
-        ?until_: String,
+        ?since: XTwitterScraper::Models::ActivityListParams::since,
+        ?until_: XTwitterScraper::Models::ActivityListParams::until_,
         ?request_options: XTwitterScraper::request_opts
       ) -> XTwitterScraper::Models::activity_list_response
 
@@ -22,8 +22,8 @@ module XTwitterScraper
         ?category: String,
         ?status: String,
         ?q: String,
-        ?since: String,
-        ?until_: String,
+        ?since: XTwitterScraper::Models::ActivityExportParams::since,
+        ?until_: XTwitterScraper::Models::ActivityExportParams::until_,
         ?request_options: XTwitterScraper::request_opts
       ) -> StringIO
 

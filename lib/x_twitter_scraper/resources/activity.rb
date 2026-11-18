@@ -25,9 +25,9 @@ module XTwitterScraper
       #
       # @param q [String] Search text.
       #
-      # @param since [String] Oldest time, ISO 8601.
+      # @param since [String, Time] Oldest time, ISO 8601.
       #
-      # @param until_ [String] Newest time, ISO 8601.
+      # @param until_ [String, Time] Newest time, ISO 8601.
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -64,9 +64,9 @@ module XTwitterScraper
       #
       # @param q [String] Search text.
       #
-      # @param since [String] Oldest time, ISO 8601.
+      # @param since [String, Time] Oldest time, ISO 8601.
       #
-      # @param until_ [String] Newest time, ISO 8601.
+      # @param until_ [String, Time] Newest time, ISO 8601.
       #
       # @param request_options [XTwitterScraper::RequestOptions, Hash{Symbol=>Object}, nil]
       #
