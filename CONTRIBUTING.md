@@ -12,20 +12,60 @@ Install `.ruby-version` through rbenv or asdf, then run the bootstrap script.
 
 Run `bundle exec rake` to list every task.
 
+## Add API operations
+
+`scripts/scaffold_operations.rb` writes the first draft of each operation that
+`scripts/scaffold/operations.json` lists. It reads the API spec the way the
+[API fields](#api-fields) check does, from `XQUIK_OPENAPI_SPEC` or else
+`https://xquik.com/openapi.json`. For each row it writes the resource method,
+its params and response models in `lib/`, `rbi/` and `sig/`, the
+`require_relative` and alias lines, an accessor for each new resource and a wire
+test under `test/x_twitter_scraper/resources`. It then runs
+`bundle exec rake format` on each file it wrote and prints the files that
+changed.
+
+To add an operation, add a row with its method and path, its resource and its
+method name. Take the resource and method name from the Python SDK's `api.md`,
+so every SDK names the operation the same way. Then run the scaffolder.
+
+```bash
+bundle exec ruby scripts/scaffold_operations.rb
+```
+
+A maintainer reviews the draft as they would code written by hand. Then remove
+the operation from `excluded-operations.json` and add a line to the `Unreleased`
+section of `CHANGELOG.md`. Fix wrong output in the scaffolder and rerun it, so
+the fix reaches every operation. A rerun on unchanged input changes no file.
+
+Each `$ref` an operation uses becomes a shared model named after the component
+in `XTwitterScraper::Models`. The `reuse` map names the hand-written class that
+stands for a component, such as `XWriteAction`, and the scaffolder writes no
+model for it. The scaffolder owns every other component's model, so add a
+hand-written class to `reuse` before an operation refers to it. A row can also
+set these keys.
+
+- `narrow` keeps some enum values of a query parameter, as `activity.list` keeps
+  only `json`.
+- `require` makes a query parameter required.
+- `"response": "binary"` returns the file as a `StringIO`.
+- `"response": "stream"` with `items` returns an `XTwitterScraper::Internal::Stream`
+  that reads each server-sent event as 1 `items` model.
+
+The scaffolder rewrites the files and methods it owns on each run. A hand edit
+to one of them lasts only until the next run, so fix the scaffolder instead and
+list any hand edit in the pull request.
+
 ## Change the SDK by hand
 
-Maintainers write and review every file in this repository by hand.
-No code generator runs.
+Maintainers write and review the rest of this repository by hand. When the API
+changes, the [API fields](#api-fields) check fails. Each failure names the
+operation or field that the SDK lacks. Scaffold a missing operation as above,
+and add each missing field in the style of the code around it.
 
-When the API changes, the [API fields](#api-fields) check fails.
-Each failure names the operation or field that the SDK lacks.
-Add each one in the style of the code around it.
-
-1. Add the method to its resource in `lib/x_twitter_scraper/resources`.
-2. Add its params and response models in `lib/x_twitter_scraper/models`.
-3. Add their types in `rbi/` and `sig/`.
-4. Add its tests in `test/x_twitter_scraper/resources`.
-5. Add a line to the `Unreleased` section of `CHANGELOG.md`.
+1. Add the field to its model in `lib/x_twitter_scraper/models`.
+2. Add its types in `rbi/` and `sig/`.
+3. Add its tests in `test/x_twitter_scraper`.
+4. Add a line to the `Unreleased` section of `CHANGELOG.md`.
 
 Keep every change additive.
 Never remove or rename a public method, parameter, model, attribute, or the `x_twitter_scraper` gem.
