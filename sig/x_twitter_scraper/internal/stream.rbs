@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Internal
+    class Stream[Elem]
+      include Enumerable[Elem]
+
+      def initialize: (
+        model: XTwitterScraper::Internal::Type::Converter::input,
+        stream: Enumerable[::Hash[Symbol, top]],
+        **top
+      ) -> void
+
+      def each: { (Elem arg0) -> void } -> void
+
+      def close: -> void
+    end
+  end
+end
