@@ -23,6 +23,8 @@ module XTwitterScraper
             value.class.dump(value, state: state)
           in StringIO
             value.string
+          in Time
+            value.iso8601(value.subsec.zero? ? 0 : 9)
           in Pathname | IO
             state[:can_retry] = false if value.is_a?(IO)
             XTwitterScraper::FilePart.new(value)
