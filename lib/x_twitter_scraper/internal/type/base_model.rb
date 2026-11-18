@@ -179,6 +179,7 @@ module XTwitterScraper
             instance = new
             data = instance.to_h
             status = instance.instance_variable_get(:@coerced)
+            error = state.fetch(:error)
 
             # rubocop:disable-next Metrics/BlockLength
             fields.each do |name, field|
@@ -216,6 +217,7 @@ module XTwitterScraper
               status.store(name, state.fetch(:error) || true)
               data.store(name, converted)
             end
+            state[:error] = error
 
             keys.each { data.store(_1, val.fetch(_1)) }
             instance

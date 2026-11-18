@@ -93,11 +93,13 @@ module XTwitterScraper
 
           strictness = state.fetch(:strictness)
           exactness = state.fetch(:exactness)
+          error = state.fetch(:error)
 
           alternatives = []
           known_variants.each do |_, variant_fn|
             target = variant_fn.call
             exact = state[:exactness] = {yes: 0, no: 0, maybe: 0}
+            state[:error] = nil
             state[:branched] += 1
 
             coerced = XTwitterScraper::Internal::Type::Converter.coerce(target, value, state: state)
@@ -105,9 +107,10 @@ module XTwitterScraper
             if (no + maybe).zero? || (!strictness && yes.positive?)
               exact.each { exactness[_1] += _2 }
               state[:exactness] = exactness
+              state[:error] ||= error
               return coerced
             elsif maybe.positive?
-              alternatives << [[-yes, -maybe, no], exact, coerced]
+              alternatives << [[-yes, -maybe, no], exact, coerced, state[:error]]
             end
           end
 
@@ -116,8 +119,9 @@ module XTwitterScraper
             exactness[:no] += 1
             state[:error] = ArgumentError.new("no matching variant for #{value.inspect}")
             value
-          in [[_, exact, coerced], *]
+          in [[_, exact, coerced, variant_error], *]
             exact.each { exactness[_1] += _2 }
+            state[:error] = variant_error || error
             coerced
           end
             .tap { state[:exactness] = exactness }
