@@ -52,6 +52,19 @@ module XTwitterScraper
         #   @return [Array<String>]
         required :unavailable_ids, XTwitterScraper::Internal::Type::ArrayOf[String]
 
+        # @!attribute not_found_ids
+        #   The unavailable IDs no account holds, as X answers for an account that was
+        #   deactivated or deleted, in first-seen request order.
+        #
+        #   @return [Array<String>]
+        required :not_found_ids, XTwitterScraper::Internal::Type::ArrayOf[String]
+
+        # @!attribute suspended_ids
+        #   The unavailable IDs of accounts X suspended, in first-seen request order.
+        #
+        #   @return [Array<String>]
+        required :suspended_ids, XTwitterScraper::Internal::Type::ArrayOf[String]
+
         # @!attribute unprocessed_ids
         #   Requested IDs skipped because available credits limited processing. Retry these
         #   IDs after adding credits.
@@ -70,7 +83,7 @@ module XTwitterScraper
         #   @return [Integer, nil]
         optional :filtered_count, Integer
 
-        # @!method initialize(failed_ids:, has_next_page: false, next_cursor:, processed_count:, requested_count:, returned_count:, unavailable_ids:, unprocessed_ids:, users:, filtered_count: nil)
+        # @!method initialize(failed_ids:, has_next_page: false, next_cursor:, processed_count:, requested_count:, returned_count:, unavailable_ids:, not_found_ids:, suspended_ids:, unprocessed_ids:, users:, filtered_count: nil)
         #   Batch user lookup results. Duplicate requested IDs are ignored while preserving
         #   first-seen order. unavailable_ids identifies processed IDs with no returned
         #   profile. unprocessed_ids identifies IDs skipped when available credits limit
@@ -85,6 +98,10 @@ module XTwitterScraper
         #   @param returned_count [Integer] Number of user profiles returned and charged.
         #
         #   @param unavailable_ids [Array<String>] Processed IDs with no returned profile, in first-seen request order.
+        #
+        #   @param not_found_ids [Array<String>] The unavailable IDs no account holds, as X answers for an account that was deactivated or deleted, in first-seen request order.
+        #
+        #   @param suspended_ids [Array<String>] The unavailable IDs of accounts X suspended, in first-seen request order.
         #
         #   @param unprocessed_ids [Array<String>] Requested IDs skipped because available credits limited processing. Retry these
         #

@@ -14,6 +14,8 @@ module XTwitterScraper
           requested_count: Integer,
           returned_count: Integer,
           unavailable_ids: ::Array[String],
+          not_found_ids: ::Array[String],
+          suspended_ids: ::Array[String],
           unprocessed_ids: ::Array[String],
           users: ::Array[XTwitterScraper::UserProfile],
           filtered_count: Integer
@@ -34,6 +36,10 @@ module XTwitterScraper
 
         attr_accessor unavailable_ids: ::Array[String]
 
+        attr_accessor not_found_ids: ::Array[String]
+
+        attr_accessor suspended_ids: ::Array[String]
+
         attr_accessor unprocessed_ids: ::Array[String]
 
         attr_accessor users: ::Array[XTwitterScraper::UserProfile]
@@ -48,6 +54,8 @@ module XTwitterScraper
           requested_count: Integer,
           returned_count: Integer,
           unavailable_ids: ::Array[String],
+          not_found_ids: ::Array[String],
+          suspended_ids: ::Array[String],
           unprocessed_ids: ::Array[String],
           users: ::Array[XTwitterScraper::UserProfile],
           failed_ids: ::Array[String],
@@ -63,6 +71,8 @@ module XTwitterScraper
           requested_count: Integer,
           returned_count: Integer,
           unavailable_ids: ::Array[String],
+          not_found_ids: ::Array[String],
+          suspended_ids: ::Array[String],
           unprocessed_ids: ::Array[String],
           users: ::Array[XTwitterScraper::UserProfile],
           filtered_count: Integer
