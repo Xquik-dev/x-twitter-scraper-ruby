@@ -11,8 +11,8 @@ module XTwitterScraper
         category: String,
         status: String,
         q: String,
-        since: String,
-        until_: String
+        since: XTwitterScraper::Models::ActivityListParams::since,
+        until_: XTwitterScraper::Models::ActivityListParams::until_
       }
       & XTwitterScraper::Internal::Type::request_parameters
 
@@ -42,13 +42,17 @@ module XTwitterScraper
 
       def q=: (String) -> String
 
-      attr_reader since: String?
+      attr_reader since: XTwitterScraper::Models::ActivityListParams::since?
 
-      def since=: (String) -> String
+      def since=: (
+        XTwitterScraper::Models::ActivityListParams::since
+      ) -> XTwitterScraper::Models::ActivityListParams::since
 
-      attr_reader until_: String?
+      attr_reader until_: XTwitterScraper::Models::ActivityListParams::until_?
 
-      def until_=: (String) -> String
+      def until_=: (
+        XTwitterScraper::Models::ActivityListParams::until_
+      ) -> XTwitterScraper::Models::ActivityListParams::until_
 
       def initialize: (
         ?format_: XTwitterScraper::Models::ActivityListParams::format_,
@@ -56,8 +60,8 @@ module XTwitterScraper
         ?category: String,
         ?status: String,
         ?q: String,
-        ?since: String,
-        ?until_: String,
+        ?since: XTwitterScraper::Models::ActivityListParams::since,
+        ?until_: XTwitterScraper::Models::ActivityListParams::until_,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
@@ -67,8 +71,8 @@ module XTwitterScraper
         category: String,
         status: String,
         q: String,
-        since: String,
-        until_: String,
+        since: XTwitterScraper::Models::ActivityListParams::since,
+        until_: XTwitterScraper::Models::ActivityListParams::until_,
         request_options: XTwitterScraper::RequestOptions
       }
 
@@ -80,6 +84,22 @@ module XTwitterScraper
         JSON: :json
 
         def self?.values: -> ::Array[XTwitterScraper::Models::ActivityListParams::format_]
+      end
+
+      type since = String | Time
+
+      module Since
+        extend XTwitterScraper::Internal::Type::Union
+
+        def self?.variants: -> ::Array[XTwitterScraper::Models::ActivityListParams::since]
+      end
+
+      type until_ = String | Time
+
+      module Until
+        extend XTwitterScraper::Internal::Type::Union
+
+        def self?.variants: -> ::Array[XTwitterScraper::Models::ActivityListParams::until_]
       end
     end
   end

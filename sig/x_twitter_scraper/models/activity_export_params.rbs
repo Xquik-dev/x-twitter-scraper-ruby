@@ -11,8 +11,8 @@ module XTwitterScraper
         category: String,
         status: String,
         q: String,
-        since: String,
-        until_: String
+        since: XTwitterScraper::Models::ActivityExportParams::since,
+        until_: XTwitterScraper::Models::ActivityExportParams::until_
       }
       & XTwitterScraper::Internal::Type::request_parameters
 
@@ -38,13 +38,17 @@ module XTwitterScraper
 
       def q=: (String) -> String
 
-      attr_reader since: String?
+      attr_reader since: XTwitterScraper::Models::ActivityExportParams::since?
 
-      def since=: (String) -> String
+      def since=: (
+        XTwitterScraper::Models::ActivityExportParams::since
+      ) -> XTwitterScraper::Models::ActivityExportParams::since
 
-      attr_reader until_: String?
+      attr_reader until_: XTwitterScraper::Models::ActivityExportParams::until_?
 
-      def until_=: (String) -> String
+      def until_=: (
+        XTwitterScraper::Models::ActivityExportParams::until_
+      ) -> XTwitterScraper::Models::ActivityExportParams::until_
 
       def initialize: (
         format_: XTwitterScraper::Models::ActivityExportParams::format_,
@@ -52,8 +56,8 @@ module XTwitterScraper
         ?category: String,
         ?status: String,
         ?q: String,
-        ?since: String,
-        ?until_: String,
+        ?since: XTwitterScraper::Models::ActivityExportParams::since,
+        ?until_: XTwitterScraper::Models::ActivityExportParams::until_,
         ?request_options: XTwitterScraper::request_opts
       ) -> void
 
@@ -63,8 +67,8 @@ module XTwitterScraper
         category: String,
         status: String,
         q: String,
-        since: String,
-        until_: String,
+        since: XTwitterScraper::Models::ActivityExportParams::since,
+        until_: XTwitterScraper::Models::ActivityExportParams::until_,
         request_options: XTwitterScraper::RequestOptions
       }
 
@@ -82,6 +86,22 @@ module XTwitterScraper
         TXT: :txt
 
         def self?.values: -> ::Array[XTwitterScraper::Models::ActivityExportParams::format_]
+      end
+
+      type since = String | Time
+
+      module Since
+        extend XTwitterScraper::Internal::Type::Union
+
+        def self?.variants: -> ::Array[XTwitterScraper::Models::ActivityExportParams::since]
+      end
+
+      type until_ = String | Time
+
+      module Until
+        extend XTwitterScraper::Internal::Type::Union
+
+        def self?.variants: -> ::Array[XTwitterScraper::Models::ActivityExportParams::until_]
       end
     end
   end

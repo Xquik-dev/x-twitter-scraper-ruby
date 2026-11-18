@@ -65,17 +65,29 @@ module XTwitterScraper
       attr_writer :q
 
       # Oldest time, ISO 8601.
-      sig { returns(T.nilable(String)) }
+      sig do
+        returns(
+          T.nilable(
+            XTwitterScraper::Models::ActivityExportParams::Since::Variants
+          )
+        )
+      end
       attr_reader :since
 
-      sig { params(since: String).void }
+      sig { params(since: T.any(String, Time)).void }
       attr_writer :since
 
       # Newest time, ISO 8601.
-      sig { returns(T.nilable(String)) }
+      sig do
+        returns(
+          T.nilable(
+            XTwitterScraper::Models::ActivityExportParams::Until::Variants
+          )
+        )
+      end
       attr_reader :until_
 
-      sig { params(until_: String).void }
+      sig { params(until_: T.any(String, Time)).void }
       attr_writer :until_
 
       sig do
@@ -86,8 +98,8 @@ module XTwitterScraper
           category: String,
           status: String,
           q: String,
-          since: String,
-          until_: String,
+          since: T.any(String, Time),
+          until_: T.any(String, Time),
           request_options: XTwitterScraper::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -121,8 +133,10 @@ module XTwitterScraper
             category: String,
             status: String,
             q: String,
-            since: String,
-            until_: String,
+            since:
+              XTwitterScraper::Models::ActivityExportParams::Since::Variants,
+            until_:
+              XTwitterScraper::Models::ActivityExportParams::Until::Variants,
             request_options: XTwitterScraper::RequestOptions
           }
         )
@@ -183,6 +197,38 @@ module XTwitterScraper
           )
         end
         def self.values
+        end
+      end
+
+      module Since
+        extend XTwitterScraper::Internal::Type::Union
+
+        Variants = T.type_alias { T.any(String, Time) }
+
+        sig do
+          override.returns(
+            T::Array[
+              XTwitterScraper::Models::ActivityExportParams::Since::Variants
+            ]
+          )
+        end
+        def self.variants
+        end
+      end
+
+      module Until
+        extend XTwitterScraper::Internal::Type::Union
+
+        Variants = T.type_alias { T.any(String, Time) }
+
+        sig do
+          override.returns(
+            T::Array[
+              XTwitterScraper::Models::ActivityExportParams::Until::Variants
+            ]
+          )
+        end
+        def self.variants
         end
       end
     end

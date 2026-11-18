@@ -30,7 +30,7 @@ class XTwitterScraper::Test::ActivityWireTest < Minitest::Test
   end
 
   def test_list
-    stub = stub_request(:get, "http://localhost/activity").with(query: {"format" => "json", "limit" => "1", "category" => "category", "status" => "status", "q" => "q", "since" => "since", "until" => "until_"}).to_return_json(body: [XTwitterScraper::Test::MockPayload.example(XTwitterScraper::Models::ActivityLogRow)])
+    stub = stub_request(:get, "http://localhost/activity").with(query: {"format" => "json", "limit" => "1", "category" => "category", "status" => "status", "q" => "q", "since" => "2026-01-02T03:04:05Z", "until" => "2026-01-02T03:04:05Z"}).to_return_json(body: [XTwitterScraper::Test::MockPayload.example(XTwitterScraper::Models::ActivityLogRow)])
 
     response = client.activity.list(
       format_: :json,
@@ -38,8 +38,8 @@ class XTwitterScraper::Test::ActivityWireTest < Minitest::Test
       category: "category",
       status: "status",
       q: "q",
-      since: "since",
-      until_: "until_"
+      since: Time.utc(2026, 1, 2, 3, 4, 5),
+      until_: Time.utc(2026, 1, 2, 3, 4, 5)
     )
 
     assert_requested(stub)
@@ -47,7 +47,7 @@ class XTwitterScraper::Test::ActivityWireTest < Minitest::Test
   end
 
   def test_export
-    stub = stub_request(:get, "http://localhost/activity").with(query: {"format" => "json", "limit" => "1", "category" => "category", "status" => "status", "q" => "q", "since" => "since", "until" => "until_"}, headers: {"Accept" => "application/octet-stream"}).to_return(
+    stub = stub_request(:get, "http://localhost/activity").with(query: {"format" => "json", "limit" => "1", "category" => "category", "status" => "status", "q" => "q", "since" => "2026-01-02T03:04:05Z", "until" => "2026-01-02T03:04:05Z"}, headers: {"Accept" => "application/octet-stream"}).to_return(
       body: "time,activity\n", headers: {"content-type" => "text/csv"}
     )
 
@@ -57,8 +57,8 @@ class XTwitterScraper::Test::ActivityWireTest < Minitest::Test
       category: "category",
       status: "status",
       q: "q",
-      since: "since",
-      until_: "until_"
+      since: Time.utc(2026, 1, 2, 3, 4, 5),
+      until_: Time.utc(2026, 1, 2, 3, 4, 5)
     )
 
     assert_requested(stub)

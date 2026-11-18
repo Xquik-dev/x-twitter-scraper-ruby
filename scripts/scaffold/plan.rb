@@ -462,7 +462,7 @@ module Scaffold
 
       if schema.key?("const")
         value = schema.fetch("const")
-        return [value.is_a?(String) ? Literal.new(value: value) : scalar(schema, request), [], nullable]
+        return [value.is_a?(String) ? Literal.new(value: value) : scalar(schema), [], nullable]
       end
       if schema.key?("enum") && string_enum?(schema)
         constant = top_or_nested(owner, name)
@@ -483,9 +483,15 @@ module Scaffold
         values, nested, = typed(extra, owner, Names.singular(name), request: request)
         return [Map.new(values: values), nested, nullable]
       end
-      return scalar_union(types, owner, name, nullable, schema) if types.length > 1
+      if types.length > 1
+        return [UNKNOWN, [], nullable] if types.intersect?(%w[array object])
 
-      [scalar(schema, request), [], nullable]
+        return scalar_union(types.map { scalar({"type" => _1}) }, owner, name, nullable, schema)
+      end
+      type = scalar(schema)
+      return scalar_union([STRING, TIME], owner, name, nullable, schema) if request && type == TIME
+
+      [type, [], nullable]
     end
 
     def top_or_nested(owner, name)
@@ -497,12 +503,12 @@ module Scaffold
       schema["nullable"] == true || types == "null" || (types.is_a?(Array) && types.include?("null"))
     end
 
-    def scalar(schema, request)
+    def scalar(schema)
       types = Array(schema["type"]) - ["null"]
       case types
       when ["string"]
         return DATE if schema["format"] == "date"
-        return TIME if schema["format"] == "date-time" && !request
+        return TIME if schema["format"] == "date-time"
 
         STRING
       when ["integer"] then INTEGER
@@ -512,11 +518,8 @@ module Scaffold
       end
     end
 
-    def scalar_union(types, owner, name, nullable, schema)
-      return [UNKNOWN, [], nullable] if types.intersect?(%w[array object])
-
+    def scalar_union(variants, owner, name, nullable, schema)
       constant = top_or_nested(owner, name)
-      variants = types.map { scalar({"type" => _1}, false) }
       union = Union.new(constant: constant, doc: text(schema["description"]), variants: variants, nested: [])
       [Ref.new(constant: constant, kind: :union), [union], nullable]
     end
