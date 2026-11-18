@@ -170,6 +170,36 @@ class ScaffoldOperationsTest < Minitest::Test
     )
   end
 
+  def test_a_date_time_input_takes_a_string_or_a_time_and_sends_iso_8601
+    spec = document
+    spec.dig("paths", "/api/v1/scaffold-gadgets/{gadgetId}/parts/{id}", "get", "parameters") << {
+      "name" => "since",
+      "in" => "query",
+      "schema" => {"type" => "string", "format" => "date-time"}
+    }
+    scaffold(spec)
+    %w[scaffold_owner scaffold_part scaffold_gadget_part_params].each do |name|
+      load(File.join(@root, "lib/x_twitter_scraper/models/#{name}.rb"))
+    end
+    load(File.join(@root, RESOURCE))
+    recorder = Recorder.new([])
+    gadgets = XTwitterScraper::Resources::ScaffoldGadgets.new(client: recorder)
+
+    gadgets.part("p1", gadget_id: "g1", idempotency_key: "k1", since: Time.utc(2026, 10, 21))
+    gadgets.part("p1", gadget_id: "g1", idempotency_key: "k1", since: "2026-10-21T00:00:00Z")
+
+    assert_equal([{since: "2026-10-21T00:00:00Z"}] * 2, recorder.requests.map { _1.fetch(:query) })
+    assert_includes(read("rbi/x_twitter_scraper/models/scaffold_gadget_part_params.rbi"), "since: T.any(String, Time)")
+    assert_includes(read("sig/x_twitter_scraper/models/scaffold_gadget_part_params.rbs"), "type since = String | Time")
+  ensure
+    XTwitterScraper::Resources.send(:remove_const, :ScaffoldGadgets) if XTwitterScraper::Resources.const_defined?(
+      :ScaffoldGadgets, false
+    )
+    XTwitterScraper::Models.send(:remove_const, :ScaffoldGadgetPartParams) if XTwitterScraper::Models.const_defined?(
+      :ScaffoldGadgetPartParams, false
+    )
+  end
+
   def test_a_reused_component_keeps_its_class_and_gets_no_file
     run = scaffold(reuse: {"ScaffoldPart" => "XTwitterScraper::Models::UserProfile"})
 
