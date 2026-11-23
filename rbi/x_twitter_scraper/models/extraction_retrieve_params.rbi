@@ -53,7 +53,7 @@ module XTwitterScraper
       sig { params(include_raw: T::Boolean).void }
       attr_writer :include_raw
 
-      # Maximum number of results to return (1-1000, default 100)
+      # Maximum number of results to return (1-10000, default 100)
       sig { returns(T.nilable(Integer)) }
       attr_reader :limit
 
@@ -127,7 +127,7 @@ module XTwitterScraper
         field_style: nil,
         # Use outputMode=raw instead.
         include_raw: nil,
-        # Maximum number of results to return (1-1000, default 100)
+        # Maximum number of results to return (1-10000, default 100)
         limit: nil,
         # Select compact, full, or raw-compatible result fields.
         output_mode: nil,

@@ -35,7 +35,7 @@ module XTwitterScraper
       optional :include_raw, XTwitterScraper::Internal::Type::Boolean
 
       # @!attribute limit
-      #   Maximum number of results to return (1-1000, default 100)
+      #   Maximum number of results to return (1-10000, default 100)
       #
       #   @return [Integer, nil]
       optional :limit, Integer
@@ -67,7 +67,7 @@ module XTwitterScraper
       #
       #   @param include_raw [Boolean] Use outputMode=raw instead.
       #
-      #   @param limit [Integer] Maximum number of results to return (1-1000, default 100)
+      #   @param limit [Integer] Maximum number of results to return (1-10000, default 100)
       #
       #   @param output_mode [Symbol, XTwitterScraper::Models::ExtractionRetrieveParams::OutputMode] Select compact, full, or raw-compatible result fields.
       #
