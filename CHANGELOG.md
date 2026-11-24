@@ -1,9 +1,20 @@
 # Changelog
 
-## Unreleased
+## 0.13.0 (2026-11-24)
 
-- Requests now time out after 80 seconds by default, up from 60, since some API reads take longer than a minute to answer. A `timeout` you pass works as before.
-- A post adds `community_unavailable` when X shows no Community for it. Its `reason` is X's reason, as X writes it. Embedded posts carry it too. Each game `client.x.sports.list_games` returns adds `rankings`, the teams X ranks in its college football poll with their `rank`, where 1 is the top. It is empty when X ranks neither team, and for the NFL. Code that builds a `FootballScheduleGame` by hand must pass `rankings:`.
+[Full changelog from v0.12.0 to v0.13.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.12.0...v0.13.0)
+
+This release waits up to 80 seconds for each request by default and reads 2 fields the API added.
+
+### Breaking changes
+
+* `FootballScheduleGame.new` requires `rankings:`, which the API now returns for each game. Code that builds one by hand must pass it.
+
+### Features
+
+* Requests now time out after 80 seconds by default, up from 60, since some API reads take longer than a minute to answer. A `timeout` you pass works as before.
+* A post adds `community_unavailable` when X shows no Community for it. Its `reason` is X's reason, as X writes it. Embedded posts carry it too.
+* Each game `client.x.sports.list_games` returns adds `rankings`, the teams X ranks in its college football poll with their `rank`, where 1 is the top. It is empty when X ranks neither team, and for the NFL.
 
 ## 0.12.0 (2026-11-18)
 
