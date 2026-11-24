@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Requests now time out after 80 seconds by default, up from 60, since some API reads take longer than a minute to answer. A `timeout` you pass works as before.
+
 ## 0.12.0 (2026-11-18)
 
 [Full changelog from v0.11.0 to v0.12.0](https://github.com/Xquik-dev/x-twitter-scraper-ruby/compare/v0.11.0...v0.12.0)
