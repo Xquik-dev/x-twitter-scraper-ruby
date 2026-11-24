@@ -53,6 +53,8 @@ module XTwitterScraper
 
   class CommunityTopic = XTwitterScraper::Models::CommunityTopic
 
+  class CommunityUnavailable = XTwitterScraper::Models::CommunityUnavailable
+
   class ComposeCreateParams = XTwitterScraper::Models::ComposeCreateParams
 
   class ContentDisclosure = XTwitterScraper::Models::ContentDisclosure
@@ -136,6 +138,8 @@ module XTwitterScraper
   class FootballPlayerStats = XTwitterScraper::Models::FootballPlayerStats
 
   class FootballPlays = XTwitterScraper::Models::FootballPlays
+
+  class FootballPollRanking = XTwitterScraper::Models::FootballPollRanking
 
   class FootballPropCategory = XTwitterScraper::Models::FootballPropCategory
 

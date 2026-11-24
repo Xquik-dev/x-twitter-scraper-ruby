@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2026 Xquik contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+module XTwitterScraper
+  module Models
+    type community_unavailable = { reason: String }
+
+    class CommunityUnavailable < XTwitterScraper::Internal::Type::BaseModel
+      attr_accessor reason: String
+
+      def initialize: (reason: String) -> void
+
+      def to_hash: -> { reason: String }
+    end
+  end
+end

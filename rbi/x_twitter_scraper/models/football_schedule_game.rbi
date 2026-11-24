@@ -93,6 +93,19 @@ module XTwitterScraper
       end
       attr_writer :odds
 
+      # Each team X ranks in its college football poll, with its rank. Empty
+      # when X ranks neither team, & for the NFL.
+      sig { returns(T::Array[XTwitterScraper::Models::FootballPollRanking]) }
+      attr_reader :rankings
+
+      sig do
+        params(
+          rankings:
+            T::Array[XTwitterScraper::Models::FootballPollRanking::OrHash]
+        ).void
+      end
+      attr_writer :rankings
+
       sig do
         params(
           id: String,
@@ -110,7 +123,9 @@ module XTwitterScraper
           odds:
             T.nilable(
               XTwitterScraper::Models::FootballScheduleGame::Odds::OrHash
-            )
+            ),
+          rankings:
+            T::Array[XTwitterScraper::Models::FootballPollRanking::OrHash]
         ).returns(T.attached_class)
       end
       def self.new(
@@ -137,7 +152,10 @@ module XTwitterScraper
         # The periods played so far.
         periods:,
         # Betting odds for each team, or null when X has none.
-        odds:
+        odds:,
+        # Each team X ranks in its college football poll, with its rank. Empty
+        # when X ranks neither team, & for the NFL.
+        rankings:
       )
       end
 
@@ -155,7 +173,9 @@ module XTwitterScraper
             away: XTwitterScraper::Models::FootballTeamScore,
             team_ids: T::Array[String],
             periods: T::Array[XTwitterScraper::Models::FootballSchedulePeriod],
-            odds: T.nilable(XTwitterScraper::Models::FootballScheduleGame::Odds)
+            odds:
+              T.nilable(XTwitterScraper::Models::FootballScheduleGame::Odds),
+            rankings: T::Array[XTwitterScraper::Models::FootballPollRanking]
           }
         )
       end

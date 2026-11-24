@@ -101,6 +101,14 @@ module XTwitterScraper
       #   @return [XTwitterScraper::Models::EmbeddedTweet::CommunityNote, nil]
       optional :community_note, -> { XTwitterScraper::EmbeddedTweet::CommunityNote }, api_name: :communityNote
 
+      # @!attribute community_unavailable
+      #   Why X shows no Community for the post. Omitted when X names no reason.
+      #
+      #   @return [XTwitterScraper::Models::CommunityUnavailable, nil]
+      optional :community_unavailable,
+               -> { XTwitterScraper::CommunityUnavailable },
+               api_name: :communityUnavailable
+
       # @!attribute content_disclosure
       #   Content disclosure metadata shown by X when a tweet is labeled as paid
       #   partnership content or AI-generated media.
@@ -465,7 +473,7 @@ module XTwitterScraper
       #   @return [String, nil]
       optional :view_state, String, api_name: :viewState
 
-      # @!method initialize(id:, bookmark_count:, like_count:, quote_count:, reply_count:, retweet_count:, text:, view_count:, article: nil, author: nil, author_unavailable: nil, card: nil, cashtag_attachments: nil, community_id: nil, community_name: nil, community_note: nil, content_disclosure: nil, conversation_control: nil, conversation_id: nil, coordinates: nil, created_at: nil, display_text_range: nil, edit: nil, entities: nil, exclusive_content: nil, geo: nil, grok_share_attachment: nil, grok_translated_post: nil, has_community_notes: nil, in_reply_to_id: nil, in_reply_to_user_id: nil, in_reply_to_username: nil, interstitial: nil, is_limited_reply: nil, is_note_tweet: nil, is_pinned: nil, is_quote_status: nil, is_reply: nil, is_retweet: nil, is_translatable: nil, jetfuel_attachment: nil, lang: nil, limited_actions: nil, live_event_context: nil, media: nil, note_tweet: nil, parent_tweet: nil, place: nil, possibly_sensitive: nil, post_cta: nil, previous_counts: nil, quoted_tweet: nil, quoted_tweet_id: nil, quoted_tweet_permalink: nil, quoted_tweet_unavailable: nil, reaction_context: nil, retweeted_at: nil, retweeted_tweet: nil, scopes: nil, soft_intervention: nil, source: nil, sports_context: nil, subscriber_badge: nil, text_highlights: nil, tombstone: nil, type: nil, unavailable_author_id: nil, unknown_counts: nil, unknown_fields: nil, unmentioned_user_ids: nil, url: nil, view_state: nil)
+      # @!method initialize(id:, bookmark_count:, like_count:, quote_count:, reply_count:, retweet_count:, text:, view_count:, article: nil, author: nil, author_unavailable: nil, card: nil, cashtag_attachments: nil, community_id: nil, community_name: nil, community_note: nil, community_unavailable: nil, content_disclosure: nil, conversation_control: nil, conversation_id: nil, coordinates: nil, created_at: nil, display_text_range: nil, edit: nil, entities: nil, exclusive_content: nil, geo: nil, grok_share_attachment: nil, grok_translated_post: nil, has_community_notes: nil, in_reply_to_id: nil, in_reply_to_user_id: nil, in_reply_to_username: nil, interstitial: nil, is_limited_reply: nil, is_note_tweet: nil, is_pinned: nil, is_quote_status: nil, is_reply: nil, is_retweet: nil, is_translatable: nil, jetfuel_attachment: nil, lang: nil, limited_actions: nil, live_event_context: nil, media: nil, note_tweet: nil, parent_tweet: nil, place: nil, possibly_sensitive: nil, post_cta: nil, previous_counts: nil, quoted_tweet: nil, quoted_tweet_id: nil, quoted_tweet_permalink: nil, quoted_tweet_unavailable: nil, reaction_context: nil, retweeted_at: nil, retweeted_tweet: nil, scopes: nil, soft_intervention: nil, source: nil, sports_context: nil, subscriber_badge: nil, text_highlights: nil, tombstone: nil, type: nil, unavailable_author_id: nil, unknown_counts: nil, unknown_fields: nil, unmentioned_user_ids: nil, url: nil, view_state: nil)
       #   Quoted or retweeted tweet context. Every object includes id, text, and
       #   engagement metrics. A zero metric can mean X did not report the count. Author,
       #   media, and conversation fields appear when available.
@@ -501,6 +509,8 @@ module XTwitterScraper
       #   @param community_name [String] Community name. Present when X sends it with the post.
       #
       #   @param community_note [XTwitterScraper::Models::EmbeddedTweet::CommunityNote] Community Note presentation metadata returned by X.
+      #
+      #   @param community_unavailable [XTwitterScraper::Models::CommunityUnavailable] Why X shows no Community for the post. Omitted when X names no reason.
       #
       #   @param content_disclosure [XTwitterScraper::Models::ContentDisclosure] Content disclosure metadata shown by X when a tweet is labeled as paid partnersh
       #
