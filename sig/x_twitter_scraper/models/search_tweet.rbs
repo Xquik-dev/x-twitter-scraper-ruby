@@ -67,6 +67,12 @@ module XTwitterScraper
         XTwitterScraper::SearchTweet::CommunityNote | ::Hash[Symbol, top]
       ) -> XTwitterScraper::SearchTweet::CommunityNote
 
+      attr_reader community_unavailable: XTwitterScraper::CommunityUnavailable?
+
+      def community_unavailable=: (
+        XTwitterScraper::CommunityUnavailable | ::Hash[Symbol, top]
+      ) -> XTwitterScraper::CommunityUnavailable
+
       attr_reader content_disclosure: XTwitterScraper::ContentDisclosure?
 
       def content_disclosure=: (
@@ -358,6 +364,7 @@ module XTwitterScraper
         ?community_id: String,
         ?community_name: String,
         ?community_note: XTwitterScraper::SearchTweet::CommunityNote | ::Hash[Symbol, top],
+        ?community_unavailable: XTwitterScraper::CommunityUnavailable | ::Hash[Symbol, top],
         ?content_disclosure: XTwitterScraper::ContentDisclosure | ::Hash[Symbol, top],
         ?conversation_control: XTwitterScraper::SearchTweet::ConversationControl | ::Hash[Symbol, top],
         ?conversation_id: String,

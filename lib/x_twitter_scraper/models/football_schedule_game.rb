@@ -79,7 +79,14 @@ module XTwitterScraper
       #   @return [XTwitterScraper::Models::FootballScheduleGame::Odds, nil]
       required :odds, -> { XTwitterScraper::Models::FootballScheduleGame::Odds }, nil?: true
 
-      # @!method initialize(id:, season_type:, week:, starts_at:, status:, clock:, quarter:, home:, away:, team_ids:, periods:, odds:)
+      # @!attribute rankings
+      #   Each team X ranks in its college football poll, with its rank. Empty
+      #   when X ranks neither team, & for the NFL.
+      #
+      #   @return [Array<XTwitterScraper::Models::FootballPollRanking>]
+      required :rankings, -> { XTwitterScraper::Internal::Type::ArrayOf[XTwitterScraper::Models::FootballPollRanking] }
+
+      # @!method initialize(id:, season_type:, week:, starts_at:, status:, clock:, quarter:, home:, away:, team_ids:, periods:, odds:, rankings:)
       #   A listed game, with its teams & score.
       #
       #   @param id [String] The game ID the other sports routes take.
@@ -105,6 +112,8 @@ module XTwitterScraper
       #   @param periods [Array<XTwitterScraper::Models::FootballSchedulePeriod>] The periods played so far.
       #
       #   @param odds [XTwitterScraper::Models::FootballScheduleGame::Odds, nil] Betting odds for each team, or null when X has none.
+      #
+      #   @param rankings [Array<XTwitterScraper::Models::FootballPollRanking>] Each team X ranks in its college football poll, with its rank. Empty when X ranks neither team, & for the NFL.
 
       class Odds < XTwitterScraper::Internal::Type::BaseModel
         # @!attribute home

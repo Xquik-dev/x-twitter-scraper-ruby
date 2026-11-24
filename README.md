@@ -134,7 +134,7 @@ x_twitter_scraper.account.retrieve(request_options: {max_retries: 5})
 
 ### Timeouts
 
-Requests time out after 60 seconds. Set `timeout` to change or disable this limit.
+Requests time out after 80 seconds. Set `timeout` to change or disable this limit.
 
 ```ruby
 # Change the client default.

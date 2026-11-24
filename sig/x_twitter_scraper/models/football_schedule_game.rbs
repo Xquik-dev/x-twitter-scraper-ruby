@@ -17,7 +17,8 @@ module XTwitterScraper
         away: XTwitterScraper::Models::FootballTeamScore,
         team_ids: ::Array[String],
         periods: ::Array[XTwitterScraper::Models::FootballSchedulePeriod],
-        odds: XTwitterScraper::Models::FootballScheduleGame::Odds?
+        odds: XTwitterScraper::Models::FootballScheduleGame::Odds?,
+        rankings: ::Array[XTwitterScraper::Models::FootballPollRanking]
       }
 
     class FootballScheduleGame < XTwitterScraper::Internal::Type::BaseModel
@@ -45,6 +46,8 @@ module XTwitterScraper
 
       attr_accessor odds: XTwitterScraper::Models::FootballScheduleGame::Odds?
 
+      attr_accessor rankings: ::Array[XTwitterScraper::Models::FootballPollRanking]
+
       def initialize: (
         id: String,
         season_type: String?,
@@ -57,7 +60,8 @@ module XTwitterScraper
         away: XTwitterScraper::Models::FootballTeamScore,
         team_ids: ::Array[String],
         periods: ::Array[XTwitterScraper::Models::FootballSchedulePeriod],
-        odds: XTwitterScraper::Models::FootballScheduleGame::Odds?
+        odds: XTwitterScraper::Models::FootballScheduleGame::Odds?,
+        rankings: ::Array[XTwitterScraper::Models::FootballPollRanking]
       ) -> void
 
       def to_hash: -> {
@@ -72,7 +76,8 @@ module XTwitterScraper
         away: XTwitterScraper::Models::FootballTeamScore,
         team_ids: ::Array[String],
         periods: ::Array[XTwitterScraper::Models::FootballSchedulePeriod],
-        odds: XTwitterScraper::Models::FootballScheduleGame::Odds?
+        odds: XTwitterScraper::Models::FootballScheduleGame::Odds?,
+        rankings: ::Array[XTwitterScraper::Models::FootballPollRanking]
       }
 
       type odds =

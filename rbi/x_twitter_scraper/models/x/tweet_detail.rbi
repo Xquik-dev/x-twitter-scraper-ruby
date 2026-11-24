@@ -123,6 +123,17 @@ module XTwitterScraper
         end
         attr_writer :community_note
 
+        # Why X shows no Community for the post. Omitted when X names no reason.
+        sig { returns(T.nilable(XTwitterScraper::CommunityUnavailable)) }
+        attr_reader :community_unavailable
+
+        sig do
+          params(
+            community_unavailable: XTwitterScraper::CommunityUnavailable::OrHash
+          ).void
+        end
+        attr_writer :community_unavailable
+
         # Content disclosure metadata shown by X when a tweet is labeled as paid
         # partnership content or AI-generated media.
         sig { returns(T.nilable(XTwitterScraper::ContentDisclosure)) }
@@ -668,6 +679,8 @@ module XTwitterScraper
             community_name: String,
             community_note:
               XTwitterScraper::X::TweetDetail::CommunityNote::OrHash,
+            community_unavailable:
+              XTwitterScraper::CommunityUnavailable::OrHash,
             content_disclosure: XTwitterScraper::ContentDisclosure::OrHash,
             conversation_control:
               XTwitterScraper::X::TweetDetail::ConversationControl::OrHash,
@@ -764,6 +777,8 @@ module XTwitterScraper
           community_name: nil,
           # Community Note presentation metadata returned by X.
           community_note: nil,
+          # Why X shows no Community for the post. Omitted when X names no reason.
+          community_unavailable: nil,
           # Content disclosure metadata shown by X when a tweet is labeled as paid
           # partnership content or AI-generated media.
           content_disclosure: nil,
@@ -897,6 +912,7 @@ module XTwitterScraper
               community_id: String,
               community_name: String,
               community_note: XTwitterScraper::X::TweetDetail::CommunityNote,
+              community_unavailable: XTwitterScraper::CommunityUnavailable,
               content_disclosure: XTwitterScraper::ContentDisclosure,
               conversation_control:
                 XTwitterScraper::X::TweetDetail::ConversationControl,
